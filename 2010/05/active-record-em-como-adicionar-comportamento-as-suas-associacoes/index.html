@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2010-05-19T00:00:00-03:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
+<time datetime="2010-05-19T10:14:18-03:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,43 +93,56 @@
   </header>
 
 
-<div class="entry-content">Qualquer um que comece a desenvolver com <a href="http://api.rubyonrails.org/files/vendor/rails/activerecord/README.html">Active Record</a> (AR), minha primeira recomendação é, para tudo e leia:  <a href="http://guides.rubyonrails.org/association_basics.html">A Guide to Active Record Associations</a> ou <a href="http://guias.rubyonrails.pro.br/association_basics.html">O Guia de Associações do Active Record</a>. O guia é bem completo, e descreve muito bem os tipos de associações que estão disponíveis no AR.
+<div class="entry-content"><p>Qualquer um que comece a desenvolver com <a href="http://api.rubyonrails.org/files/vendor/rails/activerecord/README.html">Active Record</a> (AR), minha primeira recomendação é, para tudo e leia:  <a href="http://guides.rubyonrails.org/association_basics.html">A Guide to Active Record Associations</a> ou <a href="http://guias.rubyonrails.pro.br/association_basics.html">O Guia de Associações do Active Record</a>. O guia é bem completo, e descreve muito bem os tipos de associações que estão disponíveis no AR.</p>
+
 <h2>Association Proxy, #wtf !</h2>
-As associações:
+
+<p>As associações:</p>
+
 <ul>
-	<li>belongs_to</li>
-	<li>has_one</li>
-	<li>has_many</li>
-	<li>has_and_belongs_to_many</li>
+<li><p>belongs_to</p></li>
+<li><p>has_one</p></li>
+<li><p>has_many</p></li>
+<li><p>has_and_belongs_to_many</p></li>
 </ul>
-Quando usadas, adicionam alguns métodos (veja <a href="http://guides.rubyonrails.org/association_basics.html#detailed-association-reference">Detailed Association Reference</a>). Por exemplo, ao declarar uma associação <em>belongs_to</em>, o model &#8220;ganhará&#8221; os seguintes métodos:
+
+
+<p>Quando usadas, adicionam alguns métodos (veja <a href="http://guides.rubyonrails.org/association_basics.html#detailed-association-reference">Detailed Association Reference</a>). Por exemplo, ao declarar uma associação <em>belongs_to</em>, o model &ldquo;ganhará&rdquo; os seguintes métodos:</p>
+
 <ul>
-	<li>association(force_reload = false)</li>
-	<li>association=(associate)</li>
-	<li>build_association(attributes = {})</li>
-	<li>create_association(attributes = {})</li>
+<li><p>association(force_reload = false)</p></li>
+<li><p>association=(associate)</p></li>
+<li><p>build_association(attributes = {})</p></li>
+<li><p>create_association(attributes = {})</p></li>
 </ul>
-Onde association, será substituído pelo nome da associação. Exemplo retirado do guides:
-<pre lang="ruby">class Order < ActiveRecord::Base
+
+
+<p>Onde association, será substituído pelo nome da associação. Exemplo retirado do guides:</p>
+
+<pre><code>class Order &lt; ActiveRecord::Base
    belongs_to :customer
-end</pre>
-Cada instância de Order, conterá os métodos:
+end
+</code></pre>
 
-<span style="font-size: small;"> </span>
+<p>Cada instância de Order, conterá os métodos:</p>
+
 <ul>
-	<li>customer</li>
-	<li>customer=</li>
-	<li>build_customer</li>
-	<li>create_customer</li>
+<li><p>customer</p></li>
+<li><p>customer=</p></li>
+<li><p>build_customer</p></li>
+<li><p>create_customer</p></li>
 </ul>
-O <em>association proxy</em>, é o objeto que faz a ligação do objeto que contém a associação, conhecido como <em>owner</em>, e o objeto associado, conhecido como <em>target</em>.
+
+
+<p>O <em>association proxy</em>, é o objeto que faz a ligação do objeto que contém a associação, conhecido como <em>owner</em>, e o objeto associado, conhecido como <em>target</em>.</p>
+
 <h2>Legal e daí !?!</h2>
-Graças ao <em>association proxy</em>, ao declarar uma associação, podemos extendê-la e adicionar comportamentos &#8220;customizados&#8221;. No guia, é citado como <a href="http://guides.rubyonrails.org/association_basics.html#association-extensions">Association Extensions</a>. O código de exemplo abaixo, está no github em <a href="http://github.com/rogerleite/random-samples">random-samples</a>.
 
-Para exemplificar, vamos criar um modulo que adiciona o comportamento de uma galeria a qualquer coleção.
+<p>Graças ao <em>association proxy</em>, ao declarar uma associação, podemos extendê-la e adicionar comportamentos &ldquo;customizados&rdquo;. No guia, é citado como <a href="http://guides.rubyonrails.org/association_basics.html#association-extensions">Association Extensions</a>. O código de exemplo abaixo, está no github em <a href="http://github.com/rogerleite/random-samples">random-samples</a>.</p>
 
-<pre lang="ruby">
-module GalleryColletion
+<p>Para exemplificar, vamos criar um modulo que adiciona o comportamento de uma galeria a qualquer coleção.</p>
+
+<pre><code>module GalleryColletion
 
   def current=(curr = nil)
     @current, @index = nil
@@ -158,7 +171,7 @@ module GalleryColletion
 
   def previous?
     return false if @index.nil?
-    !!(@index - 1 >= 0)
+    !!(@index - 1 &gt;= 0)
   end
   def previous
     collection[@index - 1] if previous?
@@ -166,7 +179,7 @@ module GalleryColletion
 
   def next?
     return false if @index.nil?
-    !!(@index + 1 < collection.size)
+    !!(@index + 1 &lt; collection.size)
   end
   def next
     collection[@index + 1] if next?
@@ -179,32 +192,36 @@ module GalleryColletion
   end
 
 end
-</pre>
-<a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/lib/extensions/gallery_collection.rb">Gallery Collection</a>
+</code></pre>
 
-Note que o modulo está na pasta lib, logo, a pasta tem que ser adicionada no path via config/environment.rb.
+<p><a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/lib/extensions/gallery_collection.rb">Gallery Collection</a></p>
 
-Para extender a associação, declare:
+<p>Note que o modulo está na pasta lib, logo, a pasta tem que ser adicionada no path via config/environment.rb.</p>
 
-<pre lang="ruby">
-class Article < ActiveRecord::Base
-  has_and_belongs_to_many :images, :extend => GalleryColletion
+<p>Para extender a associação, declare:</p>
+
+<pre><code>class Article &lt; ActiveRecord::Base
+  has_and_belongs_to_many :images, :extend =&gt; GalleryColletion
 end
-</pre>
-<a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/article.rb">Article model</a>, <a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/image.rb">Image model aqui</a>.
+</code></pre>
 
-Agora para navegar entre as imagens, você pode usar:
-<pre lang="ruby">a = Article.first
+<p><a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/article.rb">Article model</a>, <a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/image.rb">Image model aqui</a>.</p>
+
+<p>Agora para navegar entre as imagens, você pode usar:</p>
+
+<pre><code>a = Article.first
 a.images.current = 1 #1 e o Image.id que deseja selecionar
 a.images.current
 a.images.position
 a.images.next?
 a.images.next
 a.images.previous?
-a.images.previous</pre>
-Caso esteja com coragem, baixe o projeto e veja rodando.
+a.images.previous
+</code></pre>
 
-Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
+<p>Caso esteja com coragem, baixe o projeto e veja rodando.</p>
+
+<p>Dúvidas, sugestões, algum &ldquo;case&rdquo; de sucesso, comente!</p>
 </div>
 
 
@@ -213,7 +230,7 @@ Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -227,7 +244,7 @@ Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
   
 
 
-<time datetime="2010-05-19T00:00:00-03:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
+<time datetime="2010-05-19T10:14:18-03:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
       
 
 <span class="categories">
@@ -262,6 +279,12 @@ Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -316,7 +339,10 @@ Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/';
+        var disqus_url = 'http://1up4developers.github.io/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

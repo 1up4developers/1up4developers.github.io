@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-04-25T00:00:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
+<time datetime="2011-04-25T08:27:29-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,33 +93,49 @@
   </header>
 
 
-<div class="entry-content">This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)
+<div class="entry-content"><p>This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)</p>
 
-JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
+<p>JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
 In this series of blog posts I will show how I’m doing tests with Java legacy code. I will try cover topics including testing dao, service, controller and view layers.
-In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.
+In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.</p>
 
-The first thing we need is install <a href="https://rvm.beginrescueend.com/" target="_blank">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/" target="_blank">JRuby</a> and <a href="http://rubygems.org/" target="_blank">Ruby Gems</a>.
-<pre>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )</pre>
-<a title="http://rvm.beginrescueend.com/rvm/install/" href="http://rvm.beginrescueend.com/rvm/install/" target="_blank">http://rvm.beginrescueend.com/rvm/install/</a> for more info.
+<p>The first thing we need is install <a href="https://rvm.beginrescueend.com/">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/">JRuby</a> and <a href="http://rubygems.org/">Ruby Gems</a>.</p>
 
-Install JRuby:
-<pre>rvm install jruby</pre>
-Set rvm to use JRuby:
-<pre>rvm use jruby</pre>
-Install RSpec:
-<pre>gem install rspec</pre>
-Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.
+<pre><code>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+</code></pre>
 
-Create the initial project structure like this:
-<pre>-boleto
+<p><a href="http://rvm.beginrescueend.com/rvm/install/">http://rvm.beginrescueend.com/rvm/install/</a> for more info.</p>
+
+<p>Install JRuby:</p>
+
+<pre><code>rvm install jruby
+</code></pre>
+
+<p>Set rvm to use JRuby:</p>
+
+<pre><code>rvm use jruby
+</code></pre>
+
+<p>Install RSpec:</p>
+
+<pre><code>gem install rspec
+</code></pre>
+
+<p>Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.</p>
+
+<p>Create the initial project structure like this:</p>
+
+<pre><code>-boleto
   -spec
   -src
     -com
       -legacy
-  -build</pre>
-Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:
-<pre lang="ruby">require "date"
+  -build
+</code></pre>
+
+<p>Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:</p>
+
+<pre><code>require "date"
 require "java"
 java_import "com.legacy.Boleto"
 
@@ -130,12 +146,22 @@ describe Boleto do
     boleto.payment_date = java.util.Date.new(Date.parse("2011-01-25").ctime)
     boleto.due_days.should == 10
   end
-end</pre>
-Let&#8217;s run the example and watch it fail.
-<pre>jruby -J-cp build -S rspec spec/boleto_spec.rb</pre>
-<pre>NameError: cannot load Java class com.legacy.Boleto</pre>
-Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:
-<pre lang="java">package com.legacy;
+end
+</code></pre>
+
+<p>Let&rsquo;s run the example and watch it fail.</p>
+
+<pre><code>jruby -J-cp build -S rspec spec/boleto_spec.rb
+
+
+
+
+NameError: cannot load Java class com.legacy.Boleto
+</code></pre>
+
+<p>Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:</p>
+
+<pre><code>package com.legacy;
 import java.util.Date;
 public class Boleto {
   private Date dueDate;
@@ -146,63 +172,86 @@ public class Boleto {
   public Date getPaymentDate() { return this.paymentDate; }
   public void setPaymentDate(Date paymentDate) { this.paymentDate = paymentDate; }
   public Integer getDueDays() { return 10; }
-}</pre>
-Also we need to compile the java class.
-<pre>javac -d build/ src/com/legacy/Boleto.java</pre>
-Instead of run the example by manual command again, let’s install a continuous testing gem:
-<pre>wget --no-check-certificate\
+}
+</code></pre>
+
+<p>Also we need to compile the java class.</p>
+
+<pre><code>javac -d build/ src/com/legacy/Boleto.java
+</code></pre>
+
+<p>Instead of run the example by manual command again, let’s install a continuous testing gem:</p>
+
+<pre><code>wget --no-check-certificate\
  http://www.github.com/tomas-stefano/infinity_test/tarball/master\
  -O infinity_test.tar.gz
 tar -zxvf infinity_test.tar.gz
 cd tomas-stefano-infinity_test-{version}
 gem build infinity_test.gemspec
-gem install infinity_test-1.0.2.gem</pre>
-What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.
+gem install infinity_test-1.0.2.gem
+</code></pre>
 
-Let&#8217;s run the example with continuous testing gem:
-<pre>infinity_test --rspec --rubies=jruby+"-J-cp build"</pre>
-Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
-Also we can create a .infinity_test file, like this:
-<pre>infinity_test do
+<p>What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.</p>
+
+<p>Let&rsquo;s run the example with continuous testing gem:</p>
+
+<pre><code>infinity_test --rspec --rubies=jruby+"-J-cp build"
+</code></pre>
+
+<p>Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
+Also we can create a .infinity_test file, like this:</p>
+
+<pre><code>infinity_test do
   use :rubies =&gt; %w(jruby),
     :specific_options =&gt; {'jruby' =&gt; '-J-cp build'},
     :test_framework =&gt; :rspec
   notifications :lib_notify   # for linux / growl for mac
-end</pre>
-And run:
-<pre>infinity_test</pre>
-<img src="http://1up4dev.org/wp-content/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" width="640" height="150" />
-<a title="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test" href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test" target="_blank">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.
+end
+</code></pre>
 
-However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a title="http://www.eclipse.org/" href="http://www.eclipse.org/" target="_blank">eclipse</a> or <a title="http://eclim.org/" href="http://eclim.org/" target="_blank">eclim</a>. This kind of editor auto-recompile Java files whenever they change.
+<p>And run:</p>
 
-Last notes
+<pre><code>infinity_test
+</code></pre>
+
+<p><img src="http://1up4dev.org/wp-content/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" />
+<a href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.</p>
+
+<p>However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a href="http://www.eclipse.org/">eclipse</a> or <a href="http://eclim.org/">eclim</a>. This kind of editor auto-recompile Java files whenever they change.</p>
+
+<p>Last notes</p>
+
 <ul>
-	<li>I&#8217;ve posted the code for boleto here <a title="https://github.com/andref5/rspec-java" href="https://github.com/andref5/rspec-java" target="_blank">https://github.com/andref5/rspec-java</a></li>
-	<li>More info about JRuby
+<li><p>I&rsquo;ve posted the code for boleto here <a href="https://github.com/andref5/rspec-java">https://github.com/andref5/rspec-java</a></p></li>
+<li><p>More info about JRuby</p>
+
 <ul>
-	<li> <a title="https://github.com/jruby/jruby/wiki" href="https://github.com/jruby/jruby/wiki" target="_blank">https://github.com/jruby/jruby/wiki</a></li>
-	<li> <a title="http://pragprog.com/titles/jruby/using-jruby" href="http://pragprog.com/titles/jruby/using-jruby" target="_blank">http://pragprog.com/titles/jruby/using-jruby</a></li>
+<li><p><a href="https://github.com/jruby/jruby/wiki">https://github.com/jruby/jruby/wiki</a></p></li>
+<li><p><a href="http://pragprog.com/titles/jruby/using-jruby">http://pragprog.com/titles/jruby/using-jruby</a></p></li>
 </ul>
 </li>
-	<li>More info about RSpec
+<li><p>More info about RSpec</p>
+
 <ul>
-	<li> <a title="http://relishapp.com/rspec" href="http://relishapp.com/rspec" target="_blank">http://relishapp.com/rspec</a></li>
-	<li> <a title="http://kerryb.github.com/iprug-rspec-presentation" href="http://kerryb.github.com/iprug-rspec-presentation" target="_blank">http://kerryb.github.com/iprug-rspec-presentation</a></li>
-	<li> <a title="http://pragprog.com/titles/achbd/the-rspec-book" href="http://pragprog.com/titles/achbd/the-rspec-book" target="_blank">http://pragprog.com/titles/achbd/the-rspec-book</a></li>
+<li><p><a href="http://relishapp.com/rspec">http://relishapp.com/rspec</a></p></li>
+<li><p><a href="http://kerryb.github.com/iprug-rspec-presentation">http://kerryb.github.com/iprug-rspec-presentation</a></p></li>
+<li><p><a href="http://pragprog.com/titles/achbd/the-rspec-book">http://pragprog.com/titles/achbd/the-rspec-book</a></p></li>
 </ul>
 </li>
-	<li>More info about Infinity_test
+<li><p>More info about Infinity_test</p>
+
 <ul>
-	<li> <a title="https://github.com/tomas-stefano/infinity_test" href="https://github.com/tomas-stefano/infinity_test" target="_blank">https://github.com/tomas-stefano/infinity_test</a></li>
+<li><a href="https://github.com/tomas-stefano/infinity_test">https://github.com/tomas-stefano/infinity_test</a></li>
 </ul>
 </li>
-	<li>More info about Ruby
+<li><p>More info about Ruby</p>
+
 <ul>
-	<li> <a title="http://mislav.uniqpath.com/poignant-guide/book/" href="http://mislav.uniqpath.com/poignant-guide/book/" target="_blank">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
+<li><a href="http://mislav.uniqpath.com/poignant-guide/book/">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
 </ul>
 </li>
 </ul>
+
 </div>
 
 
@@ -211,7 +260,7 @@ Last notes
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">andrefarina</span></span>
 
       
 
@@ -225,7 +274,7 @@ Last notes
   
 
 
-<time datetime="2011-04-25T00:00:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
+<time datetime="2011-04-25T08:27:29-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -260,6 +309,12 @@ Last notes
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -314,7 +369,10 @@ Last notes
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/04/throw-legacy-part-i-continuous-testing-with-java/';
+        var disqus_url = 'http://1up4developers.github.io/2011/04/throw-legacy-part-i-continuous-testing-with-java/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

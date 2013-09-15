@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Depois de ler The Pragmatic Programmer é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &#8220; &hellip;">
+  <meta name="description" content="Depois de ler The Pragmatic Programmer é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2008-08-18T00:00:00-03:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
+<time datetime="2008-08-18T14:02:43-03:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,35 +93,35 @@
   </header>
 
 
-<div class="entry-content">Depois de ler <a href="http://1up4dev.org/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/">The Pragmatic Programmer</a> é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &#8220;digerido&#8221; o livro, lancei as <a href="http://1up4dev.org/2008/06/tpw-dicas-para-o-desenvolvedor/">dicas para o desenvolvedor</a>, acabei inventando um termo legal <em>The Pragmatic Waterfall</em>, que resolvi transformá-lo numa série.
+<div class="entry-content"><p>Depois de ler <a href="http://1up4dev.org/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/">The Pragmatic Programmer</a> é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &ldquo;digerido&rdquo; o livro, lancei as <a href="http://1up4dev.org/2008/06/tpw-dicas-para-o-desenvolvedor/">dicas para o desenvolvedor</a>, acabei inventando um termo legal <em>The Pragmatic Waterfall</em>, que resolvi transformá-lo numa série.</p>
 
-A primeira dica do &#8220;dicas para o desenvolvedor&#8221;, foi:
-- Gerador de código descartável.
+<p>A primeira dica do &ldquo;dicas para o desenvolvedor&rdquo;, foi:
+&ndash; Gerador de código descartável.</p>
 
-Pois bem, hoje, vou mostrar um exemplo de &#8220;código descartável&#8221; que utilizei e deu certo ! :D
+<p>Pois bem, hoje, vou mostrar um exemplo de &ldquo;código descartável&rdquo; que utilizei e deu certo ! :D</p>
 
-Problema: No projeto que estou existem algumas queries em arquivos XML do hibernate, preciso convertê-las para Spring. Pra cada query do hibernate, precisei gerar dois arquivos de XML do Spring e mais uma classe Java que herda de SqlUpdate &#8230; blá blá blá. Bom, os detalhes não importam muito, <strong>o que importa é que vamos ler o XML do hibernate e gerar o que for necessário</strong>, tudo isso com <strong>Ruby</strong>!
+<p>Problema: No projeto que estou existem algumas queries em arquivos XML do hibernate, preciso convertê-las para Spring. Pra cada query do hibernate, precisei gerar dois arquivos de XML do Spring e mais uma classe Java que herda de SqlUpdate &hellip; blá blá blá. Bom, os detalhes não importam muito, <strong>o que importa é que vamos ler o XML do hibernate e gerar o que for necessário</strong>, tudo isso com <strong>Ruby</strong>!</p>
 
-Antes de qualquer coisa, já aviso que ainda não domino totalmente Ruby, e o script que fiz é do tipo código &#8220;descartável&#8221;, então não tive o menor cuidado em deixá-lo bonito, apenas funcional. Acho que a melhor maneira de aprender uma nova linguagem é escrevendo código com ela, não somente lendo sobre.
+<p>Antes de qualquer coisa, já aviso que ainda não domino totalmente Ruby, e o script que fiz é do tipo código &ldquo;descartável&rdquo;, então não tive o menor cuidado em deixá-lo bonito, apenas funcional. Acho que a melhor maneira de aprender uma nova linguagem é escrevendo código com ela, não somente lendo sobre.</p>
 
-Exemplo super simplificado do XML do Hibernate:
-<script src="http://gist.github.com/6017.js"></script> script generator-bean em Ruby: <script src="http://gist.github.com/6026.js"></script>
+<p>Exemplo super simplificado do XML do Hibernate:
+script generator-bean em Ruby:</p>
 
-É isto ! O script é simples e direto, deixei a saida pro console mesmo e para jogar em arquivo é muito simples:
+<p>É isto ! O script é simples e direto, deixei a saida pro console mesmo e para jogar em arquivo é muito simples:</p>
 
-$ ruby generator-bean.rb &gt; spring-exemplo.xml
+<p>$ ruby generator-bean.rb > spring-exemplo.xml</p>
 
-O script que coloquei é uma versão bem reduzida, já que a idéia do post é mostrar que é possível transformar tarefas chatas e trabalhosas em scripts semi-automáticos ! Ah, lembrando que com ele consegui terminar a minha tarefa em 2 dias, sendo que a previsão era quase uma semana de trabalho !
+<p>O script que coloquei é uma versão bem reduzida, já que a idéia do post é mostrar que é possível transformar tarefas chatas e trabalhosas em scripts semi-automáticos ! Ah, lembrando que com ele consegui terminar a minha tarefa em 2 dias, sendo que a previsão era quase uma semana de trabalho !</p>
 
-Precisa de mais informações de como ler XML com Ruby !?
+<p>Precisa de mais informações de como ler XML com Ruby !?</p>
 
-Segue as referências.
+<p>Segue as referências.
 Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-ruby/">post</a>, muito legal por sinal.
 * API do REXML: <a href="http://www.ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html">http://www.ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html</a>
 * Sobre o Electric XML: <a href="http://www.xml.com/pub/r/1098">http://www.xml.com/pub/r/1098</a>
-* Tutorial um pouco mais complexo sobre XML com Ruby: <a href="http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html">http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html</a>
+* Tutorial um pouco mais complexo sobre XML com Ruby: <a href="http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html">http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html</a></p>
 
-<strong>OBS:</strong> Estou usando o <a href="http://gist.github.com/">gist.github.com</a> para colocar o xml e script de exemplo, provavelmente não vai aparecer no leitor de feed.
+<p><strong>OBS:</strong> Estou usando o <a href="http://gist.github.com/">gist.github.com</a> para colocar o xml e script de exemplo, provavelmente não vai aparecer no leitor de feed.</p>
 </div>
 
 
@@ -130,7 +130,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -144,7 +144,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   
 
 
-<time datetime="2008-08-18T00:00:00-03:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
+<time datetime="2008-08-18T14:02:43-03:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
       
 
 <span class="categories">
@@ -179,6 +179,12 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -233,7 +239,10 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2008/08/tpw-colocando-dicas-em-pratica/';
+        var disqus_url = 'http://1up4developers.github.io/2008/08/tpw-colocando-dicas-em-pratica/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

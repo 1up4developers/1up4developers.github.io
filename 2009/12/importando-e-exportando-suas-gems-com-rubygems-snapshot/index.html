@@ -9,7 +9,8 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Final de ano está rendendo. O rubygems_snapshot nasceu da necessidade de &#8220;migrar&#8221; as gems instaladas de uma máquina para outra, aliado ao &hellip;">
+  <meta name="description" content="Final de ano está rendendo.
+O rubygems_snapshot nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +85,7 @@
   
 
 
-<time datetime="2009-12-22T00:00:00-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+<time datetime="2009-12-22T14:24:09-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,34 +94,62 @@
   </header>
 
 
-<div class="entry-content">Final de ano está rendendo.
-O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &#8220;migrar&#8221; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do <span style="text-decoration: line-through;">famoso</span> &#8220;gem hell&#8221;.
+<div class="entry-content"><p>Final de ano está rendendo.
+O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do famoso &ldquo;gem hell&rdquo;.</p>
 
-Veja como é difícil usar:
+<p>Veja como é difícil usar:</p>
 
-Instalação:
-<pre>sudo gem install rubygems_snapshot</pre>
-Para <strong>exportar</strong> as gems instaladas:
-<pre>gem snapshot export projeto-exemplo.yml</pre>
-Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:
-<pre>[sudo] gem snapshot import projeto-exemplo.yml</pre>
+<p>Instalação:</p>
+
+<pre><code>sudo gem install rubygems_snapshot
+</code></pre>
+
+<p>Para <strong>exportar</strong> as gems instaladas:</p>
+
+<pre><code>gem snapshot export projeto-exemplo.yml
+</code></pre>
+
+<p>Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:</p>
+
+<pre><code>[sudo] gem snapshot import projeto-exemplo.yml
+</code></pre>
+
 <h2>Afinal, o que tem de legal nisso?</h2>
-Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:
 
-Com o rvm, você pode criar um &#8220;novo ambiente&#8221;:
-<pre>rvm use 1.8.7%projeto_exemplo</pre>
-<pre>gem list</pre>
-Deve retornar vazio.
-<pre>gem install rubygems_snapshot</pre>
-<pre>gem snapshot import projeto-exemplo.yml</pre>
-Instalará as gems necessárias para o projeto e pronto!
+<p>Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:</p>
+
+<p>Com o rvm, você pode criar um &ldquo;novo ambiente&rdquo;:</p>
+
+<pre><code>rvm use 1.8.7%projeto_exemplo
+
+
+
+
+gem list
+</code></pre>
+
+<p>Deve retornar vazio.</p>
+
+<pre><code>gem install rubygems_snapshot
+
+
+
+
+gem snapshot import projeto-exemplo.yml
+</code></pre>
+
+<p>Instalará as gems necessárias para o projeto e pronto!</p>
+
 <h2>ToDo:</h2>
-Esta é uma versão bem básica, onde o &#8220;import&#8221; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &#8220;build nativos&#8221;, mas por enquanto estamos usando aqui na equipe com sucesso.
-<h2>Como faço para criar um rubygems plugin também?</h2>
-Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!
 
-Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
-Valeu e sucesso!
+<p>Esta é uma versão bem básica, onde o &ldquo;import&rdquo; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &ldquo;build nativos&rdquo;, mas por enquanto estamos usando aqui na equipe com sucesso.</p>
+
+<h2>Como faço para criar um rubygems plugin também?</h2>
+
+<p>Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!</p>
+
+<p>Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
+Valeu e sucesso!</p>
 </div>
 
 
@@ -129,7 +158,7 @@ Valeu e sucesso!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -143,7 +172,7 @@ Valeu e sucesso!
   
 
 
-<time datetime="2009-12-22T00:00:00-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+<time datetime="2009-12-22T14:24:09-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
       
 
 <span class="categories">
@@ -178,6 +207,12 @@ Valeu e sucesso!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -232,7 +267,10 @@ Valeu e sucesso!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/';
+        var disqus_url = 'http://1up4developers.github.io/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

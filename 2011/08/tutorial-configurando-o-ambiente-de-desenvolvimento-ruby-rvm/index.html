@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-08-22T00:00:00-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
+<time datetime="2011-08-22T06:00:19-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,39 +93,65 @@
   </header>
 
 
-<div class="entry-content">Se você ainda não trabalha com <a href="http://www.ruby-lang.org/pt/" target="_blank">Ruby</a> pois acha complicado demais instalá-lo, chega de desculpas! Esse tutorial <del>for dummies</del> ajudará a instalar o Ruby através do <a href="http://beginrescueend.com/" target="_blank">RVM</a> de forma direta, sem enrolação.
+<div class="entry-content"><p>Se você ainda não trabalha com <a href="http://www.ruby-lang.org/pt/">Ruby</a> pois acha complicado demais instalá-lo, chega de desculpas! Esse tutorial <del>for dummies</del> ajudará a instalar o Ruby através do <a href="http://beginrescueend.com/">RVM</a> de forma direta, sem enrolação.</p>
 
-Partindo de uma instalação do <a href="http://www.ubuntu.com/" target="_blank">Ubuntu</a> 11.04 zerada, começamos com os pré-requisitos para instalar o RVM:
-<pre>user@ubuntu:~$ sudo apt-get install git-core curl</pre>
-Basta confirmar a instalação dos pacotes, em seguida executar o comando (extraído do site oficial do RVM):
-<pre>user@ubuntu:~$ bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)</pre>
-A seguir, o output completo gerado por esse comando indicará os pacotes e libs necessários para a instalação do Ruby.
-<pre>(...)
+<p>Partindo de uma instalação do <a href="http://www.ubuntu.com/">Ubuntu</a> 11.04 zerada, começamos com os pré-requisitos para instalar o RVM:</p>
+
+<pre><code>user@ubuntu:~$ sudo apt-get install git-core curl
+</code></pre>
+
+<p>Basta confirmar a instalação dos pacotes, em seguida executar o comando (extraído do site oficial do RVM):</p>
+
+<pre><code>user@ubuntu:~$ bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+</code></pre>
+
+<p>A seguir, o output completo gerado por esse comando indicará os pacotes e libs necessários para a instalação do Ruby.</p>
+
+<pre><code>(...)
 
 dependencies:
 # For RVM
   rvm: bash curl git
 
 # For Ruby (MRI &amp; ree)  you should install the following OS dependencies:
-  ruby: /usr/bin/apt-get install <strong>build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake</strong>
+  ruby: /usr/bin/apt-get install &lt;strong&gt;build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake&lt;/strong&gt;
 
 (...)
 
-Installation of RVM to /home/user/.rvm/ is complete.</pre>
-Agora, basta instalar essas libs através do apt-get:
-<pre>user@ubuntu:~$ sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake</pre>
-Com as dependências instaladas, abra um novo console (para re-carregar o RVM), e comece a instalar o Ruby, no caso, o MRI 1.8.7:
-<pre>user@ubuntu:~$ rvm install 1.8.7</pre>
-Esta operação levará alguns minutos. Quando concluída, você terá o Ruby 1.8.7 e o <a href="http://rubygems.org/" target="_blank">Rubygems</a> 1.8.6 instalados. Para testar tudo, execute os seguintes comandos:
-<pre>user@ubuntu:~$ rvm use --default 1.8.7
-Using /home/user/.rvm/gems/ruby-1.8.7-p352</pre>
-<pre>user@ubuntu:~$ ruby -v
-ruby 1.8.7 (2011-06-30 patchlevel 352) [i686-linux]</pre>
-<pre>user@ubuntu:~$ gem -v
-1.8.6</pre>
-Pronto! Agora você tem o Ruby e Rubygems instalados e prontos para o uso. Caso queira conferir, o output dos comandos acima está disponível <a href="https://gist.github.com/1157378" target="_blank">neste gist</a>.
+Installation of RVM to /home/user/.rvm/ is complete.
+</code></pre>
 
-Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comentários.
+<p>Agora, basta instalar essas libs através do apt-get:</p>
+
+<pre><code>user@ubuntu:~$ sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake
+</code></pre>
+
+<p>Com as dependências instaladas, abra um novo console (para re-carregar o RVM), e comece a instalar o Ruby, no caso, o MRI 1.8.7:</p>
+
+<pre><code>user@ubuntu:~$ rvm install 1.8.7
+</code></pre>
+
+<p>Esta operação levará alguns minutos. Quando concluída, você terá o Ruby 1.8.7 e o <a href="http://rubygems.org/">Rubygems</a> 1.8.6 instalados. Para testar tudo, execute os seguintes comandos:</p>
+
+<pre><code>user@ubuntu:~$ rvm use --default 1.8.7
+Using /home/user/.rvm/gems/ruby-1.8.7-p352
+
+
+
+
+user@ubuntu:~$ ruby -v
+ruby 1.8.7 (2011-06-30 patchlevel 352) [i686-linux]
+
+
+
+
+user@ubuntu:~$ gem -v
+1.8.6
+</code></pre>
+
+<p>Pronto! Agora você tem o Ruby e Rubygems instalados e prontos para o uso. Caso queira conferir, o output dos comandos acima está disponível <a href="https://gist.github.com/1157378">neste gist</a>.</p>
+
+<p>Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comentários.</p>
 </div>
 
 
@@ -134,7 +160,7 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -148,7 +174,7 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
   
 
 
-<time datetime="2011-08-22T00:00:00-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
+<time datetime="2011-08-22T06:00:19-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
       
 
 <span class="categories">
@@ -183,6 +209,12 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -237,7 +269,10 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm/';
+        var disqus_url = 'http://1up4developers.github.io/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

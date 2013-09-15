@@ -87,7 +87,7 @@
   
 
 
-<time datetime="2013-01-23T00:00:00-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-01-23T13:29:16-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
         
          | <a href="/2013/01/http-monkey/#disqus_thread">Comments</a>
         
@@ -96,34 +96,38 @@
   </header>
 
 
-  <div class="entry-content">O <a rel="nofollow" href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em>
+  <div class="entry-content"><p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
-Pontos positivos:
+<p>Pontos positivos:</p>
+
 <ul>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</li>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</li>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a rel="nofollow" href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</li>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</li>
-	<li>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</li>
-	<li>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</li>
+<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
+<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
+<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
 </ul>
-Pontos negativos:
+
+
+<p>Pontos negativos:</p>
+
 <ul>
-	<li>Gem nova. Ainda não tem um case em produção.</li>
-	<li>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</li>
-	<li>Não suporta adapter que permite requisições em paralelo.</li>
-	<li>Tem o <a rel="nofollow" href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</li>
-	<li>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</li>
+<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
+<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
+<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
+<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
+<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
 </ul>
-Na página <a title="HTTP Monkey uma alternativa para o Faraday (em inglês)" rel="nofollow" href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &#8220;localizar&#8221; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.
 
-Tem também <a title="Slides do HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.
 
-&nbsp;
-<div style="margin-bottom: 5px;"><strong> <a title="HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey" target="_blank">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14" target="_blank">Roger Leite</a></strong></div>
-&nbsp;
+<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
 
-Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D
+<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
+
+<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
+
+<p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
 </div>
   
   
@@ -152,7 +156,7 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
   
 
 
-<time datetime="2013-01-04T00:00:00-02:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
+<time datetime="2013-01-04T13:51:14-02:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
         
          | <a href="/2013/01/nos-idos-de-2012-uml-design-e-waterfall/#disqus_thread">Comments</a>
         
@@ -161,15 +165,15 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
   </header>
 
 
-  <div class="entry-content">Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
-Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&#8230; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.
+  <div class="entry-content"><p>Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
+Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&hellip; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.</p>
 
-Em meio a corrida do novo ouro, me encontro em uma sala de treinamento, às vesperas de um novo ano, estudando, discutindo e demonstrando como analisar e modelar sistemas utilizando a mais famosa linguagem de modelagem: a <a href="http://pt.wikipedia.org/wiki/UML">UML</a>.
-Nunca consegui traçar uma ligação saudável entre os modelos criados com UML e código funcionando em produção. A idéia principal da UML é a de comunicar aos envolvidos em um projeto o que se planeja implementar; quais os detalhes que norteiam o desenvolvimento de uma solução e que <a href="http://www.batebyte.pr.gov.br/modules/conteudo/conteudo.php?conteudo=1718">requisitos funcionais e não funcionais</a> devem ser implementados. O problema é que qualquer coisa diferente de código no desenvolvimento de sistemas, está fadada a diferentes interpretações, ao conhecimento e experiência de quem <a href="http://1up4dev.org/2008/11/arquiteto-cascateiro">produz</a> e consome tais artefatos.
+<p>Em meio a corrida do novo ouro, me encontro em uma sala de treinamento, às vesperas de um novo ano, estudando, discutindo e demonstrando como analisar e modelar sistemas utilizando a mais famosa linguagem de modelagem: a <a href="http://pt.wikipedia.org/wiki/UML">UML</a>.
+Nunca consegui traçar uma ligação saudável entre os modelos criados com UML e código funcionando em produção. A idéia principal da UML é a de comunicar aos envolvidos em um projeto o que se planeja implementar; quais os detalhes que norteiam o desenvolvimento de uma solução e que <a href="http://www.batebyte.pr.gov.br/modules/conteudo/conteudo.php?conteudo=1718">requisitos funcionais e não funcionais</a> devem ser implementados. O problema é que qualquer coisa diferente de código no desenvolvimento de sistemas, está fadada a diferentes interpretações, ao conhecimento e experiência de quem <a href="http://1up4dev.org/2008/11/arquiteto-cascateiro">produz</a> e consome tais artefatos.</p>
 
-A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento ágil distoa fortemente do <a href="http://en.wikipedia.org/wiki/Waterfall_model">modelo cascata</a>, que delinea claramente o papel do analista de negócios/requisitos, o arquiteto/designer da solução e os <del>pobres</del> desenvolvedores que terão de seguir à risca todas definições impostas pelos modelos produzidos. E se durante o ciclo ágil os problemas identificados são priorizados para serem endereçados no próximo ciclo, como o processo formal gerencia isso? Hum&#8230; daí vem minha maior crítica quanto ao uso de modelos no desenvolvimento de software. Já que se decidiu por engessar o processo, seguí-lo fielmente deveria ser o preço a ser pago para manter tanta parafernalha de artefatos sem valor. Identificado o problema, o fluxo deveria voltar lá no início e corrigir requisitos, modelos, código e testes; mas o mercado não permite tanta demora, as linhas de negócio precisam colocar seu produto na prateleira e o fluxo controladamente perfeito que outrora se desenhou, na vida real não funciona mais.
+<p>A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento ágil distoa fortemente do <a href="http://en.wikipedia.org/wiki/Waterfall_model">modelo cascata</a>, que delinea claramente o papel do analista de negócios/requisitos, o arquiteto/designer da solução e os <del>pobres</del> desenvolvedores que terão de seguir à risca todas definições impostas pelos modelos produzidos. E se durante o ciclo ágil os problemas identificados são priorizados para serem endereçados no próximo ciclo, como o processo formal gerencia isso? Hum&hellip; daí vem minha maior crítica quanto ao uso de modelos no desenvolvimento de software. Já que se decidiu por engessar o processo, seguí-lo fielmente deveria ser o preço a ser pago para manter tanta parafernalha de artefatos sem valor. Identificado o problema, o fluxo deveria voltar lá no início e corrigir requisitos, modelos, código e testes; mas o mercado não permite tanta demora, as linhas de negócio precisam colocar seu produto na prateleira e o fluxo controladamente perfeito que outrora se desenhou, na vida real não funciona mais.</p>
 
-É inviável manter a &#8220;documentação&#8221; do sistema em face a uma concorrência e volatilidade de negócios tão vorazes, então eu me pergunto: O que aquelas pessoas estavam fazendo trancadas numa sala, consumindo o tempo a um alto <a href="http://www.stanford.edu/group/fms/fingate/staff/capitalequip/capital_software.html">custo</a> da sua empresa? Aprendendo a como não fazer? Pode ser. Constatando uma vez mais que embora no papel, no processo, tudo aquilo que a teoria diz é muito bonito e controlado mas não funciona no mundo real? Sim, pode ser também, mas o pior é que passados anos de experiências ruins, projetos fracassados e montanhas de dinheiro jogados no ralo, ainda terão coragem de propor um processo baseado em requisitos → modelagem → desenvolvimento → testes, faseados e interdependentes, ignorando o histórico de dores e prejuízos experimentado.
+<p>É inviável manter a &ldquo;documentação&rdquo; do sistema em face a uma concorrência e volatilidade de negócios tão vorazes, então eu me pergunto: O que aquelas pessoas estavam fazendo trancadas numa sala, consumindo o tempo a um alto <a href="http://www.stanford.edu/group/fms/fingate/staff/capitalequip/capital_software.html">custo</a> da sua empresa? Aprendendo a como não fazer? Pode ser. Constatando uma vez mais que embora no papel, no processo, tudo aquilo que a teoria diz é muito bonito e controlado mas não funciona no mundo real? Sim, pode ser também, mas o pior é que passados anos de experiências ruins, projetos fracassados e montanhas de dinheiro jogados no ralo, ainda terão coragem de propor um processo baseado em requisitos → modelagem → desenvolvimento → testes, faseados e interdependentes, ignorando o histórico de dores e prejuízos experimentado.</p>
 </div>
   
   
@@ -198,7 +202,7 @@ A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento 
   
 
 
-<time datetime="2012-11-29T00:00:00-02:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
+<time datetime="2012-11-29T11:38:49-02:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
         
          | <a href="/2012/11/rails-4-novidades/#disqus_thread">Comments</a>
         
@@ -207,22 +211,25 @@ A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento 
   </header>
 
 
-  <div class="entry-content">O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a title="DHH commiting Rails in 4.0.0.beta" href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a title="Ruby on Rails Guides - Rails 4" href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.
+  <div class="entry-content"><p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
 
-Segue um resumão:
+<p>Segue um resumão:</p>
+
 <ul>
-	<li>Suporte somente a ruby 1.9.3 ou superior</li>
-	<li>Vendor/Plugins já era</li>
-	<li>Muita &#8220;magia&#8221; movida pra gems \o/ (Dynamic finders, Mass assignments, AR Session Store, ActiveResource … e muito mais)</li>
-	<li>Interface de Queue</li>
-	<li>Asynchronous Mailer</li>
-	<li>ActionController::Live</li>
-	<li>HTML5 tag helpers</li>
-	<li>Threadsafe on by default</li>
+<li><p>Suporte somente a ruby 1.9.3 ou superior</p></li>
+<li><p>Vendor/Plugins já era</p></li>
+<li><p>Muita &ldquo;magia&rdquo; movida pra gems \o/ (Dynamic finders, Mass assignments, AR Session Store, ActiveResource … e muito mais)</p></li>
+<li><p>Interface de Queue</p></li>
+<li><p>Asynchronous Mailer</p></li>
+<li><p>ActionController::Live</p></li>
+<li><p>HTML5 tag helpers</p></li>
+<li><p>Threadsafe on by default</p></li>
 </ul>
-O <a title="Twitter profile do Santiago Pastorino" href="https://twitter.com/spastorino" target="_blank">Santiago Pastorino</a>, um dos commiters do Rails está mantendo um <a title="Rails 4 links compilation" href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/" target="_blank">ótimo post</a> sobre o desenvolvimento do Rails 4, que vale a pena acompanhar.
 
-Sucesso!
+
+<p>O <a href="https://twitter.com/spastorino">Santiago Pastorino</a>, um dos commiters do Rails está mantendo um <a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">ótimo post</a> sobre o desenvolvimento do Rails 4, que vale a pena acompanhar.</p>
+
+<p>Sucesso!</p>
 </div>
   
   
@@ -251,7 +258,7 @@ Sucesso!
   
 
 
-<time datetime="2012-11-28T00:00:00-02:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+<time datetime="2012-11-28T13:49:06-02:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
         
          | <a href="/2012/11/minionserver-a-real-server-to-mock-servers/#disqus_thread">Comments</a>
         
@@ -260,8 +267,9 @@ Sucesso!
   </header>
 
 
-  <div class="entry-content"><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:
-<pre><code>require 'minion_server'
+  <div class="entry-content"><p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
+
+<pre><code>&lt;code&gt;require 'minion_server'
 
 # build your integration app
 IntegrationApp = Rack::Builder.new do
@@ -279,11 +287,13 @@ server.start("localhost", 1620)  # default: localhost, 4000
 system "curl http://localhost:1620" # =&gt; "Be happy!"
 
 server.shutdown
+&lt;/code&gt;
 </code></pre>
-You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&#8217;s integration tests.
-Hope that helps!
 
-<strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a title="A real server to mock servers!" href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.
+<p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
+Hope that helps!</p>
+
+<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
 </div>
   
   
@@ -312,7 +322,7 @@ Hope that helps!
   
 
 
-<time datetime="2012-08-29T00:00:00-03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+<time datetime="2012-08-29T08:00:07-03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
         
          | <a href="/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/#disqus_thread">Comments</a>
         
@@ -322,30 +332,53 @@ Hope that helps!
 
 
   <div class="entry-content"><h2>Motivação</h2>
-Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/" target="_blank">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.
 
-Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl" target="_blank">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/" target="_blank">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/" target="_blank">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/" target="_blank">toque de Midas da escrotização</a>.
+<p>Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.</p>
 
-Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/" target="_blank">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open Source</a>.
+<p>Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/">toque de Midas da escrotização</a>.</p>
+
+<p>Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software">Open Source</a>.</p>
+
 <h2>Instalando o Postgres</h2>
-Se você estiver no Ubuntu, basta rodar:
-<pre>$ sudo apt-get install postgresql-9.1 libpq-dev</pre>
-Finalizada a instalação, inicie o serviço e abra o client do Postgres:
-<pre>$ sudo service postgresql start
-$ sudo -u postgres psql</pre>
-Aproveite o terminal e mude a senha do usuário <em>postgres</em>:
-<pre># \password</pre>
-Para sair, digite:
-<pre># \q</pre>
-<h2>Migrando o banco</h2>
-Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql" target="_blank">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.
 
-O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:
-<pre>$ sudo gem install mysql2psql</pre>
-Em seguida, execute:
-<pre>$ mysql2psql</pre>
-Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:
-<pre>mysql:
+<p>Se você estiver no Ubuntu, basta rodar:</p>
+
+<pre><code>$ sudo apt-get install postgresql-9.1 libpq-dev
+</code></pre>
+
+<p>Finalizada a instalação, inicie o serviço e abra o client do Postgres:</p>
+
+<pre><code>$ sudo service postgresql start
+$ sudo -u postgres psql
+</code></pre>
+
+<p>Aproveite o terminal e mude a senha do usuário <em>postgres</em>:</p>
+
+<pre><code># \password
+</code></pre>
+
+<p>Para sair, digite:</p>
+
+<pre><code># \q
+</code></pre>
+
+<h2>Migrando o banco</h2>
+
+<p>Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.</p>
+
+<p>O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:</p>
+
+<pre><code>$ sudo gem install mysql2psql
+</code></pre>
+
+<p>Em seguida, execute:</p>
+
+<pre><code>$ mysql2psql
+</code></pre>
+
+<p>Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:</p>
+
+<pre><code>mysql:
  hostname: localhost
  port: 3306
  socket: /var/run/mysqld/mysqld.sock
@@ -358,14 +391,23 @@ destination:
   port: 5432
   username: postgres
   password: postgres
-  database: app_development</pre>
-Agora crie o banco de destino no Postgres:
-<pre>$ sudo psql -h localhost -U postgres -W
-# CREATE DATABASE app_development;</pre>
-Saia do client com <em>\q</em> e então rode novamente:
-<pre>$ mysql2psql</pre>
-Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:
-<pre>Creating table comments...
+  database: app_development
+</code></pre>
+
+<p>Agora crie o banco de destino no Postgres:</p>
+
+<pre><code>$ sudo psql -h localhost -U postgres -W
+# CREATE DATABASE app_development;
+</code></pre>
+
+<p>Saia do client com <em>\q</em> e então rode novamente:</p>
+
+<pre><code>$ mysql2psql
+</code></pre>
+
+<p>Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:</p>
+
+<pre><code>Creating table comments...
 Created table comments
 Creating table schema_migrations...
 Created table schema_migrations
@@ -394,23 +436,33 @@ Indexed table schema_migrations
 Indexing table users...
 Indexed table users
 
-Table creation 0 min, loading 1 min, indexing 0 min, total 1 min</pre>
+Table creation 0 min, loading 1 min, indexing 0 min, total 1 min
+</code></pre>
+
 <h2>Configurando a app</h2>
-Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:
-<pre># Gemfile
-gem 'pg'</pre>
-<pre># database.yml
+
+<p>Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:</p>
+
+<pre><code># Gemfile
+gem 'pg'
+
+
+
+
+# database.yml
 development:
   adapter: postgresql
   host: localhost
   database: app_development
   username: postgres
-  password: postgres</pre>
-Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!
+  password: postgres
+</code></pre>
 
-Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres" target="_blank">mysql-to-postgres</a>, do mesmo autor.
+<p>Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!</p>
 
-Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
+<p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres">mysql-to-postgres</a>, do mesmo autor.</p>
+
+<p>Caso tenha alguma dúvida ou sugestão, deixe seu comentário.</p>
 </div>
   
   
@@ -439,7 +491,7 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
   
 
 
-<time datetime="2012-07-05T00:00:00-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
+<time datetime="2012-07-05T10:00:45-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
         
          | <a href="/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/#disqus_thread">Comments</a>
         
@@ -448,10 +500,11 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
   </header>
 
 
-  <div class="entry-content">Simples, basta usar o <a title="Nginx HttpRewriteModule" href="http://wiki.nginx.org/HttpRewriteModule" target="_blank">HttpRewriteModule</a>.
+  <div class="entry-content"><p>Simples, basta usar o <a href="http://wiki.nginx.org/HttpRewriteModule">HttpRewriteModule</a>.</p>
 
-Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:
-<pre>server {
+<p>Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:</p>
+
+<pre><code>server {
     server_name  www.dominio.com;
     rewrite ^(.*) http://dominio.com$1 permanent;
 }
@@ -459,9 +512,12 @@ Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:
 server {
     server_name  dominio.com;
     #configurações do servidor aqui
-}</pre>
-E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faça:
-<pre>server {
+}
+</code></pre>
+
+<p>E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faça:</p>
+
+<pre><code>server {
     server_name  dominio.com;
     rewrite ^(.*) http://www.dominio.com$1 permanent;
 }
@@ -469,8 +525,10 @@ E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faç
 server {
     server_name  www.dominio.com;
     #configurações do servidor aqui
-}</pre>
-<em>Voilà!</em>
+}
+</code></pre>
+
+<p><em>Voilà!</em></p>
 </div>
   
   
@@ -499,7 +557,7 @@ server {
   
 
 
-<time datetime="2012-06-25T00:00:00-03:00" pubdate data-updated="true">Jun 25<span>th</span>, 2012</time>
+<time datetime="2012-06-25T07:05:09-03:00" pubdate data-updated="true">Jun 25<span>th</span>, 2012</time>
         
          | <a href="/2012/06/concepcao-do-rologames/#disqus_thread">Comments</a>
         
@@ -508,27 +566,39 @@ server {
   </header>
 
 
-  <div class="entry-content">Este post é um tópico da <a title="A experiência de lançar o RoloGames" href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.
+  <div class="entry-content"><p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
+
 <h2>Quando surgiu a idéia</h2>
-Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &#8220;abertos&#8221; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a title="Site social para trocar seus jogos!" href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.
+
+<p>Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &ldquo;abertos&rdquo; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.</p>
+
 <h2>Definindo um mantra</h2>
-[caption id=&#8221;attachment_1199&#8221; align=&#8221;alignleft&#8221; width=&#8221;240&#8221; caption=&#8221;Sorriso pimpão do Sr. Kawasaki&#8221;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img class="size-full wp-image-1199" title="A Arte do Começo - The Art of Start" src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" width="240" height="347" /></a>[/caption]
 
-Totalmente baseado nas dicas do Sr. Kawasaki em <a title="Arte do Começo por Guy Kawasaki" href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:
+<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
+
+<p>Totalmente baseado nas dicas do Sr. Kawasaki em <a href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
+
 <ul>
-	<li><strong>Oportunidades confiáveis</strong>. Queremos que o usuário encontre somente as oportunidades de troca que <strong>façam sentido</strong> a ele, e não receba spams que infortunam a vida ou propostas <em>sem noção</em> (por exemplo, oferecerem um jogo antigo em troca de um lançamento).</li>
-	<li><strong>Toda troca deve ser justa</strong>. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.</li>
-	<li><strong>Fácil de usar</strong>. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.</li>
-	<li><strong>Social</strong>. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.</li>
+<li><p><strong>Oportunidades confiáveis</strong>. Queremos que o usuário encontre somente as oportunidades de troca que <strong>façam sentido</strong> a ele, e não receba spams que infortunam a vida ou propostas <em>sem noção</em> (por exemplo, oferecerem um jogo antigo em troca de um lançamento).</p></li>
+<li><p><strong>Toda troca deve ser justa</strong>. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.</p></li>
+<li><p><strong>Fácil de usar</strong>. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.</p></li>
+<li><p><strong>Social</strong>. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.</p></li>
 </ul>
-<h2>Provas de Conceitos</h2>
-Antes de encostar no código, o Panachi e eu definimos o objetivo do site e algumas premissas para começar o projeto, e a mais importante era: ter um banco de dados de jogos. Definimos somente as informações necessárias de um jogo, e partimos para uma prova de conceito. Em dois dias conseguimos montar um banco de dados bem completo, e a nossa solução foi simplesmente um <a title="Web crawler fácil e rápido com ruby e nokogiri" href="http://1up4dev.org/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">crawler</a> de jogos! Por sinal, foi tão produtivo que nossa outra prova de conceito originou o <a title="Busca troféus da PSN (Playstation Network)." href="https://github.com/rogerleite/psn_trophies">psn_trophies</a>.
-<h2>Interface no papel</h2>
-Em paralelo às provas de conceito, começamos a rascunhar as telas do site. O processo foi bem simples, uma pilha de sulfite e lápis (na falta de uma caneta <a title="Rabiscando com uma caneta Sharpie" href="http://37signals.com/svn/posts/466-sketching-with-a-sharpie">Sharpie</a>). A partir dos esboços, começamos a definir quais funcionalidades o site teria. Em seguidas priorizamos as mais importantes e fechamos o escopo da primeira versão. Durante o desenvolvimento, muita coisa mudou no layout, mas os &#8220;rabiscos&#8221; da concepção foram a essência de tudo.
-<h2>Início do desenvolvimento</h2>
-Já tinhamos uma prova de conceito, uns rascunhos das páginas e uma lista de funcionalidades. E todo processo levou cerca de uma semana.
 
-Sem perder mais tempo, partimos para o código! E foi então que começamos a tropeçar nos detalhes&#8230; mas este será um assunto para o próximo post. Até lá!
+
+<h2>Provas de Conceitos</h2>
+
+<p>Antes de encostar no código, o Panachi e eu definimos o objetivo do site e algumas premissas para começar o projeto, e a mais importante era: ter um banco de dados de jogos. Definimos somente as informações necessárias de um jogo, e partimos para uma prova de conceito. Em dois dias conseguimos montar um banco de dados bem completo, e a nossa solução foi simplesmente um <a href="http://1up4dev.org/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">crawler</a> de jogos! Por sinal, foi tão produtivo que nossa outra prova de conceito originou o <a href="https://github.com/rogerleite/psn_trophies">psn_trophies</a>.</p>
+
+<h2>Interface no papel</h2>
+
+<p>Em paralelo às provas de conceito, começamos a rascunhar as telas do site. O processo foi bem simples, uma pilha de sulfite e lápis (na falta de uma caneta <a href="http://37signals.com/svn/posts/466-sketching-with-a-sharpie">Sharpie</a>). A partir dos esboços, começamos a definir quais funcionalidades o site teria. Em seguidas priorizamos as mais importantes e fechamos o escopo da primeira versão. Durante o desenvolvimento, muita coisa mudou no layout, mas os &ldquo;rabiscos&rdquo; da concepção foram a essência de tudo.</p>
+
+<h2>Início do desenvolvimento</h2>
+
+<p>Já tinhamos uma prova de conceito, uns rascunhos das páginas e uma lista de funcionalidades. E todo processo levou cerca de uma semana.</p>
+
+<p>Sem perder mais tempo, partimos para o código! E foi então que começamos a tropeçar nos detalhes&hellip; mas este será um assunto para o próximo post. Até lá!</p>
 </div>
   
   
@@ -557,7 +627,7 @@ Sem perder mais tempo, partimos para o código! E foi então que começamos a tr
   
 
 
-<time datetime="2012-06-20T00:00:00-03:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
+<time datetime="2012-06-20T08:37:53-03:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
         
          | <a href="/2012/06/a-experiencia-de-lancar-o-rologames/#disqus_thread">Comments</a>
         
@@ -566,28 +636,36 @@ Sem perder mais tempo, partimos para o código! E foi então que começamos a tr
   </header>
 
 
-  <div class="entry-content">Nesta segunda-feira lançamos o <a title="Rolo Games - Rede Social de troca de jogos" href="http://rologames.com.br/">RoloGames</a>.
-<p style="text-align: center;"><a href="http://rologames.com.br"><img class="aligncenter size-full wp-image-1174" title="Rolo Games - Rede Social de Troca de Jogos" src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" width="600" height="120" /></a></p>
-Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.
+  <div class="entry-content"><p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
-O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.
+<p><a href="http://rologames.com.br"><img src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
 
-Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:
+<p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
+
+<p>O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.</p>
+
+<p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
+
 <ol>
-	<li><a title="Business Bingo Generator" href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &#8230; :D</li>
-	<li>MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &#8220;regras&#8221; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</li>
-	<li><a title="Mooney - Controle financeiro pessoal simples, rápido e seguro" href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</li>
-	<li>Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</li>
+<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
+<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
+<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
+<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
 </ol>
-Mas como diz o ditado &#8220;até mesmo um pé na bunda te empurra pra frente&#8221; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D
 
-E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):
+
+<p>Mas como diz o ditado &ldquo;até mesmo um pé na bunda te empurra pra frente&rdquo; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D</p>
+
+<p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
+
 <ul>
-	<li><a title="Concepção do RoloGames" href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></li>
-	<li>Desenvolvimento</li>
-	<li>Infraestrutura</li>
+<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
+<li><p>Desenvolvimento</p></li>
+<li><p>Infraestrutura</p></li>
 </ul>
-Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &#8220;polêmico&#8221; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!
+
+
+<p>Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &ldquo;polêmico&rdquo; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!</p>
 </div>
   
   
@@ -616,7 +694,7 @@ Espero que o post te ajude de alguma maneira e te motive também, afinal até ho
   
 
 
-<time datetime="2012-06-01T00:00:00-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+<time datetime="2012-06-01T10:14:30-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
         
          | <a href="/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/#disqus_thread">Comments</a>
         
@@ -625,49 +703,80 @@ Espero que o post te ajude de alguma maneira e te motive também, afinal até ho
   </header>
 
 
-  <div class="entry-content"><a title="Vagrant, virtualized development made easy" href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.
+  <div class="entry-content"><p><a href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.</p>
+
 <h2>Prós e Contra<del>s</del></h2>
-Vários pontos se destacam no uso do Vagrant:
+
+<p>Vários pontos se destacam no uso do Vagrant:</p>
+
 <ul>
-	<li>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</li>
-	<li>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</li>
-	<li>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</li>
-	<li>Mantém a sua máquina local &#8220;limpa&#8221;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</li>
+<li><p>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</p></li>
+<li><p>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</p></li>
+<li><p>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</p></li>
+<li><p>Mantém a sua máquina local &ldquo;limpa&rdquo;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</p></li>
 </ul>
-Agora vem o contra.
+
+
+<p>Agora vem o contra.</p>
+
 <ul>
-	<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
+<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
 </ul>
+
+
 <h2>Instalação</h2>
-Você precisa do <a title="Oracle VM VirtualBox" href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &#8220;gem install vagrant&#8221; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a title="Vagrant Downloads" href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.
+
+<p>Você precisa do <a href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &ldquo;gem install vagrant&rdquo; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.</p>
+
 <h2>Exemplo de Uso</h2>
-O <a title="Vagrant - Getting Started" href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a title="Rails Casts Virtual Machines with Vagrant" href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.
 
-Supondo que o vagrant está instalado. Vamos adicionar uma máquina:
-<pre>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box</pre>
-Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:
-<pre>$ vagrant init lucid32  #ja especificando o box lucid32 baixado</pre>
-Vamos subir a VM:
-<pre>$ vagrant up</pre>
-Para acessar a VM:
-<pre>$ vagrant ssh</pre>
-Repare que dentro da VM, na pasta &#8220;/vagrant&#8221; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.
+<p>O <a href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.</p>
 
-Vamos supor que você executou um &#8220;rails s&#8221; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:
-<pre><code>config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000</code></pre>
-Dá um restart na VM:
-<pre>$ vagrant halt &amp;&amp; vagrant up</pre>
-Subir o projeto novamente. (vagrant ssh e o &#8220;rails s&#8221; dentro do /vagrant)
+<p>Supondo que o vagrant está instalado. Vamos adicionar uma máquina:</p>
 
-Acesse http://localhost:4000.
+<pre><code>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
+</code></pre>
+
+<p>Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:</p>
+
+<pre><code>$ vagrant init lucid32  #ja especificando o box lucid32 baixado
+</code></pre>
+
+<p>Vamos subir a VM:</p>
+
+<pre><code>$ vagrant up
+</code></pre>
+
+<p>Para acessar a VM:</p>
+
+<pre><code>$ vagrant ssh
+</code></pre>
+
+<p>Repare que dentro da VM, na pasta &ldquo;/vagrant&rdquo; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.</p>
+
+<p>Vamos supor que você executou um &ldquo;rails s&rdquo; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:</p>
+
+<pre><code>&lt;code&gt;config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000&lt;/code&gt;
+</code></pre>
+
+<p>Dá um restart na VM:</p>
+
+<pre><code>$ vagrant halt &amp;&amp; vagrant up
+</code></pre>
+
+<p>Subir o projeto novamente. (vagrant ssh e o &ldquo;rails s&rdquo; dentro do /vagrant)</p>
+
+<p>Acesse <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
 <h2>Extras e Conclusão</h2>
-A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:
 
-<a title="Vagrant Provisioning" href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> - Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.
+<p>A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:</p>
 
-<a title="Vagrant plugins" href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> - Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a title="Vagrant Plugin Snapshots da VM" href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.
+<p><a href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> &ndash; Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.</p>
 
-<a title="Vagrant Boxes" href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> - No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a title="A list of base boxes for Vagrant" href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.
+<p><a href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> &ndash; Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.</p>
+
+<p><a href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> &ndash; No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.</p>
 </div>
   
   
@@ -696,7 +805,7 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
   
 
 
-<time datetime="2012-03-20T00:00:00-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+<time datetime="2012-03-20T00:57:44-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
         
          | <a href="/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/#disqus_thread">Comments</a>
         
@@ -705,22 +814,31 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
   </header>
 
 
-  <div class="entry-content">Dica para quem usa o <a href="http://wiki.nginx.org/Main" target="_blank">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule" target="_blank">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.
+  <div class="entry-content"><p>Dica para quem usa o <a href="http://wiki.nginx.org/Main">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.</p>
 
-Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:
-<pre>location ~ / {
+<p>Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:</p>
+
+<pre><code>location ~ / {
         auth_basic            "Restricted";
         auth_basic_user_file  htpasswd;
         passenger_enabled on;
-}</pre>
-Um detalhe importante: se estiver rodando sua app com <a href="http://www.modrails.com/" target="_blank">Passenger</a>, inclua a linha <em>passenger_enabled on;</em>
+}
+</code></pre>
 
-Ah, já estava esquecendo das senhas. Elas devem ficar no arquivo <em>htpasswd</em>, no mesmo diretório do arquivo<em> nginx.conf</em> e precisam seguir o formato user:senha em cada linha. Por exemplo:
-<pre>user:sd5dsjo23PwdSh
-admin:mdePW2hgrPddSA</pre>
-O detalhe é que a senha precisa ser <a href="http://wiki.nginx.org/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F" target="_blank">criptografada em MD5</a>. Uma maneira fácil (e que funciona) de fazer isso é executando:
-<pre>ruby -e "puts 'usuario:' + 'senha'.crypt('md5')" &gt;&gt; htpasswd</pre>
-Sucesso!
+<p>Um detalhe importante: se estiver rodando sua app com <a href="http://www.modrails.com/">Passenger</a>, inclua a linha <em>passenger_enabled on;</em></p>
+
+<p>Ah, já estava esquecendo das senhas. Elas devem ficar no arquivo <em>htpasswd</em>, no mesmo diretório do arquivo<em> nginx.conf</em> e precisam seguir o formato user:senha em cada linha. Por exemplo:</p>
+
+<pre><code>user:sd5dsjo23PwdSh
+admin:mdePW2hgrPddSA
+</code></pre>
+
+<p>O detalhe é que a senha precisa ser <a href="http://wiki.nginx.org/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F">criptografada em MD5</a>. Uma maneira fácil (e que funciona) de fazer isso é executando:</p>
+
+<pre><code>ruby -e "puts 'usuario:' + 'senha'.crypt('md5')" &gt;&gt; htpasswd
+</code></pre>
+
+<p>Sucesso!</p>
 </div>
   
   

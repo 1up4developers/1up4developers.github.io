@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-01-17T00:00:00-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
+<time datetime="2011-01-17T09:00:55-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,20 +93,21 @@
   </header>
 
 
-<div class="entry-content">Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma resposta.
+<div class="entry-content"><p>Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma resposta.</p>
 
-Caso você não conheça, Bundler é uma ferramenta criada para facilitar a instalação e atualização de aplicações e suas gems, resolvendo facilmente as dependências e criando ambientes homogêneos em máquinas diferentes. Em outras palavras, resolve de uma vez por todas aquele inferno que era ter que baixar gem por gem da sua aplicação e ainda assim correr o risco de encontrar alguma incompatibilidade.
+<p>Caso você não conheça, Bundler é uma ferramenta criada para facilitar a instalação e atualização de aplicações e suas gems, resolvendo facilmente as dependências e criando ambientes homogêneos em máquinas diferentes. Em outras palavras, resolve de uma vez por todas aquele inferno que era ter que baixar gem por gem da sua aplicação e ainda assim correr o risco de encontrar alguma incompatibilidade.</p>
 
-O Rails 3 utiliza o Bundler por padrão, mas aplicações em Rails 2.x ainda dependem das gems declaradas no arquivo <code>config/environment.rb</code>, e ao copiar os arquivos para uma determinada máquina, você é obrigado a usar <code>rake gems:install</code>, que vai levar algum tempo rodando e não vai instalar tudo o que você precisa.
+<p>O Rails 3 utiliza o Bundler por padrão, mas aplicações em Rails 2.x ainda dependem das gems declaradas no arquivo <code>config/environment.rb</code>, e ao copiar os arquivos para uma determinada máquina, você é obrigado a usar <code>rake gems:install</code>, que vai levar algum tempo rodando e não vai instalar tudo o que você precisa.</p>
 
-Ou pelo menos era assim que funcionava até você ler esse post.
+<p>Ou pelo menos era assim que funcionava até você ler esse post.</p>
 
-Primeiro, considerando que você esteja no diretório raiz da sua aplicação, execute a sequência abaixo:
+<p>Primeiro, considerando que você esteja no diretório raiz da sua aplicação, execute a sequência abaixo:</p>
 
-Antes de qualquer outra coisa, instale o Bundler na sua máquina executando o comando <code>gem install bundler</code>
+<p>Antes de qualquer outra coisa, instale o Bundler na sua máquina executando o comando <code>gem install bundler</code></p>
 
-No seu arquivo <code>config/boot.rb</code>, imediatamente antes da linha <code>Rails.boot!</code>, insira o bloco abaixo:
-<pre lang="ruby">class Rails::Boot
+<p>No seu arquivo <code>config/boot.rb</code>, imediatamente antes da linha <code>Rails.boot!</code>, insira o bloco abaixo:</p>
+
+<pre><code>class Rails::Boot
   def run
     load_initializer
 
@@ -119,16 +120,18 @@ No seu arquivo <code>config/boot.rb</code>, imediatamente antes da linha <code>R
     Rails::Initializer.run(:set_load_path)
   end
 end
-</pre>
-Crie um arquivo <code>config/preinitializer.rb</code>. Esse arquivo não existe no Rails 2.x, então se você não criar, não vai funcionar. Adicione as linhas abaixo nesse arquivo:
-<pre lang="ruby">begin
+</code></pre>
+
+<p>Crie um arquivo <code>config/preinitializer.rb</code>. Esse arquivo não existe no Rails 2.x, então se você não criar, não vai funcionar. Adicione as linhas abaixo nesse arquivo:</p>
+
+<pre><code>begin
   require "rubygems"
   require "bundler"
 rescue LoadError
   raise "Could not load the bundler gem. Install it with `gem install bundler`."
 end
 
-if Gem::Version.new(Bundler::VERSION) <= Gem::Version.new("0.9.24")
+if Gem::Version.new(Bundler::VERSION) &lt;= Gem::Version.new("0.9.24")
   raise RuntimeError, "Your bundler version is too old for Rails 2.3." +
    "Run `gem install bundler` to upgrade."
 end
@@ -141,11 +144,13 @@ rescue Bundler::GemNotFound
   raise RuntimeError, "Bundler couldn't find some gems." +
     "Did you run `bundle install`?"
 end
-</pre>
-Crie um arquivo chamado <code>Gemfile</code> no raiz da sua aplicação. Entre em <code>config/environment.rb</code>, remova todas as instruções config.gem e as adicione no arquivo <code>Gemfile</code> conforme abaixo, sem o prefixo <code>config.</code> (ponto incluído).
+</code></pre>
 
-Seu arquivo <code>config/environment.rb</code> era assim:
-<pre lang="ruby"># Be sure to restart your server when you modify this file
+<p>Crie um arquivo chamado <code>Gemfile</code> no raiz da sua aplicação. Entre em <code>config/environment.rb</code>, remova todas as instruções config.gem e as adicione no arquivo <code>Gemfile</code> conforme abaixo, sem o prefixo <code>config.</code> (ponto incluído).</p>
+
+<p>Seu arquivo <code>config/environment.rb</code> era assim:</p>
+
+<pre><code># Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
@@ -163,10 +168,10 @@ Rails::Initializer.run do |config|
 
   # Specify gems that this application depends on and have them installed with rake gems:install
   config.gem "bj"
-  config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  config.gem "sqlite3-ruby", :lib => "sqlite3"
-  config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "authlogic", :version => "=2.1.6"
+  config.gem "hpricot", :version =&gt; '0.6', :source =&gt; "http://code.whytheluckystiff.net"
+  config.gem "sqlite3-ruby", :lib =&gt; "sqlite3"
+  config.gem "aws-s3", :lib =&gt; "aws/s3"
+  config.gem "authlogic", :version =&gt; "=2.1.6"
   config.gem "slim_scrooge", "=1.0.10"
 
   # Only load the plugins named here, in the order given (default is alphabetical).
@@ -177,9 +182,11 @@ Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 end
-</pre>
-E agora é assim:
-<pre lang="ruby"># Be sure to restart your server when you modify this file
+</code></pre>
+
+<p>E agora é assim:</p>
+
+<pre><code># Be sure to restart your server when you modify this file
 
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
@@ -203,35 +210,38 @@ Rails::Initializer.run do |config|
   # you must remove the Active Record framework.
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
 end
-</pre>
-Bem mais limpo, não?
+</code></pre>
 
-Já o seu recém criado arquivo <code>Gemfile</code> vai ficar assim:
-<pre lang="ruby">source 'http://gemcutter.org'
+<p>Bem mais limpo, não?</p>
+
+<p>Já o seu recém criado arquivo <code>Gemfile</code> vai ficar assim:</p>
+
+<pre><code>source 'http://gemcutter.org'
 gem "bj"
-gem "hpricot", "~> 0.6"
-gem "sqlite3-ruby", "~> 1.3.1", :require => "sqlite3"
-gem "aws-s3", :lib => "aws/s3"
+gem "hpricot", "~&gt; 0.6"
+gem "sqlite3-ruby", "~&gt; 1.3.1", :require =&gt; "sqlite3"
+gem "aws-s3", :lib =&gt; "aws/s3"
 gem "rails", "= 2.3.10"
-gem "authlogic", "~> 2.1.6"
+gem "authlogic", "~&gt; 2.1.6"
 
 group :development, :test do
-  gem 'mongrel', :require => false
+  gem 'mongrel', :require =&gt; false
 end
 
 group :production do
-  gem "slim_scrooge", "~> 1.0.10"
+  gem "slim_scrooge", "~&gt; 1.0.10"
 end
-</pre>
-Note que eu criei dois grupos: um com <code>:development, :test</code> e um com <code>:production</code>. Significa que as gems do primeiro grupo somente serão utilizadas em desenvolvimento e em testes, e as do segundo grupo somente serão usadas no ambiente de produção. O que está fora dos grupos será usado em qualquer ambiente.
+</code></pre>
 
-Agora, finalmente você digita <code>bundle install</code>, aguarda alguns instantes e pronto! A sua aplicação está com todas as gems instaladas e suas devidas dependências.
+<p>Note que eu criei dois grupos: um com <code>:development, :test</code> e um com <code>:production</code>. Significa que as gems do primeiro grupo somente serão utilizadas em desenvolvimento e em testes, e as do segundo grupo somente serão usadas no ambiente de produção. O que está fora dos grupos será usado em qualquer ambiente.</p>
 
-Para listar as gems utilizadas, execute <code>bundle list</code>.
+<p>Agora, finalmente você digita <code>bundle install</code>, aguarda alguns instantes e pronto! A sua aplicação está com todas as gems instaladas e suas devidas dependências.</p>
 
-Sugestões, correções e críticas são bem vindas nos comentários.
+<p>Para listar as gems utilizadas, execute <code>bundle list</code>.</p>
 
-Para mais informações, leia a documentação no site do Bundle: <a href="http://gembundler.com/" target="_blank">http://gembundler.com/</a>
+<p>Sugestões, correções e críticas são bem vindas nos comentários.</p>
+
+<p>Para mais informações, leia a documentação no site do Bundle: <a href="http://gembundler.com/">http://gembundler.com/</a></p>
 </div>
 
 
@@ -240,7 +250,7 @@ Para mais informações, leia a documentação no site do Bundle: <a href="http:
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
 
       
 
@@ -254,7 +264,7 @@ Para mais informações, leia a documentação no site do Bundle: <a href="http:
   
 
 
-<time datetime="2011-01-17T00:00:00-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
+<time datetime="2011-01-17T09:00:55-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -281,14 +291,20 @@ Para mais informações, leia a documentação no site do Bundle: <a href="http:
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/" title="Previous Post: Teste de integração com Rspec 1.x e Capybara na sua app Rails">&laquo; Teste de integração com Rspec 1.x e Capybara na sua app Rails</a>
+        <a class="basic-alignment left" href="/2011/01/voltamos/" title="Previous Post: Voltamos!">&laquo; Voltamos!</a>
       
       
-        <a class="basic-alignment right" href="/2011/01/voltamos/" title="Next Post: Voltamos!">Voltamos! &raquo;</a>
+        <a class="basic-alignment right" href="/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/" title="Next Post: Criando um WebCrawler de modo fácil e rápido com Ruby e Nokogiri">Criando um WebCrawler de modo fácil e rápido com Ruby e Nokogiri &raquo;</a>
       
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -343,7 +359,10 @@ Para mais informações, leia a documentação no site do Bundle: <a href="http:
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/01/usando-bundler-com-rails-2-3/';
+        var disqus_url = 'http://1up4developers.github.io/2011/01/usando-bundler-com-rails-2-3/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

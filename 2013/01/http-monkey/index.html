@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2013-01-23T00:00:00-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-01-23T13:29:16-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,34 +93,38 @@
   </header>
 
 
-<div class="entry-content">O <a rel="nofollow" href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em>
+<div class="entry-content"><p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
-Pontos positivos:
+<p>Pontos positivos:</p>
+
 <ul>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</li>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</li>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a rel="nofollow" href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</li>
-	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</li>
-	<li>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</li>
-	<li>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</li>
+<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
+<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
+<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
 </ul>
-Pontos negativos:
+
+
+<p>Pontos negativos:</p>
+
 <ul>
-	<li>Gem nova. Ainda não tem um case em produção.</li>
-	<li>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</li>
-	<li>Não suporta adapter que permite requisições em paralelo.</li>
-	<li>Tem o <a rel="nofollow" href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</li>
-	<li>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</li>
+<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
+<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
+<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
+<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
+<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
 </ul>
-Na página <a title="HTTP Monkey uma alternativa para o Faraday (em inglês)" rel="nofollow" href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &#8220;localizar&#8221; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.
 
-Tem também <a title="Slides do HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.
 
-&nbsp;
-<div style="margin-bottom: 5px;"><strong> <a title="HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey" target="_blank">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14" target="_blank">Roger Leite</a></strong></div>
-&nbsp;
+<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
 
-Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D
+<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
+
+<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
+
+<p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
 </div>
 
 
@@ -129,7 +133,7 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -143,7 +147,7 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
   
 
 
-<time datetime="2013-01-23T00:00:00-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-01-23T13:29:16-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
       
 
 <span class="categories">
@@ -178,6 +182,12 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -232,7 +242,10 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2013/01/http-monkey/';
+        var disqus_url = 'http://1up4developers.github.io/2013/01/http-monkey/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma &hellip;">
+  <meta name="description" content="Caros leitores, depois de um período, digamos boring, estamos de volta e com novidades! Durante o ano de 2010 estivemos trabalhando muito, por isso a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -71,7 +71,7 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/2011/01/usando-bundler-com-rails-2-3/">Usando Bundler Com Rails 2.3</a></h1>
+      <h1 class="entry-title"><a href="/2011/01/voltamos/">Voltamos!</a></h1>
     
     
       <p class="meta">
@@ -87,154 +87,36 @@
   
 
 
-<time datetime="2011-01-17T00:00:00-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
+<time datetime="2011-01-17T08:00:23-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
         
-         | <a href="/2011/01/usando-bundler-com-rails-2-3/#disqus_thread">Comments</a>
+         | <a href="/2011/01/voltamos/#disqus_thread">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content">Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma resposta.
+  <div class="entry-content"><p>Caros leitores, depois de um período, digamos <em>boring</em>, estamos de volta e com novidades!</p>
 
-Caso você não conheça, Bundler é uma ferramenta criada para facilitar a instalação e atualização de aplicações e suas gems, resolvendo facilmente as dependências e criando ambientes homogêneos em máquinas diferentes. Em outras palavras, resolve de uma vez por todas aquele inferno que era ter que baixar gem por gem da sua aplicação e ainda assim correr o risco de encontrar alguma incompatibilidade.
+<p>Durante o ano de 2010 estivemos trabalhando muito, por isso a baixa frequencia de posts. Porém tanto trabalho rendeu experiências únicas para todos nós, as quais pretendemos compartilhar com vocês em breve.</p>
 
-O Rails 3 utiliza o Bundler por padrão, mas aplicações em Rails 2.x ainda dependem das gems declaradas no arquivo <code>config/environment.rb</code>, e ao copiar os arquivos para uma determinada máquina, você é obrigado a usar <code>rake gems:install</code>, que vai levar algum tempo rodando e não vai instalar tudo o que você precisa.
+<h2>Novos rebeldes colaboradores</h2>
 
-Ou pelo menos era assim que funcionava até você ler esse post.
+<p><a href="http://twitter.com/habutre">Rogério Ramos</a></p>
 
-Primeiro, considerando que você esteja no diretório raiz da sua aplicação, execute a sequência abaixo:
+<p>Desenvolvedor, entusiasta, sonhador. Acredita que desenvolvedores e usuários devem trabalhar sempre a quatro mãos. Veterano com agile e Scrum, está iniciando sua jornada com com Ruby on Rails.</p>
 
-Antes de qualquer outra coisa, instale o Bundler na sua máquina executando o comando <code>gem install bundler</code>
+<p><a href="http://twitter.com/p_balduino">Plínio Balduino</a></p>
 
-No seu arquivo <code>config/boot.rb</code>, imediatamente antes da linha <code>Rails.boot!</code>, insira o bloco abaixo:
-<pre lang="ruby">class Rails::Boot
-  def run
-    load_initializer
+<p>Desenvolvedor, baixista musicólatra, test addicted, viciado em leitura, &ldquo;pragmático, sarcástico, curioso&rdquo; e pai do Gustavinho. Esperem posts ácidos sobre Scrum e dicas práticas de Rails.</p>
 
-    Rails::Initializer.class_eval do
-      def load_gems
-        @bundler_loaded ||= Bundler.require :default, Rails.env
-      end
-    end
+<p>Sejam bem vindos à <a href="http://1up4dev.org/1up-nightmare-team/">guerrilha</a>!</p>
 
-    Rails::Initializer.run(:set_load_path)
-  end
-end
-</pre>
-Crie um arquivo <code>config/preinitializer.rb</code>. Esse arquivo não existe no Rails 2.x, então se você não criar, não vai funcionar. Adicione as linhas abaixo nesse arquivo:
-<pre lang="ruby">begin
-  require "rubygems"
-  require "bundler"
-rescue LoadError
-  raise "Could not load the bundler gem. Install it with `gem install bundler`."
-end
+<h2>E não é só isso!</h2>
 
-if Gem::Version.new(Bundler::VERSION) <= Gem::Version.new("0.9.24")
-  raise RuntimeError, "Your bundler version is too old for Rails 2.3." +
-   "Run `gem install bundler` to upgrade."
-end
+<p>Estreiamos o novo tema, mais limpo e distribuído, facilitando a leitura dos códigos inline. O endereço do feed também mudou: atualizem seus leitores para o endereço <a href="http://feeds.feedburner.com/1up4developers">http://feeds.feedburner.com/1up4developers</a>. E quem ainda não assinou, assine <em>d-já</em>!</p>
 
-begin
-  # Set up load paths for all bundled gems
-  ENV["BUNDLE_GEMFILE"] = File.expand_path("../../Gemfile", __FILE__)
-  Bundler.setup
-rescue Bundler::GemNotFound
-  raise RuntimeError, "Bundler couldn't find some gems." +
-    "Did you run `bundle install`?"
-end
-</pre>
-Crie um arquivo chamado <code>Gemfile</code> no raiz da sua aplicação. Entre em <code>config/environment.rb</code>, remova todas as instruções config.gem e as adicione no arquivo <code>Gemfile</code> conforme abaixo, sem o prefixo <code>config.</code> (ponto incluído).
-
-Seu arquivo <code>config/environment.rb</code> era assim:
-<pre lang="ruby"># Be sure to restart your server when you modify this file
-
-# Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
-
-# Bootstrap the Rails environment, frameworks, and default configuration
-require File.join(File.dirname(__FILE__), 'boot')
-
-Rails::Initializer.run do |config|
-  # Settings in config/environments/* take precedence over those specified here.
-  # Application configuration should go into files in config/initializers
-  # -- all .rb files in that directory are automatically loaded.
-
-  # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
-
-  # Specify gems that this application depends on and have them installed with rake gems:install
-  config.gem "bj"
-  config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
-  config.gem "sqlite3-ruby", :lib => "sqlite3"
-  config.gem "aws-s3", :lib => "aws/s3"
-  config.gem "authlogic", :version => "=2.1.6"
-  config.gem "slim_scrooge", "=1.0.10"
-
-  # Only load the plugins named here, in the order given (default is alphabetical).
-  # :all can be used as a placeholder for all plugins not explicitly named
-  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-  # Skip frameworks you're not going to use. To use Rails without a database,
-  # you must remove the Active Record framework.
-  # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
-end
-</pre>
-E agora é assim:
-<pre lang="ruby"># Be sure to restart your server when you modify this file
-
-# Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
-
-# Bootstrap the Rails environment, frameworks, and default configuration
-require File.join(File.dirname(__FILE__), 'boot')
-
-Rails::Initializer.run do |config|
-  # Settings in config/environments/* take precedence over those specified here.
-  # Application configuration should go into files in config/initializers
-  # -- all .rb files in that directory are automatically loaded.
-
-  # Add additional load paths for your own custom dirs
-  # config.load_paths += %W( #{RAILS_ROOT}/extras )
-
-  # Only load the plugins named here, in the order given (default is alphabetical).
-  # :all can be used as a placeholder for all plugins not explicitly named
-  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
-
-  # Skip frameworks you're not going to use. To use Rails without a database,
-  # you must remove the Active Record framework.
-  # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
-end
-</pre>
-Bem mais limpo, não?
-
-Já o seu recém criado arquivo <code>Gemfile</code> vai ficar assim:
-<pre lang="ruby">source 'http://gemcutter.org'
-gem "bj"
-gem "hpricot", "~> 0.6"
-gem "sqlite3-ruby", "~> 1.3.1", :require => "sqlite3"
-gem "aws-s3", :lib => "aws/s3"
-gem "rails", "= 2.3.10"
-gem "authlogic", "~> 2.1.6"
-
-group :development, :test do
-  gem 'mongrel', :require => false
-end
-
-group :production do
-  gem "slim_scrooge", "~> 1.0.10"
-end
-</pre>
-Note que eu criei dois grupos: um com <code>:development, :test</code> e um com <code>:production</code>. Significa que as gems do primeiro grupo somente serão utilizadas em desenvolvimento e em testes, e as do segundo grupo somente serão usadas no ambiente de produção. O que está fora dos grupos será usado em qualquer ambiente.
-
-Agora, finalmente você digita <code>bundle install</code>, aguarda alguns instantes e pronto! A sua aplicação está com todas as gems instaladas e suas devidas dependências.
-
-Para listar as gems utilizadas, execute <code>bundle list</code>.
-
-Sugestões, correções e críticas são bem vindas nos comentários.
-
-Para mais informações, leia a documentação no site do Bundle: <a href="http://gembundler.com/" target="_blank">http://gembundler.com/</a>
+<p>Fiquem a vontade para comentar (ou não). Sucesso!</p>
 </div>
   
   
@@ -263,7 +145,7 @@ Para mais informações, leia a documentação no site do Bundle: <a href="http:
   
 
 
-<time datetime="2010-08-09T00:00:00-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
+<time datetime="2010-08-09T07:00:35-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
         
          | <a href="/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/#disqus_thread">Comments</a>
         
@@ -272,28 +154,35 @@ Para mais informações, leia a documentação no site do Bundle: <a href="http:
   </header>
 
 
-  <div class="entry-content">Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra quem já conhece <a title="Rspec home" href="http://rspec.info/">rspec</a> e <a title="capybara" href="http://github.com/jnicklas/capybara">capybara</a>.
+  <div class="entry-content"><p>Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra quem já conhece <a href="http://rspec.info/">rspec</a> e <a href="http://github.com/jnicklas/capybara">capybara</a>.</p>
 
-A documentação do Capybara é boa, mas deixa a desejar nas instruções de como integrá-lo somente com rspec. Com a ajuda do <a href="http://blog.georgeguimaraes.com/">George Guimarães</a> da <a href="http://blog.plataformatec.com.br/">Plataforma</a>, cheguei num passo a passo mega simples.
+<p>A documentação do Capybara é boa, mas deixa a desejar nas instruções de como integrá-lo somente com rspec. Com a ajuda do <a href="http://blog.georgeguimaraes.com/">George Guimarães</a> da <a href="http://blog.plataformatec.com.br/">Plataforma</a>, cheguei num passo a passo mega simples.</p>
 
-No <em>config/environments/test.rb</em> declare:
-<pre lang="ruby">config.gem "rspec",            :version =&gt; "= 1.3.0", :lib =&gt; false
+<p>No <em>config/environments/test.rb</em> declare:</p>
+
+<pre><code>config.gem "rspec",            :version =&gt; "= 1.3.0", :lib =&gt; false
 config.gem "rspec-rails",      :version =&gt; "= 1.3.2", :lib =&gt; false
-config.gem "capybara",         :version =&gt; "= 0.3.9", :lib =&gt; false</pre>
-No <em>spec/spec_helper.rb</em> coloque:
-<pre lang="ruby">require 'capybara/rails'
+config.gem "capybara",         :version =&gt; "= 0.3.9", :lib =&gt; false
+</code></pre>
+
+<p>No <em>spec/spec_helper.rb</em> coloque:</p>
+
+<pre><code>require 'capybara/rails'
 [...]
 Spec::Runner.configure do |config|
 
   [...]
   config.include(Capybara, :type =&gt; :integration)
 
-end</pre>
-Pronto! Isto é o suficiente para utilizar o Capybara nos testes de integração.
-Para finalizar, você pode montar um teste simples de validação. Por exemplo:
+end
+</code></pre>
 
-Crie <em>spec/integration/site_spec.rb</em> e coloque:
-<pre lang="ruby">require 'spec_helper'
+<p>Pronto! Isto é o suficiente para utilizar o Capybara nos testes de integração.
+Para finalizar, você pode montar um teste simples de validação. Por exemplo:</p>
+
+<p>Crie <em>spec/integration/site_spec.rb</em> e coloque:</p>
+
+<pre><code>require 'spec_helper'
 
 describe "Site sample" do
 
@@ -310,15 +199,24 @@ describe "Site sample" do
 
   end
 
-end</pre>
-Para executar somente os testes de integração:
-<pre>rake spec:integration</pre>
-<h2>have_content e um hot tip que pode te salvar muitas horas !</h2>
-Caso aconteça o erro:
-<pre>undefined method `have_content' for #&lt;ActionController::Integration::Session:0xb618ad10&gt;</pre>
-Graças a esta mensagem <a href="http://groups.google.com/group/ruby-capybara/browse_thread/thread/28467e031beb7ba1/19a368c21a278eb8?lnk=gst&amp;q=have_content#19a368c21a278eb8">Can&#8217;t make matchers work with cucumber and rails 2.3.2</a>, descobri que o <em>have_content</em> não funciona com o rails 2.3.2, eu resolvi o problema fazendo um upgrade para a última versão do rails. #ficaadica
+end
+</code></pre>
 
-Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
+<p>Para executar somente os testes de integração:</p>
+
+<pre><code>rake spec:integration
+</code></pre>
+
+<h2>have_content e um hot tip que pode te salvar muitas horas !</h2>
+
+<p>Caso aconteça o erro:</p>
+
+<pre><code>undefined method `have_content' for #&lt;ActionController::Integration::Session:0xb618ad10&gt;
+</code></pre>
+
+<p>Graças a esta mensagem <a href="http://groups.google.com/group/ruby-capybara/browse_thread/thread/28467e031beb7ba1/19a368c21a278eb8?lnk=gst&amp;q=have_content#19a368c21a278eb8">Can&rsquo;t make matchers work with cucumber and rails 2.3.2</a>, descobri que o <em>have_content</em> não funciona com o rails 2.3.2, eu resolvi o problema fazendo um upgrade para a última versão do rails. #ficaadica</p>
+
+<p>Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !</p>
 </div>
   
   
@@ -347,7 +245,7 @@ Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
   
 
 
-<time datetime="2010-07-29T00:00:00-03:00" pubdate data-updated="true">Jul 29<span>th</span>, 2010</time>
+<time datetime="2010-07-29T01:21:38-03:00" pubdate data-updated="true">Jul 29<span>th</span>, 2010</time>
         
          | <a href="/2010/07/a-extincao-do-programador-senior/#disqus_thread">Comments</a>
         
@@ -356,21 +254,24 @@ Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
   </header>
 
 
-  <div class="entry-content">Quando foi a última vez em que você viu um programador sênior? Eu tenho tido sérias dificuldades para encontrar algum. Acho que se estivesse procurando ararinhas azuis teria tido mais sucesso &#8211; será que alguma toparia programar? Desconfio que não. Consciente da causa ecológica, ela me diria: cada ararinha programando toma o lugar de um programador sênior, que é de uma espécie muito mais em risco do que eu. E bateria as asas em retirada.
+  <div class="entry-content"><p>Quando foi a última vez em que você viu um programador sênior? Eu tenho tido sérias dificuldades para encontrar algum. Acho que se estivesse procurando ararinhas azuis teria tido mais sucesso &mdash; será que alguma toparia programar? Desconfio que não. Consciente da causa ecológica, ela me diria: cada ararinha programando toma o lugar de um programador sênior, que é de uma espécie muito mais em risco do que eu. E bateria as asas em retirada.</p>
 
-É claro que, ao contrário da <a title="Cyanopsitta spixii" href="http://pt.wikipedia.org/wiki/Ararinha-azul" target="_blank">pobre arara</a>, o programador sênior ainda existe, e em grandes quantidades. Mas algo deu errado na evolução da sua espécie que, ao invés de melhorar, foi substituída por uma variedade mais fácil de reproduzir, bem adaptada ao cativeiro, de comportamento dócil, capaz de passar anos fazendo a mesma coisa e com duas opções de cor: terno preto ou azul. E que, curiosamente, não consegue programar. Eu já vou batizando essa variedade de <em>programador senhor</em>.
+<p>É claro que, ao contrário da <a href="http://pt.wikipedia.org/wiki/Ararinha-azul">pobre arara</a>, o programador sênior ainda existe, e em grandes quantidades. Mas algo deu errado na evolução da sua espécie que, ao invés de melhorar, foi substituída por uma variedade mais fácil de reproduzir, bem adaptada ao cativeiro, de comportamento dócil, capaz de passar anos fazendo a mesma coisa e com duas opções de cor: terno preto ou azul. E que, curiosamente, não consegue programar. Eu já vou batizando essa variedade de <em>programador senhor</em>.</p>
 
-Estou falando por experiência própria. A <a href="http://www.alohapos.com.br/" target="_blank">empresa em que eu trabalho</a> está recrutando um &#8220;programador sênior&#8221; há alguns meses. Dada a indisponibilidade dos colegas no nosso <em>networking</em> (o que nos pouparia um grande tempo), resolvemos apelar e buscar no mercadão de trabalho (vulgo apinfo, catho, essas coisas). Nós filtramos dezenas de currículos, conduzimos entrevistas, aplicamos testes. Com isso, conseguimos achar diversos programadores <em>senhores</em> mas nenhum propriamente <em>sênior</em>. A maioria tinha 10+ anos de carreira, 30+ anos de idade e -1 noção para bolar respostas satisfatórias para questões como:
+<p>Estou falando por experiência própria. A <a href="http://www.alohapos.com.br/">empresa em que eu trabalho</a> está recrutando um &ldquo;programador sênior&rdquo; há alguns meses. Dada a indisponibilidade dos colegas no nosso <em>networking</em> (o que nos pouparia um grande tempo), resolvemos apelar e buscar no mercadão de trabalho (vulgo apinfo, catho, essas coisas). Nós filtramos dezenas de currículos, conduzimos entrevistas, aplicamos testes. Com isso, conseguimos achar diversos programadores <em>senhores</em> mas nenhum propriamente <em>sênior</em>. A maioria tinha 10+ anos de carreira, 30+ anos de idade e -1 noção para bolar respostas satisfatórias para questões como:</p>
+
 <ol>
-	<li>Como dois programas podem se comunicar?</li>
-	<li>O que são threads?</li>
-	<li>Implemente o <a href="http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/" target="_blank">fizz buzz</a> na linguagem que preferir.</li>
+<li><p> Como dois programas podem se comunicar?</p></li>
+<li><p> O que são threads?</p></li>
+<li><p> Implemente o <a href="http://imranontech.com/2007/01/24/using-fizzbuzz-to-find-developers-who-grok-coding/">fizz buzz</a> na linguagem que preferir.</p></li>
 </ol>
-E assim por diante. Nada muito específico: preferimos encontrar gente que tivesse convivido com certos problemas, independente da tecnologia adotada. Gente demonstrasse <em>senioridade</em> propriamente dita: maturidade, bom senso, raciocínio, segurança. E conhecimento suficiente para não achar que a chave de todos os problemas é uma consulta ao Google (houve quem confessasse isso). Não encontramos essa gente ainda, mas em compensação vimos muitas pessoas bem intencionadas, certamente esforçadas, mas com imensas dificuldades para concatenar opiniões a respeito de conceitos que julgamos básicos e, no nosso negócio, fundamentais.
 
-Sequer exigimos que o candidato conheça tópicos como controle de versão, orientação a objetos, design patterns, agilidade e etcetera, que são sinais mais do que evidentes de maturidade. Já entendemos que tudo isso está além dos limites do habitat do programador senhor. São coisas tão exóticas quanto um programador sênior genuíno, que só deve existir em áreas de proteção ambiental, como este blog.
 
-(Às araras azuis que estiverem interessadas no recrutamento: por ora concluímos o processo, mas não deixem de <a href="mailto:humberto.bulhoes@gmail.com">entrar em contato</a>.)
+<p>E assim por diante. Nada muito específico: preferimos encontrar gente que tivesse convivido com certos problemas, independente da tecnologia adotada. Gente demonstrasse <em>senioridade</em> propriamente dita: maturidade, bom senso, raciocínio, segurança. E conhecimento suficiente para não achar que a chave de todos os problemas é uma consulta ao Google (houve quem confessasse isso). Não encontramos essa gente ainda, mas em compensação vimos muitas pessoas bem intencionadas, certamente esforçadas, mas com imensas dificuldades para concatenar opiniões a respeito de conceitos que julgamos básicos e, no nosso negócio, fundamentais.</p>
+
+<p>Sequer exigimos que o candidato conheça tópicos como controle de versão, orientação a objetos, design patterns, agilidade e etcetera, que são sinais mais do que evidentes de maturidade. Já entendemos que tudo isso está além dos limites do habitat do programador senhor. São coisas tão exóticas quanto um programador sênior genuíno, que só deve existir em áreas de proteção ambiental, como este blog.</p>
+
+<p>(Às araras azuis que estiverem interessadas no recrutamento: por ora concluímos o processo, mas não deixem de <a href="mailto:humberto.bulhoes@gmail.com">entrar em contato</a>.)</p>
 </div>
   
   
@@ -399,7 +300,7 @@ Sequer exigimos que o candidato conheça tópicos como controle de versão, orie
   
 
 
-<time datetime="2010-07-02T00:00:00-03:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
+<time datetime="2010-07-02T06:00:23-03:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
         
          | <a href="/2010/07/gerando-rotas-com-parametros-dinamicos-no-rails-de-modo-facil/#disqus_thread">Comments</a>
         
@@ -408,26 +309,38 @@ Sequer exigimos que o candidato conheça tópicos como controle de versão, orie
   </header>
 
 
-  <div class="entry-content">A <a href="http://api.rubyonrails.org/classes/ActionController/Routing.html">API de rotas</a> do Rails simplifica consideravelmente o desenvolvimento fornecendo um padrão de geração e utilização de URLs para toda aplicação. Porém algumas necessidades especificas e relativamente simples podem gerar dores de cabeça se forem implementadas incorretamente.
+  <div class="entry-content"><p>A <a href="http://api.rubyonrails.org/classes/ActionController/Routing.html">API de rotas</a> do Rails simplifica consideravelmente o desenvolvimento fornecendo um padrão de geração e utilização de URLs para toda aplicação. Porém algumas necessidades especificas e relativamente simples podem gerar dores de cabeça se forem implementadas incorretamente.</p>
 
-Um caso bastante comum são URLs compostas que sempre apontam para um mesmo recurso. Por exemplo, um blog que possua rotas para seus posts no formato <code>/posts/autor/categoria/permalink</code> provavelmente terá uma rota mapeada como <code>map.post "posts/:author/:category/:permalink"</code> gerando automaticamente os helpers <code>post_path</code> e <code>post_url</code>.
+<p>Um caso bastante comum são URLs compostas que sempre apontam para um mesmo recurso. Por exemplo, um blog que possua rotas para seus posts no formato <code>/posts/autor/categoria/permalink</code> provavelmente terá uma rota mapeada como <code>map.post "posts/:author/:category/:permalink"</code> gerando automaticamente os helpers <code>post_path</code> e <code>post_url</code>.</p>
 
-Muito bom, porém para <a href="http://guides.rubyonrails.org/routing.html#generating-urls-from-code">usufruirmos desta facilidade</a> precisamos fornecer os valores dos parâmetros dinâmicos nos <em>controllers</em> e <em>views</em>:
-<pre lang="ruby">post_path(:author => @post.author, :category => @post.category, :permalink => @post.permalink)</pre>
-E mesmo que você forneça os <a href="http://guides.rubyonrails.org/routing.html#route-generation-from-arrays">parâmetros em um array</a>, vai dar muito trabalho além de deixar muito código repetido pela aplicação.
+<p>Muito bom, porém para <a href="http://guides.rubyonrails.org/routing.html#generating-urls-from-code">usufruirmos desta facilidade</a> precisamos fornecer os valores dos parâmetros dinâmicos nos <em>controllers</em> e <em>views</em>:</p>
+
+<pre><code>post_path(:author =&gt; @post.author, :category =&gt; @post.category, :permalink =&gt; @post.permalink)
+</code></pre>
+
+<p>E mesmo que você forneça os <a href="http://guides.rubyonrails.org/routing.html#route-generation-from-arrays">parâmetros em um array</a>, vai dar muito trabalho além de deixar muito código repetido pela aplicação.</p>
+
 <h2>Entendi! Mas como resolvo este problema?</h2>
-Para este caso, apenas implementar o método <code><a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M001840">to_param</a></code> do model não vai servir. Uma solução seria reescrever o método <code>post_path</code> (que é gerado automaticamente) no respectivo helper (posts_helper.rb):
-<pre lang="ruby">def post_path(post, options = {})
-  super(post, :author => post.author, :category => post.category, :permalink => post.permalink)
-end</pre>
-Outra solução seria sobrescrever o método <code><a href="http://api.rubyonrails.org/classes/ActionController/Base.html#M000467">default_url_options</a></code> no <em>controller</em> para retorna os parâmetros padrões da rota:
-<pre lang="ruby">def default_url_options(options = {})
-  options.merge!(:author => @post.author, :category => @post.category, :permalink => @post.permalink) if options[:action] == "show"
-end</pre>
-A má notícia é que você terá que fazer isto para todos seus controllers e respectivos models.
 
-A terceira solução (e mais elegante) é padronizar a maneira com que os parâmetros opcionais da rota são obtidos a partir do controller e seu respectivo model. Basta adicionar os seguintes métodos no seu <em>ApplicationController</em>:
-<pre lang="ruby">def default_url_options(options = {})
+<p>Para este caso, apenas implementar o método <code>[to_param](http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M001840)</code> do model não vai servir. Uma solução seria reescrever o método <code>post_path</code> (que é gerado automaticamente) no respectivo helper (posts_helper.rb):</p>
+
+<pre><code>def post_path(post, options = {})
+  super(post, :author =&gt; post.author, :category =&gt; post.category, :permalink =&gt; post.permalink)
+end
+</code></pre>
+
+<p>Outra solução seria sobrescrever o método <code>[default_url_options](http://api.rubyonrails.org/classes/ActionController/Base.html#M000467)</code> no <em>controller</em> para retorna os parâmetros padrões da rota:</p>
+
+<pre><code>def default_url_options(options = {})
+  options.merge!(:author =&gt; @post.author, :category =&gt; @post.category, :permalink =&gt; @post.permalink) if options[:action] == "show"
+end
+</code></pre>
+
+<p>A má notícia é que você terá que fazer isto para todos seus controllers e respectivos models.</p>
+
+<p>A terceira solução (e mais elegante) é padronizar a maneira com que os parâmetros opcionais da rota são obtidos a partir do controller e seu respectivo model. Basta adicionar os seguintes métodos no seu <em>ApplicationController</em>:</p>
+
+<pre><code>def default_url_options(options = {})
   if (model = controller_model(options))
     dynamic_route_params(options).each do |param|
       options[param] = model.send(param) if model.respond_to?(param)
@@ -448,16 +361,18 @@ def dynamic_route_params(options = {})
     matched_routes = ActionController::Routing::Routes.routes.select do |route|
       route.matches_controller_and_action?(options[:controller], options[:action])
     end
-    dynamic_segments = matched_routes.map(&:segments).flatten.each do |segment|
-      dynamic_params << segment.key if segment.is_a?(ActionController::Routing::DynamicSegment)
+    dynamic_segments = matched_routes.map(&amp;:segments).flatten.each do |segment|
+      dynamic_params &lt;&lt; segment.key if segment.is_a?(ActionController::Routing::DynamicSegment)
     end
   end
-end</pre>
-Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do model. Caso queiram contribuir, este código está disponível no <a href="http://github.com/1up4dev/random-samples/blob/master/dynamic_route_params/dynamic_route_params.rb">github</a>.
+end
+</code></pre>
 
-<strong>Referências</strong>
+<p>Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do model. Caso queiram contribuir, este código está disponível no <a href="http://github.com/1up4dev/random-samples/blob/master/dynamic_route_params/dynamic_route_params.rb">github</a>.</p>
+
+<p><strong>Referências</strong>
 <a href="http://railsguts.com/routing_inside_out.html">Rails Routing from the Inside Out</a>
-<a href="http://guides.rubyonrails.org/routing.html">Rails Guides: Routing</a>
+<a href="http://guides.rubyonrails.org/routing.html">Rails Guides: Routing</a></p>
 </div>
   
   
@@ -486,7 +401,7 @@ Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do
   
 
 
-<time datetime="2010-05-19T00:00:00-03:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
+<time datetime="2010-05-19T10:14:18-03:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
         
          | <a href="/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/#disqus_thread">Comments</a>
         
@@ -495,43 +410,56 @@ Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do
   </header>
 
 
-  <div class="entry-content">Qualquer um que comece a desenvolver com <a href="http://api.rubyonrails.org/files/vendor/rails/activerecord/README.html">Active Record</a> (AR), minha primeira recomendação é, para tudo e leia:  <a href="http://guides.rubyonrails.org/association_basics.html">A Guide to Active Record Associations</a> ou <a href="http://guias.rubyonrails.pro.br/association_basics.html">O Guia de Associações do Active Record</a>. O guia é bem completo, e descreve muito bem os tipos de associações que estão disponíveis no AR.
+  <div class="entry-content"><p>Qualquer um que comece a desenvolver com <a href="http://api.rubyonrails.org/files/vendor/rails/activerecord/README.html">Active Record</a> (AR), minha primeira recomendação é, para tudo e leia:  <a href="http://guides.rubyonrails.org/association_basics.html">A Guide to Active Record Associations</a> ou <a href="http://guias.rubyonrails.pro.br/association_basics.html">O Guia de Associações do Active Record</a>. O guia é bem completo, e descreve muito bem os tipos de associações que estão disponíveis no AR.</p>
+
 <h2>Association Proxy, #wtf !</h2>
-As associações:
+
+<p>As associações:</p>
+
 <ul>
-	<li>belongs_to</li>
-	<li>has_one</li>
-	<li>has_many</li>
-	<li>has_and_belongs_to_many</li>
+<li><p>belongs_to</p></li>
+<li><p>has_one</p></li>
+<li><p>has_many</p></li>
+<li><p>has_and_belongs_to_many</p></li>
 </ul>
-Quando usadas, adicionam alguns métodos (veja <a href="http://guides.rubyonrails.org/association_basics.html#detailed-association-reference">Detailed Association Reference</a>). Por exemplo, ao declarar uma associação <em>belongs_to</em>, o model &#8220;ganhará&#8221; os seguintes métodos:
+
+
+<p>Quando usadas, adicionam alguns métodos (veja <a href="http://guides.rubyonrails.org/association_basics.html#detailed-association-reference">Detailed Association Reference</a>). Por exemplo, ao declarar uma associação <em>belongs_to</em>, o model &ldquo;ganhará&rdquo; os seguintes métodos:</p>
+
 <ul>
-	<li>association(force_reload = false)</li>
-	<li>association=(associate)</li>
-	<li>build_association(attributes = {})</li>
-	<li>create_association(attributes = {})</li>
+<li><p>association(force_reload = false)</p></li>
+<li><p>association=(associate)</p></li>
+<li><p>build_association(attributes = {})</p></li>
+<li><p>create_association(attributes = {})</p></li>
 </ul>
-Onde association, será substituído pelo nome da associação. Exemplo retirado do guides:
-<pre lang="ruby">class Order < ActiveRecord::Base
+
+
+<p>Onde association, será substituído pelo nome da associação. Exemplo retirado do guides:</p>
+
+<pre><code>class Order &lt; ActiveRecord::Base
    belongs_to :customer
-end</pre>
-Cada instância de Order, conterá os métodos:
+end
+</code></pre>
 
-<span style="font-size: small;"> </span>
+<p>Cada instância de Order, conterá os métodos:</p>
+
 <ul>
-	<li>customer</li>
-	<li>customer=</li>
-	<li>build_customer</li>
-	<li>create_customer</li>
+<li><p>customer</p></li>
+<li><p>customer=</p></li>
+<li><p>build_customer</p></li>
+<li><p>create_customer</p></li>
 </ul>
-O <em>association proxy</em>, é o objeto que faz a ligação do objeto que contém a associação, conhecido como <em>owner</em>, e o objeto associado, conhecido como <em>target</em>.
+
+
+<p>O <em>association proxy</em>, é o objeto que faz a ligação do objeto que contém a associação, conhecido como <em>owner</em>, e o objeto associado, conhecido como <em>target</em>.</p>
+
 <h2>Legal e daí !?!</h2>
-Graças ao <em>association proxy</em>, ao declarar uma associação, podemos extendê-la e adicionar comportamentos &#8220;customizados&#8221;. No guia, é citado como <a href="http://guides.rubyonrails.org/association_basics.html#association-extensions">Association Extensions</a>. O código de exemplo abaixo, está no github em <a href="http://github.com/rogerleite/random-samples">random-samples</a>.
 
-Para exemplificar, vamos criar um modulo que adiciona o comportamento de uma galeria a qualquer coleção.
+<p>Graças ao <em>association proxy</em>, ao declarar uma associação, podemos extendê-la e adicionar comportamentos &ldquo;customizados&rdquo;. No guia, é citado como <a href="http://guides.rubyonrails.org/association_basics.html#association-extensions">Association Extensions</a>. O código de exemplo abaixo, está no github em <a href="http://github.com/rogerleite/random-samples">random-samples</a>.</p>
 
-<pre lang="ruby">
-module GalleryColletion
+<p>Para exemplificar, vamos criar um modulo que adiciona o comportamento de uma galeria a qualquer coleção.</p>
+
+<pre><code>module GalleryColletion
 
   def current=(curr = nil)
     @current, @index = nil
@@ -560,7 +488,7 @@ module GalleryColletion
 
   def previous?
     return false if @index.nil?
-    !!(@index - 1 >= 0)
+    !!(@index - 1 &gt;= 0)
   end
   def previous
     collection[@index - 1] if previous?
@@ -568,7 +496,7 @@ module GalleryColletion
 
   def next?
     return false if @index.nil?
-    !!(@index + 1 < collection.size)
+    !!(@index + 1 &lt; collection.size)
   end
   def next
     collection[@index + 1] if next?
@@ -581,32 +509,36 @@ module GalleryColletion
   end
 
 end
-</pre>
-<a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/lib/extensions/gallery_collection.rb">Gallery Collection</a>
+</code></pre>
 
-Note que o modulo está na pasta lib, logo, a pasta tem que ser adicionada no path via config/environment.rb.
+<p><a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/lib/extensions/gallery_collection.rb">Gallery Collection</a></p>
 
-Para extender a associação, declare:
+<p>Note que o modulo está na pasta lib, logo, a pasta tem que ser adicionada no path via config/environment.rb.</p>
 
-<pre lang="ruby">
-class Article < ActiveRecord::Base
-  has_and_belongs_to_many :images, :extend => GalleryColletion
+<p>Para extender a associação, declare:</p>
+
+<pre><code>class Article &lt; ActiveRecord::Base
+  has_and_belongs_to_many :images, :extend =&gt; GalleryColletion
 end
-</pre>
-<a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/article.rb">Article model</a>, <a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/image.rb">Image model aqui</a>.
+</code></pre>
 
-Agora para navegar entre as imagens, você pode usar:
-<pre lang="ruby">a = Article.first
+<p><a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/article.rb">Article model</a>, <a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/image.rb">Image model aqui</a>.</p>
+
+<p>Agora para navegar entre as imagens, você pode usar:</p>
+
+<pre><code>a = Article.first
 a.images.current = 1 #1 e o Image.id que deseja selecionar
 a.images.current
 a.images.position
 a.images.next?
 a.images.next
 a.images.previous?
-a.images.previous</pre>
-Caso esteja com coragem, baixe o projeto e veja rodando.
+a.images.previous
+</code></pre>
 
-Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
+<p>Caso esteja com coragem, baixe o projeto e veja rodando.</p>
+
+<p>Dúvidas, sugestões, algum &ldquo;case&rdquo; de sucesso, comente!</p>
 </div>
   
   
@@ -635,7 +567,7 @@ Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
   
 
 
-<time datetime="2010-05-14T00:00:00-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
+<time datetime="2010-05-14T07:00:21-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
         
          | <a href="/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/#disqus_thread">Comments</a>
         
@@ -644,49 +576,71 @@ Dúvidas, sugestões, algum &#8220;case&#8221; de sucesso, comente!
   </header>
 
 
-  <div class="entry-content">É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, <a href="http://www.vim.org/">Vim</a> e não poderia ser diferente com testes funcionais, sendo mais especifico, <a href="http://cukes.info/">Cucumber</a>.
+  <div class="entry-content"><p>É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, <a href="http://www.vim.org/">Vim</a> e não poderia ser diferente com testes funcionais, sendo mais especifico, <a href="http://cukes.info/">Cucumber</a>.</p>
 
-Até o momento, só tinha usado cucumber em projetos web. E quando voltei a desenvolver o <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a>, senti falta de algo para testar funcionalmente. Baseado no <a href="http://github.com/vertiginous/pik">pik</a>, montei um esquema simples para validar qualquer aplicação de linha de comando.
+<p>Até o momento, só tinha usado cucumber em projetos web. E quando voltei a desenvolver o <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a>, senti falta de algo para testar funcionalmente. Baseado no <a href="http://github.com/vertiginous/pik">pik</a>, montei um esquema simples para validar qualquer aplicação de linha de comando.</p>
+
 <h2>Como instalar</h2>
-Basicamente, será necessário (fontes via gist):
-<ul>
-	<li>rake para executar o cucumber</li>
-	<li>env_terminal.rb</li>
-	<li>terminal_steps.rb</li>
-</ul>
-<script src="http://gist.github.com/400069.js"></script>
 
-Dado que você tem cucumber instalado, com o esquema da pasta &#8220;features&#8221;.
+<p>Basicamente, será necessário (fontes via gist):</p>
+
 <ul>
-	<li>Copie o cucumber.rake para a raiz.</li>
-	<li>Copie o env_terminal.rb para a pasta features.</li>
-	<li>Copie o terminal_steps.rb para a pasta features/step_definitions/terminal_steps.rb.</li>
-	<li>Edite o  env.rb incluindo (pode ser no começo):</li>
+<li><p>rake para executar o cucumber</p></li>
+<li><p>env_terminal.rb</p></li>
+<li><p>terminal_steps.rb</p></li>
 </ul>
-<pre>require "env_terminal"</pre>
+
+
+<p>Dado que você tem cucumber instalado, com o esquema da pasta &ldquo;features&rdquo;.</p>
+
 <ul>
-	<li>Dentro do Rakefile, pode ser no final mesmo, adicione:</li>
+<li><p>Copie o cucumber.rake para a raiz.</p></li>
+<li><p>Copie o env_terminal.rb para a pasta features.</p></li>
+<li><p>Copie o terminal_steps.rb para a pasta features/step_definitions/terminal_steps.rb.</p></li>
+<li><p>Edite o  env.rb incluindo (pode ser no começo):</p>
+
+<p>require &ldquo;env_terminal&rdquo;</p></li>
+<li><p>Dentro do Rakefile, pode ser no final mesmo, adicione:</p>
+
+<p>load &ldquo;cucumber.rake&rdquo;</p></li>
 </ul>
-<pre>load "cucumber.rake"</pre>
+
+
 <h2>Como usar</h2>
-Todas features:
-<pre>rake cucumber</pre>
-Features com a tag @wip, também conhecida como Work in Progress.
-<pre>rake cucumber:wip</pre>
+
+<p>Todas features:</p>
+
+<pre><code>rake cucumber
+</code></pre>
+
+<p>Features com a tag @wip, também conhecida como Work in Progress.</p>
+
+<pre><code>rake cucumber:wip
+</code></pre>
+
 <h2>Informações Extras</h2>
-Caso precise de mais informações, você tem a opção de ver a saída dos comandos, executando a rake assim:
-<pre>rake cucumber show_output=true</pre>
-ou
-<pre>rake cucumber:wip show_output=true</pre>
-No caso do snapshot, tive a necessidade de &#8220;modificar&#8221; o comando gem toda vez que era executado, ou melhor, passar um parâmetro para controlar o ambiente. Dentro do env_terminal.rb, existe o método <strong>gsub_command</strong>, nele você pode &#8220;redefinir&#8221; comandos, caso necessite.
+
+<p>Caso precise de mais informações, você tem a opção de ver a saída dos comandos, executando a rake assim:</p>
+
+<pre><code>rake cucumber show_output=true
+</code></pre>
+
+<p>ou</p>
+
+<pre><code>rake cucumber:wip show_output=true
+</code></pre>
+
+<p>No caso do snapshot, tive a necessidade de &ldquo;modificar&rdquo; o comando gem toda vez que era executado, ou melhor, passar um parâmetro para controlar o ambiente. Dentro do env_terminal.rb, existe o método <strong>gsub_command</strong>, nele você pode &ldquo;redefinir&rdquo; comandos, caso necessite.</p>
+
 <h2><strong>Gostei, quero mais!</strong></h2>
-A solução acima, é bem &#8220;caseira&#8221;. Para projetos simples com funcionalidades simples, funciona bem.
 
-Caso queira algo mais robusto, você tem a opção da <a href="http://github.com/aslakhellesoy/aruba">gem Aruba</a>.
+<p>A solução acima, é bem &ldquo;caseira&rdquo;. Para projetos simples com funcionalidades simples, funciona bem.</p>
 
-Tem este post como introdução:
+<p>Caso queira algo mais robusto, você tem a opção da <a href="http://github.com/aslakhellesoy/aruba">gem Aruba</a>.</p>
 
-<a href="http://www.themodestrubyist.com/2010/04/22/aruba---cucumber-goodness-for-the-command-line/">Aruba - Cucumber Goodness for the Command-Line</a>
+<p>Tem este post como introdução:</p>
+
+<p><a href="http://www.themodestrubyist.com/2010/04/22/aruba---cucumber-goodness-for-the-command-line/">Aruba &ndash; Cucumber Goodness for the Command-Line</a></p>
 </div>
   
   
@@ -715,7 +669,7 @@ Tem este post como introdução:
   
 
 
-<time datetime="2010-05-10T00:00:00-03:00" pubdate data-updated="true">May 10<span>th</span>, 2010</time>
+<time datetime="2010-05-10T10:53:17-03:00" pubdate data-updated="true">May 10<span>th</span>, 2010</time>
         
          | <a href="/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/#disqus_thread">Comments</a>
         
@@ -724,25 +678,25 @@ Tem este post como introdução:
   </header>
 
 
-  <div class="entry-content">Nova versão do <a href="http://github.com/rogerleite/rubygems_snapshot">Rubygems_Snapshot</a> no ar!
+  <div class="entry-content"><p>Nova versão do <a href="http://github.com/rogerleite/rubygems_snapshot">Rubygems_Snapshot</a> no ar!</p>
 
-Fico feliz em dizer que este é o meu primeiro projeto que passou dos dez &#8220;watchers&#8221; ! :D E que realmente ajudou alguns developers mundo afora.
+<p>Fico feliz em dizer que este é o meu primeiro projeto que passou dos dez &ldquo;watchers&rdquo; ! :D E que realmente ajudou alguns developers mundo afora.</p>
 
-A primeira versão foi muito focada no uso pessoal, como &#8220;quebra-galho&#8221; mesmo. Resolvi investir algum tempo e praticamente refaze-lá, pois ao usar no dia-a-dia percebi algumas falhas e dificuldades de uso.
+<p>A primeira versão foi muito focada no uso pessoal, como &ldquo;quebra-galho&rdquo; mesmo. Resolvi investir algum tempo e praticamente refaze-lá, pois ao usar no dia-a-dia percebi algumas falhas e dificuldades de uso.</p>
 
-Basicamente, nesta nova versão:
+<p>Basicamente, nesta nova versão:</p>
 
-- É possível trabalhar com mais de um formato. Yml e Tar, que é o padrão.
+<ul>
+<li><p>É possível trabalhar com mais de um formato. Yml e Tar, que é o padrão.</p></li>
+<li><p>Ao exportar, os arquivos &ldquo;.gem&rdquo; serão exportados.</p></li>
+<li><p>Ao importar, ocorre praticamente uma instalação &ldquo;offlline&rdquo;, muito mais rápido e livre de problemas com &ldquo;sources&rdquo; do rubygem !</p></li>
+<li><p>Usar o Snapshot como API !</p></li>
+</ul>
 
-- Ao exportar, os arquivos &#8220;.gem&#8221; serão exportados.
 
-- Ao importar, ocorre praticamente uma instalação &#8220;offlline&#8221;, muito mais rápido e livre de problemas com &#8220;sources&#8221; do rubygem !
+<p>Como tive um trabalhão para deixar o Readme legal, não pretendo escrever mais que isso! :D</p>
 
-- Usar o Snapshot como API !
-
-Como tive um trabalhão para deixar o Readme legal, não pretendo escrever mais que isso! :D
-
-<a href="http://github.com/nofxx">Marcos</a>, valeu pelo incentivo! Cara, forka lá e manda bala!
+<p><a href="http://github.com/nofxx">Marcos</a>, valeu pelo incentivo! Cara, forka lá e manda bala!</p>
 </div>
   
   
@@ -771,7 +725,7 @@ Como tive um trabalhão para deixar o Readme legal, não pretendo escrever mais 
   
 
 
-<time datetime="2009-12-22T00:00:00-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+<time datetime="2009-12-22T14:24:09-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
         
          | <a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/#disqus_thread">Comments</a>
         
@@ -780,34 +734,62 @@ Como tive um trabalhão para deixar o Readme legal, não pretendo escrever mais 
   </header>
 
 
-  <div class="entry-content">Final de ano está rendendo.
-O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &#8220;migrar&#8221; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do <span style="text-decoration: line-through;">famoso</span> &#8220;gem hell&#8221;.
+  <div class="entry-content"><p>Final de ano está rendendo.
+O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do famoso &ldquo;gem hell&rdquo;.</p>
 
-Veja como é difícil usar:
+<p>Veja como é difícil usar:</p>
 
-Instalação:
-<pre>sudo gem install rubygems_snapshot</pre>
-Para <strong>exportar</strong> as gems instaladas:
-<pre>gem snapshot export projeto-exemplo.yml</pre>
-Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:
-<pre>[sudo] gem snapshot import projeto-exemplo.yml</pre>
+<p>Instalação:</p>
+
+<pre><code>sudo gem install rubygems_snapshot
+</code></pre>
+
+<p>Para <strong>exportar</strong> as gems instaladas:</p>
+
+<pre><code>gem snapshot export projeto-exemplo.yml
+</code></pre>
+
+<p>Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:</p>
+
+<pre><code>[sudo] gem snapshot import projeto-exemplo.yml
+</code></pre>
+
 <h2>Afinal, o que tem de legal nisso?</h2>
-Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:
 
-Com o rvm, você pode criar um &#8220;novo ambiente&#8221;:
-<pre>rvm use 1.8.7%projeto_exemplo</pre>
-<pre>gem list</pre>
-Deve retornar vazio.
-<pre>gem install rubygems_snapshot</pre>
-<pre>gem snapshot import projeto-exemplo.yml</pre>
-Instalará as gems necessárias para o projeto e pronto!
+<p>Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:</p>
+
+<p>Com o rvm, você pode criar um &ldquo;novo ambiente&rdquo;:</p>
+
+<pre><code>rvm use 1.8.7%projeto_exemplo
+
+
+
+
+gem list
+</code></pre>
+
+<p>Deve retornar vazio.</p>
+
+<pre><code>gem install rubygems_snapshot
+
+
+
+
+gem snapshot import projeto-exemplo.yml
+</code></pre>
+
+<p>Instalará as gems necessárias para o projeto e pronto!</p>
+
 <h2>ToDo:</h2>
-Esta é uma versão bem básica, onde o &#8220;import&#8221; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &#8220;build nativos&#8221;, mas por enquanto estamos usando aqui na equipe com sucesso.
-<h2>Como faço para criar um rubygems plugin também?</h2>
-Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!
 
-Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
-Valeu e sucesso!
+<p>Esta é uma versão bem básica, onde o &ldquo;import&rdquo; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &ldquo;build nativos&rdquo;, mas por enquanto estamos usando aqui na equipe com sucesso.</p>
+
+<h2>Como faço para criar um rubygems plugin também?</h2>
+
+<p>Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!</p>
+
+<p>Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
+Valeu e sucesso!</p>
 </div>
   
   
@@ -836,7 +818,7 @@ Valeu e sucesso!
   
 
 
-<time datetime="2009-12-21T00:00:00-02:00" pubdate data-updated="true">Dec 21<span>st</span>, 2009</time>
+<time datetime="2009-12-21T07:00:08-02:00" pubdate data-updated="true">Dec 21<span>st</span>, 2009</time>
         
          | <a href="/2009/12/agile-enterprise-edition/#disqus_thread">Comments</a>
         
@@ -845,57 +827,65 @@ Valeu e sucesso!
   </header>
 
 
-  <div class="entry-content">Para começar o post, segue esta história sobre <em>gerenciamento</em> que vi no blog do <a href="http://gustavoribeiro.com/blog/gerenciamento" target="_blank">Gustavo Ribeiro</a>:
-<blockquote>Todos os dias, uma formiga chegava cedinho ao escritório e pegava duro no trabalho. A formiga era produtiva e feliz. O gerente marimbondo estranhou a formiga trabalhar sem supervisão. Se ela era produtiva sem supervisão, seria ainda mais se fosse supervisionada.
+  <div class="entry-content"><p>Para começar o post, segue esta história sobre <em>gerenciamento</em> que vi no blog do <a href="http://gustavoribeiro.com/blog/gerenciamento">Gustavo Ribeiro</a>:</p>
 
-E colocou uma barata, que preparava belíssimos relatórios e tinha muita experiência, como supervisora. A primeira preocupação da barata foi a de padronizar o horário de entrada e saída da formiga.
+<blockquote><p>Todos os dias, uma formiga chegava cedinho ao escritório e pegava duro no trabalho. A formiga era produtiva e feliz. O gerente marimbondo estranhou a formiga trabalhar sem supervisão. Se ela era produtiva sem supervisão, seria ainda mais se fosse supervisionada.</p></blockquote>
 
-Logo, a barata precisou de uma secretária para ajudar a preparar os relatórios e contratou também uma aranha para organizar os arquivos e controlar as ligações telefônicas.
+<p>E colocou uma barata, que preparava belíssimos relatórios e tinha muita experiência, como supervisora. A primeira preocupação da barata foi a de padronizar o horário de entrada e saída da formiga.</p>
 
-O marimbondo ficou encantado com os relatórios da barata e pediu também gráficos com indicadores e análise das tendências que eram mostradas em reuniões.
+<p>Logo, a barata precisou de uma secretária para ajudar a preparar os relatórios e contratou também uma aranha para organizar os arquivos e controlar as ligações telefônicas.</p>
 
-A barata, então, contratou uma mosca, e comprou um computador com impressora colorida. Logo, a formiga produtiva e feliz, começou a se lamentar de toda aquela movimentação de papéis e reuniões!
-O marimbondo concluiu que era o momento de criar a função de gestor para a área onde a formiga produtiva e feliz, trabalhava. O cargo foi dado a uma cigarra, que mandou colocar carpete no seu escritório e comprar uma cadeira especial.
+<p>O marimbondo ficou encantado com os relatórios da barata e pediu também gráficos com indicadores e análise das tendências que eram mostradas em reuniões.</p>
 
-A nova gestora cigarra logo precisou de um computador e de uma assistente (sua assistente na empresa anterior) para ajudá-la a preparar um plano estratégico de melhorias e um controle do orçamento para a área onde trabalhava a formiga, que já não cantarolava mais e cada dia se tornava mais chateada.
+<p>A barata, então, contratou uma mosca, e comprou um computador com impressora colorida. Logo, a formiga produtiva e feliz, começou a se lamentar de toda aquela movimentação de papéis e reuniões!
+O marimbondo concluiu que era o momento de criar a função de gestor para a área onde a formiga produtiva e feliz, trabalhava. O cargo foi dado a uma cigarra, que mandou colocar carpete no seu escritório e comprar uma cadeira especial.</p>
 
-A cigarra, então, convenceu o gerente marimbondo, que era preciso fazer um estudo de clima. Mas, o marimbondo, ao rever as cifras, se deu conta de que a unidade na qual a formiga trabalhava já não rendia como antes e contratou a coruja, uma prestigiada consultora, muito famosa, para que fizesse um diagnóstico da situação. A coruja permaneceu três meses nos escritórios e emitiu um volumoso relatório, com vários volumes que concluía: &#8220;Há muita gente nesta empresa!&#8221;
+<p>A nova gestora cigarra logo precisou de um computador e de uma assistente (sua assistente na empresa anterior) para ajudá-la a preparar um plano estratégico de melhorias e um controle do orçamento para a área onde trabalhava a formiga, que já não cantarolava mais e cada dia se tornava mais chateada.</p>
 
-Então o marimbondo mandou demitir a formiga porque ela andava muito desmotivada e aborrecida.</blockquote>
-Então lembrei de uma imagem que ilustra perfeitamente esta fábula e retrata fielmente a &#8220;organização&#8221; de alguma empresas:
-<p style="text-align: center;"><a href="http://1up4dev.org/wp-content/uploads/2009/07/trabalho_em_equipe.jpg"><img class="aligncenter" title="trabalho_em_equipe" src="http://1up4dev.org/wp-content/uploads/2009/07/trabalho_em_equipe-222x300.jpg" alt="" width="222" height="300" /></a></p>
+<p>A cigarra, então, convenceu o gerente marimbondo, que era preciso fazer um estudo de clima. Mas, o marimbondo, ao rever as cifras, se deu conta de que a unidade na qual a formiga trabalhava já não rendia como antes e contratou a coruja, uma prestigiada consultora, muito famosa, para que fizesse um diagnóstico da situação. A coruja permaneceu três meses nos escritórios e emitiu um volumoso relatório, com vários volumes que concluía: &ldquo;Há muita gente nesta empresa!&rdquo;</p>
+
+<p>Então o marimbondo mandou demitir a formiga porque ela andava muito desmotivada e aborrecida.</p>
+
+<p>Então lembrei de uma imagem que ilustra perfeitamente esta fábula e retrata fielmente a &ldquo;organização&rdquo; de alguma empresas:</p>
+
+<p><a href="http://1up4dev.org/wp-content/uploads/2009/07/trabalho_em_equipe.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/07/trabalho_em_equipe-222x300.jpg" alt="" /></a></p>
 
 <h2>Dividir para conquistar: você está fazendo isso errado!</h2>
-Quando uma <em>startup</em> passa a vender mais e ter uma procura maior por seus produtos/serviços (o que é bom), uma reação comum da &#8220;cúpula&#8221; é aumentar o quadro de funcionários visando atender a demanda. Logo surgem os problemas com a organização do pessoal e/ou fluxo de trabalho. A solução mais simplista (e óbvia) é a especialização: fulano faz isso, ciclano faz aquilo, e beltrano gerencia. Logo controles são criados, fluxos validados, centros de custo, documentos, reuniões, atas, comitês, gestão de pessoas e relacionamento, terceirização, cargos, departamentos&#8230; e nasce o monstro da <a href="http://pt.wikipedia.org/wiki/Burocracia">burocracia</a>, aka &#8220;enterprise&#8221;.
 
-Com essa <a href="http://en.wikipedia.org/wiki/Enterprise_architecture">especialização</a>, cada &#8220;módulo&#8221; (também conhecido como departamento) começa a perder o foco no GRANDE objetivo da empresa e passa a defender apenas <a href="http://1up4dev.org/2008/11/os-guardioes-da-cascata">seus interesses</a> - a famosa MISSÃO da empresa passa a ser coadjuvante. O resultado? A empresa dobra ou triplica seu quadro de funcionários e na maioria dos casos, seu lucro bruto. Porém agora tem mais despesas com pessoal e gastos extras para manter  esse novo modelo &#8220;enterprise&#8221;. Trocando em miúdos, continua na mesma!
+<p>Quando uma <em>startup</em> passa a vender mais e ter uma procura maior por seus produtos/serviços (o que é bom), uma reação comum da &ldquo;cúpula&rdquo; é aumentar o quadro de funcionários visando atender a demanda. Logo surgem os problemas com a organização do pessoal e/ou fluxo de trabalho. A solução mais simplista (e óbvia) é a especialização: fulano faz isso, ciclano faz aquilo, e beltrano gerencia. Logo controles são criados, fluxos validados, centros de custo, documentos, reuniões, atas, comitês, gestão de pessoas e relacionamento, terceirização, cargos, departamentos&hellip; e nasce o monstro da <a href="http://pt.wikipedia.org/wiki/Burocracia">burocracia</a>, aka &ldquo;enterprise&rdquo;.</p>
 
-Onde está o erro? Mais uma vez o FOCO está na <a href="http://1up4dev.org/2008/11/foco-no-problema/">solução</a> ao invés de PROBLEMA. Se você ler meus posts anteriores vai ver que este é um tema recorrente. Então por que as empresas continuam fazendo as coisas erradas e cometendo os mesmos erros?
+<p>Com essa <a href="http://en.wikipedia.org/wiki/Enterprise_architecture">especialização</a>, cada &ldquo;módulo&rdquo; (também conhecido como departamento) começa a perder o foco no GRANDE objetivo da empresa e passa a defender apenas <a href="http://1up4dev.org/2008/11/os-guardioes-da-cascata">seus interesses</a> &ndash; a famosa MISSÃO da empresa passa a ser coadjuvante. O resultado? A empresa dobra ou triplica seu quadro de funcionários e na maioria dos casos, seu lucro bruto. Porém agora tem mais despesas com pessoal e gastos extras para manter  esse novo modelo &ldquo;enterprise&rdquo;. Trocando em miúdos, continua na mesma!</p>
 
-<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="425" height="344" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,40,0"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/R47Xe8kVrv0&amp;hl=pt_BR&amp;fs=1&amp;" /><param name="allowfullscreen" value="true" /><embed type="application/x-shockwave-flash" width="425" height="344" src="http://www.youtube.com/v/R47Xe8kVrv0&amp;hl=pt_BR&amp;fs=1&amp;" allowscriptaccess="always" allowfullscreen="true"></embed></object>
+<p>Onde está o erro? Mais uma vez o FOCO está na <a href="http://1up4dev.org/2008/11/foco-no-problema/">solução</a> ao invés de PROBLEMA. Se você ler meus posts anteriores vai ver que este é um tema recorrente. Então por que as empresas continuam fazendo as coisas erradas e cometendo os mesmos erros?</p>
 
-Idéias criativas surgem das pessoas <a href="http://blog.aspercom.com.br/2008/07/21/hierarquias-sao-inteligentes-nas-pontas/">diretamente</a> relacionadas com os problemas e não de diretores, contadores, gestores, etc. Esse modelo &#8220;enterprise&#8221; é um <em>overhead</em> organizacional que só gera ruído e desperdício!
+<p>Idéias criativas surgem das pessoas <a href="http://blog.aspercom.com.br/2008/07/21/hierarquias-sao-inteligentes-nas-pontas/">diretamente</a> relacionadas com os problemas e não de diretores, contadores, gestores, etc. Esse modelo &ldquo;enterprise&rdquo; é um <em>overhead</em> organizacional que só gera ruído e desperdício!</p>
+
 <h2>A solução é adotar agile!</h2>
-SOLUÇÃO!? Mas qual era o PROBLEMA mesmo!? Sim, mais uma vez o foco é a <a href="http://agilesoftwaredevelopment.com/blog/janusz-gorycki/agile-dead">solução</a> ao invés do problema.
 
-Como eu disse nos posts anteriores, acreditar que uma mudança drástica do processo pode mudar a cultura da empresa e pincipalmente as pessoas é o maior erro na adoção de metodologias ágeis. Mudam o processo mas não mudam as pessoas.
+<p>SOLUÇÃO!? Mas qual era o PROBLEMA mesmo!? Sim, mais uma vez o foco é a <a href="http://agilesoftwaredevelopment.com/blog/janusz-gorycki/agile-dead">solução</a> ao invés do problema.</p>
 
-De uma forma simples e direta, agile resume-se a quatro valores:
-<blockquote>Individuals and interactions over processes and tools
+<p>Como eu disse nos posts anteriores, acreditar que uma mudança drástica do processo pode mudar a cultura da empresa e pincipalmente as pessoas é o maior erro na adoção de metodologias ágeis. Mudam o processo mas não mudam as pessoas.</p>
+
+<p>De uma forma simples e direta, agile resume-se a quatro valores:</p>
+
+<blockquote><p>Individuals and interactions over processes and tools
 Working software over comprehensive documentation
 Customer collaboration over contract negotiation
-Responding to change over following a plan</blockquote>
-Ou seja, pessoas, software, colaboração e feedback. Simples assim!
+Responding to change over following a plan</p></blockquote>
 
-O manifesto ágil não cita nada sobre &#8220;enterprise&#8221;, sobre a implementação. Este é o grande desafio em sua adoção. Como seguir estes valores sem burocratizar e engessar o processo? Como criar uma relação de colaboração com os clientes? Como responder rapidamente a mudanças? Como eliminar o esforço que não agrega valor ao produto e/ou empresa? Como evitar politicagem?
+<p>Ou seja, pessoas, software, colaboração e feedback. Simples assim!</p>
+
+<p>O manifesto ágil não cita nada sobre &ldquo;enterprise&rdquo;, sobre a implementação. Este é o grande desafio em sua adoção. Como seguir estes valores sem burocratizar e engessar o processo? Como criar uma relação de colaboração com os clientes? Como responder rapidamente a mudanças? Como eliminar o esforço que não agrega valor ao produto e/ou empresa? Como evitar politicagem?</p>
+
 <h2>Mantenha-se pequeno!</h2>
-Otimize! Busque soluções para os problemas que impedem de produzir mais e com mais qualidade. Faça MAIS com MENOS. Foque no O QUE ao invés do COMO. Escale as pessoas verticalmente!
 
-Inove! Não espere conseguir resultados diferentes fazendo sempre a mesma coisa. Busque novidades, opniões, experiências. Ouça seus funcionários, seus clientes. Estude, pesquise, arrisque, erre, acerte&#8230; continuamente.
+<p>Otimize! Busque soluções para os problemas que impedem de produzir mais e com mais qualidade. Faça MAIS com MENOS. Foque no O QUE ao invés do COMO. Escale as pessoas verticalmente!</p>
 
-Mantenha o foco! Tenha um GRANDE e único objetivo e certifique-se que todos acreditem nesta filosofia. É importante que todos comprem a idéia e o <em>modus operandis</em>.
+<p>Inove! Não espere conseguir resultados diferentes fazendo sempre a mesma coisa. Busque novidades, opniões, experiências. Ouça seus funcionários, seus clientes. Estude, pesquise, arrisque, erre, acerte&hellip; continuamente.</p>
 
-Finalizando, este é apenas meu ponto de vista, baseado na minha experiência em diversas empresas grandes e pequenas, vivenciando problemas, errando muito e principalmente aprendendo com os erros dos outros. Agilidade pode funcionar bem em grandes corporações, desde que haja foco e que todos comprem a idéia. Você pode concordar ou não.
+<p>Mantenha o foco! Tenha um GRANDE e único objetivo e certifique-se que todos acreditem nesta filosofia. É importante que todos comprem a idéia e o <em>modus operandis</em>.</p>
+
+<p>Finalizando, este é apenas meu ponto de vista, baseado na minha experiência em diversas empresas grandes e pequenas, vivenciando problemas, errando muito e principalmente aprendendo com os erros dos outros. Agilidade pode funcionar bem em grandes corporações, desde que haja foco e que todos comprem a idéia. Você pode concordar ou não.</p>
 </div>
   
   
@@ -924,7 +914,7 @@ Finalizando, este é apenas meu ponto de vista, baseado na minha experiência em
   
 
 
-<time datetime="2009-12-17T00:00:00-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
+<time datetime="2009-12-17T08:30:15-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
         
          | <a href="/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/#disqus_thread">Comments</a>
         
@@ -933,125 +923,230 @@ Finalizando, este é apenas meu ponto de vista, baseado na minha experiência em
   </header>
 
 
-  <div class="entry-content">Na madrugada passada, andei &#8220;brincando&#8221; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &#8220;perda de tempo&#8221;, resolvi postar alguns truques aprendidos.
+  <div class="entry-content"><p>Na madrugada passada, andei &ldquo;brincando&rdquo; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &ldquo;perda de tempo&rdquo;, resolvi postar alguns truques aprendidos.</p>
+
 <h2>Baixei o fonte do rubygems, como faço pra rodá-lo sem alterar o meu sistema?</h2>
-Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.
-<pre>$ irb</pre>
-<pre>irb(main):001:0&gt; $LOAD_PATH</pre>
-No meu Ubuntu, obtive:
-<pre>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]</pre>
-<pre>$ ls /usr/local/lib/site_ruby/1.8/</pre>
-Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
-Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:
-<pre>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v</pre>
-O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.
-<h2>Afinal, como funciona o &#8220;require de gems&#8221;?</h2>
-Bom, já sabemos que o require &#8220;rubygems&#8221; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &#8220;/usr/local/lib/site_ruby/1.8&#8221;.
 
-Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.
+<p>Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.</p>
+
+<pre><code>$ irb
+
+
+
+
+irb(main):001:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>No meu Ubuntu, obtive:</p>
+
+<pre><code>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]
+
+
+
+
+$ ls /usr/local/lib/site_ruby/1.8/
+</code></pre>
+
+<p>Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
+Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:</p>
+
+<pre><code>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v
+</code></pre>
+
+<p>O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.</p>
+
+<h2>Afinal, como funciona o &ldquo;require de gems&rdquo;?</h2>
+
+<p>Bom, já sabemos que o require &ldquo;rubygems&rdquo; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;.</p>
+
+<p>Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.</p>
+
 <ul>
-	<li>Adiciona o metodo Kernel#gem.</li>
-	<li>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</li>
+<li><p>Adiciona o metodo Kernel#gem.</p></li>
+<li><p>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</p></li>
 </ul>
+
+
 <h3>Kernel#gem</h3>
-Permite &#8220;acionar&#8221; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:
-<p style="padding-left: 30px;">##</p>
-<p style="padding-left: 30px;"># Use Kernel#gem to activate a specific version of +gem_name+.</p>
-<p style="padding-left: 30px;">#</p>
-<p style="padding-left: 30px;"># +version_requirements+ is a list of version requirements that the</p>
-<p style="padding-left: 30px;"># specified gem must match, most commonly &#8220;= example.version.number&#8221;.  See</p>
-<p style="padding-left: 30px;"># Gem::Requirement for how to specify a version requirement.</p>
-<p style="padding-left: 30px;">#</p>
-<p style="padding-left: 30px;"># If you will be activating the latest version of a gem, there is no need to</p>
-<p style="padding-left: 30px;"># call Kernel#gem, Kernel#require will do the right thing for you.</p>
-<p style="padding-left: 30px;">#</p>
-<p style="padding-left: 30px;"># Kernel#gem returns true if the gem was activated, otherwise false.  If the</p>
-<p style="padding-left: 30px;"># gem could not be found, didn&#8217;t match the version requirements, or a</p>
 
-<p style="padding-left: 30px;"># different version was already activated, an exception will be raised.
-[&#8230;]
+<p>Permite &ldquo;acionar&rdquo; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:</p>
+
+<h1>#</h1>
+
+<h1>Use Kernel#gem to activate a specific version of +gem_name+.</h1>
+
+<p>#</p>
+
+<h1>+version_requirements+ is a list of version requirements that the</h1>
+
+<h1>specified gem must match, most commonly &ldquo;= example.version.number&rdquo;.  See</h1>
+
+<h1>Gem::Requirement for how to specify a version requirement.</h1>
+
+<p>#</p>
+
+<h1>If you will be activating the latest version of a gem, there is no need to</h1>
+
+<h1>call Kernel#gem, Kernel#require will do the right thing for you.</h1>
+
+<p>#</p>
+
+<h1>Kernel#gem returns true if the gem was activated, otherwise false.  If the</h1>
+
+<h1>gem could not be found, didn&rsquo;t match the version requirements, or a</h1>
+
+<h1>different version was already activated, an exception will be raised.</h1>
+
+<p>[&hellip;]</p>
+
 <h3>Kernel#require</h3>
-No final do rubygems.rb encontramos:
 
-if RUBY_VERSION &lt; &#8216;1.9&#8217; then
+<p>No final do rubygems.rb encontramos:</p>
 
-require &#8216;rubygems/custom_require&#8217;
+<p>if RUBY_VERSION &lt; &lsquo;1.9&rsquo; then</p>
 
-end
+<p>require &lsquo;rubygems/custom_require&rsquo;</p>
 
-Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:
+<p>end</p>
+
+<p>Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:</p>
+
 <ul>
-	<li>Chama o &#8220;original&#8221; require;</li>
-	<li>Em caso de LoadError;
+<li><p>Chama o &ldquo;original&rdquo; require;</p></li>
+<li><p>Em caso de LoadError;</p>
+
 <ul>
-	<li>Executa o &#8220;Gem.searcher.find(path)&#8221;;</li>
-	<li>Se <em>true</em>
+<li><p>Executa o &ldquo;Gem.searcher.find(path)&rdquo;;</p></li>
+<li><p>Se <em>true</em></p>
+
 <ul>
-	<li>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</li>
-	<li>Executa o &#8220;original&#8221; require novamente;</li>
+<li><p>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</p></li>
+<li><p>Executa o &ldquo;original&rdquo; require novamente;</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+
+
 <h3>Exemplos com o IRB</h3>
-Para finalizar legal e comprovar tudo isso, fiz alguns testes:
-<pre>$ gem list json</pre>
-<p style="padding-left: 30px;">*** LOCAL GEMS ***</p>
-<p style="padding-left: 30px;">json (1.2.0, 1.1.9)</p>
-<p style="padding-left: 30px;">json_pure (1.2.0)</p>
-<p style="padding-left: 30px;"></p>
 
-<pre>$ irb</pre>
-<pre>irb(main):001:0&gt; $LOAD_PATH</pre>
-<p style="padding-left: 30px;">=&gt; [&#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]</p>
+<p>Para finalizar legal e comprovar tudo isso, fiz alguns testes:</p>
 
-<pre>irb(main):004:0&gt; require "json"</pre>
-<p style="padding-left: 30px;">LoadError: no such file to load &#8211; json</p>
-<p style="padding-left: 30px;">from (irb):4:in `require&#8217;</p>
-<p style="padding-left: 30px;">from (irb):4</p>
-<p style="padding-left: 30px;">from :0</p>
+<pre><code>$ gem list json
+</code></pre>
 
-<pre>irb(main):005:0&gt; gem "json", "= 1.2.0"</pre>
-<p style="padding-left: 30px;">NoMethodError: undefined method `gem&#8217; for main:Object</p>
+<p><strong><em> LOCAL GEMS </em></strong></p>
 
-<p style="padding-left: 30px;">from (irb):5
-from :0
+<p>json (1.2.0, 1.1.9)</p>
 
-O require &#8220;json&#8221; por si só, carrega a versão mais atual da gem.
-<pre>irb(main):006:0&gt; require "rubygems"</pre>
-=&gt; true
-<pre>irb(main):007:0&gt; require "json"</pre>
-=&gt; true
-<pre>irb(main):008:0&gt; JSON::VERSION</pre>
-=&gt; &#8220;1.2.0&#8221;
-<pre>irb(main):009:0&gt; $LOAD_PATH</pre>
-=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
-<pre>irb(main):010:0&gt; quit</pre>
-Após o require &#8220;json&#8221;, as pastas foram adicionadas no $LOAD_PATH.
-<pre>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"</pre>
-Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:
-<pre>$ irb
+<p>json_pure (1.2.0)</p>
 
-irb(main):001:0&gt; require "rubygems"</pre>
-=&gt; true
-<pre>irb(main):002:0&gt; $LOAD_PATH</pre>
-=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
-<pre>irb(main):003:0&gt; gem "json", "= 1.1.9"</pre>
-=&gt; true
-<pre>irb(main):004:0&gt; $LOAD_PATH</pre>
-=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
-<pre>irb(main):005:0&gt; JSON</pre>
-NameError: uninitialized constant JSON
-from (irb):5
-<pre>irb(main):006:0&gt; require "json"</pre>
-=&gt; true
-<pre>irb(main):007:0&gt; JSON::VERSION</pre>
-=&gt; &#8220;1.1.9&#8221;
-<pre>irb(main):008:0&gt; quit</pre>
-Note que após o gem &#8220;json&#8221;, &#8220;= 1.1.9&#8221; &#8230; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &#8220;json&#8221;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.
+<pre><code>$ irb
 
-Espero que com estas explicações, você use com mais segurança o rubygems.
+
+
+
+irb(main):001:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):004:0&gt; require "json"
+</code></pre>
+
+<p>LoadError: no such file to load &mdash; json</p>
+
+<p>from (irb):4:in `require&#8217;</p>
+
+<p>from (irb):4</p>
+
+<p>from :0</p>
+
+<pre><code>irb(main):005:0&gt; gem "json", "= 1.2.0"
+</code></pre>
+
+<p>NoMethodError: undefined method `gem&#8217; for main:Object</p>
+
+<p>from (irb):5
+from :0</p>
+
+<p>O require &ldquo;json&rdquo; por si só, carrega a versão mais atual da gem.</p>
+
+<pre><code>irb(main):006:0&gt; require "rubygems"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):007:0&gt; require "json"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):008:0&gt; JSON::VERSION
+</code></pre>
+
+<p>=> &ldquo;1.2.0&rdquo;</p>
+
+<pre><code>irb(main):009:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):010:0&gt; quit
+</code></pre>
+
+<p>Após o require &ldquo;json&rdquo;, as pastas foram adicionadas no $LOAD_PATH.</p>
+
+<pre><code>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"
+</code></pre>
+
+<p>Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:</p>
+
+<pre><code>$ irb
+
+irb(main):001:0&gt; require "rubygems"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):002:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):003:0&gt; gem "json", "= 1.1.9"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):004:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):005:0&gt; JSON
+</code></pre>
+
+<p>NameError: uninitialized constant JSON
+from (irb):5</p>
+
+<pre><code>irb(main):006:0&gt; require "json"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):007:0&gt; JSON::VERSION
+</code></pre>
+
+<p>=> &ldquo;1.1.9&rdquo;</p>
+
+<pre><code>irb(main):008:0&gt; quit
+</code></pre>
+
+<p>Note que após o gem &ldquo;json&rdquo;, &ldquo;= 1.1.9&rdquo; &hellip; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &ldquo;json&rdquo;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.</p>
+
+<p>Espero que com estas explicações, você use com mais segurança o rubygems.</p>
 </div>
   
   

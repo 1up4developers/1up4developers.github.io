@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2009-07-13T00:00:00-03:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
+<time datetime="2009-07-13T00:30:48-03:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,28 +93,43 @@
   </header>
 
 
-<div class="entry-content">Paginação é um recurso simples e indispensável em qualquer aplicação séria. Em se tratando de Rails, a solução mais popular é a gem <a href="http://github.com/mislav/will_paginate/tree/master" target="_blank">WillPaginate</a> que basicamente adiciona o método &#8220;paginate_&#8221; aos models do ActiveRecord e fornece um helper para renderização dos links da paginação nas views.
+<div class="entry-content"><p>Paginação é um recurso simples e indispensável em qualquer aplicação séria. Em se tratando de Rails, a solução mais popular é a gem <a href="http://github.com/mislav/will_paginate/tree/master">WillPaginate</a> que basicamente adiciona o método &ldquo;paginate_&rdquo; aos models do ActiveRecord e fornece um helper para renderização dos links da paginação nas views.</p>
 
-Instalando a gem:
-<pre>sudo gem install will_paginate</pre>
-Para utilizar na aplicação, adicione no final do <code>config/environment.rb</code>:
-<pre>require 'will_paginate'</pre>
-Altere o controller para utilizar paginação:
-<pre>def index
+<p>Instalando a gem:</p>
+
+<pre><code>sudo gem install will_paginate
+</code></pre>
+
+<p>Para utilizar na aplicação, adicione no final do <code>config/environment.rb</code>:</p>
+
+<pre><code>require 'will_paginate'
+</code></pre>
+
+<p>Altere o controller para utilizar paginação:</p>
+
+<pre><code>def index
   @posts = Post.paginate :all, :page =&gt; params[:page], :per_page =&gt; 10
-end</pre>
-E adicione os links da paginação na view:
-<pre>&lt;%= will_paginate @posts %&gt;</pre>
-Pronto! Ao clicar nos links da paginação o parâmetro &#8220;page&#8221; será incluído automaticamente na requisição.
+end
+</code></pre>
 
-<a href="http://1up4dev.org/wp-content/uploads/2009/07/posts.png"><img class="alignnone size-medium wp-image-509" title="posts" src="http://1up4dev.org/wp-content/uploads/2009/07/posts-300x253.png" alt="" width="300" height="253" /></a>
-<h2>Legal, mas cadê o &#8220;ajax&#8221;?</h2>
-Por padrão o WillPaginate não se preocupa com isso. O próprio desenvolvedor <a href="http://wiki.github.com/mislav/will_paginate/ajax-pagination" target="_blank">recomenda usar javascript</a> para interceptar o &#8220;click&#8221; dos links e renderizar o resultado na mesma página.
+<p>E adicione os links da paginação na view:</p>
 
-Outra alternativa seria estender a classe responsável por renderizar os links da paginação para utilizar requisições com ajax.
+<pre><code>&lt;%= will_paginate @posts %&gt;
+</code></pre>
 
-Inclua em <code>app/helpers</code> o arquivo <code>ajax_will_paginate.rb</code> com o código:
-<pre>class AjaxWillPaginate &lt; WillPaginate::LinkRenderer
+<p>Pronto! Ao clicar nos links da paginação o parâmetro &ldquo;page&rdquo; será incluído automaticamente na requisição.</p>
+
+<p><a href="http://1up4dev.org/wp-content/uploads/2009/07/posts.png"><img src="http://1up4dev.org/wp-content/uploads/2009/07/posts-300x253.png" alt="" /></a></p>
+
+<h2>Legal, mas cadê o &ldquo;ajax&rdquo;?</h2>
+
+<p>Por padrão o WillPaginate não se preocupa com isso. O próprio desenvolvedor <a href="http://wiki.github.com/mislav/will_paginate/ajax-pagination">recomenda usar javascript</a> para interceptar o &ldquo;click&rdquo; dos links e renderizar o resultado na mesma página.</p>
+
+<p>Outra alternativa seria estender a classe responsável por renderizar os links da paginação para utilizar requisições com ajax.</p>
+
+<p>Inclua em <code>app/helpers</code> o arquivo <code>ajax_will_paginate.rb</code> com o código:</p>
+
+<pre><code>class AjaxWillPaginate &lt; WillPaginate::LinkRenderer
   def prepare(collection, options, template)
     @update = options[:update]
     super
@@ -127,14 +142,22 @@ Inclua em <code>app/helpers</code> o arquivo <code>ajax_will_paginate.rb</code> 
       :update =&gt; @update
     })
   end
-end</pre>
-Então adicione no final do arquivo <code>config/environment.rb</code>:
-<pre>  WillPaginate::ViewHelpers.pagination_options[:renderer] = 'AjaxWillPaginate'</pre>
-E altere a chamada do helper na view para:
-<pre>&lt;%= will_paginate @posts, :update =&gt; 'div_principal' %&gt;</pre>
-Informe na opção <code>:update</code> o Id de um objeto html que contenha todo o conteúdo da paginação que será substituído nas requisições seguintes.
+end
+</code></pre>
 
-É importante lembrar que esta solução altera o comportamento de todos os helpers de paginação da aplicação, por isso deve ser utilizada com cautela. <a href="http://www.botvector.net/2008/08/willpaginate-on-ajax.html" target="_blank">Outras</a> <a href="http://weblog.redlinesoftware.com/2008/1/30/willpaginate-and-remote-links" target="_blank">soluções</a> parecidas podem ser encontradas <a href="http://www.google.com.br/search?q=ajax+will+paginate" target="_blank">aqui</a>.
+<p>Então adicione no final do arquivo <code>config/environment.rb</code>:</p>
+
+<pre><code>  WillPaginate::ViewHelpers.pagination_options[:renderer] = 'AjaxWillPaginate'
+</code></pre>
+
+<p>E altere a chamada do helper na view para:</p>
+
+<pre><code>&lt;%= will_paginate @posts, :update =&gt; 'div_principal' %&gt;
+</code></pre>
+
+<p>Informe na opção <code>:update</code> o Id de um objeto html que contenha todo o conteúdo da paginação que será substituído nas requisições seguintes.</p>
+
+<p>É importante lembrar que esta solução altera o comportamento de todos os helpers de paginação da aplicação, por isso deve ser utilizada com cautela. <a href="http://www.botvector.net/2008/08/willpaginate-on-ajax.html">Outras</a> <a href="http://weblog.redlinesoftware.com/2008/1/30/willpaginate-and-remote-links">soluções</a> parecidas podem ser encontradas <a href="http://www.google.com.br/search?q=ajax+will+paginate">aqui</a>.</p>
 </div>
 
 
@@ -143,7 +166,7 @@ Informe na opção <code>:update</code> o Id de um objeto html que contenha todo
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -157,7 +180,7 @@ Informe na opção <code>:update</code> o Id de um objeto html que contenha todo
   
 
 
-<time datetime="2009-07-13T00:00:00-03:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
+<time datetime="2009-07-13T00:30:48-03:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
       
 
 <span class="categories">
@@ -192,6 +215,12 @@ Informe na opção <code>:update</code> o Id de um objeto html que contenha todo
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -246,7 +275,10 @@ Informe na opção <code>:update</code> o Id de um objeto html que contenha todo
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2009/07/paginacao-no-rails-com-will_paginate-e-ajax-de-modo-facil/';
+        var disqus_url = 'http://1up4developers.github.io/2009/07/paginacao-no-rails-com-will_paginate-e-ajax-de-modo-facil/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

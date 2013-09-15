@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2010-07-02T00:00:00-03:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
+<time datetime="2010-07-02T06:00:23-03:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,26 +93,38 @@
   </header>
 
 
-<div class="entry-content">A <a href="http://api.rubyonrails.org/classes/ActionController/Routing.html">API de rotas</a> do Rails simplifica consideravelmente o desenvolvimento fornecendo um padrão de geração e utilização de URLs para toda aplicação. Porém algumas necessidades especificas e relativamente simples podem gerar dores de cabeça se forem implementadas incorretamente.
+<div class="entry-content"><p>A <a href="http://api.rubyonrails.org/classes/ActionController/Routing.html">API de rotas</a> do Rails simplifica consideravelmente o desenvolvimento fornecendo um padrão de geração e utilização de URLs para toda aplicação. Porém algumas necessidades especificas e relativamente simples podem gerar dores de cabeça se forem implementadas incorretamente.</p>
 
-Um caso bastante comum são URLs compostas que sempre apontam para um mesmo recurso. Por exemplo, um blog que possua rotas para seus posts no formato <code>/posts/autor/categoria/permalink</code> provavelmente terá uma rota mapeada como <code>map.post "posts/:author/:category/:permalink"</code> gerando automaticamente os helpers <code>post_path</code> e <code>post_url</code>.
+<p>Um caso bastante comum são URLs compostas que sempre apontam para um mesmo recurso. Por exemplo, um blog que possua rotas para seus posts no formato <code>/posts/autor/categoria/permalink</code> provavelmente terá uma rota mapeada como <code>map.post "posts/:author/:category/:permalink"</code> gerando automaticamente os helpers <code>post_path</code> e <code>post_url</code>.</p>
 
-Muito bom, porém para <a href="http://guides.rubyonrails.org/routing.html#generating-urls-from-code">usufruirmos desta facilidade</a> precisamos fornecer os valores dos parâmetros dinâmicos nos <em>controllers</em> e <em>views</em>:
-<pre lang="ruby">post_path(:author => @post.author, :category => @post.category, :permalink => @post.permalink)</pre>
-E mesmo que você forneça os <a href="http://guides.rubyonrails.org/routing.html#route-generation-from-arrays">parâmetros em um array</a>, vai dar muito trabalho além de deixar muito código repetido pela aplicação.
+<p>Muito bom, porém para <a href="http://guides.rubyonrails.org/routing.html#generating-urls-from-code">usufruirmos desta facilidade</a> precisamos fornecer os valores dos parâmetros dinâmicos nos <em>controllers</em> e <em>views</em>:</p>
+
+<pre><code>post_path(:author =&gt; @post.author, :category =&gt; @post.category, :permalink =&gt; @post.permalink)
+</code></pre>
+
+<p>E mesmo que você forneça os <a href="http://guides.rubyonrails.org/routing.html#route-generation-from-arrays">parâmetros em um array</a>, vai dar muito trabalho além de deixar muito código repetido pela aplicação.</p>
+
 <h2>Entendi! Mas como resolvo este problema?</h2>
-Para este caso, apenas implementar o método <code><a href="http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M001840">to_param</a></code> do model não vai servir. Uma solução seria reescrever o método <code>post_path</code> (que é gerado automaticamente) no respectivo helper (posts_helper.rb):
-<pre lang="ruby">def post_path(post, options = {})
-  super(post, :author => post.author, :category => post.category, :permalink => post.permalink)
-end</pre>
-Outra solução seria sobrescrever o método <code><a href="http://api.rubyonrails.org/classes/ActionController/Base.html#M000467">default_url_options</a></code> no <em>controller</em> para retorna os parâmetros padrões da rota:
-<pre lang="ruby">def default_url_options(options = {})
-  options.merge!(:author => @post.author, :category => @post.category, :permalink => @post.permalink) if options[:action] == "show"
-end</pre>
-A má notícia é que você terá que fazer isto para todos seus controllers e respectivos models.
 
-A terceira solução (e mais elegante) é padronizar a maneira com que os parâmetros opcionais da rota são obtidos a partir do controller e seu respectivo model. Basta adicionar os seguintes métodos no seu <em>ApplicationController</em>:
-<pre lang="ruby">def default_url_options(options = {})
+<p>Para este caso, apenas implementar o método <code>[to_param](http://api.rubyonrails.org/classes/ActiveRecord/Base.html#M001840)</code> do model não vai servir. Uma solução seria reescrever o método <code>post_path</code> (que é gerado automaticamente) no respectivo helper (posts_helper.rb):</p>
+
+<pre><code>def post_path(post, options = {})
+  super(post, :author =&gt; post.author, :category =&gt; post.category, :permalink =&gt; post.permalink)
+end
+</code></pre>
+
+<p>Outra solução seria sobrescrever o método <code>[default_url_options](http://api.rubyonrails.org/classes/ActionController/Base.html#M000467)</code> no <em>controller</em> para retorna os parâmetros padrões da rota:</p>
+
+<pre><code>def default_url_options(options = {})
+  options.merge!(:author =&gt; @post.author, :category =&gt; @post.category, :permalink =&gt; @post.permalink) if options[:action] == "show"
+end
+</code></pre>
+
+<p>A má notícia é que você terá que fazer isto para todos seus controllers e respectivos models.</p>
+
+<p>A terceira solução (e mais elegante) é padronizar a maneira com que os parâmetros opcionais da rota são obtidos a partir do controller e seu respectivo model. Basta adicionar os seguintes métodos no seu <em>ApplicationController</em>:</p>
+
+<pre><code>def default_url_options(options = {})
   if (model = controller_model(options))
     dynamic_route_params(options).each do |param|
       options[param] = model.send(param) if model.respond_to?(param)
@@ -133,16 +145,18 @@ def dynamic_route_params(options = {})
     matched_routes = ActionController::Routing::Routes.routes.select do |route|
       route.matches_controller_and_action?(options[:controller], options[:action])
     end
-    dynamic_segments = matched_routes.map(&:segments).flatten.each do |segment|
-      dynamic_params << segment.key if segment.is_a?(ActionController::Routing::DynamicSegment)
+    dynamic_segments = matched_routes.map(&amp;:segments).flatten.each do |segment|
+      dynamic_params &lt;&lt; segment.key if segment.is_a?(ActionController::Routing::DynamicSegment)
     end
   end
-end</pre>
-Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do model. Caso queiram contribuir, este código está disponível no <a href="http://github.com/1up4dev/random-samples/blob/master/dynamic_route_params/dynamic_route_params.rb">github</a>.
+end
+</code></pre>
 
-<strong>Referências</strong>
+<p>Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do model. Caso queiram contribuir, este código está disponível no <a href="http://github.com/1up4dev/random-samples/blob/master/dynamic_route_params/dynamic_route_params.rb">github</a>.</p>
+
+<p><strong>Referências</strong>
 <a href="http://railsguts.com/routing_inside_out.html">Rails Routing from the Inside Out</a>
-<a href="http://guides.rubyonrails.org/routing.html">Rails Guides: Routing</a>
+<a href="http://guides.rubyonrails.org/routing.html">Rails Guides: Routing</a></p>
 </div>
 
 
@@ -151,7 +165,7 @@ Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -165,7 +179,7 @@ Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do
   
 
 
-<time datetime="2010-07-02T00:00:00-03:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
+<time datetime="2010-07-02T06:00:23-03:00" pubdate data-updated="true">Jul 2<span>nd</span>, 2010</time>
       
 
 <span class="categories">
@@ -200,6 +214,12 @@ Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -254,7 +274,10 @@ Assim, os valores defaults dos parâmetros da rota serão obtidos diretamente do
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2010/07/gerando-rotas-com-parametros-dinamicos-no-rails-de-modo-facil/';
+        var disqus_url = 'http://1up4developers.github.io/2010/07/gerando-rotas-com-parametros-dinamicos-no-rails-de-modo-facil/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

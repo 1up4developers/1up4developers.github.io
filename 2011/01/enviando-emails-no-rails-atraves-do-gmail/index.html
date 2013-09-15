@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-01-20T00:00:00-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
+<time datetime="2011-01-20T07:00:09-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,19 +93,22 @@
   </header>
 
 
-<div class="entry-content">Enviar emails de uma aplicação Rails é <a href="http://guides.rubyonrails.org/action_mailer_basics.html">muito simples</a>. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não souber ou não tiver muita paciência para fazer isso (por exemplo instalar e configurar <a href="http://www.sendmail.org">sendmail</a>, <a href="http://www.mutt.org/">mutt</a>, etc), pode facilmente usar sua conta do <a href="http://lindsaar.net/2010/3/15/how_to_use_mail_and_actionmailer_3_with_gmail_smtp">Gmail</a> para enviar as mensagens da sua aplicação.
+<div class="entry-content"><p>Enviar emails de uma aplicação Rails é <a href="http://guides.rubyonrails.org/action_mailer_basics.html">muito simples</a>. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não souber ou não tiver muita paciência para fazer isso (por exemplo instalar e configurar <a href="http://www.sendmail.org">sendmail</a>, <a href="http://www.mutt.org/">mutt</a>, etc), pode facilmente usar sua conta do <a href="http://lindsaar.net/2010/3/15/how_to_use_mail_and_actionmailer_3_with_gmail_smtp">Gmail</a> para enviar as mensagens da sua aplicação.</p>
 
-Basta incluir as seguintes configurações no bloco <code>config</code> dos respectivos ambientes da aplicação (por exemplo, <code>config/environments/production.rb</code>):
-<pre lang="ruby">  config.action_mailer.delivery_method = :smtp
+<p>Basta incluir as seguintes configurações no bloco <code>config</code> dos respectivos ambientes da aplicação (por exemplo, <code>config/environments/production.rb</code>):</p>
+
+<pre><code>  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :enable_starttls_auto => true,
-    :authentication => :plain,
-    :address => smtp.gmail.com,
-    :port => 587,
-    :user_name => "seuemail@gmail.com",
-    :password => "suasenha"
-  }</pre>
-O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para habilitar <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. Sucesso!
+    :enable_starttls_auto =&gt; true,
+    :authentication =&gt; :plain,
+    :address =&gt; smtp.gmail.com,
+    :port =&gt; 587,
+    :user_name =&gt; "seuemail@gmail.com",
+    :password =&gt; "suasenha"
+  }
+</code></pre>
+
+<p>O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para habilitar <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. Sucesso!</p>
 </div>
 
 
@@ -114,7 +117,7 @@ O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para hab
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -128,7 +131,7 @@ O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para hab
   
 
 
-<time datetime="2011-01-20T00:00:00-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
+<time datetime="2011-01-20T07:00:09-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -163,6 +166,12 @@ O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para hab
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -217,7 +226,10 @@ O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para hab
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/01/enviando-emails-no-rails-atraves-do-gmail/';
+        var disqus_url = 'http://1up4developers.github.io/2011/01/enviando-emails-no-rails-atraves-do-gmail/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2012-03-20T00:00:00-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+<time datetime="2012-03-20T00:57:44-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,22 +93,31 @@
   </header>
 
 
-<div class="entry-content">Dica para quem usa o <a href="http://wiki.nginx.org/Main" target="_blank">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule" target="_blank">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.
+<div class="entry-content"><p>Dica para quem usa o <a href="http://wiki.nginx.org/Main">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.</p>
 
-Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:
-<pre>location ~ / {
+<p>Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:</p>
+
+<pre><code>location ~ / {
         auth_basic            "Restricted";
         auth_basic_user_file  htpasswd;
         passenger_enabled on;
-}</pre>
-Um detalhe importante: se estiver rodando sua app com <a href="http://www.modrails.com/" target="_blank">Passenger</a>, inclua a linha <em>passenger_enabled on;</em>
+}
+</code></pre>
 
-Ah, já estava esquecendo das senhas. Elas devem ficar no arquivo <em>htpasswd</em>, no mesmo diretório do arquivo<em> nginx.conf</em> e precisam seguir o formato user:senha em cada linha. Por exemplo:
-<pre>user:sd5dsjo23PwdSh
-admin:mdePW2hgrPddSA</pre>
-O detalhe é que a senha precisa ser <a href="http://wiki.nginx.org/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F" target="_blank">criptografada em MD5</a>. Uma maneira fácil (e que funciona) de fazer isso é executando:
-<pre>ruby -e "puts 'usuario:' + 'senha'.crypt('md5')" &gt;&gt; htpasswd</pre>
-Sucesso!
+<p>Um detalhe importante: se estiver rodando sua app com <a href="http://www.modrails.com/">Passenger</a>, inclua a linha <em>passenger_enabled on;</em></p>
+
+<p>Ah, já estava esquecendo das senhas. Elas devem ficar no arquivo <em>htpasswd</em>, no mesmo diretório do arquivo<em> nginx.conf</em> e precisam seguir o formato user:senha em cada linha. Por exemplo:</p>
+
+<pre><code>user:sd5dsjo23PwdSh
+admin:mdePW2hgrPddSA
+</code></pre>
+
+<p>O detalhe é que a senha precisa ser <a href="http://wiki.nginx.org/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F">criptografada em MD5</a>. Uma maneira fácil (e que funciona) de fazer isso é executando:</p>
+
+<pre><code>ruby -e "puts 'usuario:' + 'senha'.crypt('md5')" &gt;&gt; htpasswd
+</code></pre>
+
+<p>Sucesso!</p>
 </div>
 
 
@@ -117,7 +126,7 @@ Sucesso!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -131,7 +140,7 @@ Sucesso!
   
 
 
-<time datetime="2012-03-20T00:00:00-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+<time datetime="2012-03-20T00:57:44-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -166,6 +175,12 @@ Sucesso!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -220,7 +235,10 @@ Sucesso!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/';
+        var disqus_url = 'http://1up4developers.github.io/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

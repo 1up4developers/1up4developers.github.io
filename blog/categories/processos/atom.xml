@@ -4,7 +4,7 @@
   <title><![CDATA[Category: processos | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/processos/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:25:03-03:00</updated>
+  <updated>2013-09-15T18:37:40-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
     <link href="http://1up4developers.github.io/2013/04/novos-rumos/"/>
-    <updated>2013-04-01T00:00:00-03:00</updated>
+    <updated>2013-04-01T12:00:51-03:00</updated>
     <id>http://1up4developers.github.io/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
@@ -29,23 +29,19 @@
   <entry>
     <title type="html"><![CDATA[TPW: e-mails vs reuniões]]></title>
     <link href="http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes/"/>
-    <updated>2011-06-13T00:00:00-03:00</updated>
+    <updated>2011-06-13T06:00:59-03:00</updated>
     <id>http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes</id>
     <content type="html"><![CDATA[<p>A cilada típica em ambientes corporativos:</p>
 
-<p><img class="aligncenter" title="Ciclo corporativo" src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" width="558" height="551" /></p>
-
-<p>&nbsp;</p>
+<p><img src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" /></p>
 
 <h2>E agora, quem poderá nos ajudar?</h2>
-
 
 <p>Infelizmente, <strong>e-mails</strong> e <strong>reuniões</strong>, mesmo em ambientes ágeis, são inevitáveis, e na maioria das situações, tóxicos. Reuniões de 2 horas de duração ou 50 emails diários são sinais claros de que as coisas não andam muito bem.</p>
 
 <p>Atitudes ágeis tendem a evitar &ldquo;enrolações&rdquo; que desviem o foco da equipe ou desacelerem a produtividade. A seguir, algumas estratégias e dicas que podemos aplicar para quebrar um pouco essas práticas corporativas cascateiras, ajudar a manter o foco da equipe e produzir mais.</p>
 
 <h2>Reuniões</h2>
-
 
 <p>Simplesmente <strong>evite reuniões</strong>, com temor! Tente resolver os problemas com <strong>conversas cara-a-cara</strong>, na sua mesa mesmo. Se precisar discutir um assunto por mais de 5 minutos, convide as pessoas envolvidas para um cafézinho, de preferência em pé.</p>
 
@@ -59,7 +55,6 @@
 
 <h2>E-mails</h2>
 
-
 <p>Alguns problemas podem ser resolvidos com um simples e-mail, é verdade. A única regra que devemos seguir é a do &ldquo;passa, repassa ou paga&rdquo;. <strong>Não deixe os e-mails passarem das tréplicas</strong>. Se depois de 3 e-mails o problema ainda não foi resolvido, convide os envolvidos para tomar um cafezinho.</p>
 
 <p><strong>E-mail não é chat</strong>. O time deve conversar cara-a-cara, incluindo os clientes. Trocar mais do que 5 e-mails diários entre a equipe é um mau sinal. Se não puder falar pessoalmente, <strong>use o telefone ou skype</strong> ao invés de mandar um e-mail que pode ser facilmente ignorado pelo destinatário.</p>
@@ -69,7 +64,6 @@
 <p>Finalmente, use o e-mail com sabedoria, para trocar informações importantes e relevantes entre a equipe. <strong>E-mail não deve ser regra</strong>, e sim um suporte para comunicação entre a equipe. Lembre-se: <strong>quanto mais e-mails você enviar, maior a chance de ser ignorado.</strong></p>
 
 <h2>Resumo</h2>
-
 
 <p>Reuniões e e-mails são tóxicos. Evite-os! Se não puder evitar, use-os com sabedoria.</p>
 
@@ -82,78 +76,74 @@
   <entry>
     <title type="html"><![CDATA[Agilidade é a buzzword do momento]]></title>
     <link href="http://1up4developers.github.io/2009/04/agilidade-e-a-buzzword-do-momento/"/>
-    <updated>2009-04-22T00:00:00-03:00</updated>
+    <updated>2009-04-22T11:46:42-03:00</updated>
     <id>http://1up4developers.github.io/2009/04/agilidade-e-a-buzzword-do-momento</id>
     <content type="html"><![CDATA[<p>Nos últimos anos o mercado de TI cresceu exponencialmente. Surgiram desde pequenas empresas especializadas em construir websites até monstruosas fábricas de software com seus contratos milionários. Algumas com orçamento limitado outras com dinheiro jorrando pelos canos. Umas com problemas por falta de organização outras com problemas burocráticos. Bons profissionais vs. equipes de sobrinhos, habilidade técnica contra enxurradas de documentos&hellip; muito fracasso, pouco sucesso.</p>
 
 <h2>A meta é coletar as moedas até conseguirmos uma estrela</h2>
 
-
 <p>Surgiram muitas empresas especializadas em desenvolver software ou que têm um software como produto principal. Normalmente, essas empresas se preocupam apenas em satisfazer os investidores e se esquecem dos clientes. Focam em vender e deixam a qualidade de lado. Prezam pela imagem e ignoram os problemas.</p>
 
-<p>É uma triste realidade que essas empresas tenham mais <a href="http://www.youtube.com/watch?v=R47Xe8kVrv0" target="_blank">executivos</a> do que programadores. Como diz o <a href="http://www.luli.com.br/" target="_blank">Luli Radfahrer</a>, <em>executivos são aqueles seres que se vestem com um pensamento fracassado, usam uma linguagem própria sendo uma mistura de termos que só eles entendem e 20% de palavras em inglês</em>&hellip; não vivem os problemas reais da empresa. É como se estivessem em outro mundo: Mario World!</p>
+<p>É uma triste realidade que essas empresas tenham mais <a href="http://www.youtube.com/watch?v=R47Xe8kVrv0">executivos</a> do que programadores. Como diz o <a href="http://www.luli.com.br/">Luli Radfahrer</a>, <em>executivos são aqueles seres que se vestem com um pensamento fracassado, usam uma linguagem própria sendo uma mistura de termos que só eles entendem e 20% de palavras em inglês</em>&hellip; não vivem os problemas reais da empresa. É como se estivessem em outro mundo: Mario World!</p>
 
-<p>[caption id=&ldquo;attachment_439&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;O mundo dos executivos: nuvens sorrindo&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/marioland-clean.jpg"><img class="size-medium wp-image-439" title="Mario World" src="http://1up4dev.org/wp-content/uploads/2009/04/marioland-clean-300x188.jpg" alt="" width="300" height="188" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_439&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;O mundo dos executivos: nuvens sorrindo&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/marioland-clean.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/04/marioland-clean-300x188.jpg" alt="" /></a>[/caption]</p>
 
 <p>A maioria das empresas que têm problemas com desenvolvimento de software ainda estão vivendo na década de 90. Internet ainda é uma palavra assustadora. Programador é apenas um funcionário que sabe o que significam siglas de informática e sabem mexer no computador. Mudança ainda é encarada como algo arriscado, que deve ser planejado, estudado e aprovado pelo presidente, diretoria e gestores. A palavra da vez é <strong>processo</strong> e seu fiel companheiro é <strong>prazo</strong>. A burocracia é uma amiga que garante que as coisas não fujam de controle. Nesse cenário não há como fugir do waterfall.</p>
 
-<p>O maior problema do waterfall são os papéis: cada um com sua &ldquo;especialidade&rdquo;. Alguém determina que um <span style="text-decoration: line-through;">infeliz</span> funcionário vai ser responsável por &ldquo;levantar requisitos&rdquo;. Faz um cursinho de UML e começa a escrever uma quantidade sem fim de Casos de Uso sem ter noção alguma do que seu trabalho afeta no processo. Então a &ldquo;equipe&rdquo; começa a ter muito &ldquo;retrabalho&rdquo;, uma vez que os clientes não estão satisfeitos com o que está sendo entregue. Logo percebem que devem fazer o &ldquo;levantamento&rdquo; mais detalhado e passam a engessar ainda mais o processo com reuniões, assinaturas, etc. Conclusão: tempo e dinheiro desperdiçados e nenhum resultado satisfatório.</p>
+<p>O maior problema do waterfall são os papéis: cada um com sua &ldquo;especialidade&rdquo;. Alguém determina que um infeliz funcionário vai ser responsável por &ldquo;levantar requisitos&rdquo;. Faz um cursinho de UML e começa a escrever uma quantidade sem fim de Casos de Uso sem ter noção alguma do que seu trabalho afeta no processo. Então a &ldquo;equipe&rdquo; começa a ter muito &ldquo;retrabalho&rdquo;, uma vez que os clientes não estão satisfeitos com o que está sendo entregue. Logo percebem que devem fazer o &ldquo;levantamento&rdquo; mais detalhado e passam a engessar ainda mais o processo com reuniões, assinaturas, etc. Conclusão: tempo e dinheiro desperdiçados e nenhum resultado satisfatório.</p>
 
-<p>[caption id=&ldquo;attachment_441&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Meu trabalho é digitar 4 8 15 16 23 42 a cada 108 segundos&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/lost_hatch_locke.jpg"><img class="size-medium wp-image-441" title="Lost" src="http://1up4dev.org/wp-content/uploads/2009/04/lost_hatch_locke-300x199.jpg" alt="Seu trabalho é digitar xxx a cada 108 segundos" width="300" height="199" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_441&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Meu trabalho é digitar 4 8 15 16 23 42 a cada 108 segundos&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/lost_hatch_locke.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/04/lost_hatch_locke-300x199.jpg" alt="Seu trabalho é digitar xxx a cada 108 segundos" /></a>[/caption]</p>
 
-<p>Falta de foco? Profissionais não qualificados? Processo falho? Não apenas isso: não há comunicação, não há troca de experiências. O waterfall favorece o aparecimento da síndrome do funcionário público: &ldquo;eu sou gerente: eu <a href="http://www.youtube.com/watch?v=R47Xe8kVrv0" target="_blank">córdeno</a>, não preciso saber programar&rdquo;. As decisões geralmente são tomadas por uma única pessoa. Os projetos seguem o modelo de construção civil. Os profissionais se acomodam pois não veem perspectiva, não conhecem o processo completo, não são ouvidos e por isso não são valorizados.</p>
+<p>Falta de foco? Profissionais não qualificados? Processo falho? Não apenas isso: não há comunicação, não há troca de experiências. O waterfall favorece o aparecimento da síndrome do funcionário público: &ldquo;eu sou gerente: eu <a href="http://www.youtube.com/watch?v=R47Xe8kVrv0">córdeno</a>, não preciso saber programar&rdquo;. As decisões geralmente são tomadas por uma única pessoa. Os projetos seguem o modelo de construção civil. Os profissionais se acomodam pois não veem perspectiva, não conhecem o processo completo, não são ouvidos e por isso não são valorizados.</p>
 
-<p>O foco destas empresas está longe de ser tecnologia. Se concentram em suas <a href="http://migre.me/rwD" target="_blank">buzzwords</a>, processos e reuniões e se esquecem do produto, ou seja, o software. Focam mais na solução do que no problema. Fazendo uma analogia, essas empresas são como um barco furado, onde está entrando água mas há pessoas com baldes para retirá-la e mantê-lo flutuando. Se a agua subir muito, contratam mais pessoas para operar os baldes. Enquanto isso, os executivos ficam acenando como se nada tivesse acontecendo. Quando perguntam se há algum problema, nenhum <span style="text-decoration: line-through;">fdp</span> infeliz tem coragem para falar que o problema é o furo no barco!</p>
+<p>O foco destas empresas está longe de ser tecnologia. Se concentram em suas <a href="http://migre.me/rwD">buzzwords</a>, processos e reuniões e se esquecem do produto, ou seja, o software. Focam mais na solução do que no problema. Fazendo uma analogia, essas empresas são como um barco furado, onde está entrando água mas há pessoas com baldes para retirá-la e mantê-lo flutuando. Se a agua subir muito, contratam mais pessoas para operar os baldes. Enquanto isso, os executivos ficam acenando como se nada tivesse acontecendo. Quando perguntam se há algum problema, nenhum fdp infeliz tem coragem para falar que o problema é o furo no barco!</p>
 
-<p>As empresas que focam em tecnologia e nos profissionais, tipo o <a href="http://lmgtfy.com/?q=empresas+que+investem+em+tecnologia" target="_blank">Google</a> ou a <a href="http://37signals.com/" target="_blank">37signals</a>, estão se dando bem e mostrando que agilidade não é apenas mais um processo&hellip; é algo real e que funciona!</p>
+<p>As empresas que focam em tecnologia e nos profissionais, tipo o <a href="http://lmgtfy.com/?q=empresas+que+investem+em+tecnologia">Google</a> ou a <a href="http://37signals.com/">37signals</a>, estão se dando bem e mostrando que agilidade não é apenas mais um processo&hellip; é algo real e que funciona!</p>
 
 <h2>Agilidade é sair fazendo as coisas de qualquer jeito</h2>
 
-
-<p>Diante do cenário caótico das empresas, um grupo de profissionais organizou um movimento a fim de unificar as práticas bem sucedidas e tornar o processo de desenvolvimento mais produtivo e pragmático: <a href="http://agilemanifesto.org/" target="_blank">o manifesto ágil</a>. Quem freqüenta esse blog sabe que nós somos fãs e seguidores das práticas ágeis, não porque somos fanáticos e acreditamos somente em uma verdade absoluta, mas por que já sofremos muito com projetos e empresas fracassadas, vivenciamos os problemas que compartilhamos neste blog, passamos noites em claro corrigindo código escrito por maus profissionais, acumulamos horas em reuniões suficiente para tirarmos brevê, tivemos que negociar com cliente, com o chefe, fazer entrevista, contratar, gerenciar, analisar, programar, testar&hellip; nós sofremos os problemas do waterfall na pele!</p>
+<p>Diante do cenário caótico das empresas, um grupo de profissionais organizou um movimento a fim de unificar as práticas bem sucedidas e tornar o processo de desenvolvimento mais produtivo e pragmático: <a href="http://agilemanifesto.org/">o manifesto ágil</a>. Quem freqüenta esse blog sabe que nós somos fãs e seguidores das práticas ágeis, não porque somos fanáticos e acreditamos somente em uma verdade absoluta, mas por que já sofremos muito com projetos e empresas fracassadas, vivenciamos os problemas que compartilhamos neste blog, passamos noites em claro corrigindo código escrito por maus profissionais, acumulamos horas em reuniões suficiente para tirarmos brevê, tivemos que negociar com cliente, com o chefe, fazer entrevista, contratar, gerenciar, analisar, programar, testar&hellip; nós sofremos os problemas do waterfall na pele!</p>
 
 <p>O termo agilidade é bem popular atualmente: &ldquo;precisamos <strong>agilizar</strong> nosso processo de desenvolvimento&rdquo;. Como divulgação do manifesto ágil é algo muito positivo, pois mais pessoas podem conhecer e utilizar as práticas ágeis. Mas, como toda fama tem seu lado negativo, não seria diferente neste caso. Muitos profissionais &ldquo;gafanhoto&rdquo; estão utilizando esse termo como alavancagem profissional. Já tem gerente falando que RUP é ágil, arquiteto defensor de modelagem UML ágil, diagrama ER ágil, modelo de dados ágil, caso de uso ágil, cronograma ágil, etc. Ou seja, estão distorcendo totalmente o propósito e a filosofia da agilidade.</p>
 
-<p>Como disse o <a href="http://gc.blog.br/2008/11/22/agile-indo-para-o-buraco/" target="_blank">Chapiewski</a>, os programadores estão querendo ir direto para a sobremesa e esquecendo de comer seus vegetais. Agile é muito mais do que desenvolver iterativamente, fazer stand-up meetings e planejamentos ágeis. Não dá para ignorar todas as práticas de engenharia de software que realmente fazem com que a produção e mudanças em softwares sejam ágeis, sem contar todos os princípios e práticas que fazem uma diferença enorme.</p>
+<p>Como disse o <a href="http://gc.blog.br/2008/11/22/agile-indo-para-o-buraco/">Chapiewski</a>, os programadores estão querendo ir direto para a sobremesa e esquecendo de comer seus vegetais. Agile é muito mais do que desenvolver iterativamente, fazer stand-up meetings e planejamentos ágeis. Não dá para ignorar todas as práticas de engenharia de software que realmente fazem com que a produção e mudanças em softwares sejam ágeis, sem contar todos os princípios e práticas que fazem uma diferença enorme.</p>
 
 <p>O mercado que não é bobo já percebeu esse movimento migratório e lançou seus cursos de &ldquo;Gerenciamento de projetos ágeis com MSProject&rdquo;, &ldquo;Desenvolvendo aplicações web com agilidade&rdquo;, &ldquo;Aprenda a programar com JUnit e TDD&rdquo;. Não demorou muito para que uma massa de desenvolvedores colocasse o termo ágil em seus currículos. Pretensiosos demais em achar que um cursinho qualquer pode ensinar todo conceito e técnicas ágeis catalogadas por profissionais com décadas de experiência em desenvolvimento de software.</p>
 
-<p>&ldquo;Estou aprendendo Ruby on Rails por que o mercado está <a href="http://gc.blog.br/2009/02/15/plano-de-cargos-e-salarios/" target="_blank">pagando bem</a>&rdquo;. do dia para a noite surgiram milhares de especialistas ágeis. O cara que programava em .NET ou Java no modelo tradicional (digitador de código), faz um cursinho rápido e de repente começa a desenvolver aplicações numa tecnologia que exige uma enorme bagagem conceitual. Faz tudo errado, pois não <strong>sabe</strong> realmente o que está fazendo, o projeto fracassa e ainda deixa a tecnologia com má fama. Isso aconteceu com PHP, ASP e está acontecendo com <a href="http://www.mouseoverstudio.com/blog/2009/04/08/nao-deixa-o-mar-te-engolir/" target="_blank">Rails.</a></p>
+<p>&ldquo;Estou aprendendo Ruby on Rails por que o mercado está <a href="http://gc.blog.br/2009/02/15/plano-de-cargos-e-salarios/">pagando bem</a>&rdquo;. do dia para a noite surgiram milhares de especialistas ágeis. O cara que programava em .NET ou Java no modelo tradicional (digitador de código), faz um cursinho rápido e de repente começa a desenvolver aplicações numa tecnologia que exige uma enorme bagagem conceitual. Faz tudo errado, pois não <strong>sabe</strong> realmente o que está fazendo, o projeto fracassa e ainda deixa a tecnologia com má fama. Isso aconteceu com PHP, ASP e está acontecendo com <a href="http://www.mouseoverstudio.com/blog/2009/04/08/nao-deixa-o-mar-te-engolir/">Rails.</a></p>
 
-<p>Programar é difícil, não é um trabalho para qualquer aventureiro. É preciso <a href="http://akitaonrails.com/2009/04/17/off-topic-devo-fazer-faculdade" target="_blank">estudar</a> muito, se dedicar e principalmente, gostar! Não basta apenas estudar para conseguir uma <a href="http://www.nomedojogo.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/" target="_blank">certificação</a> pois não garante nada. Deve-se viver a programação, participar de fóruns, contribuir com projetos open-source, discutir idéias, ser auto-crítico, ler muito, praticar, apreciar as boas práticas e abolir o que não presta&hellip;</p>
+<p>Programar é difícil, não é um trabalho para qualquer aventureiro. É preciso <a href="http://akitaonrails.com/2009/04/17/off-topic-devo-fazer-faculdade">estudar</a> muito, se dedicar e principalmente, gostar! Não basta apenas estudar para conseguir uma <a href="http://www.nomedojogo.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/">certificação</a> pois não garante nada. Deve-se viver a programação, participar de fóruns, contribuir com projetos open-source, discutir idéias, ser auto-crítico, ler muito, praticar, apreciar as boas práticas e abolir o que não presta&hellip;</p>
 
-<p>[caption id=&ldquo;attachment_443&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;225&rdquo; caption=&ldquo;Agilidade é propor soluções simples para os problemas&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/controle-wii-remote.jpg"><img class="size-medium wp-image-443" title="controle-wii-remote" src="http://1up4dev.org/wp-content/uploads/2009/04/controle-wii-remote-225x300.jpg" alt="Agilidade é propor soluções simples para os problemas" width="225" height="300" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_443&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;225&rdquo; caption=&ldquo;Agilidade é propor soluções simples para os problemas&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/controle-wii-remote.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/04/controle-wii-remote-225x300.jpg" alt="Agilidade é propor soluções simples para os problemas" /></a>[/caption]</p>
 
-<p>Agilidade não é anarquia, não significa &ldquo;sair fazendo as coisas de qualquer jeito&rdquo;, dizer &ldquo;não&rdquo; para documentação, etc. É uma mudança de atitude, uma nova maneira de enfrentar os problemas e propor soluções <a href="http://blog.aspercom.com.br/2008/07/21/hierarquias-sao-inteligentes-nas-pontas/" target="_blank">simples e práticas</a>, é ter foco, é saber fazer mais com menos, é automatizar tarefas, é estar comprometido&hellip; agilidade é atitude.</p>
+<p>Agilidade não é anarquia, não significa &ldquo;sair fazendo as coisas de qualquer jeito&rdquo;, dizer &ldquo;não&rdquo; para documentação, etc. É uma mudança de atitude, uma nova maneira de enfrentar os problemas e propor soluções <a href="http://blog.aspercom.com.br/2008/07/21/hierarquias-sao-inteligentes-nas-pontas/">simples e práticas</a>, é ter foco, é saber fazer mais com menos, é automatizar tarefas, é estar comprometido&hellip; agilidade é atitude.</p>
 
 <h2>Contratamos uma consultoria para implantar Scrum</h2>
 
-
-<p>Scrum é a <em>metodologia</em> da moda. Assim que começou a se popularizar entre a comunidade de desenvolvedores, não demorou muito para o que vários sites e blogs se dedicassem exclusivamente na sua divulgação, apresentando benefícios, artigos, guias, exemplos, certificados para imprimir e pendurar em uma moldura na parede, etc. Logo surgiram as consultorias especializadas em <span style="text-decoration: line-through;">adestramento</span> treinamento e implantação de Scrum nas empresas. Um pouco de política aqui e influência ali até que a INFO Magazine publicasse uma matéria dizendo sua empresa <strong>deveria</strong> usar Scrum como solução para todos os problemas.</p>
+<p>Scrum é a <em>metodologia</em> da moda. Assim que começou a se popularizar entre a comunidade de desenvolvedores, não demorou muito para o que vários sites e blogs se dedicassem exclusivamente na sua divulgação, apresentando benefícios, artigos, guias, exemplos, certificados para imprimir e pendurar em uma moldura na parede, etc. Logo surgiram as consultorias especializadas em adestramento treinamento e implantação de Scrum nas empresas. Um pouco de política aqui e influência ali até que a INFO Magazine publicasse uma matéria dizendo sua empresa <strong>deveria</strong> usar Scrum como solução para todos os problemas.</p>
 
 <p>Mais uma vez, a falta de foco e maturidade das empresas distorcem tudo. Muitas empresas &ldquo;compraram&rdquo; o Scrum como a solução pronta. Bastar treinar os funcionários, comprar blocos de post-it e tudo passa a funcionar bem e gerar lucro. Pagam um curso de &ldquo;gerenciamento de projetos com Scrum&rdquo; para os gerentes. Depois apostam todos as fichas em um projeto &ldquo;piloto&rdquo;. Fazem tudo que manda o manual: reuniões diárias, planing-pocker, quadro com post-its, etc. E o projeto&hellip; fracassa!</p>
 
-<p>[caption id=&ldquo;attachment_454&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;200&rdquo; caption=&ldquo;Queimando dinheiro&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/burning_money.jpg"><img class="size-medium wp-image-454" title="burning_money" src="http://1up4dev.org/wp-content/uploads/2009/04/burning_money.jpg" alt="Queimando dinheiro" width="200" height="150" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_454&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;200&rdquo; caption=&ldquo;Queimando dinheiro&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2009/04/burning_money.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/04/burning_money.jpg" alt="Queimando dinheiro" /></a>[/caption]</p>
 
-<p>Então quer dizer que Scrum não funciona? Foi dinheiro desperdiçado? Tanto esforço para nada? Neste caso, devo dizer que sim! Se esqueceram do processo anterior falho, funcionários pouco qualificados e dos líderes sem foco. Escolheram aqueles funcionários mais &ldquo;experientes&rdquo; para serem o Scrum Master. Sim, aqueles mesmos que só sabiam escrever casos de uso e diagramas UML. Se esqueceram dos valores, dos princípios, <a href="http://rogerioalcantara.blogspot.com/2009/04/ah-entao-vc-usa-scrum.html" target="_blank">da atitude</a>, do relacionamento com o cliente. O pensamento não mudou, o foco ainda era no processo. Depois de tanto esforço, só deram outro nome o waterfall. Não demorou muito e surgiram os papéis, artefatos, documentos&hellip; ou seja, a empresa continua cometendo os mesmos erros!</p>
+<p>Então quer dizer que Scrum não funciona? Foi dinheiro desperdiçado? Tanto esforço para nada? Neste caso, devo dizer que sim! Se esqueceram do processo anterior falho, funcionários pouco qualificados e dos líderes sem foco. Escolheram aqueles funcionários mais &ldquo;experientes&rdquo; para serem o Scrum Master. Sim, aqueles mesmos que só sabiam escrever casos de uso e diagramas UML. Se esqueceram dos valores, dos princípios, <a href="http://rogerioalcantara.blogspot.com/2009/04/ah-entao-vc-usa-scrum.html">da atitude</a>, do relacionamento com o cliente. O pensamento não mudou, o foco ainda era no processo. Depois de tanto esforço, só deram outro nome o waterfall. Não demorou muito e surgiram os papéis, artefatos, documentos&hellip; ou seja, a empresa continua cometendo os mesmos erros!</p>
 
 <p>Não importa a tecnologia ou processo se não souber usá-lo corretamente! E definitivamente Scrum não pode ser encarado como mais um processo bonitinho, com seus papéis, artefatos, bla bla bla. Um processo de software que funciona é aquele onde a equipe está realmente comprometida e tem experiência acumulada para enfrentar e resolver problemas ao longo do desenvolvimento da aplicação. O processo, ou metodologia, será meramente um nome para as práticas que a equipe conhece e utiliza naturalmente.</p>
 
 <h2>Resumo</h2>
 
-
-<p>Não há ferramenta, metodologia ou processo que substitua a atitude e experiência de um verdadeiro desenvolvedor ágil. Estude, pratique, esteja comprometido, estude denovo, questione-se, estude novamente. <a href="http://smartic.us/2008/09/09/10-things-you-could-be-doing-to-your-code-right-now/" target="_blank">Revise seu código</a>, estude mais um pouco, e principalmente, tenha atitude! <strong>Agilidade não é metodologia, é atitude!</strong></p>
+<p>Não há ferramenta, metodologia ou processo que substitua a atitude e experiência de um verdadeiro desenvolvedor ágil. Estude, pratique, esteja comprometido, estude denovo, questione-se, estude novamente. <a href="http://smartic.us/2008/09/09/10-things-you-could-be-doing-to-your-code-right-now/">Revise seu código</a>, estude mais um pouco, e principalmente, tenha atitude! <strong>Agilidade não é metodologia, é atitude!</strong></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Agilidade cascateira]]></title>
     <link href="http://1up4developers.github.io/2008/12/agilidade-cascateira/"/>
-    <updated>2008-12-16T00:00:00-02:00</updated>
+    <updated>2008-12-16T11:50:09-02:00</updated>
     <id>http://1up4developers.github.io/2008/12/agilidade-cascateira</id>
-    <content type="html"><![CDATA[<p>Atualmente as metodologias ágeis vêm aparecendo com cada vez mais freqüência nas empresas que desenvolvem software, introduzidas pelos próprios desenvolvedores (o que é mais comum) ou em alguns <span style="text-decoration: line-through;">raros</span> casos pela &ldquo;cúpula&rdquo; da empresa, na esperança de melhorar a produtividade e/ou o alto tempo de resposta do fracassado processo cascateiro. Porém, esta &ldquo;fama&rdquo; prematura dos métodos ágeis tem gerado mais resultados ruins do que bons. Sua aplicação na vida real, <span style="text-decoration: line-through;">na maioria</span> em muitos casos, ocorre de maneira equivocada, distorcida e desprezando-se os reais valores e princípios que apoiaram o surgimento desta filosofia.</p>
+    <content type="html"><![CDATA[<p>Atualmente as metodologias ágeis vêm aparecendo com cada vez mais freqüência nas empresas que desenvolvem software, introduzidas pelos próprios desenvolvedores (o que é mais comum) ou em alguns raros casos pela &ldquo;cúpula&rdquo; da empresa, na esperança de melhorar a produtividade e/ou o alto tempo de resposta do fracassado processo cascateiro. Porém, esta &ldquo;fama&rdquo; prematura dos métodos ágeis tem gerado mais resultados ruins do que bons. Sua aplicação na vida real, na maioria em muitos casos, ocorre de maneira equivocada, distorcida e desprezando-se os reais valores e princípios que apoiaram o surgimento desta filosofia.</p>
 
-<p>Um exemplo claro de como os valores ágeis estão sendo <span style="text-decoration: line-through;">desprezados</span> distorcidos é o aumento constante de &ldquo;cursos&rdquo; e treinamentos de metodologias ágeis. Não é raro eu receber semanalmente vários <span style="text-decoration: line-through;">spams</span> e-mails de escolas de treinamento que ministram cursos de Scrum, XP, preparação para certificação ScrumMaster, técnicas de TDD, DDD, BDD, etc. Infelizmente o que estes cursos não ensinam (como todos os outros) é o verdadeiro significado de &ldquo;ser ágil&rdquo;. Fazer um curso de 20 horas de Scrum não o torna um ScrumMaster (você pode até ter um certificado, mas se você realmente é &ldquo;ágil&rdquo;, sabe que um certificado é um mero pedaço de papel sem valor).</p>
+<p>Um exemplo claro de como os valores ágeis estão sendo desprezados distorcidos é o aumento constante de &ldquo;cursos&rdquo; e treinamentos de metodologias ágeis. Não é raro eu receber semanalmente vários spams e-mails de escolas de treinamento que ministram cursos de Scrum, XP, preparação para certificação ScrumMaster, técnicas de TDD, DDD, BDD, etc. Infelizmente o que estes cursos não ensinam (como todos os outros) é o verdadeiro significado de &ldquo;ser ágil&rdquo;. Fazer um curso de 20 horas de Scrum não o torna um ScrumMaster (você pode até ter um certificado, mas se você realmente é &ldquo;ágil&rdquo;, sabe que um certificado é um mero pedaço de papel sem valor).</p>
 
 <p>E assim chegamos à &ldquo;agilidade cascateira&rdquo;, onde todos na empresa estufam o peito para falar que seguem práticas ágeis, <a href="http://pindureta.wordpress.com/2008/12/02/dialogo-imaginario-baseado-em-fatos-reais/">desenvolvimento orientados à testes</a>, utilizam <a href="http://fmeyer.org/archives/2008/11/20/o-scrume/">Scrume</a> para gerenciar os projetos, etc. Na verdade estão apenas praticando um <a href="http://1up4dev.org/2008/06/waterfalling/">waterfall incremental</a>, cometendo os mesmos <a href="http://1up4dev.org/2008/10/software-e-sobre-investimento/">erros clássicos da cascata</a>, valorizando os processos ao invés das pessoas, focando em soluções equivocadas ao invés de <a href="http://1up4dev.org/2008/11/foco-no-problema/">resolver os problemas dos clientes</a> e assim, <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">difamando e denegrindo</a> a reputação e o propósito do <a href="http://agilemanifesto.org/">AgileManifesto</a>.</p>
 
@@ -163,42 +153,37 @@
 
 <h3>Estude, mantenha-se atualizado!</h3>
 
-
 <p>A principal característica de um agilista é sua sede por conhecimento, sua busca incansável por novas técnicas, linguagens, ferramentas, etc. O seguidor ágil lê artigos, revistas, livros e o faz como diversão. Se você não leu pelo menos um livro técnico nos últimos 6 meses, isto é um mal sinal. Faça laboratórios, testes de novos frameworks, bibliotecas, etc. Pet-projects também são uma maneira pragmática de aprender novas formas e técnicas de desenvolvimento. Finalmente, conheça e pratique os princípios e valores do <a href="http://agilemanifesto.org/principles.html">AgileManifesto</a>, tendo-os como seu mantra, seu guia filosófico e seu mentor profissional.</p>
 
 <h3>Entenda realmente o problema do seu cliente</h3>
-
 
 <p>Isto parece ser óbvio, mas na maioria das vezes não é. Existem vários perfis de clientes, e é claro que você deve lidar de maneiras diferentes com cada um deles.</p>
 
 <p>Alguns são visionários sonhadores e sempre têm necessidades mirabolantes, sem sentido. Outros são simplistas demais e muitas vezes &ldquo;ocultam&rdquo; detalhes importantes. Também existem os pseudo-técnicos, que acham que sabem fazer seu trabalho e já vêm sugerindo como você deve implementar aquela nova funcionalidade.</p>
 
-<p>[caption id=&ldquo;attachment_272&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Reação comum quando há um problema&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2008/12/imagem_spam_problem.jpg"><img class="size-medium wp-image-272" title="Reação comum quando há um problema" src="http://1up4dev.org/wp-content/uploads/2008/12/imagem_spam_problem-300x181.jpg" alt="Reação comum quando há um problema" width="300" height="181" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_272&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Reação comum quando há um problema&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2008/12/imagem_spam_problem.jpg"><img src="http://1up4dev.org/wp-content/uploads/2008/12/imagem_spam_problem-300x181.jpg" alt="Reação comum quando há um problema" /></a>[/caption]</p>
 
 <p>Como verdadeiro agilista, saber identificar o perfil de seu cliente é o início para um relacionamento de confiança e transparência. Só assim você será capaz de concentrar esforços para <a href="http://1up4dev.org/2008/11/foco-no-problema/">resolver seu problema</a> e <a href="http://1up4dev.org/2008/10/software-e-sobre-investimento/">agregar valor ao produto</a>.</p>
 
 <h3>Não tenha medo de mudanças</h3>
 
-
 <p>A única maneira de criar, corrigir ou melhorar algo é com coragem E com mudança. O essencial para mudar algo é saber identificar o que está errado. Por exemplo, você sofre diariamente para fazer o <em>deploy</em> da sua aplicação para homologação. Identificado o problema e uma possível solução, por exemplo, fazer o <em>deploy</em> em .war, você tem duas soluções: ou deixa como está e coloca a culpa na aplicação ou no processo de desenvolvimento (conformismo) ou com muita coragem investe algumas horas e resolve de vez o problema (agilismo).</p>
 
 <p>Quando bater a insegurança, repita: <strong>coragem! coragem! coragem!</strong></p>
 
-<p>[caption id=&ldquo;attachment_266&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;150&rdquo; caption=&ldquo;Coragem: o cão covarde!&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2008/12/coragemcaocovarde.jpg"><img class="size-medium wp-image-266" title="Tenha Coragem!" src="http://1up4dev.org/wp-content/uploads/2008/12/coragemcaocovarde.jpg" alt="" width="150" height="150" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_266&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;150&rdquo; caption=&ldquo;Coragem: o cão covarde!&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2008/12/coragemcaocovarde.jpg"><img src="http://1up4dev.org/wp-content/uploads/2008/12/coragemcaocovarde.jpg" alt="" /></a>[/caption]</p>
 
 <h3>Reflita e aprenda com os próprios erros</h3>
 
-
 <p>Existem várias maneiras de você evoluir seu conhecimento, e a maioria dos programadores utilizam somente uma: tomando na cabeça.</p>
 
-<p>[caption id=&ldquo;attachment_268&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;170&rdquo; caption=&ldquo;Prego só toma na cabeça!&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2008/12/fotopregocomcabeca.jpg"><img class="size-medium wp-image-268" title="Prego só toma na cabeça!" src="http://1up4dev.org/wp-content/uploads/2008/12/fotopregocomcabeca.jpg" alt="Prego só toma na cabeça!" width="170" height="170" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_268&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;170&rdquo; caption=&ldquo;Prego só toma na cabeça!&rdquo;]<a href="http://1up4dev.org/wp-content/uploads/2008/12/fotopregocomcabeca.jpg"><img src="http://1up4dev.org/wp-content/uploads/2008/12/fotopregocomcabeca.jpg" alt="Prego só toma na cabeça!" /></a>[/caption]</p>
 
 <p>Como um bom seguidor de práticas ágeis, reflita e aprenda com seus erros. Compartilhar seus problemas é a melhor maneira de escolher um solução adequada e ainda espalhar sua experiência entre a equipe para que outras pessoas não cometam o mesmo erro.</p>
 
 <p>Errar é humano. Persistir no erro é burrice. Se você está com problemas, procure por pessoas que já tiveram um problema parecido e aprenda com ele. Não cometa os mesmo erros, e mais importante, não cometa os mesmo erros dos outros!</p>
 
 <h3>Resumo</h3>
-
 
 <p>Se tudo que você leu até agora não é novidade, parabéns! Caso contrário comece o quanto antes estudar e principalmente praticar estes conceitos no seu trabalho e na sua vida.</p>
 
@@ -209,17 +194,17 @@
   <entry>
     <title type="html"><![CDATA[Os guardiões da cascata]]></title>
     <link href="http://1up4developers.github.io/2008/11/os-guardioes-da-cascata/"/>
-    <updated>2008-11-04T00:00:00-02:00</updated>
+    <updated>2008-11-04T01:49:11-02:00</updated>
     <id>http://1up4developers.github.io/2008/11/os-guardioes-da-cascata</id>
-    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da <span style="text-decoration: line-through;">maldita</span> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata" target="_blank">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/" target="_blank">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process" target="_blank">RUP</a>. Mas infelizmente a maioria dos profissionais de TI <span style="text-decoration: line-through;">precisam</span> são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/" target="_blank">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG" target="_blank">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/" target="_blank">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/" target="_blank">área</a>.</p>
+    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
 
-<p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm" target="_blank">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua <span style="text-decoration: line-through;">necessidade</span> execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo" target="_blank">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, &lt;sarcasmo&gt; a &ldquo;equipe&rdquo; atinge seu objetivo: o software! &lt;/sarcasmo&gt; Seguem alguns exemplos desses guardiões cascateiros:</p>
+<p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua necessidade execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, <sarcasmo> a &ldquo;equipe&rdquo; atinge seu objetivo: o software! </sarcasmo> Seguem alguns exemplos desses guardiões cascateiros:</p>
 
 <p><strong>O guardião do banco de dados: &ldquo;<em>Não rodarás nenhum script na base alheia</em>&rdquo;</strong>
 Começo por este por ser o mais comum dos guardiões. Ele trata o banco de dados como um filho, mesmo que seja um adolescente que não obedeça inteiramente à 3ª regra normal. São vistos como semi-deuses, capazes de transcrever o modelo de negócio da empresa em uma linguagem de alto nível, impossível de ser compreendida por simples programadores. Protejem as tabelas com a própria vida e qualquer alteração na base de dados é motivo para um duelo até a morte! Utilizam um padrão para nomenclatura de campos que somente é conhecido pelo clã dos DBAs. Geralmente são seguidores do Oráculo, o senhor de todos os bancos de dados.</p>
 
 <p><strong>O guardião do projeto: <em>&ldquo;Guia-te pelo teu Gantt e serás recompensado&rdquo;</em></strong>
-Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt" target="_blank">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/" target="_blank">Project</a>.</p>
+Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/">Project</a>.</p>
 
 <p><strong>O guardião do framework: <em>&ldquo;Venerarás o Struts e nada te faltarás&rdquo;</em></strong>
 O framework é o objeto de adoração deste guardião, nenhum outro framework é tão bom quanto o que ele venera. Ele provê solução para todos seus problemas simplesmente escrevendo um bloco de XML aqui, outro ali, mudando aquela linha acolá e estendendo uma classe X implementando aquela interface Z. Qualquer evolução do framework em questão não passa de uma tentativa frustrada de &ldquo;reinventar a roda&rdquo;.</p>
@@ -228,7 +213,7 @@ O framework é o objeto de adoração deste guardião, nenhum outro framework é
 Uma variação interessante de guardião, que neutraliza seu oponente através de técnicas de tortura e perturbação mental, inundando as sessões de brainstorm com uma enxurrada de DTO&rsquo;s, VO&rsquo;s, Facades, EJB&rsquo;s entre outros patterns que fazem a cabeça dos programadores entrar em conflito, até que seus órgãos faleçam (ou simplesmente se demitam). Geralmente são cúmplices dos guardiões do projeto, conspirando para a dominação do Gannt.</p>
 
 <p><strong>O guardião do root: <em>&ldquo;Teu processo não executarás no meu bash&rdquo;</em></strong>
-A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is" target="_blank">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.</p>
+A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.</p>
 
 <p><strong>O guardião dos guardiões: <em>&ldquo;Tua TI é um mal necessário&rdquo;</em></strong>
 Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. É o guardião das decisões, aquele que protege sua riqueza acima de tudo, economizando nos salários, contratando funcionários despreparados e investindo rios de dinheiro em consultorias e licenças de software para garantir seus investimentos.</p>

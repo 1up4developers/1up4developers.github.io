@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2013-08-22T00:00:00-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+<time datetime="2013-08-22T14:32:23-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,23 +93,33 @@
   </header>
 
 
-<div class="entry-content">Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.
+<div class="entry-content"><p>Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
-Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &#8221;<em>onda do verão</em>&#8221; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &#8220;wave&#8221;.
+<p>Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &ldquo;<em>onda do verão</em>&rdquo; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &ldquo;wave&rdquo;.</p>
+
 <h3>O que são CGroups ?</h3>
-<strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.
 
-Curioso pra ver como funciona ?
+<p><strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.</p>
+
+<p>Curioso pra ver como funciona ?</p>
+
 <h3>Situação de Exemplo</h3>
-Para este exemplo teremos duas aplicações <em><a href="https://gist.github.com/tonyfabeen/6310137">Sinatra</a></em> e nosso objetivo será dedicar um grupo para cada aplicação limitando o consumo de memória para cada uma elas.
 
-Para rodar o exemplo estarei utilizando um <em>Ubuntu 12.04 64 bits.</em>
+<p>Para este exemplo teremos duas aplicações <em><a href="https://gist.github.com/tonyfabeen/6310137">Sinatra</a></em> e nosso objetivo será dedicar um grupo para cada aplicação limitando o consumo de memória para cada uma elas.</p>
+
+<p>Para rodar o exemplo estarei utilizando um <em>Ubuntu 12.04 64 bits.</em></p>
+
 <h4>Pré-Requisitos</h4>
-Antes de mais nada precisamos instalar algumas dependências:
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo apt-get install cgroup-bin libcgroup1
+
+<p>Antes de mais nada precisamos instalar algumas dependências:</p>
+
+<pre><code>&lt;code&gt;sudo apt-get install cgroup-bin libcgroup1
+&lt;/code&gt;
 </code></pre>
-Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong>.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>ls -al /sys/fs/cgroup
+
+<p>Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong>.</p>
+
+<pre><code>&lt;code&gt;ls -al /sys/fs/cgroup
 
 drwxr-xr-x 7 root root 140 Aug  6 09:38 .
 drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
@@ -119,52 +129,85 @@ drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
 drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
 drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
 
+&lt;/code&gt;
 </code></pre>
-CGroups estão organizados por subsistemas conhecidos também como &#8220;resource controllers&#8221; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.
-<h4>CGConfig Service</h4>
-Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>$ sudo service cgconfig status</code></pre>
-Caso não esteja inicie o serviço
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>$ sudo service cgconfig start</code></pre>
-Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf&#8217;</strong> ou via linha de comando, que será o meio que iremos utilizar.
-<h4>Criando Grupos</h4>
-Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
-sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
-</code></pre>
-O argumento <strong>/sinatra*</strong> indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller&gt;/&lt;path&gt;</strong>
-<h3>Executando programas em um Grupo</h3>
-Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo cgexec -g *:/sinatra1 sh -c 'cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D'
-sudo cgexec -g *:/sinatra2 sh -c 'cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D'
-</code></pre>
-O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.
 
-Para checar a hierarquia criada:
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>ps xawf -eo pid,cgroup,args | grep ruby
+<p>CGroups estão organizados por subsistemas conhecidos também como &ldquo;resource controllers&rdquo; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.</p>
+
+<h4>CGConfig Service</h4>
+
+<p>Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :</p>
+
+<pre><code>&lt;code&gt;$ sudo service cgconfig status&lt;/code&gt;
+</code></pre>
+
+<p>Caso não esteja inicie o serviço</p>
+
+<pre><code>&lt;code&gt;$ sudo service cgconfig start&lt;/code&gt;
+</code></pre>
+
+<p>Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf&#8217;</strong> ou via linha de comando, que será o meio que iremos utilizar.</p>
+
+<h4>Criando Grupos</h4>
+
+<p>Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.</p>
+
+<pre><code>&lt;code&gt;sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
+sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
+&lt;/code&gt;
+</code></pre>
+
+<p>O argumento <strong>/sinatra</strong>* indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller>/<path></strong></p>
+
+<h3>Executando programas em um Grupo</h3>
+
+<p>Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.</p>
+
+<pre><code>&lt;code&gt;sudo cgexec -g *:/sinatra1 sh -c 'cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D'
+sudo cgexec -g *:/sinatra2 sh -c 'cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D'
+&lt;/code&gt;
+</code></pre>
+
+<p>O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.</p>
+
+<p>Para checar a hierarquia criada:</p>
+
+<pre><code>&lt;code&gt;ps xawf -eo pid,cgroup,args | grep ruby
  1476              \_  5:freezer:              \_ grep --color=auto ruby
  1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
  1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
+&lt;/code&gt;
 </code></pre>
-Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo cgset -r memory.limit_in_bytes='256M' sinatra1
+
+<p>Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.</p>
+
+<pre><code>&lt;code&gt;sudo cgset -r memory.limit_in_bytes='256M' sinatra1
 sudo cgset -r memory.limit_in_bytes='128M' sinatra2
+&lt;/code&gt;
 </code></pre>
-Para checar a alteração :
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
+
+<p>Para checar a alteração :</p>
+
+<pre><code>&lt;code&gt;cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
 cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
+&lt;/code&gt;
 </code></pre>
+
 <h3>Conclusão</h3>
-O intuito deste artigo foi demonstrar um dos possíveis usos de CGroups. Caso a aplicação <strong>sinatra1</strong> cair por estouro de memória ou alguma outra falha que não seja a destruição da máquina, a aplicação <strong>sinatra2 </strong>continuará funcionando.
 
-Há mais a se explorar, poderíamos inserir limitação de I/O, consumo de banda, entre outras coisas. Poderíamos até criar nossa própria implementação de LXC, mas isso é assunto para um próximo encontro.
+<p>O intuito deste artigo foi demonstrar um dos possíveis usos de CGroups. Caso a aplicação <strong>sinatra1</strong> cair por estouro de memória ou alguma outra falha que não seja a destruição da máquina, a aplicação <strong>sinatra2 </strong>continuará funcionando.</p>
 
-Os links abaixo exploram mais detalhes sobre o assunto :
+<p>Há mais a se explorar, poderíamos inserir limitação de I/O, consumo de banda, entre outras coisas. Poderíamos até criar nossa própria implementação de LXC, mas isso é assunto para um próximo encontro.</p>
+
+<p>Os links abaixo exploram mais detalhes sobre o assunto :</p>
+
 <ul>
-	<li><a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></li>
-	<li><a href="http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf">http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf</a></li>
+<li><p><a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></p></li>
+<li><p><a href="http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf">http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf</a></p></li>
 </ul>
-Divirtam-se !
+
+
+<p>Divirtam-se !</p>
 </div>
 
 
@@ -173,7 +216,7 @@ Divirtam-se !
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">tonyfabeen</span></span>
 
       
 
@@ -187,7 +230,7 @@ Divirtam-se !
   
 
 
-<time datetime="2013-08-22T00:00:00-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+<time datetime="2013-08-22T14:32:23-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
       
 
 <span class="categories">
@@ -220,6 +263,12 @@ Divirtam-se !
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -274,7 +323,10 @@ Divirtam-se !
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups/';
+        var disqus_url = 'http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

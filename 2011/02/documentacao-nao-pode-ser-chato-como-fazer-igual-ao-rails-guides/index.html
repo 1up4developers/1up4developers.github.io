@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Documentação é aquilo que você reclama para fazer e reclama quando não encontra. Por Plínio &#8220;Chico Xavier&#8221; via Twitter. Isto me fez &hellip;">
+  <meta name="description" content="Documentação é aquilo que você reclama para fazer e reclama quando não encontra. Por Plínio &ldquo;Chico Xavier&#8221; via Twitter. Isto me fez &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-02-24T00:00:00-03:00" pubdate data-updated="true">Feb 24<span>th</span>, 2011</time>
+<time datetime="2011-02-24T00:52:40-03:00" pubdate data-updated="true">Feb 24<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,45 +93,78 @@
   </header>
 
 
-<div class="entry-content"><blockquote>Documentação é aquilo que você reclama para fazer e reclama quando não encontra.</blockquote>
-Por <a href="http://1up4dev.org/author/pbalduino/">Plínio</a> &#8220;Chico Xavier&#8221; via <a href="http://twitter.com/#!/p_balduino/status/35689585455407105">Twitter</a>.
+<div class="entry-content"><blockquote><p>Documentação é aquilo que você reclama para fazer e reclama quando não encontra.</p></blockquote>
 
-Isto me fez refletir (bem rápido) sobre as possíveis causas da não-documentação:
+<p>Por <a href="http://1up4dev.org/author/pbalduino/">Plínio</a> &ldquo;Chico Xavier&#8221; via <a href="http://twitter.com/#!/p_balduino/status/35689585455407105">Twitter</a>.</p>
+
+<p>Isto me fez refletir (bem rápido) sobre as possíveis causas da não-documentação:</p>
+
 <ul>
-	<li>É muito chato ! Editar wiki, doc &#8230; é incrível como toda documentação geralmente é feita em algo não produtivo.</li>
-	<li>Espaço e Tempo (ou seja, prazo!). Sempre é deixado por último e nunca sobra tempo pra ser feito.</li>
-	<li>Não é levado a sério. Levanta a mão que já viu a secretária documentando &#8220;tela&#8221; de sistema &#8230; :D</li>
-	<li>Normalmente o &#8220;investidor&#8221; do software não vê valor nisto, ou melhor, espera alguém pedir e repassa a tarefa com prioridade &#8220;faz rapidinho&#8221;.</li>
+<li><p>É muito chato ! Editar wiki, doc &hellip; é incrível como toda documentação geralmente é feita em algo não produtivo.</p></li>
+<li><p>Espaço e Tempo (ou seja, prazo!). Sempre é deixado por último e nunca sobra tempo pra ser feito.</p></li>
+<li><p>Não é levado a sério. Levanta a mão que já viu a secretária documentando &ldquo;tela&rdquo; de sistema &hellip; :D</p></li>
+<li><p>Normalmente o &ldquo;investidor&rdquo; do software não vê valor nisto, ou melhor, espera alguém pedir e repassa a tarefa com prioridade &ldquo;faz rapidinho&rdquo;.</p></li>
 </ul>
-Ok. Após reflexão feita, hora de atacar o problema.
-<h2>Usando &#8220;guides&#8221; para criar um Guide !</h2>
-Este é um resultado da experiência abaixo:
-<p style="text-align: center;"><a href="http://rogerleite.github.com/rubygems_snapshot/"><img class="aligncenter size-medium wp-image-891" title="Snapshot Guide (inspirado no Rails Guides)" src="http://1up4dev.org/wp-content/uploads/2011/02/snapshot_guide-300x241.png" alt="Snapshot Guide (inspirado no Rails Guides)" width="300" height="241" /></a></p>
-Com a gem <a href="https://github.com/wycats/guides">guides</a>, em segundos você tem um <em>scaffold</em>, pronto para ser preenchido.
-<pre><span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"><span style="line-height: 22px;">$ gem install guides</span></span></pre>
-<pre><span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"><span style="line-height: 22px;"> </span></span><span style="color: #444444; font-family: Georgia, 'Bitstream Charter', serif; line-height: 22px;">$ guides #mostra os comandos disponíveis</span></pre>
-<pre><span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"><span style="line-height: 22px;">$ guides new sample</span></span></pre>
-<pre><span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"><span style="line-height: 22px;">$ cd sample</span></span></pre>
-<pre><span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"><span style="line-height: 22px;">$ guides build &amp;&amp; guides preview</span></span></pre>
-Pronto. Em http://localhost:9292 você terá acesso ao novo guia gerado.
+
+
+<p>Ok. Após reflexão feita, hora de atacar o problema.</p>
+
+<h2>Usando &ldquo;guides&rdquo; para criar um Guide !</h2>
+
+<p>Este é um resultado da experiência abaixo:</p>
+
+<p><a href="http://rogerleite.github.com/rubygems_snapshot/"><img src="http://1up4dev.org/wp-content/uploads/2011/02/snapshot_guide-300x241.png" alt="Snapshot Guide (inspirado no Rails Guides)" /></a></p>
+
+<p>Com a gem <a href="https://github.com/wycats/guides">guides</a>, em segundos você tem um <em>scaffold</em>, pronto para ser preenchido.</p>
+
+<pre><code>&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ gem install guides&lt;/span&gt;&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt; &lt;/span&gt;&lt;/span&gt;&lt;span style="color: #444444; font-family: Georgia, 'Bitstream Charter', serif; line-height: 22px;"&gt;$ guides #mostra os comandos disponíveis&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ guides new sample&lt;/span&gt;&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ cd sample&lt;/span&gt;&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ guides build &amp;&amp; guides preview&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>Pronto. Em <a href="http://localhost:9292">http://localhost:9292</a> você terá acesso ao novo guia gerado.</p>
+
 <h3>Preenchendo o seu Guia</h3>
-Em <em>guides.yml</em> (exemplo <a href="https://github.com/rogerleite/rubygems_snapshot/blob/master/guides/guides.yml">aqui</a>), está o básico do seu Guia. Nele está o índice de &#8220;capítulos&#8221;, com resumo e nome do arquivo que o link deve seguir. Os arquivos textile  gerados/criados ficarão na pasta <em>source</em>, o resultado do &#8220;guides build&#8221; ficará na pasta <em>output</em>.
 
-As páginas são em <a href="http://www.textism.com/tools/textile/">textile</a>, o que facilita bastante. Mas o grande diferencial, está em alguns <em>helpers</em> disponibilizados pela gem, que torna muito simples criar áreas de destaque como INFO, WARNING &#8230; etc e adicionar comandos e códigos.
+<p>Em <em>guides.yml</em> (exemplo <a href="https://github.com/rogerleite/rubygems_snapshot/blob/master/guides/guides.yml">aqui</a>), está o básico do seu Guia. Nele está o índice de &ldquo;capítulos&rdquo;, com resumo e nome do arquivo que o link deve seguir. Os arquivos textile  gerados/criados ficarão na pasta <em>source</em>, o resultado do &ldquo;guides build&rdquo; ficará na pasta <em>output</em>.</p>
 
-Para ter idéia de uma página em textile, segue o link <a href="https://github.com/rogerleite/rubygems_snapshot/raw/master/guides/source/getting_started.textile">source/getting_started.textile</a> (raw).
+<p>As páginas são em <a href="http://www.textism.com/tools/textile/">textile</a>, o que facilita bastante. Mas o grande diferencial, está em alguns <em>helpers</em> disponibilizados pela gem, que torna muito simples criar áreas de destaque como INFO, WARNING &hellip; etc e adicionar comandos e códigos.</p>
+
+<p>Para ter idéia de uma página em textile, segue o link <a href="https://github.com/rogerleite/rubygems_snapshot/raw/master/guides/source/getting_started.textile">source/getting_started.textile</a> (raw).</p>
+
 <h3>Repensando a documentação</h3>
-Com certeza, usando a <em>gem guides</em>, vocẽ consegue um boost na hora de documentar. Já evitando aquela chatice de editar wiki, .doc, controlando versão &#8230; etc. Usando textile, seu editor preferido e git, não tem mais desculpas.
+
+<p>Com certeza, usando a <em>gem guides</em>, vocẽ consegue um boost na hora de documentar. Já evitando aquela chatice de editar wiki, .doc, controlando versão &hellip; etc. Usando textile, seu editor preferido e git, não tem mais desculpas.</p>
+
 <h4>Desenvolvendo Frameworks e APIs</h4>
-Já faz um tempo que eu topo com a <em>vibe</em> <a href="http://www.google.com.br/search?sourceid=chrome&amp;ie=UTF-8&amp;q=Documentation+Driven+Development">Documentation Driven Development</a>. Como tudo na vida, é questão de bom senso. Documentar uma API, nada mais é do que definir a interface dela, e dependendo do caso, isto ajuda bastante antes de começar o desenvolvimento.
+
+<p>Já faz um tempo que eu topo com a <em>vibe</em> <a href="http://www.google.com.br/search?sourceid=chrome&amp;ie=UTF-8&amp;q=Documentation+Driven+Development">Documentation Driven Development</a>. Como tudo na vida, é questão de bom senso. Documentar uma API, nada mais é do que definir a interface dela, e dependendo do caso, isto ajuda bastante antes de começar o desenvolvimento.</p>
+
 <h4>Você é um Usuário !</h4>
-Uma documentação com um monte de imagem e seta, descrevendo o óbvio não serve para nada (além de passar raiva). Uma documentação <strong>sucinta</strong>, com o básico, por exemplo Instalação, Modo de Usar, Configurações Disponíveis é bem melhor que muito dossiê por aí ! Tente ao máximo se colocar no lugar do usuário ao escrever alguma documentação ou ajuda.
 
-&#8212;
+<p>Uma documentação com um monte de imagem e seta, descrevendo o óbvio não serve para nada (além de passar raiva). Uma documentação <strong>sucinta</strong>, com o básico, por exemplo Instalação, Modo de Usar, Configurações Disponíveis é bem melhor que muito dossiê por aí ! Tente ao máximo se colocar no lugar do usuário ao escrever alguma documentação ou ajuda.</p>
 
-Não deixe de contribuir com o post. Mande sugestões, comentários, reclamações etc.
+<hr />
 
-<span style="line-height: 24px; font-size: 16px;"> </span>
+<p>Não deixe de contribuir com o post. Mande sugestões, comentários, reclamações etc.</p>
 </div>
 
 
@@ -140,7 +173,7 @@ Não deixe de contribuir com o post. Mande sugestões, comentários, reclamaçõ
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -154,7 +187,7 @@ Não deixe de contribuir com o post. Mande sugestões, comentários, reclamaçõ
   
 
 
-<time datetime="2011-02-24T00:00:00-03:00" pubdate data-updated="true">Feb 24<span>th</span>, 2011</time>
+<time datetime="2011-02-24T00:52:40-03:00" pubdate data-updated="true">Feb 24<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -189,6 +222,12 @@ Não deixe de contribuir com o post. Mande sugestões, comentários, reclamaçõ
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -243,7 +282,10 @@ Não deixe de contribuir com o post. Mande sugestões, comentários, reclamaçõ
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/';
+        var disqus_url = 'http://1up4developers.github.io/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

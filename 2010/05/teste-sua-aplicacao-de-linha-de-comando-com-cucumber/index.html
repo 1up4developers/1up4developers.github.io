@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2010-05-14T00:00:00-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
+<time datetime="2010-05-14T07:00:21-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,49 +93,71 @@
   </header>
 
 
-<div class="entry-content">É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, <a href="http://www.vim.org/">Vim</a> e não poderia ser diferente com testes funcionais, sendo mais especifico, <a href="http://cukes.info/">Cucumber</a>.
+<div class="entry-content"><p>É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, <a href="http://www.vim.org/">Vim</a> e não poderia ser diferente com testes funcionais, sendo mais especifico, <a href="http://cukes.info/">Cucumber</a>.</p>
 
-Até o momento, só tinha usado cucumber em projetos web. E quando voltei a desenvolver o <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a>, senti falta de algo para testar funcionalmente. Baseado no <a href="http://github.com/vertiginous/pik">pik</a>, montei um esquema simples para validar qualquer aplicação de linha de comando.
+<p>Até o momento, só tinha usado cucumber em projetos web. E quando voltei a desenvolver o <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a>, senti falta de algo para testar funcionalmente. Baseado no <a href="http://github.com/vertiginous/pik">pik</a>, montei um esquema simples para validar qualquer aplicação de linha de comando.</p>
+
 <h2>Como instalar</h2>
-Basicamente, será necessário (fontes via gist):
-<ul>
-	<li>rake para executar o cucumber</li>
-	<li>env_terminal.rb</li>
-	<li>terminal_steps.rb</li>
-</ul>
-<script src="http://gist.github.com/400069.js"></script>
 
-Dado que você tem cucumber instalado, com o esquema da pasta &#8220;features&#8221;.
+<p>Basicamente, será necessário (fontes via gist):</p>
+
 <ul>
-	<li>Copie o cucumber.rake para a raiz.</li>
-	<li>Copie o env_terminal.rb para a pasta features.</li>
-	<li>Copie o terminal_steps.rb para a pasta features/step_definitions/terminal_steps.rb.</li>
-	<li>Edite o  env.rb incluindo (pode ser no começo):</li>
+<li><p>rake para executar o cucumber</p></li>
+<li><p>env_terminal.rb</p></li>
+<li><p>terminal_steps.rb</p></li>
 </ul>
-<pre>require "env_terminal"</pre>
+
+
+<p>Dado que você tem cucumber instalado, com o esquema da pasta &ldquo;features&rdquo;.</p>
+
 <ul>
-	<li>Dentro do Rakefile, pode ser no final mesmo, adicione:</li>
+<li><p>Copie o cucumber.rake para a raiz.</p></li>
+<li><p>Copie o env_terminal.rb para a pasta features.</p></li>
+<li><p>Copie o terminal_steps.rb para a pasta features/step_definitions/terminal_steps.rb.</p></li>
+<li><p>Edite o  env.rb incluindo (pode ser no começo):</p>
+
+<p>require &ldquo;env_terminal&rdquo;</p></li>
+<li><p>Dentro do Rakefile, pode ser no final mesmo, adicione:</p>
+
+<p>load &ldquo;cucumber.rake&rdquo;</p></li>
 </ul>
-<pre>load "cucumber.rake"</pre>
+
+
 <h2>Como usar</h2>
-Todas features:
-<pre>rake cucumber</pre>
-Features com a tag @wip, também conhecida como Work in Progress.
-<pre>rake cucumber:wip</pre>
+
+<p>Todas features:</p>
+
+<pre><code>rake cucumber
+</code></pre>
+
+<p>Features com a tag @wip, também conhecida como Work in Progress.</p>
+
+<pre><code>rake cucumber:wip
+</code></pre>
+
 <h2>Informações Extras</h2>
-Caso precise de mais informações, você tem a opção de ver a saída dos comandos, executando a rake assim:
-<pre>rake cucumber show_output=true</pre>
-ou
-<pre>rake cucumber:wip show_output=true</pre>
-No caso do snapshot, tive a necessidade de &#8220;modificar&#8221; o comando gem toda vez que era executado, ou melhor, passar um parâmetro para controlar o ambiente. Dentro do env_terminal.rb, existe o método <strong>gsub_command</strong>, nele você pode &#8220;redefinir&#8221; comandos, caso necessite.
+
+<p>Caso precise de mais informações, você tem a opção de ver a saída dos comandos, executando a rake assim:</p>
+
+<pre><code>rake cucumber show_output=true
+</code></pre>
+
+<p>ou</p>
+
+<pre><code>rake cucumber:wip show_output=true
+</code></pre>
+
+<p>No caso do snapshot, tive a necessidade de &ldquo;modificar&rdquo; o comando gem toda vez que era executado, ou melhor, passar um parâmetro para controlar o ambiente. Dentro do env_terminal.rb, existe o método <strong>gsub_command</strong>, nele você pode &ldquo;redefinir&rdquo; comandos, caso necessite.</p>
+
 <h2><strong>Gostei, quero mais!</strong></h2>
-A solução acima, é bem &#8220;caseira&#8221;. Para projetos simples com funcionalidades simples, funciona bem.
 
-Caso queira algo mais robusto, você tem a opção da <a href="http://github.com/aslakhellesoy/aruba">gem Aruba</a>.
+<p>A solução acima, é bem &ldquo;caseira&rdquo;. Para projetos simples com funcionalidades simples, funciona bem.</p>
 
-Tem este post como introdução:
+<p>Caso queira algo mais robusto, você tem a opção da <a href="http://github.com/aslakhellesoy/aruba">gem Aruba</a>.</p>
 
-<a href="http://www.themodestrubyist.com/2010/04/22/aruba---cucumber-goodness-for-the-command-line/">Aruba - Cucumber Goodness for the Command-Line</a>
+<p>Tem este post como introdução:</p>
+
+<p><a href="http://www.themodestrubyist.com/2010/04/22/aruba---cucumber-goodness-for-the-command-line/">Aruba &ndash; Cucumber Goodness for the Command-Line</a></p>
 </div>
 
 
@@ -144,7 +166,7 @@ Tem este post como introdução:
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -158,7 +180,7 @@ Tem este post como introdução:
   
 
 
-<time datetime="2010-05-14T00:00:00-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
+<time datetime="2010-05-14T07:00:21-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
       
 
 <span class="categories">
@@ -193,6 +215,12 @@ Tem este post como introdução:
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -247,7 +275,10 @@ Tem este post como introdução:
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/';
+        var disqus_url = 'http://1up4developers.github.io/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

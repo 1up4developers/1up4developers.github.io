@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hello | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/hello/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:25:03-03:00</updated>
+  <updated>2013-09-15T18:37:40-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -16,11 +16,11 @@
   <entry>
     <title type="html"><![CDATA[1up4developers 2.0]]></title>
     <link href="http://1up4developers.github.io/2008/06/1up4developers-20/"/>
-    <updated>2008-06-03T00:00:00-03:00</updated>
+    <updated>2008-06-03T17:20:33-03:00</updated>
     <id>http://1up4developers.github.io/2008/06/1up4developers-20</id>
     <content type="html"><![CDATA[<p>Então, nobres colegas e respeitável público, o nosso blog estava meio estranho no Blogger e decidimos mudar para uma plataforma mais funcional, mais gerenciável, mais colaborativa, enfim, uma coisa totalmente mais 2.0 mesmo.</p>
 
-<p>O conteúdo continua composto de puro veneno partindo de mentes furiosas por não terem uma vida agilemente ativa. Aposto que você, leitor, também se encontra nessa situação aviltante, então <a title="feed:1up4developers" href="http://feeds.feedburner.com/1up4dev?format=xml">assine o novo feed</a> e participe comentando as nossas observações, frustrações e viagens.</p>
+<p>O conteúdo continua composto de puro veneno partindo de mentes furiosas por não terem uma vida agilemente ativa. Aposto que você, leitor, também se encontra nessa situação aviltante, então <a href="http://feeds.feedburner.com/1up4dev?format=xml">assine o novo feed</a> e participe comentando as nossas observações, frustrações e viagens.</p>
 
 <p>Muito sucesso a todos! Prossigamos&hellip;</p>
 ]]></content>
@@ -29,7 +29,7 @@
   <entry>
     <title type="html"><![CDATA[Post de Inauguração]]></title>
     <link href="http://1up4developers.github.io/2008/05/post-de-inauguracao/"/>
-    <updated>2008-05-10T00:00:00-03:00</updated>
+    <updated>2008-05-10T16:37:00-03:00</updated>
     <id>http://1up4developers.github.io/2008/05/post-de-inauguracao</id>
     <content type="html"><![CDATA[<p>Hello hello hello ! Inaugurando o Blog do Mal &hellip;
 Foi lançado convites de autores a grandes poggers da atualidade !</p>

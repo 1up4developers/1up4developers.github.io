@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2009-02-19T00:00:00-03:00" pubdate data-updated="true">Feb 19<span>th</span>, 2009</time>
+<time datetime="2009-02-19T12:48:35-03:00" pubdate data-updated="true">Feb 19<span>th</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,27 +93,33 @@
   </header>
 
 
-<div class="entry-content">Pela definição de <a href="http://www.amazon.com/Working-Effectively-Legacy-Robert-Martin/dp/0131177052">Michael Feather</a>, <strong>código legado é código sem testes</strong>! Não importa se o código foi escrito semana passada ou alguns anos atrás. Qualquer manutenção será de difícil entendimento por outra pessoa e não haverá garantias de seu funcionamento. Uma vez que não há &#8220;controle&#8221;, é mais difícil rastrear as alterações; pior do que uma nova funcionalidade que não funciona, é uma funcionalidade antiga que começa a falhar. Este é um risco que um desenvolvedor não pode correr!
+<div class="entry-content"><p>Pela definição de <a href="http://www.amazon.com/Working-Effectively-Legacy-Robert-Martin/dp/0131177052">Michael Feather</a>, <strong>código legado é código sem testes</strong>! Não importa se o código foi escrito semana passada ou alguns anos atrás. Qualquer manutenção será de difícil entendimento por outra pessoa e não haverá garantias de seu funcionamento. Uma vez que não há &ldquo;controle&rdquo;, é mais difícil rastrear as alterações; pior do que uma nova funcionalidade que não funciona, é uma funcionalidade antiga que começa a falhar. Este é um risco que um desenvolvedor não pode correr!</p>
+
 <h3>Não altere código legado até que seja possível testá-lo</h3>
-Um dos problemas mais comuns em sistemas legados é a interdependência de classes, ou seja, o <a href="http://en.wikipedia.org/wiki/Coupling_(computer_science)">alto acoplamento</a>, que sempre está ligado com a <a href="http://en.wikipedia.org/wiki/Cohesion_(computer_science)">baixa coesão</a>. Se estes termos são difíceis de entender, pense em acoplamento como sendo o grau com que as classes referenciam umas as outras e coesão o quanto uma classe está focada em realizar suas responsabilidades.
 
-Para que seja possível testar o comportamento de uma classe &#8220;acoplada&#8221;, o comportamento de suas dependências precisa ser <a href="http://en.wikipedia.org/wiki/Method_stub">simulado</a>. Isto normalmente é feito através de objetos falsos, ou <a href="http://en.wikipedia.org/wiki/Mock_object">mocks</a>, que são injetados na instância da classe em questão. Este padrão é conhecido como <a href="http://pt.wikipedia.org/wiki/Invers%C3%A3o_de_controle">Inversão de Controle </a>e <a href="http://pt.wikipedia.org/wiki/Inje%C3%A7%C3%A3o_de_depend%C3%AAncia">Injeção de dependência</a>, onde o controle sobre as dependências da classe são delegados à outro objeto, ou normalmente um <a href="http://pt.wikipedia.org/wiki/Spring_Framework">container de objetos</a>, responsável por <a href="http://misko.hevery.com/2009/01/14/when-to-use-dependency-injection/">injetar</a> as dependências nas instâncias das classes. Simples, não?! Mas isso será detalhado em outro post&#8230;
+<p>Um dos problemas mais comuns em sistemas legados é a interdependência de classes, ou seja, o <a href="http://en.wikipedia.org/wiki/Coupling_(computer_science">alto acoplamento</a>), que sempre está ligado com a <a href="http://en.wikipedia.org/wiki/Cohesion_(computer_science">baixa coesão</a>). Se estes termos são difíceis de entender, pense em acoplamento como sendo o grau com que as classes referenciam umas as outras e coesão o quanto uma classe está focada em realizar suas responsabilidades.</p>
 
-Voltando para os testes, no <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-automatizando-build/">post anterior</a> começamos a organizar o projeto automatizando o build e centralizando a execução dos testes para evitar que fiquem &#8220;soltos&#8221; pelo código. Agora vamos nos concentrar em escrever os casos de teste, <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorando</a> o necessário para lidar com as dependências das classes.
+<p>Para que seja possível testar o comportamento de uma classe &ldquo;acoplada&rdquo;, o comportamento de suas dependências precisa ser <a href="http://en.wikipedia.org/wiki/Method_stub">simulado</a>. Isto normalmente é feito através de objetos falsos, ou <a href="http://en.wikipedia.org/wiki/Mock_object">mocks</a>, que são injetados na instância da classe em questão. Este padrão é conhecido como <a href="http://pt.wikipedia.org/wiki/Invers%C3%A3o_de_controle">Inversão de Controle </a>e <a href="http://pt.wikipedia.org/wiki/Inje%C3%A7%C3%A3o_de_depend%C3%AAncia">Injeção de dependência</a>, onde o controle sobre as dependências da classe são delegados à outro objeto, ou normalmente um <a href="http://pt.wikipedia.org/wiki/Spring_Framework">container de objetos</a>, responsável por <a href="http://misko.hevery.com/2009/01/14/when-to-use-dependency-injection/">injetar</a> as dependências nas instâncias das classes. Simples, não?! Mas isso será detalhado em outro post&hellip;</p>
 
-Partindo da premissa que o projeto não possuí nenhum framework de inversão de controle, utilizaremos um certo &#8220;padrão&#8221; que permite manipular as dependências de uma classe por meio de herança, sem alterar seu comportamento original. <strong>A idéia é resolver as dependências da classe através de getters protegidos, que podem ser sobrescritos em uma classe filha no momento do teste</strong>. Isso permite que, na classe estendida, o método sobrescrito retorne um objeto mock, por exemplo, com o comportamento esperado para o teste.
+<p>Voltando para os testes, no <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-automatizando-build/">post anterior</a> começamos a organizar o projeto automatizando o build e centralizando a execução dos testes para evitar que fiquem &ldquo;soltos&rdquo; pelo código. Agora vamos nos concentrar em escrever os casos de teste, <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorando</a> o necessário para lidar com as dependências das classes.</p>
 
-Vamos tomar como exemplo, uma classe simples com algumas dependências e responsável por encapsular algumas regras de negócio referentes à <em>Estoque</em>.
-<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class EstoqueLogic {
+<p>Partindo da premissa que o projeto não possuí nenhum framework de inversão de controle, utilizaremos um certo &ldquo;padrão&rdquo; que permite manipular as dependências de uma classe por meio de herança, sem alterar seu comportamento original. <strong>A idéia é resolver as dependências da classe através de getters protegidos, que podem ser sobrescritos em uma classe filha no momento do teste</strong>. Isso permite que, na classe estendida, o método sobrescrito retorne um objeto mock, por exemplo, com o comportamento esperado para o teste.</p>
+
+<p>Vamos tomar como exemplo, uma classe simples com algumas dependências e responsável por encapsular algumas regras de negócio referentes à <em>Estoque</em>.</p>
+
+<pre><code>&lt;code&gt;public class EstoqueLogic {
     public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
         EstoqueDAO dao = new EstoqueDAO();
         Estoque estoque = dao.localizaProduto(produto.getCodigo());
         return estoque.getQuantidade() &gt;= quantidade;
     }
 }
+&lt;/code&gt;
 </code></pre>
-Da forma como esta classe foi escrita, é impossível testar a regra de <em>disponibilidade</em> independentemente, pois depende do objeto <em>EstoqueDAO</em> para localizar as informações necessárias para o método. Mas com um pequeno refactoring, a responsabilidade de resolver a dependência <em>EstoqueDAO</em> passa a ser responsabilidade da própria classe <em>Estoque</em>:
-<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class EstoqueLogic {
+
+<p>Da forma como esta classe foi escrita, é impossível testar a regra de <em>disponibilidade</em> independentemente, pois depende do objeto <em>EstoqueDAO</em> para localizar as informações necessárias para o método. Mas com um pequeno refactoring, a responsabilidade de resolver a dependência <em>EstoqueDAO</em> passa a ser responsabilidade da própria classe <em>Estoque</em>:</p>
+
+<pre><code>&lt;code&gt;public class EstoqueLogic {
     public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
         EstoqueDAO dao = getEstoqueDAO();
         Estoque estoque = dao.localizaProduto(produto.getCodigo());
@@ -123,9 +129,12 @@ Da forma como esta classe foi escrita, é impossível testar a regra de <em>disp
         return new EstoqueDAO();
     }
 }
+&lt;/code&gt;
 </code></pre>
-Desta forma, é possível &#8220;injetar&#8221; um objeto que simule a dependência do <em>EstoqueDAO</em> estendendo a classe e sobrescrevendo o método <em>getEstoqueDAO()</em> para retornar a instância desejada. O teste ficaria mais ou menos assim:
-<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class EstoqueLogicTest {
+
+<p>Desta forma, é possível &ldquo;injetar&rdquo; um objeto que simule a dependência do <em>EstoqueDAO</em> estendendo a classe e sobrescrevendo o método <em>getEstoqueDAO()</em> para retornar a instância desejada. O teste ficaria mais ou menos assim:</p>
+
+<pre><code>&lt;code&gt;public class EstoqueLogicTest {
 
     public void testVerificandoDisponibilidadeDeUmProduto() {
 
@@ -161,12 +170,16 @@ Desta forma, é possível &#8220;injetar&#8221; um objeto que simule a dependên
         assertTrue(naoEstaDisponivel);
     }
 }
+&lt;/code&gt;
 </code></pre>
-O método<em> getEstoqueDAO() </em>da classe <em>EstoqueLogic</em> foi sobrescrito para retornar o objeto <em>estoqueDAOMock</em> com as informações necessárias para o teste, ou seja, o comportamento das dependências foi simulado, possibilitando que o teste ficasse concentrado apenas da classe <em>Estoque</em>.
-<h3>Elimine as dependências e teste onde os bugs estão!</h3>
-Este padrão fornece apenas uma maneira de lidar com as dependências das classes para escrever testes. A dica aqui é manter o <a href="http://1up4dev.org/2008/11/foco-no-problema/">foco</a>: defina apenas testes para as funcionalidades que estiver alterando e que exercitem pontos críticos e/ou regras de negócio. Então, refatore apenas as classes necessárias para simular e validar o fluxo destes testes, nem que seja apenas seus &#8221;<a href="http://www.fragmental.com.br/wiki/index.php/Contratos_Nulos">contratos</a>&#8221;. Não há necessidade de escrever testes muito granulares nem alterar todas as classes de um sistema legado.
 
-No caso de classes com muitas dependências, o melhor é refatorá-la, separar as responsabilidades e testá-las individualmente. Para classes com dependências de Utils e/ou muitas chamadas à métodos estáticos, uma estratégia parecida pode ser utilizada. Mas estes são assuntos para os próximos posts. Acompanhem!
+<p>O método<em> getEstoqueDAO() </em>da classe <em>EstoqueLogic</em> foi sobrescrito para retornar o objeto <em>estoqueDAOMock</em> com as informações necessárias para o teste, ou seja, o comportamento das dependências foi simulado, possibilitando que o teste ficasse concentrado apenas da classe <em>Estoque</em>.</p>
+
+<h3>Elimine as dependências e teste onde os bugs estão!</h3>
+
+<p>Este padrão fornece apenas uma maneira de lidar com as dependências das classes para escrever testes. A dica aqui é manter o <a href="http://1up4dev.org/2008/11/foco-no-problema/">foco</a>: defina apenas testes para as funcionalidades que estiver alterando e que exercitem pontos críticos e/ou regras de negócio. Então, refatore apenas as classes necessárias para simular e validar o fluxo destes testes, nem que seja apenas seus &ldquo;<a href="http://www.fragmental.com.br/wiki/index.php/Contratos_Nulos">contratos</a>&rdquo;. Não há necessidade de escrever testes muito granulares nem alterar todas as classes de um sistema legado.</p>
+
+<p>No caso de classes com muitas dependências, o melhor é refatorá-la, separar as responsabilidades e testá-las individualmente. Para classes com dependências de Utils e/ou muitas chamadas à métodos estáticos, uma estratégia parecida pode ser utilizada. Mas estes são assuntos para os próximos posts. Acompanhem!</p>
 </div>
 
 
@@ -175,7 +188,7 @@ No caso de classes com muitas dependências, o melhor é refatorá-la, separar a
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -189,7 +202,7 @@ No caso de classes com muitas dependências, o melhor é refatorá-la, separar a
   
 
 
-<time datetime="2009-02-19T00:00:00-03:00" pubdate data-updated="true">Feb 19<span>th</span>, 2009</time>
+<time datetime="2009-02-19T12:48:35-03:00" pubdate data-updated="true">Feb 19<span>th</span>, 2009</time>
       
 
 <span class="categories">
@@ -224,6 +237,12 @@ No caso de classes com muitas dependências, o melhor é refatorá-la, separar a
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -278,7 +297,10 @@ No caso de classes com muitas dependências, o melhor é refatorá-la, separar a
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/';
+        var disqus_url = 'http://1up4developers.github.io/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2010-08-09T00:00:00-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
+<time datetime="2010-08-09T07:00:35-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,28 +93,35 @@
   </header>
 
 
-<div class="entry-content">Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra quem já conhece <a title="Rspec home" href="http://rspec.info/">rspec</a> e <a title="capybara" href="http://github.com/jnicklas/capybara">capybara</a>.
+<div class="entry-content"><p>Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra quem já conhece <a href="http://rspec.info/">rspec</a> e <a href="http://github.com/jnicklas/capybara">capybara</a>.</p>
 
-A documentação do Capybara é boa, mas deixa a desejar nas instruções de como integrá-lo somente com rspec. Com a ajuda do <a href="http://blog.georgeguimaraes.com/">George Guimarães</a> da <a href="http://blog.plataformatec.com.br/">Plataforma</a>, cheguei num passo a passo mega simples.
+<p>A documentação do Capybara é boa, mas deixa a desejar nas instruções de como integrá-lo somente com rspec. Com a ajuda do <a href="http://blog.georgeguimaraes.com/">George Guimarães</a> da <a href="http://blog.plataformatec.com.br/">Plataforma</a>, cheguei num passo a passo mega simples.</p>
 
-No <em>config/environments/test.rb</em> declare:
-<pre lang="ruby">config.gem "rspec",            :version =&gt; "= 1.3.0", :lib =&gt; false
+<p>No <em>config/environments/test.rb</em> declare:</p>
+
+<pre><code>config.gem "rspec",            :version =&gt; "= 1.3.0", :lib =&gt; false
 config.gem "rspec-rails",      :version =&gt; "= 1.3.2", :lib =&gt; false
-config.gem "capybara",         :version =&gt; "= 0.3.9", :lib =&gt; false</pre>
-No <em>spec/spec_helper.rb</em> coloque:
-<pre lang="ruby">require 'capybara/rails'
+config.gem "capybara",         :version =&gt; "= 0.3.9", :lib =&gt; false
+</code></pre>
+
+<p>No <em>spec/spec_helper.rb</em> coloque:</p>
+
+<pre><code>require 'capybara/rails'
 [...]
 Spec::Runner.configure do |config|
 
   [...]
   config.include(Capybara, :type =&gt; :integration)
 
-end</pre>
-Pronto! Isto é o suficiente para utilizar o Capybara nos testes de integração.
-Para finalizar, você pode montar um teste simples de validação. Por exemplo:
+end
+</code></pre>
 
-Crie <em>spec/integration/site_spec.rb</em> e coloque:
-<pre lang="ruby">require 'spec_helper'
+<p>Pronto! Isto é o suficiente para utilizar o Capybara nos testes de integração.
+Para finalizar, você pode montar um teste simples de validação. Por exemplo:</p>
+
+<p>Crie <em>spec/integration/site_spec.rb</em> e coloque:</p>
+
+<pre><code>require 'spec_helper'
 
 describe "Site sample" do
 
@@ -131,15 +138,24 @@ describe "Site sample" do
 
   end
 
-end</pre>
-Para executar somente os testes de integração:
-<pre>rake spec:integration</pre>
-<h2>have_content e um hot tip que pode te salvar muitas horas !</h2>
-Caso aconteça o erro:
-<pre>undefined method `have_content' for #&lt;ActionController::Integration::Session:0xb618ad10&gt;</pre>
-Graças a esta mensagem <a href="http://groups.google.com/group/ruby-capybara/browse_thread/thread/28467e031beb7ba1/19a368c21a278eb8?lnk=gst&amp;q=have_content#19a368c21a278eb8">Can&#8217;t make matchers work with cucumber and rails 2.3.2</a>, descobri que o <em>have_content</em> não funciona com o rails 2.3.2, eu resolvi o problema fazendo um upgrade para a última versão do rails. #ficaadica
+end
+</code></pre>
 
-Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
+<p>Para executar somente os testes de integração:</p>
+
+<pre><code>rake spec:integration
+</code></pre>
+
+<h2>have_content e um hot tip que pode te salvar muitas horas !</h2>
+
+<p>Caso aconteça o erro:</p>
+
+<pre><code>undefined method `have_content' for #&lt;ActionController::Integration::Session:0xb618ad10&gt;
+</code></pre>
+
+<p>Graças a esta mensagem <a href="http://groups.google.com/group/ruby-capybara/browse_thread/thread/28467e031beb7ba1/19a368c21a278eb8?lnk=gst&amp;q=have_content#19a368c21a278eb8">Can&rsquo;t make matchers work with cucumber and rails 2.3.2</a>, descobri que o <em>have_content</em> não funciona com o rails 2.3.2, eu resolvi o problema fazendo um upgrade para a última versão do rails. #ficaadica</p>
+
+<p>Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !</p>
 </div>
 
 
@@ -148,7 +164,7 @@ Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -162,7 +178,7 @@ Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
   
 
 
-<time datetime="2010-08-09T00:00:00-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
+<time datetime="2010-08-09T07:00:35-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
       
 
 <span class="categories">
@@ -192,11 +208,17 @@ Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
         <a class="basic-alignment left" href="/2010/07/a-extincao-do-programador-senior/" title="Previous Post: A extinção do programador sênior">&laquo; A extinção do programador sênior</a>
       
       
-        <a class="basic-alignment right" href="/2011/01/usando-bundler-com-rails-2-3/" title="Next Post: Usando Bundler com Rails 2.3">Usando Bundler com Rails 2.3 &raquo;</a>
+        <a class="basic-alignment right" href="/2011/01/voltamos/" title="Next Post: Voltamos!">Voltamos! &raquo;</a>
       
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -251,7 +273,10 @@ Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/';
+        var disqus_url = 'http://1up4developers.github.io/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

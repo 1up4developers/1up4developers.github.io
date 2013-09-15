@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2012-06-01T00:00:00-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+<time datetime="2012-06-01T10:14:30-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,49 +93,80 @@
   </header>
 
 
-<div class="entry-content"><a title="Vagrant, virtualized development made easy" href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.
+<div class="entry-content"><p><a href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.</p>
+
 <h2>Prós e Contra<del>s</del></h2>
-Vários pontos se destacam no uso do Vagrant:
+
+<p>Vários pontos se destacam no uso do Vagrant:</p>
+
 <ul>
-	<li>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</li>
-	<li>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</li>
-	<li>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</li>
-	<li>Mantém a sua máquina local &#8220;limpa&#8221;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</li>
+<li><p>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</p></li>
+<li><p>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</p></li>
+<li><p>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</p></li>
+<li><p>Mantém a sua máquina local &ldquo;limpa&rdquo;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</p></li>
 </ul>
-Agora vem o contra.
+
+
+<p>Agora vem o contra.</p>
+
 <ul>
-	<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
+<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
 </ul>
+
+
 <h2>Instalação</h2>
-Você precisa do <a title="Oracle VM VirtualBox" href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &#8220;gem install vagrant&#8221; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a title="Vagrant Downloads" href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.
+
+<p>Você precisa do <a href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &ldquo;gem install vagrant&rdquo; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.</p>
+
 <h2>Exemplo de Uso</h2>
-O <a title="Vagrant - Getting Started" href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a title="Rails Casts Virtual Machines with Vagrant" href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.
 
-Supondo que o vagrant está instalado. Vamos adicionar uma máquina:
-<pre>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box</pre>
-Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:
-<pre>$ vagrant init lucid32  #ja especificando o box lucid32 baixado</pre>
-Vamos subir a VM:
-<pre>$ vagrant up</pre>
-Para acessar a VM:
-<pre>$ vagrant ssh</pre>
-Repare que dentro da VM, na pasta &#8220;/vagrant&#8221; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.
+<p>O <a href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.</p>
 
-Vamos supor que você executou um &#8220;rails s&#8221; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:
-<pre><code>config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000</code></pre>
-Dá um restart na VM:
-<pre>$ vagrant halt &amp;&amp; vagrant up</pre>
-Subir o projeto novamente. (vagrant ssh e o &#8220;rails s&#8221; dentro do /vagrant)
+<p>Supondo que o vagrant está instalado. Vamos adicionar uma máquina:</p>
 
-Acesse http://localhost:4000.
+<pre><code>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
+</code></pre>
+
+<p>Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:</p>
+
+<pre><code>$ vagrant init lucid32  #ja especificando o box lucid32 baixado
+</code></pre>
+
+<p>Vamos subir a VM:</p>
+
+<pre><code>$ vagrant up
+</code></pre>
+
+<p>Para acessar a VM:</p>
+
+<pre><code>$ vagrant ssh
+</code></pre>
+
+<p>Repare que dentro da VM, na pasta &ldquo;/vagrant&rdquo; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.</p>
+
+<p>Vamos supor que você executou um &ldquo;rails s&rdquo; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:</p>
+
+<pre><code>&lt;code&gt;config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000&lt;/code&gt;
+</code></pre>
+
+<p>Dá um restart na VM:</p>
+
+<pre><code>$ vagrant halt &amp;&amp; vagrant up
+</code></pre>
+
+<p>Subir o projeto novamente. (vagrant ssh e o &ldquo;rails s&rdquo; dentro do /vagrant)</p>
+
+<p>Acesse <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
 <h2>Extras e Conclusão</h2>
-A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:
 
-<a title="Vagrant Provisioning" href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> - Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.
+<p>A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:</p>
 
-<a title="Vagrant plugins" href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> - Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a title="Vagrant Plugin Snapshots da VM" href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.
+<p><a href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> &ndash; Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.</p>
 
-<a title="Vagrant Boxes" href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> - No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a title="A list of base boxes for Vagrant" href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.
+<p><a href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> &ndash; Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.</p>
+
+<p><a href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> &ndash; No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.</p>
 </div>
 
 
@@ -144,7 +175,7 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -158,7 +189,7 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
   
 
 
-<time datetime="2012-06-01T00:00:00-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+<time datetime="2012-06-01T10:14:30-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
       
 
 <span class="categories">
@@ -193,6 +224,12 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -247,7 +284,10 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/';
+        var disqus_url = 'http://1up4developers.github.io/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -87,7 +87,7 @@
   
 
 
-<time datetime="2013-08-22T00:00:00-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+<time datetime="2013-08-22T14:32:23-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
         
          | <a href="/2013/08/introducao-a-linux-control-groups-cgroups/#disqus_thread">Comments</a>
         
@@ -96,23 +96,33 @@
   </header>
 
 
-  <div class="entry-content">Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.
+  <div class="entry-content"><p>Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
-Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &#8221;<em>onda do verão</em>&#8221; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &#8220;wave&#8221;.
+<p>Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &ldquo;<em>onda do verão</em>&rdquo; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &ldquo;wave&rdquo;.</p>
+
 <h3>O que são CGroups ?</h3>
-<strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.
 
-Curioso pra ver como funciona ?
+<p><strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.</p>
+
+<p>Curioso pra ver como funciona ?</p>
+
 <h3>Situação de Exemplo</h3>
-Para este exemplo teremos duas aplicações <em><a href="https://gist.github.com/tonyfabeen/6310137">Sinatra</a></em> e nosso objetivo será dedicar um grupo para cada aplicação limitando o consumo de memória para cada uma elas.
 
-Para rodar o exemplo estarei utilizando um <em>Ubuntu 12.04 64 bits.</em>
+<p>Para este exemplo teremos duas aplicações <em><a href="https://gist.github.com/tonyfabeen/6310137">Sinatra</a></em> e nosso objetivo será dedicar um grupo para cada aplicação limitando o consumo de memória para cada uma elas.</p>
+
+<p>Para rodar o exemplo estarei utilizando um <em>Ubuntu 12.04 64 bits.</em></p>
+
 <h4>Pré-Requisitos</h4>
-Antes de mais nada precisamos instalar algumas dependências:
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo apt-get install cgroup-bin libcgroup1
+
+<p>Antes de mais nada precisamos instalar algumas dependências:</p>
+
+<pre><code>&lt;code&gt;sudo apt-get install cgroup-bin libcgroup1
+&lt;/code&gt;
 </code></pre>
-Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong>.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>ls -al /sys/fs/cgroup
+
+<p>Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong>.</p>
+
+<pre><code>&lt;code&gt;ls -al /sys/fs/cgroup
 
 drwxr-xr-x 7 root root 140 Aug  6 09:38 .
 drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
@@ -122,52 +132,85 @@ drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
 drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
 drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
 
+&lt;/code&gt;
 </code></pre>
-CGroups estão organizados por subsistemas conhecidos também como &#8220;resource controllers&#8221; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.
-<h4>CGConfig Service</h4>
-Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>$ sudo service cgconfig status</code></pre>
-Caso não esteja inicie o serviço
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>$ sudo service cgconfig start</code></pre>
-Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf&#8217;</strong> ou via linha de comando, que será o meio que iremos utilizar.
-<h4>Criando Grupos</h4>
-Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
-sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
-</code></pre>
-O argumento <strong>/sinatra*</strong> indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller&gt;/&lt;path&gt;</strong>
-<h3>Executando programas em um Grupo</h3>
-Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo cgexec -g *:/sinatra1 sh -c 'cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D'
-sudo cgexec -g *:/sinatra2 sh -c 'cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D'
-</code></pre>
-O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.
 
-Para checar a hierarquia criada:
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>ps xawf -eo pid,cgroup,args | grep ruby
+<p>CGroups estão organizados por subsistemas conhecidos também como &ldquo;resource controllers&rdquo; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.</p>
+
+<h4>CGConfig Service</h4>
+
+<p>Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :</p>
+
+<pre><code>&lt;code&gt;$ sudo service cgconfig status&lt;/code&gt;
+</code></pre>
+
+<p>Caso não esteja inicie o serviço</p>
+
+<pre><code>&lt;code&gt;$ sudo service cgconfig start&lt;/code&gt;
+</code></pre>
+
+<p>Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf&#8217;</strong> ou via linha de comando, que será o meio que iremos utilizar.</p>
+
+<h4>Criando Grupos</h4>
+
+<p>Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.</p>
+
+<pre><code>&lt;code&gt;sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
+sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
+&lt;/code&gt;
+</code></pre>
+
+<p>O argumento <strong>/sinatra</strong>* indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller>/<path></strong></p>
+
+<h3>Executando programas em um Grupo</h3>
+
+<p>Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.</p>
+
+<pre><code>&lt;code&gt;sudo cgexec -g *:/sinatra1 sh -c 'cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D'
+sudo cgexec -g *:/sinatra2 sh -c 'cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D'
+&lt;/code&gt;
+</code></pre>
+
+<p>O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.</p>
+
+<p>Para checar a hierarquia criada:</p>
+
+<pre><code>&lt;code&gt;ps xawf -eo pid,cgroup,args | grep ruby
  1476              \_  5:freezer:              \_ grep --color=auto ruby
  1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
  1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
+&lt;/code&gt;
 </code></pre>
-Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>sudo cgset -r memory.limit_in_bytes='256M' sinatra1
+
+<p>Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.</p>
+
+<pre><code>&lt;code&gt;sudo cgset -r memory.limit_in_bytes='256M' sinatra1
 sudo cgset -r memory.limit_in_bytes='128M' sinatra2
+&lt;/code&gt;
 </code></pre>
-Para checar a alteração :
-<pre style="font-family: Andale Mono, Lucida Console, Monaco, fixed, monospace;color: #000000;background-color: #eee;font-size: 12px;border: 1px dashed #999999;line-height: 14px;padding: 5px;overflow: auto;width: 100%"><code>cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
+
+<p>Para checar a alteração :</p>
+
+<pre><code>&lt;code&gt;cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
 cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
+&lt;/code&gt;
 </code></pre>
+
 <h3>Conclusão</h3>
-O intuito deste artigo foi demonstrar um dos possíveis usos de CGroups. Caso a aplicação <strong>sinatra1</strong> cair por estouro de memória ou alguma outra falha que não seja a destruição da máquina, a aplicação <strong>sinatra2 </strong>continuará funcionando.
 
-Há mais a se explorar, poderíamos inserir limitação de I/O, consumo de banda, entre outras coisas. Poderíamos até criar nossa própria implementação de LXC, mas isso é assunto para um próximo encontro.
+<p>O intuito deste artigo foi demonstrar um dos possíveis usos de CGroups. Caso a aplicação <strong>sinatra1</strong> cair por estouro de memória ou alguma outra falha que não seja a destruição da máquina, a aplicação <strong>sinatra2 </strong>continuará funcionando.</p>
 
-Os links abaixo exploram mais detalhes sobre o assunto :
+<p>Há mais a se explorar, poderíamos inserir limitação de I/O, consumo de banda, entre outras coisas. Poderíamos até criar nossa própria implementação de LXC, mas isso é assunto para um próximo encontro.</p>
+
+<p>Os links abaixo exploram mais detalhes sobre o assunto :</p>
+
 <ul>
-	<li><a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></li>
-	<li><a href="http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf">http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf</a></li>
+<li><p><a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></p></li>
+<li><p><a href="http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf">http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf</a></p></li>
 </ul>
-Divirtam-se !
+
+
+<p>Divirtam-se !</p>
 </div>
   
   
@@ -196,7 +239,7 @@ Divirtam-se !
   
 
 
-<time datetime="2013-08-19T00:00:00-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
+<time datetime="2013-08-19T14:29:56-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
         
          | <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/#disqus_thread">Comments</a>
         
@@ -205,70 +248,106 @@ Divirtam-se !
   </header>
 
 
-  <div class="entry-content">Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.
+  <div class="entry-content"><p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
 
-Vamos criar uma extensão que retorna uma simples String.
+<p>Vamos criar uma extensão que retorna uma simples String.</p>
 
-Primeiramente criamos o diretório onde estará nossa extensão :
-<pre>  <code>$ mkdir &lt;your_path&gt;/1up4dev</code></pre>
-Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &#8221;<strong>ruby.h&#8221;</strong>
-<pre>  <code>#include &lt;ruby.h&gt;</code></pre>
-Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.
-<pre><code>VALUE m1up4dev;</code></pre>
-E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:
-<pre><code>VALUE cTalker;</code></pre>
-Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.
-<pre><code>static VALUE say_yeah(VALUE self){
+<p>Primeiramente criamos o diretório onde estará nossa extensão :</p>
+
+<pre><code>  &lt;code&gt;$ mkdir &lt;your_path&gt;/1up4dev&lt;/code&gt;
+</code></pre>
+
+<p>Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &ldquo;<strong>ruby.h&rdquo;</strong></p>
+
+<pre><code>  &lt;code&gt;#include &lt;ruby.h&gt;&lt;/code&gt;
+</code></pre>
+
+<p>Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.</p>
+
+<pre><code>&lt;code&gt;VALUE m1up4dev;&lt;/code&gt;
+</code></pre>
+
+<p>E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:</p>
+
+<pre><code>&lt;code&gt;VALUE cTalker;&lt;/code&gt;
+</code></pre>
+
+<p>Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.</p>
+
+<pre><code>&lt;code&gt;static VALUE say_yeah(VALUE self){
   const char *sentence= "YEAH YEAH!";
   return rb_str_new2(sentence);
 }
 
+&lt;/code&gt;
 </code></pre>
-Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.
 
-Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &#8217;<strong>Init_1up4dev</strong>&#8217;. Por convenção estas funções sempre começam com o prefixo &#8217;<strong>Init_</strong>&#8217;.
-<pre><code>void Init_1up4dev(){
+<p>Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.</p>
+
+<p>Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &lsquo;<strong>Init_1up4dev</strong>&rsquo;. Por convenção estas funções sempre começam com o prefixo &lsquo;<strong>Init_</strong>&rsquo;.</p>
+
+<pre><code>&lt;code&gt;void Init_1up4dev(){
   m1up4dev = rb_define_module("1up4dev");
   cTalker = rb_define_class_under(m1up4dev, "Talker", rb_cObject);
   rb_define_singleton_method(cTalker, "say_yeah", say_yeah, 0);
 }
 
+&lt;/code&gt;
 </code></pre>
-A função &#8217;<strong>rb_define_module</strong>&#8217; define um módulo no topo da hierarquia. Algo como :
-<pre><code>module 1up4dev
+
+<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como :</p>
+
+<pre><code>&lt;code&gt;module 1up4dev
 end
 
+&lt;/code&gt;
 </code></pre>
-A função &#8217;<strong>rb_define_class_under</strong>&#8217; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :
-<pre><code>module 1up4dev
+
+<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :</p>
+
+<pre><code>&lt;code&gt;module 1up4dev
   class Talker
 
   end
 end
 
+&lt;/code&gt;
 </code></pre>
-A função &#8217;<strong>rb_define_singleton_method</strong>&#8217; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.
 
-Para rodar nosso exemplo, crie um arquivo chamado &#8217;<strong>extconf.rb</strong>&#8217; contendo :
-<pre><code>
+<p>A função &lsquo;<strong>rb_define_singleton_method</strong>&rsquo; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.</p>
+
+<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo :</p>
+
+<pre><code>&lt;code&gt;
 require 'mkmf'
 create_makefile('1up4dev')
 
+&lt;/code&gt;
 </code></pre>
-Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .
-<pre><code>$ ruby extconf.rb
+
+<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .</p>
+
+<pre><code>&lt;code&gt;$ ruby extconf.rb
+&lt;/code&gt;
 </code></pre>
-Compile e instale a extensão :
-<pre><code>$ make &amp;&amp; make install
+
+<p>Compile e instale a extensão :</p>
+
+<pre><code>&lt;code&gt;$ make &amp;&amp; make install
+&lt;/code&gt;
 </code></pre>
-Para ver o código funcionando basta digitar o código abaixo em um &#8217;<strong>irb</strong>&#8217; ou algo do gênero :
-<pre><code>$irb(main):001:0&gt; require '1up4dev'
+
+<p>Para ver o código funcionando basta digitar o código abaixo em um &lsquo;<strong>irb</strong>&rsquo; ou algo do gênero :</p>
+
+<pre><code>&lt;code&gt;$irb(main):001:0&gt; require '1up4dev'
 true
 $irb(main):002:0&gt; 1up4dev::Talker.say_yeah
 "YEAH YEAH!"
 
+&lt;/code&gt;
 </code></pre>
-YEAH YEAH !!
+
+<p>YEAH YEAH !!</p>
 </div>
   
   
@@ -297,7 +376,7 @@ YEAH YEAH !!
   
 
 
-<time datetime="2013-07-14T00:00:00-03:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
+<time datetime="2013-07-14T11:35:31-03:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
         
          | <a href="/2013/07/entendendo-lisp-finalmente/#disqus_thread">Comments</a>
         
@@ -308,122 +387,138 @@ YEAH YEAH !!
 
   <div class="entry-content"><h2>A sintaxe invertida</h2>
 
-Ao olhar um código LISP pela primeira vez, você se assusta.
+<p>Ao olhar um código LISP pela primeira vez, você se assusta.</p>
 
-Eu me assustei e não havia ninguém para me ajudar a entender.
+<p>Eu me assustei e não havia ninguém para me ajudar a entender.</p>
 
-Que bom que você está lendo isto para entender bem depressa e perder o medo.
+<p>Que bom que você está lendo isto para entender bem depressa e perder o medo.</p>
 
-Acredite ou não, o LISP não é invertido: as outras linguagens é que são inconsistentes.
+<p>Acredite ou não, o LISP não é invertido: as outras linguagens é que são inconsistentes.</p>
 
-Matematicamente falando, funções são expressas dessa forma:
+<p>Matematicamente falando, funções são expressas dessa forma:</p>
 
-<pre lang="javascript">y = f(x)</pre>
+<pre><code>y = f(x)
+</code></pre>
 
-Para calcularmos o dobro de um número, teríamos:
+<p>Para calcularmos o dobro de um número, teríamos:</p>
 
-<pre lang="javascript">y = dobro(21)</pre>
+<pre><code>y = dobro(21)
+</code></pre>
 
-Note que estamos usando uma notação diferente: primeiro vem o operador dobro e, em seguida, vem o operando, ou parâmetro, 21. Chamamos isso de notação prefixa.
+<p>Note que estamos usando uma notação diferente: primeiro vem o operador dobro e, em seguida, vem o operando, ou parâmetro, 21. Chamamos isso de notação prefixa.</p>
 
-Já para executar um cálculo matemático, usamos a forma abaixo:
+<p>Já para executar um cálculo matemático, usamos a forma abaixo:</p>
 
-<pre lang="javascript">y = 21 * 2</pre>
+<pre><code>y = 21 * 2
+</code></pre>
 
-Primeiro temos um operador 21, depois temos um operando responsável pela multiplicação e, finalmente, o segundo operando 2. Chamamos essa forma de notação infixa.
+<p>Primeiro temos um operador 21, depois temos um operando responsável pela multiplicação e, finalmente, o segundo operando 2. Chamamos essa forma de notação infixa.</p>
 
-Nota: se você é um desenvolvedor Ruby, ignore essa última expressão. Em Ruby o cálculo acima utiliza internamente a notação prefixa onde 21 é um objeto, * é um método (ou uma mensagem, se preferir) e 2 é um parâmetro.
+<p>Nota: se você é um desenvolvedor Ruby, ignore essa última expressão. Em Ruby o cálculo acima utiliza internamente a notação prefixa onde 21 é um objeto, * é um método (ou uma mensagem, se preferir) e 2 é um parâmetro.</p>
 
-A coisa fica bagunçada quando misturamos as duas formas:
+<p>A coisa fica bagunçada quando misturamos as duas formas:</p>
 
-<pre lang="javascript">y = dobro(7 * 3)</pre>
+<pre><code>y = dobro(7 * 3)
+</code></pre>
 
-Na expressão acima misturamos notação prefixa com infixa. Não há problema algum com isso, mas não é um bom exemplo de consistência.
+<p>Na expressão acima misturamos notação prefixa com infixa. Não há problema algum com isso, mas não é um bom exemplo de consistência.</p>
 
-Quando falamos em LISP, o primeiro item de uma lista é um operador e todos os demais são operandos.
+<p>Quando falamos em LISP, o primeiro item de uma lista é um operador e todos os demais são operandos.</p>
 
-Todo operador é uma função, macro ou forma especial, inclusive os operadores matemáticos. Não se preocupe em entender agora o que são macros ou formas especiais. Todo o resto da lista é considerado um valor, parâmetro ou operando.
+<p>Todo operador é uma função, macro ou forma especial, inclusive os operadores matemáticos. Não se preocupe em entender agora o que são macros ou formas especiais. Todo o resto da lista é considerado um valor, parâmetro ou operando.</p>
 
-Imagine agora que o símbolo <code>+</code> é uma função. Para calcularmos uma soma usaríamos o seguinte código:
+<p>Imagine agora que o símbolo <code>+</code> é uma função. Para calcularmos uma soma usaríamos o seguinte código:</p>
 
-<pre lang="javascript">+(1, 2)</pre>
+<pre><code>+(1, 2)
+</code></pre>
 
-Movendo os parênteses e removendo as vírgulas, a nossa soma inicial ficaria:
+<p>Movendo os parênteses e removendo as vírgulas, a nossa soma inicial ficaria:</p>
 
-<pre lang="clojure">(+ 1 2)</pre>
+<pre><code>(+ 1 2)
+</code></pre>
 
-Sabemos que dobro também é uma função. Para calcular dobro, usaríamos:
+<p>Sabemos que dobro também é uma função. Para calcular dobro, usaríamos:</p>
 
-<pre lang="clojure">(dobro 12)</pre>
+<pre><code>(dobro 12)
+</code></pre>
 
-Percebam que agora temos uma regra que se aplica a todos os casos. Repetindo a expressão acima que mistura as notações infixa e prefixa usando as regras do LISP, teríamos:
+<p>Percebam que agora temos uma regra que se aplica a todos os casos. Repetindo a expressão acima que mistura as notações infixa e prefixa usando as regras do LISP, teríamos:</p>
 
-<pre lang="clojure">(dobro (+ 7 3))</pre>
+<pre><code>(dobro (+ 7 3))
+</code></pre>
 
-Talvez pela sua origem acadêmica e fortemente influenciada pela matemática, as implementações de LISP levam muito a sério a questão da consistência.
+<p>Talvez pela sua origem acadêmica e fortemente influenciada pela matemática, as implementações de LISP levam muito a sério a questão da consistência.</p>
 
 <h2>Os parênteses</h2>
 
-Quando eu estava na quarta série, aprendi uma coisa chamada <em>expressão numérica</em>, que consistia em resolver um cálculo extenso atacando um pedaço por vez, organizadamente.
+<p>Quando eu estava na quarta série, aprendi uma coisa chamada <em>expressão numérica</em>, que consistia em resolver um cálculo extenso atacando um pedaço por vez, organizadamente.</p>
 
-Cada pedaço desse cálculo ficava dentro de parênteses, colchetes ou chaves, dependendo do quão aninhado estivesse a expressão. Eu nunca mais vi esse tipo de hierarquia,  mas era um jeito bacana de manter a organização.
+<p>Cada pedaço desse cálculo ficava dentro de parênteses, colchetes ou chaves, dependendo do quão aninhado estivesse a expressão. Eu nunca mais vi esse tipo de hierarquia,  mas era um jeito bacana de manter a organização.</p>
 
-Uma expressão numérica tem essa cara:
+<p>Uma expressão numérica tem essa cara:</p>
 
-<pre lang="javascript">x = {1 + [3 * (5 + 7)]}</pre>
+<pre><code>x = {1 + [3 * (5 + 7)]}
+</code></pre>
 
-Resolvemos a expressão de dentro para fora:
+<p>Resolvemos a expressão de dentro para fora:</p>
 
-<pre lang="javascript">x = {1 + [3 * (12)]}
+<pre><code>x = {1 + [3 * (12)]}
 
 x = {1 + [36]}
 
 x = {37}
 
-x = 37</pre>
-Simples, não?
+x = 37
+</code></pre>
 
-Agora vamos extrapolar o que aprendemos na quarta série para uma linguagem de programação, trocando chaves e colchetes por parênteses:
+<p>Simples, não?</p>
 
-<pre lang="javascript">x = (1 + (3 * (5 + 7)))</pre>
+<p>Agora vamos extrapolar o que aprendemos na quarta série para uma linguagem de programação, trocando chaves e colchetes por parênteses:</p>
 
-Vamos substituir a nossa conhecida notação infixa pela prefixa.
+<pre><code>x = (1 + (3 * (5 + 7)))
+</code></pre>
 
-<pre lang="clojure">x = (+ 1 (* 3 (+ 5 7)))</pre>
+<p>Vamos substituir a nossa conhecida notação infixa pela prefixa.</p>
 
-Pronto. Você tem uma expressão numérica com a cara do LISP, resolvendo da forma como a professora ensinou lá na quarta série: primeiro você resolve os parênteses de dentro, depois os próximos, até terminar.
+<pre><code>x = (+ 1 (* 3 (+ 5 7)))
+</code></pre>
 
-Qualquer LISP que você encontrar pela frente, incluindo o Clojure, funciona exatamente dessa maneira.
+<p>Pronto. Você tem uma expressão numérica com a cara do LISP, resolvendo da forma como a professora ensinou lá na quarta série: primeiro você resolve os parênteses de dentro, depois os próximos, até terminar.</p>
 
-Uma vantagem que isso traz é que você não precisa ficar se preocupando com precedência de operadores.
+<p>Qualquer LISP que você encontrar pela frente, incluindo o Clojure, funciona exatamente dessa maneira.</p>
 
-Imagine que você tem o código abaixo:
+<p>Uma vantagem que isso traz é que você não precisa ficar se preocupando com precedência de operadores.</p>
 
-<pre lang="javascript">x = 3 * 2 + 1
+<p>Imagine que você tem o código abaixo:</p>
 
-y = 1 + 2 * 3</pre>
+<pre><code>x = 3 * 2 + 1
 
-Os valores de x e y serão iguais? Sim, ambas as variáveis contém o número 7, mas para saber disso você precisou ler em algum outro lugar que o operador de multiplicação tem precedência sobre o operador de adição. É algo que você espera que seja assim e age como se realmente fosse.
+y = 1 + 2 * 3
+</code></pre>
 
-E o que aconteceria se você estiver usando uma linguagem em que a adição tem precedência sobre a multiplicação? Ou pior ainda: os operadores são executados da esquerda para a direita conforme forem aparecendo.
+<p>Os valores de x e y serão iguais? Sim, ambas as variáveis contém o número 7, mas para saber disso você precisou ler em algum outro lugar que o operador de multiplicação tem precedência sobre o operador de adição. É algo que você espera que seja assim e age como se realmente fosse.</p>
 
-No primeiro caso, x e y continuariam sendo igual, mas ambos teriam o valor 9. No segundo caso, x seria igual a 7 e y seria igual a 9.
+<p>E o que aconteceria se você estiver usando uma linguagem em que a adição tem precedência sobre a multiplicação? Ou pior ainda: os operadores são executados da esquerda para a direita conforme forem aparecendo.</p>
 
-Seria mais fácil se as expressões fossem escritas assim:
+<p>No primeiro caso, x e y continuariam sendo igual, mas ambos teriam o valor 9. No segundo caso, x seria igual a 7 e y seria igual a 9.</p>
 
-<pre lang="javascript">x = (3 * 2) + 1
+<p>Seria mais fácil se as expressões fossem escritas assim:</p>
 
-y = 1 + (2 * 3)</pre>
+<pre><code>x = (3 * 2) + 1
 
-Agora está claro para qualquer pessoa o que vai ser executado primeiro, independente do modo como a expressão seja interpretada pela linguagem. Pois saiba que é exatamente assim que um LISP trabalha. Usando a notação prefixa, as expressões acima ficariam:
+y = 1 + (2 * 3)
+</code></pre>
 
-<pre lang="clojure">x = (+ (* 3 2) 1)
+<p>Agora está claro para qualquer pessoa o que vai ser executado primeiro, independente do modo como a expressão seja interpretada pela linguagem. Pois saiba que é exatamente assim que um LISP trabalha. Usando a notação prefixa, as expressões acima ficariam:</p>
 
-y = (+ 1 (* 3 2))</pre>
+<pre><code>x = (+ (* 3 2) 1)
 
-Primeiro será executada a multiplicação, que está nos parênteses mais internos e, em seguida, será executada a adição. Tudo isso sem se preocupar com regras ocultas ou peculiaridades do compilador.
+y = (+ 1 (* 3 2))
+</code></pre>
 
-Qualquer código em qualquer dialeto LISP, mesmo com suas características particulares, fica fácil de entender se você lembrar dessas regrinha.
+<p>Primeiro será executada a multiplicação, que está nos parênteses mais internos e, em seguida, será executada a adição. Tudo isso sem se preocupar com regras ocultas ou peculiaridades do compilador.</p>
+
+<p>Qualquer código em qualquer dialeto LISP, mesmo com suas características particulares, fica fácil de entender se você lembrar dessas regrinha.</p>
 </div>
   
   
@@ -452,7 +547,7 @@ Qualquer código em qualquer dialeto LISP, mesmo com suas características parti
   
 
 
-<time datetime="2013-06-27T00:00:00-03:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+<time datetime="2013-06-27T09:42:18-03:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
         
          | <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/#disqus_thread">Comments</a>
         
@@ -461,26 +556,27 @@ Qualquer código em qualquer dialeto LISP, mesmo com suas características parti
   </header>
 
 
-  <div class="entry-content">Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &#8220;template&#8221; em shell script para testar uma API Server.
+  <div class="entry-content"><p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
-Dependências:
+<p>Dependências:</p>
+
 <ul>
-	<li>bash</li>
-	<li>curl</li>
+<li><p>bash</p></li>
+<li><p>curl</p></li>
 </ul>
-Foi testado no Ubuntu 13.04.
 
-Obs: Vou embedar <a title="Using Shell Script to test your server" href="https://gist.github.com/rogerleite/5869576">este gist</a>, e pode ser que não apareça no seu reader ;D.
 
-Obs2: Este post é uma versão pt-br deste post no coderwall <a title="Using Shell Script to test your server" href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.
+<p>Foi testado no Ubuntu 13.04.</p>
 
-<script src="https://gist.github.com/rogerleite/5869576.js"></script>
+<p>Obs: Vou embedar <a href="https://gist.github.com/rogerleite/5869576">este gist</a>, e pode ser que não apareça no seu reader ;D.</p>
 
-Referências:
+<p>Obs2: Este post é uma versão pt-br deste post no coderwall <a href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.</p>
 
-<a title="Unit-Testable Shell Scripts" href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a>
+<p>Referências:</p>
 
-Aguardo dicas, sugestões, experiências etc.
+<p><a href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a></p>
+
+<p>Aguardo dicas, sugestões, experiências etc.</p>
 </div>
   
   
@@ -509,7 +605,7 @@ Aguardo dicas, sugestões, experiências etc.
   
 
 
-<time datetime="2013-05-06T00:00:00-03:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+<time datetime="2013-05-06T07:00:44-03:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
         
          | <a href="/2013/05/a-melhor-linguagem-de-programacao/#disqus_thread">Comments</a>
         
@@ -518,27 +614,27 @@ Aguardo dicas, sugestões, experiências etc.
   </header>
 
 
-  <div class="entry-content">Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.
+  <div class="entry-content"><p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
 
-Atualmente ele está trabalhando em um projeto para Web e comentou que está dando preferência a uma ferramenta proprietária que eu particularmente não gosto.
+<p>Atualmente ele está trabalhando em um projeto para Web e comentou que está dando preferência a uma ferramenta proprietária que eu particularmente não gosto.</p>
 
-Numa conversa que achei muito produtiva, nós concordamos que, independente de gostar ou não, &#8220;software é bola na rede&#8221;, onde o importante é entregar o produto, atendendo as necessidades do cliente no menor tempo possível.
+<p>Numa conversa que achei muito produtiva, nós concordamos que, independente de gostar ou não, &ldquo;software é bola na rede&rdquo;, onde o importante é entregar o produto, atendendo as necessidades do cliente no menor tempo possível.</p>
 
-Eu trabalhei com PHP por dez anos, com Delphi por seis e estou indo para oito com Java, usando diariamente cada uma dessas linguagens. Já tive experiências com C e trabalho há anos com Ruby e JavaScript, atualmente tenho me concentrado em Clojure e, gostando mais de umas e menos de outras, conheço as forças e fraquezas de cada uma delas.
+<p>Eu trabalhei com PHP por dez anos, com Delphi por seis e estou indo para oito com Java, usando diariamente cada uma dessas linguagens. Já tive experiências com C e trabalho há anos com Ruby e JavaScript, atualmente tenho me concentrado em Clojure e, gostando mais de umas e menos de outras, conheço as forças e fraquezas de cada uma delas.</p>
 
-No final das contas, eu gosto da analogia de que o nosso trabalho se assemelha ao de um carpinteiro/marceneiro (desculpe, mas eu não sei muito bem a diferença entre ambos). Esses profissionais usam várias ferramentas para chegar ao produto final e, ao invés de perderem tempo em fóruns e discussões, eles buscam as ferramentas adequadas a cada tipo de tarefa, buscando entregar o melhor produto no menor tempo e menor custo (entenda &#8216;melhor produto&#8217; como algo totalmente subjetivo).
+<p>No final das contas, eu gosto da analogia de que o nosso trabalho se assemelha ao de um carpinteiro/marceneiro (desculpe, mas eu não sei muito bem a diferença entre ambos). Esses profissionais usam várias ferramentas para chegar ao produto final e, ao invés de perderem tempo em fóruns e discussões, eles buscam as ferramentas adequadas a cada tipo de tarefa, buscando entregar o melhor produto no menor tempo e menor custo (entenda &lsquo;melhor produto&rsquo; como algo totalmente subjetivo).</p>
 
-Linguagens de programação são meras ferramentas, assim como serrotes, limas, martelos e sei lá que outras ferramentas os profissionais da madeira usam.
+<p>Linguagens de programação são meras ferramentas, assim como serrotes, limas, martelos e sei lá que outras ferramentas os profissionais da madeira usam.</p>
 
-Assim sendo, o que é melhor? SASS, SCSS, LESS ou CSS puro? HAML ou ERB? A melhor é aquela que trouxer menos dor de cabeça, custo e tempo de desenvolvimento. Avalie com cautela aquilo que &#8220;está na moda&#8221; ou &#8220;que é o padrão de mercado&#8221; e escolha o que for melhor para o que você precisa, usando argumentos técnicos e financeiros, e deixando a paixão de lado.
+<p>Assim sendo, o que é melhor? SASS, SCSS, LESS ou CSS puro? HAML ou ERB? A melhor é aquela que trouxer menos dor de cabeça, custo e tempo de desenvolvimento. Avalie com cautela aquilo que &ldquo;está na moda&rdquo; ou &ldquo;que é o padrão de mercado&rdquo; e escolha o que for melhor para o que você precisa, usando argumentos técnicos e financeiros, e deixando a paixão de lado.</p>
 
-Aprenda a sua linguagem de trabalho a fundo, e procure conhecer alternativas. Ao me tornar um bom desenvolvedor  Ruby, eu aprendi a escrever um código Java melhor. Ao entender LISP, eu me tornei mais produtivo em JavaScript.
+<p>Aprenda a sua linguagem de trabalho a fundo, e procure conhecer alternativas. Ao me tornar um bom desenvolvedor  Ruby, eu aprendi a escrever um código Java melhor. Ao entender LISP, eu me tornei mais produtivo em JavaScript.</p>
 
-Quando for escrever ou comentar algo do tipo &#8220;Porque PHP fede&#8221;, ou perguntar num fórum &#8220;O que é melhor: PL/I ou FORTRAN 66?&#8221;, procure estudar mais, entender que nem todo mundo vive a mesma realidade que você e mesmo, algumas vezes, nem todo mundo tem o interesse em aprender tanto quanto você.
+<p>Quando for escrever ou comentar algo do tipo &ldquo;Porque PHP fede&rdquo;, ou perguntar num fórum &ldquo;O que é melhor: PL/I ou FORTRAN 66?&rdquo;, procure estudar mais, entender que nem todo mundo vive a mesma realidade que você e mesmo, algumas vezes, nem todo mundo tem o interesse em aprender tanto quanto você.</p>
 
-Às vezes, o que o outro desenvolvedor quer é apenas entregar o trabalho, receber o pagamento e ir para casa.
+<p>Às vezes, o que o outro desenvolvedor quer é apenas entregar o trabalho, receber o pagamento e ir para casa.</p>
 
-P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguagens que conseguir. Eu acho divertido, e profissionalmente é algo que tem me dado bons resultados.
+<p>P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguagens que conseguir. Eu acho divertido, e profissionalmente é algo que tem me dado bons resultados.</p>
 </div>
   
   
@@ -567,7 +663,7 @@ P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguag
   
 
 
-<time datetime="2013-04-11T00:00:00-03:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
+<time datetime="2013-04-11T07:30:47-03:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
         
          | <a href="/2013/04/o-que-eu-aprendi-escrevendo/#disqus_thread">Comments</a>
         
@@ -576,63 +672,63 @@ P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguag
   </header>
 
 
-  <div class="entry-content">Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.
+  <div class="entry-content"><p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
-Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.
+<p>Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.</p>
 
-Seguindo os próprios passos que descrevo abaixo, resolvi separar alguns pontos que considero importantes.
+<p>Seguindo os próprios passos que descrevo abaixo, resolvi separar alguns pontos que considero importantes.</p>
 
 <h3>Escrever é um processo iterativo e incremental</h3>
 
-O texto não nasce pronto. As vezes uma coisa ou outra está pronta na sua cabeça, mas na hora de colocar no papel a coisa muda. Você esquece algumas partes, lembra de outras, muda a ordem.
+<p>O texto não nasce pronto. As vezes uma coisa ou outra está pronta na sua cabeça, mas na hora de colocar no papel a coisa muda. Você esquece algumas partes, lembra de outras, muda a ordem.</p>
 
-O importante é que você coloque suas ideias no papel (ou no site), e depois releia com calma. Mostre para outras pessoas, peça opinião. Eu pensei em um texto por mais de dois anos e <a href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/">publiquei aqui</a> antes de adicionar no livro. O feedback dos leitores foi importantíssimo para que a versão final tivesse o mínimo de erros e o máximo de clareza possível.
+<p>O importante é que você coloque suas ideias no papel (ou no site), e depois releia com calma. Mostre para outras pessoas, peça opinião. Eu pensei em um texto por mais de dois anos e <a href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/">publiquei aqui</a> antes de adicionar no livro. O feedback dos leitores foi importantíssimo para que a versão final tivesse o mínimo de erros e o máximo de clareza possível.</p>
 
 <h3>Defina bem o seu público</h3>
 
-Ao escrever sobre programação funcional em JavaScript, eu tinha bem claro quem é o leitor do 1up. Caso você não tenha definido quem será seu público e quais os requisitos necessários para que possam absorver seu conteúdo, você vai correr o risco de escrever um texto em aramaico para crianças de quarta série ou um texto de quarta série para doutores em línguas mortas. 
+<p>Ao escrever sobre programação funcional em JavaScript, eu tinha bem claro quem é o leitor do 1up. Caso você não tenha definido quem será seu público e quais os requisitos necessários para que possam absorver seu conteúdo, você vai correr o risco de escrever um texto em aramaico para crianças de quarta série ou um texto de quarta série para doutores em línguas mortas.</p>
 
-Pior ainda é quando se tenta abraçar a todos. Seus braços são curtos para abraçar o mundo e, no final, alguma coisa vai acabar caindo no chão.
+<p>Pior ainda é quando se tenta abraçar a todos. Seus braços são curtos para abraçar o mundo e, no final, alguma coisa vai acabar caindo no chão.</p>
 
 <h3>Trace uma linha</h3>
 
-Como o Manifesto Ágil profere, <i>responder a mudanças é mais importante do que seguir um plano</i>, o que não quer dizer que você não precisa de um plano. 
+<p>Como o Manifesto Ágil profere, <em>responder a mudanças é mais importante do que seguir um plano</em>, o que não quer dizer que você não precisa de um plano.</p>
 
-Eu costumo traçar um plano, seja como uma lista de tópicos, seja como um mindmap, e vou me guiando por ele até pegar o ritmo. Normalmente essa lista não permanece inalterada por mais de dois capítulos, mas ainda assim é importante você ter algo para te manter no caminho, por mais que esse caminho mude constantemente.
+<p>Eu costumo traçar um plano, seja como uma lista de tópicos, seja como um mindmap, e vou me guiando por ele até pegar o ritmo. Normalmente essa lista não permanece inalterada por mais de dois capítulos, mas ainda assim é importante você ter algo para te manter no caminho, por mais que esse caminho mude constantemente.</p>
 
 <h3>Concentre-se</h3>
 
-Eu tenho problemas sérios de concentração, mas em algumas ocasiões consigo despejar quilos de texto ou código de uma única vez. Claro que uma revisão posterior é sempre bem vinda e necessária.
+<p>Eu tenho problemas sérios de concentração, mas em algumas ocasiões consigo despejar quilos de texto ou código de uma única vez. Claro que uma revisão posterior é sempre bem vinda e necessária.</p>
 
-O problema são os culpados de sempre: família exigindo atenção (eles têm prioridade, não pense o contrário); Internet oferecendo todo o tipo de entretenimento; GTalk aberto e seus amigos ali, ao alcance dos dedos.
+<p>O problema são os culpados de sempre: família exigindo atenção (eles têm prioridade, não pense o contrário); Internet oferecendo todo o tipo de entretenimento; GTalk aberto e seus amigos ali, ao alcance dos dedos.</p>
 
-Escrever é um ato solitário. Lide com isso e concentre-se no que está fazendo.
+<p>Escrever é um ato solitário. Lide com isso e concentre-se no que está fazendo.</p>
 
 <h3>Arranje tempo</h3>
 
-&#8220;Eu não tenho tempo&#8221; é a desculpa preferida do procrastinador e do cara que quer que os outros acreditem que ele é muito ocupado.
+<p>&ldquo;Eu não tenho tempo&rdquo; é a desculpa preferida do procrastinador e do cara que quer que os outros acreditem que ele é muito ocupado.</p>
 
-Você tem tempo para conversar no GTalk, para acessar o 9gag, para ver os gols do Fantástico, mas nunca temos tempo para brincar com o filho, para conversar com a esposa (ou marido) ou para fazer aquela meia hora de esteira.
+<p>Você tem tempo para conversar no GTalk, para acessar o 9gag, para ver os gols do Fantástico, mas nunca temos tempo para brincar com o filho, para conversar com a esposa (ou marido) ou para fazer aquela meia hora de esteira.</p>
 
-Um terço do meu livro foi escrito dentro de viagens em ônibus, táxis e aviões. Acho que produzi muito mais em uma hora de vôo até o Rio do que em uma tarde inteira jogada fora na frente do computador.
+<p>Um terço do meu livro foi escrito dentro de viagens em ônibus, táxis e aviões. Acho que produzi muito mais em uma hora de vôo até o Rio do que em uma tarde inteira jogada fora na frente do computador.</p>
 
-Quando você realmente quer fazer algo, o tempo aparece. Não ter tempo é uma outra forma de dizer &#8220;isso não é importante o suficiente para mim&#8221;.
+<p>Quando você realmente quer fazer algo, o tempo aparece. Não ter tempo é uma outra forma de dizer &ldquo;isso não é importante o suficiente para mim&rdquo;.</p>
 
-<h3>&#8216;Pronto&#8217; é melhor do que &#8216;perfeito&#8217;</h3>
+<h3>&lsquo;Pronto&rsquo; é melhor do que &lsquo;perfeito&rsquo;</h3>
 
-Depois do livro e do curso prontos e entregues, eu percebi coisas que poderia ter adicionado, frases que poderia ter mudado, assuntos que faltaram. Se existe a possibilidade de adicionar ou mudar, faça, mas não caia na armadilha de ficar polindo algo que já deveria estar em produção há tempos. 
+<p>Depois do livro e do curso prontos e entregues, eu percebi coisas que poderia ter adicionado, frases que poderia ter mudado, assuntos que faltaram. Se existe a possibilidade de adicionar ou mudar, faça, mas não caia na armadilha de ficar polindo algo que já deveria estar em produção há tempos.</p>
 
-Pronto é melhor do que perfeito e, não importa o quanto você tente, seu trabalho nunca vai ficar perfeito.
+<p>Pronto é melhor do que perfeito e, não importa o quanto você tente, seu trabalho nunca vai ficar perfeito.</p>
 
 <h3>Divirta-se</h3>
 
-Principalmente, divirta-se.
+<p>Principalmente, divirta-se.</p>
 
-Conheci muitas pessoas que sabem muito mais do assunto que estou escrevendo do que eu, pessoas que deram excelentes sugestões, ideias e me ensinaram a escrever melhor. E em tudo isso eu me diverti, aprendi, aproveitei o momento.
+<p>Conheci muitas pessoas que sabem muito mais do assunto que estou escrevendo do que eu, pessoas que deram excelentes sugestões, ideias e me ensinaram a escrever melhor. E em tudo isso eu me diverti, aprendi, aproveitei o momento.</p>
 
-Não se leve tão a sério. É apenas um texto, um post, um curso, um livro. A vida é bem mais do que isso.
+<p>Não se leve tão a sério. É apenas um texto, um post, um curso, um livro. A vida é bem mais do que isso.</p>
 
-Abraço
+<p>Abraço</p>
 </div>
   
   
@@ -661,7 +757,7 @@ Abraço
   
 
 
-<time datetime="2013-04-01T00:00:00-03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+<time datetime="2013-04-01T12:00:51-03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
         
          | <a href="/2013/04/novos-rumos/#disqus_thread">Comments</a>
         
@@ -670,11 +766,11 @@ Abraço
   </header>
 
 
-  <div class="entry-content">Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado. 
+  <div class="entry-content"><p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
-Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável. 
+<p>Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável.</p>
 
-=) 
+<p>=)</p>
 </div>
   
   
@@ -703,7 +799,7 @@ Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que
   
 
 
-<time datetime="2013-03-20T00:00:00-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
+<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
         
          | <a href="/2013/03/pair-programming-remoto-com-screen-e-vim/#disqus_thread">Comments</a>
         
@@ -712,79 +808,108 @@ Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que
   </header>
 
 
-  <div class="entry-content">Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.
+  <div class="entry-content"><p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
-Empresas de TI bem sucedidas como <a title="37signals" href="http://37signals.com/" target="_blank">37signals</a> e <a title="Github" href="https://github.com/" target="_blank">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.
+<p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
 
-Usando as ferramentas e práticas certas é possível <a title="REMOTE" href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013" target="_blank">trabalhar remotamente</a> e até mesmo <a title="Pair programming" href="http://en.wikipedia.org/wiki/Pair_programming" target="_blank">parear com outro desenvolvedor</a> à distância.
+<p>Usando as ferramentas e práticas certas é possível <a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">trabalhar remotamente</a> e até mesmo <a href="http://en.wikipedia.org/wiki/Pair_programming">parear com outro desenvolvedor</a> à distância.</p>
+
 <h2>Requisitos</h2>
+
 <ul>
-	<li>ssh</li>
-	<li>screen</li>
-	<li>vim</li>
-	<li>skype</li>
+<li><p>ssh</p></li>
+<li><p>screen</p></li>
+<li><p>vim</p></li>
+<li><p>skype</p></li>
 </ul>
-Para compartilhar o mesmo &#8220;contexto&#8221; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a title="O melhor editor" href="http://www.vim.org/" target="_blank">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?
+
+
+<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a href="http://www.vim.org/">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
+
 <h2>Instalação</h2>
-Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:
-<pre>$ sudo apt-get install screen</pre>
-Em seguida, configure as permissões de execução:
-<pre>$ chmod u+s /usr/bin/screen
-$ chmod 755 /var/run/screen</pre>
-O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:
-<pre>$ screen -S nomedasessao</pre>
-Isso criará uma sessão com o nome &#8220;nomedasessao&#8221; e será exibido um shell &#8220;limpo&#8221;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:
-<pre>$ screen -ls
+
+<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
+
+<pre><code>$ sudo apt-get install screen
+</code></pre>
+
+<p>Em seguida, configure as permissões de execução:</p>
+
+<pre><code>$ chmod u+s /usr/bin/screen
+$ chmod 755 /var/run/screen
+</code></pre>
+
+<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
+
+<pre><code>$ screen -S nomedasessao
+</code></pre>
+
+<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
+
+<pre><code>$ screen -ls
 There is a screen on:
-        8095.nomedasessao	(19-03-2013 23:32:54)	(Attached)
-1 Socket in /var/run/screen/S-user.</pre>
-A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:
-<pre>$ screen -x nomedasessao</pre>
-Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.
+        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
+1 Socket in /var/run/screen/S-user.
+</code></pre>
 
-Para se desconectar da sessão atual, execute:
-<pre># screen -d
-[remote detached from 8095.nomedasessao]</pre>
+<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
+
+<pre><code>$ screen -x nomedasessao
+</code></pre>
+
+<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
+
+<p>Para se desconectar da sessão atual, execute:</p>
+
+<pre><code># screen -d
+[remote detached from 8095.nomedasessao]
+</code></pre>
+
 <h2>Usando o Screen</h2>
-O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.
 
-Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:
+<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
 
-<strong>Copy mode (scroll)</strong>
+<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
+
+<p><strong>Copy mode (scroll)</strong>
 Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
 Navegue pela tela com as setas ou pageup/pagedown;
-Marque o início da seleção do texto com &lt;espaço&gt; e termine com &lt;espaço&gt; para copiar;
-Cole com Ctrl-a + ] (colchete para direita);
+Marque o início da seleção do texto com &lt;espaço> e termine com &lt;espaço> para copiar;
+Cole com Ctrl-a + ] (colchete para direita);</p>
 
-<strong>Windows</strong>
+<p><strong>Windows</strong>
 Crie uma janela (ou aba) com Ctrl-a + c
-Liste as janelas com Ctrl-a + &#8221; (aspas)
-Altere para a janela com Ctrl-a &lt;numero de 0-9&gt;
-Feche (ou mate) a janela atual com Ctrl+a k
+Liste as janelas com Ctrl-a + &ldquo; (aspas)
+Altere para a janela com Ctrl-a <numero de 0-9>
+Feche (ou mate) a janela atual com Ctrl+a k</p>
 
-<strong>Split</strong>
+<p><strong>Split</strong>
 Divida a tela horizontalmente com Ctrl-a + S
 Divida a tela verticalmente com Ctrl-a + V
 Mude de split com Ctrl-a + Tab
-Feche um split com Ctrl-a + X
+Feche um split com Ctrl-a + X</p>
 
-Para digitar um comando: Ctrl-a + :
+<p>Para digitar um comando: Ctrl-a + :</p>
 
-Consulte o <a title="man screen" href="http://linux.die.net/man/1/screen" target="_blank">manual do Screen</a> para a lista completa de atalhos/comandos.
+<p>Consulte o <a href="http://linux.die.net/man/1/screen">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
+
 <h2>Dicas e considerações</h2>
-Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a title="man screen" href="http://linux.die.net/man/1/screen" target="_blank">manual oficial</a>.
 
-Existem outras alternativas como o <a title="tmux" href="http://tmux.sourceforge.net/" target="_blank">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.
+<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a href="http://linux.die.net/man/1/screen">manual oficial</a>.</p>
 
-Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &#8220;window&#8221; na mesma sessão do Screen.
+<p>Existem outras alternativas como o <a href="http://tmux.sourceforge.net/">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
 
-Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a title="pomodoro" href="http://www.pomodorotechnique.com/" target="_blank">Pomodoro</a> pode ser uma boa opção.
+<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
 
-Dúvidas, críticas ou sugestões nos comentários. Sucesso!
+<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a href="http://www.pomodorotechnique.com/">Pomodoro</a> pode ser uma boa opção.</p>
+
+<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
+
 <h2>Referências</h2>
-<a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction" target="_blank">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
-</a><a href="http://linux.die.net/man/1/screen" target="_blank">http://linux.die.net/man/1/screen
-</a><a href="http://aperiodic.net/screen/quick_reference" target="_blank">http://aperiodic.net/screen/quick_reference</a>
+
+<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
+</a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
+</a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
 </div>
   
   
@@ -813,7 +938,7 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
   
 
 
-<time datetime="2013-03-18T00:00:00-03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+<time datetime="2013-03-18T13:45:25-03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
         
          | <a href="/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/#disqus_thread">Comments</a>
         
@@ -822,35 +947,35 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
   </header>
 
 
-  <div class="entry-content"><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em>
+  <div class="entry-content"><p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
 
-De alguns anos para cá, passei a escrever uma pequena lista de metas para o ano seguinte e percebi que o simples fato de haver uma lista já era o suficiente para que eu não perdesse totalmente o foco.
+<p>De alguns anos para cá, passei a escrever uma pequena lista de metas para o ano seguinte e percebi que o simples fato de haver uma lista já era o suficiente para que eu não perdesse totalmente o foco.</p>
 
-A criação de uma lista, pequena, concisa, realista, também traz motivação para cumprir novas metas a cada vez que você completa algum dos itens. É a estratégia de alimentar o cérebro com pequenas recompensas para continuar em frente, como acontece num jogo.
+<p>A criação de uma lista, pequena, concisa, realista, também traz motivação para cumprir novas metas a cada vez que você completa algum dos itens. É a estratégia de alimentar o cérebro com pequenas recompensas para continuar em frente, como acontece num jogo.</p>
 
-Há pouco mais de dois anos, <a title="Pare de chorar e mexa-se" href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/" target="_blank">escrevi aqui um post</a> em que eu dizia que deveríamos parar de chorar e reclamar e começar a correr atrás de nossos objetivos. Escrevi aquele texto especialmente para mim, como se uma parte do cérebro estivesse dando uma bronca na outra parte. Demorou, mas acho que a bronca fez efeito.
+<p>Há pouco mais de dois anos, <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">escrevi aqui um post</a> em que eu dizia que deveríamos parar de chorar e reclamar e começar a correr atrás de nossos objetivos. Escrevi aquele texto especialmente para mim, como se uma parte do cérebro estivesse dando uma bronca na outra parte. Demorou, mas acho que a bronca fez efeito.</p>
 
-Usando a lista de metas, mesmo sem muita disciplina, consegui ir além do que eu previa, sendo que passei a considerar 2012 como o ano em que parei de reclamar, tirei a bunda da cadeira e as coisas começaram a acontecer.
+<p>Usando a lista de metas, mesmo sem muita disciplina, consegui ir além do que eu previa, sendo que passei a considerar 2012 como o ano em que parei de reclamar, tirei a bunda da cadeira e as coisas começaram a acontecer.</p>
 
-Em 2011, resolvi que queria tentar participar de eventos como palestrante. Sempre tive dificuldade de falar em público e apresentar idéias, e achei que essa seria uma boa forma de corrigir essas limitações.
+<p>Em 2011, resolvi que queria tentar participar de eventos como palestrante. Sempre tive dificuldade de falar em público e apresentar idéias, e achei que essa seria uma boa forma de corrigir essas limitações.</p>
 
-Em 2012 eu continuei, tanto para apresentar algum tema que eu considero interessante, como também como ferramenta de marketing pessoal. Tanto quanto ser competente e fazer um bom trabalho, é importante ver e ser visto.
+<p>Em 2012 eu continuei, tanto para apresentar algum tema que eu considero interessante, como também como ferramenta de marketing pessoal. Tanto quanto ser competente e fazer um bom trabalho, é importante ver e ser visto.</p>
 
-Em Maio, apresentei um <a href="http://pbalduino.github.com/gurusp-talk-23/">talk de 30 minutos</a>, no 23º encontro do GURU-SP, demonstrando a simplicidade do LISP usando Clojure.
+<p>Em Maio, apresentei um <a href="http://pbalduino.github.com/gurusp-talk-23/">talk de 30 minutos</a>, no 23º encontro do GURU-SP, demonstrando a simplicidade do LISP usando Clojure.</p>
 
-Em Agosto, para minha total surpresa, fui convidado a apresentar um lightning talk no <a href="http://www.qconsp.com/">QCON-SP</a>, onde falei sobre todos os sabores conhecidos de Ruby e dialetos, incluindo o Elixir. Apresentar um tema em cinco minutos é como fazer um show de Punk Rock, e a adrenalina de ambos é sempre bem vinda.
+<p>Em Agosto, para minha total surpresa, fui convidado a apresentar um lightning talk no <a href="http://www.qconsp.com/">QCON-SP</a>, onde falei sobre todos os sabores conhecidos de Ruby e dialetos, incluindo o Elixir. Apresentar um tema em cinco minutos é como fazer um show de Punk Rock, e a adrenalina de ambos é sempre bem vinda.</p>
 
-Em Outubro, foi ao ar o meu curso <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">Ruby on Rails do começo ao fim</a>, pelo portal de cursos do iMasters. O curso nasceu como um tutorial que fiz para ajudar algumas pessoas próximas e acabou se tornando algo que me ajudou a conhecer mais pessoas.
+<p>Em Outubro, foi ao ar o meu curso <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">Ruby on Rails do começo ao fim</a>, pelo portal de cursos do iMasters. O curso nasceu como um tutorial que fiz para ajudar algumas pessoas próximas e acabou se tornando algo que me ajudou a conhecer mais pessoas.</p>
 
-Um dos frutos que colhi com esse curso foi o convite para <a href="http://pbalduino.github.com/senes2012/">palestrar</a> e ministrar um treinamento durante a IV Semana de Engenharia do Norte do Espírito Santo, no campus do CEUNES/UFES, em São Mateus - ES, que aconteceu em Novembro. Um efeito colateral muito bem vindo dessa minha ida ao Espírito Santo foi a criação do Grupo de Usuários Ruby-ES, um irmão caçula do GURU-SP.
+<p>Um dos frutos que colhi com esse curso foi o convite para <a href="http://pbalduino.github.com/senes2012/">palestrar</a> e ministrar um treinamento durante a IV Semana de Engenharia do Norte do Espírito Santo, no campus do CEUNES/UFES, em São Mateus &ndash; ES, que aconteceu em Novembro. Um efeito colateral muito bem vindo dessa minha ida ao Espírito Santo foi a criação do Grupo de Usuários Ruby-ES, um irmão caçula do GURU-SP.</p>
 
-Ainda em Novembro, fui convidado a participar do evento 7masters Java, organizado pelo iMasters, no qual tive a honra de dividir o espaço com pessoas que eu admiro há anos, como Bruno &#8220;JavaMan&#8221;, Luca Bastos e a dupla dinâmica qmx/abstractj. Lá falei sobre os usos do <a href="http://pbalduino.github.com/7masters-java/">Clojure no mundo real</a> e <a href="http://videolog.tv/video.php?id=889921">compartilhei a experiência</a> que tive em um projeto, utilizando a ferramenta.
+<p>Ainda em Novembro, fui convidado a participar do evento 7masters Java, organizado pelo iMasters, no qual tive a honra de dividir o espaço com pessoas que eu admiro há anos, como Bruno &ldquo;JavaMan&rdquo;, Luca Bastos e a dupla dinâmica qmx/abstractj. Lá falei sobre os usos do <a href="http://pbalduino.github.com/7masters-java/">Clojure no mundo real</a> e <a href="http://videolog.tv/video.php?id=889921">compartilhei a experiência</a> que tive em um projeto, utilizando a ferramenta.</p>
 
-Fechando o ano, tive meu livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">Dominando JavaScript com jQuery</a> publicado pela <a href="http://www.casadocodigo.com.br/">Editora Casa do Código</a>. Aliás, a versão impressa do livro foi disponibilizada hoje no site. Agora só me falta plantar uma árvore.
+<p>Fechando o ano, tive meu livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">Dominando JavaScript com jQuery</a> publicado pela <a href="http://www.casadocodigo.com.br/">Editora Casa do Código</a>. Aliás, a versão impressa do livro foi disponibilizada hoje no site. Agora só me falta plantar uma árvore.</p>
 
-Em breve, pretendo compartilhar minhas experiências ao escrever o curso e o livro.
+<p>Em breve, pretendo compartilhar minhas experiências ao escrever o curso e o livro.</p>
 
-Que mais realizações venham em 2013, e que os frutos do que plantei continuem nascendo, mesmo que dessa vez eu não tenha feito nenhuma lista de metas a cumprir.
+<p>Que mais realizações venham em 2013, e que os frutos do que plantei continuem nascendo, mesmo que dessa vez eu não tenha feito nenhuma lista de metas a cumprir.</p>
 </div>
   
   
@@ -879,7 +1004,7 @@ Que mais realizações venham em 2013, e que os frutos do que plantei continuem 
   
 
 
-<time datetime="2013-02-21T00:00:00-03:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
+<time datetime="2013-02-21T12:58:02-03:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
         
          | <a href="/2013/02/programacao-funcional-com-javascript/#disqus_thread">Comments</a>
         
@@ -888,37 +1013,48 @@ Que mais realizações venham em 2013, e que os frutos do que plantei continuem 
   </header>
 
 
-  <div class="entry-content"><blockquote>&#8220;JavaScript is LISP in C&#8217;s clothing&#8221; - Douglas Crockford</blockquote>
+  <div class="entry-content"><blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
+
 <h2>O que é programação funcional</h2>
-Programação funcional é, assim como a orientação a objetos, uma forma de se pensar em como resolver problemas.
 
-A base do que hoje é a programação funcional foi criada paralelamente por Alan Turing e Alonzo Church na década de 1930, antes mesmo da existência dos computadores como o conhecemos.
+<p>Programação funcional é, assim como a orientação a objetos, uma forma de se pensar em como resolver problemas.</p>
 
-Infelizmente, a programação funcional passou muito tempo restrita aos meios acadêmicos, o que faz com que o iniciante no assunto fique assustado com toda aquela notação matemática e com os termos incompreensíveis.
+<p>A base do que hoje é a programação funcional foi criada paralelamente por Alan Turing e Alonzo Church na década de 1930, antes mesmo da existência dos computadores como o conhecemos.</p>
 
-<pre>ω := λx.x x
+<p>Infelizmente, a programação funcional passou muito tempo restrita aos meios acadêmicos, o que faz com que o iniciante no assunto fique assustado com toda aquela notação matemática e com os termos incompreensíveis.</p>
+
+<pre><code>ω := λx.x x
 Ω := ω ω 
-Y := λg.(λx.g (x x)) (λx.g (x x))</pre>
+Y := λg.(λx.g (x x)) (λx.g (x x))
+</code></pre>
 
-Felizmente, o conceito de programação funcional é muito simples. Assim como na orientação a objetos a menor parte de um sistema é um objeto, você pode atribuir objetos a variáveis, pode passá-los por parâmetro e ter métodos retornando objetos, na programação funcional a menor parte do seu sistema é uma função.
+<p>Felizmente, o conceito de programação funcional é muito simples. Assim como na orientação a objetos a menor parte de um sistema é um objeto, você pode atribuir objetos a variáveis, pode passá-los por parâmetro e ter métodos retornando objetos, na programação funcional a menor parte do seu sistema é uma função.</p>
 
-Isso implica que você pode atribuir funções a variáveis, pode passá-las por parâmetro e mesmo fazer com que uma função retorne outra função. Alguma linguagens implementam também imutabilidade, que é quando todo valor é tratado como se fosse uma constante, e outros conceitos periféricos, o que não é o caso do JavaScript. Todos os demais conceitos de programação funcional derivam do fato de você lidar com funções como se fossem um valor como qualquer outro.
+<p>Isso implica que você pode atribuir funções a variáveis, pode passá-las por parâmetro e mesmo fazer com que uma função retorne outra função. Alguma linguagens implementam também imutabilidade, que é quando todo valor é tratado como se fosse uma constante, e outros conceitos periféricos, o que não é o caso do JavaScript. Todos os demais conceitos de programação funcional derivam do fato de você lidar com funções como se fossem um valor como qualquer outro.</p>
+
 <h2>High order functions</h2>
-Uma high order function (não achei uma tradução decente para o Português), apesar do nome intimidador, é simplesmente uma função que recebe outra função como parâmetro ou devolve uma função como resultado. Quando você usa callbacks no JavaScript e no jQuery, você está fazendo uso de high order functions.
-<pre lang="javascript">$("button.mallandro")
+
+<p>Uma high order function (não achei uma tradução decente para o Português), apesar do nome intimidador, é simplesmente uma função que recebe outra função como parâmetro ou devolve uma função como resultado. Quando você usa callbacks no JavaScript e no jQuery, você está fazendo uso de high order functions.</p>
+
+<pre><code>$("button.mallandro")
   .click(function() {
     alert("Ié ié!");
-  });</pre>
-O método <tt>click</tt> é uma high order function, e a função anônima que faz <em>Ié ié!</em> é um callback.
+  });
+</code></pre>
 
-Mais para frente vou mostrar mais formas de usar high order functions.
+<p>O método click é uma high order function, e a função anônima que faz <em>Ié ié!</em> é um callback.</p>
+
+<p>Mais para frente vou mostrar mais formas de usar high order functions.</p>
+
 <h2>Escopo</h2>
-Apesar do conceito de escopo não ser exclusivo da programação funcional, é importantíssimo que você entenda como funciona o escopo no JavaScript para que não fique confuso ao ver <em>closures</em> e <em>currying</em>.
 
-Como na maioria das linguagens comerciais, uma variável declarada em um escopo maior é visível em um escopo menor, enquanto o contrário não é verdadeiro.
+<p>Apesar do conceito de escopo não ser exclusivo da programação funcional, é importantíssimo que você entenda como funciona o escopo no JavaScript para que não fique confuso ao ver <em>closures</em> e <em>currying</em>.</p>
 
-Na prática significa que uma variável global é visível por todo mundo:
-<pre lang="javascript">var x = 1;
+<p>Como na maioria das linguagens comerciais, uma variável declarada em um escopo maior é visível em um escopo menor, enquanto o contrário não é verdadeiro.</p>
+
+<p>Na prática significa que uma variável global é visível por todo mundo:</p>
+
+<pre><code>var x = 1;
 
 function foo() {
   console.log(x);
@@ -926,11 +1062,12 @@ function foo() {
 
 foo();
 
-// Saída:   1</pre>
-Significa também que uma variável local só é vista dentro do escopo em que foi criada, mesmo que tenha o mesmo nome de uma variável global:
+// Saída:   1
+</code></pre>
 
-<pre lang="javascript">
-var x = 1;
+<p>Significa também que uma variável local só é vista dentro do escopo em que foi criada, mesmo que tenha o mesmo nome de uma variável global:</p>
+
+<pre><code>var x = 1;
 
 function bar() {
   var x = 99;
@@ -947,12 +1084,11 @@ console.log(x);
 
 console.log(y);
 // ReferenceError: y is not defined
-</pre>
+</code></pre>
 
-Quando uma função altera o valor de uma variável global, isso afeta toda a aplicação. Por isso o uso de variáveis globais não é considerado uma boa prática. Porém, uma variável global passada por parâmetro para uma função não tem o seu valor alterado:
+<p>Quando uma função altera o valor de uma variável global, isso afeta toda a aplicação. Por isso o uso de variáveis globais não é considerado uma boa prática. Porém, uma variável global passada por parâmetro para uma função não tem o seu valor alterado:</p>
 
-<pre lang="javascript">
-var x = 1;
+<pre><code>var x = 1;
 var y = 11;
 
 function meh(x) {
@@ -968,14 +1104,13 @@ meh(x);
 
 console.log("Fora: ", x, y);
 // Fora:  1 12
-</pre>
+</code></pre>
 
 <h2>Closures</h2>
 
-Outra característica do escopo é que uma função guarda as variáveis do contexto em que foi criada. Isso significa que uma função pode continuar acessando variáveis que só existiam no momento em que ela foi criada.
+<p>Outra característica do escopo é que uma função guarda as variáveis do contexto em que foi criada. Isso significa que uma função pode continuar acessando variáveis que só existiam no momento em que ela foi criada.</p>
 
-<pre lang="javascript">
-function counter() {
+<pre><code>function counter() {
   var x = 0;
 
   return function() {
@@ -995,22 +1130,21 @@ console.log(count());
 // 4
 console.log(x);
 // ReferenceError: x is not defined
-</pre>
+</code></pre>
 
-O que acontece aqui é que <tt>count</tt> recebe uma função que incrementa o valor da variável <tt>x</tt>, só que essa variável existe apenas dentro da função <tt>counter</tt>. O que aconteceu aqui é que a função armazenada em <tt>count</tt> <i>se lembra</i> da variável que foi criada em outra função, mas que não está mais sendo executada.
+<p>O que acontece aqui é que count recebe uma função que incrementa o valor da variável x, só que essa variável existe apenas dentro da função counter. O que aconteceu aqui é que a função armazenada em count <em>se lembra</em> da variável que foi criada em outra função, mas que não está mais sendo executada.</p>
 
-Ao tentarmos exibir o valor da variável <tt>x</tt>, recebemos um erro, pois ela não existe no escopo global.
+<p>Ao tentarmos exibir o valor da variável x, recebemos um erro, pois ela não existe no escopo global.</p>
 
 <h2>Currying</h2>
 
-Juntando tudo o que vimos até aqui sobre high order functions, escopo e closures, chegamos ao <i>currying</i>. Currying é uma operação em que você transforma uma função que receberia mais de um parâmetro em uma série de chamadas de funções com apenas um parâmetro cada. 
+<p>Juntando tudo o que vimos até aqui sobre high order functions, escopo e closures, chegamos ao <em>currying</em>. Currying é uma operação em que você transforma uma função que receberia mais de um parâmetro em uma série de chamadas de funções com apenas um parâmetro cada.</p>
 
-Um dos usos dessa técnica é evitar, de forma elegante, que o mesmo parâmetro seja passado para a mesma função.
+<p>Um dos usos dessa técnica é evitar, de forma elegante, que o mesmo parâmetro seja passado para a mesma função.</p>
 
-Vamos pegar um exemplo escrito de forma imperativa. Temos uma função <tt>hey</tt>, que recebe os parâmetros <tt>texto</tt> e <tt>nome</tt> e, a partir disso, imprime uma saudação.
+<p>Vamos pegar um exemplo escrito de forma imperativa. Temos uma função hey, que recebe os parâmetros texto e nome e, a partir disso, imprime uma saudação.</p>
 
-<pre lang="javascript">
-function hey(texto, nome) {
+<pre><code>function hey(texto, nome) {
   console.log(texto + ", " + nome);
 }
 
@@ -1022,14 +1156,13 @@ hey("Bom dia", "José");
 
 hey("Bom dia", "Nicolau");
 // Bom dia, Nicolau
-</pre>
+</code></pre>
 
-Você pode dizer que poderíamos guardar &#8220;Bom dia&#8221; em uma variável. Concordo, mas isso não mudaria nada dentro do que estamos apresentando.
+<p>Você pode dizer que poderíamos guardar &ldquo;Bom dia&rdquo; em uma variável. Concordo, mas isso não mudaria nada dentro do que estamos apresentando.</p>
 
-Reescrevendo a mesma função usando currying, teremos o código abaixo:
+<p>Reescrevendo a mesma função usando currying, teremos o código abaixo:</p>
 
-<pre lang="javascript">
-function hey(texto) {
+<pre><code>function hey(texto) {
   return function(nome) {
     console.log(texto + ", " + nome);
   }
@@ -1045,17 +1178,17 @@ bomDia("José");
 
 bomDia("Nicolau");
 // Bom dia, Nicolau
-</pre>
+</code></pre>
 
-Programação funcional é muito mais do que os conceitos que apresentei aqui, mas como um primeiro contato já dá para fazer muita coisa bacana.
+<p>Programação funcional é muito mais do que os conceitos que apresentei aqui, mas como um primeiro contato já dá para fazer muita coisa bacana.</p>
 
-Recomendo que você estude e pesquise a respeito. Mesmo que você não use uma linguagem funcional no seu dia-a-dia, o fato de conhecer um novo modo de pensar acaba alterando a forma como você resolve problemas, fazendo com que você tenha idéias melhores e mais elegantes.
+<p>Recomendo que você estude e pesquise a respeito. Mesmo que você não use uma linguagem funcional no seu dia-a-dia, o fato de conhecer um novo modo de pensar acaba alterando a forma como você resolve problemas, fazendo com que você tenha idéias melhores e mais elegantes.</p>
 
-<b>Update em 26/02:</b>
+<p><strong>Update em 26/02:</strong></p>
 
-Este artigo foi publicado também no iMasters, no endereço <a href="http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/" target="_blank">http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/</a>.
+<p>Este artigo foi publicado também no iMasters, no endereço <a href="http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/">http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/</a>.</p>
 
-<i>Esse texto é parte do livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery" target="_blank">Dominando JavaScript com jQuery</a>, publicado pela <a href="http://www.casadocodigo.com.br" target="_blank">Editora Casa do Código</a></i>.
+<p><em>Esse texto é parte do livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">Dominando JavaScript com jQuery</a>, publicado pela <a href="http://www.casadocodigo.com.br">Editora Casa do Código</a></em>.</p>
 </div>
   
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:25:03-03:00</updated>
+  <updated>2013-09-15T18:37:40-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -16,25 +16,25 @@
   <entry>
     <title type="html"><![CDATA[Rails 4 - Novidades]]></title>
     <link href="http://1up4developers.github.io/2012/11/rails-4-novidades/"/>
-    <updated>2012-11-29T00:00:00-02:00</updated>
+    <updated>2012-11-29T11:38:49-02:00</updated>
     <id>http://1up4developers.github.io/2012/11/rails-4-novidades</id>
-    <content type="html"><![CDATA[<p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a title="DHH commiting Rails in 4.0.0.beta" href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a title="Ruby on Rails Guides - Rails 4" href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
+    <content type="html"><![CDATA[<p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
 
 <p>Segue um resumão:</p>
 
 <ul>
-    <li>Suporte somente a ruby 1.9.3 ou superior</li>
-    <li>Vendor/Plugins já era</li>
-    <li>Muita "magia" movida pra gems \o/ (Dynamic finders, Mass assignments, AR Session Store, ActiveResource … e muito mais)</li>
-    <li>Interface de Queue</li>
-    <li>Asynchronous Mailer</li>
-    <li>ActionController::Live</li>
-    <li>HTML5 tag helpers</li>
-    <li>Threadsafe on by default</li>
+<li><p>Suporte somente a ruby 1.9.3 ou superior</p></li>
+<li><p>Vendor/Plugins já era</p></li>
+<li><p>Muita &ldquo;magia&rdquo; movida pra gems \o/ (Dynamic finders, Mass assignments, AR Session Store, ActiveResource … e muito mais)</p></li>
+<li><p>Interface de Queue</p></li>
+<li><p>Asynchronous Mailer</p></li>
+<li><p>ActionController::Live</p></li>
+<li><p>HTML5 tag helpers</p></li>
+<li><p>Threadsafe on by default</p></li>
 </ul>
 
 
-<p>O <a title="Twitter profile do Santiago Pastorino" href="https://twitter.com/spastorino" target="_blank">Santiago Pastorino</a>, um dos commiters do Rails está mantendo um <a title="Rails 4 links compilation" href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/" target="_blank">ótimo post</a> sobre o desenvolvimento do Rails 4, que vale a pena acompanhar.</p>
+<p>O <a href="https://twitter.com/spastorino">Santiago Pastorino</a>, um dos commiters do Rails está mantendo um <a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">ótimo post</a> sobre o desenvolvimento do Rails 4, que vale a pena acompanhar.</p>
 
 <p>Sucesso!</p>
 ]]></content>
@@ -43,11 +43,11 @@
   <entry>
     <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
     <link href="http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers/"/>
-    <updated>2012-11-28T00:00:00-02:00</updated>
+    <updated>2012-11-28T13:49:06-02:00</updated>
     <id>http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
-<pre><code>require 'minion_server'
+<pre><code>&lt;code&gt;require 'minion_server'
 
 # build your integration app
 IntegrationApp = Rack::Builder.new do
@@ -65,72 +65,69 @@ server.start("localhost", 1620)  # default: localhost, 4000
 system "curl http://localhost:1620" # =&gt; "Be happy!"
 
 server.shutdown
+&lt;/code&gt;
 </code></pre>
-
 
 <p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
 Hope that helps!</p>
 
-<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a title="A real server to mock servers!" href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
+<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Migrando sua app Rails do MySQL para PostgreSQL sem dor]]></title>
     <link href="http://1up4developers.github.io/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/"/>
-    <updated>2012-08-29T00:00:00-03:00</updated>
+    <updated>2012-08-29T08:00:07-03:00</updated>
     <id>http://1up4developers.github.io/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor</id>
     <content type="html"><![CDATA[<h2>Motivação</h2>
 
+<p>Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.</p>
 
-<p>Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/" target="_blank">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.</p>
+<p>Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/">toque de Midas da escrotização</a>.</p>
 
-<p>Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl" target="_blank">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/" target="_blank">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/" target="_blank">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/" target="_blank">toque de Midas da escrotização</a>.</p>
-
-<p>Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/" target="_blank">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open Source</a>.</p>
+<p>Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software">Open Source</a>.</p>
 
 <h2>Instalando o Postgres</h2>
 
-
 <p>Se você estiver no Ubuntu, basta rodar:</p>
 
-<pre>$ sudo apt-get install postgresql-9.1 libpq-dev</pre>
-
+<pre><code>$ sudo apt-get install postgresql-9.1 libpq-dev
+</code></pre>
 
 <p>Finalizada a instalação, inicie o serviço e abra o client do Postgres:</p>
 
-<pre>$ sudo service postgresql start
-$ sudo -u postgres psql</pre>
-
+<pre><code>$ sudo service postgresql start
+$ sudo -u postgres psql
+</code></pre>
 
 <p>Aproveite o terminal e mude a senha do usuário <em>postgres</em>:</p>
 
-<pre># \password</pre>
-
+<pre><code># \password
+</code></pre>
 
 <p>Para sair, digite:</p>
 
-<pre># \q</pre>
-
+<pre><code># \q
+</code></pre>
 
 <h2>Migrando o banco</h2>
 
-
-<p>Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql" target="_blank">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.</p>
+<p>Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.</p>
 
 <p>O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:</p>
 
-<pre>$ sudo gem install mysql2psql</pre>
-
+<pre><code>$ sudo gem install mysql2psql
+</code></pre>
 
 <p>Em seguida, execute:</p>
 
-<pre>$ mysql2psql</pre>
-
+<pre><code>$ mysql2psql
+</code></pre>
 
 <p>Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:</p>
 
-<pre>mysql:
+<pre><code>mysql:
  hostname: localhost
  port: 3306
  socket: /var/run/mysqld/mysqld.sock
@@ -143,23 +140,23 @@ destination:
   port: 5432
   username: postgres
   password: postgres
-  database: app_development</pre>
-
+  database: app_development
+</code></pre>
 
 <p>Agora crie o banco de destino no Postgres:</p>
 
-<pre>$ sudo psql -h localhost -U postgres -W
-# CREATE DATABASE app_development;</pre>
-
+<pre><code>$ sudo psql -h localhost -U postgres -W
+# CREATE DATABASE app_development;
+</code></pre>
 
 <p>Saia do client com <em>\q</em> e então rode novamente:</p>
 
-<pre>$ mysql2psql</pre>
-
+<pre><code>$ mysql2psql
+</code></pre>
 
 <p>Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:</p>
 
-<pre>Creating table comments...
+<pre><code>Creating table comments...
 Created table comments
 Creating table schema_migrations...
 Created table schema_migrations
@@ -188,30 +185,31 @@ Indexed table schema_migrations
 Indexing table users...
 Indexed table users
 
-Table creation 0 min, loading 1 min, indexing 0 min, total 1 min</pre>
-
+Table creation 0 min, loading 1 min, indexing 0 min, total 1 min
+</code></pre>
 
 <h2>Configurando a app</h2>
 
-
 <p>Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:</p>
 
-<pre># Gemfile
-gem 'pg'</pre>
+<pre><code># Gemfile
+gem 'pg'
 
 
-<pre># database.yml
+
+
+# database.yml
 development:
   adapter: postgresql
   host: localhost
   database: app_development
   username: postgres
-  password: postgres</pre>
-
+  password: postgres
+</code></pre>
 
 <p>Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!</p>
 
-<p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres" target="_blank">mysql-to-postgres</a>, do mesmo autor.</p>
+<p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres">mysql-to-postgres</a>, do mesmo autor.</p>
 
 <p>Caso tenha alguma dúvida ou sugestão, deixe seu comentário.</p>
 ]]></content>
@@ -220,42 +218,37 @@ development:
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
     <link href="http://1up4developers.github.io/2012/06/concepcao-do-rologames/"/>
-    <updated>2012-06-25T00:00:00-03:00</updated>
+    <updated>2012-06-25T07:05:09-03:00</updated>
     <id>http://1up4developers.github.io/2012/06/concepcao-do-rologames</id>
-    <content type="html"><![CDATA[<p>Este post é um tópico da <a title="A experiência de lançar o RoloGames" href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
+    <content type="html"><![CDATA[<p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
 
 <h2>Quando surgiu a idéia</h2>
 
-
-<p>Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &ldquo;abertos&rdquo; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a title="Site social para trocar seus jogos!" href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.</p>
+<p>Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &ldquo;abertos&rdquo; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.</p>
 
 <h2>Definindo um mantra</h2>
 
+<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
 
-<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img class="size-full wp-image-1199" title="A Arte do Começo - The Art of Start" src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" width="240" height="347" /></a>[/caption]</p>
-
-<p>Totalmente baseado nas dicas do Sr. Kawasaki em <a title="Arte do Começo por Guy Kawasaki" href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
+<p>Totalmente baseado nas dicas do Sr. Kawasaki em <a href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
 
 <ul>
-    <li><strong>Oportunidades confiáveis</strong>. Queremos que o usuário encontre somente as oportunidades de troca que <strong>façam sentido</strong> a ele, e não receba spams que infortunam a vida ou propostas <em>sem noção</em> (por exemplo, oferecerem um jogo antigo em troca de um lançamento).</li>
-    <li><strong>Toda troca deve ser justa</strong>. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.</li>
-    <li><strong>Fácil de usar</strong>. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.</li>
-    <li><strong>Social</strong>. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.</li>
+<li><p><strong>Oportunidades confiáveis</strong>. Queremos que o usuário encontre somente as oportunidades de troca que <strong>façam sentido</strong> a ele, e não receba spams que infortunam a vida ou propostas <em>sem noção</em> (por exemplo, oferecerem um jogo antigo em troca de um lançamento).</p></li>
+<li><p><strong>Toda troca deve ser justa</strong>. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.</p></li>
+<li><p><strong>Fácil de usar</strong>. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.</p></li>
+<li><p><strong>Social</strong>. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.</p></li>
 </ul>
 
 
 <h2>Provas de Conceitos</h2>
 
-
-<p>Antes de encostar no código, o Panachi e eu definimos o objetivo do site e algumas premissas para começar o projeto, e a mais importante era: ter um banco de dados de jogos. Definimos somente as informações necessárias de um jogo, e partimos para uma prova de conceito. Em dois dias conseguimos montar um banco de dados bem completo, e a nossa solução foi simplesmente um <a title="Web crawler fácil e rápido com ruby e nokogiri" href="http://1up4dev.org/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">crawler</a> de jogos! Por sinal, foi tão produtivo que nossa outra prova de conceito originou o <a title="Busca troféus da PSN (Playstation Network)." href="https://github.com/rogerleite/psn_trophies">psn_trophies</a>.</p>
+<p>Antes de encostar no código, o Panachi e eu definimos o objetivo do site e algumas premissas para começar o projeto, e a mais importante era: ter um banco de dados de jogos. Definimos somente as informações necessárias de um jogo, e partimos para uma prova de conceito. Em dois dias conseguimos montar um banco de dados bem completo, e a nossa solução foi simplesmente um <a href="http://1up4dev.org/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">crawler</a> de jogos! Por sinal, foi tão produtivo que nossa outra prova de conceito originou o <a href="https://github.com/rogerleite/psn_trophies">psn_trophies</a>.</p>
 
 <h2>Interface no papel</h2>
 
-
-<p>Em paralelo às provas de conceito, começamos a rascunhar as telas do site. O processo foi bem simples, uma pilha de sulfite e lápis (na falta de uma caneta <a title="Rabiscando com uma caneta Sharpie" href="http://37signals.com/svn/posts/466-sketching-with-a-sharpie">Sharpie</a>). A partir dos esboços, começamos a definir quais funcionalidades o site teria. Em seguidas priorizamos as mais importantes e fechamos o escopo da primeira versão. Durante o desenvolvimento, muita coisa mudou no layout, mas os &ldquo;rabiscos&rdquo; da concepção foram a essência de tudo.</p>
+<p>Em paralelo às provas de conceito, começamos a rascunhar as telas do site. O processo foi bem simples, uma pilha de sulfite e lápis (na falta de uma caneta <a href="http://37signals.com/svn/posts/466-sketching-with-a-sharpie">Sharpie</a>). A partir dos esboços, começamos a definir quais funcionalidades o site teria. Em seguidas priorizamos as mais importantes e fechamos o escopo da primeira versão. Durante o desenvolvimento, muita coisa mudou no layout, mas os &ldquo;rabiscos&rdquo; da concepção foram a essência de tudo.</p>
 
 <h2>Início do desenvolvimento</h2>
-
 
 <p>Já tinhamos uma prova de conceito, uns rascunhos das páginas e uma lista de funcionalidades. E todo processo levou cerca de uma semana.</p>
 
@@ -266,12 +259,11 @@ development:
   <entry>
     <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
     <link href="http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames/"/>
-    <updated>2012-06-20T00:00:00-03:00</updated>
+    <updated>2012-06-20T08:37:53-03:00</updated>
     <id>http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames</id>
-    <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a title="Rolo Games - Rede Social de troca de jogos" href="http://rologames.com.br/">RoloGames</a>.</p>
+    <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
-<p style="text-align: center;"><a href="http://rologames.com.br"><img class="aligncenter size-full wp-image-1174" title="Rolo Games - Rede Social de Troca de Jogos" src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" width="600" height="120" /></a></p>
-
+<p><a href="http://rologames.com.br"><img src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
 
 <p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
 
@@ -280,10 +272,10 @@ development:
 <p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
 
 <ol>
-    <li><a title="Business Bingo Generator" href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados ... :D</li>
-    <li>MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir "regras" para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</li>
-    <li><a title="Mooney - Controle financeiro pessoal simples, rápido e seguro" href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</li>
-    <li>Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</li>
+<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
+<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
+<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
+<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
 </ol>
 
 
@@ -292,9 +284,9 @@ development:
 <p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
 
 <ul>
-    <li><a title="Concepção do RoloGames" href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></li>
-    <li>Desenvolvimento</li>
-    <li>Infraestrutura</li>
+<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
+<li><p>Desenvolvimento</p></li>
+<li><p>Infraestrutura</p></li>
 </ul>
 
 

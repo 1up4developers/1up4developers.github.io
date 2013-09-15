@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lisp | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/lisp/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:25:03-03:00</updated>
+  <updated>2013-09-15T18:37:40-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -16,10 +16,9 @@
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
     <link href="http://1up4developers.github.io/2013/07/entendendo-lisp-finalmente/"/>
-    <updated>2013-07-14T00:00:00-03:00</updated>
+    <updated>2013-07-14T11:35:31-03:00</updated>
     <id>http://1up4developers.github.io/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
-
 
 <p>Ao olhar um código LISP pela primeira vez, você se assusta.</p>
 
@@ -31,20 +30,20 @@
 
 <p>Matematicamente falando, funções são expressas dessa forma:</p>
 
-<pre lang="javascript">y = f(x)</pre>
-
+<pre><code>y = f(x)
+</code></pre>
 
 <p>Para calcularmos o dobro de um número, teríamos:</p>
 
-<pre lang="javascript">y = dobro(21)</pre>
-
+<pre><code>y = dobro(21)
+</code></pre>
 
 <p>Note que estamos usando uma notação diferente: primeiro vem o operador dobro e, em seguida, vem o operando, ou parâmetro, 21. Chamamos isso de notação prefixa.</p>
 
 <p>Já para executar um cálculo matemático, usamos a forma abaixo:</p>
 
-<pre lang="javascript">y = 21 * 2</pre>
-
+<pre><code>y = 21 * 2
+</code></pre>
 
 <p>Primeiro temos um operador 21, depois temos um operando responsável pela multiplicação e, finalmente, o segundo operando 2. Chamamos essa forma de notação infixa.</p>
 
@@ -52,8 +51,8 @@
 
 <p>A coisa fica bagunçada quando misturamos as duas formas:</p>
 
-<pre lang="javascript">y = dobro(7 * 3)</pre>
-
+<pre><code>y = dobro(7 * 3)
+</code></pre>
 
 <p>Na expressão acima misturamos notação prefixa com infixa. Não há problema algum com isso, mas não é um bom exemplo de consistência.</p>
 
@@ -63,28 +62,27 @@
 
 <p>Imagine agora que o símbolo <code>+</code> é uma função. Para calcularmos uma soma usaríamos o seguinte código:</p>
 
-<pre lang="javascript">+(1, 2)</pre>
-
+<pre><code>+(1, 2)
+</code></pre>
 
 <p>Movendo os parênteses e removendo as vírgulas, a nossa soma inicial ficaria:</p>
 
-<pre lang="clojure">(+ 1 2)</pre>
-
+<pre><code>(+ 1 2)
+</code></pre>
 
 <p>Sabemos que dobro também é uma função. Para calcular dobro, usaríamos:</p>
 
-<pre lang="clojure">(dobro 12)</pre>
-
+<pre><code>(dobro 12)
+</code></pre>
 
 <p>Percebam que agora temos uma regra que se aplica a todos os casos. Repetindo a expressão acima que mistura as notações infixa e prefixa usando as regras do LISP, teríamos:</p>
 
-<pre lang="clojure">(dobro (+ 7 3))</pre>
-
+<pre><code>(dobro (+ 7 3))
+</code></pre>
 
 <p>Talvez pela sua origem acadêmica e fortemente influenciada pela matemática, as implementações de LISP levam muito a sério a questão da consistência.</p>
 
 <h2>Os parênteses</h2>
-
 
 <p>Quando eu estava na quarta série, aprendi uma coisa chamada <em>expressão numérica</em>, que consistia em resolver um cálculo extenso atacando um pedaço por vez, organizadamente.</p>
 
@@ -92,31 +90,31 @@
 
 <p>Uma expressão numérica tem essa cara:</p>
 
-<pre lang="javascript">x = {1 + [3 * (5 + 7)]}</pre>
-
+<pre><code>x = {1 + [3 * (5 + 7)]}
+</code></pre>
 
 <p>Resolvemos a expressão de dentro para fora:</p>
 
-<pre lang="javascript">x = {1 + [3 * (12)]}
+<pre><code>x = {1 + [3 * (12)]}
 
 x = {1 + [36]}
 
 x = {37}
 
-x = 37</pre>
-
+x = 37
+</code></pre>
 
 <p>Simples, não?</p>
 
 <p>Agora vamos extrapolar o que aprendemos na quarta série para uma linguagem de programação, trocando chaves e colchetes por parênteses:</p>
 
-<pre lang="javascript">x = (1 + (3 * (5 + 7)))</pre>
-
+<pre><code>x = (1 + (3 * (5 + 7)))
+</code></pre>
 
 <p>Vamos substituir a nossa conhecida notação infixa pela prefixa.</p>
 
-<pre lang="clojure">x = (+ 1 (* 3 (+ 5 7)))</pre>
-
+<pre><code>x = (+ 1 (* 3 (+ 5 7)))
+</code></pre>
 
 <p>Pronto. Você tem uma expressão numérica com a cara do LISP, resolvendo da forma como a professora ensinou lá na quarta série: primeiro você resolve os parênteses de dentro, depois os próximos, até terminar.</p>
 
@@ -126,10 +124,10 @@ x = 37</pre>
 
 <p>Imagine que você tem o código abaixo:</p>
 
-<pre lang="javascript">x = 3 * 2 + 1
+<pre><code>x = 3 * 2 + 1
 
-y = 1 + 2 * 3</pre>
-
+y = 1 + 2 * 3
+</code></pre>
 
 <p>Os valores de x e y serão iguais? Sim, ambas as variáveis contém o número 7, mas para saber disso você precisou ler em algum outro lugar que o operador de multiplicação tem precedência sobre o operador de adição. É algo que você espera que seja assim e age como se realmente fosse.</p>
 
@@ -139,17 +137,17 @@ y = 1 + 2 * 3</pre>
 
 <p>Seria mais fácil se as expressões fossem escritas assim:</p>
 
-<pre lang="javascript">x = (3 * 2) + 1
+<pre><code>x = (3 * 2) + 1
 
-y = 1 + (2 * 3)</pre>
-
+y = 1 + (2 * 3)
+</code></pre>
 
 <p>Agora está claro para qualquer pessoa o que vai ser executado primeiro, independente do modo como a expressão seja interpretada pela linguagem. Pois saiba que é exatamente assim que um LISP trabalha. Usando a notação prefixa, as expressões acima ficariam:</p>
 
-<pre lang="clojure">x = (+ (* 3 2) 1)
+<pre><code>x = (+ (* 3 2) 1)
 
-y = (+ 1 (* 3 2))</pre>
-
+y = (+ 1 (* 3 2))
+</code></pre>
 
 <p>Primeiro será executada a multiplicação, que está nos parênteses mais internos e, em seguida, será executada a adição. Tudo isso sem se preocupar com regras ocultas ou peculiaridades do compilador.</p>
 

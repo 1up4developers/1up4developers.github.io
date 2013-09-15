@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2012-08-29T00:00:00-03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+<time datetime="2012-08-29T08:00:07-03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -94,30 +94,53 @@
 
 
 <div class="entry-content"><h2>Motivação</h2>
-Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/" target="_blank">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.
 
-Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl" target="_blank">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/" target="_blank">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/" target="_blank">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/" target="_blank">toque de Midas da escrotização</a>.
+<p>Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.</p>
 
-Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/" target="_blank">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software" target="_blank">Open Source</a>.
+<p>Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/">toque de Midas da escrotização</a>.</p>
+
+<p>Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software">Open Source</a>.</p>
+
 <h2>Instalando o Postgres</h2>
-Se você estiver no Ubuntu, basta rodar:
-<pre>$ sudo apt-get install postgresql-9.1 libpq-dev</pre>
-Finalizada a instalação, inicie o serviço e abra o client do Postgres:
-<pre>$ sudo service postgresql start
-$ sudo -u postgres psql</pre>
-Aproveite o terminal e mude a senha do usuário <em>postgres</em>:
-<pre># \password</pre>
-Para sair, digite:
-<pre># \q</pre>
-<h2>Migrando o banco</h2>
-Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql" target="_blank">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.
 
-O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:
-<pre>$ sudo gem install mysql2psql</pre>
-Em seguida, execute:
-<pre>$ mysql2psql</pre>
-Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:
-<pre>mysql:
+<p>Se você estiver no Ubuntu, basta rodar:</p>
+
+<pre><code>$ sudo apt-get install postgresql-9.1 libpq-dev
+</code></pre>
+
+<p>Finalizada a instalação, inicie o serviço e abra o client do Postgres:</p>
+
+<pre><code>$ sudo service postgresql start
+$ sudo -u postgres psql
+</code></pre>
+
+<p>Aproveite o terminal e mude a senha do usuário <em>postgres</em>:</p>
+
+<pre><code># \password
+</code></pre>
+
+<p>Para sair, digite:</p>
+
+<pre><code># \q
+</code></pre>
+
+<h2>Migrando o banco</h2>
+
+<p>Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.</p>
+
+<p>O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:</p>
+
+<pre><code>$ sudo gem install mysql2psql
+</code></pre>
+
+<p>Em seguida, execute:</p>
+
+<pre><code>$ mysql2psql
+</code></pre>
+
+<p>Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:</p>
+
+<pre><code>mysql:
  hostname: localhost
  port: 3306
  socket: /var/run/mysqld/mysqld.sock
@@ -130,14 +153,23 @@ destination:
   port: 5432
   username: postgres
   password: postgres
-  database: app_development</pre>
-Agora crie o banco de destino no Postgres:
-<pre>$ sudo psql -h localhost -U postgres -W
-# CREATE DATABASE app_development;</pre>
-Saia do client com <em>\q</em> e então rode novamente:
-<pre>$ mysql2psql</pre>
-Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:
-<pre>Creating table comments...
+  database: app_development
+</code></pre>
+
+<p>Agora crie o banco de destino no Postgres:</p>
+
+<pre><code>$ sudo psql -h localhost -U postgres -W
+# CREATE DATABASE app_development;
+</code></pre>
+
+<p>Saia do client com <em>\q</em> e então rode novamente:</p>
+
+<pre><code>$ mysql2psql
+</code></pre>
+
+<p>Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:</p>
+
+<pre><code>Creating table comments...
 Created table comments
 Creating table schema_migrations...
 Created table schema_migrations
@@ -166,23 +198,33 @@ Indexed table schema_migrations
 Indexing table users...
 Indexed table users
 
-Table creation 0 min, loading 1 min, indexing 0 min, total 1 min</pre>
+Table creation 0 min, loading 1 min, indexing 0 min, total 1 min
+</code></pre>
+
 <h2>Configurando a app</h2>
-Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:
-<pre># Gemfile
-gem 'pg'</pre>
-<pre># database.yml
+
+<p>Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:</p>
+
+<pre><code># Gemfile
+gem 'pg'
+
+
+
+
+# database.yml
 development:
   adapter: postgresql
   host: localhost
   database: app_development
   username: postgres
-  password: postgres</pre>
-Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!
+  password: postgres
+</code></pre>
 
-Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres" target="_blank">mysql-to-postgres</a>, do mesmo autor.
+<p>Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!</p>
 
-Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
+<p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres">mysql-to-postgres</a>, do mesmo autor.</p>
+
+<p>Caso tenha alguma dúvida ou sugestão, deixe seu comentário.</p>
 </div>
 
 
@@ -191,7 +233,7 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -205,7 +247,7 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
   
 
 
-<time datetime="2012-08-29T00:00:00-03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+<time datetime="2012-08-29T08:00:07-03:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -240,6 +282,12 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -294,7 +342,10 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/';
+        var disqus_url = 'http://1up4developers.github.io/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2013-03-20T00:00:00-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
+<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,79 +93,108 @@
   </header>
 
 
-<div class="entry-content">Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.
+<div class="entry-content"><p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
-Empresas de TI bem sucedidas como <a title="37signals" href="http://37signals.com/" target="_blank">37signals</a> e <a title="Github" href="https://github.com/" target="_blank">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.
+<p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
 
-Usando as ferramentas e práticas certas é possível <a title="REMOTE" href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013" target="_blank">trabalhar remotamente</a> e até mesmo <a title="Pair programming" href="http://en.wikipedia.org/wiki/Pair_programming" target="_blank">parear com outro desenvolvedor</a> à distância.
+<p>Usando as ferramentas e práticas certas é possível <a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">trabalhar remotamente</a> e até mesmo <a href="http://en.wikipedia.org/wiki/Pair_programming">parear com outro desenvolvedor</a> à distância.</p>
+
 <h2>Requisitos</h2>
+
 <ul>
-	<li>ssh</li>
-	<li>screen</li>
-	<li>vim</li>
-	<li>skype</li>
+<li><p>ssh</p></li>
+<li><p>screen</p></li>
+<li><p>vim</p></li>
+<li><p>skype</p></li>
 </ul>
-Para compartilhar o mesmo &#8220;contexto&#8221; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a title="O melhor editor" href="http://www.vim.org/" target="_blank">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?
+
+
+<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a href="http://www.vim.org/">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
+
 <h2>Instalação</h2>
-Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:
-<pre>$ sudo apt-get install screen</pre>
-Em seguida, configure as permissões de execução:
-<pre>$ chmod u+s /usr/bin/screen
-$ chmod 755 /var/run/screen</pre>
-O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:
-<pre>$ screen -S nomedasessao</pre>
-Isso criará uma sessão com o nome &#8220;nomedasessao&#8221; e será exibido um shell &#8220;limpo&#8221;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:
-<pre>$ screen -ls
+
+<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
+
+<pre><code>$ sudo apt-get install screen
+</code></pre>
+
+<p>Em seguida, configure as permissões de execução:</p>
+
+<pre><code>$ chmod u+s /usr/bin/screen
+$ chmod 755 /var/run/screen
+</code></pre>
+
+<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
+
+<pre><code>$ screen -S nomedasessao
+</code></pre>
+
+<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
+
+<pre><code>$ screen -ls
 There is a screen on:
-        8095.nomedasessao	(19-03-2013 23:32:54)	(Attached)
-1 Socket in /var/run/screen/S-user.</pre>
-A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:
-<pre>$ screen -x nomedasessao</pre>
-Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.
+        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
+1 Socket in /var/run/screen/S-user.
+</code></pre>
 
-Para se desconectar da sessão atual, execute:
-<pre># screen -d
-[remote detached from 8095.nomedasessao]</pre>
+<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
+
+<pre><code>$ screen -x nomedasessao
+</code></pre>
+
+<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
+
+<p>Para se desconectar da sessão atual, execute:</p>
+
+<pre><code># screen -d
+[remote detached from 8095.nomedasessao]
+</code></pre>
+
 <h2>Usando o Screen</h2>
-O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.
 
-Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:
+<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
 
-<strong>Copy mode (scroll)</strong>
+<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
+
+<p><strong>Copy mode (scroll)</strong>
 Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
 Navegue pela tela com as setas ou pageup/pagedown;
-Marque o início da seleção do texto com &lt;espaço&gt; e termine com &lt;espaço&gt; para copiar;
-Cole com Ctrl-a + ] (colchete para direita);
+Marque o início da seleção do texto com &lt;espaço> e termine com &lt;espaço> para copiar;
+Cole com Ctrl-a + ] (colchete para direita);</p>
 
-<strong>Windows</strong>
+<p><strong>Windows</strong>
 Crie uma janela (ou aba) com Ctrl-a + c
-Liste as janelas com Ctrl-a + &#8221; (aspas)
-Altere para a janela com Ctrl-a &lt;numero de 0-9&gt;
-Feche (ou mate) a janela atual com Ctrl+a k
+Liste as janelas com Ctrl-a + &ldquo; (aspas)
+Altere para a janela com Ctrl-a <numero de 0-9>
+Feche (ou mate) a janela atual com Ctrl+a k</p>
 
-<strong>Split</strong>
+<p><strong>Split</strong>
 Divida a tela horizontalmente com Ctrl-a + S
 Divida a tela verticalmente com Ctrl-a + V
 Mude de split com Ctrl-a + Tab
-Feche um split com Ctrl-a + X
+Feche um split com Ctrl-a + X</p>
 
-Para digitar um comando: Ctrl-a + :
+<p>Para digitar um comando: Ctrl-a + :</p>
 
-Consulte o <a title="man screen" href="http://linux.die.net/man/1/screen" target="_blank">manual do Screen</a> para a lista completa de atalhos/comandos.
+<p>Consulte o <a href="http://linux.die.net/man/1/screen">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
+
 <h2>Dicas e considerações</h2>
-Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a title="man screen" href="http://linux.die.net/man/1/screen" target="_blank">manual oficial</a>.
 
-Existem outras alternativas como o <a title="tmux" href="http://tmux.sourceforge.net/" target="_blank">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.
+<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a href="http://linux.die.net/man/1/screen">manual oficial</a>.</p>
 
-Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &#8220;window&#8221; na mesma sessão do Screen.
+<p>Existem outras alternativas como o <a href="http://tmux.sourceforge.net/">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
 
-Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a title="pomodoro" href="http://www.pomodorotechnique.com/" target="_blank">Pomodoro</a> pode ser uma boa opção.
+<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
 
-Dúvidas, críticas ou sugestões nos comentários. Sucesso!
+<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a href="http://www.pomodorotechnique.com/">Pomodoro</a> pode ser uma boa opção.</p>
+
+<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
+
 <h2>Referências</h2>
-<a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction" target="_blank">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
-</a><a href="http://linux.die.net/man/1/screen" target="_blank">http://linux.die.net/man/1/screen
-</a><a href="http://aperiodic.net/screen/quick_reference" target="_blank">http://aperiodic.net/screen/quick_reference</a>
+
+<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
+</a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
+</a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
 </div>
 
 
@@ -174,7 +203,7 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -188,7 +217,7 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
   
 
 
-<time datetime="2013-03-20T00:00:00-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
+<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -223,6 +252,12 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -277,7 +312,10 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/';
+        var disqus_url = 'http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

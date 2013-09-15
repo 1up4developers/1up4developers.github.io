@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Este post serve mais como &#8220;cola&#8221; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por &hellip;">
+  <meta name="description" content="Este post serve mais como &ldquo;cola&rdquo; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,7 +87,7 @@
   
 
 
-<time datetime="2011-11-08T00:00:00-02:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
+<time datetime="2011-11-08T09:00:28-02:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
         
          | <a href="/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/#disqus_thread">Comments</a>
         
@@ -96,20 +96,32 @@
   </header>
 
 
-  <div class="entry-content">Este post serve mais como &#8220;cola&#8221; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por sinal é mega simples, é só editar o <em>config/application.rb</em> e remover a linha:
-<pre>require 'rails/all'</pre>
-E substituir por:
-<pre>require "active_record/railtie"
+  <div class="entry-content"><p>Este post serve mais como &ldquo;cola&rdquo; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por sinal é mega simples, é só editar o <em>config/application.rb</em> e remover a linha:</p>
+
+<pre><code>require 'rails/all'
+</code></pre>
+
+<p>E substituir por:</p>
+
+<pre><code>require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
-require "sprockets/railtie"</pre>
-Após isso, já não aparece mais as tasks de testes, e você pode remover a pasta test.
-<pre>$ git rm -r test/</pre>
-Pra finalizar, já segue a dica de alterar a task <em>default</em>, no final do <em>Rakefile</em> é só colocar:
-<pre>Rake::Task[:default].prerequisites.clear
-task :default =&gt; :spec  #no caso do rspec</pre>
-Sucesso!
+require "sprockets/railtie"
+</code></pre>
+
+<p>Após isso, já não aparece mais as tasks de testes, e você pode remover a pasta test.</p>
+
+<pre><code>$ git rm -r test/
+</code></pre>
+
+<p>Pra finalizar, já segue a dica de alterar a task <em>default</em>, no final do <em>Rakefile</em> é só colocar:</p>
+
+<pre><code>Rake::Task[:default].prerequisites.clear
+task :default =&gt; :spec  #no caso do rspec
+</code></pre>
+
+<p>Sucesso!</p>
 </div>
   
   
@@ -138,7 +150,7 @@ Sucesso!
   
 
 
-<time datetime="2011-08-22T00:00:00-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
+<time datetime="2011-08-22T06:00:19-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2011</time>
         
          | <a href="/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm/#disqus_thread">Comments</a>
         
@@ -147,39 +159,65 @@ Sucesso!
   </header>
 
 
-  <div class="entry-content">Se você ainda não trabalha com <a href="http://www.ruby-lang.org/pt/" target="_blank">Ruby</a> pois acha complicado demais instalá-lo, chega de desculpas! Esse tutorial <del>for dummies</del> ajudará a instalar o Ruby através do <a href="http://beginrescueend.com/" target="_blank">RVM</a> de forma direta, sem enrolação.
+  <div class="entry-content"><p>Se você ainda não trabalha com <a href="http://www.ruby-lang.org/pt/">Ruby</a> pois acha complicado demais instalá-lo, chega de desculpas! Esse tutorial <del>for dummies</del> ajudará a instalar o Ruby através do <a href="http://beginrescueend.com/">RVM</a> de forma direta, sem enrolação.</p>
 
-Partindo de uma instalação do <a href="http://www.ubuntu.com/" target="_blank">Ubuntu</a> 11.04 zerada, começamos com os pré-requisitos para instalar o RVM:
-<pre>user@ubuntu:~$ sudo apt-get install git-core curl</pre>
-Basta confirmar a instalação dos pacotes, em seguida executar o comando (extraído do site oficial do RVM):
-<pre>user@ubuntu:~$ bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)</pre>
-A seguir, o output completo gerado por esse comando indicará os pacotes e libs necessários para a instalação do Ruby.
-<pre>(...)
+<p>Partindo de uma instalação do <a href="http://www.ubuntu.com/">Ubuntu</a> 11.04 zerada, começamos com os pré-requisitos para instalar o RVM:</p>
+
+<pre><code>user@ubuntu:~$ sudo apt-get install git-core curl
+</code></pre>
+
+<p>Basta confirmar a instalação dos pacotes, em seguida executar o comando (extraído do site oficial do RVM):</p>
+
+<pre><code>user@ubuntu:~$ bash &lt; &lt;(curl -s https://rvm.beginrescueend.com/install/rvm)
+</code></pre>
+
+<p>A seguir, o output completo gerado por esse comando indicará os pacotes e libs necessários para a instalação do Ruby.</p>
+
+<pre><code>(...)
 
 dependencies:
 # For RVM
   rvm: bash curl git
 
 # For Ruby (MRI &amp; ree)  you should install the following OS dependencies:
-  ruby: /usr/bin/apt-get install <strong>build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake</strong>
+  ruby: /usr/bin/apt-get install &lt;strong&gt;build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake&lt;/strong&gt;
 
 (...)
 
-Installation of RVM to /home/user/.rvm/ is complete.</pre>
-Agora, basta instalar essas libs através do apt-get:
-<pre>user@ubuntu:~$ sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake</pre>
-Com as dependências instaladas, abra um novo console (para re-carregar o RVM), e comece a instalar o Ruby, no caso, o MRI 1.8.7:
-<pre>user@ubuntu:~$ rvm install 1.8.7</pre>
-Esta operação levará alguns minutos. Quando concluída, você terá o Ruby 1.8.7 e o <a href="http://rubygems.org/" target="_blank">Rubygems</a> 1.8.6 instalados. Para testar tudo, execute os seguintes comandos:
-<pre>user@ubuntu:~$ rvm use --default 1.8.7
-Using /home/user/.rvm/gems/ruby-1.8.7-p352</pre>
-<pre>user@ubuntu:~$ ruby -v
-ruby 1.8.7 (2011-06-30 patchlevel 352) [i686-linux]</pre>
-<pre>user@ubuntu:~$ gem -v
-1.8.6</pre>
-Pronto! Agora você tem o Ruby e Rubygems instalados e prontos para o uso. Caso queira conferir, o output dos comandos acima está disponível <a href="https://gist.github.com/1157378" target="_blank">neste gist</a>.
+Installation of RVM to /home/user/.rvm/ is complete.
+</code></pre>
 
-Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comentários.
+<p>Agora, basta instalar essas libs através do apt-get:</p>
+
+<pre><code>user@ubuntu:~$ sudo apt-get install build-essential bison openssl libreadline6 libreadline6-dev curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-0 libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake
+</code></pre>
+
+<p>Com as dependências instaladas, abra um novo console (para re-carregar o RVM), e comece a instalar o Ruby, no caso, o MRI 1.8.7:</p>
+
+<pre><code>user@ubuntu:~$ rvm install 1.8.7
+</code></pre>
+
+<p>Esta operação levará alguns minutos. Quando concluída, você terá o Ruby 1.8.7 e o <a href="http://rubygems.org/">Rubygems</a> 1.8.6 instalados. Para testar tudo, execute os seguintes comandos:</p>
+
+<pre><code>user@ubuntu:~$ rvm use --default 1.8.7
+Using /home/user/.rvm/gems/ruby-1.8.7-p352
+
+
+
+
+user@ubuntu:~$ ruby -v
+ruby 1.8.7 (2011-06-30 patchlevel 352) [i686-linux]
+
+
+
+
+user@ubuntu:~$ gem -v
+1.8.6
+</code></pre>
+
+<p>Pronto! Agora você tem o Ruby e Rubygems instalados e prontos para o uso. Caso queira conferir, o output dos comandos acima está disponível <a href="https://gist.github.com/1157378">neste gist</a>.</p>
+
+<p>Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comentários.</p>
 </div>
   
   
@@ -208,7 +246,7 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
   
 
 
-<time datetime="2011-07-20T00:00:00-03:00" pubdate data-updated="true">Jul 20<span>th</span>, 2011</time>
+<time datetime="2011-07-20T22:39:50-03:00" pubdate data-updated="true">Jul 20<span>th</span>, 2011</time>
         
          | <a href="/2011/07/enlightenment/#disqus_thread">Comments</a>
         
@@ -217,12 +255,17 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
   </header>
 
 
-  <div class="entry-content"><p style="text-align: justify;">Sentado num quarto de hotel, longe de casa, com a televisão passando imagens sem som, uma tela de computador cheia de parênteses na minha frente, sentindo uma imensa felicidade por ganhar a vida fazendo aquilo que escolhi, e principalmente, por (re)descobrir o quão divertido e empolgante pode ser esse caminho.</p>
-<p style="text-align: justify;">Meu filho, de um ano e meio, me ensina todo dia a ser curioso, a não parar de aprender, me relembra como é bom descobrir o mundo, entender como as coisas funcionam, aprender com os erros. Vejo nele a alegria de perceber pequenas coisas, de querer mais, por mais que isso algumas vezes incomode quem está ao redor.</p>
-<p style="text-align: justify;">As pessoas costumam crescer, buscam conforto, buscam um canto macio e aquecido para encostar, um cubículo para se sentar todo dia fazendo o mesmo trabalha de sempre, sem aprender, sem questionar, muitas vezes em entender, ouvindo e dizendo as mesmas coisas todos os dias. As pessoas crescem e perdem aquela alegria da criança ao aprender, se esquecem como é bom entender, perguntar o porquê, colocar a mão onde não é para mexer.</p>
-<p style="text-align: justify;">Eu não consigo entender como alguém escolhe se tornar um programador, um desenvolvedor, e não alimenta a curiosidade, não alimenta a vontade de aprender. É pelo salário, já me disseram. Pode ser, mas garanto que estão perdendo o melhor da brincadeira. Eles vão conseguir uma vida confortável, comprometer o orçamento com o que quer seja e logo o lado financeiro não será mais suficiente. Surgirá uma sensação de vazio, de inutilidade, de frustração por trabalhar com algo que não traz nenhuma satisfação, por desperdiçar metade do dia numa vida vazia, metade da vida numa função sem atrativos.</p>
-<p style="text-align: justify;">Com a participação de alguns amigos, passamos a compartilhar experiências, conhecimento e novidades com os demais colegas de trabalho. Existem sempre aqueles que nunca estão interessados, como queiram. Mas existem aqueles que logo se tornam sedentos por conhecimento, por novidades, que começam a compartilhar o que sabem, o que descobriram, e isso começa a formar um círculo virtuoso. Essas pessoas passam a relembrar daquela alegria infantil de aprender e entender o mundo, e começam a contaminar as pessoas ao redor, aumentando esse círculo. O ambiente de trabalho passa a ter um clima melhor, apesar de tudo; as pessoas passam a se respeitar mais, a se conhecer melhor, a nutrir admiração uns pelos outros. Obrigado a todos por isso.</p>
-<p style="text-align: justify;">Não deixe aquela curiosidade infantil e a vontade de descobrir o mundo morrerem em você. Vale todo o esforço, eu posso garantir.</p>
+  <div class="entry-content"><p>Sentado num quarto de hotel, longe de casa, com a televisão passando imagens sem som, uma tela de computador cheia de parênteses na minha frente, sentindo uma imensa felicidade por ganhar a vida fazendo aquilo que escolhi, e principalmente, por (re)descobrir o quão divertido e empolgante pode ser esse caminho.</p>
+
+<p>Meu filho, de um ano e meio, me ensina todo dia a ser curioso, a não parar de aprender, me relembra como é bom descobrir o mundo, entender como as coisas funcionam, aprender com os erros. Vejo nele a alegria de perceber pequenas coisas, de querer mais, por mais que isso algumas vezes incomode quem está ao redor.</p>
+
+<p>As pessoas costumam crescer, buscam conforto, buscam um canto macio e aquecido para encostar, um cubículo para se sentar todo dia fazendo o mesmo trabalha de sempre, sem aprender, sem questionar, muitas vezes em entender, ouvindo e dizendo as mesmas coisas todos os dias. As pessoas crescem e perdem aquela alegria da criança ao aprender, se esquecem como é bom entender, perguntar o porquê, colocar a mão onde não é para mexer.</p>
+
+<p>Eu não consigo entender como alguém escolhe se tornar um programador, um desenvolvedor, e não alimenta a curiosidade, não alimenta a vontade de aprender. É pelo salário, já me disseram. Pode ser, mas garanto que estão perdendo o melhor da brincadeira. Eles vão conseguir uma vida confortável, comprometer o orçamento com o que quer seja e logo o lado financeiro não será mais suficiente. Surgirá uma sensação de vazio, de inutilidade, de frustração por trabalhar com algo que não traz nenhuma satisfação, por desperdiçar metade do dia numa vida vazia, metade da vida numa função sem atrativos.</p>
+
+<p>Com a participação de alguns amigos, passamos a compartilhar experiências, conhecimento e novidades com os demais colegas de trabalho. Existem sempre aqueles que nunca estão interessados, como queiram. Mas existem aqueles que logo se tornam sedentos por conhecimento, por novidades, que começam a compartilhar o que sabem, o que descobriram, e isso começa a formar um círculo virtuoso. Essas pessoas passam a relembrar daquela alegria infantil de aprender e entender o mundo, e começam a contaminar as pessoas ao redor, aumentando esse círculo. O ambiente de trabalho passa a ter um clima melhor, apesar de tudo; as pessoas passam a se respeitar mais, a se conhecer melhor, a nutrir admiração uns pelos outros. Obrigado a todos por isso.</p>
+
+<p>Não deixe aquela curiosidade infantil e a vontade de descobrir o mundo morrerem em você. Vale todo o esforço, eu posso garantir.</p>
 </div>
   
   
@@ -251,7 +294,7 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
   
 
 
-<time datetime="2011-06-13T00:00:00-03:00" pubdate data-updated="true">Jun 13<span>th</span>, 2011</time>
+<time datetime="2011-06-13T06:00:59-03:00" pubdate data-updated="true">Jun 13<span>th</span>, 2011</time>
         
          | <a href="/2011/06/tpw-e-mails-vs-reunioes/#disqus_thread">Comments</a>
         
@@ -260,39 +303,45 @@ Fique ligado no próximo post: Gemsets e Bundler. Qualquer dúvida, use os comen
   </header>
 
 
-  <div class="entry-content">A cilada típica em ambientes corporativos:
+  <div class="entry-content"><p>A cilada típica em ambientes corporativos:</p>
 
-<img class="aligncenter" title="Ciclo corporativo" src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" width="558" height="551" />
+<p><img src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" /></p>
 
-&nbsp;
 <h2>E agora, quem poderá nos ajudar?</h2>
-Infelizmente, <strong>e-mails</strong> e <strong>reuniões</strong>, mesmo em ambientes ágeis, são inevitáveis, e na maioria das situações, tóxicos. Reuniões de 2 horas de duração ou 50 emails diários são sinais claros de que as coisas não andam muito bem.
 
-Atitudes ágeis tendem a evitar &#8220;enrolações&#8221; que desviem o foco da equipe ou desacelerem a produtividade. A seguir, algumas estratégias e dicas que podemos aplicar para quebrar um pouco essas práticas corporativas cascateiras, ajudar a manter o foco da equipe e produzir mais.
+<p>Infelizmente, <strong>e-mails</strong> e <strong>reuniões</strong>, mesmo em ambientes ágeis, são inevitáveis, e na maioria das situações, tóxicos. Reuniões de 2 horas de duração ou 50 emails diários são sinais claros de que as coisas não andam muito bem.</p>
+
+<p>Atitudes ágeis tendem a evitar &ldquo;enrolações&rdquo; que desviem o foco da equipe ou desacelerem a produtividade. A seguir, algumas estratégias e dicas que podemos aplicar para quebrar um pouco essas práticas corporativas cascateiras, ajudar a manter o foco da equipe e produzir mais.</p>
+
 <h2>Reuniões</h2>
-Simplesmente <strong>evite reuniões</strong>, com temor! Tente resolver os problemas com <strong>conversas cara-a-cara</strong>, na sua mesa mesmo. Se precisar discutir um assunto por mais de 5 minutos, convide as pessoas envolvidas para um cafézinho, de preferência em pé.
 
-Se não puder evitar a reunião, <strong>defina com antecipação</strong>: 1) o(s) <strong>objetivo</strong>(s) e 2) a <strong>duração máxima</strong>. Limite qualquer reunião a no máximo 5 participantes e duração de 15 minutos. Acredite: é  suficiente.
+<p>Simplesmente <strong>evite reuniões</strong>, com temor! Tente resolver os problemas com <strong>conversas cara-a-cara</strong>, na sua mesa mesmo. Se precisar discutir um assunto por mais de 5 minutos, convide as pessoas envolvidas para um cafézinho, de preferência em pé.</p>
 
-Se um problema for muito complexo para ser resolvido em uma reunião de 15 minutos, <strong>quebre o problema em problemas menores</strong>, e discuta um de cada vez. Os próximos problemas devem ser discutidos somente quando o problema anterior for resolvido.
+<p>Se não puder evitar a reunião, <strong>defina com antecipação</strong>: 1) o(s) <strong>objetivo</strong>(s) e 2) a <strong>duração máxima</strong>. Limite qualquer reunião a no máximo 5 participantes e duração de 15 minutos. Acredite: é  suficiente.</p>
 
-Antes de começar qualquer discussão, faça com que todos presentes tomem ciência dos <strong>objetivos e da duração máxima</strong>. Assim que alcançarem os objetivos ou o tempo se esgotar, termine a discussão imediatamente! Não dê oportunidade para que alguém inicie uma nova discussão desnecessária.
+<p>Se um problema for muito complexo para ser resolvido em uma reunião de 15 minutos, <strong>quebre o problema em problemas menores</strong>, e discuta um de cada vez. Os próximos problemas devem ser discutidos somente quando o problema anterior for resolvido.</p>
 
-<strong>Diga não</strong>! Em certas ocasiões, é a melhor resposta. Se você não é o responsável por determinado problema, desconhece ou não pode ajudar plenamente, simplesmente diga &#8220;não, obrigado&#8221;.
+<p>Antes de começar qualquer discussão, faça com que todos presentes tomem ciência dos <strong>objetivos e da duração máxima</strong>. Assim que alcançarem os objetivos ou o tempo se esgotar, termine a discussão imediatamente! Não dê oportunidade para que alguém inicie uma nova discussão desnecessária.</p>
+
+<p><strong>Diga não</strong>! Em certas ocasiões, é a melhor resposta. Se você não é o responsável por determinado problema, desconhece ou não pode ajudar plenamente, simplesmente diga &ldquo;não, obrigado&rdquo;.</p>
+
 <h2>E-mails</h2>
-Alguns problemas podem ser resolvidos com um simples e-mail, é verdade. A única regra que devemos seguir é a do &#8220;passa, repassa ou paga&#8221;. <strong>Não deixe os e-mails passarem das tréplicas</strong>. Se depois de 3 e-mails o problema ainda não foi resolvido, convide os envolvidos para tomar um cafezinho.
 
-<strong>E-mail não é chat</strong>. O time deve conversar cara-a-cara, incluindo os clientes. Trocar mais do que 5 e-mails diários entre a equipe é um mau sinal. Se não puder falar pessoalmente, <strong>use o telefone ou skype</strong> ao invés de mandar um e-mail que pode ser facilmente ignorado pelo destinatário.
+<p>Alguns problemas podem ser resolvidos com um simples e-mail, é verdade. A única regra que devemos seguir é a do &ldquo;passa, repassa ou paga&rdquo;. <strong>Não deixe os e-mails passarem das tréplicas</strong>. Se depois de 3 e-mails o problema ainda não foi resolvido, convide os envolvidos para tomar um cafezinho.</p>
 
-<strong>E-mail não é documentação</strong>. Não é preciso enviar um e-mail a cada decisão tomada pelo cliente ou pelo time. Se algo importante foi decidido, converse pessoalmente com os envolvidos.
+<p><strong>E-mail não é chat</strong>. O time deve conversar cara-a-cara, incluindo os clientes. Trocar mais do que 5 e-mails diários entre a equipe é um mau sinal. Se não puder falar pessoalmente, <strong>use o telefone ou skype</strong> ao invés de mandar um e-mail que pode ser facilmente ignorado pelo destinatário.</p>
 
-Finalmente, use o e-mail com sabedoria, para trocar informações importantes e relevantes entre a equipe. <strong>E-mail não deve ser regra</strong>, e sim um suporte para comunicação entre a equipe. Lembre-se: <strong>quanto mais e-mails você enviar, maior a chance de ser ignorado.</strong>
+<p><strong>E-mail não é documentação</strong>. Não é preciso enviar um e-mail a cada decisão tomada pelo cliente ou pelo time. Se algo importante foi decidido, converse pessoalmente com os envolvidos.</p>
+
+<p>Finalmente, use o e-mail com sabedoria, para trocar informações importantes e relevantes entre a equipe. <strong>E-mail não deve ser regra</strong>, e sim um suporte para comunicação entre a equipe. Lembre-se: <strong>quanto mais e-mails você enviar, maior a chance de ser ignorado.</strong></p>
+
 <h2>Resumo</h2>
-Reuniões e e-mails são tóxicos. Evite-os! Se não puder evitar, use-os com sabedoria.
 
-Se identificou com alguma situação? Acha que essas dicas &#8220;choveram no molhado&#8221;? Concorda, discorda, quer complementar algo? Use os comentários.
+<p>Reuniões e e-mails são tóxicos. Evite-os! Se não puder evitar, use-os com sabedoria.</p>
 
-<strong>Reflexão: quais dessas práticas você aplica no seu cotidiano profissional?</strong>
+<p>Se identificou com alguma situação? Acha que essas dicas &ldquo;choveram no molhado&rdquo;? Concorda, discorda, quer complementar algo? Use os comentários.</p>
+
+<p><strong>Reflexão: quais dessas práticas você aplica no seu cotidiano profissional?</strong></p>
 </div>
   
   
@@ -321,7 +370,7 @@ Se identificou com alguma situação? Acha que essas dicas &#8220;choveram no mo
   
 
 
-<time datetime="2011-04-27T00:00:00-03:00" pubdate data-updated="true">Apr 27<span>th</span>, 2011</time>
+<time datetime="2011-04-27T18:59:21-03:00" pubdate data-updated="true">Apr 27<span>th</span>, 2011</time>
         
          | <a href="/2011/04/dont-be-a-hero/#disqus_thread">Comments</a>
         
@@ -330,18 +379,20 @@ Se identificou com alguma situação? Acha que essas dicas &#8220;choveram no mo
   </header>
 
 
-  <div class="entry-content">Um amigo escreveu isso há algum tempo e tive a oportunidade de reler hoje.
-<blockquote>Sometimes things go wrong: hardware is not acting as expected, the API you rely on is not reliable, some vital information is missing. But you don’t care, as you are a hero, a tough Charles Bronson-like guy that will accomplish the mission no matter what.
+  <div class="entry-content"><p>Um amigo escreveu isso há algum tempo e tive a oportunidade de reler hoje.</p>
 
-Another project is saved? Maybe. But someone made a very stupid choice and will pay for it. And I’m talking about you, Bruce Lee.
+<blockquote><p>Sometimes things go wrong: hardware is not acting as expected, the API you rely on is not reliable, some vital information is missing. But you don’t care, as you are a hero, a tough Charles Bronson-like guy that will accomplish the mission no matter what.</p></blockquote>
 
-In six months nobody will remember the adversities you’ve been through. The sleepless nights. The weird bugs. The managers on you back, asking for status reports every five minutes. But something will linger: your name in the source code. It will be there in the SCM, ready to prove that you are a lousy coder and committed buggy/ugly code.
+<p>Another project is saved? Maybe. But someone made a very stupid choice and will pay for it. And I’m talking about you, Bruce Lee.</p>
 
-So, next time you find yourself in this kind of situation, take a deep breath and raise the red flag. Share the problem. It’s not fair to chain yourself to something bad just to show that you are tough.</blockquote>
-Eu deveria ter levado esse texto impresso para a Venezuela.
+<p>In six months nobody will remember the adversities you’ve been through. The sleepless nights. The weird bugs. The managers on you back, asking for status reports every five minutes. But something will linger: your name in the source code. It will be there in the SCM, ready to prove that you are a lousy coder and committed buggy/ugly code.</p>
 
-<strong>Update em 02/05</strong>:
-<a title="Igor Musardo" href="http://igormusardo.com.br/" target="_blank">Igor Musardo</a> <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/" target="_blank">repostou esse post</a>, e adicionou um excelente vídeo da palestra do DHH na Rails Conf 2009. Recomendo que <a title="assistam" href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/" target="_blank">assistam</a>.
+<p>So, next time you find yourself in this kind of situation, take a deep breath and raise the red flag. Share the problem. It’s not fair to chain yourself to something bad just to show that you are tough.</p>
+
+<p>Eu deveria ter levado esse texto impresso para a Venezuela.</p>
+
+<p><strong>Update em 02/05</strong>:
+<a href="http://igormusardo.com.br/">Igor Musardo</a> <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/">repostou esse post</a>, e adicionou um excelente vídeo da palestra do DHH na Rails Conf 2009. Recomendo que <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/">assistam</a>.</p>
 </div>
   
   
@@ -370,7 +421,7 @@ Eu deveria ter levado esse texto impresso para a Venezuela.
   
 
 
-<time datetime="2011-04-25T00:00:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
+<time datetime="2011-04-25T08:27:29-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
         
          | <a href="/2011/04/throw-legacy-part-i-continuous-testing-with-java/#disqus_thread">Comments</a>
         
@@ -379,33 +430,49 @@ Eu deveria ter levado esse texto impresso para a Venezuela.
   </header>
 
 
-  <div class="entry-content">This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)
+  <div class="entry-content"><p>This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)</p>
 
-JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
+<p>JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
 In this series of blog posts I will show how I’m doing tests with Java legacy code. I will try cover topics including testing dao, service, controller and view layers.
-In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.
+In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.</p>
 
-The first thing we need is install <a href="https://rvm.beginrescueend.com/" target="_blank">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/" target="_blank">JRuby</a> and <a href="http://rubygems.org/" target="_blank">Ruby Gems</a>.
-<pre>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )</pre>
-<a title="http://rvm.beginrescueend.com/rvm/install/" href="http://rvm.beginrescueend.com/rvm/install/" target="_blank">http://rvm.beginrescueend.com/rvm/install/</a> for more info.
+<p>The first thing we need is install <a href="https://rvm.beginrescueend.com/">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/">JRuby</a> and <a href="http://rubygems.org/">Ruby Gems</a>.</p>
 
-Install JRuby:
-<pre>rvm install jruby</pre>
-Set rvm to use JRuby:
-<pre>rvm use jruby</pre>
-Install RSpec:
-<pre>gem install rspec</pre>
-Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.
+<pre><code>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+</code></pre>
 
-Create the initial project structure like this:
-<pre>-boleto
+<p><a href="http://rvm.beginrescueend.com/rvm/install/">http://rvm.beginrescueend.com/rvm/install/</a> for more info.</p>
+
+<p>Install JRuby:</p>
+
+<pre><code>rvm install jruby
+</code></pre>
+
+<p>Set rvm to use JRuby:</p>
+
+<pre><code>rvm use jruby
+</code></pre>
+
+<p>Install RSpec:</p>
+
+<pre><code>gem install rspec
+</code></pre>
+
+<p>Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.</p>
+
+<p>Create the initial project structure like this:</p>
+
+<pre><code>-boleto
   -spec
   -src
     -com
       -legacy
-  -build</pre>
-Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:
-<pre lang="ruby">require "date"
+  -build
+</code></pre>
+
+<p>Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:</p>
+
+<pre><code>require "date"
 require "java"
 java_import "com.legacy.Boleto"
 
@@ -416,12 +483,22 @@ describe Boleto do
     boleto.payment_date = java.util.Date.new(Date.parse("2011-01-25").ctime)
     boleto.due_days.should == 10
   end
-end</pre>
-Let&#8217;s run the example and watch it fail.
-<pre>jruby -J-cp build -S rspec spec/boleto_spec.rb</pre>
-<pre>NameError: cannot load Java class com.legacy.Boleto</pre>
-Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:
-<pre lang="java">package com.legacy;
+end
+</code></pre>
+
+<p>Let&rsquo;s run the example and watch it fail.</p>
+
+<pre><code>jruby -J-cp build -S rspec spec/boleto_spec.rb
+
+
+
+
+NameError: cannot load Java class com.legacy.Boleto
+</code></pre>
+
+<p>Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:</p>
+
+<pre><code>package com.legacy;
 import java.util.Date;
 public class Boleto {
   private Date dueDate;
@@ -432,63 +509,86 @@ public class Boleto {
   public Date getPaymentDate() { return this.paymentDate; }
   public void setPaymentDate(Date paymentDate) { this.paymentDate = paymentDate; }
   public Integer getDueDays() { return 10; }
-}</pre>
-Also we need to compile the java class.
-<pre>javac -d build/ src/com/legacy/Boleto.java</pre>
-Instead of run the example by manual command again, let’s install a continuous testing gem:
-<pre>wget --no-check-certificate\
+}
+</code></pre>
+
+<p>Also we need to compile the java class.</p>
+
+<pre><code>javac -d build/ src/com/legacy/Boleto.java
+</code></pre>
+
+<p>Instead of run the example by manual command again, let’s install a continuous testing gem:</p>
+
+<pre><code>wget --no-check-certificate\
  http://www.github.com/tomas-stefano/infinity_test/tarball/master\
  -O infinity_test.tar.gz
 tar -zxvf infinity_test.tar.gz
 cd tomas-stefano-infinity_test-{version}
 gem build infinity_test.gemspec
-gem install infinity_test-1.0.2.gem</pre>
-What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.
+gem install infinity_test-1.0.2.gem
+</code></pre>
 
-Let&#8217;s run the example with continuous testing gem:
-<pre>infinity_test --rspec --rubies=jruby+"-J-cp build"</pre>
-Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
-Also we can create a .infinity_test file, like this:
-<pre>infinity_test do
+<p>What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.</p>
+
+<p>Let&rsquo;s run the example with continuous testing gem:</p>
+
+<pre><code>infinity_test --rspec --rubies=jruby+"-J-cp build"
+</code></pre>
+
+<p>Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
+Also we can create a .infinity_test file, like this:</p>
+
+<pre><code>infinity_test do
   use :rubies =&gt; %w(jruby),
     :specific_options =&gt; {'jruby' =&gt; '-J-cp build'},
     :test_framework =&gt; :rspec
   notifications :lib_notify   # for linux / growl for mac
-end</pre>
-And run:
-<pre>infinity_test</pre>
-<img src="http://1up4dev.org/wp-content/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" width="640" height="150" />
-<a title="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test" href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test" target="_blank">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.
+end
+</code></pre>
 
-However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a title="http://www.eclipse.org/" href="http://www.eclipse.org/" target="_blank">eclipse</a> or <a title="http://eclim.org/" href="http://eclim.org/" target="_blank">eclim</a>. This kind of editor auto-recompile Java files whenever they change.
+<p>And run:</p>
 
-Last notes
+<pre><code>infinity_test
+</code></pre>
+
+<p><img src="http://1up4dev.org/wp-content/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" />
+<a href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.</p>
+
+<p>However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a href="http://www.eclipse.org/">eclipse</a> or <a href="http://eclim.org/">eclim</a>. This kind of editor auto-recompile Java files whenever they change.</p>
+
+<p>Last notes</p>
+
 <ul>
-	<li>I&#8217;ve posted the code for boleto here <a title="https://github.com/andref5/rspec-java" href="https://github.com/andref5/rspec-java" target="_blank">https://github.com/andref5/rspec-java</a></li>
-	<li>More info about JRuby
+<li><p>I&rsquo;ve posted the code for boleto here <a href="https://github.com/andref5/rspec-java">https://github.com/andref5/rspec-java</a></p></li>
+<li><p>More info about JRuby</p>
+
 <ul>
-	<li> <a title="https://github.com/jruby/jruby/wiki" href="https://github.com/jruby/jruby/wiki" target="_blank">https://github.com/jruby/jruby/wiki</a></li>
-	<li> <a title="http://pragprog.com/titles/jruby/using-jruby" href="http://pragprog.com/titles/jruby/using-jruby" target="_blank">http://pragprog.com/titles/jruby/using-jruby</a></li>
+<li><p><a href="https://github.com/jruby/jruby/wiki">https://github.com/jruby/jruby/wiki</a></p></li>
+<li><p><a href="http://pragprog.com/titles/jruby/using-jruby">http://pragprog.com/titles/jruby/using-jruby</a></p></li>
 </ul>
 </li>
-	<li>More info about RSpec
+<li><p>More info about RSpec</p>
+
 <ul>
-	<li> <a title="http://relishapp.com/rspec" href="http://relishapp.com/rspec" target="_blank">http://relishapp.com/rspec</a></li>
-	<li> <a title="http://kerryb.github.com/iprug-rspec-presentation" href="http://kerryb.github.com/iprug-rspec-presentation" target="_blank">http://kerryb.github.com/iprug-rspec-presentation</a></li>
-	<li> <a title="http://pragprog.com/titles/achbd/the-rspec-book" href="http://pragprog.com/titles/achbd/the-rspec-book" target="_blank">http://pragprog.com/titles/achbd/the-rspec-book</a></li>
+<li><p><a href="http://relishapp.com/rspec">http://relishapp.com/rspec</a></p></li>
+<li><p><a href="http://kerryb.github.com/iprug-rspec-presentation">http://kerryb.github.com/iprug-rspec-presentation</a></p></li>
+<li><p><a href="http://pragprog.com/titles/achbd/the-rspec-book">http://pragprog.com/titles/achbd/the-rspec-book</a></p></li>
 </ul>
 </li>
-	<li>More info about Infinity_test
+<li><p>More info about Infinity_test</p>
+
 <ul>
-	<li> <a title="https://github.com/tomas-stefano/infinity_test" href="https://github.com/tomas-stefano/infinity_test" target="_blank">https://github.com/tomas-stefano/infinity_test</a></li>
+<li><a href="https://github.com/tomas-stefano/infinity_test">https://github.com/tomas-stefano/infinity_test</a></li>
 </ul>
 </li>
-	<li>More info about Ruby
+<li><p>More info about Ruby</p>
+
 <ul>
-	<li> <a title="http://mislav.uniqpath.com/poignant-guide/book/" href="http://mislav.uniqpath.com/poignant-guide/book/" target="_blank">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
+<li><a href="http://mislav.uniqpath.com/poignant-guide/book/">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
 </ul>
 </li>
 </ul>
+
 </div>
   
   
@@ -517,7 +617,7 @@ Last notes
   
 
 
-<time datetime="2011-04-19T00:00:00-03:00" pubdate data-updated="true">Apr 19<span>th</span>, 2011</time>
+<time datetime="2011-04-19T13:36:52-03:00" pubdate data-updated="true">Apr 19<span>th</span>, 2011</time>
         
          | <a href="/2011/04/o-que-eu-tenho-feito-da-vida-ou-links-sobre-temas-variados/#disqus_thread">Comments</a>
         
@@ -526,41 +626,57 @@ Last notes
   </header>
 
 
-  <div class="entry-content">Em um mega resumo, trabalhando muito no <a href="http://sitefique.me/" target="_blank">Sitefique.me</a>. Acho que este post é uma maneira de mostrar porque está difícil de postar coisas novas, e ao mesmo tempo, oferecer algum conteúdo para nossos leitores.
+  <div class="entry-content"><p>Em um mega resumo, trabalhando muito no <a href="http://sitefique.me/">Sitefique.me</a>. Acho que este post é uma maneira de mostrar porque está difícil de postar coisas novas, e ao mesmo tempo, oferecer algum conteúdo para nossos leitores.</p>
 
-Hoje em dia, com frameworks &#8220;modernos&#8221;, é relativamente rápido fazer um site e colocá-lo no ar. O difícil é escrever para o seu público alvo.
+<p>Hoje em dia, com frameworks &ldquo;modernos&rdquo;, é relativamente rápido fazer um site e colocá-lo no ar. O difícil é escrever para o seu público alvo.</p>
 
-Quando se faz uma gem ou lib, o seu público alvo é o desenvolvedor e isto facilita muito, pois você sabe o que ele busca e espera do seu &#8220;produto&#8221;. Agora, lançar um produto onde o público alvo é o usuário iniciante/intermediário, muda muito as coisas.
+<p>Quando se faz uma gem ou lib, o seu público alvo é o desenvolvedor e isto facilita muito, pois você sabe o que ele busca e espera do seu &ldquo;produto&rdquo;. Agora, lançar um produto onde o público alvo é o usuário iniciante/intermediário, muda muito as coisas.</p>
 
-Sem entrar em mais detalhes, <strong>preparei uma compilação do que venho lendo, estudando e usando</strong>, para ajudar nesta nova jornada de montar um produto do zero. São assuntos profundos, que toco de forma superficial (ficou legal né! :D). Espero que aproveitem!
+<p>Sem entrar em mais detalhes, <strong>preparei uma compilação do que venho lendo, estudando e usando</strong>, para ajudar nesta nova jornada de montar um produto do zero. São assuntos profundos, que toco de forma superficial (ficou legal né! :D). Espero que aproveitem!</p>
+
 <h2>Brainstorm</h2>
-Apesar de parecer, não é simples escrever. Montar textos como o <a href="http://blog.sitefique.me/post/4000593339/pesquisa-sitefiqueme" target="_blank">lançamento</a> e <a href="http://blog.sitefique.me/post/4556035664/informacoes-primeira-versao-sitefiqueme" target="_blank">roadmap</a>, é muito custoso para meros desenvolvedores como nós. Estamos usando o <a href="http://docs.google.com" target="_blank">Google Docs</a> para trabalhar remotamente e simultaneamente com muito êxito!
+
+<p>Apesar de parecer, não é simples escrever. Montar textos como o <a href="http://blog.sitefique.me/post/4000593339/pesquisa-sitefiqueme">lançamento</a> e <a href="http://blog.sitefique.me/post/4556035664/informacoes-primeira-versao-sitefiqueme">roadmap</a>, é muito custoso para meros desenvolvedores como nós. Estamos usando o <a href="http://docs.google.com">Google Docs</a> para trabalhar remotamente e simultaneamente com muito êxito!</p>
+
 <h2>Empreendedorismo</h2>
-Recomendo o blog <a href="http://www.saiadolugar.com.br">http://www.saiadolugar.com.br</a>
+
+<p>Recomendo o blog <a href="http://www.saiadolugar.com.br">http://www.saiadolugar.com.br</a>
 Muito boa esta apresentação, vale a pena conferir:
-Guy Kawasaki - A arte do começo (<a href="http://video.google.com/videoplay?docid=8206486082210767228#">link direto aqui</a>)
-http://video.google.com/videoplay?docid=8206486082210767228#
+Guy Kawasaki &ndash; A arte do começo (<a href="http://video.google.com/videoplay?docid=8206486082210767228#">link direto aqui</a>)
+<a href="http://video.google.com/videoplay?docid=8206486082210767228#">http://video.google.com/videoplay?docid=8206486082210767228#</a></p>
 
-Fora isto, tem uma pá de livro sobre o assunto. Os clássicos modernos da 37signals, <a href="http://gettingreal.37signals.com/">Getting Real</a> e <a href="http://37signals.com/rework/">Rework</a>.
+<p>Fora isto, tem uma pá de livro sobre o assunto. Os clássicos modernos da 37signals, <a href="http://gettingreal.37signals.com/">Getting Real</a> e <a href="http://37signals.com/rework/">Rework</a>.</p>
+
 <h2>Controle de Tarefas</h2>
-Somos em dois desenvolvedores e só! O nosso quadro de tarefas está no <a href="http://lessprojects.com/">lessprojects.com </a>(que por enquanto é de graça). É incrível como <a href="http://lesseverything.com/" target="_blank">os caras</a> são pragmáticos. Este foi um achado do <a title="Rodrigo Panachi" href="http://1up4dev.org/author/rodrigopanachi/">Panachi</a>.
+
+<p>Somos em dois desenvolvedores e só! O nosso quadro de tarefas está no <a href="http://lessprojects.com/">lessprojects.com </a>(que por enquanto é de graça). É incrível como <a href="http://lesseverything.com/">os caras</a> são pragmáticos. Este foi um achado do <a href="http://1up4dev.org/author/rodrigopanachi/">Panachi</a>.</p>
+
 <h2>Frontend, Design, layout e cia.</h2>
-Este é um campo que é necessário ter <em>mindset</em> diferente. Até 2002, me virava muito bem com os layouts &#8220;divless&#8221;, ou melhor, usando <em>table</em> mesmo (<em>shame on me</em>). Depois da onda <a title="Tableless web design" href="http://en.wikipedia.org/wiki/Tableless_web_design">tableless</a>, sempre tive dificuldade em desenvolver o frontend (e também nunca fiz muita questão). Agora chegou a hora, e tenho que estudar. É muito importante ter ajuda de quem manja muito! <a title="Diego Costa" href="http://twitter.com/umdiegocosta">Diego</a>, <a title="Gustavo Cardoso - O Designer" href="http://gustavocardoso.com/">Gus</a> e <a title="Barbara Sousa" href="http://www.barbarasousa.com.br">Babi</a>. Valeu!
+
+<p>Este é um campo que é necessário ter <em>mindset</em> diferente. Até 2002, me virava muito bem com os layouts &ldquo;divless&rdquo;, ou melhor, usando <em>table</em> mesmo (<em>shame on me</em>). Depois da onda <a href="http://en.wikipedia.org/wiki/Tableless_web_design">tableless</a>, sempre tive dificuldade em desenvolver o frontend (e também nunca fiz muita questão). Agora chegou a hora, e tenho que estudar. É muito importante ter ajuda de quem manja muito! <a href="http://twitter.com/umdiegocosta">Diego</a>, <a href="http://gustavocardoso.com/">Gus</a> e <a href="http://www.barbarasousa.com.br">Babi</a>. Valeu!</p>
+
 <h2>Mail marketing</h2>
-Enviar e-mail é muito simples. Agora, enviar e-mail com layout legal, com informação relevante, sem ser barrado como spam e renderizar no máximo de webmails e clientes desktop é muito difícil! Encontrei ótimos materiais sobre o assunto:
+
+<p>Enviar e-mail é muito simples. Agora, enviar e-mail com layout legal, com informação relevante, sem ser barrado como spam e renderizar no máximo de webmails e clientes desktop é muito difícil! Encontrei ótimos materiais sobre o assunto:</p>
+
 <ul>
-	<li><a title="email design guidelines" href="http://www.campaignmonitor.com/design-guidelines/">Email design guidelines</a></li>
-	<li><a title="16 Técnicas para otimizar a entrega do email marketing" href="http://www.templateria.com.br/blog/tecnologia/16-tecnicas-para-otimizar-a-entrega-do-email-marketing/">16 Técnicas para Otimizar a Entrega do Email Marketing</a></li>
-	<li><a href="http://www.email-standards.org/">Email Standards Project</a> - Achei animal o objetivo do site. Eles rodam um <em>acid test</em> para uma leva de webmails e clients desktop, e de quebra você ganha uma lista de quem suporta o que ao renderizar html do seu e-mail.</li>
+<li><p><a href="http://www.campaignmonitor.com/design-guidelines/">Email design guidelines</a></p></li>
+<li><p><a href="http://www.templateria.com.br/blog/tecnologia/16-tecnicas-para-otimizar-a-entrega-do-email-marketing/">16 Técnicas para Otimizar a Entrega do Email Marketing</a></p></li>
+<li><p><a href="http://www.email-standards.org/">Email Standards Project</a> &ndash; Achei animal o objetivo do site. Eles rodam um <em>acid test</em> para uma leva de webmails e clients desktop, e de quebra você ganha uma lista de quem suporta o que ao renderizar html do seu e-mail.</p></li>
 </ul>
+
+
 <h2>Private Server</h2>
-É onde hospedamos o produto, repositórios e o que precisar. O ponto é que você vai precisar! Estamos usando o <a title="Webbynode" href="http://webbynode.com/">http://webbynode.com</a>. Não tive problemas até hoje. Uma maravilha poder logar via ssh e fazer miséria.
+
+<p>É onde hospedamos o produto, repositórios e o que precisar. O ponto é que você vai precisar! Estamos usando o <a href="http://webbynode.com/">http://webbynode.com</a>. Não tive problemas até hoje. Uma maravilha poder logar via ssh e fazer miséria.</p>
+
 <h2>Foco</h2>
-Se tiver paciência (acho que o post já é um teste!) leia: <a title="How to get things done like a zen master" href="http://howtogetfocused.com/chapters/how-to-get-things-done-like-a-zen-master/">http://howtogetfocused.com/chapters/how-to-get-things-done-like-a-zen-master</a>
 
-Comentem. Me avisem se este tipo de post é chatão ou legal.
+<p>Se tiver paciência (acho que o post já é um teste!) leia: <a href="http://howtogetfocused.com/chapters/how-to-get-things-done-like-a-zen-master/">http://howtogetfocused.com/chapters/how-to-get-things-done-like-a-zen-master</a></p>
 
-Valeu!
+<p>Comentem. Me avisem se este tipo de post é chatão ou legal.</p>
+
+<p>Valeu!</p>
 </div>
   
   
@@ -589,7 +705,7 @@ Valeu!
   
 
 
-<time datetime="2011-04-14T00:00:00-03:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time>
+<time datetime="2011-04-14T10:20:26-03:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time>
         
          | <a href="/2011/04/coffescript-what/#disqus_thread">Comments</a>
         
@@ -598,34 +714,38 @@ Valeu!
   </header>
 
 
-  <div class="entry-content">Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão.
+  <div class="entry-content"><p>Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão.</p>
 
-Aproveitando a barulheira, que é comum a cada vez que o criador da plataforma abre a boca, vamos nos ater ao que é importante e apresentar uma introdução ao resumo simplificado do CoffeeScript básico.
+<p>Aproveitando a barulheira, que é comum a cada vez que o criador da plataforma abre a boca, vamos nos ater ao que é importante e apresentar uma introdução ao resumo simplificado do CoffeeScript básico.</p>
 
-Confesso que minha opinião sobre essa ferramenta mudou nos primeiros instantes em que comecei a usar. No site do CoffeeScript (ok se eu começar a chamar de CS daqui para frente?) existe um link onde você digita o código do lado esquerdo e, imediatamente, do lado direito aparece o equivalente em JavaScript.
+<p>Confesso que minha opinião sobre essa ferramenta mudou nos primeiros instantes em que comecei a usar. No site do CoffeeScript (ok se eu começar a chamar de CS daqui para frente?) existe um link onde você digita o código do lado esquerdo e, imediatamente, do lado direito aparece o equivalente em JavaScript.</p>
 
-Fiz uma brincadeira lá usando um código que sempre me vem à cabeça ao tentar explicar o básico de programação funcional para alguem. Segue:
-<pre>mimimi = (operation, value) ->
+<p>Fiz uma brincadeira lá usando um código que sempre me vem à cabeça ao tentar explicar o básico de programação funcional para alguem. Segue:</p>
+
+<pre><code>mimimi = (operation, value) -&gt;
    operation(value);
 
-dobro = (value) ->
+dobro = (value) -&gt;
   value + value;
 
-quadrado = (value) ->
+quadrado = (value) -&gt;
   value * value;
 
-zero = (value) ->
+zero = (value) -&gt;
   value - value;
 
-um = (value) ->
+um = (value) -&gt;
   value / value;
 
 alert(mimimi(dobro, 3));
 alert(mimimi(quadrado, 3));
 alert(mimimi(zero, 3));
-alert(mimimi(um, 3));</pre>
-Nada de outro mundo, certo? O equivalente JS é o código abaixo:
-<pre>var dobro, mimimi, quadrado, um, zero;
+alert(mimimi(um, 3));
+</code></pre>
+
+<p>Nada de outro mundo, certo? O equivalente JS é o código abaixo:</p>
+
+<pre><code>var dobro, mimimi, quadrado, um, zero;
 mimimi = function(operation, value) {
   return operation(value);
 };
@@ -644,30 +764,40 @@ um = function(value) {
 alert(mimimi(dobro, 3));
 alert(mimimi(quadrado, 3));
 alert(mimimi(zero, 3));
-alert(mimimi(um, 3));</pre>
-CS permite também a checagem automática de valores e parâmetros opcionais, conforme o exemplo retirado do site:
-<pre>fill = (container, liquid = "coffee") -&gt;
-  "Filling the #{container} with #{liquid}..."</pre>
-Ou o equivalente em JS:
-<pre>var fill;
+alert(mimimi(um, 3));
+</code></pre>
+
+<p>CS permite também a checagem automática de valores e parâmetros opcionais, conforme o exemplo retirado do site:</p>
+
+<pre><code>fill = (container, liquid = "coffee") -&gt;
+  "Filling the #{container} with #{liquid}..."
+</code></pre>
+
+<p>Ou o equivalente em JS:</p>
+
+<pre><code>var fill;
 fill = function(container, liquid) {
   if (liquid == null) {
     liquid = "coffee";
   }
   return "Filling the " + container + " with " + liquid + "...";
-};</pre>
-Sem dúvida, muito mais legível e expressivo.
+};
+</code></pre>
 
-É uma ferramenta que eu pretendo usar em algum projeto pequeno, para testar e ver o quanto acelera meu trabalho. Em projetos maiores talvez eu demore um pouco mais para usar mas, considerando que umas das minhas aplicações já conta com 79% de código total escrito em JavaScript, segundo o GitHub, imagino que isso vai melhorar consideravelmente a manutenção do código.
+<p>Sem dúvida, muito mais legível e expressivo.</p>
 
-E no mais, se o CS não te chamou a atenção e você não quer mesmo utilizar, basta remover o require do arquivo Gemfiles e a vida segue como se nada tivesse acontecido.
+<p>É uma ferramenta que eu pretendo usar em algum projeto pequeno, para testar e ver o quanto acelera meu trabalho. Em projetos maiores talvez eu demore um pouco mais para usar mas, considerando que umas das minhas aplicações já conta com 79% de código total escrito em JavaScript, segundo o GitHub, imagino que isso vai melhorar consideravelmente a manutenção do código.</p>
 
-Links recomendados:
+<p>E no mais, se o CS não te chamou a atenção e você não quer mesmo utilizar, basta remover o require do arquivo Gemfiles e a vida segue como se nada tivesse acontecido.</p>
+
+<p>Links recomendados:</p>
+
 <ul>
-	<li>Site do CoffeScript: <a title="http://jashkenas.github.com/coffee-script/" href="http://jashkenas.github.com/coffee-script/" target="_blank">http://jashkenas.github.com/coffee-script/</a></li>
-	<li>Mais do mesmo: <a title="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html" href="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html" target="_blank">http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html</a></li>
-	<li>Exemplo bacana de como utilizar CS dentro da sua view: <a title="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html" href="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html" target="_blank">http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html</a></li>
+<li><p>Site do CoffeScript: <a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></p></li>
+<li><p>Mais do mesmo: <a href="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html">http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html</a></p></li>
+<li><p>Exemplo bacana de como utilizar CS dentro da sua view: <a href="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html">http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html</a></p></li>
 </ul>
+
 </div>
   
   
@@ -696,7 +826,7 @@ Links recomendados:
   
 
 
-<time datetime="2011-04-12T00:00:00-03:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
+<time datetime="2011-04-12T10:00:54-03:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
         
          | <a href="/2011/04/comunicacao-e-tudo-e-mais-um-pouco/#disqus_thread">Comments</a>
         
@@ -705,27 +835,29 @@ Links recomendados:
   </header>
 
 
-  <div class="entry-content">Imagine que você receba a seguinte especificação:
-<blockquote>Pegue uma folha de papel A4. Sob a mesa, dobre-a ao meio. Coloque a folha dobrada sobre a mesa.</blockquote>
-A especificação parece clara e simples, mas aposto que dobramos as folhas de forma diferente, obtendo resultados diferentes. Eu dobrei a minha folha verticalmente, enquanto provavelmente você dobrou horizontalmente, obtendo uma forma próxima de um quadrado.
+  <div class="entry-content"><p>Imagine que você receba a seguinte especificação:</p>
 
-Qual foi o problema?
+<blockquote><p>Pegue uma folha de papel A4. Sob a mesa, dobre-a ao meio. Coloque a folha dobrada sobre a mesa.</p></blockquote>
 
-Eu criei uma especificação tendo em mente exatamente o que eu queria. E eu acreditei que aquilo era mais do que suficiente.
+<p>A especificação parece clara e simples, mas aposto que dobramos as folhas de forma diferente, obtendo resultados diferentes. Eu dobrei a minha folha verticalmente, enquanto provavelmente você dobrou horizontalmente, obtendo uma forma próxima de um quadrado.</p>
 
-Você pegou uma especificação, aparentemente muito simples, e sem questionar seguiu os passos que julgou corretos.
+<p>Qual foi o problema?</p>
 
-Não houve comunicação, cada parte presumiu coisas e o resultado final não foi o esperado.
+<p>Eu criei uma especificação tendo em mente exatamente o que eu queria. E eu acreditei que aquilo era mais do que suficiente.</p>
 
-O grande diferencial das ditas metodologia ágeis é exatamente permitir a comunicação rápida, clara e sem ruídos entre todos os membros da equipe. Isso não tem nada a ver com post-its, gráficos ou ferramentas na Internet. É por isso que estamos vendo-as falhar, e é por isso que o seu projeto, e o meu, também estão falhando.
+<p>Você pegou uma especificação, aparentemente muito simples, e sem questionar seguiu os passos que julgou corretos.</p>
 
-É por isso que relacionamentos chegam a níveis insuportáveis de convivência, casamentos terminam, empregos viram um inferno. É por isso que ocorrem desencontros, é por isso que clientes recebem algo que não pediram e que não os atendem.
+<p>Não houve comunicação, cada parte presumiu coisas e o resultado final não foi o esperado.</p>
 
-É por isso também que não consegui comprar um mísero pão doce quando estive fora do país.
+<p>O grande diferencial das ditas metodologia ágeis é exatamente permitir a comunicação rápida, clara e sem ruídos entre todos os membros da equipe. Isso não tem nada a ver com post-its, gráficos ou ferramentas na Internet. É por isso que estamos vendo-as falhar, e é por isso que o seu projeto, e o meu, também estão falhando.</p>
 
-Comunicação é, na minha opinião, o fator mais importante, e o menos valorizado. É tudo isso que eu falei, e mais um pouco.
+<p>É por isso que relacionamentos chegam a níveis insuportáveis de convivência, casamentos terminam, empregos viram um inferno. É por isso que ocorrem desencontros, é por isso que clientes recebem algo que não pediram e que não os atendem.</p>
 
-(Escrito pelo autor em 26/01/2009, e muito pouco ou quase nada mudou desde então)
+<p>É por isso também que não consegui comprar um mísero pão doce quando estive fora do país.</p>
+
+<p>Comunicação é, na minha opinião, o fator mais importante, e o menos valorizado. É tudo isso que eu falei, e mais um pouco.</p>
+
+<p>(Escrito pelo autor em 26/01/2009, e muito pouco ou quase nada mudou desde então)</p>
 </div>
   
   
@@ -754,7 +886,7 @@ Comunicação é, na minha opinião, o fator mais importante, e o menos valoriza
   
 
 
-<time datetime="2011-04-08T00:00:00-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
+<time datetime="2011-04-08T13:24:49-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
         
          | <a href="/2011/04/o-desenvolvedor-preguicoso/#disqus_thread">Comments</a>
         
@@ -763,23 +895,23 @@ Comunicação é, na minha opinião, o fator mais importante, e o menos valoriza
   </header>
 
 
-  <div class="entry-content">Durante o almoço eu estava conversando com um colega e citei que, se tivesse uma empresa, gostaria de contratar um programador/desenvolvedor/engenheiro que fosse preguiçoso. Por meio minuto ele deve ter imaginado que eu estava louco, ou que queria abrir transformar minha empresa imaginária numa repartição pública.
+  <div class="entry-content"><p>Durante o almoço eu estava conversando com um colega e citei que, se tivesse uma empresa, gostaria de contratar um programador/desenvolvedor/engenheiro que fosse preguiçoso. Por meio minuto ele deve ter imaginado que eu estava louco, ou que queria abrir transformar minha empresa imaginária numa repartição pública.</p>
 
-Vou tentar ser breve na explicação.
+<p>Vou tentar ser breve na explicação.</p>
 
-O primeiro ponto é que uma pessoa preguiçosa, dentro desse contexto, é completamente diferente de uma pessoa acomodada, encostada ou vagabunda. Uma pessoa preguiçosa, novamente nesse contexto, é aquela que se incomoda de fazer várias vezes ao dia a mesma tarefa, e encontra meios de automatizar isso.
+<p>O primeiro ponto é que uma pessoa preguiçosa, dentro desse contexto, é completamente diferente de uma pessoa acomodada, encostada ou vagabunda. Uma pessoa preguiçosa, novamente nesse contexto, é aquela que se incomoda de fazer várias vezes ao dia a mesma tarefa, e encontra meios de automatizar isso.</p>
 
-Um caso real: eu trabalhei numa projeto em que era necessário compilar os fontes, passar os binários resultantes (executáveis, DLLs ou JARs) por um software proprietário para que esses fossem convertidos num formato que a plataforma proprietária entenda, e então utilizar um outro software para jogar esse binário convertido para dentro do dispositivo.
+<p>Um caso real: eu trabalhei numa projeto em que era necessário compilar os fontes, passar os binários resultantes (executáveis, DLLs ou JARs) por um software proprietário para que esses fossem convertidos num formato que a plataforma proprietária entenda, e então utilizar um outro software para jogar esse binário convertido para dentro do dispositivo.</p>
 
-O segundo passo, a conversão dos binários, era freqüentemente esquecido, fazendo com que um binário desatualizado fosse instalado no dispositivo, desperdiçando tempo e estressando os envolvidos.
+<p>O segundo passo, a conversão dos binários, era freqüentemente esquecido, fazendo com que um binário desatualizado fosse instalado no dispositivo, desperdiçando tempo e estressando os envolvidos.</p>
 
-Um colega, preguiçoso, criou um passo novo que foi adicionado ao <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> para que essa geração fosse automatizada, reduzindo todo processo à compilação e instalação. Não fosse o software de instalação tão fechado, a coisa toda seria realizada num único processo.
+<p>Um colega, preguiçoso, criou um passo novo que foi adicionado ao <a href="http://maven.apache.org/">Maven</a> para que essa geração fosse automatizada, reduzindo todo processo à compilação e instalação. Não fosse o software de instalação tão fechado, a coisa toda seria realizada num único processo.</p>
 
-O mesmo acontece com a utilização de testes automatizados. Poderíamos muito bem executar passo a passo todos os itens de uma planilha gigantesca cada vez que eu gerasse uma nova versão do sistema. Ao invés disso, escrevemos alguns testes automatizados (705 da última vez vi) que levam trinta segundos para executar toda vez que você altera o código. A cada nova funcionalidade, uma nova série de testes é escrita, fazendo com que a coisa seja menos trabalhosa para todos os envolvidos.
+<p>O mesmo acontece com a utilização de testes automatizados. Poderíamos muito bem executar passo a passo todos os itens de uma planilha gigantesca cada vez que eu gerasse uma nova versão do sistema. Ao invés disso, escrevemos alguns testes automatizados (705 da última vez vi) que levam trinta segundos para executar toda vez que você altera o código. A cada nova funcionalidade, uma nova série de testes é escrita, fazendo com que a coisa seja menos trabalhosa para todos os envolvidos.</p>
 
-Automatizar tarefas repetitivas aumenta a produtividade, reduz drasticamente a possibilidade de que erros idiotas aconteçam e ainda te dá tempo para investir no que realmente interessa.
+<p>Automatizar tarefas repetitivas aumenta a produtividade, reduz drasticamente a possibilidade de que erros idiotas aconteçam e ainda te dá tempo para investir no que realmente interessa.</p>
 
-E você, está sendo preguiçoso ou acomodado?
+<p>E você, está sendo preguiçoso ou acomodado?</p>
 </div>
   
   

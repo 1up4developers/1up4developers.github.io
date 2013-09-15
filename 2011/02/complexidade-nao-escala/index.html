@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-02-01T00:00:00-02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
+<time datetime="2011-02-01T07:00:00-02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,61 +93,72 @@
   </header>
 
 
-<div class="entry-content">Este é um assunto polêmico e que gera muita discussão nos escritórios de TI. Mesmo assim, tendo trabalhado em várias empresas, grandes e pequenas, presenciando vários projetos fracassarem por decisões arquiteturais (as gerenciais não contam nesse contexto), e os mesmos erros sendo cometidos repetidas vezes, sinto-me na obrigação de passar esta experiência e meu ponto de vista.
+<div class="entry-content"><p>Este é um assunto polêmico e que gera muita discussão nos escritórios de TI. Mesmo assim, tendo trabalhado em várias empresas, grandes e pequenas, presenciando vários projetos fracassarem por decisões arquiteturais (as gerenciais não contam nesse contexto), e os mesmos erros sendo cometidos repetidas vezes, sinto-me na obrigação de passar esta experiência e meu ponto de vista.</p>
+
 <h3>Escalabilidade, por definição</h3>
-De acordo com a <a href="http://en.wikipedia.org/wiki/Scalability">Wikipedia</a>, <strong>escalabilidade</strong> <em>é uma característica desejável em todo o sistema que indica sua habilidade de manipular uma porção crescente de trabalho de forma uniforme, ou estar preparado para crescer.</em> Em outras palavras, um sistema deve estar preparado para suportar uma demanda crescente.
 
-Pode ser classificada como:
+<p>De acordo com a <a href="http://en.wikipedia.org/wiki/Scalability">Wikipedia</a>, <strong>escalabilidade</strong> <em>é uma característica desejável em todo o sistema que indica sua habilidade de manipular uma porção crescente de trabalho de forma uniforme, ou estar preparado para crescer.</em> Em outras palavras, um sistema deve estar preparado para suportar uma demanda crescente.</p>
+
+<p>Pode ser classificada como:</p>
+
 <ul>
-<li>Carga de escalabilidade: um sistema distribuído deve ser fácil para ser expandido e usar sua gama de recursos para acomodar tanto exigências do mesmo sendo elas pouca ou excessiva.</li>
-<li>Geograficamente escalável: um sistema é geograficamente escalável quando ele mantém sua utilidade e usabilidade, não obstante como são usados os seus recursos.</li>
-<li>Escalabilidade administrativa: não importa a variação de informação que diferentes organizações necessitam compartilhar em um único sistema distribuído, ele deve permanecer fácil de ser usado e gerenciado.</li>
-<li>Escalabilidade funcional: capacidade de melhorar o sistema, adicionando novas funcionalidades com mínimo esforço.</li>
+<li><p>Carga de escalabilidade: um sistema distribuído deve ser fácil para ser expandido e usar sua gama de recursos para acomodar tanto exigências do mesmo sendo elas pouca ou excessiva.</p></li>
+<li><p>Geograficamente escalável: um sistema é geograficamente escalável quando ele mantém sua utilidade e usabilidade, não obstante como são usados os seus recursos.</p></li>
+<li><p>Escalabilidade administrativa: não importa a variação de informação que diferentes organizações necessitam compartilhar em um único sistema distribuído, ele deve permanecer fácil de ser usado e gerenciado.</p></li>
+<li><p>Escalabilidade funcional: capacidade de melhorar o sistema, adicionando novas funcionalidades com mínimo esforço.</p></li>
 </ul>
-Pode ser aplicada como:
+
+
+<p>Pode ser aplicada como:</p>
+
 <ul>
-<li><strong>Escalabilidade Vertical</strong> (scale up): significa adicionar recursos em um único nó do sistema (mais memória ou um disco rígido mais rápido).</li>
-<li><strong>Escalabilidade Horizontal</strong> (scale out): significa adicionar mais nós ao sistema, tais como adicionar um novo computador com uma aplicação para clusterizar o software. Você pode encontrar escalabilidade horizontal nos sabores <a href="http://pt.wikipedia.org/wiki/Computa%C3%A7%C3%A3o_distribu%C3%ADda">Sistemas Distribuídos</a>, <a href="http://en.wikipedia.org/wiki/Enterprise_JavaBean">Serviços de Componentes</a>, <a href="http://pt.wikipedia.org/wiki/Service-oriented_architecture">SOA</a>, <a href="http://en.wikipedia.org/wiki/System_of_systems">System of Systems</a>, etc.</li>
+<li><p><strong>Escalabilidade Vertical</strong> (scale up): significa adicionar recursos em um único nó do sistema (mais memória ou um disco rígido mais rápido).</p></li>
+<li><p><strong>Escalabilidade Horizontal</strong> (scale out): significa adicionar mais nós ao sistema, tais como adicionar um novo computador com uma aplicação para clusterizar o software. Você pode encontrar escalabilidade horizontal nos sabores <a href="http://pt.wikipedia.org/wiki/Computa%C3%A7%C3%A3o_distribu%C3%ADda">Sistemas Distribuídos</a>, <a href="http://en.wikipedia.org/wiki/Enterprise_JavaBean">Serviços de Componentes</a>, <a href="http://pt.wikipedia.org/wiki/Service-oriented_architecture">SOA</a>, <a href="http://en.wikipedia.org/wiki/System_of_systems">System of Systems</a>, etc.</p></li>
 </ul>
-<a href="http://escalabilidade.com"><img src="http://1up4dev.org/wp-content/uploads/2011/01/scale-up-300x150.png" alt="Escalabilidade" title="Escalabilidade" width="300" height="150" class="aligncenter size-medium wp-image-828" /></a>
-Do ponto de vista do custo de desenvolvimento, manutenção e suporte, eu defino escalabilidade como: caro (complexo) vs. barato (simples). Porém, o que é caro nem sempre é bom&#8230; e vice versa.
+
+
+<p><a href="http://escalabilidade.com"><img src="http://1up4dev.org/wp-content/uploads/2011/01/scale-up-300x150.png" alt="Escalabilidade" /></a>
+Do ponto de vista do custo de desenvolvimento, manutenção e suporte, eu defino escalabilidade como: caro (complexo) vs. barato (simples). Porém, o que é caro nem sempre é bom&hellip; e vice versa.</p>
+
 <h3>Analogias com o mundo real</h3>
-Nós gostamos de fazer <a href="http://en.wikipedia.org/wiki/Extreme_programming_practices#System_metaphor">analogias com coisas reais</a>, são ótimas para expressar idéias e facilitar a comunicação.
 
-Call centers, ou centrais de atendimento. Se você mora no Brasil provavelmente já perdeu algumas horas de sua vida pendurado no telefone tentando resolver um problema com sua assinatura de celular, internet, TV, energia elétrica, etc. Mas por que isso acontece?
-Provavelmente, essas centrais de atendimento começaram com poucos funcionários, porém foram &#8220;projetadas&#8221; para crescer conforme a demanda. Basta contratar mais funcionários, dar treinamento e pronto: mais &#8220;nós&#8221; atendendo as requisições. Entretanto, o processo passa a ser mais complexo e mais burocrático, pois é muita informação para disseminar entre os funcionários. Resultado: alto custo para empresa e pouco resultado para os clientes. A espera ainda existe e quando finalmente somos atendidos, a sensação é de estar falando com um robô, que dificilmente entenderá seu problema e dará uma solução padrão ou insatisfatória para o mesmo.
+<p>Nós gostamos de fazer <a href="http://en.wikipedia.org/wiki/Extreme_programming_practices#System_metaphor">analogias com coisas reais</a>, são ótimas para expressar idéias e facilitar a comunicação.</p>
 
-<a href="http://1up4dev.org/wp-content/uploads/2011/01/call-center.jpg"><img src="http://1up4dev.org/wp-content/uploads/2011/01/call-center-300x225.jpg" alt="Call Center" title="Call Center" width="300" height="225" class="aligncenter size-medium wp-image-820" /></a>
+<p>Call centers, ou centrais de atendimento. Se você mora no Brasil provavelmente já perdeu algumas horas de sua vida pendurado no telefone tentando resolver um problema com sua assinatura de celular, internet, TV, energia elétrica, etc. Mas por que isso acontece?
+Provavelmente, essas centrais de atendimento começaram com poucos funcionários, porém foram &ldquo;projetadas&rdquo; para crescer conforme a demanda. Basta contratar mais funcionários, dar treinamento e pronto: mais &ldquo;nós&rdquo; atendendo as requisições. Entretanto, o processo passa a ser mais complexo e mais burocrático, pois é muita informação para disseminar entre os funcionários. Resultado: alto custo para empresa e pouco resultado para os clientes. A espera ainda existe e quando finalmente somos atendidos, a sensação é de estar falando com um robô, que dificilmente entenderá seu problema e dará uma solução padrão ou insatisfatória para o mesmo.</p>
 
-O processo é adequado para escalar a demanda horizontalmente, o que o torna complexo e não garante a qualidade. Vale lembrar que o <a href="http://pt.wikipedia.org/wiki/Sistemas_computacionais">software</a> apenas automatiza ou apóia a realização dos processos reais. Se o processo é complexo, o software será tão complexo quanto (e em alguns casos até mais complexo).
+<p><a href="http://1up4dev.org/wp-content/uploads/2011/01/call-center.jpg"><img src="http://1up4dev.org/wp-content/uploads/2011/01/call-center-300x225.jpg" alt="Call Center" /></a></p>
 
-Um exemplo diferente: o <a href="http://pt.wikipedia.org/wiki/Volkswagen_Fusca">Fusca</a>. É um dos carros mais simples que existem, não precisa nem de refrigeração a água. Costuma-se dizer que pode ser consertado com um alicate e um rolo de arame. Seu custo de fabricação seria mínimo se comparado com o custo de um carro popular moderno. Ok, não oferece a mesma segurança, velocidade e conforto de um carro moderno, mas ambos conseguem transportar 5 passageiros ao destino desejado.
+<p>O processo é adequado para escalar a demanda horizontalmente, o que o torna complexo e não garante a qualidade. Vale lembrar que o <a href="http://pt.wikipedia.org/wiki/Sistemas_computacionais">software</a> apenas automatiza ou apóia a realização dos processos reais. Se o processo é complexo, o software será tão complexo quanto (e em alguns casos até mais complexo).</p>
 
-<a href="http://1up4dev.org/wp-content/uploads/2011/01/fuka_herbie_oval.jpg"><img class="aligncenter size-medium wp-image-810" title="Fusca" src="http://1up4dev.org/wp-content/uploads/2011/01/fuka_herbie_oval-300x210.jpg" alt="Fusca" width="300" height="210" /></a>
+<p>Um exemplo diferente: o <a href="http://pt.wikipedia.org/wiki/Volkswagen_Fusca">Fusca</a>. É um dos carros mais simples que existem, não precisa nem de refrigeração a água. Costuma-se dizer que pode ser consertado com um alicate e um rolo de arame. Seu custo de fabricação seria mínimo se comparado com o custo de um carro popular moderno. Ok, não oferece a mesma segurança, velocidade e conforto de um carro moderno, mas ambos conseguem transportar 5 passageiros ao destino desejado.</p>
 
-Mas o que um Fusca têm a ver com escalabilidade? Bem, imagine um congestionamento na véspera de um feriado, por exemplo. Tanto o Fusca quanto o carro moderno ficarão parados na mesma fila de farofeiros. Toda tecnologia, complexidade e custo da fabricação do carro moderno não o livra de um congestionamento. Não há projeto que consiga prever ou contornar esse problema.
+<p><a href="http://1up4dev.org/wp-content/uploads/2011/01/fuka_herbie_oval.jpg"><img src="http://1up4dev.org/wp-content/uploads/2011/01/fuka_herbie_oval-300x210.jpg" alt="Fusca" /></a></p>
 
-<a href="http://1up4dev.org/wp-content/uploads/2011/01/baleia1.jpg"><img class="aligncenter size-medium wp-image-811" title="Twitter" src="http://1up4dev.org/wp-content/uploads/2011/01/baleia1-300x225.jpg" alt="Twitter" width="300" height="225" /></a>
+<p>Mas o que um Fusca têm a ver com escalabilidade? Bem, imagine um congestionamento na véspera de um feriado, por exemplo. Tanto o Fusca quanto o carro moderno ficarão parados na mesma fila de farofeiros. Toda tecnologia, complexidade e custo da fabricação do carro moderno não o livra de um congestionamento. Não há projeto que consiga prever ou contornar esse problema.</p>
 
-Voltando para nossa realidade, em certos casos o custo não paga o benefício. Mesmo um sistema bem planejado, distribuído, separado em camadas e serviços independentes, pode não suportar a demanda, seja de carga ou de funcionalidade. O mesmo aconteceria com um sistema mais simples arquiteturalmente, com certeza. Porém, o custo e velocidade de desenvolvimento e manutenção seria bem menor.
+<p><a href="http://1up4dev.org/wp-content/uploads/2011/01/baleia1.jpg"><img src="http://1up4dev.org/wp-content/uploads/2011/01/baleia1-300x225.jpg" alt="Twitter" /></a></p>
+
+<p>Voltando para nossa realidade, em certos casos o custo não paga o benefício. Mesmo um sistema bem planejado, distribuído, separado em camadas e serviços independentes, pode não suportar a demanda, seja de carga ou de funcionalidade. O mesmo aconteceria com um sistema mais simples arquiteturalmente, com certeza. Porém, o custo e velocidade de desenvolvimento e manutenção seria bem menor.</p>
 
 <h3>O que fazer então?</h3>
 
-Sistemas precisam evoluir de acordo com a necessidade. <a href="http://merbist.com/2011/01/31/designing-for-scalability/">Projetar um sistema</a> prevendo todos os possíveis &#8220;casos de uso&#8221; bem como suas hipotéticas cargas (ou acessos) é uma forte característica do <em>waterfall</em>. Sistemas mais simples arquiteturalmente evoluem mais facilmente, em outras palavras, escalam mais facilmente:
+<p>Sistemas precisam evoluir de acordo com a necessidade. <a href="http://merbist.com/2011/01/31/designing-for-scalability/">Projetar um sistema</a> prevendo todos os possíveis &ldquo;casos de uso&rdquo; bem como suas hipotéticas cargas (ou acessos) é uma forte característica do <em>waterfall</em>. Sistemas mais simples arquiteturalmente evoluem mais facilmente, em outras palavras, escalam mais facilmente:</p>
 
 <ul>
-<li><a href="http://pt.wikipedia.org/wiki/Keep_It_Simple"><strong>Keep it simple, stupid</strong></a>! Soluções simples geralmente custam menos e trazem retorno mais rápido. Qualquer funcionalidade ou recurso que não agregue valor deve ser descartada. Simples assim!</li>
-<li><strong>Simplifique requisitos</strong>. Clientes <em>sem</em> software costumam <em>viajar</em> nos requisitos. Converse, escute e entenda exatamente seus <a href="http://1up4dev.org/2008/11/foco-no-problema/">PROBLEMAS</a>, então <a href="http://pt.wikipedia.org/wiki/YAGNI">negocie</a> e sugira uma SOLUÇÃO simples e rápida. E a <a href="http://pragprog.com/titles/prj/ship-it">entregue</a> logo!</li>
-<li><strong>Busque soluções prontas</strong>. As necessidades dos clientes, em muitos casos, são parecidas. Provavelmente existe alguma solução pronta que você pode entregar para seu cliente ao invés de desenvolver um novo [software que todos conhecem] do zero.</li>
-<li><strong>Otimize sua infra-estrutura</strong>. Procure a melhor forma de deploy da aplicação. Qual hardware é mais adequado, qual sistema operacional e arquitetura. Faça tunning do webserver (workers, pool, memória), módulos e load balance. Utilize uma versão otimizada do interpretador, como o <a href="http://www.rubyenterpriseedition.com/">Ruby Enterprise Edition</a>, <a href="http://www.jruby.org/">JRuby</a> ou <a href="http://rubini.us/">Rubinius</a>.</li>
-<li><strong>Monitore sua aplicação</strong>. Uma vez que esteja em produção, monitore-a em busca de gargalos e possíveis pontos de otimização. Existem várias ferramentas para ajudá-lo nessa tarefa, como o <a href="http://hoptoadapp.com/">Hoptoad</a>, <a href="http://newrelic.com/">NewRelic</a>, ou até mesmo o <a href="http://rubini.us/doc/en/tools/profiler/">Rubinius Profiler</a>.</li>
-<li><strong>Otimize sua aplicação</strong>. O log é seu melhor amigo no desenvolvimento. Não ignore queries demoradas ou que geram <a href="http://rails-bestpractices.com/posts/29-fix-n-1-queries">N+1</a>, otimize-as! Faça <em>profiling</em>, analise e otimize o código. Utilize <em>caching</em> para serviços externos e para páginas. Caching pode ser a melhor alternativa para turbinar sua aplicação, mas use-o com sabedoria. Bancos de dados não devem ser um problema, por isso saiba escolher a melhor distribuição para seu caso. Mesmo que <a href="http://nosql-database.org/">NoSQL</a> esteja na moda, não quer dizer que é a melhor solução para sua aplicação (a menos que seja necessário para o negócio).</li>
-<li><strong>Simplifique o desenvolvimento</strong>. Fameworks ajudam bastante, mas use-os com sabedoria para não inflar o <em>stack</em> da aplicação. Em certas situações, vale mais a pena desenvolver algo simples do zero do que utilizar algo pronto, pesado e que precise ser adaptado para sua necessidade. Escreva menos: quanto menor seu código, mais rápido será sua execução. Camadas são perigosas: evite rodeios e escreva código que realmente interessa. E lembre-se: sempre existe uma ferramenta certa para cada problema.</li>
+<li><p><a href="http://pt.wikipedia.org/wiki/Keep_It_Simple"><strong>Keep it simple, stupid</strong></a>! Soluções simples geralmente custam menos e trazem retorno mais rápido. Qualquer funcionalidade ou recurso que não agregue valor deve ser descartada. Simples assim!</p></li>
+<li><p><strong>Simplifique requisitos</strong>. Clientes <em>sem</em> software costumam <em>viajar</em> nos requisitos. Converse, escute e entenda exatamente seus <a href="http://1up4dev.org/2008/11/foco-no-problema/">PROBLEMAS</a>, então <a href="http://pt.wikipedia.org/wiki/YAGNI">negocie</a> e sugira uma SOLUÇÃO simples e rápida. E a <a href="http://pragprog.com/titles/prj/ship-it">entregue</a> logo!</p></li>
+<li><p><strong>Busque soluções prontas</strong>. As necessidades dos clientes, em muitos casos, são parecidas. Provavelmente existe alguma solução pronta que você pode entregar para seu cliente ao invés de desenvolver um novo [software que todos conhecem] do zero.</p></li>
+<li><p><strong>Otimize sua infra-estrutura</strong>. Procure a melhor forma de deploy da aplicação. Qual hardware é mais adequado, qual sistema operacional e arquitetura. Faça tunning do webserver (workers, pool, memória), módulos e load balance. Utilize uma versão otimizada do interpretador, como o <a href="http://www.rubyenterpriseedition.com/">Ruby Enterprise Edition</a>, <a href="http://www.jruby.org/">JRuby</a> ou <a href="http://rubini.us/">Rubinius</a>.</p></li>
+<li><p><strong>Monitore sua aplicação</strong>. Uma vez que esteja em produção, monitore-a em busca de gargalos e possíveis pontos de otimização. Existem várias ferramentas para ajudá-lo nessa tarefa, como o <a href="http://hoptoadapp.com/">Hoptoad</a>, <a href="http://newrelic.com/">NewRelic</a>, ou até mesmo o <a href="http://rubini.us/doc/en/tools/profiler/">Rubinius Profiler</a>.</p></li>
+<li><p><strong>Otimize sua aplicação</strong>. O log é seu melhor amigo no desenvolvimento. Não ignore queries demoradas ou que geram <a href="http://rails-bestpractices.com/posts/29-fix-n-1-queries">N+1</a>, otimize-as! Faça <em>profiling</em>, analise e otimize o código. Utilize <em>caching</em> para serviços externos e para páginas. Caching pode ser a melhor alternativa para turbinar sua aplicação, mas use-o com sabedoria. Bancos de dados não devem ser um problema, por isso saiba escolher a melhor distribuição para seu caso. Mesmo que <a href="http://nosql-database.org/">NoSQL</a> esteja na moda, não quer dizer que é a melhor solução para sua aplicação (a menos que seja necessário para o negócio).</p></li>
+<li><p><strong>Simplifique o desenvolvimento</strong>. Fameworks ajudam bastante, mas use-os com sabedoria para não inflar o <em>stack</em> da aplicação. Em certas situações, vale mais a pena desenvolver algo simples do zero do que utilizar algo pronto, pesado e que precise ser adaptado para sua necessidade. Escreva menos: quanto menor seu código, mais rápido será sua execução. Camadas são perigosas: evite rodeios e escreva código que realmente interessa. E lembre-se: sempre existe uma ferramenta certa para cada problema.</p></li>
 </ul>
+
 
 <h3>SIMPLIFIQUE!</h3>
 
-Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-ideas-to-simplify-your-life/"><strong>SIMPLES</strong></a> gravada na sua mente. Se uma coisa exigir muito esforço para ser feita, talvez nem valha a pena. Volte para o início, pense novamente e busque uma ALTERNATIVA mais rápida/fácil/barata. Quanto melhor for sua técnica, melhor serão suas escolhas. <a href="http://blip.tv/file/2733212">Pratique constantemente</a>. 
+<p>Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-ideas-to-simplify-your-life/"><strong>SIMPLES</strong></a> gravada na sua mente. Se uma coisa exigir muito esforço para ser feita, talvez nem valha a pena. Volte para o início, pense novamente e busque uma ALTERNATIVA mais rápida/fácil/barata. Quanto melhor for sua técnica, melhor serão suas escolhas. <a href="http://blip.tv/file/2733212">Pratique constantemente</a>.</p>
 </div>
 
 
@@ -156,7 +167,7 @@ Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -170,7 +181,7 @@ Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-
   
 
 
-<time datetime="2011-02-01T00:00:00-02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
+<time datetime="2011-02-01T07:00:00-02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
       
 
 <span class="categories">
@@ -205,6 +216,12 @@ Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -259,7 +276,10 @@ Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/02/complexidade-nao-escala/';
+        var disqus_url = 'http://1up4developers.github.io/2011/02/complexidade-nao-escala/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

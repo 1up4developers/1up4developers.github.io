@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2012-11-28T00:00:00-02:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+<time datetime="2012-11-28T13:49:06-02:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,8 +93,9 @@
   </header>
 
 
-<div class="entry-content"><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:
-<pre><code>require 'minion_server'
+<div class="entry-content"><p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
+
+<pre><code>&lt;code&gt;require 'minion_server'
 
 # build your integration app
 IntegrationApp = Rack::Builder.new do
@@ -112,11 +113,13 @@ server.start("localhost", 1620)  # default: localhost, 4000
 system "curl http://localhost:1620" # =&gt; "Be happy!"
 
 server.shutdown
+&lt;/code&gt;
 </code></pre>
-You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&#8217;s integration tests.
-Hope that helps!
 
-<strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a title="A real server to mock servers!" href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.
+<p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
+Hope that helps!</p>
+
+<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
 </div>
 
 
@@ -125,7 +128,7 @@ Hope that helps!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -139,7 +142,7 @@ Hope that helps!
   
 
 
-<time datetime="2012-11-28T00:00:00-02:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+<time datetime="2012-11-28T13:49:06-02:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -174,6 +177,12 @@ Hope that helps!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -228,7 +237,10 @@ Hope that helps!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers/';
+        var disqus_url = 'http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

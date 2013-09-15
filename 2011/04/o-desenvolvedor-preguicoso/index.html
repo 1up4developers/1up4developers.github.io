@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-04-08T00:00:00-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
+<time datetime="2011-04-08T13:24:49-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,23 +93,23 @@
   </header>
 
 
-<div class="entry-content">Durante o almoço eu estava conversando com um colega e citei que, se tivesse uma empresa, gostaria de contratar um programador/desenvolvedor/engenheiro que fosse preguiçoso. Por meio minuto ele deve ter imaginado que eu estava louco, ou que queria abrir transformar minha empresa imaginária numa repartição pública.
+<div class="entry-content"><p>Durante o almoço eu estava conversando com um colega e citei que, se tivesse uma empresa, gostaria de contratar um programador/desenvolvedor/engenheiro que fosse preguiçoso. Por meio minuto ele deve ter imaginado que eu estava louco, ou que queria abrir transformar minha empresa imaginária numa repartição pública.</p>
 
-Vou tentar ser breve na explicação.
+<p>Vou tentar ser breve na explicação.</p>
 
-O primeiro ponto é que uma pessoa preguiçosa, dentro desse contexto, é completamente diferente de uma pessoa acomodada, encostada ou vagabunda. Uma pessoa preguiçosa, novamente nesse contexto, é aquela que se incomoda de fazer várias vezes ao dia a mesma tarefa, e encontra meios de automatizar isso.
+<p>O primeiro ponto é que uma pessoa preguiçosa, dentro desse contexto, é completamente diferente de uma pessoa acomodada, encostada ou vagabunda. Uma pessoa preguiçosa, novamente nesse contexto, é aquela que se incomoda de fazer várias vezes ao dia a mesma tarefa, e encontra meios de automatizar isso.</p>
 
-Um caso real: eu trabalhei numa projeto em que era necessário compilar os fontes, passar os binários resultantes (executáveis, DLLs ou JARs) por um software proprietário para que esses fossem convertidos num formato que a plataforma proprietária entenda, e então utilizar um outro software para jogar esse binário convertido para dentro do dispositivo.
+<p>Um caso real: eu trabalhei numa projeto em que era necessário compilar os fontes, passar os binários resultantes (executáveis, DLLs ou JARs) por um software proprietário para que esses fossem convertidos num formato que a plataforma proprietária entenda, e então utilizar um outro software para jogar esse binário convertido para dentro do dispositivo.</p>
 
-O segundo passo, a conversão dos binários, era freqüentemente esquecido, fazendo com que um binário desatualizado fosse instalado no dispositivo, desperdiçando tempo e estressando os envolvidos.
+<p>O segundo passo, a conversão dos binários, era freqüentemente esquecido, fazendo com que um binário desatualizado fosse instalado no dispositivo, desperdiçando tempo e estressando os envolvidos.</p>
 
-Um colega, preguiçoso, criou um passo novo que foi adicionado ao <a title="Maven" href="http://maven.apache.org/" target="_blank">Maven</a> para que essa geração fosse automatizada, reduzindo todo processo à compilação e instalação. Não fosse o software de instalação tão fechado, a coisa toda seria realizada num único processo.
+<p>Um colega, preguiçoso, criou um passo novo que foi adicionado ao <a href="http://maven.apache.org/">Maven</a> para que essa geração fosse automatizada, reduzindo todo processo à compilação e instalação. Não fosse o software de instalação tão fechado, a coisa toda seria realizada num único processo.</p>
 
-O mesmo acontece com a utilização de testes automatizados. Poderíamos muito bem executar passo a passo todos os itens de uma planilha gigantesca cada vez que eu gerasse uma nova versão do sistema. Ao invés disso, escrevemos alguns testes automatizados (705 da última vez vi) que levam trinta segundos para executar toda vez que você altera o código. A cada nova funcionalidade, uma nova série de testes é escrita, fazendo com que a coisa seja menos trabalhosa para todos os envolvidos.
+<p>O mesmo acontece com a utilização de testes automatizados. Poderíamos muito bem executar passo a passo todos os itens de uma planilha gigantesca cada vez que eu gerasse uma nova versão do sistema. Ao invés disso, escrevemos alguns testes automatizados (705 da última vez vi) que levam trinta segundos para executar toda vez que você altera o código. A cada nova funcionalidade, uma nova série de testes é escrita, fazendo com que a coisa seja menos trabalhosa para todos os envolvidos.</p>
 
-Automatizar tarefas repetitivas aumenta a produtividade, reduz drasticamente a possibilidade de que erros idiotas aconteçam e ainda te dá tempo para investir no que realmente interessa.
+<p>Automatizar tarefas repetitivas aumenta a produtividade, reduz drasticamente a possibilidade de que erros idiotas aconteçam e ainda te dá tempo para investir no que realmente interessa.</p>
 
-E você, está sendo preguiçoso ou acomodado?
+<p>E você, está sendo preguiçoso ou acomodado?</p>
 </div>
 
 
@@ -118,7 +118,7 @@ E você, está sendo preguiçoso ou acomodado?
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
 
       
 
@@ -132,7 +132,7 @@ E você, está sendo preguiçoso ou acomodado?
   
 
 
-<time datetime="2011-04-08T00:00:00-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
+<time datetime="2011-04-08T13:24:49-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -167,6 +167,12 @@ E você, está sendo preguiçoso ou acomodado?
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -221,7 +227,10 @@ E você, está sendo preguiçoso ou acomodado?
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/04/o-desenvolvedor-preguicoso/';
+        var disqus_url = 'http://1up4developers.github.io/2011/04/o-desenvolvedor-preguicoso/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

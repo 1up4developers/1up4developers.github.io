@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2009-03-03T00:00:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+<time datetime="2009-03-03T11:11:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,21 +93,25 @@
   </header>
 
 
-<div class="entry-content">Aproveitando o gancho do <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/">post anterior</a> sobre manipulação de dependências, decidi dedicar um post apenas sobre este tema, pois acredito ser de grande ajuda para todos desenvolvedores que precisam manter código legado.
+<div class="entry-content"><p>Aproveitando o gancho do <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/">post anterior</a> sobre manipulação de dependências, decidi dedicar um post apenas sobre este tema, pois acredito ser de grande ajuda para todos desenvolvedores que precisam manter código legado.</p>
 
-Em projetos legados é comum encontrarmos classes Util (aka Helpers) espalhadas por todo o código, fazendo desde coisas simples como formatar datas ou números, até coisas mágicas como cache de objetos, operações com <a href="http://en.wikibooks.org/wiki/Java_Programming/Reflection/Overview" target="_blank">reflection</a>, escrita de logs, etc. Mesmo que tenham sua &#8220;utilidade&#8221;, são um <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">terror</a> quando falamos de testes! Além de ser um <a href="http://en.wikipedia.org/wiki/God_object">forte indício</a> de um <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">design fraco</a>, as chamadas a seus métodos, geralmente estáticos, geram dependências nas classes que a utilizam.
+<p>Em projetos legados é comum encontrarmos classes Util (aka Helpers) espalhadas por todo o código, fazendo desde coisas simples como formatar datas ou números, até coisas mágicas como cache de objetos, operações com <a href="http://en.wikibooks.org/wiki/Java_Programming/Reflection/Overview">reflection</a>, escrita de logs, etc. Mesmo que tenham sua &ldquo;utilidade&rdquo;, são um <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">terror</a> quando falamos de testes! Além de ser um <a href="http://en.wikipedia.org/wiki/God_object">forte indício</a> de um <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">design fraco</a>, as chamadas a seus métodos, geralmente estáticos, geram dependências nas classes que a utilizam.</p>
 
-Este é a estrutura comum (bem simplificada) de uma classe Util com métodos estáticos:
-<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class MagicUtil {
+<p>Este é a estrutura comum (bem simplificada) de uma classe Util com métodos estáticos:</p>
+
+<pre><code>&lt;code&gt;public class MagicUtil {
     public static String getConstanteSecreta() {
         return "VALOR_SECRETO_AMBIENTE";
     }
 }
+&lt;/code&gt;
 </code></pre>
-Neste caso, uma boa estratégia para os testes seria encapsular a chamada da classe Util em um método <em>protected</em>, para que seja sobrescrito na classe de teste, assumindo o comportamento desejado. Porém, se a classe Util for largamente referenciada no projeto (o que é comum) seria preciso <em>refatorar</em> todas a classes que a utilizam para escrever um teste completo.
 
-A estratégia proposta é <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorar</a> a classe Util, aplicando o padrão <a href="http://pt.wikipedia.org/wiki/Singleton">Singleton</a> e transformando os métodos estáticos em métodos de instância, porém mantendo as assinaturas estáticas, que devem referenciar os métodos da instância. Uma vez que a Util pode ser instanciada (mesmo que internamente), é possível manipular seu comportamento através da injeção de um objeto <em>Mock</em>, por exemplo<em>:</em>
-<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class MagicUtil {
+<p>Neste caso, uma boa estratégia para os testes seria encapsular a chamada da classe Util em um método <em>protected</em>, para que seja sobrescrito na classe de teste, assumindo o comportamento desejado. Porém, se a classe Util for largamente referenciada no projeto (o que é comum) seria preciso <em>refatorar</em> todas a classes que a utilizam para escrever um teste completo.</p>
+
+<p>A estratégia proposta é <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorar</a> a classe Util, aplicando o padrão <a href="http://pt.wikipedia.org/wiki/Singleton">Singleton</a> e transformando os métodos estáticos em métodos de instância, porém mantendo as assinaturas estáticas, que devem referenciar os métodos da instância. Uma vez que a Util pode ser instanciada (mesmo que internamente), é possível manipular seu comportamento através da injeção de um objeto <em>Mock</em>, por exemplo<em>:</em></p>
+
+<pre><code>&lt;code&gt;public class MagicUtil {
     private static MagicUtil instance = new MagicUtil();
     protected static MagicUtil getInstance() {
         return instance;
@@ -122,9 +126,12 @@ A estratégia proposta é <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C
         return getInstance().getConstanteSecretaInstancia();
     }
 }
+&lt;/code&gt;
 </code></pre>
-Assim, a Util continua com o mesmo comportamento e seu <strong>contrato</strong> foi mantido. Agora, no seu teste, basta escrever o mock (estendendo a classe e sobrescrevendo os métodos) e injetá-lo na instância interna da Util:
-<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class ClasseTest {
+
+<p>Assim, a Util continua com o mesmo comportamento e seu <strong>contrato</strong> foi mantido. Agora, no seu teste, basta escrever o mock (estendendo a classe e sobrescrevendo os métodos) e injetá-lo na instância interna da Util:</p>
+
+<pre><code>&lt;code&gt;public class ClasseTest {
     @Test
     public void testaMetodoDependenteDeMagicUtil() {
         new MagicUtil() {
@@ -138,10 +145,12 @@ Assim, a Util continua com o mesmo comportamento e seu <strong>contrato</strong>
         Assert.assertEquals("MEU_VALOR_MOCK", MagicUtil.getConstanteSecreta());
     }
 }
+&lt;/code&gt;
 </code></pre>
-Neste caso a classe anônima (que estende a Util) passa sua própria instância (this) para o método protegido <em>setInstance()</em>. Note que a chamada do método (estático) da Util continua igual ao da classe original, sem o refactoring.
 
-Nos projetos que preciso manter, esta estratégia tem sido muito útil para resolver os problemas das &#8220;teias&#8221; de Utils. Porém é um recurso paliativo e <a href="http://gcirne.wordpress.com/2008/01/14/classes-util/">não deve ser utilizado</a> como o &#8220;padrão&#8221;. O ideal é sempre evitar classes Utils, lembrando que uma classe deve sempre ter comportamentos bem definidos e o <a href="http://domaindrivendesign.org/">nome já deve indicar</a> sua responsabilidade.
+<p>Neste caso a classe anônima (que estende a Util) passa sua própria instância (this) para o método protegido <em>setInstance()</em>. Note que a chamada do método (estático) da Util continua igual ao da classe original, sem o refactoring.</p>
+
+<p>Nos projetos que preciso manter, esta estratégia tem sido muito útil para resolver os problemas das &ldquo;teias&rdquo; de Utils. Porém é um recurso paliativo e <a href="http://gcirne.wordpress.com/2008/01/14/classes-util/">não deve ser utilizado</a> como o &ldquo;padrão&rdquo;. O ideal é sempre evitar classes Utils, lembrando que uma classe deve sempre ter comportamentos bem definidos e o <a href="http://domaindrivendesign.org/">nome já deve indicar</a> sua responsabilidade.</p>
 </div>
 
 
@@ -150,7 +159,7 @@ Nos projetos que preciso manter, esta estratégia tem sido muito útil para reso
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -164,7 +173,7 @@ Nos projetos que preciso manter, esta estratégia tem sido muito útil para reso
   
 
 
-<time datetime="2009-03-03T00:00:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+<time datetime="2009-03-03T11:11:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
       
 
 <span class="categories">
@@ -199,6 +208,12 @@ Nos projetos que preciso manter, esta estratégia tem sido muito útil para reso
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -253,7 +268,10 @@ Nos projetos que preciso manter, esta estratégia tem sido muito útil para reso
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2009/03/tpw-testando-sistemas-legados-classes-utils/';
+        var disqus_url = 'http://1up4developers.github.io/2009/03/tpw-testando-sistemas-legados-classes-utils/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

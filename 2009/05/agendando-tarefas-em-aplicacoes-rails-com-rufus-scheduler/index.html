@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2009-05-31T00:00:00-03:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
+<time datetime="2009-05-31T15:33:06-03:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,12 +93,16 @@
   </header>
 
 
-<div class="entry-content"><a href="http://rufus.rubyforge.org/" target="_blank">Rufus</a> é um conjunto de gems utilizado para <a href="http://pt.wikipedia.org/wiki/Fluxo_de_Trabalho" target="_blank">Workflow</a> e <a href="http://pt.wikipedia.org/wiki/Business_Process_Management" target="_blank">BPM</a>. O <a href="http://rufus.rubyforge.org/rufus-scheduler/" target="_blank">rufus-scheduler</a> é a gem responsável pelo agendamento e execução de tarefas (jobs). Se você programa em Java e conhece o <a href="http://www.opensymphony.com/quartz/wikidocs/QuickStart.html" target="_blank">Quartz</a> não vai ter dificuldade em utilizá-la.
+<div class="entry-content"><p><a href="http://rufus.rubyforge.org/">Rufus</a> é um conjunto de gems utilizado para <a href="http://pt.wikipedia.org/wiki/Fluxo_de_Trabalho">Workflow</a> e <a href="http://pt.wikipedia.org/wiki/Business_Process_Management">BPM</a>. O <a href="http://rufus.rubyforge.org/rufus-scheduler/">rufus-scheduler</a> é a gem responsável pelo agendamento e execução de tarefas (jobs). Se você programa em Java e conhece o <a href="http://www.opensymphony.com/quartz/wikidocs/QuickStart.html">Quartz</a> não vai ter dificuldade em utilizá-la.</p>
 
-Instalação:
-<pre>sudo gem install rufus-scheduler</pre>
-Utilização:
-<pre>require 'rubygems'
+<p>Instalação:</p>
+
+<pre><code>sudo gem install rufus-scheduler
+</code></pre>
+
+<p>Utilização:</p>
+
+<pre><code>require 'rubygems'
 require 'rufus/scheduler'
 
 scheduler = Rufus::Scheduler.start_new
@@ -109,8 +113,10 @@ end
 
 scheduler.schedule '0 18 * * *' do
   puts 'Executando todos os dias as 18h'
-end</pre>
-Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/" target="_blank">documentação</a> oficial ou <a href="http://github.com/jmettraux/rufus-scheduler/tree/master" target="_blank">contribua com o código</a>.
+end
+</code></pre>
+
+<p>Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/">documentação</a> oficial ou <a href="http://github.com/jmettraux/rufus-scheduler/tree/master">contribua com o código</a>.</p>
 </div>
 
 
@@ -119,7 +125,7 @@ Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/" 
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -133,7 +139,7 @@ Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/" 
   
 
 
-<time datetime="2009-05-31T00:00:00-03:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
+<time datetime="2009-05-31T15:33:06-03:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
       
 
 <span class="categories">
@@ -168,6 +174,12 @@ Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/" 
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -222,7 +234,10 @@ Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/" 
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/';
+        var disqus_url = 'http://1up4developers.github.io/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

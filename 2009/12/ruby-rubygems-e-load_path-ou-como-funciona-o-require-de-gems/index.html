@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Na madrugada passada, andei &#8220;brincando&#8221; com o fonte do Rubygems. Logo de cara posso te dizer que não consegui fazer o que queria, e pra &hellip;">
+  <meta name="description" content="Na madrugada passada, andei &ldquo;brincando&rdquo; com o fonte do Rubygems. Logo de cara posso te dizer que não consegui fazer o que queria, e pra &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2009-12-17T00:00:00-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
+<time datetime="2009-12-17T08:30:15-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,125 +93,230 @@
   </header>
 
 
-<div class="entry-content">Na madrugada passada, andei &#8220;brincando&#8221; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &#8220;perda de tempo&#8221;, resolvi postar alguns truques aprendidos.
+<div class="entry-content"><p>Na madrugada passada, andei &ldquo;brincando&rdquo; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &ldquo;perda de tempo&rdquo;, resolvi postar alguns truques aprendidos.</p>
+
 <h2>Baixei o fonte do rubygems, como faço pra rodá-lo sem alterar o meu sistema?</h2>
-Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.
-<pre>$ irb</pre>
-<pre>irb(main):001:0&gt; $LOAD_PATH</pre>
-No meu Ubuntu, obtive:
-<pre>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]</pre>
-<pre>$ ls /usr/local/lib/site_ruby/1.8/</pre>
-Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
-Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:
-<pre>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v</pre>
-O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.
-<h2>Afinal, como funciona o &#8220;require de gems&#8221;?</h2>
-Bom, já sabemos que o require &#8220;rubygems&#8221; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &#8220;/usr/local/lib/site_ruby/1.8&#8221;.
 
-Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.
+<p>Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.</p>
+
+<pre><code>$ irb
+
+
+
+
+irb(main):001:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>No meu Ubuntu, obtive:</p>
+
+<pre><code>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]
+
+
+
+
+$ ls /usr/local/lib/site_ruby/1.8/
+</code></pre>
+
+<p>Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
+Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:</p>
+
+<pre><code>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v
+</code></pre>
+
+<p>O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.</p>
+
+<h2>Afinal, como funciona o &ldquo;require de gems&rdquo;?</h2>
+
+<p>Bom, já sabemos que o require &ldquo;rubygems&rdquo; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;.</p>
+
+<p>Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.</p>
+
 <ul>
-	<li>Adiciona o metodo Kernel#gem.</li>
-	<li>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</li>
+<li><p>Adiciona o metodo Kernel#gem.</p></li>
+<li><p>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</p></li>
 </ul>
+
+
 <h3>Kernel#gem</h3>
-Permite &#8220;acionar&#8221; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:
-<p style="padding-left: 30px;">##</p>
-<p style="padding-left: 30px;"># Use Kernel#gem to activate a specific version of +gem_name+.</p>
-<p style="padding-left: 30px;">#</p>
-<p style="padding-left: 30px;"># +version_requirements+ is a list of version requirements that the</p>
-<p style="padding-left: 30px;"># specified gem must match, most commonly &#8220;= example.version.number&#8221;.  See</p>
-<p style="padding-left: 30px;"># Gem::Requirement for how to specify a version requirement.</p>
-<p style="padding-left: 30px;">#</p>
-<p style="padding-left: 30px;"># If you will be activating the latest version of a gem, there is no need to</p>
-<p style="padding-left: 30px;"># call Kernel#gem, Kernel#require will do the right thing for you.</p>
-<p style="padding-left: 30px;">#</p>
-<p style="padding-left: 30px;"># Kernel#gem returns true if the gem was activated, otherwise false.  If the</p>
-<p style="padding-left: 30px;"># gem could not be found, didn&#8217;t match the version requirements, or a</p>
 
-<p style="padding-left: 30px;"># different version was already activated, an exception will be raised.
-[&#8230;]
+<p>Permite &ldquo;acionar&rdquo; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:</p>
+
+<h1>#</h1>
+
+<h1>Use Kernel#gem to activate a specific version of +gem_name+.</h1>
+
+<p>#</p>
+
+<h1>+version_requirements+ is a list of version requirements that the</h1>
+
+<h1>specified gem must match, most commonly &ldquo;= example.version.number&rdquo;.  See</h1>
+
+<h1>Gem::Requirement for how to specify a version requirement.</h1>
+
+<p>#</p>
+
+<h1>If you will be activating the latest version of a gem, there is no need to</h1>
+
+<h1>call Kernel#gem, Kernel#require will do the right thing for you.</h1>
+
+<p>#</p>
+
+<h1>Kernel#gem returns true if the gem was activated, otherwise false.  If the</h1>
+
+<h1>gem could not be found, didn&rsquo;t match the version requirements, or a</h1>
+
+<h1>different version was already activated, an exception will be raised.</h1>
+
+<p>[&hellip;]</p>
+
 <h3>Kernel#require</h3>
-No final do rubygems.rb encontramos:
 
-if RUBY_VERSION &lt; &#8216;1.9&#8217; then
+<p>No final do rubygems.rb encontramos:</p>
 
-require &#8216;rubygems/custom_require&#8217;
+<p>if RUBY_VERSION &lt; &lsquo;1.9&rsquo; then</p>
 
-end
+<p>require &lsquo;rubygems/custom_require&rsquo;</p>
 
-Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:
+<p>end</p>
+
+<p>Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:</p>
+
 <ul>
-	<li>Chama o &#8220;original&#8221; require;</li>
-	<li>Em caso de LoadError;
+<li><p>Chama o &ldquo;original&rdquo; require;</p></li>
+<li><p>Em caso de LoadError;</p>
+
 <ul>
-	<li>Executa o &#8220;Gem.searcher.find(path)&#8221;;</li>
-	<li>Se <em>true</em>
+<li><p>Executa o &ldquo;Gem.searcher.find(path)&rdquo;;</p></li>
+<li><p>Se <em>true</em></p>
+
 <ul>
-	<li>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</li>
-	<li>Executa o &#8220;original&#8221; require novamente;</li>
+<li><p>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</p></li>
+<li><p>Executa o &ldquo;original&rdquo; require novamente;</p></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+
+
 <h3>Exemplos com o IRB</h3>
-Para finalizar legal e comprovar tudo isso, fiz alguns testes:
-<pre>$ gem list json</pre>
-<p style="padding-left: 30px;">*** LOCAL GEMS ***</p>
-<p style="padding-left: 30px;">json (1.2.0, 1.1.9)</p>
-<p style="padding-left: 30px;">json_pure (1.2.0)</p>
-<p style="padding-left: 30px;"></p>
 
-<pre>$ irb</pre>
-<pre>irb(main):001:0&gt; $LOAD_PATH</pre>
-<p style="padding-left: 30px;">=&gt; [&#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]</p>
+<p>Para finalizar legal e comprovar tudo isso, fiz alguns testes:</p>
 
-<pre>irb(main):004:0&gt; require "json"</pre>
-<p style="padding-left: 30px;">LoadError: no such file to load &#8211; json</p>
-<p style="padding-left: 30px;">from (irb):4:in `require&#8217;</p>
-<p style="padding-left: 30px;">from (irb):4</p>
-<p style="padding-left: 30px;">from :0</p>
+<pre><code>$ gem list json
+</code></pre>
 
-<pre>irb(main):005:0&gt; gem "json", "= 1.2.0"</pre>
-<p style="padding-left: 30px;">NoMethodError: undefined method `gem&#8217; for main:Object</p>
+<p><strong><em> LOCAL GEMS </em></strong></p>
 
-<p style="padding-left: 30px;">from (irb):5
-from :0
+<p>json (1.2.0, 1.1.9)</p>
 
-O require &#8220;json&#8221; por si só, carrega a versão mais atual da gem.
-<pre>irb(main):006:0&gt; require "rubygems"</pre>
-=&gt; true
-<pre>irb(main):007:0&gt; require "json"</pre>
-=&gt; true
-<pre>irb(main):008:0&gt; JSON::VERSION</pre>
-=&gt; &#8220;1.2.0&#8221;
-<pre>irb(main):009:0&gt; $LOAD_PATH</pre>
-=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
-<pre>irb(main):010:0&gt; quit</pre>
-Após o require &#8220;json&#8221;, as pastas foram adicionadas no $LOAD_PATH.
-<pre>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"</pre>
-Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:
-<pre>$ irb
+<p>json_pure (1.2.0)</p>
 
-irb(main):001:0&gt; require "rubygems"</pre>
-=&gt; true
-<pre>irb(main):002:0&gt; $LOAD_PATH</pre>
-=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
-<pre>irb(main):003:0&gt; gem "json", "= 1.1.9"</pre>
-=&gt; true
-<pre>irb(main):004:0&gt; $LOAD_PATH</pre>
-=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
-<pre>irb(main):005:0&gt; JSON</pre>
-NameError: uninitialized constant JSON
-from (irb):5
-<pre>irb(main):006:0&gt; require "json"</pre>
-=&gt; true
-<pre>irb(main):007:0&gt; JSON::VERSION</pre>
-=&gt; &#8220;1.1.9&#8221;
-<pre>irb(main):008:0&gt; quit</pre>
-Note que após o gem &#8220;json&#8221;, &#8220;= 1.1.9&#8221; &#8230; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &#8220;json&#8221;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.
+<pre><code>$ irb
 
-Espero que com estas explicações, você use com mais segurança o rubygems.
+
+
+
+irb(main):001:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):004:0&gt; require "json"
+</code></pre>
+
+<p>LoadError: no such file to load &mdash; json</p>
+
+<p>from (irb):4:in `require&#8217;</p>
+
+<p>from (irb):4</p>
+
+<p>from :0</p>
+
+<pre><code>irb(main):005:0&gt; gem "json", "= 1.2.0"
+</code></pre>
+
+<p>NoMethodError: undefined method `gem&#8217; for main:Object</p>
+
+<p>from (irb):5
+from :0</p>
+
+<p>O require &ldquo;json&rdquo; por si só, carrega a versão mais atual da gem.</p>
+
+<pre><code>irb(main):006:0&gt; require "rubygems"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):007:0&gt; require "json"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):008:0&gt; JSON::VERSION
+</code></pre>
+
+<p>=> &ldquo;1.2.0&rdquo;</p>
+
+<pre><code>irb(main):009:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):010:0&gt; quit
+</code></pre>
+
+<p>Após o require &ldquo;json&rdquo;, as pastas foram adicionadas no $LOAD_PATH.</p>
+
+<pre><code>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"
+</code></pre>
+
+<p>Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:</p>
+
+<pre><code>$ irb
+
+irb(main):001:0&gt; require "rubygems"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):002:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):003:0&gt; gem "json", "= 1.1.9"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):004:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):005:0&gt; JSON
+</code></pre>
+
+<p>NameError: uninitialized constant JSON
+from (irb):5</p>
+
+<pre><code>irb(main):006:0&gt; require "json"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):007:0&gt; JSON::VERSION
+</code></pre>
+
+<p>=> &ldquo;1.1.9&rdquo;</p>
+
+<pre><code>irb(main):008:0&gt; quit
+</code></pre>
+
+<p>Note que após o gem &ldquo;json&rdquo;, &ldquo;= 1.1.9&rdquo; &hellip; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &ldquo;json&rdquo;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.</p>
+
+<p>Espero que com estas explicações, você use com mais segurança o rubygems.</p>
 </div>
 
 
@@ -220,7 +325,7 @@ Espero que com estas explicações, você use com mais segurança o rubygems.
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -234,7 +339,7 @@ Espero que com estas explicações, você use com mais segurança o rubygems.
   
 
 
-<time datetime="2009-12-17T00:00:00-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
+<time datetime="2009-12-17T08:30:15-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
       
 
 <span class="categories">
@@ -269,6 +374,12 @@ Espero que com estas explicações, você use com mais segurança o rubygems.
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -323,7 +434,10 @@ Espero que com estas explicações, você use com mais segurança o rubygems.
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/';
+        var disqus_url = 'http://1up4developers.github.io/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

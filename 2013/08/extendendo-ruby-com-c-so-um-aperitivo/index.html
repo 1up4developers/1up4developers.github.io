@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2013-08-19T00:00:00-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
+<time datetime="2013-08-19T14:29:56-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,70 +93,106 @@
   </header>
 
 
-<div class="entry-content">Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.
+<div class="entry-content"><p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
 
-Vamos criar uma extensão que retorna uma simples String.
+<p>Vamos criar uma extensão que retorna uma simples String.</p>
 
-Primeiramente criamos o diretório onde estará nossa extensão :
-<pre>  <code>$ mkdir &lt;your_path&gt;/1up4dev</code></pre>
-Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &#8221;<strong>ruby.h&#8221;</strong>
-<pre>  <code>#include &lt;ruby.h&gt;</code></pre>
-Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.
-<pre><code>VALUE m1up4dev;</code></pre>
-E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:
-<pre><code>VALUE cTalker;</code></pre>
-Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.
-<pre><code>static VALUE say_yeah(VALUE self){
+<p>Primeiramente criamos o diretório onde estará nossa extensão :</p>
+
+<pre><code>  &lt;code&gt;$ mkdir &lt;your_path&gt;/1up4dev&lt;/code&gt;
+</code></pre>
+
+<p>Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &ldquo;<strong>ruby.h&rdquo;</strong></p>
+
+<pre><code>  &lt;code&gt;#include &lt;ruby.h&gt;&lt;/code&gt;
+</code></pre>
+
+<p>Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.</p>
+
+<pre><code>&lt;code&gt;VALUE m1up4dev;&lt;/code&gt;
+</code></pre>
+
+<p>E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:</p>
+
+<pre><code>&lt;code&gt;VALUE cTalker;&lt;/code&gt;
+</code></pre>
+
+<p>Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.</p>
+
+<pre><code>&lt;code&gt;static VALUE say_yeah(VALUE self){
   const char *sentence= "YEAH YEAH!";
   return rb_str_new2(sentence);
 }
 
+&lt;/code&gt;
 </code></pre>
-Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.
 
-Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &#8217;<strong>Init_1up4dev</strong>&#8217;. Por convenção estas funções sempre começam com o prefixo &#8217;<strong>Init_</strong>&#8217;.
-<pre><code>void Init_1up4dev(){
+<p>Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.</p>
+
+<p>Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &lsquo;<strong>Init_1up4dev</strong>&rsquo;. Por convenção estas funções sempre começam com o prefixo &lsquo;<strong>Init_</strong>&rsquo;.</p>
+
+<pre><code>&lt;code&gt;void Init_1up4dev(){
   m1up4dev = rb_define_module("1up4dev");
   cTalker = rb_define_class_under(m1up4dev, "Talker", rb_cObject);
   rb_define_singleton_method(cTalker, "say_yeah", say_yeah, 0);
 }
 
+&lt;/code&gt;
 </code></pre>
-A função &#8217;<strong>rb_define_module</strong>&#8217; define um módulo no topo da hierarquia. Algo como :
-<pre><code>module 1up4dev
+
+<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como :</p>
+
+<pre><code>&lt;code&gt;module 1up4dev
 end
 
+&lt;/code&gt;
 </code></pre>
-A função &#8217;<strong>rb_define_class_under</strong>&#8217; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :
-<pre><code>module 1up4dev
+
+<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :</p>
+
+<pre><code>&lt;code&gt;module 1up4dev
   class Talker
 
   end
 end
 
+&lt;/code&gt;
 </code></pre>
-A função &#8217;<strong>rb_define_singleton_method</strong>&#8217; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.
 
-Para rodar nosso exemplo, crie um arquivo chamado &#8217;<strong>extconf.rb</strong>&#8217; contendo :
-<pre><code>
+<p>A função &lsquo;<strong>rb_define_singleton_method</strong>&rsquo; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.</p>
+
+<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo :</p>
+
+<pre><code>&lt;code&gt;
 require 'mkmf'
 create_makefile('1up4dev')
 
+&lt;/code&gt;
 </code></pre>
-Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .
-<pre><code>$ ruby extconf.rb
+
+<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .</p>
+
+<pre><code>&lt;code&gt;$ ruby extconf.rb
+&lt;/code&gt;
 </code></pre>
-Compile e instale a extensão :
-<pre><code>$ make &amp;&amp; make install
+
+<p>Compile e instale a extensão :</p>
+
+<pre><code>&lt;code&gt;$ make &amp;&amp; make install
+&lt;/code&gt;
 </code></pre>
-Para ver o código funcionando basta digitar o código abaixo em um &#8217;<strong>irb</strong>&#8217; ou algo do gênero :
-<pre><code>$irb(main):001:0&gt; require '1up4dev'
+
+<p>Para ver o código funcionando basta digitar o código abaixo em um &lsquo;<strong>irb</strong>&rsquo; ou algo do gênero :</p>
+
+<pre><code>&lt;code&gt;$irb(main):001:0&gt; require '1up4dev'
 true
 $irb(main):002:0&gt; 1up4dev::Talker.say_yeah
 "YEAH YEAH!"
 
+&lt;/code&gt;
 </code></pre>
-YEAH YEAH !!
+
+<p>YEAH YEAH !!</p>
 </div>
 
 
@@ -165,7 +201,7 @@ YEAH YEAH !!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">tonyfabeen</span></span>
 
       
 
@@ -179,7 +215,7 @@ YEAH YEAH !!
   
 
 
-<time datetime="2013-08-19T00:00:00-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
+<time datetime="2013-08-19T14:29:56-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
       
 
 <span class="categories">
@@ -214,6 +250,12 @@ YEAH YEAH !!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -268,7 +310,10 @@ YEAH YEAH !!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo/';
+        var disqus_url = 'http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

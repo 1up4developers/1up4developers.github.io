@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2012-07-05T00:00:00-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
+<time datetime="2012-07-05T10:00:45-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,10 +93,11 @@
   </header>
 
 
-<div class="entry-content">Simples, basta usar o <a title="Nginx HttpRewriteModule" href="http://wiki.nginx.org/HttpRewriteModule" target="_blank">HttpRewriteModule</a>.
+<div class="entry-content"><p>Simples, basta usar o <a href="http://wiki.nginx.org/HttpRewriteModule">HttpRewriteModule</a>.</p>
 
-Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:
-<pre>server {
+<p>Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:</p>
+
+<pre><code>server {
     server_name  www.dominio.com;
     rewrite ^(.*) http://dominio.com$1 permanent;
 }
@@ -104,9 +105,12 @@ Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:
 server {
     server_name  dominio.com;
     #configurações do servidor aqui
-}</pre>
-E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faça:
-<pre>server {
+}
+</code></pre>
+
+<p>E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faça:</p>
+
+<pre><code>server {
     server_name  dominio.com;
     rewrite ^(.*) http://www.dominio.com$1 permanent;
 }
@@ -114,8 +118,10 @@ E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faç
 server {
     server_name  www.dominio.com;
     #configurações do servidor aqui
-}</pre>
-<em>Voilà!</em>
+}
+</code></pre>
+
+<p><em>Voilà!</em></p>
 </div>
 
 
@@ -124,7 +130,7 @@ server {
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -138,7 +144,7 @@ server {
   
 
 
-<time datetime="2012-07-05T00:00:00-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
+<time datetime="2012-07-05T10:00:45-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
       
 
 <span class="categories">
@@ -173,6 +179,12 @@ server {
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -227,7 +239,10 @@ server {
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/';
+        var disqus_url = 'http://1up4developers.github.io/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

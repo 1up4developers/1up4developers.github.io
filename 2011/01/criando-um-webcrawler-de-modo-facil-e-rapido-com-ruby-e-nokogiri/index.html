@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-01-18T00:00:00-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+<time datetime="2011-01-18T07:00:41-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,10 +93,13 @@
   </header>
 
 
-<div class="entry-content">Quantas vezes você precisou buscar alguma informação externa para sua aplicação, como um número de telefone ou uma foto em algum site? A idéia é simples: criar um <a href="http://en.wikipedia.org/wiki/Web_crawler" target="_blank">crawler</a> script para fazer parse de algum conteúdo HTML. E basta apenas Ruby e <a href="http://nokogiri.org/" target="_blank">Nokogiri</a>.
+<div class="entry-content"><p>Quantas vezes você precisou buscar alguma informação externa para sua aplicação, como um número de telefone ou uma foto em algum site? A idéia é simples: criar um <a href="http://en.wikipedia.org/wiki/Web_crawler">crawler</a> script para fazer parse de algum conteúdo HTML. E basta apenas Ruby e <a href="http://nokogiri.org/">Nokogiri</a>.</p>
+
 <h3>Exemplo</h3>
-Digamos que eu queira obter a última versão de uma dada gem consultando diretamente no site <a href="http://rubygems.org/">http://rubygems.org</a> para me ajudar quando precisar instalar novas gems no meu ambiente. Vamos ao código:
-<pre lang="bash">#!/usr/bin/env ruby
+
+<p>Digamos que eu queira obter a última versão de uma dada gem consultando diretamente no site <a href="http://rubygems.org/">http://rubygems.org</a> para me ajudar quando precisar instalar novas gems no meu ambiente. Vamos ao código:</p>
+
+<pre><code>#!/usr/bin/env ruby
 
 require "rubygems"
 require "open-uri"
@@ -107,11 +110,16 @@ site = open("http://rubygems.org/gems/#{gem}")
 document = Nokogiri::HTML(site)
 version = document.css(".title h3").text
 
-puts "#{gem} version #{version}"</pre>
-Vou salvar esse script no arquivo <code>gem-version.sh</code>, torna-lo executável com <code>chmod +x gem-version.sh</code> em seguida executar no terminal:
-<pre lang="bash">$ ./gem-version rails
-  rails version 3.0.3</pre>
-Pronto, agora você também pode brincar à vontade com <a href="http://github.com/tenderlove/nokogiri" target="_blank">Nokogiri</a> no seu shell!
+puts "#{gem} version #{version}"
+</code></pre>
+
+<p>Vou salvar esse script no arquivo <code>gem-version.sh</code>, torna-lo executável com <code>chmod +x gem-version.sh</code> em seguida executar no terminal:</p>
+
+<pre><code>$ ./gem-version rails
+  rails version 3.0.3
+</code></pre>
+
+<p>Pronto, agora você também pode brincar à vontade com <a href="http://github.com/tenderlove/nokogiri">Nokogiri</a> no seu shell!</p>
 </div>
 
 
@@ -120,7 +128,7 @@ Pronto, agora você também pode brincar à vontade com <a href="http://github.c
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
 
       
 
@@ -134,7 +142,7 @@ Pronto, agora você também pode brincar à vontade com <a href="http://github.c
   
 
 
-<time datetime="2011-01-18T00:00:00-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+<time datetime="2011-01-18T07:00:41-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -161,7 +169,7 @@ Pronto, agora você também pode brincar à vontade com <a href="http://github.c
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2011/01/voltamos/" title="Previous Post: Voltamos!">&laquo; Voltamos!</a>
+        <a class="basic-alignment left" href="/2011/01/usando-bundler-com-rails-2-3/" title="Previous Post: Usando Bundler com Rails 2.3">&laquo; Usando Bundler com Rails 2.3</a>
       
       
         <a class="basic-alignment right" href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/" title="Next Post: Enviando emails no Rails através do Gmail">Enviando emails no Rails através do Gmail &raquo;</a>
@@ -169,6 +177,12 @@ Pronto, agora você também pode brincar à vontade com <a href="http://github.c
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -223,7 +237,10 @@ Pronto, agora você também pode brincar à vontade com <a href="http://github.c
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/';
+        var disqus_url = 'http://1up4developers.github.io/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

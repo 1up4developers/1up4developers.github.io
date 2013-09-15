@@ -4,7 +4,7 @@
   <title><![CDATA[Category: marketing | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/marketing/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:25:03-03:00</updated>
+  <updated>2013-09-15T18:37:40-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -16,43 +16,38 @@
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
     <link href="http://1up4developers.github.io/2013/01/http-monkey/"/>
-    <updated>2013-01-23T00:00:00-02:00</updated>
+    <updated>2013-01-23T13:29:16-02:00</updated>
     <id>http://1up4developers.github.io/2013/01/http-monkey</id>
-    <content type="html"><![CDATA[<p>O <a rel="nofollow" href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
+    <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
 <p>Pontos positivos:</p>
 
 <ul>
-    <li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</li>
-    <li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</li>
-    <li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a rel="nofollow" href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</li>
-    <li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</li>
-    <li>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</li>
-    <li>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</li>
+<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
+<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
+<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
 </ul>
 
 
 <p>Pontos negativos:</p>
 
 <ul>
-    <li>Gem nova. Ainda não tem um case em produção.</li>
-    <li>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</li>
-    <li>Não suporta adapter que permite requisições em paralelo.</li>
-    <li>Tem o <a rel="nofollow" href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</li>
-    <li>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</li>
+<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
+<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
+<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
+<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
+<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
 </ul>
 
 
-<p>Na página <a title="HTTP Monkey uma alternativa para o Faraday (em inglês)" rel="nofollow" href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
+<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
 
-<p>Tem também <a title="Slides do HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
+<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
 
-<p>&nbsp;</p>
-
-<div style="margin-bottom: 5px;"><strong> <a title="HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey" target="_blank">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14" target="_blank">Roger Leite</a></strong></div>
-
-
-<p>&nbsp;</p>
+<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
 
 <p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
 ]]></content>
@@ -61,42 +56,37 @@
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
     <link href="http://1up4developers.github.io/2012/06/concepcao-do-rologames/"/>
-    <updated>2012-06-25T00:00:00-03:00</updated>
+    <updated>2012-06-25T07:05:09-03:00</updated>
     <id>http://1up4developers.github.io/2012/06/concepcao-do-rologames</id>
-    <content type="html"><![CDATA[<p>Este post é um tópico da <a title="A experiência de lançar o RoloGames" href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
+    <content type="html"><![CDATA[<p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
 
 <h2>Quando surgiu a idéia</h2>
 
-
-<p>Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &ldquo;abertos&rdquo; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a title="Site social para trocar seus jogos!" href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.</p>
+<p>Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &ldquo;abertos&rdquo; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.</p>
 
 <h2>Definindo um mantra</h2>
 
+<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
 
-<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img class="size-full wp-image-1199" title="A Arte do Começo - The Art of Start" src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" width="240" height="347" /></a>[/caption]</p>
-
-<p>Totalmente baseado nas dicas do Sr. Kawasaki em <a title="Arte do Começo por Guy Kawasaki" href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
+<p>Totalmente baseado nas dicas do Sr. Kawasaki em <a href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
 
 <ul>
-    <li><strong>Oportunidades confiáveis</strong>. Queremos que o usuário encontre somente as oportunidades de troca que <strong>façam sentido</strong> a ele, e não receba spams que infortunam a vida ou propostas <em>sem noção</em> (por exemplo, oferecerem um jogo antigo em troca de um lançamento).</li>
-    <li><strong>Toda troca deve ser justa</strong>. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.</li>
-    <li><strong>Fácil de usar</strong>. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.</li>
-    <li><strong>Social</strong>. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.</li>
+<li><p><strong>Oportunidades confiáveis</strong>. Queremos que o usuário encontre somente as oportunidades de troca que <strong>façam sentido</strong> a ele, e não receba spams que infortunam a vida ou propostas <em>sem noção</em> (por exemplo, oferecerem um jogo antigo em troca de um lançamento).</p></li>
+<li><p><strong>Toda troca deve ser justa</strong>. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.</p></li>
+<li><p><strong>Fácil de usar</strong>. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.</p></li>
+<li><p><strong>Social</strong>. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.</p></li>
 </ul>
 
 
 <h2>Provas de Conceitos</h2>
 
-
-<p>Antes de encostar no código, o Panachi e eu definimos o objetivo do site e algumas premissas para começar o projeto, e a mais importante era: ter um banco de dados de jogos. Definimos somente as informações necessárias de um jogo, e partimos para uma prova de conceito. Em dois dias conseguimos montar um banco de dados bem completo, e a nossa solução foi simplesmente um <a title="Web crawler fácil e rápido com ruby e nokogiri" href="http://1up4dev.org/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">crawler</a> de jogos! Por sinal, foi tão produtivo que nossa outra prova de conceito originou o <a title="Busca troféus da PSN (Playstation Network)." href="https://github.com/rogerleite/psn_trophies">psn_trophies</a>.</p>
+<p>Antes de encostar no código, o Panachi e eu definimos o objetivo do site e algumas premissas para começar o projeto, e a mais importante era: ter um banco de dados de jogos. Definimos somente as informações necessárias de um jogo, e partimos para uma prova de conceito. Em dois dias conseguimos montar um banco de dados bem completo, e a nossa solução foi simplesmente um <a href="http://1up4dev.org/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">crawler</a> de jogos! Por sinal, foi tão produtivo que nossa outra prova de conceito originou o <a href="https://github.com/rogerleite/psn_trophies">psn_trophies</a>.</p>
 
 <h2>Interface no papel</h2>
 
-
-<p>Em paralelo às provas de conceito, começamos a rascunhar as telas do site. O processo foi bem simples, uma pilha de sulfite e lápis (na falta de uma caneta <a title="Rabiscando com uma caneta Sharpie" href="http://37signals.com/svn/posts/466-sketching-with-a-sharpie">Sharpie</a>). A partir dos esboços, começamos a definir quais funcionalidades o site teria. Em seguidas priorizamos as mais importantes e fechamos o escopo da primeira versão. Durante o desenvolvimento, muita coisa mudou no layout, mas os &ldquo;rabiscos&rdquo; da concepção foram a essência de tudo.</p>
+<p>Em paralelo às provas de conceito, começamos a rascunhar as telas do site. O processo foi bem simples, uma pilha de sulfite e lápis (na falta de uma caneta <a href="http://37signals.com/svn/posts/466-sketching-with-a-sharpie">Sharpie</a>). A partir dos esboços, começamos a definir quais funcionalidades o site teria. Em seguidas priorizamos as mais importantes e fechamos o escopo da primeira versão. Durante o desenvolvimento, muita coisa mudou no layout, mas os &ldquo;rabiscos&rdquo; da concepção foram a essência de tudo.</p>
 
 <h2>Início do desenvolvimento</h2>
-
 
 <p>Já tinhamos uma prova de conceito, uns rascunhos das páginas e uma lista de funcionalidades. E todo processo levou cerca de uma semana.</p>
 
@@ -107,12 +97,11 @@
   <entry>
     <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
     <link href="http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames/"/>
-    <updated>2012-06-20T00:00:00-03:00</updated>
+    <updated>2012-06-20T08:37:53-03:00</updated>
     <id>http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames</id>
-    <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a title="Rolo Games - Rede Social de troca de jogos" href="http://rologames.com.br/">RoloGames</a>.</p>
+    <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
-<p style="text-align: center;"><a href="http://rologames.com.br"><img class="aligncenter size-full wp-image-1174" title="Rolo Games - Rede Social de Troca de Jogos" src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" width="600" height="120" /></a></p>
-
+<p><a href="http://rologames.com.br"><img src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
 
 <p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
 
@@ -121,10 +110,10 @@
 <p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
 
 <ol>
-    <li><a title="Business Bingo Generator" href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados ... :D</li>
-    <li>MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir "regras" para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</li>
-    <li><a title="Mooney - Controle financeiro pessoal simples, rápido e seguro" href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</li>
-    <li>Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</li>
+<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
+<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
+<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
+<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
 </ol>
 
 
@@ -133,9 +122,9 @@
 <p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
 
 <ul>
-    <li><a title="Concepção do RoloGames" href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></li>
-    <li>Desenvolvimento</li>
-    <li>Infraestrutura</li>
+<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
+<li><p>Desenvolvimento</p></li>
+<li><p>Infraestrutura</p></li>
 </ul>
 
 
@@ -146,28 +135,25 @@
   <entry>
     <title type="html"><![CDATA[Business Bingo Generator]]></title>
     <link href="http://1up4developers.github.io/2009/04/business-bingo-generator/"/>
-    <updated>2009-04-13T00:00:00-03:00</updated>
+    <updated>2009-04-13T09:03:13-03:00</updated>
     <id>http://1up4developers.github.io/2009/04/business-bingo-generator</id>
     <content type="html"><![CDATA[<p>Para quem tem algum tempo de internet, é fácil notar como as piadas se repetem, ou melhor, assim como olimpíadas ou copa do mundo, re-aparecem a cada quatro anos por exemplo. Não foi diferente com a piada que recebi (novamente) a pouco tempo, o Business Bingo. O que torna a piada muito divertida é o seu alto teor sarcástico e real, foi quando pensei, porque não imprimir esta cartela e realmente testar! Foi assim que surgiu a idéia de fazer um gerador de cartelas para o Business Bingo! :D</p>
 
-<p><a href="http://1up4dev.org/wp-content/uploads/2009/04/ideia.jpg"><img class="size-medium wp-image-401 alignleft" src="http://1up4dev.org/wp-content/uploads/2009/04/ideia-299x300.jpg" alt="idéia" width="66" height="67" /></a></p>
+<p><a href="http://1up4dev.org/wp-content/uploads/2009/04/ideia.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/04/ideia-299x300.jpg" alt="idéia" /></a></p>
 
-<h2 style="text-align: left;"><a href="http://business-bingo.heroku.com/">Business Bingo! Generator</a></h2>
-
+<h2><a href="http://business-bingo.heroku.com/">Business Bingo! Generator</a></h2>
 
 <p>A idéia deste post, além de ajudar a divulgar o site, é ter um local central para <strong>comentários, sugestões, reclamações e elogios</strong> para o <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>.</p>
 
 <h3>Curiosidade</h3>
 
-
 <ul>
-    <li>O Business Bingo, também conhecido como <a href="http://en.wikipedia.org/wiki/Buzzword_bingo">Buzzword Bingo</a>, ganhou notoridade em 1994, com uma tirinha publicada do <a href="http://dilbert.com/fast/1994-02-22/">Dilbert</a>.</li>
-    <li>Um dos "grandes" eventos "documentados", foi em 1996, que alunos do MIT o usaram no discurso do vice-presidente dos EUA, Al-Gore.</li>
+<li><p>O Business Bingo, também conhecido como <a href="http://en.wikipedia.org/wiki/Buzzword_bingo">Buzzword Bingo</a>, ganhou notoridade em 1994, com uma tirinha publicada do <a href="http://dilbert.com/fast/1994-02-22/">Dilbert</a>.</p></li>
+<li><p>Um dos &ldquo;grandes&rdquo; eventos &ldquo;documentados&rdquo;, foi em 1996, que alunos do MIT o usaram no discurso do vice-presidente dos EUA, Al-Gore.</p></li>
 </ul>
 
 
 <h3>Uma nota rápida a desenvolvedores</h3>
-
 
 <p>A primeira versão foi desenvolvida em dois dias, isso mesmo, dois dias e já estava em produção. Eu e o Rodrigo Panachi resolvemos implementar a idéia do <em>&ldquo;generator&rdquo;</em> para aprender na prática como funciona o Ruby on Rails. Num post futuro irei colocar mais detalhes técnicos, que apesar de ser uma aplicação muito pequena, podemos tirar proveito de grandes aulas. Para quem quiser contribuir, o <a href="http://github.com/rpanachi/business-bingo-generator/tree/master">Business Bingo Generator está no GitHub</a>.</p>
 ]]></content>
@@ -176,17 +162,17 @@
   <entry>
     <title type="html"><![CDATA[Os guardiões da cascata]]></title>
     <link href="http://1up4developers.github.io/2008/11/os-guardioes-da-cascata/"/>
-    <updated>2008-11-04T00:00:00-02:00</updated>
+    <updated>2008-11-04T01:49:11-02:00</updated>
     <id>http://1up4developers.github.io/2008/11/os-guardioes-da-cascata</id>
-    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da <span style="text-decoration: line-through;">maldita</span> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata" target="_blank">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/" target="_blank">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process" target="_blank">RUP</a>. Mas infelizmente a maioria dos profissionais de TI <span style="text-decoration: line-through;">precisam</span> são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/" target="_blank">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG" target="_blank">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/" target="_blank">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/" target="_blank">área</a>.</p>
+    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
 
-<p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm" target="_blank">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua <span style="text-decoration: line-through;">necessidade</span> execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo" target="_blank">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, &lt;sarcasmo&gt; a &ldquo;equipe&rdquo; atinge seu objetivo: o software! &lt;/sarcasmo&gt; Seguem alguns exemplos desses guardiões cascateiros:</p>
+<p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua necessidade execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, <sarcasmo> a &ldquo;equipe&rdquo; atinge seu objetivo: o software! </sarcasmo> Seguem alguns exemplos desses guardiões cascateiros:</p>
 
 <p><strong>O guardião do banco de dados: &ldquo;<em>Não rodarás nenhum script na base alheia</em>&rdquo;</strong>
 Começo por este por ser o mais comum dos guardiões. Ele trata o banco de dados como um filho, mesmo que seja um adolescente que não obedeça inteiramente à 3ª regra normal. São vistos como semi-deuses, capazes de transcrever o modelo de negócio da empresa em uma linguagem de alto nível, impossível de ser compreendida por simples programadores. Protejem as tabelas com a própria vida e qualquer alteração na base de dados é motivo para um duelo até a morte! Utilizam um padrão para nomenclatura de campos que somente é conhecido pelo clã dos DBAs. Geralmente são seguidores do Oráculo, o senhor de todos os bancos de dados.</p>
 
 <p><strong>O guardião do projeto: <em>&ldquo;Guia-te pelo teu Gantt e serás recompensado&rdquo;</em></strong>
-Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt" target="_blank">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/" target="_blank">Project</a>.</p>
+Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/">Project</a>.</p>
 
 <p><strong>O guardião do framework: <em>&ldquo;Venerarás o Struts e nada te faltarás&rdquo;</em></strong>
 O framework é o objeto de adoração deste guardião, nenhum outro framework é tão bom quanto o que ele venera. Ele provê solução para todos seus problemas simplesmente escrevendo um bloco de XML aqui, outro ali, mudando aquela linha acolá e estendendo uma classe X implementando aquela interface Z. Qualquer evolução do framework em questão não passa de uma tentativa frustrada de &ldquo;reinventar a roda&rdquo;.</p>
@@ -195,7 +181,7 @@ O framework é o objeto de adoração deste guardião, nenhum outro framework é
 Uma variação interessante de guardião, que neutraliza seu oponente através de técnicas de tortura e perturbação mental, inundando as sessões de brainstorm com uma enxurrada de DTO&rsquo;s, VO&rsquo;s, Facades, EJB&rsquo;s entre outros patterns que fazem a cabeça dos programadores entrar em conflito, até que seus órgãos faleçam (ou simplesmente se demitam). Geralmente são cúmplices dos guardiões do projeto, conspirando para a dominação do Gannt.</p>
 
 <p><strong>O guardião do root: <em>&ldquo;Teu processo não executarás no meu bash&rdquo;</em></strong>
-A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is" target="_blank">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.</p>
+A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.</p>
 
 <p><strong>O guardião dos guardiões: <em>&ldquo;Tua TI é um mal necessário&rdquo;</em></strong>
 Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. É o guardião das decisões, aquele que protege sua riqueza acima de tudo, economizando nos salários, contratando funcionários despreparados e investindo rios de dinheiro em consultorias e licenças de software para garantir seus investimentos.</p>

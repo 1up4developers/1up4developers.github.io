@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Este post serve mais como &#8220;cola&#8221; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por &hellip;">
+  <meta name="description" content="Este post serve mais como &ldquo;cola&rdquo; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -84,7 +84,7 @@
   
 
 
-<time datetime="2011-11-08T00:00:00-02:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
+<time datetime="2011-11-08T09:00:28-02:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
         
          | <a href="#disqus_thread">Comments</a>
         
@@ -93,20 +93,32 @@
   </header>
 
 
-<div class="entry-content">Este post serve mais como &#8220;cola&#8221; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por sinal é mega simples, é só editar o <em>config/application.rb</em> e remover a linha:
-<pre>require 'rails/all'</pre>
-E substituir por:
-<pre>require "active_record/railtie"
+<div class="entry-content"><p>Este post serve mais como &ldquo;cola&rdquo; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por sinal é mega simples, é só editar o <em>config/application.rb</em> e remover a linha:</p>
+
+<pre><code>require 'rails/all'
+</code></pre>
+
+<p>E substituir por:</p>
+
+<pre><code>require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
-require "sprockets/railtie"</pre>
-Após isso, já não aparece mais as tasks de testes, e você pode remover a pasta test.
-<pre>$ git rm -r test/</pre>
-Pra finalizar, já segue a dica de alterar a task <em>default</em>, no final do <em>Rakefile</em> é só colocar:
-<pre>Rake::Task[:default].prerequisites.clear
-task :default =&gt; :spec  #no caso do rspec</pre>
-Sucesso!
+require "sprockets/railtie"
+</code></pre>
+
+<p>Após isso, já não aparece mais as tasks de testes, e você pode remover a pasta test.</p>
+
+<pre><code>$ git rm -r test/
+</code></pre>
+
+<p>Pra finalizar, já segue a dica de alterar a task <em>default</em>, no final do <em>Rakefile</em> é só colocar:</p>
+
+<pre><code>Rake::Task[:default].prerequisites.clear
+task :default =&gt; :spec  #no caso do rspec
+</code></pre>
+
+<p>Sucesso!</p>
 </div>
 
 
@@ -115,7 +127,7 @@ Sucesso!
       
   
 
-<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
 
       
 
@@ -129,7 +141,7 @@ Sucesso!
   
 
 
-<time datetime="2011-11-08T00:00:00-02:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
+<time datetime="2011-11-08T09:00:28-02:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
       
 
 <span class="categories">
@@ -164,6 +176,12 @@ Sucesso!
     </p>
   </footer>
 </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
 
@@ -218,7 +236,10 @@ Sucesso!
       var disqus_shortname = '1up4developers';
       
         
-        var disqus_script = 'count.js';
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4developers.github.io/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/';
+        var disqus_url = 'http://1up4developers.github.io/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/';
+        var disqus_script = 'embed.js';
       
     (function () {
       var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
