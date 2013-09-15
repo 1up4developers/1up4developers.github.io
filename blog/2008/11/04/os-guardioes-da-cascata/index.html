@@ -1,0 +1,241 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Os guardiões da cascata - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita cascata. Fases bem definidas, detalhamento de requisitos, &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2008/11/04/os-guardioes-da-cascata">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Os Guardiões Da Cascata</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-04T00:00:00-02:00" pubdate data-updated="true">Nov 4<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Se você freqüenta este blog já deve ter percebido que nós não gostamos da <span style="text-decoration: line-through;">maldita</span> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata" target="_blank">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&#8230; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/" target="_blank">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process" target="_blank">RUP</a>. Mas infelizmente a maioria dos profissionais de TI <span style="text-decoration: line-through;">precisam</span> são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/" target="_blank">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG" target="_blank">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/" target="_blank">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/" target="_blank">área</a>.
+
+O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &#8220;equipe&#8221; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm" target="_blank">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua <span style="text-decoration: line-through;">necessidade</span> execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo" target="_blank">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &#8220;processo&#8221; não seja quebrado. Desta forma, &lt;sarcasmo&gt; a &#8220;equipe&#8221; atinge seu objetivo: o software! &lt;/sarcasmo&gt; Seguem alguns exemplos desses guardiões cascateiros:
+
+<strong>O guardião do banco de dados: &#8221;<em>Não rodarás nenhum script na base alheia</em>&#8221;</strong>
+Começo por este por ser o mais comum dos guardiões. Ele trata o banco de dados como um filho, mesmo que seja um adolescente que não obedeça inteiramente à 3ª regra normal. São vistos como semi-deuses, capazes de transcrever o modelo de negócio da empresa em uma linguagem de alto nível, impossível de ser compreendida por simples programadores. Protejem as tabelas com a própria vida e qualquer alteração na base de dados é motivo para um duelo até a morte! Utilizam um padrão para nomenclatura de campos que somente é conhecido pelo clã dos DBAs. Geralmente são seguidores do Oráculo, o senhor de todos os bancos de dados.
+
+<strong>O guardião do projeto: <em>&#8220;Guia-te pelo teu Gantt e serás recompensado&#8221;</em></strong>
+Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt" target="_blank">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/" target="_blank">Project</a>.
+
+<strong>O guardião do framework: <em>&#8220;Venerarás o Struts e nada te faltarás&#8221;</em></strong>
+O framework é o objeto de adoração deste guardião, nenhum outro framework é tão bom quanto o que ele venera. Ele provê solução para todos seus problemas simplesmente escrevendo um bloco de XML aqui, outro ali, mudando aquela linha acolá e estendendo uma classe X implementando aquela interface Z. Qualquer evolução do framework em questão não passa de uma tentativa frustrada de &#8220;reinventar a roda&#8221;.
+
+<strong>O guardião da arquitetura: <em>&#8220;Não usarás a instância do teu objeto em vão&#8221;</em></strong>
+Uma variação interessante de guardião, que neutraliza seu oponente através de técnicas de tortura e perturbação mental, inundando as sessões de brainstorm com uma enxurrada de DTO&#8217;s, VO&#8217;s, Facades, EJB&#8217;s entre outros patterns que fazem a cabeça dos programadores entrar em conflito, até que seus órgãos faleçam (ou simplesmente se demitam). Geralmente são cúmplices dos guardiões do projeto, conspirando para a dominação do Gannt.
+
+<strong>O guardião do root: <em>&#8220;Teu processo não executarás no meu bash&#8221;</em></strong>
+A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is" target="_blank">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.
+
+<strong>O guardião dos guardiões: <em>&#8220;Tua TI é um mal necessário&#8221;</em></strong>
+Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. É o guardião das decisões, aquele que protege sua riqueza acima de tudo, economizando nos salários, contratando funcionários despreparados e investindo rios de dinheiro em consultorias e licenças de software para garantir seus investimentos.
+
+Enfim, são guardiões dos próprios interesses. A &#8220;equipe&#8221; é apenas uma palavra que usam em discursos mas nunca aplicaram o conceito na prática!
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-04T00:00:00-02:00" pubdate data-updated="true">Nov 4<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/cascata/'>cascata</a>, <a class='category' href='/blog/categories/marketing/'>marketing</a>, <a class='category' href='/blog/categories/processos/'>processos</a>, <a class='category' href='/blog/categories/resenhas/'>resenhas</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2008/11/04/os-guardioes-da-cascata/" data-via="" data-counturl="http://1up4developers.github.io/blog/2008/11/04/os-guardioes-da-cascata/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/10/30/software-e-sobre-investimento/" title="Previous Post: Software é sobre investimento">&laquo; Software é sobre investimento</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/11/07/arquiteto-cascateiro/" title="Next Post: Arquiteto Cascateiro">Arquiteto Cascateiro &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

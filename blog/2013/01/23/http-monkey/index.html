@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>HTTP Monkey - lançado! - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="O HTTP Monkey é um cliente http simples, com interface fluente, suporte a múltiplos adapters (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e  &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2013/01/23/http-monkey">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">HTTP Monkey - Lançado!</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T00:00:00-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">O <a rel="nofollow" href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em>
+
+Pontos positivos:
+<ul>
+	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</li>
+	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</li>
+	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a rel="nofollow" href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</li>
+	<li><a rel="nofollow" href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</li>
+	<li>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</li>
+	<li>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</li>
+</ul>
+Pontos negativos:
+<ul>
+	<li>Gem nova. Ainda não tem um case em produção.</li>
+	<li>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</li>
+	<li>Não suporta adapter que permite requisições em paralelo.</li>
+	<li>Tem o <a rel="nofollow" href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</li>
+	<li>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</li>
+</ul>
+Na página <a title="HTTP Monkey uma alternativa para o Faraday (em inglês)" rel="nofollow" href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &#8220;localizar&#8221; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.
+
+Tem também <a title="Slides do HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.
+
+&nbsp;
+<div style="margin-bottom: 5px;"><strong> <a title="HTTP Monkey" href="http://www.slideshare.net/rogerleite14/http-monkey" target="_blank">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14" target="_blank">Roger Leite</a></strong></div>
+&nbsp;
+
+Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T00:00:00-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/marketing/'>marketing</a>, <a class='category' href='/blog/categories/projetos/'>projetos</a>, <a class='category' href='/blog/categories/real-world/'>real world</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2013/01/23/http-monkey/" data-via="" data-counturl="http://1up4developers.github.io/blog/2013/01/23/http-monkey/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/01/04/nos-idos-de-2012-uml-design-e-waterfall/" title="Previous Post: Nos idos de 2012, UML, Design e Waterfall">&laquo; Nos idos de 2012, UML, Design e Waterfall</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/02/21/programacao-funcional-com-javascript/" title="Next Post: Programação funcional com JavaScript">Programação funcional com JavaScript &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

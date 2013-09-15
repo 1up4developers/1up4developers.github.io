@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Deploy de várias aplicações no Nginx + Passenger usando subdomain ou suburi - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Se você está pensando em fazer o deploy da sua aplicação Rails em um server Nginx com Phusion Passenger, você está no caminho certo! Não apenas pela &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2011/01/26/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Deploy De Várias Aplicações No Nginx + Passenger Usando Subdomain Ou Suburi</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-26T00:00:00-02:00" pubdate data-updated="true">Jan 26<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Se você está pensando em fazer o deploy da sua aplicação Rails em um server <a href="http://nginx.org/">Nginx</a> com <a href="http://www.modrails.com/">Phusion Passenger</a>, você está no caminho certo! Não apenas pela segurança e performance do Nginx, mas também pela facilidade de instalação e configuração quando comparado à outros web servers populares. 
+
+A <a href="http://wiki.nginx.org/Install">instalação do Nginx</a> bem como <a href="http://www.modrails.com/install.html">configuração do módulo do Passenger</a> são relativamente simples. A documentação de <a href="http://www.modrails.com/documentation/Users%20guide%20Nginx.html#_installing_phusion_passenger">ambos é bem completa</a>. Você provavelmente não terá muita dificuldade. Eu recomendo seguir o passo-a-passo da instalação do Passenger:
+
+<pre lang="bash">
+  passenger-install-nginx-module
+</pre>
+
+Uma vez que tudo esteja instalado, é hora de configurar o Nginx editando o arquivo <code>nginx.conf</code> (provavelmente localizado em <code>/usr/local/nginx/conf/nginx.conf</code>)
+
+<h3>Usando sub URI</h3>
+
+O deploy como sub URI torna sua aplicação acessível com o endereço <code>http://dominio.com/app1</code>, sendo <code>app1</code> o nome da sua aplicação. Supondo que diretório público do Nginx esteja em <code>/var/www</code> e sua aplicação Rails em <code>/var/rails/app1</code>, configure-o assim:
+
+<pre lang="ruby">
+http {
+    ...
+    server {
+        listen 80;
+        server_name dominio.com www.dominio.com;
+        root /var/www;
+        passenger_enabled on;
+        passenger_base_uri /app1;
+    }
+    ...
+}
+</pre>
+
+Ainda é preciso criar um link simbólico para que o contexto da aplicação Rails seja visível pelo document root em <code>/var/www</code>:
+
+<pre lang="bash">
+ln -s /var/rails/app1/public /var/www/app1
+</pre>
+
+Reiniciando o Nginx, sua aplicação já estará rodando. Para adicionar outras aplicações, basta adicionar:
+
+<pre lang="ruby">
+        passenger_base_uri /app1;
+        passenger_base_uri /app2;
+        passenger_base_uri /app3;
+</pre>
+
+E em seguida criar os links simbólicos como descrito acima. Nota importante: em alguns casos, será necessário informar a URL relativa correta nas configurações do Rails:
+
+<pre lang="ruby">
+   config.action_controller.relative_url_root = "/app1"
+</pre>
+
+<h3>Usando subdomain</h3>
+
+O deploy como subdomain torna sua aplicação acessível com o endereço <code>http://app1.dominio.com</code>. Basta configurar o Nginx como segue:
+
+<pre lang="ruby">
+http {
+    ...
+    server {
+        listen 80;
+        server_name app1.dominio.com;
+        root /var/rails/app1/public;
+        passenger_enabled on;
+    }
+    ...
+}
+</pre>
+
+Note que o <code>root</code> aponta diretamente para o diretório &#8220;public&#8221; da aplicação Rails. Para fazer o deploy de outras aplicações como subdomínio, basta configurar outro &#8220;server&#8221;, alterando <code>root</code> e o <code>server_name</code>:
+
+<pre lang="ruby">
+http {
+    ...
+    server {
+        listen 80;
+        server_name app1.dominio.com;
+        root /var/rails/app1/public;
+        passenger_enabled on;
+    }
+    ...
+    server {
+        listen 80;
+        server_name app2.dominio.com;
+        root /var/rails/app2/public;
+        passenger_enabled on;
+    }
+    ...
+}
+</pre>
+
+Uma vez que o DNS do host esteja corretamente configurado, suas aplicações estarão acessíveis em <code>http://app1.dominio.com</code>, <code>http://app2.dominio.com</code>, etc.
+
+Dúvidas ou sugestões, utilizem os comentários. Sucesso!
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-26T00:00:00-02:00" pubdate data-updated="true">Jan 26<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quick-tips/'>quick tips</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2011/01/26/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/" data-via="" data-counturl="http://1up4developers.github.io/blog/2011/01/26/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/01/20/enviando-emails-no-rails-atraves-do-gmail/" title="Previous Post: Enviando emails no Rails através do Gmail">&laquo; Enviando emails no Rails através do Gmail</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/02/01/complexidade-nao-escala/" title="Next Post: Complexidade não escala!">Complexidade não escala! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

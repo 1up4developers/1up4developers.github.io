@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Engenharia naïf - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="&#8211; Inaugurando a minha participação no blog &#8211; Sabe aqueles quadros que costumam vender na rua? Esses de feirinha, que são verdadeiros &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2008/05/14/engenharia-naif">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Engenharia Naïf</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-14T00:00:00-03:00" pubdate data-updated="true">May 14<span>th</span>, 2008</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><span style="font-style:italic;">&#8211; Inaugurando a minha participação no blog &#8211;</span>
+
+Sabe aqueles quadros que costumam vender na rua? Esses de feirinha, que são verdadeiros clássicos: casas toscas num gramado, cenários praianos, <a title="Galeria de Arte Tosquista" href="http://shoe-me.blogspot.com/2008_01_01_archive.html#3365084320162022222" target="_new">coisas deste naipe</a>. São parte do que é chamado de <a href="http://pt.wikipedia.org/wiki/Arte_na%C3%AFf" target="_new">arte naïf</a>: obras não necessariamente intelectuais ou acadêmicas. Que podem até ser tecnicamente bem-feitas, mas dificilmente vão transformar seus autores em Van Goghs, mesmo que eles arranquem as próprias orelhas com os dentes.
+
+Lembrei dessas coisas no mês passado, quando eu estava a ponto de precisar desenvolver um parser para uma certa linguagem de programação antiga. O parser seria um pedaço de uma ferramenta que extrai informações sintáticas e estruturais de um programa a partir do seu fonte &#8211; coisa que qualquer IDE atual disponibiliza quando se faz refactoring ou checagem de referências e dependências. Mas, como a tal linguagem não tem exatamente um IDE, a ferramenta (e o parser) tem que ser desenvolvidos &#8220;do zero&#8221;. E lá estava eu estudando as necessidades do meu trabalho.
+
+Em pouco tempo concluí (instintivamente, não objetivamente) que o ideal era construir um mecanismo de parsing genérico, que servisse para qualquer linguagem. Entendi que esse mecanismo era possível de existir, desde que o léxico (sintaxe para definir sintaxes) fosse potente. Foi divertido então definir um léxico que permitisse uma estruturação a la <a href="http://en.wikipedia.org/wiki/Backus-Naur_form" target="_new">BNF</a>. E de forma bastante ingênua parti para montar um protótipo de parser. Um protótipo que entendesse uma linguagem simples. Um parser de XPath, por exemplo, só pra começar&#8230;
+
+Foi aí que eu vi que ainda preciso comer muito arroz e feijão! O fato é que eu nunca precisei fazer um compilador na faculdade (ha!), e portanto não sabia que o buraco é muito mais embaixo. Existe um monte de formas de se <a href="http://en.wikipedia.org/wiki/Parser_generator" target="_new">construir um parser</a>, uma porção de <a href="http://en.wikipedia.org/wiki/Comparison_of_parser_generators" target="_new">ferramentas</a>, documentos, exemplos&#8230; e eu lá, escavando a pedra pra fazer a roda.
+
+Pra mim foi interessante entender como esses mecanismos funcionam, e também foi bacana ter imaginado alguns algoritmos que, depois vi, são usados no ramo há muito tempo. Mas o ruim da história é ter entrado num caminho arriscado ao criar uma solução duvidosa, por pura ignorância. Nesse episódio eu fui um engenheiro naïf!
+
+A minha &#8220;obra&#8221; até poderia ser passável tecnicamente, mas sem dúvida eu deixaria uma série de defeitos para trás, que qualquer um mais capacitado iria bater o olho e pensar: <span style="font-style:italic;">mas quem fez esta merda?</span> Que é mais ou menos o que eu penso quando vejo uma ou outra pog alheia&#8230;
+
+Seu código se sentiria à vontade na feirinha hippie?
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-05-14T00:00:00-03:00" pubdate data-updated="true">May 14<span>th</span>, 2008</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/questionamento/'>questionamento</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2008/05/14/engenharia-naif/" data-via="" data-counturl="http://1up4developers.github.io/blog/2008/05/14/engenharia-naif/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2008/05/13/error-access-denied/" title="Previous Post: Error: Access Denied">&laquo; Error: Access Denied</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2008/05/15/a-ferramentametodologia-que-ainda-nao-existe/" title="Next Post: A ferramenta/metodologia que ainda não existe.">A ferramenta/metodologia que ainda não existe. &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

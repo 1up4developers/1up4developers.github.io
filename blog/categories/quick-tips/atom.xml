@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: quick tips | My Octopress Blog]]></title>
+  <link href="http://1up4developers.github.io/blog/categories/quick-tips/atom.xml" rel="self"/>
+  <link href="http://1up4developers.github.io/"/>
+  <updated>2013-09-15T18:08:39-03:00</updated>
+  <id>http://1up4developers.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
+    <link href="http://1up4developers.github.io/blog/2013/07/14/entendendo-lisp-finalmente/"/>
+    <updated>2013-07-14T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2013/07/14/entendendo-lisp-finalmente</id>
+    <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
+
+
+<p>Ao olhar um código LISP pela primeira vez, você se assusta.</p>
+
+<p>Eu me assustei e não havia ninguém para me ajudar a entender.</p>
+
+<p>Que bom que você está lendo isto para entender bem depressa e perder o medo.</p>
+
+<p>Acredite ou não, o LISP não é invertido: as outras linguagens é que são inconsistentes.</p>
+
+<p>Matematicamente falando, funções são expressas dessa forma:</p>
+
+<pre lang="javascript">y = f(x)</pre>
+
+
+<p>Para calcularmos o dobro de um número, teríamos:</p>
+
+<pre lang="javascript">y = dobro(21)</pre>
+
+
+<p>Note que estamos usando uma notação diferente: primeiro vem o operador dobro e, em seguida, vem o operando, ou parâmetro, 21. Chamamos isso de notação prefixa.</p>
+
+<p>Já para executar um cálculo matemático, usamos a forma abaixo:</p>
+
+<pre lang="javascript">y = 21 * 2</pre>
+
+
+<p>Primeiro temos um operador 21, depois temos um operando responsável pela multiplicação e, finalmente, o segundo operando 2. Chamamos essa forma de notação infixa.</p>
+
+<p>Nota: se você é um desenvolvedor Ruby, ignore essa última expressão. Em Ruby o cálculo acima utiliza internamente a notação prefixa onde 21 é um objeto, * é um método (ou uma mensagem, se preferir) e 2 é um parâmetro.</p>
+
+<p>A coisa fica bagunçada quando misturamos as duas formas:</p>
+
+<pre lang="javascript">y = dobro(7 * 3)</pre>
+
+
+<p>Na expressão acima misturamos notação prefixa com infixa. Não há problema algum com isso, mas não é um bom exemplo de consistência.</p>
+
+<p>Quando falamos em LISP, o primeiro item de uma lista é um operador e todos os demais são operandos.</p>
+
+<p>Todo operador é uma função, macro ou forma especial, inclusive os operadores matemáticos. Não se preocupe em entender agora o que são macros ou formas especiais. Todo o resto da lista é considerado um valor, parâmetro ou operando.</p>
+
+<p>Imagine agora que o símbolo <code>+</code> é uma função. Para calcularmos uma soma usaríamos o seguinte código:</p>
+
+<pre lang="javascript">+(1, 2)</pre>
+
+
+<p>Movendo os parênteses e removendo as vírgulas, a nossa soma inicial ficaria:</p>
+
+<pre lang="clojure">(+ 1 2)</pre>
+
+
+<p>Sabemos que dobro também é uma função. Para calcular dobro, usaríamos:</p>
+
+<pre lang="clojure">(dobro 12)</pre>
+
+
+<p>Percebam que agora temos uma regra que se aplica a todos os casos. Repetindo a expressão acima que mistura as notações infixa e prefixa usando as regras do LISP, teríamos:</p>
+
+<pre lang="clojure">(dobro (+ 7 3))</pre>
+
+
+<p>Talvez pela sua origem acadêmica e fortemente influenciada pela matemática, as implementações de LISP levam muito a sério a questão da consistência.</p>
+
+<h2>Os parênteses</h2>
+
+
+<p>Quando eu estava na quarta série, aprendi uma coisa chamada <em>expressão numérica</em>, que consistia em resolver um cálculo extenso atacando um pedaço por vez, organizadamente.</p>
+
+<p>Cada pedaço desse cálculo ficava dentro de parênteses, colchetes ou chaves, dependendo do quão aninhado estivesse a expressão. Eu nunca mais vi esse tipo de hierarquia,  mas era um jeito bacana de manter a organização.</p>
+
+<p>Uma expressão numérica tem essa cara:</p>
+
+<pre lang="javascript">x = {1 + [3 * (5 + 7)]}</pre>
+
+
+<p>Resolvemos a expressão de dentro para fora:</p>
+
+<pre lang="javascript">x = {1 + [3 * (12)]}
+
+x = {1 + [36]}
+
+x = {37}
+
+x = 37</pre>
+
+
+<p>Simples, não?</p>
+
+<p>Agora vamos extrapolar o que aprendemos na quarta série para uma linguagem de programação, trocando chaves e colchetes por parênteses:</p>
+
+<pre lang="javascript">x = (1 + (3 * (5 + 7)))</pre>
+
+
+<p>Vamos substituir a nossa conhecida notação infixa pela prefixa.</p>
+
+<pre lang="clojure">x = (+ 1 (* 3 (+ 5 7)))</pre>
+
+
+<p>Pronto. Você tem uma expressão numérica com a cara do LISP, resolvendo da forma como a professora ensinou lá na quarta série: primeiro você resolve os parênteses de dentro, depois os próximos, até terminar.</p>
+
+<p>Qualquer LISP que você encontrar pela frente, incluindo o Clojure, funciona exatamente dessa maneira.</p>
+
+<p>Uma vantagem que isso traz é que você não precisa ficar se preocupando com precedência de operadores.</p>
+
+<p>Imagine que você tem o código abaixo:</p>
+
+<pre lang="javascript">x = 3 * 2 + 1
+
+y = 1 + 2 * 3</pre>
+
+
+<p>Os valores de x e y serão iguais? Sim, ambas as variáveis contém o número 7, mas para saber disso você precisou ler em algum outro lugar que o operador de multiplicação tem precedência sobre o operador de adição. É algo que você espera que seja assim e age como se realmente fosse.</p>
+
+<p>E o que aconteceria se você estiver usando uma linguagem em que a adição tem precedência sobre a multiplicação? Ou pior ainda: os operadores são executados da esquerda para a direita conforme forem aparecendo.</p>
+
+<p>No primeiro caso, x e y continuariam sendo igual, mas ambos teriam o valor 9. No segundo caso, x seria igual a 7 e y seria igual a 9.</p>
+
+<p>Seria mais fácil se as expressões fossem escritas assim:</p>
+
+<pre lang="javascript">x = (3 * 2) + 1
+
+y = 1 + (2 * 3)</pre>
+
+
+<p>Agora está claro para qualquer pessoa o que vai ser executado primeiro, independente do modo como a expressão seja interpretada pela linguagem. Pois saiba que é exatamente assim que um LISP trabalha. Usando a notação prefixa, as expressões acima ficariam:</p>
+
+<pre lang="clojure">x = (+ (* 3 2) 1)
+
+y = (+ 1 (* 3 2))</pre>
+
+
+<p>Primeiro será executada a multiplicação, que está nos parênteses mais internos e, em seguida, será executada a adição. Tudo isso sem se preocupar com regras ocultas ou peculiaridades do compilador.</p>
+
+<p>Qualquer código em qualquer dialeto LISP, mesmo com suas características particulares, fica fácil de entender se você lembrar dessas regrinha.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
+    <link href="http://1up4developers.github.io/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/"/>
+    <updated>2013-06-27T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste</id>
+    <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
+
+<p>Dependências:</p>
+
+<ul>
+    <li>bash</li>
+    <li>curl</li>
+</ul>
+
+
+<p>Foi testado no Ubuntu 13.04.</p>
+
+<p>Obs: Vou embedar <a title="Using Shell Script to test your server" href="https://gist.github.com/rogerleite/5869576">este gist</a>, e pode ser que não apareça no seu reader ;D.</p>
+
+<p>Obs2: Este post é uma versão pt-br deste post no coderwall <a title="Using Shell Script to test your server" href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.</p>
+
+<script src="https://gist.github.com/rogerleite/5869576.js"></script>
+
+
+<p>Referências:</p>
+
+<p><a title="Unit-Testable Shell Scripts" href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a></p>
+
+<p>Aguardo dicas, sugestões, experiências etc.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
+    <link href="http://1up4developers.github.io/blog/2013/04/11/o-que-eu-aprendi-escrevendo/"/>
+    <updated>2013-04-11T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2013/04/11/o-que-eu-aprendi-escrevendo</id>
+    <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
+
+<p>Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.</p>
+
+<p>Seguindo os próprios passos que descrevo abaixo, resolvi separar alguns pontos que considero importantes.</p>
+
+<h3>Escrever é um processo iterativo e incremental</h3>
+
+
+<p>O texto não nasce pronto. As vezes uma coisa ou outra está pronta na sua cabeça, mas na hora de colocar no papel a coisa muda. Você esquece algumas partes, lembra de outras, muda a ordem.</p>
+
+<p>O importante é que você coloque suas ideias no papel (ou no site), e depois releia com calma. Mostre para outras pessoas, peça opinião. Eu pensei em um texto por mais de dois anos e <a href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/">publiquei aqui</a> antes de adicionar no livro. O feedback dos leitores foi importantíssimo para que a versão final tivesse o mínimo de erros e o máximo de clareza possível.</p>
+
+<h3>Defina bem o seu público</h3>
+
+
+<p>Ao escrever sobre programação funcional em JavaScript, eu tinha bem claro quem é o leitor do 1up. Caso você não tenha definido quem será seu público e quais os requisitos necessários para que possam absorver seu conteúdo, você vai correr o risco de escrever um texto em aramaico para crianças de quarta série ou um texto de quarta série para doutores em línguas mortas.</p>
+
+<p>Pior ainda é quando se tenta abraçar a todos. Seus braços são curtos para abraçar o mundo e, no final, alguma coisa vai acabar caindo no chão.</p>
+
+<h3>Trace uma linha</h3>
+
+
+<p>Como o Manifesto Ágil profere, <i>responder a mudanças é mais importante do que seguir um plano</i>, o que não quer dizer que você não precisa de um plano.</p>
+
+<p>Eu costumo traçar um plano, seja como uma lista de tópicos, seja como um mindmap, e vou me guiando por ele até pegar o ritmo. Normalmente essa lista não permanece inalterada por mais de dois capítulos, mas ainda assim é importante você ter algo para te manter no caminho, por mais que esse caminho mude constantemente.</p>
+
+<h3>Concentre-se</h3>
+
+
+<p>Eu tenho problemas sérios de concentração, mas em algumas ocasiões consigo despejar quilos de texto ou código de uma única vez. Claro que uma revisão posterior é sempre bem vinda e necessária.</p>
+
+<p>O problema são os culpados de sempre: família exigindo atenção (eles têm prioridade, não pense o contrário); Internet oferecendo todo o tipo de entretenimento; GTalk aberto e seus amigos ali, ao alcance dos dedos.</p>
+
+<p>Escrever é um ato solitário. Lide com isso e concentre-se no que está fazendo.</p>
+
+<h3>Arranje tempo</h3>
+
+
+<p>&ldquo;Eu não tenho tempo&rdquo; é a desculpa preferida do procrastinador e do cara que quer que os outros acreditem que ele é muito ocupado.</p>
+
+<p>Você tem tempo para conversar no GTalk, para acessar o 9gag, para ver os gols do Fantástico, mas nunca temos tempo para brincar com o filho, para conversar com a esposa (ou marido) ou para fazer aquela meia hora de esteira.</p>
+
+<p>Um terço do meu livro foi escrito dentro de viagens em ônibus, táxis e aviões. Acho que produzi muito mais em uma hora de vôo até o Rio do que em uma tarde inteira jogada fora na frente do computador.</p>
+
+<p>Quando você realmente quer fazer algo, o tempo aparece. Não ter tempo é uma outra forma de dizer &ldquo;isso não é importante o suficiente para mim&rdquo;.</p>
+
+<h3>'Pronto' é melhor do que 'perfeito'</h3>
+
+
+<p>Depois do livro e do curso prontos e entregues, eu percebi coisas que poderia ter adicionado, frases que poderia ter mudado, assuntos que faltaram. Se existe a possibilidade de adicionar ou mudar, faça, mas não caia na armadilha de ficar polindo algo que já deveria estar em produção há tempos.</p>
+
+<p>Pronto é melhor do que perfeito e, não importa o quanto você tente, seu trabalho nunca vai ficar perfeito.</p>
+
+<h3>Divirta-se</h3>
+
+
+<p>Principalmente, divirta-se.</p>
+
+<p>Conheci muitas pessoas que sabem muito mais do assunto que estou escrevendo do que eu, pessoas que deram excelentes sugestões, ideias e me ensinaram a escrever melhor. E em tudo isso eu me diverti, aprendi, aproveitei o momento.</p>
+
+<p>Não se leve tão a sério. É apenas um texto, um post, um curso, um livro. A vida é bem mais do que isso.</p>
+
+<p>Abraço</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
+    <link href="http://1up4developers.github.io/blog/2013/03/20/pair-programming-remoto-com-screen-e-vim/"/>
+    <updated>2013-03-20T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2013/03/20/pair-programming-remoto-com-screen-e-vim</id>
+    <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
+
+<p>Empresas de TI bem sucedidas como <a title="37signals" href="http://37signals.com/" target="_blank">37signals</a> e <a title="Github" href="https://github.com/" target="_blank">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
+
+<p>Usando as ferramentas e práticas certas é possível <a title="REMOTE" href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013" target="_blank">trabalhar remotamente</a> e até mesmo <a title="Pair programming" href="http://en.wikipedia.org/wiki/Pair_programming" target="_blank">parear com outro desenvolvedor</a> à distância.</p>
+
+<h2>Requisitos</h2>
+
+
+<ul>
+    <li>ssh</li>
+    <li>screen</li>
+    <li>vim</li>
+    <li>skype</li>
+</ul>
+
+
+<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a title="O melhor editor" href="http://www.vim.org/" target="_blank">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
+
+<h2>Instalação</h2>
+
+
+<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
+
+<pre>$ sudo apt-get install screen</pre>
+
+
+<p>Em seguida, configure as permissões de execução:</p>
+
+<pre>$ chmod u+s /usr/bin/screen
+$ chmod 755 /var/run/screen</pre>
+
+
+<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
+
+<pre>$ screen -S nomedasessao</pre>
+
+
+<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
+
+<pre>$ screen -ls
+There is a screen on:
+        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
+1 Socket in /var/run/screen/S-user.</pre>
+
+
+<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
+
+<pre>$ screen -x nomedasessao</pre>
+
+
+<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
+
+<p>Para se desconectar da sessão atual, execute:</p>
+
+<pre># screen -d
+[remote detached from 8095.nomedasessao]</pre>
+
+
+<h2>Usando o Screen</h2>
+
+
+<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
+
+<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
+
+<p><strong>Copy mode (scroll)</strong>
+Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
+Navegue pela tela com as setas ou pageup/pagedown;
+Marque o início da seleção do texto com &lt;espaço&gt; e termine com &lt;espaço&gt; para copiar;
+Cole com Ctrl-a + ] (colchete para direita);</p>
+
+<p><strong>Windows</strong>
+Crie uma janela (ou aba) com Ctrl-a + c
+Liste as janelas com Ctrl-a + &ldquo; (aspas)
+Altere para a janela com Ctrl-a &lt;numero de 0-9&gt;
+Feche (ou mate) a janela atual com Ctrl+a k</p>
+
+<p><strong>Split</strong>
+Divida a tela horizontalmente com Ctrl-a + S
+Divida a tela verticalmente com Ctrl-a + V
+Mude de split com Ctrl-a + Tab
+Feche um split com Ctrl-a + X</p>
+
+<p>Para digitar um comando: Ctrl-a + :</p>
+
+<p>Consulte o <a title="man screen" href="http://linux.die.net/man/1/screen" target="_blank">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
+
+<h2>Dicas e considerações</h2>
+
+
+<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a title="man screen" href="http://linux.die.net/man/1/screen" target="_blank">manual oficial</a>.</p>
+
+<p>Existem outras alternativas como o <a title="tmux" href="http://tmux.sourceforge.net/" target="_blank">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
+
+<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
+
+<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a title="pomodoro" href="http://www.pomodorotechnique.com/" target="_blank">Pomodoro</a> pode ser uma boa opção.</p>
+
+<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
+
+<h2>Referências</h2>
+
+
+<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction" target="_blank"><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction</a>
+</a><a href="http://linux.die.net/man/1/screen" target="_blank"><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen</a>
+</a><a href="http://aperiodic.net/screen/quick_reference" target="_blank"><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
+    <link href="http://1up4developers.github.io/blog/2012/11/28/minionserver-a-real-server-to-mock-servers/"/>
+    <updated>2012-11-28T00:00:00-02:00</updated>
+    <id>http://1up4developers.github.io/blog/2012/11/28/minionserver-a-real-server-to-mock-servers</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
+
+<pre><code>require 'minion_server'
+
+# build your integration app
+IntegrationApp = Rack::Builder.new do
+  map "/" do
+    run lambda { |env|
+      [200, {"Content-Type" =&gt; "text/plain"}, ["Be happy!"]]
+    }
+  end
+end
+
+server = MinionServer.new(IntegrationApp)
+server.start("localhost", 1620)  # default: localhost, 4000
+
+# do your calls
+system "curl http://localhost:1620" # =&gt; "Be happy!"
+
+server.shutdown
+</code></pre>
+
+
+<p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
+Hope that helps!</p>
+
+<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a title="A real server to mock servers!" href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
+]]></content>
+  </entry>
+  
+</feed>

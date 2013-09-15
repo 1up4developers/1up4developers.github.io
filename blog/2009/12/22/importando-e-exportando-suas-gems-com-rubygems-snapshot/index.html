@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Importando e exportando suas gems com Rubygems Snapshot - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Final de ano está rendendo. O rubygems_snapshot nasceu da necessidade de &#8220;migrar&#8221; as gems instaladas de uma máquina para outra, aliado ao &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2009/12/22/importando-e-exportando-suas-gems-com-rubygems-snapshot">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Importando E Exportando Suas Gems Com Rubygems Snapshot</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T00:00:00-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Final de ano está rendendo.
+O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &#8220;migrar&#8221; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do <span style="text-decoration: line-through;">famoso</span> &#8220;gem hell&#8221;.
+
+Veja como é difícil usar:
+
+Instalação:
+<pre>sudo gem install rubygems_snapshot</pre>
+Para <strong>exportar</strong> as gems instaladas:
+<pre>gem snapshot export projeto-exemplo.yml</pre>
+Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:
+<pre>[sudo] gem snapshot import projeto-exemplo.yml</pre>
+<h2>Afinal, o que tem de legal nisso?</h2>
+Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:
+
+Com o rvm, você pode criar um &#8220;novo ambiente&#8221;:
+<pre>rvm use 1.8.7%projeto_exemplo</pre>
+<pre>gem list</pre>
+Deve retornar vazio.
+<pre>gem install rubygems_snapshot</pre>
+<pre>gem snapshot import projeto-exemplo.yml</pre>
+Instalará as gems necessárias para o projeto e pronto!
+<h2>ToDo:</h2>
+Esta é uma versão bem básica, onde o &#8220;import&#8221; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &#8220;build nativos&#8221;, mas por enquanto estamos usando aqui na equipe com sucesso.
+<h2>Como faço para criar um rubygems plugin também?</h2>
+Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!
+
+Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
+Valeu e sucesso!
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T00:00:00-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/projetos/'>projetos</a>, <a class='category' href='/blog/categories/quick-tips/'>quick tips</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2009/12/22/importando-e-exportando-suas-gems-com-rubygems-snapshot/" data-via="" data-counturl="http://1up4developers.github.io/blog/2009/12/22/importando-e-exportando-suas-gems-com-rubygems-snapshot/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/12/21/agile-enterprise-edition/" title="Previous Post: Agile Enterprise Edition">&laquo; Agile Enterprise Edition</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/05/10/rubygems-snapshot-importandoexportando-gems-com-velocidade/" title="Next Post: Rubygems Snapshot! Importando/Exportando gems com velocidade!">Rubygems Snapshot! Importando/Exportando gems com velocidade! &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

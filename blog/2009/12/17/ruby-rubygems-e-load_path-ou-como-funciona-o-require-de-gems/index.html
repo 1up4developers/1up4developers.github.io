@@ -1,0 +1,337 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ruby, Rubygems e $LOAD_PATH ou Como funciona o require de gems - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="Na madrugada passada, andei &#8220;brincando&#8221; com o fonte do Rubygems. Logo de cara posso te dizer que não consegui fazer o que queria, e pra &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2009/12/17/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby, Rubygems E $LOAD_PATH Ou Como Funciona O Require De Gems</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-17T00:00:00-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Na madrugada passada, andei &#8220;brincando&#8221; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &#8220;perda de tempo&#8221;, resolvi postar alguns truques aprendidos.
+<h2>Baixei o fonte do rubygems, como faço pra rodá-lo sem alterar o meu sistema?</h2>
+Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.
+<pre>$ irb</pre>
+<pre>irb(main):001:0&gt; $LOAD_PATH</pre>
+No meu Ubuntu, obtive:
+<pre>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]</pre>
+<pre>$ ls /usr/local/lib/site_ruby/1.8/</pre>
+Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
+Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:
+<pre>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v</pre>
+O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.
+<h2>Afinal, como funciona o &#8220;require de gems&#8221;?</h2>
+Bom, já sabemos que o require &#8220;rubygems&#8221; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &#8220;/usr/local/lib/site_ruby/1.8&#8221;.
+
+Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.
+<ul>
+	<li>Adiciona o metodo Kernel#gem.</li>
+	<li>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</li>
+</ul>
+<h3>Kernel#gem</h3>
+Permite &#8220;acionar&#8221; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:
+<p style="padding-left: 30px;">##</p>
+<p style="padding-left: 30px;"># Use Kernel#gem to activate a specific version of +gem_name+.</p>
+<p style="padding-left: 30px;">#</p>
+<p style="padding-left: 30px;"># +version_requirements+ is a list of version requirements that the</p>
+<p style="padding-left: 30px;"># specified gem must match, most commonly &#8220;= example.version.number&#8221;.  See</p>
+<p style="padding-left: 30px;"># Gem::Requirement for how to specify a version requirement.</p>
+<p style="padding-left: 30px;">#</p>
+<p style="padding-left: 30px;"># If you will be activating the latest version of a gem, there is no need to</p>
+<p style="padding-left: 30px;"># call Kernel#gem, Kernel#require will do the right thing for you.</p>
+<p style="padding-left: 30px;">#</p>
+<p style="padding-left: 30px;"># Kernel#gem returns true if the gem was activated, otherwise false.  If the</p>
+<p style="padding-left: 30px;"># gem could not be found, didn&#8217;t match the version requirements, or a</p>
+
+<p style="padding-left: 30px;"># different version was already activated, an exception will be raised.
+[&#8230;]
+<h3>Kernel#require</h3>
+No final do rubygems.rb encontramos:
+
+if RUBY_VERSION &lt; &#8216;1.9&#8217; then
+
+require &#8216;rubygems/custom_require&#8217;
+
+end
+
+Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:
+<ul>
+	<li>Chama o &#8220;original&#8221; require;</li>
+	<li>Em caso de LoadError;
+<ul>
+	<li>Executa o &#8220;Gem.searcher.find(path)&#8221;;</li>
+	<li>Se <em>true</em>
+<ul>
+	<li>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</li>
+	<li>Executa o &#8220;original&#8221; require novamente;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Exemplos com o IRB</h3>
+Para finalizar legal e comprovar tudo isso, fiz alguns testes:
+<pre>$ gem list json</pre>
+<p style="padding-left: 30px;">*** LOCAL GEMS ***</p>
+<p style="padding-left: 30px;">json (1.2.0, 1.1.9)</p>
+<p style="padding-left: 30px;">json_pure (1.2.0)</p>
+<p style="padding-left: 30px;"></p>
+
+<pre>$ irb</pre>
+<pre>irb(main):001:0&gt; $LOAD_PATH</pre>
+<p style="padding-left: 30px;">=&gt; [&#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]</p>
+
+<pre>irb(main):004:0&gt; require "json"</pre>
+<p style="padding-left: 30px;">LoadError: no such file to load &#8211; json</p>
+<p style="padding-left: 30px;">from (irb):4:in `require&#8217;</p>
+<p style="padding-left: 30px;">from (irb):4</p>
+<p style="padding-left: 30px;">from :0</p>
+
+<pre>irb(main):005:0&gt; gem "json", "= 1.2.0"</pre>
+<p style="padding-left: 30px;">NoMethodError: undefined method `gem&#8217; for main:Object</p>
+
+<p style="padding-left: 30px;">from (irb):5
+from :0
+
+O require &#8220;json&#8221; por si só, carrega a versão mais atual da gem.
+<pre>irb(main):006:0&gt; require "rubygems"</pre>
+=&gt; true
+<pre>irb(main):007:0&gt; require "json"</pre>
+=&gt; true
+<pre>irb(main):008:0&gt; JSON::VERSION</pre>
+=&gt; &#8220;1.2.0&#8221;
+<pre>irb(main):009:0&gt; $LOAD_PATH</pre>
+=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
+<pre>irb(main):010:0&gt; quit</pre>
+Após o require &#8220;json&#8221;, as pastas foram adicionadas no $LOAD_PATH.
+<pre>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"</pre>
+Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:
+<pre>$ irb
+
+irb(main):001:0&gt; require "rubygems"</pre>
+=&gt; true
+<pre>irb(main):002:0&gt; $LOAD_PATH</pre>
+=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
+<pre>irb(main):003:0&gt; gem "json", "= 1.1.9"</pre>
+=&gt; true
+<pre>irb(main):004:0&gt; $LOAD_PATH</pre>
+=&gt; [&#8220;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&#8221;, &#8220;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&#8221;, &#8220;/usr/local/lib/site_ruby/1.8&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i486-linux&#8221;, &#8220;/usr/local/lib/site_ruby/1.8/i386-linux&#8221;, &#8220;/usr/local/lib/site_ruby&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8&#8221;, &#8220;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/vendor_ruby&#8221;, &#8220;/usr/lib/ruby/1.8&#8221;, &#8220;/usr/lib/ruby/1.8/i486-linux&#8221;, &#8220;/usr/lib/ruby/1.8/i386-linux&#8221;, &#8220;.&#8221;]
+<pre>irb(main):005:0&gt; JSON</pre>
+NameError: uninitialized constant JSON
+from (irb):5
+<pre>irb(main):006:0&gt; require "json"</pre>
+=&gt; true
+<pre>irb(main):007:0&gt; JSON::VERSION</pre>
+=&gt; &#8220;1.1.9&#8221;
+<pre>irb(main):008:0&gt; quit</pre>
+Note que após o gem &#8220;json&#8221;, &#8220;= 1.1.9&#8221; &#8230; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &#8220;json&#8221;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.
+
+Espero que com estas explicações, você use com mais segurança o rubygems.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-17T00:00:00-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quick-tips/'>quick tips</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2009/12/17/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/" data-via="" data-counturl="http://1up4developers.github.io/blog/2009/12/17/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2009/10/23/rails-summit-2009/" title="Previous Post: Rails Summit 2009">&laquo; Rails Summit 2009</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2009/12/21/agile-enterprise-edition/" title="Next Post: Agile Enterprise Edition">Agile Enterprise Edition &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

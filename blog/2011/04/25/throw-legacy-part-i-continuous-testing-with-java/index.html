@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Throw Legacy - Part I - Continuous testing with Java - My Octopress Blog</title>
+  <meta name="author" content="Your Name">
+
+  
+  <meta name="description" content="This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/blog/2011/04/25/throw-legacy-part-i-continuous-testing-with-java">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">My Octopress Blog</a></h1>
+  
+    <h2>A blogging framework for hackers.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Throw Legacy - Part I - Continuous Testing With Java</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-25T00:00:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)
+
+JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
+In this series of blog posts I will show how I’m doing tests with Java legacy code. I will try cover topics including testing dao, service, controller and view layers.
+In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.
+
+The first thing we need is install <a href="https://rvm.beginrescueend.com/" target="_blank">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/" target="_blank">JRuby</a> and <a href="http://rubygems.org/" target="_blank">Ruby Gems</a>.
+<pre>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )</pre>
+<a title="http://rvm.beginrescueend.com/rvm/install/" href="http://rvm.beginrescueend.com/rvm/install/" target="_blank">http://rvm.beginrescueend.com/rvm/install/</a> for more info.
+
+Install JRuby:
+<pre>rvm install jruby</pre>
+Set rvm to use JRuby:
+<pre>rvm use jruby</pre>
+Install RSpec:
+<pre>gem install rspec</pre>
+Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.
+
+Create the initial project structure like this:
+<pre>-boleto
+  -spec
+  -src
+    -com
+      -legacy
+  -build</pre>
+Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:
+<pre lang="ruby">require "date"
+require "java"
+java_import "com.legacy.Boleto"
+
+describe Boleto do
+  it "calculates due days" do
+    boleto = Boleto.new
+    boleto.due_date = java.util.Date.new(Date.parse("2011-01-15").ctime)
+    boleto.payment_date = java.util.Date.new(Date.parse("2011-01-25").ctime)
+    boleto.due_days.should == 10
+  end
+end</pre>
+Let&#8217;s run the example and watch it fail.
+<pre>jruby -J-cp build -S rspec spec/boleto_spec.rb</pre>
+<pre>NameError: cannot load Java class com.legacy.Boleto</pre>
+Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:
+<pre lang="java">package com.legacy;
+import java.util.Date;
+public class Boleto {
+  private Date dueDate;
+  private Date paymentDate;
+
+  public Date getDueDate() { return this.dueDate; }
+  public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
+  public Date getPaymentDate() { return this.paymentDate; }
+  public void setPaymentDate(Date paymentDate) { this.paymentDate = paymentDate; }
+  public Integer getDueDays() { return 10; }
+}</pre>
+Also we need to compile the java class.
+<pre>javac -d build/ src/com/legacy/Boleto.java</pre>
+Instead of run the example by manual command again, let’s install a continuous testing gem:
+<pre>wget --no-check-certificate\
+ http://www.github.com/tomas-stefano/infinity_test/tarball/master\
+ -O infinity_test.tar.gz
+tar -zxvf infinity_test.tar.gz
+cd tomas-stefano-infinity_test-{version}
+gem build infinity_test.gemspec
+gem install infinity_test-1.0.2.gem</pre>
+What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.
+
+Let&#8217;s run the example with continuous testing gem:
+<pre>infinity_test --rspec --rubies=jruby+"-J-cp build"</pre>
+Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
+Also we can create a .infinity_test file, like this:
+<pre>infinity_test do
+  use :rubies =&gt; %w(jruby),
+    :specific_options =&gt; {'jruby' =&gt; '-J-cp build'},
+    :test_framework =&gt; :rspec
+  notifications :lib_notify   # for linux / growl for mac
+end</pre>
+And run:
+<pre>infinity_test</pre>
+<img src="http://1up4dev.org/wp-content/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" width="640" height="150" />
+<a title="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test" href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test" target="_blank">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.
+
+However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a title="http://www.eclipse.org/" href="http://www.eclipse.org/" target="_blank">eclipse</a> or <a title="http://eclim.org/" href="http://eclim.org/" target="_blank">eclim</a>. This kind of editor auto-recompile Java files whenever they change.
+
+Last notes
+<ul>
+	<li>I&#8217;ve posted the code for boleto here <a title="https://github.com/andref5/rspec-java" href="https://github.com/andref5/rspec-java" target="_blank">https://github.com/andref5/rspec-java</a></li>
+	<li>More info about JRuby
+<ul>
+	<li> <a title="https://github.com/jruby/jruby/wiki" href="https://github.com/jruby/jruby/wiki" target="_blank">https://github.com/jruby/jruby/wiki</a></li>
+	<li> <a title="http://pragprog.com/titles/jruby/using-jruby" href="http://pragprog.com/titles/jruby/using-jruby" target="_blank">http://pragprog.com/titles/jruby/using-jruby</a></li>
+</ul>
+</li>
+	<li>More info about RSpec
+<ul>
+	<li> <a title="http://relishapp.com/rspec" href="http://relishapp.com/rspec" target="_blank">http://relishapp.com/rspec</a></li>
+	<li> <a title="http://kerryb.github.com/iprug-rspec-presentation" href="http://kerryb.github.com/iprug-rspec-presentation" target="_blank">http://kerryb.github.com/iprug-rspec-presentation</a></li>
+	<li> <a title="http://pragprog.com/titles/achbd/the-rspec-book" href="http://pragprog.com/titles/achbd/the-rspec-book" target="_blank">http://pragprog.com/titles/achbd/the-rspec-book</a></li>
+</ul>
+</li>
+	<li>More info about Infinity_test
+<ul>
+	<li> <a title="https://github.com/tomas-stefano/infinity_test" href="https://github.com/tomas-stefano/infinity_test" target="_blank">https://github.com/tomas-stefano/infinity_test</a></li>
+</ul>
+</li>
+	<li>More info about Ruby
+<ul>
+	<li> <a title="http://mislav.uniqpath.com/poignant-guide/book/" href="http://mislav.uniqpath.com/poignant-guide/book/" target="_blank">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Your Name</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-25T00:00:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/blog/2011/04/25/throw-legacy-part-i-continuous-testing-with-java/" data-via="" data-counturl="http://1up4developers.github.io/blog/2011/04/25/throw-legacy-part-i-continuous-testing-with-java/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/04/19/o-que-eu-tenho-feito-da-vida-ou-links-sobre-temas-variados/" title="Previous Post: O que eu tenho feito da vida ou Links sobre temas variados">&laquo; O que eu tenho feito da vida ou Links sobre temas variados</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/04/27/dont-be-a-hero/" title="Next Post: Don't be a hero">Don't be a hero &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/07/14/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/05/06/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Your Name -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

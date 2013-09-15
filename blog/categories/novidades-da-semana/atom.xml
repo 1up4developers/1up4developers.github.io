@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: novidades da semana | My Octopress Blog]]></title>
+  <link href="http://1up4developers.github.io/blog/categories/novidades-da-semana/atom.xml" rel="self"/>
+  <link href="http://1up4developers.github.io/"/>
+  <updated>2013-09-15T18:08:39-03:00</updated>
+  <id>http://1up4developers.github.io/</id>
+  <author>
+    <name><![CDATA[Your Name]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Novos rumos]]></title>
+    <link href="http://1up4developers.github.io/blog/2013/04/01/novos-rumos/"/>
+    <updated>2013-04-01T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2013/04/01/novos-rumos</id>
+    <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
+
+<p>Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável.</p>
+
+<p>=)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CoffeeScript quem?]]></title>
+    <link href="http://1up4developers.github.io/blog/2011/04/14/coffescript-what/"/>
+    <updated>2011-04-14T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2011/04/14/coffescript-what</id>
+    <content type="html"><![CDATA[<p>Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão.</p>
+
+<p>Aproveitando a barulheira, que é comum a cada vez que o criador da plataforma abre a boca, vamos nos ater ao que é importante e apresentar uma introdução ao resumo simplificado do CoffeeScript básico.</p>
+
+<p>Confesso que minha opinião sobre essa ferramenta mudou nos primeiros instantes em que comecei a usar. No site do CoffeeScript (ok se eu começar a chamar de CS daqui para frente?) existe um link onde você digita o código do lado esquerdo e, imediatamente, do lado direito aparece o equivalente em JavaScript.</p>
+
+<p>Fiz uma brincadeira lá usando um código que sempre me vem à cabeça ao tentar explicar o básico de programação funcional para alguem. Segue:</p>
+
+<pre>mimimi = (operation, value) ->
+   operation(value);
+
+dobro = (value) ->
+  value + value;
+
+quadrado = (value) ->
+  value * value;
+
+zero = (value) ->
+  value - value;
+
+um = (value) ->
+  value / value;
+
+alert(mimimi(dobro, 3));
+alert(mimimi(quadrado, 3));
+alert(mimimi(zero, 3));
+alert(mimimi(um, 3));</pre>
+
+
+<p>Nada de outro mundo, certo? O equivalente JS é o código abaixo:</p>
+
+<pre>var dobro, mimimi, quadrado, um, zero;
+mimimi = function(operation, value) {
+  return operation(value);
+};
+dobro = function(value) {
+  return value + value;
+};
+quadrado = function(value) {
+  return value * value;
+};
+zero = function(value) {
+  return value - value;
+};
+um = function(value) {
+  return value / value;
+};
+alert(mimimi(dobro, 3));
+alert(mimimi(quadrado, 3));
+alert(mimimi(zero, 3));
+alert(mimimi(um, 3));</pre>
+
+
+<p>CS permite também a checagem automática de valores e parâmetros opcionais, conforme o exemplo retirado do site:</p>
+
+<pre>fill = (container, liquid = "coffee") -&gt;
+  "Filling the #{container} with #{liquid}..."</pre>
+
+
+<p>Ou o equivalente em JS:</p>
+
+<pre>var fill;
+fill = function(container, liquid) {
+  if (liquid == null) {
+    liquid = "coffee";
+  }
+  return "Filling the " + container + " with " + liquid + "...";
+};</pre>
+
+
+<p>Sem dúvida, muito mais legível e expressivo.</p>
+
+<p>É uma ferramenta que eu pretendo usar em algum projeto pequeno, para testar e ver o quanto acelera meu trabalho. Em projetos maiores talvez eu demore um pouco mais para usar mas, considerando que umas das minhas aplicações já conta com 79% de código total escrito em JavaScript, segundo o GitHub, imagino que isso vai melhorar consideravelmente a manutenção do código.</p>
+
+<p>E no mais, se o CS não te chamou a atenção e você não quer mesmo utilizar, basta remover o require do arquivo Gemfiles e a vida segue como se nada tivesse acontecido.</p>
+
+<p>Links recomendados:</p>
+
+<ul>
+    <li>Site do CoffeScript: <a title="http://jashkenas.github.com/coffee-script/" href="http://jashkenas.github.com/coffee-script/" target="_blank">http://jashkenas.github.com/coffee-script/</a></li>
+    <li>Mais do mesmo: <a title="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html" href="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html" target="_blank">http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html</a></li>
+    <li>Exemplo bacana de como utilizar CS dentro da sua view: <a title="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html" href="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html" target="_blank">http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery DataTables, GitHub API e links da semana]]></title>
+    <link href="http://1up4developers.github.io/blog/2009/05/04/jquery-datatables-github-apilinks-semana/"/>
+    <updated>2009-05-04T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2009/05/04/jquery-datatables-github-apilinks-semana</id>
+    <content type="html"><![CDATA[<h2><a href="http://www.datatables.net/" target="_blank">jQuery DataTables</a></h2>
+
+
+<p>Nós somos fãs de jQuery pela sua simplicidade e poder de extensão através de plugins. Falando nisso, este plugin torna qualquer tabela &lt;table/&gt; em um &ldquo;grid&rdquo; ordenável, pesquisavel e paginável <em>automagicamente</em>.</p>
+
+<p><a href="http://1up4dev.org/wp-content/uploads/2009/05/datatables.png"><img class="aligncenter size-medium wp-image-490" title="datatables" src="http://1up4dev.org/wp-content/uploads/2009/05/datatables-300x86.png" alt="" width="300" height="86" /></a></p>
+
+<p>Para usar, basta incluir o plugin na página após o jQuery e executar o script:</p>
+
+<pre>$(document).ready(function() {
+    $("id-tabela").dataTable();
+}</pre>
+
+
+<p>No <a href="http://www.datatables.net/" target="_blank">site oficial</a> é possível consultar a documentação, exemplos e a <a href="http://www.datatables.net/plug-ins#language" target="_blank">tradução</a> para pt-br.</p>
+
+<h2><a title="github api take two" href="http://github.com/blog/413-github-api-take-two">GitHub API, version 2</a></h2>
+
+
+<p>Os caras do GitHub não são fracos não&hellip; já faz um tempinho, mas antes tarde do que nunca, anunciaram em seu <a title="GitHub Blog" href="http://github.com/blog">blog</a> a versão 2 do GitHub API. Ela provê acesso à &ldquo;Repository, User, Commit, Object and Network&rdquo; e futuramente ao Gist também. Como é a primeira release e ainda estão trabalhando nela, o próprio pessoal do Github pede ajuda a &ldquo;desbravadores&rdquo; e que abram tickets, caso encontrem algo. Documentação você encontra em  <a title="GitHub API Documentation" href="http://develop.github.com">develop.github.com</a>.</p>
+
+<h2>Links da semana</h2>
+
+
+<p><a href="http://www.desenvolvimentoparaweb.com/usabilidade/8-caracteristicas-de-user-interfaces-ui-de-sucesso/" target="_blank">8 características de User Interfaces (UI) de sucesso</a></p>
+
+<p><a href="http://github.com/ryanb/nifty-generators/tree/master" target="_blank">Nifty Generators para Ruby on Rails</a></p>
+
+<p><a href="http://olabini.com/blog/2009/04/jruby-on-rails-on-google-app-engine/" target="_blank">JRuby on Rails no Google App Engine</a></p>
+
+<p><a href="http://www.ajaxianos.com.br/2008/10/grid-com-ordenacao-e-paginacao-animados/" target="_blank">Grid com ordenação e paginação animados</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Guia de Ruby do Why e Autospec-notification]]></title>
+    <link href="http://1up4developers.github.io/blog/2009/04/27/guia-de-ruby-do-why-autospec-autotest-notification/"/>
+    <updated>2009-04-27T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2009/04/27/guia-de-ruby-do-why-autospec-autotest-notification</id>
+    <content type="html"><![CDATA[<h2>O comovente guia de Ruby do Why</h2>
+
+
+<p>Este <a href="http://poignantguide.net/ruby/" target="_blank">livro</a> é sensacional e demonstra exatamente o espírito do Ruby: papo de programador.</p>
+
+<p><a href="http://1up4dev.org/wp-content/uploads/2009/04/thefoxes-3.png"><img class="aligncenter size-full wp-image-463" title="thefoxes-3" src="http://1up4dev.org/wp-content/uploads/2009/04/thefoxes-3.png" alt="" width="500" height="145" /></a></p>
+
+<p>O livro é bem divertido. As tirinhas das raposas são ótimas. Várias <a href="http://www.nomedojogo.com/2008/10/28/why%E2%80%99s-poignant-guide-to-ruby-em-portugues/" target="_blank">pessoas</a> <a href="http://akitaonrails.com/2008/5/14/vamos-traduzir-o-why-s-poignant-guide-to-ruby" target="_blank">contribuíram</a> com a tradução para pt-br que está disponível no <a href="http://github.com/carlosbrando/poignant-br/tree/master" target="_blank">Github</a>.</p>
+
+<p><a href="http://why.nomedojogo.com/" target="_blank">Leitura obrigatória</a>. Chunky bacon!</p>
+
+<h2>Autospec-notification</h2>
+
+
+<p>O <a href="http://www.nateclark.com/articles/2008/09/17/_autotest_-is-now-_autospec_-how-to-set-up-autospec-for-rspec-and-rails-with-zentest" target="_blank">Autospec</a> é um script gerado pelo <a href="http://rspec.info/" target="_blank">RSpec</a> que utiliza o Autotest para rodar os testes automaticamente a cada alteração no código.</p>
+
+<p>Unindo o útil ao agradável, foi criado o <a href="http://www.mouseoverstudio.com/blog/2008/10/10/autospec-autotest-notification-autospec-notification-e-novidades/" target="_blank">Autospec-notification</a>, que exibe as notificações do autospec no desktop.</p>
+
+<p><a href="http://1up4dev.org/wp-content/uploads/2009/04/sucesso.png"><img class="aligncenter size-full wp-image-465" title="sucesso" src="http://1up4dev.org/wp-content/uploads/2009/04/sucesso.png" alt="" width="500" height="173" /></a></p>
+
+<p>Para instalar, comece pela gem ZenTest:</p>
+
+<pre style="padding-left: 30px;">sudo gem install ZenTest</pre>
+
+
+<p>No linux, instale o Libnotify:</p>
+
+<pre style="padding-left: 30px;">sudo apt-get install libnotify-bin</pre>
+
+
+<p>Agora instale a gem do autotest-notification:</p>
+
+<pre style="padding-left: 30px;">sudo gem install carlosbrando-autotest-notification --source=http://gems.github.com</pre>
+
+
+<p>Ative o autotest-notification e rode o autospec no seu projeto:</p>
+
+<pre style="padding-left: 30px;">an-install</pre>
+
+
+<pre style="padding-left: 30px;">script/autospec</pre>
+
+
+<p>O código está no <a href="http://github.com/carlosbrando/autotest-notification/tree/master" target="_blank">Github</a>. Escreva seus testes e divirta-se!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Remarkable, jqGrid no Rails, Heroku e Github issues]]></title>
+    <link href="http://1up4developers.github.io/blog/2009/04/20/remarkable-jqgrid-no-rails-heroku-e-github-issues/"/>
+    <updated>2009-04-20T00:00:00-03:00</updated>
+    <id>http://1up4developers.github.io/blog/2009/04/20/remarkable-jqgrid-no-rails-heroku-e-github-issues</id>
+    <content type="html"><![CDATA[<p>Este é o primeiro post que publicaremos semanalmente reunindo novidades sobre desenvolvimento, artigos, notícias e temas variados sobre Rails.</p>
+
+<h2><a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" target="_blank">Remarkable 3.0</a></h2>
+
+
+<p>Foi lançada a nova versão do Remarkable, um framework para testes com RSpec. Dentre as novidades, estão:</p>
+
+<ul>
+    <li>I18n, possibilitando gerar o output das specs no seu idioma <span style="text-decoration: line-through;">favorito</span> fluente</li>
+    <li>Pending Macros, facilitando o agrupamento das specs pendentes</li>
+    <li>Macro stubs e mais opções de Matchers, simplificando testes com mocks</li>
+</ul>
+
+
+<p>Para instalar basta um <code>sudo gem install remarkable_rails</code></p>
+
+<p>Saiba mais no site do <a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" target="_blank">Carlos Brando</a>, lendo a <a href="http://remarkable.rubyforge.org/rails/" target="_blank">documentação</a> ou espiando o código no <a href="http://github.com/carlosbrando/remarkable/tree/master" target="_blank">Github</a>.</p>
+
+<h2><a href="http://www.2dconcept.com/jquery-grid-rails-plugin" target="_blank">jqGrid no Rails</a></h2>
+
+
+<p><a href="http://jquery.com/" target="_blank">jQuery</a> é um dos frameworks Javascript mais populares do mercado. O que <a href="http://www.2dconcept.com/articles/8-jquery-grid-rails-plugin" target="_blank">esse cara</a> fez foi juntar o <a href="http://www.trirand.com/jqgrid35/jqgrid.html" target="_blank">jqGrid</a>, que é um plugin muito bom para trabalhar com grids, num plugin para Rails, facilitando sua utilização.</p>
+
+<p>Veja <a href="http://www.2dconcept.com/jquery-grid-rails-plugin" target="_blank">aqui</a> um guia de utilização do plugin, a <a href="http://github.com/ahe/jqgrid_demo_app/tree/master" target="_blank">aplicação de exemplo</a> ou confira o código no <a href="http://github.com/ahe/2dc_jqgrid/tree/master" target="_blank">Github</a>.</p>
+
+<h2><a title="Heroku" href="http://heroku.com/" target="_blank">Heroku</a></h2>
+
+
+<p>Apesar da simplicidade do <a title="Business Bingo Generator" href="http://1up4dev.org/2009/04/business-bingo-generator/" target="_blank">Business Bingo Generator</a>, houve muitas &ldquo;manhas&rdquo; aprendidas no seu desenvolvimento. O Heroku foi uma delas, onde pudemos publicar rapidamente a aplicação. Se você quer hospedar um projeto simples feito em Rails, nós o recomendamos. O seu uso é muito simples e a incrível idéia de usar o git como interface para deploy é realmente sensacional. Basta instalar o client do Heroku, dar um &ldquo;git push&rdquo; e pronto: a aplicação está no ar!</p>
+
+<h2><a title="Github Issue Tracker" href="http://github.com/blog/411-github-issue-tracker" target="_blank">Github Issue Tracker</a></h2>
+
+
+<p>Nova funcionalidade no GitHub para facilitar nossas vidas, permitindo informar os &ldquo;bugs&rdquo; nos projetos. No link acima, contém o vídeo &ldquo;I<em>ntroduction to GitHub Issues</em>&rdquo; para mais detalhes.</p>
+
+<p>Caso já use um Issue Tracker para o seu projeto no github, você pode desabilitá-lo na seção  do <em>Features </em>na aba<em> Admin</em>.</p>
+]]></content>
+  </entry>
+  
+</feed>
