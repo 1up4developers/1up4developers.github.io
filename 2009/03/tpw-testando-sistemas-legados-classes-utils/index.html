@@ -1,0 +1,303 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TPW - Testando sistemas legados: classes Utils - 1up4developers</title>
+  <meta name="author" content="1up4developers authors">
+
+  
+  <meta name="description" content="Aproveitando o gancho do post anterior sobre manipulação de dependências, decidi dedicar um post apenas sobre este tema, pois acredito ser de grande &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/2009/03/tpw-testando-sistemas-legados-classes-utils">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="1up4developers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">1up4developers</a></h1>
+  
+    <h2>Nadando contra o Waterfall. tail -f /mind/realworld >> /blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">TPW - Testando Sistemas Legados: Classes Utils</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-03T00:00:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Aproveitando o gancho do <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/">post anterior</a> sobre manipulação de dependências, decidi dedicar um post apenas sobre este tema, pois acredito ser de grande ajuda para todos desenvolvedores que precisam manter código legado.
+
+Em projetos legados é comum encontrarmos classes Util (aka Helpers) espalhadas por todo o código, fazendo desde coisas simples como formatar datas ou números, até coisas mágicas como cache de objetos, operações com <a href="http://en.wikibooks.org/wiki/Java_Programming/Reflection/Overview" target="_blank">reflection</a>, escrita de logs, etc. Mesmo que tenham sua &#8220;utilidade&#8221;, são um <a href="http://en.wikipedia.org/wiki/Separation_of_concerns">terror</a> quando falamos de testes! Além de ser um <a href="http://en.wikipedia.org/wiki/God_object">forte indício</a> de um <a href="http://en.wikipedia.org/wiki/Single_responsibility_principle">design fraco</a>, as chamadas a seus métodos, geralmente estáticos, geram dependências nas classes que a utilizam.
+
+Este é a estrutura comum (bem simplificada) de uma classe Util com métodos estáticos:
+<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class MagicUtil {
+    public static String getConstanteSecreta() {
+        return "VALOR_SECRETO_AMBIENTE";
+    }
+}
+</code></pre>
+Neste caso, uma boa estratégia para os testes seria encapsular a chamada da classe Util em um método <em>protected</em>, para que seja sobrescrito na classe de teste, assumindo o comportamento desejado. Porém, se a classe Util for largamente referenciada no projeto (o que é comum) seria preciso <em>refatorar</em> todas a classes que a utilizam para escrever um teste completo.
+
+A estratégia proposta é <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorar</a> a classe Util, aplicando o padrão <a href="http://pt.wikipedia.org/wiki/Singleton">Singleton</a> e transformando os métodos estáticos em métodos de instância, porém mantendo as assinaturas estáticas, que devem referenciar os métodos da instância. Uma vez que a Util pode ser instanciada (mesmo que internamente), é possível manipular seu comportamento através da injeção de um objeto <em>Mock</em>, por exemplo<em>:</em>
+<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class MagicUtil {
+    private static MagicUtil instance = new MagicUtil();
+    protected static MagicUtil getInstance() {
+        return instance;
+    }
+    protected static void setInstance(MagicUtil obj) {
+        instance = obj;
+    }
+    public String getConstanteSecretaInstancia() {
+        return "VALOR_SECRETO_AMBIENTE";
+    }
+    public static String getConstanteSecreta() {
+        return getInstance().getConstanteSecretaInstancia();
+    }
+}
+</code></pre>
+Assim, a Util continua com o mesmo comportamento e seu <strong>contrato</strong> foi mantido. Agora, no seu teste, basta escrever o mock (estendendo a classe e sobrescrevendo os métodos) e injetá-lo na instância interna da Util:
+<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>public class ClasseTest {
+    @Test
+    public void testaMetodoDependenteDeMagicUtil() {
+        new MagicUtil() {
+            {
+                setInstance(this);
+            }
+            public String getConstanteSecretaInstancia() {
+                return "MEU_VALOR_MOCK";
+            }
+        };
+        Assert.assertEquals("MEU_VALOR_MOCK", MagicUtil.getConstanteSecreta());
+    }
+}
+</code></pre>
+Neste caso a classe anônima (que estende a Util) passa sua própria instância (this) para o método protegido <em>setInstance()</em>. Note que a chamada do método (estático) da Util continua igual ao da classe original, sem o refactoring.
+
+Nos projetos que preciso manter, esta estratégia tem sido muito útil para resolver os problemas das &#8220;teias&#8221; de Utils. Porém é um recurso paliativo e <a href="http://gcirne.wordpress.com/2008/01/14/classes-util/">não deve ser utilizado</a> como o &#8220;padrão&#8221;. O ideal é sempre evitar classes Utils, lembrando que uma classe deve sempre ter comportamentos bem definidos e o <a href="http://domaindrivendesign.org/">nome já deve indicar</a> sua responsabilidade.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-03-03T00:00:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quick-tips/'>quick tips</a>, <a class='category' href='/blog/categories/tutorial/'>tutorial</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/2009/03/tpw-testando-sistemas-legados-classes-utils/" data-via="1up4dev" data-counturl="http://1up4developers.github.io/2009/03/tpw-testando-sistemas-legados-classes-utils/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/" title="Previous Post: TPW - Testando sistemas legados: manipulando dependências">&laquo; TPW - Testando sistemas legados: manipulando dependências</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/04/business-bingo-generator/" title="Next Post: Business Bingo Generator">Business Bingo Generator &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 1up4developers authors -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = '1up4developers';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

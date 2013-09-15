@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: waterfall | My Octopress Blog]]></title>
+  <title><![CDATA[Category: waterfall | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/waterfall/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/04/01/novos-rumos/"/>
+    <link href="http://1up4developers.github.io/2013/04/novos-rumos/"/>
     <updated>2013-04-01T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/04/01/novos-rumos</id>
+    <id>http://1up4developers.github.io/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
 <p>Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável.</p>
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[Nos idos de 2012, UML, Design e Waterfall]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/01/04/nos-idos-de-2012-uml-design-e-waterfall/"/>
+    <link href="http://1up4developers.github.io/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
     <updated>2013-01-04T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/01/04/nos-idos-de-2012-uml-design-e-waterfall</id>
+    <id>http://1up4developers.github.io/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
     <content type="html"><![CDATA[<p>Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
 Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&hellip; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.</p>
 
@@ -45,9 +45,9 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   
   <entry>
     <title type="html"><![CDATA[Agilidade é a buzzword do momento]]></title>
-    <link href="http://1up4developers.github.io/blog/2009/04/22/agilidade-e-a-buzzword-do-momento/"/>
+    <link href="http://1up4developers.github.io/2009/04/agilidade-e-a-buzzword-do-momento/"/>
     <updated>2009-04-22T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2009/04/22/agilidade-e-a-buzzword-do-momento</id>
+    <id>http://1up4developers.github.io/2009/04/agilidade-e-a-buzzword-do-momento</id>
     <content type="html"><![CDATA[<p>Nos últimos anos o mercado de TI cresceu exponencialmente. Surgiram desde pequenas empresas especializadas em construir websites até monstruosas fábricas de software com seus contratos milionários. Algumas com orçamento limitado outras com dinheiro jorrando pelos canos. Umas com problemas por falta de organização outras com problemas burocráticos. Bons profissionais vs. equipes de sobrinhos, habilidade técnica contra enxurradas de documentos&hellip; muito fracasso, pouco sucesso.</p>
 
 <h2>A meta é coletar as moedas até conseguirmos uma estrela</h2>
@@ -112,9 +112,9 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   
   <entry>
     <title type="html"><![CDATA[Foco no problema]]></title>
-    <link href="http://1up4developers.github.io/blog/2008/11/10/foco-no-problema/"/>
+    <link href="http://1up4developers.github.io/2008/11/foco-no-problema/"/>
     <updated>2008-11-10T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2008/11/10/foco-no-problema</id>
+    <id>http://1up4developers.github.io/2008/11/foco-no-problema</id>
     <content type="html"><![CDATA[<p>Desenvolver software é uma atividade muito gratificante pois sempre podemos (ou deveríamos) exercitar nossa criatividade para solucionar os problemas dos clientes. Isto, apesar de divertido pode ser perigoso e/ou catastrófico se estivermos com o foco errado. Num ambiente cascateiro, onde cada envolvido está comprometido apenas com o processo e não se preocupa verdadeiramente com os problemas dos clientes, não é difícil que isto ocorra. Quase sempre o foco acaba sendo direcionado para a solução ao invés do problema.</p>
 
 <p>Mas qual a diferença entre foco no <strong>problema</strong> ou <strong>solução</strong>? Vamos a um exemplo:</p>
@@ -144,9 +144,9 @@ Os russos, que tiveram o mesmo problema, optaram por uma solução mais simples:
   
   <entry>
     <title type="html"><![CDATA[Arquiteto Cascateiro]]></title>
-    <link href="http://1up4developers.github.io/blog/2008/11/07/arquiteto-cascateiro/"/>
+    <link href="http://1up4developers.github.io/2008/11/arquiteto-cascateiro/"/>
     <updated>2008-11-07T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2008/11/07/arquiteto-cascateiro</id>
+    <id>http://1up4developers.github.io/2008/11/arquiteto-cascateiro</id>
     <content type="html"><![CDATA[<blockquote>Este post é uma homenagem aos Arquitetos defensores do <em>waterfall</em>/cascata.</blockquote>
 
 

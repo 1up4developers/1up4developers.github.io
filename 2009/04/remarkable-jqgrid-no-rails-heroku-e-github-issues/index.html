@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Remarkable, jqGrid no Rails, Heroku e Github issues - 1up4developers</title>
+  <meta name="author" content="1up4developers authors">
+
+  
+  <meta name="description" content="Este é o primeiro post que publicaremos semanalmente reunindo novidades sobre desenvolvimento, artigos, notícias e temas variados sobre Rails. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="1up4developers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">1up4developers</a></h1>
+  
+    <h2>Nadando contra o Waterfall. tail -f /mind/realworld >> /blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Remarkable, jqGrid No Rails, Heroku E Github Issues</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-20T00:00:00-03:00" pubdate data-updated="true">Apr 20<span>th</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Este é o primeiro post que publicaremos semanalmente reunindo novidades sobre desenvolvimento, artigos, notícias e temas variados sobre Rails.
+<h2><a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" target="_blank">Remarkable 3.0</a></h2>
+Foi lançada a nova versão do Remarkable, um framework para testes com RSpec. Dentre as novidades, estão:
+<ul>
+	<li>I18n, possibilitando gerar o output das specs no seu idioma <span style="text-decoration: line-through;">favorito</span> fluente</li>
+	<li>Pending Macros, facilitando o agrupamento das specs pendentes</li>
+	<li>Macro stubs e mais opções de Matchers, simplificando testes com mocks</li>
+</ul>
+Para instalar basta um <code>sudo gem install remarkable_rails</code>
+
+Saiba mais no site do <a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" target="_blank">Carlos Brando</a>, lendo a <a href="http://remarkable.rubyforge.org/rails/" target="_blank">documentação</a> ou espiando o código no <a href="http://github.com/carlosbrando/remarkable/tree/master" target="_blank">Github</a>.
+<h2><a href="http://www.2dconcept.com/jquery-grid-rails-plugin" target="_blank">jqGrid no Rails</a></h2>
+<a href="http://jquery.com/" target="_blank">jQuery</a> é um dos frameworks Javascript mais populares do mercado. O que <a href="http://www.2dconcept.com/articles/8-jquery-grid-rails-plugin" target="_blank">esse cara</a> fez foi juntar o <a href="http://www.trirand.com/jqgrid35/jqgrid.html" target="_blank">jqGrid</a>, que é um plugin muito bom para trabalhar com grids, num plugin para Rails, facilitando sua utilização.
+
+Veja <a href="http://www.2dconcept.com/jquery-grid-rails-plugin" target="_blank">aqui</a> um guia de utilização do plugin, a <a href="http://github.com/ahe/jqgrid_demo_app/tree/master" target="_blank">aplicação de exemplo</a> ou confira o código no <a href="http://github.com/ahe/2dc_jqgrid/tree/master" target="_blank">Github</a>.
+<h2><a title="Heroku" href="http://heroku.com/" target="_blank">Heroku</a></h2>
+Apesar da simplicidade do <a title="Business Bingo Generator" href="http://1up4dev.org/2009/04/business-bingo-generator/" target="_blank">Business Bingo Generator</a>, houve muitas &#8220;manhas&#8221; aprendidas no seu desenvolvimento. O Heroku foi uma delas, onde pudemos publicar rapidamente a aplicação. Se você quer hospedar um projeto simples feito em Rails, nós o recomendamos. O seu uso é muito simples e a incrível idéia de usar o git como interface para deploy é realmente sensacional. Basta instalar o client do Heroku, dar um &#8220;git push&#8221; e pronto: a aplicação está no ar!
+<h2><a title="Github Issue Tracker" href="http://github.com/blog/411-github-issue-tracker" target="_blank">Github Issue Tracker</a></h2>
+Nova funcionalidade no GitHub para facilitar nossas vidas, permitindo informar os &#8220;bugs&#8221; nos projetos. No link acima, contém o vídeo &#8220;I<em>ntroduction to GitHub Issues</em>&#8221; para mais detalhes.
+
+Caso já use um Issue Tracker para o seu projeto no github, você pode desabilitá-lo na seção  do <em>Features </em>na aba<em> Admin</em>.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-04-20T00:00:00-03:00" pubdate data-updated="true">Apr 20<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/novidades-da-semana/'>novidades da semana</a>, <a class='category' href='/blog/categories/real-world/'>real world</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues/" data-via="1up4dev" data-counturl="http://1up4developers.github.io/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/04/business-bingo-generator/" title="Previous Post: Business Bingo Generator">&laquo; Business Bingo Generator</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/04/agilidade-e-a-buzzword-do-momento/" title="Next Post: Agilidade é a buzzword do momento">Agilidade é a buzzword do momento &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 1up4developers authors -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = '1up4developers';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

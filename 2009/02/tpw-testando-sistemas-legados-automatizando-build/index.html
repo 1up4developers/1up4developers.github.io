@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>TPW - Testando sistemas legados: automatizando o build - 1up4developers</title>
+  <meta name="author" content="1up4developers authors">
+
+  
+  <meta name="description" content="Imagine o cenário: você caiu de para-quedas naquele projeto que todo mundo na empresa fez gambiarra deu manutenção e agora precisa implementar uma &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/2009/02/tpw-testando-sistemas-legados-automatizando-build">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="1up4developers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">1up4developers</a></h1>
+  
+    <h2>Nadando contra o Waterfall. tail -f /mind/realworld >> /blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">TPW - Testando Sistemas Legados: Automatizando O Build</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-11T00:00:00-02:00" pubdate data-updated="true">Feb 11<span>th</span>, 2009</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Imagine o cenário: você caiu de para-quedas naquele projeto que todo mundo na empresa <span style="text-decoration: line-through;">fez gambiarra</span> deu manutenção e agora precisa implementar uma nova funcionalidade. Mesmo que tenha alguma documentação, vai ser inútil neste caso. Então você começa a vasculhar o código e encontra dezenas de classes com nomes parecidos, vários arquivos XML&#8217;s dos inúmeros frameworks utilizados anteriormente, <a href="http://www.fragmental.com.br/wiki/index.php/Evitando_VOs_e_BOs" target="_blank">TO&#8217;s, VO&#8217;s</a>, Actions, Utils&#8230; ou seja, um lugar cheio de <a href="http://blog.improveit.com.br/articles/2007/01/05/nada-de-janelas-quebradas" target="_blank">janelas quebradas</a>.
+
+O mais fácil neste caso seria fazer seu trabalho, quebrando mais algumas janelas caso necessário, e cair fora o quanto antes. Mas você, <a href="http://agilemanifesto.org/" target="_blank">desenvolvedor ágil</a>, sabe que além de ser falta de profissionalismo, você corre o risco de cair novamente no mesmo projeto. Então aproveite a oportunidade para fazer uma pequena faxina e preparar o projeto para escrever os testes das novas funcionalidades que irá desenvolver, garantido assim a qualidade, pelo menos, do seu trabalho.
+
+Durante minha carreira <span style="text-decoration: line-through;">fui obrigado</span> tive a oportunidade de dar manutenção em diversos projetos &#8221;<a href="http://blog.fragmental.com.br/2006/04/02/2006-o-inicio-da-arquitetura-heterogenea-java-ee-ou-qual-o-melhor-framework-web/" target="_blank">frankenstein</a>&#8221; de onde adquiri certa experiência para poder &#8220;organizar a casa&#8221; e trabalhar decentemente no código. É claro que não estou falando em escrever testes para o projeto inteiro, mas pelo menos garantir a qualidade do código que desenvolvi ou irei desenvolver.
+
+Há um certo padrão que todo software de qualidade deve seguir. Além dos padrões e boas práticas como organização do código em pacotes vs. responsabilidade, uma coisa essencial para o projeto é sua construção, ou seja, a forma que o software é &#8220;entregue&#8221;. Acredito que este seja o primeiro passo para começar a organizar a bagunça de um projeto.
+
+A construção do projeto deve ser automática e desempenhada por uma ferramenta de build como o <a href="http://ant.apache.org/index.html" target="_blank">Ant</a> ou <a href="http://maven.apache.org/" target="_blank">Maven</a>, com tarefas (tasks) e objetivos bem definidos. Normalmente, um build do projeto deve:
+<ol>
+	<li>Preparar o código e dependências</li>
+	<li>Compilar os arquivos fontes</li>
+	<li>Executar os testes</li>
+	<li>Empacotar a distribuição</li>
+</ol>
+No exemplo abaixo usarei o Ant, que é a ferramenta de build (para Java) mais popular do mercado e muito simples de utilizar. O importante neste processo é ser pragmático: não perca o foco! Você poderia (e futuramente deveria) utilizar o Maven, mas adequá-lo a um sistema legado não é tão simples quanto parece.
+
+Tendo os objetivos do build definidos, basta escrever o script do Ant. Isso deve ser feito no arquivo build.xml, no root do projeto. As tarefas são definidas pelas tags &lt;target&gt; e podem ser dependentes para garantir a sequencia de execução. Em cada target são definidas as ações executadas, como rodar o compilador (javac), copiar um arquivo, rodar os testes, etc. Uma vez que as tarefas estão configuradas, basta executar o build pelo próprio IDE ou linha de comando.
+<pre style="border: 1px dashed #999999; padding: 5px; overflow: auto; font-family: Andale Mono,Lucida Console,Monaco,fixed,monospace; color: #000000; background-color: #eeeeee; font-size: 12px; line-height: 14px; width: 100%;"><code>&lt;project name="frank" default="package"&gt;
+    &lt;path id="classpath"&gt;
+        &lt;pathelement location="build/bin"/&gt;
+        &lt;fileset dir="src"&gt;
+            &lt;include name="*.java"/&gt;
+        &lt;/fileset&gt;
+        &lt;fileset dir="lib"&gt;
+            &lt;include name="*.jar"/&gt;
+        &lt;/fileset&gt;
+    &lt;/path&gt;
+    &lt;target name="clean"&gt;
+         &lt;delete dir="build"/&gt;
+          &lt;mkdir dir="build"/&gt;
+    &lt;/target&gt;
+    &lt;target name="compile" depends="clean"&gt;
+        &lt;javac srcdir="src" destdir="build"&gt;
+            &lt;classpath refid="classpath"/&gt;
+        &lt;/javac&gt;
+    &lt;/target&gt;
+    &lt;target name="test" depends="compile"&gt;
+        &lt;junit&gt;
+            &lt;classpath refid="classpath"/&gt;
+            &lt;batchtest&gt;
+                &lt;fileset dir="build" includes="*Test"/&gt;
+            &lt;/batchtest&gt;
+        &lt;/junit&gt;
+    &lt;/target&gt;
+    &lt;target name="package" depends="compile, test"&gt;
+        &lt;war destfile="frank.war" webxml="web/WEB-INF/web.xml"&gt;
+        &lt;classes dir="build"/&gt;
+    &lt;/target&gt;
+&lt;/project&gt;
+</code></pre>
+Neste script estão definidas as tarefas necessárias para executar um build, conforme citei anteriormente. Por enquanto isto será o mínimo necessário para dar suporte as próximas etapas da sua missão. Mesmo que o projeto já tenha um build em Ant aproveite para <a href="http://www.onjava.com/pub/a/onjava/2003/12/17/ant_bestpractices.html" target="_blank">revisá-lo</a>. Tarefas bem simples e bem definidas são mais fáceis de entender e manter.
+
+Com o build implementado, você não terá mais que se preocupar com o empacotamento do projeto. Agora comece a direcionar seus esforços para escrever os testes. Deixe que o Ant se encarregará de executá-los para você.
+
+No próximo post vou apresentar alguns padrões e práticas de refactoring utilizados para possibilitar escrever testes que dependem de classes legadas do projeto.
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-11T00:00:00-02:00" pubdate data-updated="true">Feb 11<span>th</span>, 2009</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quick-tips/'>quick tips</a>, <a class='category' href='/blog/categories/real-world/'>real world</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/2009/02/tpw-testando-sistemas-legados-automatizando-build/" data-via="1up4dev" data-counturl="http://1up4developers.github.io/2009/02/tpw-testando-sistemas-legados-automatizando-build/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2009/01/tpw-dicas-para-a-qualidade-do-software/" title="Previous Post: TPW - Dicas para a qualidade do Software">&laquo; TPW - Dicas para a qualidade do Software</a>
+      
+      
+        <a class="basic-alignment right" href="/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/" title="Next Post: TPW - Testando sistemas legados: manipulando dependências">TPW - Testando sistemas legados: manipulando dependências &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 1up4developers authors -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = '1up4developers';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Teste de integração com Rspec 1.x e Capybara na sua app Rails - 1up4developers</title>
+  <meta name="author" content="1up4developers authors">
+
+  
+  <meta name="description" content="Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4developers.github.io/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="1up4developers" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">1up4developers</a></h1>
+  
+    <h2>Nadando contra o Waterfall. tail -f /mind/realworld >> /blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4developers.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Teste De Integração Com Rspec 1.x E Capybara Na Sua App Rails</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-09T00:00:00-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content">Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra quem já conhece <a title="Rspec home" href="http://rspec.info/">rspec</a> e <a title="capybara" href="http://github.com/jnicklas/capybara">capybara</a>.
+
+A documentação do Capybara é boa, mas deixa a desejar nas instruções de como integrá-lo somente com rspec. Com a ajuda do <a href="http://blog.georgeguimaraes.com/">George Guimarães</a> da <a href="http://blog.plataformatec.com.br/">Plataforma</a>, cheguei num passo a passo mega simples.
+
+No <em>config/environments/test.rb</em> declare:
+<pre lang="ruby">config.gem "rspec",            :version =&gt; "= 1.3.0", :lib =&gt; false
+config.gem "rspec-rails",      :version =&gt; "= 1.3.2", :lib =&gt; false
+config.gem "capybara",         :version =&gt; "= 0.3.9", :lib =&gt; false</pre>
+No <em>spec/spec_helper.rb</em> coloque:
+<pre lang="ruby">require 'capybara/rails'
+[...]
+Spec::Runner.configure do |config|
+
+  [...]
+  config.include(Capybara, :type =&gt; :integration)
+
+end</pre>
+Pronto! Isto é o suficiente para utilizar o Capybara nos testes de integração.
+Para finalizar, você pode montar um teste simples de validação. Por exemplo:
+
+Crie <em>spec/integration/site_spec.rb</em> e coloque:
+<pre lang="ruby">require 'spec_helper'
+
+describe "Site sample" do
+
+  context "root" do
+
+    before do
+      visit root_url
+      save_and_open_page
+    end
+
+    it "should have Hello" do
+      page.should have_content("Hello")
+    end
+
+  end
+
+end</pre>
+Para executar somente os testes de integração:
+<pre>rake spec:integration</pre>
+<h2>have_content e um hot tip que pode te salvar muitas horas !</h2>
+Caso aconteça o erro:
+<pre>undefined method `have_content' for #&lt;ActionController::Integration::Session:0xb618ad10&gt;</pre>
+Graças a esta mensagem <a href="http://groups.google.com/group/ruby-capybara/browse_thread/thread/28467e031beb7ba1/19a368c21a278eb8?lnk=gst&amp;q=have_content#19a368c21a278eb8">Can&#8217;t make matchers work with cucumber and rails 2.3.2</a>, descobri que o <em>have_content</em> não funciona com o rails 2.3.2, eu resolvi o problema fazendo um upgrade para a última versão do rails. #ficaadica
+
+Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">1up4developers authors</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-08-09T00:00:00-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/quick-tips/'>quick tips</a>, <a class='category' href='/blog/categories/rails/'>rails</a>, <a class='category' href='/blog/categories/web/'>web</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://1up4developers.github.io/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/" data-via="1up4dev" data-counturl="http://1up4developers.github.io/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2010/07/a-extincao-do-programador-senior/" title="Previous Post: A extinção do programador sênior">&laquo; A extinção do programador sênior</a>
+      
+      
+        <a class="basic-alignment right" href="/2011/01/usando-bundler-com-rails-2-3/" title="Next Post: Usando Bundler com Rails 2.3">Usando Bundler com Rails 2.3 &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby Com C - Só Um Aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 1up4developers authors -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = '1up4developers';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

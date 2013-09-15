@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: sitefique.me | My Octopress Blog]]></title>
+  <title><![CDATA[Category: sitefique.me | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/sitefique-dot-me/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Pesquisa de pré-lançamento do Sitefique.me]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/03/21/pesquisa-de-pre-lancamento-do-sitefique-me/"/>
+    <link href="http://1up4developers.github.io/2011/03/pesquisa-de-pre-lancamento-do-sitefique-me/"/>
     <updated>2011-03-21T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/03/21/pesquisa-de-pre-lancamento-do-sitefique-me</id>
+    <id>http://1up4developers.github.io/2011/03/pesquisa-de-pre-lancamento-do-sitefique-me</id>
     <content type="html"><![CDATA[<p>Pessoal, hoje estamos lançando a <a href="http://sitefique.me/pesquisa" target="_blank">pesquisa de intenção</a> do nosso próximo produto: <a href="http://sitefique.me/" target="_blank">Sitefique.me</a>, uma ferramenta online para <strong>criação de sites</strong> focado na <strong>simplicidade</strong>.</p>
 
 <h2>Sobre o produto</h2>

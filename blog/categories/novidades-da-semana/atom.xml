@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: novidades da semana | My Octopress Blog]]></title>
+  <title><![CDATA[Category: novidades da semana | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/novidades-da-semana/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/04/01/novos-rumos/"/>
+    <link href="http://1up4developers.github.io/2013/04/novos-rumos/"/>
     <updated>2013-04-01T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/04/01/novos-rumos</id>
+    <id>http://1up4developers.github.io/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
 <p>Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável.</p>
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[CoffeeScript quem?]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/04/14/coffescript-what/"/>
+    <link href="http://1up4developers.github.io/2011/04/coffescript-what/"/>
     <updated>2011-04-14T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/04/14/coffescript-what</id>
+    <id>http://1up4developers.github.io/2011/04/coffescript-what</id>
     <content type="html"><![CDATA[<p>Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão.</p>
 
 <p>Aproveitando a barulheira, que é comum a cada vez que o criador da plataforma abre a boca, vamos nos ater ao que é importante e apresentar uma introdução ao resumo simplificado do CoffeeScript básico.</p>
@@ -120,9 +120,9 @@ fill = function(container, liquid) {
   
   <entry>
     <title type="html"><![CDATA[jQuery DataTables, GitHub API e links da semana]]></title>
-    <link href="http://1up4developers.github.io/blog/2009/05/04/jquery-datatables-github-apilinks-semana/"/>
+    <link href="http://1up4developers.github.io/2009/05/jquery-datatables-github-apilinks-semana/"/>
     <updated>2009-05-04T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2009/05/04/jquery-datatables-github-apilinks-semana</id>
+    <id>http://1up4developers.github.io/2009/05/jquery-datatables-github-apilinks-semana</id>
     <content type="html"><![CDATA[<h2><a href="http://www.datatables.net/" target="_blank">jQuery DataTables</a></h2>
 
 
@@ -159,9 +159,9 @@ fill = function(container, liquid) {
   
   <entry>
     <title type="html"><![CDATA[Guia de Ruby do Why e Autospec-notification]]></title>
-    <link href="http://1up4developers.github.io/blog/2009/04/27/guia-de-ruby-do-why-autospec-autotest-notification/"/>
+    <link href="http://1up4developers.github.io/2009/04/guia-de-ruby-do-why-autospec-autotest-notification/"/>
     <updated>2009-04-27T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2009/04/27/guia-de-ruby-do-why-autospec-autotest-notification</id>
+    <id>http://1up4developers.github.io/2009/04/guia-de-ruby-do-why-autospec-autotest-notification</id>
     <content type="html"><![CDATA[<h2>O comovente guia de Ruby do Why</h2>
 
 
@@ -211,9 +211,9 @@ fill = function(container, liquid) {
   
   <entry>
     <title type="html"><![CDATA[Remarkable, jqGrid no Rails, Heroku e Github issues]]></title>
-    <link href="http://1up4developers.github.io/blog/2009/04/20/remarkable-jqgrid-no-rails-heroku-e-github-issues/"/>
+    <link href="http://1up4developers.github.io/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues/"/>
     <updated>2009-04-20T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2009/04/20/remarkable-jqgrid-no-rails-heroku-e-github-issues</id>
+    <id>http://1up4developers.github.io/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues</id>
     <content type="html"><![CDATA[<p>Este é o primeiro post que publicaremos semanalmente reunindo novidades sobre desenvolvimento, artigos, notícias e temas variados sobre Rails.</p>
 
 <h2><a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/" target="_blank">Remarkable 3.0</a></h2>

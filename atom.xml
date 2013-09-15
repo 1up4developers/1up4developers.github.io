@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
+  <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4developers.github.io/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/08/22/introducao-a-linux-control-groups-cgroups/"/>
+    <link href="http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups/"/>
     <updated>2013-08-22T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/08/22/introducao-a-linux-control-groups-cgroups</id>
+    <id>http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups</id>
     <content type="html"><![CDATA[Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.
 
 Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &#8221;<em>onda do verão</em>&#8221; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &#8220;wave&#8221;.
@@ -95,9 +95,9 @@ Divirtam-se !
   
   <entry>
     <title type="html"><![CDATA[Extendendo Ruby com C - Só um aperitivo]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo/"/>
+    <link href="http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
     <updated>2013-08-19T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/08/19/extendendo-ruby-com-c-so-um-aperitivo</id>
+    <id>http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
     <content type="html"><![CDATA[Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.
 
 Vamos criar uma extensão que retorna uma simples String.
@@ -167,9 +167,9 @@ YEAH YEAH !!
   
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/07/14/entendendo-lisp-finalmente/"/>
+    <link href="http://1up4developers.github.io/2013/07/entendendo-lisp-finalmente/"/>
     <updated>2013-07-14T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/07/14/entendendo-lisp-finalmente</id>
+    <id>http://1up4developers.github.io/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 
 Ao olhar um código LISP pela primeira vez, você se assusta.
@@ -293,9 +293,9 @@ Qualquer código em qualquer dialeto LISP, mesmo com suas características parti
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/"/>
+    <link href="http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
     <updated>2013-06-27T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste</id>
+    <id>http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &#8220;template&#8221; em shell script para testar uma API Server.
 
 Dependências:
@@ -321,9 +321,9 @@ Aguardo dicas, sugestões, experiências etc.
   
   <entry>
     <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/05/06/a-melhor-linguagem-de-programacao/"/>
+    <link href="http://1up4developers.github.io/2013/05/a-melhor-linguagem-de-programacao/"/>
     <updated>2013-05-06T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/05/06/a-melhor-linguagem-de-programacao</id>
+    <id>http://1up4developers.github.io/2013/05/a-melhor-linguagem-de-programacao</id>
     <content type="html"><![CDATA[Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.
 
 Atualmente ele está trabalhando em um projeto para Web e comentou que está dando preferência a uma ferramenta proprietária que eu particularmente não gosto.
@@ -350,9 +350,9 @@ P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguag
   
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/04/11/o-que-eu-aprendi-escrevendo/"/>
+    <link href="http://1up4developers.github.io/2013/04/o-que-eu-aprendi-escrevendo/"/>
     <updated>2013-04-11T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/04/11/o-que-eu-aprendi-escrevendo</id>
+    <id>http://1up4developers.github.io/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.
 
 Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.
@@ -415,9 +415,9 @@ Abraço
   
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/04/01/novos-rumos/"/>
+    <link href="http://1up4developers.github.io/2013/04/novos-rumos/"/>
     <updated>2013-04-01T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/04/01/novos-rumos</id>
+    <id>http://1up4developers.github.io/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado. 
 
 Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável. 
@@ -428,9 +428,9 @@ Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que
   
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/03/20/pair-programming-remoto-com-screen-e-vim/"/>
+    <link href="http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
     <updated>2013-03-20T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/03/20/pair-programming-remoto-com-screen-e-vim</id>
+    <id>http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.
 
 Empresas de TI bem sucedidas como <a title="37signals" href="http://37signals.com/" target="_blank">37signals</a> e <a title="Github" href="https://github.com/" target="_blank">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.
@@ -509,9 +509,9 @@ Dúvidas, críticas ou sugestões nos comentários. Sucesso!
   
   <entry>
     <title type="html"><![CDATA[O ano em que eu tirei a bunda da cadeira]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/03/18/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
+    <link href="http://1up4developers.github.io/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
     <updated>2013-03-18T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/03/18/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
+    <id>http://1up4developers.github.io/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
     <content type="html"><![CDATA[<strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em>
 
 De alguns anos para cá, passei a escrever uma pequena lista de metas para o ano seguinte e percebi que o simples fato de haver uma lista já era o suficiente para que eu não perdesse totalmente o foco.
@@ -546,9 +546,9 @@ Que mais realizações venham em 2013, e que os frutos do que plantei continuem 
   
   <entry>
     <title type="html"><![CDATA[Programação funcional com JavaScript]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/02/21/programacao-funcional-com-javascript/"/>
+    <link href="http://1up4developers.github.io/2013/02/programacao-funcional-com-javascript/"/>
     <updated>2013-02-21T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/02/21/programacao-funcional-com-javascript</id>
+    <id>http://1up4developers.github.io/2013/02/programacao-funcional-com-javascript</id>
     <content type="html"><![CDATA[<blockquote>&#8220;JavaScript is LISP in C&#8217;s clothing&#8221; - Douglas Crockford</blockquote>
 <h2>O que é programação funcional</h2>
 Programação funcional é, assim como a orientação a objetos, uma forma de se pensar em como resolver problemas.
@@ -722,9 +722,9 @@ Este artigo foi publicado também no iMasters, no endereço <a href="http://imas
   
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/01/23/http-monkey/"/>
+    <link href="http://1up4developers.github.io/2013/01/http-monkey/"/>
     <updated>2013-01-23T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/01/23/http-monkey</id>
+    <id>http://1up4developers.github.io/2013/01/http-monkey</id>
     <content type="html"><![CDATA[O <a rel="nofollow" href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em>
 
 Pontos positivos:
@@ -758,9 +758,9 @@ Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor 
   
   <entry>
     <title type="html"><![CDATA[Nos idos de 2012, UML, Design e Waterfall]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/01/04/nos-idos-de-2012-uml-design-e-waterfall/"/>
+    <link href="http://1up4developers.github.io/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
     <updated>2013-01-04T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/01/04/nos-idos-de-2012-uml-design-e-waterfall</id>
+    <id>http://1up4developers.github.io/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
     <content type="html"><![CDATA[Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
 Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&#8230; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.
 
@@ -775,9 +775,9 @@ A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento 
   
   <entry>
     <title type="html"><![CDATA[Rails 4 - Novidades]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/11/29/rails-4-novidades/"/>
+    <link href="http://1up4developers.github.io/2012/11/rails-4-novidades/"/>
     <updated>2012-11-29T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/11/29/rails-4-novidades</id>
+    <id>http://1up4developers.github.io/2012/11/rails-4-novidades</id>
     <content type="html"><![CDATA[O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a title="DHH commiting Rails in 4.0.0.beta" href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a title="Ruby on Rails Guides - Rails 4" href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.
 
 Segue um resumão:
@@ -799,9 +799,9 @@ Sucesso!
   
   <entry>
     <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/11/28/minionserver-a-real-server-to-mock-servers/"/>
+    <link href="http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers/"/>
     <updated>2012-11-28T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/11/28/minionserver-a-real-server-to-mock-servers</id>
+    <id>http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:
 <pre><code>require 'minion_server'
 
@@ -831,9 +831,9 @@ Hope that helps!
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Migrando sua app Rails do MySQL para PostgreSQL sem dor]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/08/29/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/"/>
+    <link href="http://1up4developers.github.io/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/"/>
     <updated>2012-08-29T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/08/29/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor</id>
+    <id>http://1up4developers.github.io/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor</id>
     <content type="html"><![CDATA[<h2>Motivação</h2>
 Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/" target="_blank">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.
 
@@ -929,9 +929,9 @@ Caso tenha alguma dúvida ou sugestão, deixe seu comentário.
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Nginx: redirect de domínio com www para domínio sem www e vice-versa]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/07/05/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/"/>
+    <link href="http://1up4developers.github.io/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/"/>
     <updated>2012-07-05T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/07/05/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa</id>
+    <id>http://1up4developers.github.io/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa</id>
     <content type="html"><![CDATA[Simples, basta usar o <a title="Nginx HttpRewriteModule" href="http://wiki.nginx.org/HttpRewriteModule" target="_blank">HttpRewriteModule</a>.
 
 Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:
@@ -960,9 +960,9 @@ server {
   
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/06/25/concepcao-do-rologames/"/>
+    <link href="http://1up4developers.github.io/2012/06/concepcao-do-rologames/"/>
     <updated>2012-06-25T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/06/25/concepcao-do-rologames</id>
+    <id>http://1up4developers.github.io/2012/06/concepcao-do-rologames</id>
     <content type="html"><![CDATA[Este post é um tópico da <a title="A experiência de lançar o RoloGames" href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.
 <h2>Quando surgiu a idéia</h2>
 Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam poucas opções e normalmente as trocas eram feitas via fórum (UOL Jogos, por exemplo). Na época minha filha tinha acabado de nascer, eu estava num emprego novo e acabei congelando a idéia. Recentemente surgiram alguns sites de trocas, tentei usar mas não gostei, pois eram muito &#8220;abertos&#8221; e mais aborrecia do que gerava oportunidade real. Sofrendo com isso que o Panachi e eu bolamos o <a title="Site social para trocar seus jogos!" href="http://rologames.com.br">RoloGames</a>, onde a troca deve ser sempre 1 por 1 e o site só te avisa se o <em>match </em>for exato.
@@ -989,9 +989,9 @@ Sem perder mais tempo, partimos para o código! E foi então que começamos a tr
   
   <entry>
     <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/06/20/a-experiencia-de-lancar-o-rologames/"/>
+    <link href="http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames/"/>
     <updated>2012-06-20T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/06/20/a-experiencia-de-lancar-o-rologames</id>
+    <id>http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames</id>
     <content type="html"><![CDATA[Nesta segunda-feira lançamos o <a title="Rolo Games - Rede Social de troca de jogos" href="http://rologames.com.br/">RoloGames</a>.
 <p style="text-align: center;"><a href="http://rologames.com.br"><img class="aligncenter size-full wp-image-1174" title="Rolo Games - Rede Social de Troca de Jogos" src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" width="600" height="120" /></a></p>
 Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.
@@ -1019,9 +1019,9 @@ Espero que o post te ajude de alguma maneira e te motive também, afinal até ho
   
   <entry>
     <title type="html"><![CDATA[Vagrant, virtualizando o ambiente de trabalho]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/06/01/vagrant-virtualizando-o-ambiente-de-trabalho/"/>
+    <link href="http://1up4developers.github.io/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/"/>
     <updated>2012-06-01T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/06/01/vagrant-virtualizando-o-ambiente-de-trabalho</id>
+    <id>http://1up4developers.github.io/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho</id>
     <content type="html"><![CDATA[<a title="Vagrant, virtualized development made easy" href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.
 <h2>Prós e Contra<del>s</del></h2>
 Vários pontos se destacam no uso do Vagrant:
@@ -1070,9 +1070,9 @@ A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas 
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Habilitando auth_basic no Nginx e como gerar senhas do htpasswd]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/03/20/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/"/>
+    <link href="http://1up4developers.github.io/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/"/>
     <updated>2012-03-20T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/03/20/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd</id>
+    <id>http://1up4developers.github.io/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd</id>
     <content type="html"><![CDATA[Dica para quem usa o <a href="http://wiki.nginx.org/Main" target="_blank">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule" target="_blank">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.
 
 Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:

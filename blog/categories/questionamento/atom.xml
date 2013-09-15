@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: questionamento | My Octopress Blog]]></title>
+  <title><![CDATA[Category: questionamento | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/questionamento/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/05/06/a-melhor-linguagem-de-programacao/"/>
+    <link href="http://1up4developers.github.io/2013/05/a-melhor-linguagem-de-programacao/"/>
     <updated>2013-05-06T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/05/06/a-melhor-linguagem-de-programacao</id>
+    <id>http://1up4developers.github.io/2013/05/a-melhor-linguagem-de-programacao</id>
     <content type="html"><![CDATA[<p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
 
 <p>Atualmente ele está trabalhando em um projeto para Web e comentou que está dando preferência a uma ferramenta proprietária que eu particularmente não gosto.</p>
@@ -44,9 +44,9 @@
   
   <entry>
     <title type="html"><![CDATA['(enlightenment)]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/07/20/enlightenment/"/>
+    <link href="http://1up4developers.github.io/2011/07/enlightenment/"/>
     <updated>2011-07-20T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/07/20/enlightenment</id>
+    <id>http://1up4developers.github.io/2011/07/enlightenment</id>
     <content type="html"><![CDATA[<p style="text-align: justify;">Sentado num quarto de hotel, longe de casa, com a televisão passando imagens sem som, uma tela de computador cheia de parênteses na minha frente, sentindo uma imensa felicidade por ganhar a vida fazendo aquilo que escolhi, e principalmente, por (re)descobrir o quão divertido e empolgante pode ser esse caminho.</p>
 
 
@@ -69,9 +69,9 @@
   
   <entry>
     <title type="html"><![CDATA[TPW: e-mails vs reuniões]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/06/13/tpw-e-mails-vs-reunioes/"/>
+    <link href="http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes/"/>
     <updated>2011-06-13T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/06/13/tpw-e-mails-vs-reunioes</id>
+    <id>http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes</id>
     <content type="html"><![CDATA[<p>A cilada típica em ambientes corporativos:</p>
 
 <p><img class="aligncenter" title="Ciclo corporativo" src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" width="558" height="551" /></p>
@@ -122,9 +122,9 @@
   
   <entry>
     <title type="html"><![CDATA[Don't be a hero]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/04/27/dont-be-a-hero/"/>
+    <link href="http://1up4developers.github.io/2011/04/dont-be-a-hero/"/>
     <updated>2011-04-27T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/04/27/dont-be-a-hero</id>
+    <id>http://1up4developers.github.io/2011/04/dont-be-a-hero</id>
     <content type="html"><![CDATA[<p>Um amigo escreveu isso há algum tempo e tive a oportunidade de reler hoje.</p>
 
 <blockquote>Sometimes things go wrong: hardware is not acting as expected, the API you rely on is not reliable, some vital information is missing. But you don’t care, as you are a hero, a tough Charles Bronson-like guy that will accomplish the mission no matter what.
@@ -145,9 +145,9 @@ So, next time you find yourself in this kind of situation, take a deep breath an
   
   <entry>
     <title type="html"><![CDATA[Comunicação é tudo e mais um pouco]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/04/12/comunicacao-e-tudo-e-mais-um-pouco/"/>
+    <link href="http://1up4developers.github.io/2011/04/comunicacao-e-tudo-e-mais-um-pouco/"/>
     <updated>2011-04-12T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/04/12/comunicacao-e-tudo-e-mais-um-pouco</id>
+    <id>http://1up4developers.github.io/2011/04/comunicacao-e-tudo-e-mais-um-pouco</id>
     <content type="html"><![CDATA[<p>Imagine que você receba a seguinte especificação:</p>
 
 <blockquote>Pegue uma folha de papel A4. Sob a mesa, dobre-a ao meio. Coloque a folha dobrada sobre a mesa.</blockquote>

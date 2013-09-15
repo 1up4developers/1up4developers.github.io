@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: resenhas | My Octopress Blog]]></title>
+  <title><![CDATA[Category: resenhas | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/resenhas/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Resenha do livro Crafting Rails Applications]]></title>
-    <link href="http://1up4developers.github.io/blog/2011/02/02/resenha-do-livro-crafting-rails-applications/"/>
+    <link href="http://1up4developers.github.io/2011/02/resenha-do-livro-crafting-rails-applications/"/>
     <updated>2011-02-02T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2011/02/02/resenha-do-livro-crafting-rails-applications</id>
+    <id>http://1up4developers.github.io/2011/02/resenha-do-livro-crafting-rails-applications</id>
     <content type="html"><![CDATA[<p>No final do ano passado, ao ver um <a href="http://twitter.com/josevalim/status/12537904249176064">twitty do José Valim</a>, fiquei tentando a comprar o livro, mas depois do post <a href="http://blog.plataformatec.com.br/2010/12/crafting-rails-applications-why-i-wrote-this-book/">Crafting Rails Applications: Why I wrote this book</a>, tive certeza que não perderia este presente de Natal.</p>
 
 <p>[caption id=&ldquo;attachment_847&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;190&rdquo; caption=&ldquo;Crafting Rails Applications: Expert Practices for Everyday Rails Development&rdquo;]<a href="http://pragprog.com/titles/jvrails/crafting-rails-applications"><img class="size-full wp-image-847" title="Crafting Rails Applications: Expert Practices for Everyday Rails Development" src="http://1up4dev.org/wp-content/uploads/2011/02/jvrails.jpg" alt="Crafting Rails Applications: Expert Practices for Everyday Rails Development" width="190" height="228" /></a>[/caption]</p>
@@ -48,9 +48,9 @@
   
   <entry>
     <title type="html"><![CDATA[Os guardiões da cascata]]></title>
-    <link href="http://1up4developers.github.io/blog/2008/11/04/os-guardioes-da-cascata/"/>
+    <link href="http://1up4developers.github.io/2008/11/os-guardioes-da-cascata/"/>
     <updated>2008-11-04T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2008/11/04/os-guardioes-da-cascata</id>
+    <id>http://1up4developers.github.io/2008/11/os-guardioes-da-cascata</id>
     <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da <span style="text-decoration: line-through;">maldita</span> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata" target="_blank">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/" target="_blank">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process" target="_blank">RUP</a>. Mas infelizmente a maioria dos profissionais de TI <span style="text-decoration: line-through;">precisam</span> são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/" target="_blank">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG" target="_blank">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/" target="_blank">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/" target="_blank">área</a>.</p>
 
 <p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm" target="_blank">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua <span style="text-decoration: line-through;">necessidade</span> execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo" target="_blank">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, &lt;sarcasmo&gt; a &ldquo;equipe&rdquo; atinge seu objetivo: o software! &lt;/sarcasmo&gt; Seguem alguns exemplos desses guardiões cascateiros:</p>
@@ -79,9 +79,9 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
   
   <entry>
     <title type="html"><![CDATA[Resenha do livro Pragmatic Unit Testing]]></title>
-    <link href="http://1up4developers.github.io/blog/2008/06/26/resenha-do-livro-pragmatic-unit-testing/"/>
+    <link href="http://1up4developers.github.io/2008/06/resenha-do-livro-pragmatic-unit-testing/"/>
     <updated>2008-06-26T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2008/06/26/resenha-do-livro-pragmatic-unit-testing</id>
+    <id>http://1up4developers.github.io/2008/06/resenha-do-livro-pragmatic-unit-testing</id>
     <content type="html"><![CDATA[<p>Olá a todos !</p>
 
 <p>Sei que estão estranhando &hellip; perceberam que não tem Waterfall no título ? Pois bem, hoje não vou chorar e digo mais, vou até fingir que não vivo num <em>Waterfall</em> e vou falar sobre TESTES ! Tá bom, sei que enfatizei demais, só vou fazer uma resenha sobre este último livro que li mesmo.</p>
@@ -104,9 +104,9 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
   
   <entry>
     <title type="html"><![CDATA[The Pragmatic Programmer, no ambiente Waterfall é claro !]]></title>
-    <link href="http://1up4developers.github.io/blog/2008/05/26/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/"/>
+    <link href="http://1up4developers.github.io/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/"/>
     <updated>2008-05-26T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2008/05/26/the-pragmatic-programmer-no-ambiente-waterfall-e-claro</id>
+    <id>http://1up4developers.github.io/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro</id>
     <content type="html"><![CDATA[<p><a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X"><img style="float:left;cursor:pointer;margin:0 10px 10px 0;" src="http://bp1.blogger.com/_XL8FQmVF9qY/SDqv0OnB-jI/AAAAAAAAAF4/DLYKHqhh_2Y/s320/pragmatic-programer-book.jpeg" border="0" alt="" /></a></p>
 
 <p>Estou lendo o consagrado <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer</a>, o livro é ótimo e faz com que eu tenha certeza que sou um sadomasoquista -calma, eu vou explicar-. Da sua capacidade técnica eu nunca desconfiei, pois sempre é citado nas lista de &ldquo;top hits&rdquo; de pessoal muito bom como o <a href="http://gc.blog.br/2008/03/27/10-livros-recomendados-para-desenvolvedores/">Guilherme Chapiewski</a> e <a href="http://blog.fragmental.com.br/2008/05/20/trilha-de-livros-desenvolvedor/trackback/">Phillip Calçado</a>.

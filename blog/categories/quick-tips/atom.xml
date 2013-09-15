@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: quick tips | My Octopress Blog]]></title>
+  <title><![CDATA[Category: quick tips | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/quick-tips/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/07/14/entendendo-lisp-finalmente/"/>
+    <link href="http://1up4developers.github.io/2013/07/entendendo-lisp-finalmente/"/>
     <updated>2013-07-14T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/07/14/entendendo-lisp-finalmente</id>
+    <id>http://1up4developers.github.io/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 
 
@@ -159,9 +159,9 @@ y = (+ 1 (* 3 2))</pre>
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste/"/>
+    <link href="http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
     <updated>2013-06-27T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/06/27/quicktips-usando-shell-script-como-suite-de-teste</id>
+    <id>http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
 <p>Dependências:</p>
@@ -191,9 +191,9 @@ y = (+ 1 (* 3 2))</pre>
   
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/04/11/o-que-eu-aprendi-escrevendo/"/>
+    <link href="http://1up4developers.github.io/2013/04/o-que-eu-aprendi-escrevendo/"/>
     <updated>2013-04-11T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/04/11/o-que-eu-aprendi-escrevendo</id>
+    <id>http://1up4developers.github.io/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
 <p>Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.</p>
@@ -263,9 +263,9 @@ y = (+ 1 (* 3 2))</pre>
   
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/03/20/pair-programming-remoto-com-screen-e-vim/"/>
+    <link href="http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
     <updated>2013-03-20T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/03/20/pair-programming-remoto-com-screen-e-vim</id>
+    <id>http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
 <p>Empresas de TI bem sucedidas como <a title="37signals" href="http://37signals.com/" target="_blank">37signals</a> e <a title="Github" href="https://github.com/" target="_blank">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
@@ -378,9 +378,9 @@ Feche um split com Ctrl-a + X</p>
   
   <entry>
     <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
-    <link href="http://1up4developers.github.io/blog/2012/11/28/minionserver-a-real-server-to-mock-servers/"/>
+    <link href="http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers/"/>
     <updated>2012-11-28T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2012/11/28/minionserver-a-real-server-to-mock-servers</id>
+    <id>http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
 <pre><code>require 'minion_server'

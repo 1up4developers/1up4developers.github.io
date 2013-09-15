@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: eventos | My Octopress Blog]]></title>
+  <title><![CDATA[Category: eventos | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/eventos/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T18:08:39-03:00</updated>
+  <updated>2013-09-15T18:25:03-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[1up4developers authors]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[O ano em que eu tirei a bunda da cadeira]]></title>
-    <link href="http://1up4developers.github.io/blog/2013/03/18/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
+    <link href="http://1up4developers.github.io/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
     <updated>2013-03-18T00:00:00-03:00</updated>
-    <id>http://1up4developers.github.io/blog/2013/03/18/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
+    <id>http://1up4developers.github.io/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
     <content type="html"><![CDATA[<p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
 
 <p>De alguns anos para cá, passei a escrever uma pequena lista de metas para o ano seguinte e percebi que o simples fato de haver uma lista já era o suficiente para que eu não perdesse totalmente o foco.</p>
@@ -52,9 +52,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails Summit 2009]]></title>
-    <link href="http://1up4developers.github.io/blog/2009/10/23/rails-summit-2009/"/>
+    <link href="http://1up4developers.github.io/2009/10/rails-summit-2009/"/>
     <updated>2009-10-23T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2009/10/23/rails-summit-2009</id>
+    <id>http://1up4developers.github.io/2009/10/rails-summit-2009</id>
     <content type="html"><![CDATA[<p>Estamos de volta depois de algumas semanas de correria e muito trabalho, o que nos impediu de postar sobre vários assuntos atuais e experiências recentes. Também migramos de empresa. Agora o <a href="http://1up4dev.org/author/rogerbarreto/">Roger</a> e eu estamos trabalhando em uma empresa maior, focada em conteúdo digital, desenvolvendo aplicações de grande porte com Ruby e Rails :)</p>
 
 <h1>O evento</h1>
@@ -120,9 +120,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails Summit Happy hour!!]]></title>
-    <link href="http://1up4developers.github.io/blog/2008/11/17/rails-summit-happy-hour/"/>
+    <link href="http://1up4developers.github.io/2008/11/rails-summit-happy-hour/"/>
     <updated>2008-11-17T00:00:00-02:00</updated>
-    <id>http://1up4developers.github.io/blog/2008/11/17/rails-summit-happy-hour</id>
+    <id>http://1up4developers.github.io/2008/11/rails-summit-happy-hour</id>
     <content type="html"><![CDATA[<p>Bom pessoal, já faz um tempo que não escrevo, isso se deve um pouco pela falta de tempo, mas muito pela falta de vergonha na cara! Sempre tenho idéias, mas pouca atitude. Como muitos sabem, em outubro passado o 1up4dev esteve representado no Rails Summit Latin America por mim, pelo Roger Leite e pelo André Farina. Muita coisa aconteceu naquele evento, e isso com certeza ficou evidente em muitos posts por aí (post do <a href="http://blog.shadowmaru.org/2008/10/17/rails-summit-a-experiencia-pessoal" target="_blank">shadow</a>, <a href="http://akitaonrails.com/2008/11/12/rails-summit-blogosfera" target="_blank">akitaonrails</a> e muitos outros). As palestras simplesmente foram inspiradoras, enriquecedoras e com certeza mudaram a cabeça de muita gente, não tem como não se empolgar ao ver caras como Chad Fowler e Obie Fernandez falando! Os caras arrasaram em todos os sentidos. O fato de poder entrar em contato com figuras da comunidade que muitas vezes você só acompanha via GitHub, e melhor, poder trocar uma idéia com essa galera é muito legal.</p>
 
 <p>Com certeza todos ficaram com um gostinho de quero mais, e com uma imensa vontade de agradecer ao Fábio Akita e todos aqueles que tornaram este evento possível. Mas uma coisa que não vi ser muito falada foi o happy hour que aconteceu ao final do último dia. Você consegue imaginar como seria poder tomar uma breja com o cara que escreveu um de seus livros preferidos?! Ou o cara que mantém aquele blog que te inspirou a aprender ruby/rails? Melhor ainda. Imagine poder passar um momento falando besteiras e dando muita risada com esses caras?! Bom, eu passei por isso!! E até agora a ficha parece não ter caído, não consigo acreditar que passei por isso.</p>
