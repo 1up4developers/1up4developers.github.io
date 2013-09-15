@@ -1,0 +1,19 @@
+---
+author: hbulhoes
+comments: true
+date: 2008-06-03 20:20:33+00:00
+layout: post
+slug: 1up4developers-20
+title: 1up4developers 2.0
+wordpress_id: 32
+categories:
+- hello
+tags:
+- inauguração
+---
+
+Então, nobres colegas e respeitável público, o nosso blog estava meio estranho no Blogger e decidimos mudar para uma plataforma mais funcional, mais gerenciável, mais colaborativa, enfim, uma coisa totalmente mais 2.0 mesmo.
+
+O conteúdo continua composto de puro veneno partindo de mentes furiosas por não terem uma vida agilemente ativa. Aposto que você, leitor, também se encontra nessa situação aviltante, então [assine o novo feed](http://feeds.feedburner.com/1up4dev?format=xml) e participe comentando as nossas observações, frustrações e viagens.
+
+Muito sucesso a todos! Prossigamos...

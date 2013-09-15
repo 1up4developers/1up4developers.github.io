@@ -1,0 +1,37 @@
+---
+author: rodrigopanachi
+comments: true
+date: 2011-01-17 10:00:23+00:00
+layout: post
+slug: voltamos
+title: Voltamos!
+wordpress_id: 734
+categories:
+- real world
+---
+
+Caros leitores, depois de um período, digamos _boring_, estamos de volta e com novidades!
+
+Durante o ano de 2010 estivemos trabalhando muito, por isso a baixa frequencia de posts. Porém tanto trabalho rendeu experiências únicas para todos nós, as quais pretendemos compartilhar com vocês em breve.
+
+
+## Novos rebeldes colaboradores
+
+
+[Rogério Ramos](http://twitter.com/habutre)
+
+Desenvolvedor, entusiasta, sonhador. Acredita que desenvolvedores e usuários devem trabalhar sempre a quatro mãos. Veterano com agile e Scrum, está iniciando sua jornada com com Ruby on Rails.
+
+[Plínio Balduino](http://twitter.com/p_balduino)
+
+Desenvolvedor, baixista musicólatra, test addicted, viciado em leitura, "pragmático, sarcástico, curioso" e pai do Gustavinho. Esperem posts ácidos sobre Scrum e dicas práticas de Rails.
+
+Sejam bem vindos à [guerrilha](http://1up4dev.org/1up-nightmare-team/)!
+
+
+## E não é só isso!
+
+
+Estreiamos o novo tema, mais limpo e distribuído, facilitando a leitura dos códigos inline. O endereço do feed também mudou: atualizem seus leitores para o endereço [http://feeds.feedburner.com/1up4developers](http://feeds.feedburner.com/1up4developers). E quem ainda não assinou, assine _d-já_!
+
+Fiquem a vontade para comentar (ou não). Sucesso!
