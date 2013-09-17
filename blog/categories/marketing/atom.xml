@@ -4,7 +4,7 @@
   <title><![CDATA[Category: marketing | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/marketing/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T22:56:34-03:00</updated>
+  <updated>2013-09-16T22:25:51-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -66,7 +66,7 @@
 
 <h2>Definindo um mantra</h2>
 
-<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="/images/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
 
 <p>Totalmente baseado nas dicas do Sr. Kawasaki em <a href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
 
@@ -101,7 +101,7 @@
     <id>http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames</id>
     <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
-<p><a href="http://rologames.com.br"><img src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
+<p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
 
 <p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
 
@@ -139,7 +139,7 @@
     <id>http://1up4developers.github.io/2009/04/business-bingo-generator</id>
     <content type="html"><![CDATA[<p>Para quem tem algum tempo de internet, é fácil notar como as piadas se repetem, ou melhor, assim como olimpíadas ou copa do mundo, re-aparecem a cada quatro anos por exemplo. Não foi diferente com a piada que recebi (novamente) a pouco tempo, o Business Bingo. O que torna a piada muito divertida é o seu alto teor sarcástico e real, foi quando pensei, porque não imprimir esta cartela e realmente testar! Foi assim que surgiu a idéia de fazer um gerador de cartelas para o Business Bingo! :D</p>
 
-<p><a href="http://1up4dev.org/wp-content/uploads/2009/04/ideia.jpg"><img src="http://1up4dev.org/wp-content/uploads/2009/04/ideia-299x300.jpg" alt="idéia" /></a></p>
+<p><a href="/images/uploads/2009/04/ideia.jpg"><img src="/images/uploads/2009/04/ideia-299x300.jpg" alt="idéia" /></a></p>
 
 <h2><a href="http://business-bingo.heroku.com/">Business Bingo! Generator</a></h2>
 

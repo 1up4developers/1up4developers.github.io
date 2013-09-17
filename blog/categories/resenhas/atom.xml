@@ -4,7 +4,7 @@
   <title><![CDATA[Category: resenhas | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/resenhas/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T22:56:34-03:00</updated>
+  <updated>2013-09-16T22:25:51-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -20,7 +20,7 @@
     <id>http://1up4developers.github.io/2011/02/resenha-do-livro-crafting-rails-applications</id>
     <content type="html"><![CDATA[<p>No final do ano passado, ao ver um <a href="http://twitter.com/josevalim/status/12537904249176064">twitty do José Valim</a>, fiquei tentando a comprar o livro, mas depois do post <a href="http://blog.plataformatec.com.br/2010/12/crafting-rails-applications-why-i-wrote-this-book/">Crafting Rails Applications: Why I wrote this book</a>, tive certeza que não perderia este presente de Natal.</p>
 
-<p>[caption id=&ldquo;attachment_847&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;190&rdquo; caption=&ldquo;Crafting Rails Applications: Expert Practices for Everyday Rails Development&rdquo;]<a href="http://pragprog.com/titles/jvrails/crafting-rails-applications"><img src="http://1up4dev.org/wp-content/uploads/2011/02/jvrails.jpg" alt="Crafting Rails Applications: Expert Practices for Everyday Rails Development" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_847&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;190&rdquo; caption=&ldquo;Crafting Rails Applications: Expert Practices for Everyday Rails Development&rdquo;]<a href="http://pragprog.com/titles/jvrails/crafting-rails-applications"><img src="/images/uploads/2011/02/jvrails.jpg" alt="Crafting Rails Applications: Expert Practices for Everyday Rails Development" /></a>[/caption]</p>
 
 <p>Apesar de poucas páginas, o livro tem muito conteúdo. Logo no começo, em &ldquo;<em>Who should read this book ?</em>&rdquo; é avisado, <strong>não é para iniciantes</strong>. Os capítulos são separados em tópicos interessantes, abordando diferentes maneiras de extender o Rails 3.</p>
 
@@ -84,7 +84,7 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
 
 <p>Sei que estão estranhando &hellip; perceberam que não tem Waterfall no título ? Pois bem, hoje não vou chorar e digo mais, vou até fingir que não vivo num <em>Waterfall</em> e vou falar sobre TESTES ! Tá bom, sei que enfatizei demais, só vou fazer uma resenha sobre este último livro que li mesmo.</p>
 
-<p><a href="http://www.amazon.com/Pragmatic-Unit-Testing-Java-JUnit/dp/0974514012"><img src="http://1up4dev.org/wp-content/uploads/2008/06/pragmatic_unit_testting.jpg?w=240" alt="Pragmatic Unit Testing" /></a></p>
+<p><a href="http://www.amazon.com/Pragmatic-Unit-Testing-Java-JUnit/dp/0974514012"><img src="/images/uploads/2008/06/pragmatic_unit_testting.jpg?w=240" alt="Pragmatic Unit Testing" /></a></p>
 
 <p>Numa leitura leve e até divertida (sou nerd mesmo), os autores abordam conceitos práticos de testes que não estão ligados diretamente ao <a href="http://www.junit.org">JUnit</a>, e sim a &ldquo;Filosofia de Testes&rdquo;. O legal que os principais conceitos são apresentados com acrônimos como &ldquo;Right BICEP&rdquo;, &ldquo;CORRECT Boundary Conditions&rdquo;, &ldquo;A TRIP&rdquo;, MockObjects e etc. Depois da passagem por todos esses acrônimos, os próximos capítulos atacam temas como, onde colocar os testes, design dos testes e etc.</p>
 

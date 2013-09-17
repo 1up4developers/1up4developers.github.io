@@ -4,7 +4,7 @@
   <title><![CDATA[Category: rails | 1up4developers]]></title>
   <link href="http://1up4developers.github.io/blog/categories/rails/atom.xml" rel="self"/>
   <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-15T22:56:34-03:00</updated>
+  <updated>2013-09-16T22:25:51-03:00</updated>
   <id>http://1up4developers.github.io/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -228,7 +228,7 @@ development:
 
 <h2>Definindo um mantra</h2>
 
-<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
+<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="/images/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
 
 <p>Totalmente baseado nas dicas do Sr. Kawasaki em <a href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
 
@@ -263,7 +263,7 @@ development:
     <id>http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames</id>
     <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
-<p><a href="http://rologames.com.br"><img src="http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
+<p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
 
 <p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
 
