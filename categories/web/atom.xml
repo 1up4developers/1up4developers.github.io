@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web | 1up4developers]]></title>
+  <link href="http://1up4developers.github.io/categories/web/atom.xml" rel="self"/>
+  <link href="http://1up4developers.github.io/"/>
+  <updated>2013-09-17T15:55:23-03:00</updated>
+  <id>http://1up4developers.github.io/</id>
+  <author>
+    <name><![CDATA[1up4developers authors]]></name>
+    <email><![CDATA[1up4dev@googlegroups.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
+    <link href="http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups/"/>
+    <updated>2013-08-22T14:32:23-03:00</updated>
+    <id>http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups</id>
+    <content type="html"><![CDATA[<p>Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
+
+<p>Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &ldquo;<em>onda do verão</em>&rdquo; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &ldquo;wave&rdquo;.</p>
+
+<h3>O que são CGroups ?</h3>
+
+<p><strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.</p>
+
+<p>Curioso pra ver como funciona ?</p>
+
+<h3>Situação de Exemplo</h3>
+
+<p>Para este exemplo teremos duas aplicações <em><a href="https://gist.github.com/tonyfabeen/6310137">Sinatra</a></em> e nosso objetivo será dedicar um grupo para cada aplicação limitando o consumo de memória para cada uma elas.</p>
+
+<p>Para rodar o exemplo estarei utilizando um <em>Ubuntu 12.04 64 bits.</em></p>
+
+<h4>Pré-Requisitos</h4>
+
+<p>Antes de mais nada precisamos instalar algumas dependências:</p>
+
+<pre><code>&lt;code&gt;sudo apt-get install cgroup-bin libcgroup1
+&lt;/code&gt;
+</code></pre>
+
+<p>Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong>.</p>
+
+<pre><code>&lt;code&gt;ls -al /sys/fs/cgroup
+
+drwxr-xr-x 7 root root 140 Aug  6 09:38 .
+drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
+drwxr-xr-x 6 root root   0 Aug  6 09:38 cpu
+drwxr-xr-x 6 root root   0 Aug  6 09:38 cpuacct
+drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
+drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
+drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
+
+&lt;/code&gt;
+</code></pre>
+
+<p>CGroups estão organizados por subsistemas conhecidos também como &ldquo;resource controllers&rdquo; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.</p>
+
+<h4>CGConfig Service</h4>
+
+<p>Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :</p>
+
+<pre><code>&lt;code&gt;$ sudo service cgconfig status&lt;/code&gt;
+</code></pre>
+
+<p>Caso não esteja inicie o serviço</p>
+
+<pre><code>&lt;code&gt;$ sudo service cgconfig start&lt;/code&gt;
+</code></pre>
+
+<p>Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf'</strong> ou via linha de comando, que será o meio que iremos utilizar.</p>
+
+<h4>Criando Grupos</h4>
+
+<p>Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.</p>
+
+<pre><code>&lt;code&gt;sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
+sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
+&lt;/code&gt;
+</code></pre>
+
+<p>O argumento <strong>/sinatra</strong>* indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller>/<path></strong></p>
+
+<h3>Executando programas em um Grupo</h3>
+
+<p>Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.</p>
+
+<pre><code>&lt;code&gt;sudo cgexec -g *:/sinatra1 sh -c 'cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D'
+sudo cgexec -g *:/sinatra2 sh -c 'cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D'
+&lt;/code&gt;
+</code></pre>
+
+<p>O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.</p>
+
+<p>Para checar a hierarquia criada:</p>
+
+<pre><code>&lt;code&gt;ps xawf -eo pid,cgroup,args | grep ruby
+ 1476              \_  5:freezer:              \_ grep --color=auto ruby
+ 1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
+ 1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
+&lt;/code&gt;
+</code></pre>
+
+<p>Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.</p>
+
+<pre><code>&lt;code&gt;sudo cgset -r memory.limit_in_bytes='256M' sinatra1
+sudo cgset -r memory.limit_in_bytes='128M' sinatra2
+&lt;/code&gt;
+</code></pre>
+
+<p>Para checar a alteração :</p>
+
+<pre><code>&lt;code&gt;cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
+cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
+&lt;/code&gt;
+</code></pre>
+
+<h3>Conclusão</h3>
+
+<p>O intuito deste artigo foi demonstrar um dos possíveis usos de CGroups. Caso a aplicação <strong>sinatra1</strong> cair por estouro de memória ou alguma outra falha que não seja a destruição da máquina, a aplicação <strong>sinatra2 </strong>continuará funcionando.</p>
+
+<p>Há mais a se explorar, poderíamos inserir limitação de I/O, consumo de banda, entre outras coisas. Poderíamos até criar nossa própria implementação de LXC, mas isso é assunto para um próximo encontro.</p>
+
+<p>Os links abaixo exploram mais detalhes sobre o assunto :</p>
+
+<ul>
+<li><p><a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></p></li>
+<li><p><a href="http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf">http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf</a></p></li>
+</ul>
+
+
+<p>Divirtam-se !</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Extendendo Ruby com C - Só um aperitivo]]></title>
+    <link href="http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
+    <updated>2013-08-19T14:29:56-03:00</updated>
+    <id>http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
+    <content type="html"><![CDATA[<p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
+
+<p>Vamos criar uma extensão que retorna uma simples String.</p>
+
+<p>Primeiramente criamos o diretório onde estará nossa extensão :</p>
+
+<pre><code>  &lt;code&gt;$ mkdir &lt;your_path&gt;/1up4dev&lt;/code&gt;
+</code></pre>
+
+<p>Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &ldquo;<strong>ruby.h&rdquo;</strong></p>
+
+<pre><code>  &lt;code&gt;#include &lt;ruby.h&gt;&lt;/code&gt;
+</code></pre>
+
+<p>Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.</p>
+
+<pre><code>&lt;code&gt;VALUE m1up4dev;&lt;/code&gt;
+</code></pre>
+
+<p>E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:</p>
+
+<pre><code>&lt;code&gt;VALUE cTalker;&lt;/code&gt;
+</code></pre>
+
+<p>Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.</p>
+
+<pre><code>&lt;code&gt;static VALUE say_yeah(VALUE self){
+  const char *sentence= "YEAH YEAH!";
+  return rb_str_new2(sentence);
+}
+
+&lt;/code&gt;
+</code></pre>
+
+<p>Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.</p>
+
+<p>Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &lsquo;<strong>Init_1up4dev</strong>&rsquo;. Por convenção estas funções sempre começam com o prefixo &lsquo;<strong>Init_</strong>&rsquo;.</p>
+
+<pre><code>&lt;code&gt;void Init_1up4dev(){
+  m1up4dev = rb_define_module("1up4dev");
+  cTalker = rb_define_class_under(m1up4dev, "Talker", rb_cObject);
+  rb_define_singleton_method(cTalker, "say_yeah", say_yeah, 0);
+}
+
+&lt;/code&gt;
+</code></pre>
+
+<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como :</p>
+
+<pre><code>&lt;code&gt;module 1up4dev
+end
+
+&lt;/code&gt;
+</code></pre>
+
+<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :</p>
+
+<pre><code>&lt;code&gt;module 1up4dev
+  class Talker
+
+  end
+end
+
+&lt;/code&gt;
+</code></pre>
+
+<p>A função &lsquo;<strong>rb_define_singleton_method</strong>&rsquo; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.</p>
+
+<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo :</p>
+
+<pre><code>&lt;code&gt;
+require 'mkmf'
+create_makefile('1up4dev')
+
+&lt;/code&gt;
+</code></pre>
+
+<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .</p>
+
+<pre><code>&lt;code&gt;$ ruby extconf.rb
+&lt;/code&gt;
+</code></pre>
+
+<p>Compile e instale a extensão :</p>
+
+<pre><code>&lt;code&gt;$ make &amp;&amp; make install
+&lt;/code&gt;
+</code></pre>
+
+<p>Para ver o código funcionando basta digitar o código abaixo em um &lsquo;<strong>irb</strong>&rsquo; ou algo do gênero :</p>
+
+<pre><code>&lt;code&gt;$irb(main):001:0&gt; require '1up4dev'
+true
+$irb(main):002:0&gt; 1up4dev::Talker.say_yeah
+"YEAH YEAH!"
+
+&lt;/code&gt;
+</code></pre>
+
+<p>YEAH YEAH !!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
+    <link href="http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
+    <updated>2013-06-27T09:42:18-03:00</updated>
+    <id>http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
+    <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
+
+<p>Dependências:</p>
+
+<ul>
+<li><p>bash</p></li>
+<li><p>curl</p></li>
+</ul>
+
+
+<p>Foi testado no Ubuntu 13.04.</p>
+
+<p>Obs: Vou embedar <a href="https://gist.github.com/rogerleite/5869576">este gist</a>, e pode ser que não apareça no seu reader ;D.</p>
+
+<p>Obs2: Este post é uma versão pt-br deste post no coderwall <a href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.</p>
+
+<p>Referências:</p>
+
+<p><a href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a></p>
+
+<p>Aguardo dicas, sugestões, experiências etc.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
+    <link href="http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
+    <updated>2013-03-20T11:27:02-03:00</updated>
+    <id>http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim</id>
+    <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
+
+<p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
+
+<p>Usando as ferramentas e práticas certas é possível <a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">trabalhar remotamente</a> e até mesmo <a href="http://en.wikipedia.org/wiki/Pair_programming">parear com outro desenvolvedor</a> à distância.</p>
+
+<h2>Requisitos</h2>
+
+<ul>
+<li><p>ssh</p></li>
+<li><p>screen</p></li>
+<li><p>vim</p></li>
+<li><p>skype</p></li>
+</ul>
+
+
+<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a href="http://www.vim.org/">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
+
+<h2>Instalação</h2>
+
+<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
+
+<pre><code>$ sudo apt-get install screen
+</code></pre>
+
+<p>Em seguida, configure as permissões de execução:</p>
+
+<pre><code>$ chmod u+s /usr/bin/screen
+$ chmod 755 /var/run/screen
+</code></pre>
+
+<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
+
+<pre><code>$ screen -S nomedasessao
+</code></pre>
+
+<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
+
+<pre><code>$ screen -ls
+There is a screen on:
+        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
+1 Socket in /var/run/screen/S-user.
+</code></pre>
+
+<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
+
+<pre><code>$ screen -x nomedasessao
+</code></pre>
+
+<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
+
+<p>Para se desconectar da sessão atual, execute:</p>
+
+<pre><code># screen -d
+[remote detached from 8095.nomedasessao]
+</code></pre>
+
+<h2>Usando o Screen</h2>
+
+<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
+
+<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
+
+<p><strong>Copy mode (scroll)</strong>
+Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
+Navegue pela tela com as setas ou pageup/pagedown;
+Marque o início da seleção do texto com &lt;espaço> e termine com &lt;espaço> para copiar;
+Cole com Ctrl-a + ] (colchete para direita);</p>
+
+<p><strong>Windows</strong>
+Crie uma janela (ou aba) com Ctrl-a + c
+Liste as janelas com Ctrl-a + &ldquo; (aspas)
+Altere para a janela com Ctrl-a <numero de 0-9>
+Feche (ou mate) a janela atual com Ctrl+a k</p>
+
+<p><strong>Split</strong>
+Divida a tela horizontalmente com Ctrl-a + S
+Divida a tela verticalmente com Ctrl-a + V
+Mude de split com Ctrl-a + Tab
+Feche um split com Ctrl-a + X</p>
+
+<p>Para digitar um comando: Ctrl-a + :</p>
+
+<p>Consulte o <a href="http://linux.die.net/man/1/screen">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
+
+<h2>Dicas e considerações</h2>
+
+<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a href="http://linux.die.net/man/1/screen">manual oficial</a>.</p>
+
+<p>Existem outras alternativas como o <a href="http://tmux.sourceforge.net/">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
+
+<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
+
+<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a href="http://www.pomodorotechnique.com/">Pomodoro</a> pode ser uma boa opção.</p>
+
+<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
+
+<h2>Referências</h2>
+
+<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
+</a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
+</a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
+    <link href="http://1up4developers.github.io/2013/01/http-monkey/"/>
+    <updated>2013-01-23T13:29:16-02:00</updated>
+    <id>http://1up4developers.github.io/2013/01/http-monkey</id>
+    <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
+
+<p>Pontos positivos:</p>
+
+<ul>
+<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
+<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
+<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
+</ul>
+
+
+<p>Pontos negativos:</p>
+
+<ul>
+<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
+<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
+<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
+<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
+<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
+</ul>
+
+
+<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
+
+<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
+
+<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
+
+<p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
+]]></content>
+  </entry>
+  
+</feed>

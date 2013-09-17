@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: resenhas | 1up4developers]]></title>
+  <link href="http://1up4developers.github.io/categories/resenhas/atom.xml" rel="self"/>
+  <link href="http://1up4developers.github.io/"/>
+  <updated>2013-09-17T15:55:23-03:00</updated>
+  <id>http://1up4developers.github.io/</id>
+  <author>
+    <name><![CDATA[1up4developers authors]]></name>
+    <email><![CDATA[1up4dev@googlegroups.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Resenha do livro Crafting Rails Applications]]></title>
+    <link href="http://1up4developers.github.io/2011/02/resenha-do-livro-crafting-rails-applications/"/>
+    <updated>2011-02-02T10:05:53-02:00</updated>
+    <id>http://1up4developers.github.io/2011/02/resenha-do-livro-crafting-rails-applications</id>
+    <content type="html"><![CDATA[<p>No final do ano passado, ao ver um <a href="http://twitter.com/josevalim/status/12537904249176064">twitty do José Valim</a>, fiquei tentando a comprar o livro, mas depois do post <a href="http://blog.plataformatec.com.br/2010/12/crafting-rails-applications-why-i-wrote-this-book/">Crafting Rails Applications: Why I wrote this book</a>, tive certeza que não perderia este presente de Natal.</p>
+
+<p>[caption id=&ldquo;attachment_847&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;190&rdquo; caption=&ldquo;Crafting Rails Applications: Expert Practices for Everyday Rails Development&rdquo;]<a href="http://pragprog.com/titles/jvrails/crafting-rails-applications"><img src="/images/uploads/2011/02/jvrails.jpg" alt="Crafting Rails Applications: Expert Practices for Everyday Rails Development" /></a>[/caption]</p>
+
+<p>Apesar de poucas páginas, o livro tem muito conteúdo. Logo no começo, em &ldquo;<em>Who should read this book ?</em>&rdquo; é avisado, <strong>não é para iniciantes</strong>. Os capítulos são separados em tópicos interessantes, abordando diferentes maneiras de extender o Rails 3.</p>
+
+<p>Aliás, extender é a palavra chave do livro. Dos projetos que compõe o Rails, somente o <em>Active Resource</em> não foi citado. O livro com certeza pula o básico, ou seja, não espere por explicações em como usar as funcionalidades do Rails.</p>
+
+<p>&ndash;</p>
+
+<h2>Detalhes que tornam o livro interessante.</h2>
+
+<ul>
+<li><p><a href="https://github.com/josevalim/enginex">Enginex</a> &ndash; é uma Ruby gem que cria um <em>Rails 3 Engine</em> com Rakefile, Gemfile e pronto para rodar testes em cima de uma aplicação &ldquo;vendorizada&rdquo;. Ou seja, no livro temos projetos reais, que são executados e tem testes !</p></li>
+<li><p><a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a> &ndash; todo código apresentado, é feito seguindo o <em>Test-driven Development</em>, mostra-se o teste falhando e vai implementando aos poucos, até tudo ficar verde.</p></li>
+<li><p>Como melhorar o seu código &ndash; conhecendo <em>Responders</em> e o <em>Renderer Stack do Rails 3</em>, você com certeza irá ampliar o seu leque de possibilidades de como melhorar o fonte das suas aplicações. Tem bastante exemplos de <em>Rails Generators</em> também.</p></li>
+<li><p>Desmistificando Rails &ndash; o Valim realmente conseguiu de forma majestosa explicar as entranhas do Rails 3. A cada capítulo e detalhe explicado, pude ver o verdadeiro trampo que fizeram no projeto, em comparação com o 2.x, o Rails mudou muito (internamente!).</p></li>
+</ul>
+
+
+<h2>Finalizando&hellip;</h2>
+
+<p>Se você é um desenvolvedor que se preocupa em conhecer a fundo o framework que trabalha, <strong><a href="http://pragprog.com/titles/jvrails/crafting-rails-applications">compre agora</a></strong>! Confesso que depois da leitura, estou muito mais a vontade para navegar no fontes do Rails, inclusive passei a acompanhar os tickets no <a href="https://rails.lighthouseapp.com/projects/8994-ruby-on-rails/overview">Lighthouse</a>. :D <a href="https://github.com/rails/rails">Rails 3</a> definitivamente está mais flexível, e o José Valim conseguiu expor tudo isso com código e uma leitura agradável.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Os guardiões da cascata]]></title>
+    <link href="http://1up4developers.github.io/2008/11/os-guardioes-da-cascata/"/>
+    <updated>2008-11-04T01:49:11-02:00</updated>
+    <id>http://1up4developers.github.io/2008/11/os-guardioes-da-cascata</id>
+    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
+
+<p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua necessidade execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, <sarcasmo> a &ldquo;equipe&rdquo; atinge seu objetivo: o software! </sarcasmo> Seguem alguns exemplos desses guardiões cascateiros:</p>
+
+<p><strong>O guardião do banco de dados: &ldquo;<em>Não rodarás nenhum script na base alheia</em>&rdquo;</strong>
+Começo por este por ser o mais comum dos guardiões. Ele trata o banco de dados como um filho, mesmo que seja um adolescente que não obedeça inteiramente à 3ª regra normal. São vistos como semi-deuses, capazes de transcrever o modelo de negócio da empresa em uma linguagem de alto nível, impossível de ser compreendida por simples programadores. Protejem as tabelas com a própria vida e qualquer alteração na base de dados é motivo para um duelo até a morte! Utilizam um padrão para nomenclatura de campos que somente é conhecido pelo clã dos DBAs. Geralmente são seguidores do Oráculo, o senhor de todos os bancos de dados.</p>
+
+<p><strong>O guardião do projeto: <em>&ldquo;Guia-te pelo teu Gantt e serás recompensado&rdquo;</em></strong>
+Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/">Project</a>.</p>
+
+<p><strong>O guardião do framework: <em>&ldquo;Venerarás o Struts e nada te faltarás&rdquo;</em></strong>
+O framework é o objeto de adoração deste guardião, nenhum outro framework é tão bom quanto o que ele venera. Ele provê solução para todos seus problemas simplesmente escrevendo um bloco de XML aqui, outro ali, mudando aquela linha acolá e estendendo uma classe X implementando aquela interface Z. Qualquer evolução do framework em questão não passa de uma tentativa frustrada de &ldquo;reinventar a roda&rdquo;.</p>
+
+<p><strong>O guardião da arquitetura: <em>&ldquo;Não usarás a instância do teu objeto em vão&rdquo;</em></strong>
+Uma variação interessante de guardião, que neutraliza seu oponente através de técnicas de tortura e perturbação mental, inundando as sessões de brainstorm com uma enxurrada de DTO&rsquo;s, VO&rsquo;s, Facades, EJB&rsquo;s entre outros patterns que fazem a cabeça dos programadores entrar em conflito, até que seus órgãos faleçam (ou simplesmente se demitam). Geralmente são cúmplices dos guardiões do projeto, conspirando para a dominação do Gannt.</p>
+
+<p><strong>O guardião do root: <em>&ldquo;Teu processo não executarás no meu bash&rdquo;</em></strong>
+A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.</p>
+
+<p><strong>O guardião dos guardiões: <em>&ldquo;Tua TI é um mal necessário&rdquo;</em></strong>
+Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. É o guardião das decisões, aquele que protege sua riqueza acima de tudo, economizando nos salários, contratando funcionários despreparados e investindo rios de dinheiro em consultorias e licenças de software para garantir seus investimentos.</p>
+
+<p>Enfim, são guardiões dos próprios interesses. A &ldquo;equipe&rdquo; é apenas uma palavra que usam em discursos mas nunca aplicaram o conceito na prática!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Resenha do livro Pragmatic Unit Testing]]></title>
+    <link href="http://1up4developers.github.io/2008/06/resenha-do-livro-pragmatic-unit-testing/"/>
+    <updated>2008-06-26T16:54:19-03:00</updated>
+    <id>http://1up4developers.github.io/2008/06/resenha-do-livro-pragmatic-unit-testing</id>
+    <content type="html"><![CDATA[<p>Olá a todos !</p>
+
+<p>Sei que estão estranhando &hellip; perceberam que não tem Waterfall no título ? Pois bem, hoje não vou chorar e digo mais, vou até fingir que não vivo num <em>Waterfall</em> e vou falar sobre TESTES ! Tá bom, sei que enfatizei demais, só vou fazer uma resenha sobre este último livro que li mesmo.</p>
+
+<p><a href="http://www.amazon.com/Pragmatic-Unit-Testing-Java-JUnit/dp/0974514012"><img src="/images/uploads/2008/06/pragmatic_unit_testting.jpg?w=240" alt="Pragmatic Unit Testing" /></a></p>
+
+<p>Numa leitura leve e até divertida (sou nerd mesmo), os autores abordam conceitos práticos de testes que não estão ligados diretamente ao <a href="http://www.junit.org">JUnit</a>, e sim a &ldquo;Filosofia de Testes&rdquo;. O legal que os principais conceitos são apresentados com acrônimos como &ldquo;Right BICEP&rdquo;, &ldquo;CORRECT Boundary Conditions&rdquo;, &ldquo;A TRIP&rdquo;, MockObjects e etc. Depois da passagem por todos esses acrônimos, os próximos capítulos atacam temas como, onde colocar os testes, design dos testes e etc.</p>
+
+<p>Isso pode parecer estranho, mas de todos os capítulos o que eu mais gostei foi do primeiro, a Introdução, talvez porque no momento estou com a água do waterfall até o pescoço, e nele os autores colocam as dicas de como contra-argumentar as desculpas para não fazer testes. Exemplos dos tópicos, &ldquo;Por que devo me importar com testes ?&rdquo; e &ldquo;Desculpas para não testar&rdquo;, parece que os autores realmente conhecem o lado negro da força. Por sinal, achei este último tão interessante, que estou pensando em pedir permissão para traduzi-lo e postar aqui, se alguém souber o caminho das pedras e quiser ajudar eu peço a gentileza de entrar em contato.</p>
+
+<p>Gostei muito do livro, o considero uma ótima referência sobre o tema, veja bem, <strong>referência</strong>, pois se queres uma biblia do JUnit, descarte-o. Sei que muitos da nossa área não conhecem nada sobre o assunto, e um ótimo começo seria por ele.</p>
+
+<p>Agora, voltando um pouco pra minha (e de muitos) realidade cruel, antes de ler o livro eu imaginava (ou sonhava ?) que o sistema atual em que trabalho, poderia ser implantado testes, agora, com uma visão mais pragmática, tenho certeza que estava certo, só que mirando na camada errada. Aqui, a maioria da lógica (uns 90%) está em PL/SQL no banco, e a melhor maneira de implantar testes seria começando com um PL/SQLUnit &hellip; mas aí já é assunto pra outro post. Ahh, ainda não pesquisei, mas deve existir com certeza.</p>
+
+<p>Chegando ao fim do livro &hellip;</p>
+
+<p>Uma parte chata do livro foi quando terminei de lê-lo, confesso que fiquei com uma vontade de &ldquo;quero mais&rdquo; e acabei ficando com a impressão de que só li a ponta do iceberg sobre o tema. Sugestões de mais livros sobre o tema, são bem vindas !</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Pragmatic Programmer, no ambiente Waterfall é claro !]]></title>
+    <link href="http://1up4developers.github.io/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/"/>
+    <updated>2008-05-26T09:38:00-03:00</updated>
+    <id>http://1up4developers.github.io/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro</id>
+    <content type="html"><![CDATA[<p><a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X"><img src="http://bp1.blogger.com/_XL8FQmVF9qY/SDqv0OnB-jI/AAAAAAAAAF4/DLYKHqhh_2Y/s320/pragmatic-programer-book.jpeg" alt="" /></a></p>
+
+<p>Estou lendo o consagrado <a href="http://www.amazon.com/Pragmatic-Programmer-Journeyman-Master/dp/020161622X">The Pragmatic Programmer</a>, o livro é ótimo e faz com que eu tenha certeza que sou um sadomasoquista -calma, eu vou explicar-. Da sua capacidade técnica eu nunca desconfiei, pois sempre é citado nas lista de &ldquo;top hits&rdquo; de pessoal muito bom como o <a href="http://gc.blog.br/2008/03/27/10-livros-recomendados-para-desenvolvedores/">Guilherme Chapiewski</a> e <a href="http://blog.fragmental.com.br/2008/05/20/trilha-de-livros-desenvolvedor/trackback/">Phillip Calçado</a>.
+Agora entra a explicação do sadomasoquismo &hellip; ler um livro destes, realmente nos faz pensar, tanto em corrigir hábitos ruins que adquirimos com o tempo, quanto novas possibilidade em automatizar todas as tarefas rotineiras por exemplo. Até ai tudo bem, maravilha, o livro até parece uma auto-ajuda alá Paulo Coelho para o programador sofrido e abatido pelo rotina Waterfall &hellip; E é nesse momento que volto a realidade e lembro que não sou um programador e muito menos pragmático, pois aqui, no real world Waterfall eu sou apenas um macaco digitador, logo adaptei algumas lições do livro para a vida real:</p>
+
+<ul>
+<li><p><a href="http://www.artima.com/intv/dry.html">The DRY Principle</a>, bom aqui é diferente, parafraseando o Miguel, aqui temos o PRY Principle, que se auto explica, Please Repeat Yourself.</p></li>
+<li><p><a href="http://www.artima.com/intv/adapt.html">Building Adaptable Systems</a>, essa parte aqui se resume a criar &ldquo;flags&rdquo; no banco de dados e dar um nome bonitinho de &ldquo;parametrização&rdquo;.</p></li>
+<li><p><a href="http://www.artima.com/intv/domain.html">Programming Close to the Domain</a>, Domain !?! Seria enviar 18 ou mais parâmetros pra procedures que contém as regras de negócio ? Se for, aqui a gente faz !</p></li>
+<li><p><a href="http://www.artima.com/intv/defense.html">Programming Defensively</a>, aqui isso se resume a colocar logs em lugares chaves pra passar a culpa do bug para outro equipe.</p></li>
+</ul>
+
+
+<p>É claro que existem mais conceitos, mais para um programador-pragmático-waterfall os principais estão acima. O significado real de cada tópico você pode ver nos links, apesar que nada substitui a leitura do mesmo, que por sinal eu recomendo!</p>
+
+<p>Enquanto isso, continuo com a minha sessão &ldquo;sado&rdquo;, lendo sobre <a href="http://en.wikipedia.org/wiki/Domain-driven_design">DDD</a> e tentando descobrir <a href="http://thiagoarrais.wordpress.com/2007/12/10/resenha-por-que-as-pessoas-de-negocios-falam-como-idiotas/trackback/">Por que as pessoas de negócios falam como idiotas</a>.</p>
+
+<p>Qualquer desabafo deixem nos comentários.</p>
+
+<p>*obs: o link do amazon não é &ldquo;paitrocinado&rdquo;, só ilustrativo mesmo.</p>
+]]></content>
+  </entry>
+  
+</feed>

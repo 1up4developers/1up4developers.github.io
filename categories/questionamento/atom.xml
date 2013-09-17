@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: questionamento | 1up4developers]]></title>
+  <link href="http://1up4developers.github.io/categories/questionamento/atom.xml" rel="self"/>
+  <link href="http://1up4developers.github.io/"/>
+  <updated>2013-09-17T15:55:23-03:00</updated>
+  <id>http://1up4developers.github.io/</id>
+  <author>
+    <name><![CDATA[1up4developers authors]]></name>
+    <email><![CDATA[1up4dev@googlegroups.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
+    <link href="http://1up4developers.github.io/2013/05/a-melhor-linguagem-de-programacao/"/>
+    <updated>2013-05-06T07:00:44-03:00</updated>
+    <id>http://1up4developers.github.io/2013/05/a-melhor-linguagem-de-programacao</id>
+    <content type="html"><![CDATA[<p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
+
+<p>Atualmente ele está trabalhando em um projeto para Web e comentou que está dando preferência a uma ferramenta proprietária que eu particularmente não gosto.</p>
+
+<p>Numa conversa que achei muito produtiva, nós concordamos que, independente de gostar ou não, &ldquo;software é bola na rede&rdquo;, onde o importante é entregar o produto, atendendo as necessidades do cliente no menor tempo possível.</p>
+
+<p>Eu trabalhei com PHP por dez anos, com Delphi por seis e estou indo para oito com Java, usando diariamente cada uma dessas linguagens. Já tive experiências com C e trabalho há anos com Ruby e JavaScript, atualmente tenho me concentrado em Clojure e, gostando mais de umas e menos de outras, conheço as forças e fraquezas de cada uma delas.</p>
+
+<p>No final das contas, eu gosto da analogia de que o nosso trabalho se assemelha ao de um carpinteiro/marceneiro (desculpe, mas eu não sei muito bem a diferença entre ambos). Esses profissionais usam várias ferramentas para chegar ao produto final e, ao invés de perderem tempo em fóruns e discussões, eles buscam as ferramentas adequadas a cada tipo de tarefa, buscando entregar o melhor produto no menor tempo e menor custo (entenda &lsquo;melhor produto&rsquo; como algo totalmente subjetivo).</p>
+
+<p>Linguagens de programação são meras ferramentas, assim como serrotes, limas, martelos e sei lá que outras ferramentas os profissionais da madeira usam.</p>
+
+<p>Assim sendo, o que é melhor? SASS, SCSS, LESS ou CSS puro? HAML ou ERB? A melhor é aquela que trouxer menos dor de cabeça, custo e tempo de desenvolvimento. Avalie com cautela aquilo que &ldquo;está na moda&rdquo; ou &ldquo;que é o padrão de mercado&rdquo; e escolha o que for melhor para o que você precisa, usando argumentos técnicos e financeiros, e deixando a paixão de lado.</p>
+
+<p>Aprenda a sua linguagem de trabalho a fundo, e procure conhecer alternativas. Ao me tornar um bom desenvolvedor  Ruby, eu aprendi a escrever um código Java melhor. Ao entender LISP, eu me tornei mais produtivo em JavaScript.</p>
+
+<p>Quando for escrever ou comentar algo do tipo &ldquo;Porque PHP fede&rdquo;, ou perguntar num fórum &ldquo;O que é melhor: PL/I ou FORTRAN 66?&rdquo;, procure estudar mais, entender que nem todo mundo vive a mesma realidade que você e mesmo, algumas vezes, nem todo mundo tem o interesse em aprender tanto quanto você.</p>
+
+<p>Às vezes, o que o outro desenvolvedor quer é apenas entregar o trabalho, receber o pagamento e ir para casa.</p>
+
+<p>P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguagens que conseguir. Eu acho divertido, e profissionalmente é algo que tem me dado bons resultados.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA['(enlightenment)]]></title>
+    <link href="http://1up4developers.github.io/2011/07/enlightenment/"/>
+    <updated>2011-07-20T22:39:50-03:00</updated>
+    <id>http://1up4developers.github.io/2011/07/enlightenment</id>
+    <content type="html"><![CDATA[<p>Sentado num quarto de hotel, longe de casa, com a televisão passando imagens sem som, uma tela de computador cheia de parênteses na minha frente, sentindo uma imensa felicidade por ganhar a vida fazendo aquilo que escolhi, e principalmente, por (re)descobrir o quão divertido e empolgante pode ser esse caminho.</p>
+
+<p>Meu filho, de um ano e meio, me ensina todo dia a ser curioso, a não parar de aprender, me relembra como é bom descobrir o mundo, entender como as coisas funcionam, aprender com os erros. Vejo nele a alegria de perceber pequenas coisas, de querer mais, por mais que isso algumas vezes incomode quem está ao redor.</p>
+
+<p>As pessoas costumam crescer, buscam conforto, buscam um canto macio e aquecido para encostar, um cubículo para se sentar todo dia fazendo o mesmo trabalha de sempre, sem aprender, sem questionar, muitas vezes em entender, ouvindo e dizendo as mesmas coisas todos os dias. As pessoas crescem e perdem aquela alegria da criança ao aprender, se esquecem como é bom entender, perguntar o porquê, colocar a mão onde não é para mexer.</p>
+
+<p>Eu não consigo entender como alguém escolhe se tornar um programador, um desenvolvedor, e não alimenta a curiosidade, não alimenta a vontade de aprender. É pelo salário, já me disseram. Pode ser, mas garanto que estão perdendo o melhor da brincadeira. Eles vão conseguir uma vida confortável, comprometer o orçamento com o que quer seja e logo o lado financeiro não será mais suficiente. Surgirá uma sensação de vazio, de inutilidade, de frustração por trabalhar com algo que não traz nenhuma satisfação, por desperdiçar metade do dia numa vida vazia, metade da vida numa função sem atrativos.</p>
+
+<p>Com a participação de alguns amigos, passamos a compartilhar experiências, conhecimento e novidades com os demais colegas de trabalho. Existem sempre aqueles que nunca estão interessados, como queiram. Mas existem aqueles que logo se tornam sedentos por conhecimento, por novidades, que começam a compartilhar o que sabem, o que descobriram, e isso começa a formar um círculo virtuoso. Essas pessoas passam a relembrar daquela alegria infantil de aprender e entender o mundo, e começam a contaminar as pessoas ao redor, aumentando esse círculo. O ambiente de trabalho passa a ter um clima melhor, apesar de tudo; as pessoas passam a se respeitar mais, a se conhecer melhor, a nutrir admiração uns pelos outros. Obrigado a todos por isso.</p>
+
+<p>Não deixe aquela curiosidade infantil e a vontade de descobrir o mundo morrerem em você. Vale todo o esforço, eu posso garantir.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[TPW: e-mails vs reuniões]]></title>
+    <link href="http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes/"/>
+    <updated>2011-06-13T06:00:59-03:00</updated>
+    <id>http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes</id>
+    <content type="html"><![CDATA[<p>A cilada típica em ambientes corporativos:</p>
+
+<p><img src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" /></p>
+
+<h2>E agora, quem poderá nos ajudar?</h2>
+
+<p>Infelizmente, <strong>e-mails</strong> e <strong>reuniões</strong>, mesmo em ambientes ágeis, são inevitáveis, e na maioria das situações, tóxicos. Reuniões de 2 horas de duração ou 50 emails diários são sinais claros de que as coisas não andam muito bem.</p>
+
+<p>Atitudes ágeis tendem a evitar &ldquo;enrolações&rdquo; que desviem o foco da equipe ou desacelerem a produtividade. A seguir, algumas estratégias e dicas que podemos aplicar para quebrar um pouco essas práticas corporativas cascateiras, ajudar a manter o foco da equipe e produzir mais.</p>
+
+<h2>Reuniões</h2>
+
+<p>Simplesmente <strong>evite reuniões</strong>, com temor! Tente resolver os problemas com <strong>conversas cara-a-cara</strong>, na sua mesa mesmo. Se precisar discutir um assunto por mais de 5 minutos, convide as pessoas envolvidas para um cafézinho, de preferência em pé.</p>
+
+<p>Se não puder evitar a reunião, <strong>defina com antecipação</strong>: 1) o(s) <strong>objetivo</strong>(s) e 2) a <strong>duração máxima</strong>. Limite qualquer reunião a no máximo 5 participantes e duração de 15 minutos. Acredite: é  suficiente.</p>
+
+<p>Se um problema for muito complexo para ser resolvido em uma reunião de 15 minutos, <strong>quebre o problema em problemas menores</strong>, e discuta um de cada vez. Os próximos problemas devem ser discutidos somente quando o problema anterior for resolvido.</p>
+
+<p>Antes de começar qualquer discussão, faça com que todos presentes tomem ciência dos <strong>objetivos e da duração máxima</strong>. Assim que alcançarem os objetivos ou o tempo se esgotar, termine a discussão imediatamente! Não dê oportunidade para que alguém inicie uma nova discussão desnecessária.</p>
+
+<p><strong>Diga não</strong>! Em certas ocasiões, é a melhor resposta. Se você não é o responsável por determinado problema, desconhece ou não pode ajudar plenamente, simplesmente diga &ldquo;não, obrigado&rdquo;.</p>
+
+<h2>E-mails</h2>
+
+<p>Alguns problemas podem ser resolvidos com um simples e-mail, é verdade. A única regra que devemos seguir é a do &ldquo;passa, repassa ou paga&rdquo;. <strong>Não deixe os e-mails passarem das tréplicas</strong>. Se depois de 3 e-mails o problema ainda não foi resolvido, convide os envolvidos para tomar um cafezinho.</p>
+
+<p><strong>E-mail não é chat</strong>. O time deve conversar cara-a-cara, incluindo os clientes. Trocar mais do que 5 e-mails diários entre a equipe é um mau sinal. Se não puder falar pessoalmente, <strong>use o telefone ou skype</strong> ao invés de mandar um e-mail que pode ser facilmente ignorado pelo destinatário.</p>
+
+<p><strong>E-mail não é documentação</strong>. Não é preciso enviar um e-mail a cada decisão tomada pelo cliente ou pelo time. Se algo importante foi decidido, converse pessoalmente com os envolvidos.</p>
+
+<p>Finalmente, use o e-mail com sabedoria, para trocar informações importantes e relevantes entre a equipe. <strong>E-mail não deve ser regra</strong>, e sim um suporte para comunicação entre a equipe. Lembre-se: <strong>quanto mais e-mails você enviar, maior a chance de ser ignorado.</strong></p>
+
+<h2>Resumo</h2>
+
+<p>Reuniões e e-mails são tóxicos. Evite-os! Se não puder evitar, use-os com sabedoria.</p>
+
+<p>Se identificou com alguma situação? Acha que essas dicas &ldquo;choveram no molhado&rdquo;? Concorda, discorda, quer complementar algo? Use os comentários.</p>
+
+<p><strong>Reflexão: quais dessas práticas você aplica no seu cotidiano profissional?</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Don't be a hero]]></title>
+    <link href="http://1up4developers.github.io/2011/04/dont-be-a-hero/"/>
+    <updated>2011-04-27T18:59:21-03:00</updated>
+    <id>http://1up4developers.github.io/2011/04/dont-be-a-hero</id>
+    <content type="html"><![CDATA[<p>Um amigo escreveu isso há algum tempo e tive a oportunidade de reler hoje.</p>
+
+<blockquote><p>Sometimes things go wrong: hardware is not acting as expected, the API you rely on is not reliable, some vital information is missing. But you don’t care, as you are a hero, a tough Charles Bronson-like guy that will accomplish the mission no matter what.</p></blockquote>
+
+<p>Another project is saved? Maybe. But someone made a very stupid choice and will pay for it. And I’m talking about you, Bruce Lee.</p>
+
+<p>In six months nobody will remember the adversities you’ve been through. The sleepless nights. The weird bugs. The managers on you back, asking for status reports every five minutes. But something will linger: your name in the source code. It will be there in the SCM, ready to prove that you are a lousy coder and committed buggy/ugly code.</p>
+
+<p>So, next time you find yourself in this kind of situation, take a deep breath and raise the red flag. Share the problem. It’s not fair to chain yourself to something bad just to show that you are tough.</p>
+
+<p>Eu deveria ter levado esse texto impresso para a Venezuela.</p>
+
+<p><strong>Update em 02/05</strong>:
+<a href="http://igormusardo.com.br/">Igor Musardo</a> <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/">repostou esse post</a>, e adicionou um excelente vídeo da palestra do DHH na Rails Conf 2009. Recomendo que <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/">assistam</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Comunicação é tudo e mais um pouco]]></title>
+    <link href="http://1up4developers.github.io/2011/04/comunicacao-e-tudo-e-mais-um-pouco/"/>
+    <updated>2011-04-12T10:00:54-03:00</updated>
+    <id>http://1up4developers.github.io/2011/04/comunicacao-e-tudo-e-mais-um-pouco</id>
+    <content type="html"><![CDATA[<p>Imagine que você receba a seguinte especificação:</p>
+
+<blockquote><p>Pegue uma folha de papel A4. Sob a mesa, dobre-a ao meio. Coloque a folha dobrada sobre a mesa.</p></blockquote>
+
+<p>A especificação parece clara e simples, mas aposto que dobramos as folhas de forma diferente, obtendo resultados diferentes. Eu dobrei a minha folha verticalmente, enquanto provavelmente você dobrou horizontalmente, obtendo uma forma próxima de um quadrado.</p>
+
+<p>Qual foi o problema?</p>
+
+<p>Eu criei uma especificação tendo em mente exatamente o que eu queria. E eu acreditei que aquilo era mais do que suficiente.</p>
+
+<p>Você pegou uma especificação, aparentemente muito simples, e sem questionar seguiu os passos que julgou corretos.</p>
+
+<p>Não houve comunicação, cada parte presumiu coisas e o resultado final não foi o esperado.</p>
+
+<p>O grande diferencial das ditas metodologia ágeis é exatamente permitir a comunicação rápida, clara e sem ruídos entre todos os membros da equipe. Isso não tem nada a ver com post-its, gráficos ou ferramentas na Internet. É por isso que estamos vendo-as falhar, e é por isso que o seu projeto, e o meu, também estão falhando.</p>
+
+<p>É por isso que relacionamentos chegam a níveis insuportáveis de convivência, casamentos terminam, empregos viram um inferno. É por isso que ocorrem desencontros, é por isso que clientes recebem algo que não pediram e que não os atendem.</p>
+
+<p>É por isso também que não consegui comprar um mísero pão doce quando estive fora do país.</p>
+
+<p>Comunicação é, na minha opinião, o fator mais importante, e o menos valorizado. É tudo isso que eu falei, e mais um pouco.</p>
+
+<p>(Escrito pelo autor em 26/01/2009, e muito pouco ou quase nada mudou desde então)</p>
+]]></content>
+  </entry>
+  
+</feed>
