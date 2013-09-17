@@ -21,7 +21,7 @@ tags:
 
 Nós somos fãs de jQuery pela sua simplicidade e poder de extensão através de plugins. Falando nisso, este plugin torna qualquer tabela <table/> em um "grid" ordenável, pesquisavel e paginável _automagicamente_.
 
-[![](http://1up4dev.org/wp-content/uploads/2009/05/datatables-300x86.png)](http://1up4dev.org/wp-content/uploads/2009/05/datatables.png)
+[![](/images/uploads/2009/05/datatables-300x86.png)](/images/uploads/2009/05/datatables.png)
 
 Para usar, basta incluir o plugin na página após o jQuery e executar o script:
 

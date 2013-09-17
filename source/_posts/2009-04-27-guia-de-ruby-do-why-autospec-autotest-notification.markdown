@@ -24,7 +24,7 @@ tags:
 
 Este [livro](http://poignantguide.net/ruby/) é sensacional e demonstra exatamente o espírito do Ruby: papo de programador.
 
-[![](http://1up4dev.org/wp-content/uploads/2009/04/thefoxes-3.png)](http://1up4dev.org/wp-content/uploads/2009/04/thefoxes-3.png)
+[![](/images/uploads/2009/04/thefoxes-3.png)](/images/uploads/2009/04/thefoxes-3.png)
 
 O livro é bem divertido. As tirinhas das raposas são ótimas. Várias [pessoas](http://www.nomedojogo.com/2008/10/28/why%E2%80%99s-poignant-guide-to-ruby-em-portugues/) [contribuíram](http://akitaonrails.com/2008/5/14/vamos-traduzir-o-why-s-poignant-guide-to-ruby) com a tradução para pt-br que está disponível no [Github](http://github.com/carlosbrando/poignant-br/tree/master).
 
@@ -38,7 +38,7 @@ O [Autospec](http://www.nateclark.com/articles/2008/09/17/_autotest_-is-now-_aut
 
 Unindo o útil ao agradável, foi criado o [Autospec-notification](http://www.mouseoverstudio.com/blog/2008/10/10/autospec-autotest-notification-autospec-notification-e-novidades/), que exibe as notificações do autospec no desktop.
 
-[![](http://1up4dev.org/wp-content/uploads/2009/04/sucesso.png)](http://1up4dev.org/wp-content/uploads/2009/04/sucesso.png)
+[![](/images/uploads/2009/04/sucesso.png)](/images/uploads/2009/04/sucesso.png)
 
 Para instalar, comece pela gem ZenTest:
 

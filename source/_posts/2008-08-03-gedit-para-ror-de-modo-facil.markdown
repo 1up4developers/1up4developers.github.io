@@ -28,17 +28,17 @@ Vamos ao que interessa !
 
 No projeto [gedit-rails](http://github.com/mig/gedit-rails/tree/master) faça o download [aqui](http://github.com/mig/gedit-rails/tarball/master) ou clique em download na página do projeto (estamos no linux, use o formato tar). Descompacte o arquivo, entre na pasta e execute o install.sh veja a imagem abaixo:
 
-[caption id="attachment_65" align="aligncenter" width="300" caption="install do gedit-rails"][![install-gedit-rails](http://1up4dev.org/wp-content/uploads/2008/08/install-gedit-rails-300x131.png)](http://1up4dev.org/wp-content/uploads/2008/08/install-gedit-rails.png)[/caption]
+[caption id="attachment_65" align="aligncenter" width="300" caption="install do gedit-rails"][![install-gedit-rails](/images/uploads/2008/08/install-gedit-rails-300x131.png)](/images/uploads/2008/08/install-gedit-rails.png)[/caption]
 
 No projeto [gedit-themes](http://github.com/mig/gedit-themes/tree/master) você encontrará temas para o visual do gedit, o meu preferido é o darkmate, acho muito confortável para os olhos, mas existem várias opções. O processo de instalação é mais simples que os plugins.
 
 Baixe os temas em tar [aqui](http://github.com/mig/gedit-themes/tarball/master) ou no botão download na página do projeto. Descompacte o tar numa pasta separada, e na tela de preferências, fontes e cores do gedit, você consegue adicionar o novo tema que deseja.
 
-[![](http://1up4dev.org/wp-content/uploads/2008/08/add-gedit-theme2-300x181.png)](http://1up4dev.org/wp-content/uploads/2008/08/add-gedit-theme2.png)
+[![](/images/uploads/2008/08/add-gedit-theme2-300x181.png)](/images/uploads/2008/08/add-gedit-theme2.png)
 
 Veja o resultado aqui:
 
-[![](http://1up4dev.org/wp-content/uploads/2008/08/result-gedit2-300x158.png)](http://1up4dev.org/wp-content/uploads/2008/08/result-gedit2.png)
+[![](/images/uploads/2008/08/result-gedit2-300x158.png)](/images/uploads/2008/08/result-gedit2.png)
 
 Infelizmente estou sem tempo para entrar nos detalhes de cada plugin, de qualquer maneira, vou deixar aos interessados os links, que contém informações valiosas:
 
@@ -69,7 +69,7 @@ Plugins:
 
 - Snippets ou Trechos - padrão do Gedit (tem que ativar). Quando o gedit-rails é instalado ele adiciona os snippets para erb, ruby e shoulda;
 
-[![](http://1up4dev.org/wp-content/uploads/2008/08/gedit-snippets-249x300.png)](http://1up4dev.org/wp-content/uploads/2008/08/gedit-snippets.png)
+[![](/images/uploads/2008/08/gedit-snippets-249x300.png)](/images/uploads/2008/08/gedit-snippets.png)
 
 - [gedit_formatter](http://github.com/urubatan/gedit_formatter/tree/master)
 
@@ -83,4 +83,4 @@ Aqui já entra configurações mais pessoais que você encontra na tela de prefe
 
 Quanto ao esquema de cor acho o Oblivion mais “completo” para Rails. Screenshot do gedit com Oblivion:
 
-[![](http://1up4dev.org/wp-content/uploads/2008/08/gedit-oblivion-300x216.png)](http://1up4dev.org/wp-content/uploads/2008/08/gedit-oblivion.png)
+[![](/images/uploads/2008/08/gedit-oblivion-300x216.png)](/images/uploads/2008/08/gedit-oblivion.png)

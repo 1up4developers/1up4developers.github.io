@@ -144,7 +144,7 @@ And run:
     infinity_test
 
 
-![infinity_test jruby](http://1up4dev.org/wp-content/uploads/2011/04/infinity_test.png)
+![infinity_test jruby](/images/uploads/2011/04/infinity_test.png)
 [https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test](https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test) for more info.
 
 However, we have to compile the java classes when they change. The solution we came up with is to use editors like [eclipse](http://www.eclipse.org/) or [eclim](http://eclim.org/). This kind of editor auto-recompile Java files whenever they change.

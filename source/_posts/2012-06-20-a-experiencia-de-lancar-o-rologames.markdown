@@ -26,7 +26,7 @@ tags:
 Nesta segunda-feira lançamos o [RoloGames](http://rologames.com.br/).
 
 
-[![Rolo Games - Rede Social de Troca de Jogos](http://1up4dev.org/wp-content/uploads/2012/06/logo1.jpg)](http://rologames.com.br)
+[![Rolo Games - Rede Social de Troca de Jogos](/images/uploads/2012/06/logo1.jpg)](http://rologames.com.br)
 
 
 Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.

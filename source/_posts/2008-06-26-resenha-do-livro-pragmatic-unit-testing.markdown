@@ -17,7 +17,7 @@ Olá a todos !
 
 Sei que estão estranhando ... perceberam que não tem Waterfall no título ? Pois bem, hoje não vou chorar e digo mais, vou até fingir que não vivo num _Waterfall_ e vou falar sobre TESTES ! Tá bom, sei que enfatizei demais, só vou fazer uma resenha sobre este último livro que li mesmo.
 
-[![Pragmatic Unit Testing](http://1up4dev.org/wp-content/uploads/2008/06/pragmatic_unit_testting.jpg?w=240)](http://www.amazon.com/Pragmatic-Unit-Testing-Java-JUnit/dp/0974514012)
+[![Pragmatic Unit Testing](/images/uploads/2008/06/pragmatic_unit_testting.jpg?w=240)](http://www.amazon.com/Pragmatic-Unit-Testing-Java-JUnit/dp/0974514012)
 
 Numa leitura leve e até divertida (sou nerd mesmo), os autores abordam conceitos práticos de testes que não estão ligados diretamente ao [JUnit](http://www.junit.org), e sim a "Filosofia de Testes". O legal que os principais conceitos são apresentados com acrônimos como "Right BICEP", "CORRECT Boundary Conditions", "A TRIP", MockObjects e etc. Depois da passagem por todos esses acrônimos, os próximos capítulos atacam temas como, onde colocar os testes, design dos testes e etc.
 

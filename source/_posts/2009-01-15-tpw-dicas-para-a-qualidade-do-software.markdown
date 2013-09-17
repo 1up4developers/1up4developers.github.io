@@ -113,7 +113,7 @@ Estes últimos dois anos tenho usado [linux](http://www.ubuntu.com/) no desktop 
 Usando o [Virtual Box](http://www.virtualbox.org/) e [Multiple IEs](http://tredosoft.com/Multiple_IE) mais o opcional roteiro de testes, consigo validar o sistema numa boa gama de navegadores. Para usar o Multiple IEs não tem segredo, é só atualizar para o IE7 e depois rodar o executável do mesmo.
 
 
-[![](http://1up4dev.org/wp-content/uploads/2009/01/virtualbox_multiple_ies-300x187.png)](http://1up4dev.org/wp-content/uploads/2009/01/virtualbox_multiple_ies.png)
+[![](/images/uploads/2009/01/virtualbox_multiple_ies-300x187.png)](/images/uploads/2009/01/virtualbox_multiple_ies.png)
 
 
 

@@ -35,7 +35,7 @@ Caso tenha muitos snippets, e deseja criar um cheat sheet somente com Ruby e Rub
     <code>gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml</code>
 
 
-[caption id="attachment_484" align="aligncenter" width="291" caption="Meu cheat sheet de exemplo"][![Meu cheat sheet de exemplo](http://1up4dev.org/wp-content/uploads/2009/04/cheatsheet-example-291x300.png)](http://1up4dev.org/wp-content/uploads/2009/04/cheatsheet-example.png)[/caption]
+[caption id="attachment_484" align="aligncenter" width="291" caption="Meu cheat sheet de exemplo"][![Meu cheat sheet de exemplo](/images/uploads/2009/04/cheatsheet-example-291x300.png)](/images/uploads/2009/04/cheatsheet-example.png)[/caption]
 
 Levando em conta que a gem foi feita em três dias e focamos somente o necessário para lançarmos uma versão 0.x "em produção", vamos as limitações:
 

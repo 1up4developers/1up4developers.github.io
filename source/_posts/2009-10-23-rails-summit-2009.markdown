@@ -23,7 +23,7 @@ Estamos de volta depois de algumas semanas de correria e muito trabalho, o que n
 
 Se você não soube do [Rails Summit 2009](http://www.railssummit.com.br/) ou não sabe nem o que é Rails recomendo que acesse [este site](http://pbskids.org/teletubbies/). Deixando o sarcasmo de lado, a edição 2009 do Rails Summit foi muito boa. As palestras foram excelentes (com algumas poucas exceções). Os coffe-breaks e as [locagirls](http://github.com/railssummit/morena_opensource/tree/master/RailsSummit2009/) também!
 
-![Rails Summit 2009 Locaweb](http://1up4dev.org/wp-content/uploads/2009/10/4013425175_68b7b78b6f_original.jpg)
+![Rails Summit 2009 Locaweb](/images/uploads/2009/10/4013425175_68b7b78b6f_original.jpg)
 
 Quem não conseguiu ir este ano pode conferir o que aconteceu e assistir a algumas palestras nos seguintes links:
 

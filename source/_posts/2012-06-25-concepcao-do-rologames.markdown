@@ -32,7 +32,7 @@ Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam pouc
 ## Definindo um mantra
 
 
-[caption id="attachment_1199" align="alignleft" width="240" caption="Sorriso pimpão do Sr. Kawasaki"][![A Arte do Começo - The Art of Start](http://1up4dev.org/wp-content/uploads/2012/06/kawasaki-sm.jpg)](http://www.youtube.com/watch?v=VKhEg79xLio)[/caption]
+[caption id="attachment_1199" align="alignleft" width="240" caption="Sorriso pimpão do Sr. Kawasaki"][![A Arte do Começo - The Art of Start](/images/uploads/2012/06/kawasaki-sm.jpg)](http://www.youtube.com/watch?v=VKhEg79xLio)[/caption]
 
 Totalmente baseado nas dicas do Sr. Kawasaki em [A Arte do Começo](http://www.youtube.com/watch?v=VKhEg79xLio), definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:
 

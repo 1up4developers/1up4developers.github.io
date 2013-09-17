@@ -20,7 +20,7 @@ tags:
 
 No final do ano passado, ao ver um [twitty do José Valim](http://twitter.com/josevalim/status/12537904249176064), fiquei tentando a comprar o livro, mas depois do post [Crafting Rails Applications: Why I wrote this book](http://blog.plataformatec.com.br/2010/12/crafting-rails-applications-why-i-wrote-this-book/), tive certeza que não perderia este presente de Natal.
 
-[caption id="attachment_847" align="alignleft" width="190" caption="Crafting Rails Applications: Expert Practices for Everyday Rails Development"][![Crafting Rails Applications: Expert Practices for Everyday Rails Development](http://1up4dev.org/wp-content/uploads/2011/02/jvrails.jpg)](http://pragprog.com/titles/jvrails/crafting-rails-applications)[/caption]
+[caption id="attachment_847" align="alignleft" width="190" caption="Crafting Rails Applications: Expert Practices for Everyday Rails Development"][![Crafting Rails Applications: Expert Practices for Everyday Rails Development](/images/uploads/2011/02/jvrails.jpg)](http://pragprog.com/titles/jvrails/crafting-rails-applications)[/caption]
 
 Apesar de poucas páginas, o livro tem muito conteúdo. Logo no começo, em "_Who should read this book ?_" é avisado, **não é para iniciantes**. Os capítulos são separados em tópicos interessantes, abordando diferentes maneiras de extender o Rails 3.
 

@@ -49,7 +49,7 @@ Ok. Após reflexão feita, hora de atacar o problema.
 Este é um resultado da experiência abaixo:
 
 
-[![Snapshot Guide (inspirado no Rails Guides)](http://1up4dev.org/wp-content/uploads/2011/02/snapshot_guide-300x241.png)](http://rogerleite.github.com/rubygems_snapshot/)
+[![Snapshot Guide (inspirado no Rails Guides)](/images/uploads/2011/02/snapshot_guide-300x241.png)](http://rogerleite.github.com/rubygems_snapshot/)
 
 
 Com a gem [guides](https://github.com/wycats/guides), em segundos você tem um _scaffold_, pronto para ser preenchido.

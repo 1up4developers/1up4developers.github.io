@@ -14,7 +14,7 @@ tags:
 - javascript
 ---
 
-[![](http://1up4dev.org/wp-content/uploads/2008/07/logo.gif?w=300)](http://1up4dev.org/?p=45)
+[![](/images/uploads/2008/07/logo.gif?w=300)](http://1up4dev.org/?p=45)
 
 Bom pessoal, hoje estou aqui pra pedir ajuda. Sim, pedir ajuda pra todos àqueles que utilizam a web([www](http://en.wikipedia.org/wiki/World_Wide_Web)) para alguma coisa, seja para estudar, trabalhar, jogar ou ficar rico! E falo por todos desenvolvedores que tem o navegador como _container_ de suas aplicações, que tem que lidar com as diversidades de dois mundos, MS Internet Explorer 6 contra a rapa!
 

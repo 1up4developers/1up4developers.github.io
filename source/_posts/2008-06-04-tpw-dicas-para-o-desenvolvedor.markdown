@@ -48,7 +48,7 @@ Quem vive num malditodigno ambiente Waterfall já deve ter vivenciado muito diss
 
 Na tentativa de transformar este post de "muro das lamentações" para Pragmatic Waterfall, vamos as dicas didáticas (ou seria um guia de sobrevivência?) de como tentar contornar este tipo de situação frustante:
 
-[![](http://1up4dev.org/wp-content/uploads/2008/06/14-03-06_sharon.jpg?w=300)](http://1up4dev.org/wp-content/uploads/2008/06/14-03-06_sharon.jpg)==>>[![Waterfall Model](http://1up4dev.org/wp-content/uploads/2008/06/waterfall_model.png?w=300)](http://1up4dev.org/wp-content/uploads/2008/06/waterfall_model.png)
+[![](/images/uploads/2008/06/14-03-06_sharon.jpg?w=300)](/images/uploads/2008/06/14-03-06_sharon.jpg)==>>[![Waterfall Model](/images/uploads/2008/06/waterfall_model.png?w=300)](/images/uploads/2008/06/waterfall_model.png)
 
 
 

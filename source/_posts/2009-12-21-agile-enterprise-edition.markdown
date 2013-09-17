@@ -41,7 +41,7 @@ Então o marimbondo mandou demitir a formiga porque ela andava muito desmotivada
 Então lembrei de uma imagem que ilustra perfeitamente esta fábula e retrata fielmente a "organização" de alguma empresas:
 
 
-[![](http://1up4dev.org/wp-content/uploads/2009/07/trabalho_em_equipe-222x300.jpg)](http://1up4dev.org/wp-content/uploads/2009/07/trabalho_em_equipe.jpg)
+[![](/images/uploads/2009/07/trabalho_em_equipe-222x300.jpg)](/images/uploads/2009/07/trabalho_em_equipe.jpg)
 
 
 

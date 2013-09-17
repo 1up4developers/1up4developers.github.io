@@ -19,7 +19,7 @@ tags:
 
 Para quem tem algum tempo de internet, é fácil notar como as piadas se repetem, ou melhor, assim como olimpíadas ou copa do mundo, re-aparecem a cada quatro anos por exemplo. Não foi diferente com a piada que recebi (novamente) a pouco tempo, o Business Bingo. O que torna a piada muito divertida é o seu alto teor sarcástico e real, foi quando pensei, porque não imprimir esta cartela e realmente testar! Foi assim que surgiu a idéia de fazer um gerador de cartelas para o Business Bingo! :D
 
-[![idéia](http://1up4dev.org/wp-content/uploads/2009/04/ideia-299x300.jpg)](http://1up4dev.org/wp-content/uploads/2009/04/ideia.jpg)
+[![idéia](/images/uploads/2009/04/ideia-299x300.jpg)](/images/uploads/2009/04/ideia.jpg)
 
 
 ## [Business Bingo! Generator](http://business-bingo.heroku.com/)

@@ -18,7 +18,7 @@ A própria explicação do Caso de Uso demonstra o que costumam ser na prática,
 ## É uma cilada Bino!!!
 
 
-[caption id="attachment_525" align="aligncenter" width="360" caption="Caso de Uso!?! Pode ser uma cilada Bino!"][![](http://1up4dev.org/wp-content/uploads/2009/07/cilada_bino.jpg)](http://pt.wikipedia.org/wiki/Carga_Pesada)[/caption]
+[caption id="attachment_525" align="aligncenter" width="360" caption="Caso de Uso!?! Pode ser uma cilada Bino!"][![](/images/uploads/2009/07/cilada_bino.jpg)](http://pt.wikipedia.org/wiki/Carga_Pesada)[/caption]
 
 Pontos negativos que podem tornar numa cilada:
 

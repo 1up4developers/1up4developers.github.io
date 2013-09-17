@@ -45,7 +45,7 @@ E adicione os links da paginação na view:
 
 Pronto! Ao clicar nos links da paginação o parâmetro "page" será incluído automaticamente na requisição.
 
-[![](http://1up4dev.org/wp-content/uploads/2009/07/posts-300x253.png)](http://1up4dev.org/wp-content/uploads/2009/07/posts.png)
+[![](/images/uploads/2009/07/posts-300x253.png)](/images/uploads/2009/07/posts.png)
 
 
 ## Legal, mas cadê o "ajax"?
