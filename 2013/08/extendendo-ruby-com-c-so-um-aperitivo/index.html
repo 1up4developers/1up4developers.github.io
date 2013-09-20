@@ -116,100 +116,125 @@
 
 <p>Primeiramente criamos o diretório onde estará nossa extensão :</p>
 
-<pre><code>  &lt;code&gt;$ mkdir &lt;your_path&gt;/1up4dev&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mkdir &lt;your_path&gt;/1up4dev
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &ldquo;<strong>ruby.h&rdquo;</strong></p>
 
-<pre><code>  &lt;code&gt;#include &lt;ruby.h&gt;&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;ruby.h&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.</p>
 
-<pre><code>&lt;code&gt;VALUE m1up4dev;&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">VALUE</span> <span class="n">m1up4dev</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:</p>
 
-<pre><code>&lt;code&gt;VALUE cTalker;&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">VALUE</span> <span class="n">cTalker</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.</p>
 
-<pre><code>&lt;code&gt;static VALUE say_yeah(VALUE self){
-  const char *sentence= "YEAH YEAH!";
-  return rb_str_new2(sentence);
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">static</span> <span class="n">VALUE</span> <span class="nf">say_yeah</span><span class="p">(</span><span class="n">VALUE</span> <span class="n">self</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sentence</span><span class="o">=</span> <span class="s">&quot;YEAH YEAH!&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">rb_str_new2</span><span class="p">(</span><span class="n">sentence</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
 <p>Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.</p>
 
 <p>Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &lsquo;<strong>Init_1up4dev</strong>&rsquo;. Por convenção estas funções sempre começam com o prefixo &lsquo;<strong>Init_</strong>&rsquo;.</p>
 
-<pre><code>&lt;code&gt;void Init_1up4dev(){
-  m1up4dev = rb_define_module("1up4dev");
-  cTalker = rb_define_class_under(m1up4dev, "Talker", rb_cObject);
-  rb_define_singleton_method(cTalker, "say_yeah", say_yeah, 0);
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">Init_1up4dev</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">m1up4dev</span> <span class="o">=</span> <span class="n">rb_define_module</span><span class="p">(</span><span class="s">&quot;1up4dev&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">cTalker</span> <span class="o">=</span> <span class="n">rb_define_class_under</span><span class="p">(</span><span class="n">m1up4dev</span><span class="p">,</span> <span class="s">&quot;Talker&quot;</span><span class="p">,</span> <span class="n">rb_cObject</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">rb_define_singleton_method</span><span class="p">(</span><span class="n">cTalker</span><span class="p">,</span> <span class="s">&quot;say_yeah&quot;</span><span class="p">,</span> <span class="n">say_yeah</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como :</p>
+<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como:</p>
 
-<pre><code>&lt;code&gt;module 1up4dev
-end
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">module</span> <span class="mi">1</span><span class="n">up4dev</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :</p>
+<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar:</p>
 
-<pre><code>&lt;code&gt;module 1up4dev
-  class Talker
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">module</span> <span class="mi">1</span><span class="n">up4dev</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Talker</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  end
-end
-
-&lt;/code&gt;
-</code></pre>
 
 <p>A função &lsquo;<strong>rb_define_singleton_method</strong>&rsquo; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.</p>
 
-<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo :</p>
+<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo:</p>
 
-<pre><code>&lt;code&gt;
-require 'mkmf'
-create_makefile('1up4dev')
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;mkmf&#39;</span>
+</span><span class='line'><span class="n">create_makefile</span><span class="p">(</span><span class="s1">&#39;1up4dev&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .</p>
+<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão.</p>
 
-<pre><code>&lt;code&gt;$ ruby extconf.rb
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ruby extconf.rb
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Compile e instale a extensão :</p>
 
-<pre><code>&lt;code&gt;$ make &amp;&amp; make install
-&lt;/code&gt;
-</code></pre>
+<p>Compile e instale a extensão:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>make <span class="o">&amp;&amp;</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Para ver o código funcionando basta digitar o código abaixo em um &lsquo;<strong>irb</strong>&rsquo; ou algo do gênero :</p>
 
-<pre><code>&lt;code&gt;$irb(main):001:0&gt; require '1up4dev'
-true
-$irb(main):002:0&gt; 1up4dev::Talker.say_yeah
-"YEAH YEAH!"
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$irb</span><span class="o">(</span>main<span class="o">)</span>:001:0&gt; require <span class="s1">&#39;1up4dev&#39;</span>
+</span><span class='line'><span class="nb">true</span>
+</span><span class='line'><span class="nv">$irb</span><span class="o">(</span>main<span class="o">)</span>:002:0&gt; 1up4dev::Talker.say_yeah
+</span><span class='line'><span class="s2">&quot;YEAH YEAH!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>YEAH YEAH !!</p>
+<p>YEAH YEAH!!</p>
 </div>
 
 

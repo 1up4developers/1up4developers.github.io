@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Em tempos Metodologias Àgeis, iniciativas como DevOps, adoção de Cloud Computing e derivados (SaaS, IaaS e PaaS), aplicações que demorariam meses, &hellip;">
+  <meta name="description" content="Em tempos de Metodologias Àgeis, iniciativas como DevOps, adoção de Cloud Computing e derivados (SaaS, IaaS e PaaS), aplicações que demorariam meses &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,15 +113,15 @@
   </header>
 
 
-  <div class="entry-content"><p>Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
+  <div class="entry-content"><p>Em tempos de <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
 <p>Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &ldquo;<em>onda do verão</em>&rdquo; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &ldquo;wave&rdquo;.</p>
 
-<h3>O que são CGroups ?</h3>
+<h3>O que são CGroups?</h3>
 
 <p><strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.</p>
 
-<p>Curioso pra ver como funciona ?</p>
+<p>Curioso pra ver como funciona?</p>
 
 <h3>Situação de Exemplo</h3>
 
@@ -133,24 +133,33 @@
 
 <p>Antes de mais nada precisamos instalar algumas dependências:</p>
 
-<pre><code>&lt;code&gt;sudo apt-get install cgroup-bin libcgroup1
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install cgroup-bin libcgroup1
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong>.</p>
 
-<pre><code>&lt;code&gt;ls -al /sys/fs/cgroup
+<p>Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong></p>
 
-drwxr-xr-x 7 root root 140 Aug  6 09:38 .
-drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
-drwxr-xr-x 6 root root   0 Aug  6 09:38 cpu
-drwxr-xr-x 6 root root   0 Aug  6 09:38 cpuacct
-drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
-drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
-drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ls -al /sys/fs/cgroup
+</span><span class='line'>
+</span><span class='line'>drwxr-xr-x 7 root root 140 Aug  6 09:38 .
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 cpu
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 cpuacct
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
 <p>CGroups estão organizados por subsistemas conhecidos também como &ldquo;resource controllers&rdquo; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.</p>
 
@@ -158,13 +167,17 @@ drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
 
 <p>Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :</p>
 
-<pre><code>&lt;code&gt;$ sudo service cgconfig status&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo service cgconfig status
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Caso não esteja inicie o serviço</p>
 
-<pre><code>&lt;code&gt;$ sudo service cgconfig start&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo service cgconfig start
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf&#8217;</strong> ou via linha de comando, que será o meio que iremos utilizar.</p>
 
@@ -172,10 +185,12 @@ drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
 
 <p>Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.</p>
 
-<pre><code>&lt;code&gt;sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
-sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
+</span><span class='line'>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>O argumento <strong>/sinatra</strong>* indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller>/<path></strong></p>
 
@@ -183,35 +198,45 @@ sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
 
 <p>Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.</p>
 
-<pre><code>&lt;code&gt;sudo cgexec -g *:/sinatra1 sh -c 'cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D'
-sudo cgexec -g *:/sinatra2 sh -c 'cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D'
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo cgexec -g *:/sinatra1 sh -c <span class="s1">&#39;cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D&#39;</span>
+</span><span class='line'>sudo cgexec -g *:/sinatra2 sh -c <span class="s1">&#39;cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.</p>
 
 <p>Para checar a hierarquia criada:</p>
 
-<pre><code>&lt;code&gt;ps xawf -eo pid,cgroup,args | grep ruby
- 1476              \_  5:freezer:              \_ grep --color=auto ruby
- 1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
- 1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ps xawf -eo pid,cgroup,args | grep ruby
+</span><span class='line'> 1476              <span class="se">\_</span>  5:freezer:              <span class="se">\_</span> grep --color<span class="o">=</span>auto ruby
+</span><span class='line'> 1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
+</span><span class='line'> 1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.</p>
 
-<pre><code>&lt;code&gt;sudo cgset -r memory.limit_in_bytes='256M' sinatra1
-sudo cgset -r memory.limit_in_bytes='128M' sinatra2
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo cgset -r memory.limit_in_bytes<span class="o">=</span><span class="s1">&#39;256M&#39;</span> sinatra1
+</span><span class='line'>sudo cgset -r memory.limit_in_bytes<span class="o">=</span><span class="s1">&#39;128M&#39;</span> sinatra2
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Para checar a alteração :</p>
 
-<pre><code>&lt;code&gt;cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
-cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
-&lt;/code&gt;
-</code></pre>
+<p>Para checar a alteração:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
+</span><span class='line'>cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Conclusão</h3>
 
@@ -227,7 +252,7 @@ cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
 </ul>
 
 
-<p>Divirtam-se !</p>
+<p>Divirtam-se!</p>
 </div>
   
   
@@ -276,100 +301,125 @@ cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
 
 <p>Primeiramente criamos o diretório onde estará nossa extensão :</p>
 
-<pre><code>  &lt;code&gt;$ mkdir &lt;your_path&gt;/1up4dev&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>mkdir &lt;your_path&gt;/1up4dev
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Crie um arquivo chamado <strong>1up4dev.c </strong>e dentro dele inclua o header &ldquo;<strong>ruby.h&rdquo;</strong></p>
 
-<pre><code>  &lt;code&gt;#include &lt;ruby.h&gt;&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="cp">#include &lt;ruby.h&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Tudo em Ruby relaciona-se com o tipo <strong>VALUE</strong>. Para nosso exemplo, vamos criar um <strong>VALUE m1up4dev</strong> representando um módulo.</p>
 
-<pre><code>&lt;code&gt;VALUE m1up4dev;&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">VALUE</span> <span class="n">m1up4dev</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>E para representar uma classe, abaixo deste módulo, a qual chamaremos de Talker, criaremos uma <strong>VALUE cTalker</strong>:</p>
 
-<pre><code>&lt;code&gt;VALUE cTalker;&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="n">VALUE</span> <span class="n">cTalker</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Nossa classe <strong>Talker</strong> precisa fazer algo, vamos adicionar uma simples função que retorna uma String.</p>
 
-<pre><code>&lt;code&gt;static VALUE say_yeah(VALUE self){
-  const char *sentence= "YEAH YEAH!";
-  return rb_str_new2(sentence);
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="k">static</span> <span class="n">VALUE</span> <span class="nf">say_yeah</span><span class="p">(</span><span class="n">VALUE</span> <span class="n">self</span><span class="p">){</span>
+</span><span class='line'>  <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">sentence</span><span class="o">=</span> <span class="s">&quot;YEAH YEAH!&quot;</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">rb_str_new2</span><span class="p">(</span><span class="n">sentence</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
 <p>Na função <strong>say_yeah</strong>, <strong>VALUE self</strong> representa o objeto associado a função, <strong>sentence</strong> a String de retorno e a função <strong>rb_str_new2</strong> converte o <strong>*char </strong>em uma <strong>Ruby String</strong>.</p>
 
 <p>Para deixar esse código acessível no mundo Ruby, criaremos uma função chamada &lsquo;<strong>Init_1up4dev</strong>&rsquo;. Por convenção estas funções sempre começam com o prefixo &lsquo;<strong>Init_</strong>&rsquo;.</p>
 
-<pre><code>&lt;code&gt;void Init_1up4dev(){
-  m1up4dev = rb_define_module("1up4dev");
-  cTalker = rb_define_class_under(m1up4dev, "Talker", rb_cObject);
-  rb_define_singleton_method(cTalker, "say_yeah", say_yeah, 0);
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">void</span> <span class="nf">Init_1up4dev</span><span class="p">(){</span>
+</span><span class='line'>  <span class="n">m1up4dev</span> <span class="o">=</span> <span class="n">rb_define_module</span><span class="p">(</span><span class="s">&quot;1up4dev&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">cTalker</span> <span class="o">=</span> <span class="n">rb_define_class_under</span><span class="p">(</span><span class="n">m1up4dev</span><span class="p">,</span> <span class="s">&quot;Talker&quot;</span><span class="p">,</span> <span class="n">rb_cObject</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">rb_define_singleton_method</span><span class="p">(</span><span class="n">cTalker</span><span class="p">,</span> <span class="s">&quot;say_yeah&quot;</span><span class="p">,</span> <span class="n">say_yeah</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como :</p>
+<p>A função &lsquo;<strong>rb_define_module</strong>&rsquo; define um módulo no topo da hierarquia. Algo como:</p>
 
-<pre><code>&lt;code&gt;module 1up4dev
-end
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">module</span> <span class="mi">1</span><span class="n">up4dev</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar :</p>
+<p>A função &lsquo;<strong>rb_define_class_under</strong>&rsquo; define uma classe abaixo de um módulo ou outra classe. Isso irá gerar:</p>
 
-<pre><code>&lt;code&gt;module 1up4dev
-  class Talker
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">module</span> <span class="mi">1</span><span class="n">up4dev</span>
+</span><span class='line'>  <span class="k">class</span> <span class="nc">Talker</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
-  end
-end
-
-&lt;/code&gt;
-</code></pre>
 
 <p>A função &lsquo;<strong>rb_define_singleton_method</strong>&rsquo; é responsável por criar um método singleton em uma classe ou módulo, neste caso ele estará atrelado a class Talker.</p>
 
-<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo :</p>
+<p>Para rodar nosso exemplo, crie um arquivo chamado &lsquo;<strong>extconf.rb</strong>&rsquo; contendo:</p>
 
-<pre><code>&lt;code&gt;
-require 'mkmf'
-create_makefile('1up4dev')
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;mkmf&#39;</span>
+</span><span class='line'><span class="n">create_makefile</span><span class="p">(</span><span class="s1">&#39;1up4dev&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão .</p>
+<p>Executando o script, irá ser gerado um arquivo <strong>Makefile</strong> para executar o build da extensão.</p>
 
-<pre><code>&lt;code&gt;$ ruby extconf.rb
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>ruby extconf.rb
+</span></code></pre></td></tr></table></div></figure>
 
-<p>Compile e instale a extensão :</p>
 
-<pre><code>&lt;code&gt;$ make &amp;&amp; make install
-&lt;/code&gt;
-</code></pre>
+<p>Compile e instale a extensão:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>make <span class="o">&amp;&amp;</span> make install
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Para ver o código funcionando basta digitar o código abaixo em um &lsquo;<strong>irb</strong>&rsquo; ou algo do gênero :</p>
 
-<pre><code>&lt;code&gt;$irb(main):001:0&gt; require '1up4dev'
-true
-$irb(main):002:0&gt; 1up4dev::Talker.say_yeah
-"YEAH YEAH!"
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$irb</span><span class="o">(</span>main<span class="o">)</span>:001:0&gt; require <span class="s1">&#39;1up4dev&#39;</span>
+</span><span class='line'><span class="nb">true</span>
+</span><span class='line'><span class="nv">$irb</span><span class="o">(</span>main<span class="o">)</span>:002:0&gt; 1up4dev::Talker.say_yeah
+</span><span class='line'><span class="s2">&quot;YEAH YEAH!&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-&lt;/code&gt;
-</code></pre>
 
-<p>YEAH YEAH !!</p>
+<p>YEAH YEAH!!</p>
 </div>
   
   
@@ -603,6 +653,74 @@ y = (+ 1 (* 3 2))
 <p>Obs: Vou embedar <a href="https://gist.github.com/rogerleite/5869576">este gist</a>, e pode ser que não apareça no seu reader ;D.</p>
 
 <p>Obs2: Este post é uma versão pt-br deste post no coderwall <a href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.</p>
+
+<figure class='code'><figcaption><span>test.sh </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">URL</span><span class="o">=</span>http://localhost:8080
+</span><span class='line'>
+</span><span class='line'><span class="c">## Unit-Testable Shell Scripts (http://eradman.com/posts/ut-shell-scripts.html)</span>
+</span><span class='line'><span class="nb">typeset</span> -i <span class="nv">tests_run</span><span class="o">=</span>0
+</span><span class='line'><span class="k">function </span>try <span class="o">{</span> <span class="nv">this</span><span class="o">=</span>&amp;quot;<span class="nv">$1</span>&amp;quot;; <span class="o">}</span>
+</span><span class='line'><span class="nb">trap</span> &amp;#39;printf &amp;quot;<span class="nv">$0</span>: <span class="nb">exit </span>code <span class="nv">$?</span> on line <span class="nv">$LINENO</span><span class="se">\n</span>FAIL: <span class="nv">$this</span><span class="se">\n</span>&amp;quot;; <span class="nb">exit </span>1&amp;#39; ERR
+</span><span class='line'><span class="k">function </span>assert <span class="o">{</span>
+</span><span class='line'>    <span class="nb">let </span>tests_run+<span class="o">=</span>1
+</span><span class='line'>    <span class="o">[</span> &amp;quot;<span class="nv">$1</span>&amp;quot; <span class="o">=</span> &amp;quot;<span class="nv">$2</span>&amp;quot; <span class="o">]</span> &amp;amp;&amp;amp; <span class="o">{</span> <span class="nb">echo</span> -n &amp;quot;.&amp;quot;; <span class="k">return</span>; <span class="o">}</span>
+</span><span class='line'>    <span class="nb">printf</span> &amp;quot;<span class="se">\n</span>FAIL: <span class="nv">$this</span><span class="se">\n</span>&amp;#39;<span class="nv">$1</span>&amp;#39; !<span class="o">=</span> &amp;#39;<span class="nv">$2</span>&amp;#39;<span class="se">\n</span>&amp;quot;; <span class="nb">exit </span>1
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c">## end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">###############################################################</span>
+</span><span class='line'>
+</span><span class='line'>try &amp;quot;Example of GET and <span class="nb">test </span><span class="k">for </span>404 status&amp;quot;
+</span><span class='line'>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>curl -s -w &amp;quot;%<span class="o">{</span>http_code<span class="o">}</span>&amp;quot; <span class="nv">$URL</span><span class="k">)</span>
+</span><span class='line'>assert &amp;quot;404&amp;quot; &amp;quot;<span class="nv">$out</span>&amp;quot;
+</span><span class='line'>
+</span><span class='line'>try &amp;quot;Example of POST XML&amp;quot;
+</span><span class='line'>
+</span><span class='line'><span class="c"># Post xml (from hello.xml file) on /hello</span>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>cat <span class="nb">test</span>/hello.xml | curl -s -H &amp;quot;Content-Type: text/xml&amp;quot; -d @- <span class="se">\</span>
+</span><span class='line'>  -X POST <span class="nv">$URL</span>/hello<span class="k">)</span>
+</span><span class='line'>assert &amp;quot;Hello World&amp;quot; &amp;quot;<span class="nv">$out</span>&amp;quot;
+</span><span class='line'>
+</span><span class='line'><span class="c">###############################################################</span>
+</span><span class='line'><span class="nb">echo</span>
+</span><span class='line'><span class="nb">echo</span> &amp;quot;PASS: <span class="nv">$tests_run</span> tests run&amp;quot;
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Referências:</p>
 

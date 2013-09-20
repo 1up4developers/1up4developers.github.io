@@ -126,6 +126,74 @@
 
 <p>Obs2: Este post é uma versão pt-br deste post no coderwall <a href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.</p>
 
+<figure class='code'><figcaption><span>test.sh </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">URL</span><span class="o">=</span>http://localhost:8080
+</span><span class='line'>
+</span><span class='line'><span class="c">## Unit-Testable Shell Scripts (http://eradman.com/posts/ut-shell-scripts.html)</span>
+</span><span class='line'><span class="nb">typeset</span> -i <span class="nv">tests_run</span><span class="o">=</span>0
+</span><span class='line'><span class="k">function </span>try <span class="o">{</span> <span class="nv">this</span><span class="o">=</span>&amp;quot;<span class="nv">$1</span>&amp;quot;; <span class="o">}</span>
+</span><span class='line'><span class="nb">trap</span> &amp;#39;printf &amp;quot;<span class="nv">$0</span>: <span class="nb">exit </span>code <span class="nv">$?</span> on line <span class="nv">$LINENO</span><span class="se">\n</span>FAIL: <span class="nv">$this</span><span class="se">\n</span>&amp;quot;; <span class="nb">exit </span>1&amp;#39; ERR
+</span><span class='line'><span class="k">function </span>assert <span class="o">{</span>
+</span><span class='line'>    <span class="nb">let </span>tests_run+<span class="o">=</span>1
+</span><span class='line'>    <span class="o">[</span> &amp;quot;<span class="nv">$1</span>&amp;quot; <span class="o">=</span> &amp;quot;<span class="nv">$2</span>&amp;quot; <span class="o">]</span> &amp;amp;&amp;amp; <span class="o">{</span> <span class="nb">echo</span> -n &amp;quot;.&amp;quot;; <span class="k">return</span>; <span class="o">}</span>
+</span><span class='line'>    <span class="nb">printf</span> &amp;quot;<span class="se">\n</span>FAIL: <span class="nv">$this</span><span class="se">\n</span>&amp;#39;<span class="nv">$1</span>&amp;#39; !<span class="o">=</span> &amp;#39;<span class="nv">$2</span>&amp;#39;<span class="se">\n</span>&amp;quot;; <span class="nb">exit </span>1
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c">## end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">###############################################################</span>
+</span><span class='line'>
+</span><span class='line'>try &amp;quot;Example of GET and <span class="nb">test </span><span class="k">for </span>404 status&amp;quot;
+</span><span class='line'>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>curl -s -w &amp;quot;%<span class="o">{</span>http_code<span class="o">}</span>&amp;quot; <span class="nv">$URL</span><span class="k">)</span>
+</span><span class='line'>assert &amp;quot;404&amp;quot; &amp;quot;<span class="nv">$out</span>&amp;quot;
+</span><span class='line'>
+</span><span class='line'>try &amp;quot;Example of POST XML&amp;quot;
+</span><span class='line'>
+</span><span class='line'><span class="c"># Post xml (from hello.xml file) on /hello</span>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>cat <span class="nb">test</span>/hello.xml | curl -s -H &amp;quot;Content-Type: text/xml&amp;quot; -d @- <span class="se">\</span>
+</span><span class='line'>  -X POST <span class="nv">$URL</span>/hello<span class="k">)</span>
+</span><span class='line'>assert &amp;quot;Hello World&amp;quot; &amp;quot;<span class="nv">$out</span>&amp;quot;
+</span><span class='line'>
+</span><span class='line'><span class="c">###############################################################</span>
+</span><span class='line'><span class="nb">echo</span>
+</span><span class='line'><span class="nb">echo</span> &amp;quot;PASS: <span class="nv">$tests_run</span> tests run&amp;quot;
+</span></code></pre></td></tr></table></div></figure>
+
+
 <p>Referências:</p>
 
 <p><a href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a></p>
