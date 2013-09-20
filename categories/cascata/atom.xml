@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: cascata | 1up4developers]]></title>
-  <link href="http://1up4developers.github.io/categories/cascata/atom.xml" rel="self"/>
-  <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-19T23:10:10-03:00</updated>
-  <id>http://1up4developers.github.io/</id>
+  <link href="http://1up4dev.org/categories/cascata/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-19T23:16:21-03:00</updated>
+  <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
     <email><![CDATA[1up4dev@googlegroups.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
-    <link href="http://1up4developers.github.io/2013/04/novos-rumos/"/>
+    <link href="http://1up4dev.org/2013/04/novos-rumos/"/>
     <updated>2013-04-01T12:00:51-03:00</updated>
-    <id>http://1up4developers.github.io/2013/04/novos-rumos</id>
+    <id>http://1up4dev.org/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
 <p>Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável.</p>
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[TPW: e-mails vs reuniões]]></title>
-    <link href="http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes/"/>
+    <link href="http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes/"/>
     <updated>2011-06-13T06:00:59-03:00</updated>
-    <id>http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes</id>
+    <id>http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes</id>
     <content type="html"><![CDATA[<p>A cilada típica em ambientes corporativos:</p>
 
 <p><img src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" /></p>
@@ -75,9 +75,9 @@
   
   <entry>
     <title type="html"><![CDATA[Agilidade cascateira]]></title>
-    <link href="http://1up4developers.github.io/2008/12/agilidade-cascateira/"/>
+    <link href="http://1up4dev.org/2008/12/agilidade-cascateira/"/>
     <updated>2008-12-16T11:50:09-02:00</updated>
-    <id>http://1up4developers.github.io/2008/12/agilidade-cascateira</id>
+    <id>http://1up4dev.org/2008/12/agilidade-cascateira</id>
     <content type="html"><![CDATA[<p>Atualmente as metodologias ágeis vêm aparecendo com cada vez mais freqüência nas empresas que desenvolvem software, introduzidas pelos próprios desenvolvedores (o que é mais comum) ou em alguns raros casos pela &ldquo;cúpula&rdquo; da empresa, na esperança de melhorar a produtividade e/ou o alto tempo de resposta do fracassado processo cascateiro. Porém, esta &ldquo;fama&rdquo; prematura dos métodos ágeis tem gerado mais resultados ruins do que bons. Sua aplicação na vida real, na maioria em muitos casos, ocorre de maneira equivocada, distorcida e desprezando-se os reais valores e princípios que apoiaram o surgimento desta filosofia.</p>
 
 <p>Um exemplo claro de como os valores ágeis estão sendo desprezados distorcidos é o aumento constante de &ldquo;cursos&rdquo; e treinamentos de metodologias ágeis. Não é raro eu receber semanalmente vários spams e-mails de escolas de treinamento que ministram cursos de Scrum, XP, preparação para certificação ScrumMaster, técnicas de TDD, DDD, BDD, etc. Infelizmente o que estes cursos não ensinam (como todos os outros) é o verdadeiro significado de &ldquo;ser ágil&rdquo;. Fazer um curso de 20 horas de Scrum não o torna um ScrumMaster (você pode até ter um certificado, mas se você realmente é &ldquo;ágil&rdquo;, sabe que um certificado é um mero pedaço de papel sem valor).</p>
@@ -130,9 +130,9 @@
   
   <entry>
     <title type="html"><![CDATA[Foco no problema]]></title>
-    <link href="http://1up4developers.github.io/2008/11/foco-no-problema/"/>
+    <link href="http://1up4dev.org/2008/11/foco-no-problema/"/>
     <updated>2008-11-10T19:33:43-02:00</updated>
-    <id>http://1up4developers.github.io/2008/11/foco-no-problema</id>
+    <id>http://1up4dev.org/2008/11/foco-no-problema</id>
     <content type="html"><![CDATA[<p>Desenvolver software é uma atividade muito gratificante pois sempre podemos (ou deveríamos) exercitar nossa criatividade para solucionar os problemas dos clientes. Isto, apesar de divertido pode ser perigoso e/ou catastrófico se estivermos com o foco errado. Num ambiente cascateiro, onde cada envolvido está comprometido apenas com o processo e não se preocupa verdadeiramente com os problemas dos clientes, não é difícil que isto ocorra. Quase sempre o foco acaba sendo direcionado para a solução ao invés do problema.</p>
 
 <p>Mas qual a diferença entre foco no <strong>problema</strong> ou <strong>solução</strong>? Vamos a um exemplo:</p>
@@ -161,9 +161,9 @@ Os russos, que tiveram o mesmo problema, optaram por uma solução mais simples:
   
   <entry>
     <title type="html"><![CDATA[Arquiteto Cascateiro]]></title>
-    <link href="http://1up4developers.github.io/2008/11/arquiteto-cascateiro/"/>
+    <link href="http://1up4dev.org/2008/11/arquiteto-cascateiro/"/>
     <updated>2008-11-07T07:44:44-02:00</updated>
-    <id>http://1up4developers.github.io/2008/11/arquiteto-cascateiro</id>
+    <id>http://1up4dev.org/2008/11/arquiteto-cascateiro</id>
     <content type="html"><![CDATA[<blockquote><p>Este post é uma homenagem aos Arquitetos defensores do <em>waterfall</em>/cascata.</p></blockquote>
 
 <p>Recentemente tive o desprazer de conhecer um arquiteto, é isso mesmo, aquele com certificado e tudo, com direito a broche da Sun em seu terninho. Aliás, certificado é um tema polêmico que eu não tenho uma opinião muito certa e/ou formada&hellip; bom, vou deixar esta parte para um próximo post, quem sabe.</p>

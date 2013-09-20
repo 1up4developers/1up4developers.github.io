@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: tutorial | 1up4developers]]></title>
-  <link href="http://1up4developers.github.io/categories/tutorial/atom.xml" rel="self"/>
-  <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-19T23:10:10-03:00</updated>
-  <id>http://1up4developers.github.io/</id>
+  <link href="http://1up4dev.org/categories/tutorial/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-19T23:16:21-03:00</updated>
+  <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
     <email><![CDATA[1up4dev@googlegroups.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
-    <link href="http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
+    <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
     <updated>2013-03-20T11:27:02-03:00</updated>
-    <id>http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim</id>
+    <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
 <p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
@@ -125,9 +125,9 @@ Feche um split com Ctrl-a + X</p>
   
   <entry>
     <title type="html"><![CDATA[Programação funcional com JavaScript]]></title>
-    <link href="http://1up4developers.github.io/2013/02/programacao-funcional-com-javascript/"/>
+    <link href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"/>
     <updated>2013-02-21T12:58:02-03:00</updated>
-    <id>http://1up4developers.github.io/2013/02/programacao-funcional-com-javascript</id>
+    <id>http://1up4dev.org/2013/02/programacao-funcional-com-javascript</id>
     <content type="html"><![CDATA[<blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
 
 <h2>O que é programação funcional</h2>
@@ -309,9 +309,9 @@ bomDia("Nicolau");
   
   <entry>
     <title type="html"><![CDATA[[Tutorial] Configurando o ambiente de desenvolvimento Ruby: RVM]]></title>
-    <link href="http://1up4developers.github.io/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm/"/>
+    <link href="http://1up4dev.org/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm/"/>
     <updated>2011-08-22T06:00:19-03:00</updated>
-    <id>http://1up4developers.github.io/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm</id>
+    <id>http://1up4dev.org/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm</id>
     <content type="html"><![CDATA[<p>Se você ainda não trabalha com <a href="http://www.ruby-lang.org/pt/">Ruby</a> pois acha complicado demais instalá-lo, chega de desculpas! Esse tutorial <del>for dummies</del> ajudará a instalar o Ruby através do <a href="http://beginrescueend.com/">RVM</a> de forma direta, sem enrolação.</p>
 
 <p>Partindo de uma instalação do <a href="http://www.ubuntu.com/">Ubuntu</a> 11.04 zerada, começamos com os pré-requisitos para instalar o RVM:</p>
@@ -376,9 +376,9 @@ user@ubuntu:~$ gem -v
   
   <entry>
     <title type="html"><![CDATA[Usando Bundler com Rails 2.3]]></title>
-    <link href="http://1up4developers.github.io/2011/01/usando-bundler-com-rails-2-3/"/>
+    <link href="http://1up4dev.org/2011/01/usando-bundler-com-rails-2-3/"/>
     <updated>2011-01-17T09:00:55-02:00</updated>
-    <id>http://1up4developers.github.io/2011/01/usando-bundler-com-rails-2-3</id>
+    <id>http://1up4dev.org/2011/01/usando-bundler-com-rails-2-3</id>
     <content type="html"><![CDATA[<p>Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma resposta.</p>
 
 <p>Caso você não conheça, Bundler é uma ferramenta criada para facilitar a instalação e atualização de aplicações e suas gems, resolvendo facilmente as dependências e criando ambientes homogêneos em máquinas diferentes. Em outras palavras, resolve de uma vez por todas aquele inferno que era ter que baixar gem por gem da sua aplicação e ainda assim correr o risco de encontrar alguma incompatibilidade.</p>
@@ -533,9 +533,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Guia de Ruby do Why e Autospec-notification]]></title>
-    <link href="http://1up4developers.github.io/2009/04/guia-de-ruby-do-why-autospec-autotest-notification/"/>
+    <link href="http://1up4dev.org/2009/04/guia-de-ruby-do-why-autospec-autotest-notification/"/>
     <updated>2009-04-27T01:00:03-03:00</updated>
-    <id>http://1up4developers.github.io/2009/04/guia-de-ruby-do-why-autospec-autotest-notification</id>
+    <id>http://1up4dev.org/2009/04/guia-de-ruby-do-why-autospec-autotest-notification</id>
     <content type="html"><![CDATA[<h2>O comovente guia de Ruby do Why</h2>
 
 <p>Este <a href="http://poignantguide.net/ruby/">livro</a> é sensacional e demonstra exatamente o espírito do Ruby: papo de programador.</p>

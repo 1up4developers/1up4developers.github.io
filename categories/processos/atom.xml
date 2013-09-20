@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: processos | 1up4developers]]></title>
-  <link href="http://1up4developers.github.io/categories/processos/atom.xml" rel="self"/>
-  <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-19T23:10:10-03:00</updated>
-  <id>http://1up4developers.github.io/</id>
+  <link href="http://1up4dev.org/categories/processos/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-19T23:16:21-03:00</updated>
+  <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
     <email><![CDATA[1up4dev@googlegroups.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
-    <link href="http://1up4developers.github.io/2013/04/novos-rumos/"/>
+    <link href="http://1up4dev.org/2013/04/novos-rumos/"/>
     <updated>2013-04-01T12:00:51-03:00</updated>
-    <id>http://1up4developers.github.io/2013/04/novos-rumos</id>
+    <id>http://1up4dev.org/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
 <p>Pretendo aplicar, de maneira holística, processos definidos e reproduziveis que performem de maneira out of box a sinergia entre o levantamento de requisitos, desenvolvimento no chão de fábrica e posterior envio ao setor de testes, visando a garantia de qualidade do entregável.</p>
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[TPW: e-mails vs reuniões]]></title>
-    <link href="http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes/"/>
+    <link href="http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes/"/>
     <updated>2011-06-13T06:00:59-03:00</updated>
-    <id>http://1up4developers.github.io/2011/06/tpw-e-mails-vs-reunioes</id>
+    <id>http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes</id>
     <content type="html"><![CDATA[<p>A cilada típica em ambientes corporativos:</p>
 
 <p><img src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" /></p>
@@ -75,9 +75,9 @@
   
   <entry>
     <title type="html"><![CDATA[Agilidade é a buzzword do momento]]></title>
-    <link href="http://1up4developers.github.io/2009/04/agilidade-e-a-buzzword-do-momento/"/>
+    <link href="http://1up4dev.org/2009/04/agilidade-e-a-buzzword-do-momento/"/>
     <updated>2009-04-22T11:46:42-03:00</updated>
-    <id>http://1up4developers.github.io/2009/04/agilidade-e-a-buzzword-do-momento</id>
+    <id>http://1up4dev.org/2009/04/agilidade-e-a-buzzword-do-momento</id>
     <content type="html"><![CDATA[<p>Nos últimos anos o mercado de TI cresceu exponencialmente. Surgiram desde pequenas empresas especializadas em construir websites até monstruosas fábricas de software com seus contratos milionários. Algumas com orçamento limitado outras com dinheiro jorrando pelos canos. Umas com problemas por falta de organização outras com problemas burocráticos. Bons profissionais vs. equipes de sobrinhos, habilidade técnica contra enxurradas de documentos&hellip; muito fracasso, pouco sucesso.</p>
 
 <h2>A meta é coletar as moedas até conseguirmos uma estrela</h2>
@@ -138,9 +138,9 @@
   
   <entry>
     <title type="html"><![CDATA[Agilidade cascateira]]></title>
-    <link href="http://1up4developers.github.io/2008/12/agilidade-cascateira/"/>
+    <link href="http://1up4dev.org/2008/12/agilidade-cascateira/"/>
     <updated>2008-12-16T11:50:09-02:00</updated>
-    <id>http://1up4developers.github.io/2008/12/agilidade-cascateira</id>
+    <id>http://1up4dev.org/2008/12/agilidade-cascateira</id>
     <content type="html"><![CDATA[<p>Atualmente as metodologias ágeis vêm aparecendo com cada vez mais freqüência nas empresas que desenvolvem software, introduzidas pelos próprios desenvolvedores (o que é mais comum) ou em alguns raros casos pela &ldquo;cúpula&rdquo; da empresa, na esperança de melhorar a produtividade e/ou o alto tempo de resposta do fracassado processo cascateiro. Porém, esta &ldquo;fama&rdquo; prematura dos métodos ágeis tem gerado mais resultados ruins do que bons. Sua aplicação na vida real, na maioria em muitos casos, ocorre de maneira equivocada, distorcida e desprezando-se os reais valores e princípios que apoiaram o surgimento desta filosofia.</p>
 
 <p>Um exemplo claro de como os valores ágeis estão sendo desprezados distorcidos é o aumento constante de &ldquo;cursos&rdquo; e treinamentos de metodologias ágeis. Não é raro eu receber semanalmente vários spams e-mails de escolas de treinamento que ministram cursos de Scrum, XP, preparação para certificação ScrumMaster, técnicas de TDD, DDD, BDD, etc. Infelizmente o que estes cursos não ensinam (como todos os outros) é o verdadeiro significado de &ldquo;ser ágil&rdquo;. Fazer um curso de 20 horas de Scrum não o torna um ScrumMaster (você pode até ter um certificado, mas se você realmente é &ldquo;ágil&rdquo;, sabe que um certificado é um mero pedaço de papel sem valor).</p>
@@ -193,9 +193,9 @@
   
   <entry>
     <title type="html"><![CDATA[Os guardiões da cascata]]></title>
-    <link href="http://1up4developers.github.io/2008/11/os-guardioes-da-cascata/"/>
+    <link href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/"/>
     <updated>2008-11-04T01:49:11-02:00</updated>
-    <id>http://1up4developers.github.io/2008/11/os-guardioes-da-cascata</id>
+    <id>http://1up4dev.org/2008/11/os-guardioes-da-cascata</id>
     <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
 
 <p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua necessidade execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, <sarcasmo> a &ldquo;equipe&rdquo; atinge seu objetivo: o software! </sarcasmo> Seguem alguns exemplos desses guardiões cascateiros:</p>

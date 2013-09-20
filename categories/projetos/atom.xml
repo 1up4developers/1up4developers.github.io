@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: projetos | 1up4developers]]></title>
-  <link href="http://1up4developers.github.io/categories/projetos/atom.xml" rel="self"/>
-  <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-19T23:10:10-03:00</updated>
-  <id>http://1up4developers.github.io/</id>
+  <link href="http://1up4dev.org/categories/projetos/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-19T23:16:21-03:00</updated>
+  <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
     <email><![CDATA[1up4dev@googlegroups.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
-    <link href="http://1up4developers.github.io/2013/04/o-que-eu-aprendi-escrevendo/"/>
+    <link href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"/>
     <updated>2013-04-11T07:30:47-03:00</updated>
-    <id>http://1up4developers.github.io/2013/04/o-que-eu-aprendi-escrevendo</id>
+    <id>http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
 <p>Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.</p>
@@ -80,9 +80,9 @@
   
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
-    <link href="http://1up4developers.github.io/2013/01/http-monkey/"/>
+    <link href="http://1up4dev.org/2013/01/http-monkey/"/>
     <updated>2013-01-23T13:29:16-02:00</updated>
-    <id>http://1up4developers.github.io/2013/01/http-monkey</id>
+    <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
 <p>Pontos positivos:</p>
@@ -120,9 +120,9 @@
   
   <entry>
     <title type="html"><![CDATA[Nos idos de 2012, UML, Design e Waterfall]]></title>
-    <link href="http://1up4developers.github.io/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
+    <link href="http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
     <updated>2013-01-04T13:51:14-02:00</updated>
-    <id>http://1up4developers.github.io/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
+    <id>http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
     <content type="html"><![CDATA[<p>Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
 Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&hellip; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.</p>
 
@@ -137,9 +137,9 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   
   <entry>
     <title type="html"><![CDATA[Vagrant, virtualizando o ambiente de trabalho]]></title>
-    <link href="http://1up4developers.github.io/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/"/>
+    <link href="http://1up4dev.org/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/"/>
     <updated>2012-06-01T10:14:30-03:00</updated>
-    <id>http://1up4developers.github.io/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho</id>
+    <id>http://1up4dev.org/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho</id>
     <content type="html"><![CDATA[<p><a href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.</p>
 
 <h2>Prós e Contra<del>s</del></h2>
@@ -219,9 +219,9 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   
   <entry>
     <title type="html"><![CDATA[Teste sua aplicação de Linha de Comando com Cucumber!]]></title>
-    <link href="http://1up4developers.github.io/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/"/>
+    <link href="http://1up4dev.org/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/"/>
     <updated>2010-05-14T07:00:21-03:00</updated>
-    <id>http://1up4developers.github.io/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber</id>
+    <id>http://1up4dev.org/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber</id>
     <content type="html"><![CDATA[<p>É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, <a href="http://www.vim.org/">Vim</a> e não poderia ser diferente com testes funcionais, sendo mais especifico, <a href="http://cukes.info/">Cucumber</a>.</p>
 
 <p>Até o momento, só tinha usado cucumber em projetos web. E quando voltei a desenvolver o <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a>, senti falta de algo para testar funcionalmente. Baseado no <a href="http://github.com/vertiginous/pik">pik</a>, montei um esquema simples para validar qualquer aplicação de linha de comando.</p>

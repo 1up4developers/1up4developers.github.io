@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://1up4developers.github.io/sitemap.xml 
+Sitemap: http://1up4dev.org/sitemap.xml 

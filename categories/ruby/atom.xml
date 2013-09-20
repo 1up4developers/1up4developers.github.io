@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | 1up4developers]]></title>
-  <link href="http://1up4developers.github.io/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-19T23:10:10-03:00</updated>
-  <id>http://1up4developers.github.io/</id>
+  <link href="http://1up4dev.org/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-19T23:16:21-03:00</updated>
+  <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
     <email><![CDATA[1up4dev@googlegroups.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
-    <link href="http://1up4developers.github.io/2013/01/http-monkey/"/>
+    <link href="http://1up4dev.org/2013/01/http-monkey/"/>
     <updated>2013-01-23T13:29:16-02:00</updated>
-    <id>http://1up4developers.github.io/2013/01/http-monkey</id>
+    <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
 <p>Pontos positivos:</p>
@@ -55,9 +55,9 @@
   
   <entry>
     <title type="html"><![CDATA[Rails 4 - Novidades]]></title>
-    <link href="http://1up4developers.github.io/2012/11/rails-4-novidades/"/>
+    <link href="http://1up4dev.org/2012/11/rails-4-novidades/"/>
     <updated>2012-11-29T11:38:49-02:00</updated>
-    <id>http://1up4developers.github.io/2012/11/rails-4-novidades</id>
+    <id>http://1up4dev.org/2012/11/rails-4-novidades</id>
     <content type="html"><![CDATA[<p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
 
 <p>Segue um resumão:</p>
@@ -82,9 +82,9 @@
   
   <entry>
     <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
-    <link href="http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers/"/>
+    <link href="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"/>
     <updated>2012-11-28T13:49:06-02:00</updated>
-    <id>http://1up4developers.github.io/2012/11/minionserver-a-real-server-to-mock-servers</id>
+    <id>http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
 <pre><code>&lt;code&gt;require 'minion_server'
@@ -117,9 +117,9 @@ Hope that helps!</p>
   
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
-    <link href="http://1up4developers.github.io/2012/06/concepcao-do-rologames/"/>
+    <link href="http://1up4dev.org/2012/06/concepcao-do-rologames/"/>
     <updated>2012-06-25T07:05:09-03:00</updated>
-    <id>http://1up4developers.github.io/2012/06/concepcao-do-rologames</id>
+    <id>http://1up4dev.org/2012/06/concepcao-do-rologames</id>
     <content type="html"><![CDATA[<p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
 
 <h2>Quando surgiu a idéia</h2>
@@ -158,9 +158,9 @@ Hope that helps!</p>
   
   <entry>
     <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
-    <link href="http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames/"/>
+    <link href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/"/>
     <updated>2012-06-20T08:37:53-03:00</updated>
-    <id>http://1up4developers.github.io/2012/06/a-experiencia-de-lancar-o-rologames</id>
+    <id>http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames</id>
     <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
 <p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>

@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: web | 1up4developers]]></title>
-  <link href="http://1up4developers.github.io/categories/web/atom.xml" rel="self"/>
-  <link href="http://1up4developers.github.io/"/>
-  <updated>2013-09-19T23:10:10-03:00</updated>
-  <id>http://1up4developers.github.io/</id>
+  <link href="http://1up4dev.org/categories/web/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-19T23:16:21-03:00</updated>
+  <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
     <email><![CDATA[1up4dev@googlegroups.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
-    <link href="http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups/"/>
+    <link href="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/"/>
     <updated>2013-08-22T14:32:23-03:00</updated>
-    <id>http://1up4developers.github.io/2013/08/introducao-a-linux-control-groups-cgroups</id>
+    <id>http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups</id>
     <content type="html"><![CDATA[<p>Em tempos <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
 <p>Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &ldquo;<em>onda do verão</em>&rdquo; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &ldquo;wave&rdquo;.</p>
@@ -138,9 +138,9 @@ cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
   
   <entry>
     <title type="html"><![CDATA[Extendendo Ruby com C - Só um aperitivo]]></title>
-    <link href="http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
+    <link href="http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
     <updated>2013-08-19T14:29:56-03:00</updated>
-    <id>http://1up4developers.github.io/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
+    <id>http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
     <content type="html"><![CDATA[<p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
 
 <p>Vamos criar uma extensão que retorna uma simples String.</p>
@@ -246,9 +246,9 @@ $irb(main):002:0&gt; 1up4dev::Talker.say_yeah
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
-    <link href="http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
+    <link href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
     <updated>2013-06-27T09:42:18-03:00</updated>
-    <id>http://1up4developers.github.io/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
+    <id>http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
 <p>Dependências:</p>
@@ -275,9 +275,9 @@ $irb(main):002:0&gt; 1up4dev::Talker.say_yeah
   
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
-    <link href="http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
+    <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
     <updated>2013-03-20T11:27:02-03:00</updated>
-    <id>http://1up4developers.github.io/2013/03/pair-programming-remoto-com-screen-e-vim</id>
+    <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
 <p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
@@ -385,9 +385,9 @@ Feche um split com Ctrl-a + X</p>
   
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
-    <link href="http://1up4developers.github.io/2013/01/http-monkey/"/>
+    <link href="http://1up4dev.org/2013/01/http-monkey/"/>
     <updated>2013-01-23T13:29:16-02:00</updated>
-    <id>http://1up4developers.github.io/2013/01/http-monkey</id>
+    <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
 <p>Pontos positivos:</p>
