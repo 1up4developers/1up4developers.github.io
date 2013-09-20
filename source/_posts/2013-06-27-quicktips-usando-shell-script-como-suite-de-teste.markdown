@@ -26,10 +26,9 @@ Dependências:
 
 
 
-	
   * bash
 
-	
+
   * curl
 
 
@@ -39,6 +38,10 @@ Obs: Vou embedar [este gist](https://gist.github.com/rogerleite/5869576), e pode
 
 Obs2: Este post é uma versão pt-br deste post no coderwall [Using Shell Script to test your server](https://coderwall.com/p/nsso8w).
 
+
+{% codeblock test.sh lang:bash %}
+  {% gistcontent rogerleite/5869576 test.sh %}
+{% endcodeblock %}
 
 
 Referências:
