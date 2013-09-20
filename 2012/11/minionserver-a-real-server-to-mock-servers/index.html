@@ -112,26 +112,44 @@
 
 <div class="entry-content"><p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
-<pre><code>&lt;code&gt;require 'minion_server'
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;minion_server&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># build your integration app</span>
+</span><span class='line'><span class="no">IntegrationApp</span> <span class="o">=</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Builder</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">map</span> <span class="s2">&quot;/&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">run</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
+</span><span class='line'>      <span class="o">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">},</span> <span class="o">[</span><span class="s2">&quot;Be happy!&quot;</span><span class="o">]]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">server</span> <span class="o">=</span> <span class="no">MinionServer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">IntegrationApp</span><span class="p">)</span>
+</span><span class='line'><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">1620</span><span class="p">)</span>  <span class="c1"># default: localhost, 4000</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># do your calls</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;curl http://localhost:1620&quot;</span> <span class="c1"># =&gt; &quot;Be happy!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">server</span><span class="o">.</span><span class="n">shutdown</span>
+</span></code></pre></td></tr></table></div></figure>
 
-# build your integration app
-IntegrationApp = Rack::Builder.new do
-  map "/" do
-    run lambda { |env|
-      [200, {"Content-Type" =&gt; "text/plain"}, ["Be happy!"]]
-    }
-  end
-end
-
-server = MinionServer.new(IntegrationApp)
-server.start("localhost", 1620)  # default: localhost, 4000
-
-# do your calls
-system "curl http://localhost:1620" # =&gt; "Be happy!"
-
-server.shutdown
-&lt;/code&gt;
-</code></pre>
 
 <p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
 Hope that helps!</p>

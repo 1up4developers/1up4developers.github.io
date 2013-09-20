@@ -300,7 +300,7 @@
 
 <h2>É uma cilada Bino!!!</h2>
 
-<p>[caption id=&ldquo;attachment_525&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;360&rdquo; caption=&ldquo;Caso de Uso!?! Pode ser uma cilada Bino!&rdquo;]<a href="http://pt.wikipedia.org/wiki/Carga_Pesada"><img src="/images/uploads/2009/07/cilada_bino.jpg" alt="" /></a>[/caption]</p>
+<p><a href="http://pt.wikipedia.org/wiki/Carga_Pesada"><img src="/images/uploads/2009/07/cilada_bino.jpg" alt="" /></a></p>
 
 <p>Pontos negativos que podem tornar numa cilada:</p>
 
@@ -564,20 +564,25 @@ end
 
 <p>Tudo isso foi só pra contar o que me levou a criar a gem gedit-snippets-tool. Com ela é possível criar <em>cheat sheets</em> dos seus snippets. Supondo que você tenha ruby e rubygem instalados, seu modo de uso é muito simples. Para instalar a gem execute:</p>
 
-<pre><code>&lt;code&gt;sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Após a instalação, para gerar um <em>cheat sheet</em> com todos os seus snippets, execute:</p>
 
-<pre><code>&lt;code&gt;gedit-snippets-tool -cs &gt; ~/mycheatsheet.xhtml&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gedit-snippets-tool -cs &gt; ~/mycheatsheet.xhtml
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Caso tenha muitos snippets, e deseja criar um cheat sheet somente com Ruby e Ruby on Rails por exemplo, execute:</p>
 
-<pre><code>&lt;code&gt;gedit-snippets-tool -cs ruby* &gt; ~/mycheatsheet.xhtml&lt;/code&gt;
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml</span></code></pre></td></tr></table></div></figure>
 
-<p>[caption id=&ldquo;attachment_484&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;291&rdquo; caption=&ldquo;Meu cheat sheet de exemplo&rdquo;]<a href="/images/uploads/2009/04/cheatsheet-example.png"><img src="/images/uploads/2009/04/cheatsheet-example-291x300.png" alt="Meu cheat sheet de exemplo" /></a>[/caption]</p>
+
+<p><a href="/images/uploads/2009/04/cheatsheet-example.png"><img src="/images/uploads/2009/04/cheatsheet-example-291x300.png" alt="Meu cheat sheet de exemplo" /></a></p>
 
 <p>Levando em conta que a gem foi feita em três dias e focamos somente o necessário para lançarmos uma versão 0.x &ldquo;em produção&rdquo;, vamos as limitações:</p>
 
@@ -809,13 +814,13 @@ script/autospec
 
 <p>É uma triste realidade que essas empresas tenham mais <a href="http://www.youtube.com/watch?v=R47Xe8kVrv0">executivos</a> do que programadores. Como diz o <a href="http://www.luli.com.br/">Luli Radfahrer</a>, <em>executivos são aqueles seres que se vestem com um pensamento fracassado, usam uma linguagem própria sendo uma mistura de termos que só eles entendem e 20% de palavras em inglês</em>&hellip; não vivem os problemas reais da empresa. É como se estivessem em outro mundo: Mario World!</p>
 
-<p>[caption id=&ldquo;attachment_439&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;O mundo dos executivos: nuvens sorrindo&rdquo;]<a href="/images/uploads/2009/04/marioland-clean.jpg"><img src="/images/uploads/2009/04/marioland-clean-300x188.jpg" alt="" /></a>[/caption]</p>
+<p><a href="/images/uploads/2009/04/marioland-clean.jpg"><img src="/images/uploads/2009/04/marioland-clean-300x188.jpg" alt="" /></a></p>
 
 <p>A maioria das empresas que têm problemas com desenvolvimento de software ainda estão vivendo na década de 90. Internet ainda é uma palavra assustadora. Programador é apenas um funcionário que sabe o que significam siglas de informática e sabem mexer no computador. Mudança ainda é encarada como algo arriscado, que deve ser planejado, estudado e aprovado pelo presidente, diretoria e gestores. A palavra da vez é <strong>processo</strong> e seu fiel companheiro é <strong>prazo</strong>. A burocracia é uma amiga que garante que as coisas não fujam de controle. Nesse cenário não há como fugir do waterfall.</p>
 
 <p>O maior problema do waterfall são os papéis: cada um com sua &ldquo;especialidade&rdquo;. Alguém determina que um infeliz funcionário vai ser responsável por &ldquo;levantar requisitos&rdquo;. Faz um cursinho de UML e começa a escrever uma quantidade sem fim de Casos de Uso sem ter noção alguma do que seu trabalho afeta no processo. Então a &ldquo;equipe&rdquo; começa a ter muito &ldquo;retrabalho&rdquo;, uma vez que os clientes não estão satisfeitos com o que está sendo entregue. Logo percebem que devem fazer o &ldquo;levantamento&rdquo; mais detalhado e passam a engessar ainda mais o processo com reuniões, assinaturas, etc. Conclusão: tempo e dinheiro desperdiçados e nenhum resultado satisfatório.</p>
 
-<p>[caption id=&ldquo;attachment_441&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;300&rdquo; caption=&ldquo;Meu trabalho é digitar 4 8 15 16 23 42 a cada 108 segundos&rdquo;]<a href="/images/uploads/2009/04/lost_hatch_locke.jpg"><img src="/images/uploads/2009/04/lost_hatch_locke-300x199.jpg" alt="Seu trabalho é digitar xxx a cada 108 segundos" /></a>[/caption]</p>
+<p><a href="/images/uploads/2009/04/lost_hatch_locke.jpg"><img src="/images/uploads/2009/04/lost_hatch_locke-300x199.jpg" alt="Seu trabalho é digitar xxx a cada 108 segundos" /></a></p>
 
 <p>Falta de foco? Profissionais não qualificados? Processo falho? Não apenas isso: não há comunicação, não há troca de experiências. O waterfall favorece o aparecimento da síndrome do funcionário público: &ldquo;eu sou gerente: eu <a href="http://www.youtube.com/watch?v=R47Xe8kVrv0">córdeno</a>, não preciso saber programar&rdquo;. As decisões geralmente são tomadas por uma única pessoa. Os projetos seguem o modelo de construção civil. Os profissionais se acomodam pois não veem perspectiva, não conhecem o processo completo, não são ouvidos e por isso não são valorizados.</p>
 
@@ -837,7 +842,7 @@ script/autospec
 
 <p>Programar é difícil, não é um trabalho para qualquer aventureiro. É preciso <a href="http://akitaonrails.com/2009/04/17/off-topic-devo-fazer-faculdade">estudar</a> muito, se dedicar e principalmente, gostar! Não basta apenas estudar para conseguir uma <a href="http://www.nomedojogo.com/2009/02/17/um-modelo-de-maturidade-para-projetos-rails-e-pratico/">certificação</a> pois não garante nada. Deve-se viver a programação, participar de fóruns, contribuir com projetos open-source, discutir idéias, ser auto-crítico, ler muito, praticar, apreciar as boas práticas e abolir o que não presta&hellip;</p>
 
-<p>[caption id=&ldquo;attachment_443&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;225&rdquo; caption=&ldquo;Agilidade é propor soluções simples para os problemas&rdquo;]<a href="/images/uploads/2009/04/controle-wii-remote.jpg"><img src="/images/uploads/2009/04/controle-wii-remote-225x300.jpg" alt="Agilidade é propor soluções simples para os problemas" /></a>[/caption]</p>
+<p><a href="/images/uploads/2009/04/controle-wii-remote.jpg"><img src="/images/uploads/2009/04/controle-wii-remote-225x300.jpg" alt="Agilidade é propor soluções simples para os problemas" /></a></p>
 
 <p>Agilidade não é anarquia, não significa &ldquo;sair fazendo as coisas de qualquer jeito&rdquo;, dizer &ldquo;não&rdquo; para documentação, etc. É uma mudança de atitude, uma nova maneira de enfrentar os problemas e propor soluções <a href="http://blog.aspercom.com.br/2008/07/21/hierarquias-sao-inteligentes-nas-pontas/">simples e práticas</a>, é ter foco, é saber fazer mais com menos, é automatizar tarefas, é estar comprometido&hellip; agilidade é atitude.</p>
 
@@ -847,7 +852,7 @@ script/autospec
 
 <p>Mais uma vez, a falta de foco e maturidade das empresas distorcem tudo. Muitas empresas &ldquo;compraram&rdquo; o Scrum como a solução pronta. Bastar treinar os funcionários, comprar blocos de post-it e tudo passa a funcionar bem e gerar lucro. Pagam um curso de &ldquo;gerenciamento de projetos com Scrum&rdquo; para os gerentes. Depois apostam todos as fichas em um projeto &ldquo;piloto&rdquo;. Fazem tudo que manda o manual: reuniões diárias, planing-pocker, quadro com post-its, etc. E o projeto&hellip; fracassa!</p>
 
-<p>[caption id=&ldquo;attachment_454&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;200&rdquo; caption=&ldquo;Queimando dinheiro&rdquo;]<a href="/images/uploads/2009/04/burning_money.jpg"><img src="/images/uploads/2009/04/burning_money.jpg" alt="Queimando dinheiro" /></a>[/caption]</p>
+<p><a href="/images/uploads/2009/04/burning_money.jpg"><img src="/images/uploads/2009/04/burning_money.jpg" alt="Queimando dinheiro" /></a></p>
 
 <p>Então quer dizer que Scrum não funciona? Foi dinheiro desperdiçado? Tanto esforço para nada? Neste caso, devo dizer que sim! Se esqueceram do processo anterior falho, funcionários pouco qualificados e dos líderes sem foco. Escolheram aqueles funcionários mais &ldquo;experientes&rdquo; para serem o Scrum Master. Sim, aqueles mesmos que só sabiam escrever casos de uso e diagramas UML. Se esqueceram dos valores, dos princípios, <a href="http://rogerioalcantara.blogspot.com/2009/04/ah-entao-vc-usa-scrum.html">da atitude</a>, do relacionamento com o cliente. O pensamento não mudou, o foco ainda era no processo. Depois de tanto esforço, só deram outro nome o waterfall. Não demorou muito e surgiram os papéis, artefatos, documentos&hellip; ou seja, a empresa continua cometendo os mesmos erros!</p>
 

@@ -116,54 +116,88 @@
 
 <p>Este é a estrutura comum (bem simplificada) de uma classe Util com métodos estáticos:</p>
 
-<pre><code>&lt;code&gt;public class MagicUtil {
-    public static String getConstanteSecreta() {
-        return "VALOR_SECRETO_AMBIENTE";
-    }
-}
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MagicUtil</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getConstanteSecreta</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;VALOR_SECRETO_AMBIENTE&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Neste caso, uma boa estratégia para os testes seria encapsular a chamada da classe Util em um método <em>protected</em>, para que seja sobrescrito na classe de teste, assumindo o comportamento desejado. Porém, se a classe Util for largamente referenciada no projeto (o que é comum) seria preciso <em>refatorar</em> todas a classes que a utilizam para escrever um teste completo.</p>
 
 <p>A estratégia proposta é <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorar</a> a classe Util, aplicando o padrão <a href="http://pt.wikipedia.org/wiki/Singleton">Singleton</a> e transformando os métodos estáticos em métodos de instância, porém mantendo as assinaturas estáticas, que devem referenciar os métodos da instância. Uma vez que a Util pode ser instanciada (mesmo que internamente), é possível manipular seu comportamento através da injeção de um objeto <em>Mock</em>, por exemplo<em>:</em></p>
 
-<pre><code>&lt;code&gt;public class MagicUtil {
-    private static MagicUtil instance = new MagicUtil();
-    protected static MagicUtil getInstance() {
-        return instance;
-    }
-    protected static void setInstance(MagicUtil obj) {
-        instance = obj;
-    }
-    public String getConstanteSecretaInstancia() {
-        return "VALOR_SECRETO_AMBIENTE";
-    }
-    public static String getConstanteSecreta() {
-        return getInstance().getConstanteSecretaInstancia();
-    }
-}
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">MagicUtil</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">private</span> <span class="kd">static</span> <span class="n">MagicUtil</span> <span class="n">instance</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MagicUtil</span><span class="o">();</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kd">static</span> <span class="n">MagicUtil</span> <span class="nf">getInstance</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">instance</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">setInstance</span><span class="o">(</span><span class="n">MagicUtil</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">instance</span> <span class="o">=</span> <span class="n">obj</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="n">String</span> <span class="nf">getConstanteSecretaInstancia</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="s">&quot;VALOR_SECRETO_AMBIENTE&quot;</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">getConstanteSecreta</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="nf">getInstance</span><span class="o">().</span><span class="na">getConstanteSecretaInstancia</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Assim, a Util continua com o mesmo comportamento e seu <strong>contrato</strong> foi mantido. Agora, no seu teste, basta escrever o mock (estendendo a classe e sobrescrevendo os métodos) e injetá-lo na instância interna da Util:</p>
 
-<pre><code>&lt;code&gt;public class ClasseTest {
-    @Test
-    public void testaMetodoDependenteDeMagicUtil() {
-        new MagicUtil() {
-            {
-                setInstance(this);
-            }
-            public String getConstanteSecretaInstancia() {
-                return "MEU_VALOR_MOCK";
-            }
-        };
-        Assert.assertEquals("MEU_VALOR_MOCK", MagicUtil.getConstanteSecreta());
-    }
-}
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">ClasseTest</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nd">@Test</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testaMetodoDependenteDeMagicUtil</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">new</span> <span class="nf">MagicUtil</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="o">{</span>
+</span><span class='line'>                <span class="n">setInstance</span><span class="o">(</span><span class="k">this</span><span class="o">);</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="n">String</span> <span class="nf">getConstanteSecretaInstancia</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="s">&quot;MEU_VALOR_MOCK&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">};</span>
+</span><span class='line'>        <span class="n">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="s">&quot;MEU_VALOR_MOCK&quot;</span><span class="o">,</span> <span class="n">MagicUtil</span><span class="o">.</span><span class="na">getConstanteSecreta</span><span class="o">());</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Neste caso a classe anônima (que estende a Util) passa sua própria instância (this) para o método protegido <em>setInstance()</em>. Note que a chamada do método (estático) da Util continua igual ao da classe original, sem o refactoring.</p>
 

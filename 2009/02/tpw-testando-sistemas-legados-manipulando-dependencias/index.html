@@ -124,71 +124,124 @@
 
 <p>Vamos tomar como exemplo, uma classe simples com algumas dependências e responsável por encapsular algumas regras de negócio referentes à <em>Estoque</em>.</p>
 
-<pre><code>&lt;code&gt;public class EstoqueLogic {
-    public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
-        EstoqueDAO dao = new EstoqueDAO();
-        Estoque estoque = dao.localizaProduto(produto.getCodigo());
-        return estoque.getQuantidade() &gt;= quantidade;
-    }
-}
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogic</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verificaDisponibilidade</span><span class="o">(</span><span class="n">Produto</span> <span class="n">produto</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">quantidade</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">EstoqueDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueDAO</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">localizaProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">.</span><span class="na">getCodigo</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">estoque</span><span class="o">.</span><span class="na">getQuantidade</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">quantidade</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Da forma como esta classe foi escrita, é impossível testar a regra de <em>disponibilidade</em> independentemente, pois depende do objeto <em>EstoqueDAO</em> para localizar as informações necessárias para o método. Mas com um pequeno refactoring, a responsabilidade de resolver a dependência <em>EstoqueDAO</em> passa a ser responsabilidade da própria classe <em>Estoque</em>:</p>
 
-<pre><code>&lt;code&gt;public class EstoqueLogic {
-    public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
-        EstoqueDAO dao = getEstoqueDAO();
-        Estoque estoque = dao.localizaProduto(produto.getCodigo());
-        return estoque.getQuantidade() &gt;= quantidade;
-    }
-    protected EstoqueDAO getEstoqueDAO() {
-        return new EstoqueDAO();
-    }
-}
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogic</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verificaDisponibilidade</span><span class="o">(</span><span class="n">Produto</span> <span class="n">produto</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">quantidade</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">EstoqueDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="n">getEstoqueDAO</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">localizaProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">.</span><span class="na">getCodigo</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">estoque</span><span class="o">.</span><span class="na">getQuantidade</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">quantidade</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="n">EstoqueDAO</span> <span class="nf">getEstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="nf">EstoqueDAO</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Desta forma, é possível &ldquo;injetar&rdquo; um objeto que simule a dependência do <em>EstoqueDAO</em> estendendo a classe e sobrescrevendo o método <em>getEstoqueDAO()</em> para retornar a instância desejada. O teste ficaria mais ou menos assim:</p>
 
-<pre><code>&lt;code&gt;public class EstoqueLogicTest {
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogicTest</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testVerificandoDisponibilidadeDeUmProduto</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Criando o objeto EstoqueDAO mock, simulando o comportamento desejado</span>
+</span><span class='line'>        <span class="kd">final</span> <span class="n">EstoqueDAO</span> <span class="n">estoqueDAOMock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="nd">@Override</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="n">Estoque</span> <span class="nf">localizaProduto</span><span class="o">(</span><span class="n">String</span> <span class="n">codigo</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">Produto</span> <span class="n">produto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Produto</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">produto</span><span class="o">.</span><span class="na">setCodigo</span><span class="o">(</span><span class="n">codigo</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Estoque</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">estoque</span><span class="o">.</span><span class="na">setProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">estoque</span><span class="o">.</span><span class="na">setQuantidade</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">estoque</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Sobrescrevendo o método getEstoqueDAO para retornar o Mock</span>
+</span><span class='line'>        <span class="n">EstoqueLogic</span> <span class="n">logic</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueLogic</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="nd">@Override</span>
+</span><span class='line'>            <span class="kd">protected</span> <span class="n">EstoqueDAO</span> <span class="nf">getEstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">estoqueDAOMock</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Definindo o teste e executando</span>
+</span><span class='line'>        <span class="n">Produto</span> <span class="n">produto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Produto</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">produto</span><span class="o">.</span><span class="na">setCodigo</span><span class="o">(</span><span class="s">&quot;123456&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">boolean</span> <span class="n">estaDisponivel</span> <span class="o">=</span> <span class="n">logic</span><span class="o">.</span><span class="na">verificaDisponibilidade</span><span class="o">(</span><span class="n">produto</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">assertTrue</span><span class="o">(</span><span class="n">estaDisponivel</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">boolean</span> <span class="n">naoEstaDisponivel</span> <span class="o">=</span> <span class="n">logic</span><span class="o">.</span><span class="na">verificaDisponibilidade</span><span class="o">(</span><span class="n">produto</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">assertTrue</span><span class="o">(</span><span class="n">naoEstaDisponivel</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    public void testVerificandoDisponibilidadeDeUmProduto() {
-
-        //Criando o objeto EstoqueDAO mock, simulando o comportamento desejado
-        final EstoqueDAO estoqueDAOMock = new EstoqueDAO() {
-            @Override
-            public Estoque localizaProduto(String codigo) {
-                Produto produto = new Produto();
-                produto.setCodigo(codigo);
-                Estoque estoque = new Estoque();
-                estoque.setProduto(produto);
-                estoque.setQuantidade(5);
-                return estoque;
-            }
-        };
-
-        //Sobrescrevendo o método getEstoqueDAO para retornar o Mock
-        EstoqueLogic logic = new EstoqueLogic() {
-            @Override
-            protected EstoqueDAO getEstoqueDAO() {
-                return estoqueDAOMock;
-            }
-        };
-
-        //Definindo o teste e executando
-        Produto produto = new Produto();
-        produto.setCodigo("123456");        
-
-        boolean estaDisponivel = logic.verificaDisponibilidade(produto, 10);
-        assertTrue(estaDisponivel);
-
-        boolean naoEstaDisponivel = logic.verificaDisponibilidade(produto, 2);
-        assertTrue(naoEstaDisponivel);
-    }
-}
-&lt;/code&gt;
-</code></pre>
 
 <p>O método<em> getEstoqueDAO() </em>da classe <em>EstoqueLogic</em> foi sobrescrito para retornar o objeto <em>estoqueDAOMock</em> com as informações necessárias para o teste, ou seja, o comportamento das dependências foi simulado, possibilitando que o teste ficasse concentrado apenas da classe <em>Estoque</em>.</p>
 

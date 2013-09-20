@@ -116,20 +116,25 @@
 
 <p>Tudo isso foi só pra contar o que me levou a criar a gem gedit-snippets-tool. Com ela é possível criar <em>cheat sheets</em> dos seus snippets. Supondo que você tenha ruby e rubygem instalados, seu modo de uso é muito simples. Para instalar a gem execute:</p>
 
-<pre><code>&lt;code&gt;sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Após a instalação, para gerar um <em>cheat sheet</em> com todos os seus snippets, execute:</p>
 
-<pre><code>&lt;code&gt;gedit-snippets-tool -cs &gt; ~/mycheatsheet.xhtml&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gedit-snippets-tool -cs &gt; ~/mycheatsheet.xhtml
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Caso tenha muitos snippets, e deseja criar um cheat sheet somente com Ruby e Ruby on Rails por exemplo, execute:</p>
 
-<pre><code>&lt;code&gt;gedit-snippets-tool -cs ruby* &gt; ~/mycheatsheet.xhtml&lt;/code&gt;
-</code></pre>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml</span></code></pre></td></tr></table></div></figure>
 
-<p>[caption id=&ldquo;attachment_484&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;291&rdquo; caption=&ldquo;Meu cheat sheet de exemplo&rdquo;]<a href="/images/uploads/2009/04/cheatsheet-example.png"><img src="/images/uploads/2009/04/cheatsheet-example-291x300.png" alt="Meu cheat sheet de exemplo" /></a>[/caption]</p>
+
+<p><a href="/images/uploads/2009/04/cheatsheet-example.png"><img src="/images/uploads/2009/04/cheatsheet-example-291x300.png" alt="Meu cheat sheet de exemplo" /></a></p>
 
 <p>Levando em conta que a gem foi feita em três dias e focamos somente o necessário para lançarmos uma versão 0.x &ldquo;em produção&rdquo;, vamos as limitações:</p>
 

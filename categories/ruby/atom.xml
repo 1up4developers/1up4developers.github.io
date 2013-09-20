@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/ruby/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-20T20:12:58-03:00</updated>
+  <updated>2013-09-20T20:51:06-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -87,26 +87,53 @@
     <id>http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
-<pre><code>&lt;code&gt;require 'minion_server'
-
-# build your integration app
-IntegrationApp = Rack::Builder.new do
-  map "/" do
-    run lambda { |env|
-      [200, {"Content-Type" =&gt; "text/plain"}, ["Be happy!"]]
-    }
-  end
-end
-
-server = MinionServer.new(IntegrationApp)
-server.start("localhost", 1620)  # default: localhost, 4000
-
-# do your calls
-system "curl http://localhost:1620" # =&gt; "Be happy!"
-
-server.shutdown
-&lt;/code&gt;
-</code></pre>
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">minion_server</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;h1&gt;build your integration app&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">IntegrationApp</span> <span class="o">=</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Builder</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">map</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">/&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;run lambda { |env|</span>
+</span><span class='line'><span class="sr">  [200, {&quot;Content-Type&quot; =&amp;gt; &quot;text/</span><span class="n">plain</span><span class="s2">&quot;}, [&quot;</span><span class="no">Be</span> <span class="n">happy!</span><span class="s2">&quot;]]</span>
+</span><span class='line'><span class="s2">}</span>
+</span><span class='line'><span class="s2">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;p&gt;  end</span>
+</span><span class='line'><span class="s2">end&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;p&gt;server = MinionServer.new(IntegrationApp)</span>
+</span><span class='line'><span class="s2">server.start(&amp;ldquo;localhost&amp;rdquo;, 1620)  # default: localhost, 4000&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;h1&gt;do your calls&lt;/h1&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;p&gt;system &amp;ldquo;curl &lt;a href=&quot;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="ss">localhost</span><span class="p">:</span><span class="mi">1620</span><span class="s2">&quot;&gt;http://localhost:1620&lt;/a&gt;&amp;rdquo; # =&gt; &amp;ldquo;Be happy!&amp;rdquo;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">&lt;p&gt;server.shutdown</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
 Hope that helps!</p>
@@ -128,7 +155,7 @@ Hope that helps!</p>
 
 <h2>Definindo um mantra</h2>
 
-<p>[caption id=&ldquo;attachment_1199&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;240&rdquo; caption=&ldquo;Sorriso pimpão do Sr. Kawasaki&rdquo;]<a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="/images/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a>[/caption]</p>
+<p><a href="http://www.youtube.com/watch?v=VKhEg79xLio"><img src="/images/uploads/2012/06/kawasaki-sm.jpg" alt="A Arte do Começo - The Art of Start" /></a></p>
 
 <p>Totalmente baseado nas dicas do Sr. Kawasaki em <a href="http://www.youtube.com/watch?v=VKhEg79xLio">A Arte do Começo</a>, definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:</p>
 

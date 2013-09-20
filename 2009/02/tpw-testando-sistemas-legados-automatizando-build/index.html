@@ -132,40 +132,72 @@
 
 <p>Tendo os objetivos do build definidos, basta escrever o script do Ant. Isso deve ser feito no arquivo build.xml, no root do projeto. As tarefas são definidas pelas tags <target> e podem ser dependentes para garantir a sequencia de execução. Em cada target são definidas as ações executadas, como rodar o compilador (javac), copiar um arquivo, rodar os testes, etc. Uma vez que as tarefas estão configuradas, basta executar o build pelo próprio IDE ou linha de comando.</p>
 
-<pre><code>&lt;code&gt;&lt;project name="frank" default="package"&gt;
-    &lt;path id="classpath"&gt;
-        &lt;pathelement location="build/bin"/&gt;
-        &lt;fileset dir="src"&gt;
-            &lt;include name="*.java"/&gt;
-        &lt;/fileset&gt;
-        &lt;fileset dir="lib"&gt;
-            &lt;include name="*.jar"/&gt;
-        &lt;/fileset&gt;
-    &lt;/path&gt;
-    &lt;target name="clean"&gt;
-         &lt;delete dir="build"/&gt;
-          &lt;mkdir dir="build"/&gt;
-    &lt;/target&gt;
-    &lt;target name="compile" depends="clean"&gt;
-        &lt;javac srcdir="src" destdir="build"&gt;
-            &lt;classpath refid="classpath"/&gt;
-        &lt;/javac&gt;
-    &lt;/target&gt;
-    &lt;target name="test" depends="compile"&gt;
-        &lt;junit&gt;
-            &lt;classpath refid="classpath"/&gt;
-            &lt;batchtest&gt;
-                &lt;fileset dir="build" includes="*Test"/&gt;
-            &lt;/batchtest&gt;
-        &lt;/junit&gt;
-    &lt;/target&gt;
-    &lt;target name="package" depends="compile, test"&gt;
-        &lt;war destfile="frank.war" webxml="web/WEB-INF/web.xml"&gt;
-        &lt;classes dir="build"/&gt;
-    &lt;/target&gt;
-&lt;/project&gt;
-&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;project</span> <span class="na">name=</span><span class="s">&quot;frank&quot;</span> <span class="na">default=</span><span class="s">&quot;package&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;path</span> <span class="na">id=</span><span class="s">&quot;classpath&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;pathelement</span> <span class="na">location=</span><span class="s">&quot;build/bin&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;fileset</span> <span class="na">dir=</span><span class="s">&quot;src&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;include</span> <span class="na">name=</span><span class="s">&quot;*.java&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/fileset&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;fileset</span> <span class="na">dir=</span><span class="s">&quot;lib&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;include</span> <span class="na">name=</span><span class="s">&quot;*.jar&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/fileset&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/path&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;clean&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>       <span class="nt">&lt;delete</span> <span class="na">dir=</span><span class="s">&quot;build&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>        <span class="nt">&lt;mkdir</span> <span class="na">dir=</span><span class="s">&quot;build&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;compile&quot;</span> <span class="na">depends=</span><span class="s">&quot;clean&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;javac</span> <span class="na">srcdir=</span><span class="s">&quot;src&quot;</span> <span class="na">destdir=</span><span class="s">&quot;build&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;classpath</span> <span class="na">refid=</span><span class="s">&quot;classpath&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/javac&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;test&quot;</span> <span class="na">depends=</span><span class="s">&quot;compile&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;junit&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;classpath</span> <span class="na">refid=</span><span class="s">&quot;classpath&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;batchtest&gt;</span>
+</span><span class='line'>              <span class="nt">&lt;fileset</span> <span class="na">dir=</span><span class="s">&quot;build&quot;</span> <span class="na">includes=</span><span class="s">&quot;*Test&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>          <span class="nt">&lt;/batchtest&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/junit&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;target</span> <span class="na">name=</span><span class="s">&quot;package&quot;</span> <span class="na">depends=</span><span class="s">&quot;compile, test&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;war</span> <span class="na">destfile=</span><span class="s">&quot;frank.war&quot;</span> <span class="na">webxml=</span><span class="s">&quot;web/WEB-INF/web.xml&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;classes</span> <span class="na">dir=</span><span class="s">&quot;build&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/target&gt;</span>
+</span><span class='line'><span class="nt">&lt;/project&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Neste script estão definidas as tarefas necessárias para executar um build, conforme citei anteriormente. Por enquanto isto será o mínimo necessário para dar suporte as próximas etapas da sua missão. Mesmo que o projeto já tenha um build em Ant aproveite para <a href="http://www.onjava.com/pub/a/onjava/2003/12/17/ant_bestpractices.html">revisá-lo</a>. Tarefas bem simples e bem definidas são mais fáceis de entender e manter.</p>
 

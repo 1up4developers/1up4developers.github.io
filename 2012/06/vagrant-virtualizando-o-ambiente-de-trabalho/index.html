@@ -163,8 +163,10 @@
 
 <p>Vamos supor que você executou um &ldquo;rails s&rdquo; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:</p>
 
-<pre><code>&lt;code&gt;config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000&lt;/code&gt;
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span>  <span class="c1"># 3000 from VM, available at 4000</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Dá um restart na VM:</p>
 
