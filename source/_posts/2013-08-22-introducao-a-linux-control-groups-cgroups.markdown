@@ -10,17 +10,17 @@ categories:
 - web
 ---
 
-Em tempos **Metodologias Àgeis**, iniciativas como **[DevOps](http://en.wikipedia.org/wiki/DevOps)**, adoção de **Cloud Computing** e derivados **(SaaS, IaaS e PaaS)**, aplicações que demorariam meses, senão anos para estar na **www**, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.
+Em tempos de **Metodologias Àgeis**, iniciativas como **[DevOps](http://en.wikipedia.org/wiki/DevOps)**, adoção de **Cloud Computing** e derivados **(SaaS, IaaS e PaaS)**, aplicações que demorariam meses, senão anos para estar na **www**, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.
 
 Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de **[PaaS (Platform as A Service)](http://en.wikipedia.org/wiki/Platform_as_a_service)** tem sido a nova "_onda do verão_" e tecnologias como **[LXC](http://lxc.sourceforge.net/)**, **[Docker](http://www.docker.io/) **e **[CGroups](http://en.wikipedia.org/wiki/Cgroups)** atuam como o cerne dessa "wave".
 
 
-### O que são CGroups ?
+### O que são CGroups?
 
 
 **CGroups** é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.
 
-Curioso pra ver como funciona ?
+Curioso pra ver como funciona?
 
 
 ### Situação de Exemplo
@@ -36,25 +36,25 @@ Para rodar o exemplo estarei utilizando um _Ubuntu 12.04 64 bits._
 
 Antes de mais nada precisamos instalar algumas dependências:
 
-    
-    <code>sudo apt-get install cgroup-bin libcgroup1
-    </code>
+{% codeblock lang:bash %}
+sudo apt-get install cgroup-bin libcgroup1
+{% endcodeblock %}
 
 
-Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em **/sys/fs/cgroup **.
+Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em **/sys/fs/cgroup **
 
-    
-    <code>ls -al /sys/fs/cgroup
-    
-    drwxr-xr-x 7 root root 140 Aug  6 09:38 .
-    drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
-    drwxr-xr-x 6 root root   0 Aug  6 09:38 cpu
-    drwxr-xr-x 6 root root   0 Aug  6 09:38 cpuacct
-    drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
-    drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
-    drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
-    
-    </code>
+
+{% codeblock lang:bash %}
+ls -al /sys/fs/cgroup
+
+drwxr-xr-x 7 root root 140 Aug  6 09:38 .
+drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
+drwxr-xr-x 6 root root   0 Aug  6 09:38 cpu
+drwxr-xr-x 6 root root   0 Aug  6 09:38 cpuacct
+drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
+drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
+drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
+{% endcodeblock %}
 
 
 CGroups estão organizados por subsistemas conhecidos também como "resource controllers" responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um **Resource Controller**.
@@ -65,14 +65,18 @@ CGroups estão organizados por subsistemas conhecidos também como "resource con
 
 Para gerenciar CGroups iremos utilizar a utilitário _cgconfig_ instalado como o pacote _libcgroup1_. É interessante checar se o serviço está rodando antes de continuar :
 
-    
-    <code>$ sudo service cgconfig status</code>
+
+{% codeblock lang:bash %}
+sudo service cgconfig status
+{% endcodeblock %}
 
 
 Caso não esteja inicie o serviço
 
-    
-    <code>$ sudo service cgconfig start</code>
+
+{% codeblock lang:bash %}
+sudo service cgconfig start
+{% endcodeblock %}
 
 
 Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração **/etc/cgconfig.conf'** ou via linha de comando, que será o meio que iremos utilizar.
@@ -83,10 +87,11 @@ Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo d
 
 Para criar um grupo, utilizamos o comando **cgcreate** passando como argumento quais controllers estarão associados a ele.
 
-    
-    <code>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
-    sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
-    </code>
+
+{% codeblock lang:bash %}
+sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
+sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
+{% endcodeblock %}
 
 
 O argumento **/sinatra*** indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : **/sys/fs/cgroup/<resource_controller>/<path>**
@@ -97,39 +102,42 @@ O argumento **/sinatra*** indica o caminho relativo do grupo dentro de cada Reso
 
 Para executar determinado processo em um grupo utilizamos o comando **cgexec** passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.
 
-    
-    <code>sudo cgexec -g *:/sinatra1 sh -c 'cd <path_to_sinatra1> && exec rackup -p 4567 -D'
-    sudo cgexec -g *:/sinatra2 sh -c 'cd <path_to_sinatra2> && exec rackup -p 4568 -D'
-    </code>
+
+{% codeblock lang:bash %}
+sudo cgexec -g *:/sinatra1 sh -c 'cd <path_to_sinatra1> && exec rackup -p 4567 -D'
+sudo cgexec -g *:/sinatra2 sh -c 'cd <path_to_sinatra2> && exec rackup -p 4568 -D'
+{% endcodeblock %}
 
 
 O asterisco **(*)** acima significa que o processo estará associado a todos os controllers.
 
 Para checar a hierarquia criada:
 
-    
-    <code>ps xawf -eo pid,cgroup,args | grep ruby
-     1476              \_  5:freezer:              \_ grep --color=auto ruby
-     1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
-     1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
-    </code>
+
+{% codeblock lang:bash %}
+ps xawf -eo pid,cgroup,args | grep ruby
+ 1476              \_  5:freezer:              \_ grep --color=auto ruby
+ 1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
+ 1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
+{% endcodeblock %}
 
 
 Para setar os valores em determinado controller utilizamos o comando **cgset**. No caso abaixo estamos limitando o consumo de memória para o grupo **sinatra1** em **256MB** e para o grupo **sinatra2** em **128MB**.
 
-    
-    <code>sudo cgset -r memory.limit_in_bytes='256M' sinatra1
-    sudo cgset -r memory.limit_in_bytes='128M' sinatra2
-    </code>
+
+{% codeblock lang:bash %}
+sudo cgset -r memory.limit_in_bytes='256M' sinatra1
+sudo cgset -r memory.limit_in_bytes='128M' sinatra2
+{% endcodeblock %}
 
 
-Para checar a alteração :
+Para checar a alteração:
 
-    
-    <code>cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
-    cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
-    </code>
 
+{% codeblock lang:bash %}
+cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
+cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
+{% endcodeblock %}
 
 
 
@@ -144,11 +152,11 @@ Os links abaixo exploram mais detalhes sobre o assunto :
 
 
 
-	
+
   * [https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt](https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt)
 
-	
+
   * [http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf](http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf)
 
 
-Divirtam-se !
+Divirtam-se!
