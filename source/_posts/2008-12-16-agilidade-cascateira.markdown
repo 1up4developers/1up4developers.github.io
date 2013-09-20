@@ -38,7 +38,7 @@ Isto parece ser óbvio, mas na maioria das vezes não é. Existem vários perfis
 
 Alguns são visionários sonhadores e sempre têm necessidades mirabolantes, sem sentido. Outros são simplistas demais e muitas vezes "ocultam" detalhes importantes. Também existem os pseudo-técnicos, que acham que sabem fazer seu trabalho e já vêm sugerindo como você deve implementar aquela nova funcionalidade.
 
-[caption id="attachment_272" align="aligncenter" width="300" caption="Reação comum quando há um problema"][![Reação comum quando há um problema](/images/uploads/2008/12/imagem_spam_problem-300x181.jpg)](/images/uploads/2008/12/imagem_spam_problem.jpg)[/caption]
+[![Reação comum quando há um problema](/images/uploads/2008/12/imagem_spam_problem-300x181.jpg)](/images/uploads/2008/12/imagem_spam_problem.jpg)
 
 Como verdadeiro agilista, saber identificar o perfil de seu cliente é o início para um relacionamento de confiança e transparência. Só assim você será capaz de concentrar esforços para [resolver seu problema](http://1up4dev.org/2008/11/foco-no-problema/) e [agregar valor ao produto](http://1up4dev.org/2008/10/software-e-sobre-investimento/).
 
@@ -50,7 +50,7 @@ A única maneira de criar, corrigir ou melhorar algo é com coragem E com mudan�
 
 Quando bater a insegurança, repita: **coragem! coragem! coragem!**
 
-[caption id="attachment_266" align="aligncenter" width="150" caption="Coragem: o cão covarde!"][![](/images/uploads/2008/12/coragemcaocovarde.jpg)](/images/uploads/2008/12/coragemcaocovarde.jpg)[/caption]
+[![](/images/uploads/2008/12/coragemcaocovarde.jpg)](/images/uploads/2008/12/coragemcaocovarde.jpg)
 
 
 ### Reflita e aprenda com os próprios erros
@@ -58,7 +58,7 @@ Quando bater a insegurança, repita: **coragem! coragem! coragem!**
 
 Existem várias maneiras de você evoluir seu conhecimento, e a maioria dos programadores utilizam somente uma: tomando na cabeça.
 
-[caption id="attachment_268" align="aligncenter" width="170" caption="Prego só toma na cabeça!"][![Prego só toma na cabeça!](/images/uploads/2008/12/fotopregocomcabeca.jpg)](/images/uploads/2008/12/fotopregocomcabeca.jpg)[/caption]
+[![Prego só toma na cabeça!](/images/uploads/2008/12/fotopregocomcabeca.jpg)](/images/uploads/2008/12/fotopregocomcabeca.jpg)
 
 Como um bom seguidor de práticas ágeis, reflita e aprenda com seus erros. Compartilhar seus problemas é a melhor maneira de escolher um solução adequada e ainda espalhar sua experiência entre a equipe para que outras pessoas não cometam o mesmo erro.
 

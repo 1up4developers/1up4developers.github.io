@@ -16,7 +16,7 @@ tags:
 
 Não sei nem como começar a descrever o evento, foi muito bom !!! Logo no primeiro dia, na fila para pegar o pequeno cracha de identificação, já trombei logo com quem !?! Dr. Nic ! E ao seu lado, estava um cara muito simpático também, que de primeira não reconheci, o Chad Fowler e sem barba ! E pra quem não acredita, bom, tirei foto com o figura como prova ! (está [aqui](http://www.flickr.com/photos/rogerleite/) no album do flickr)
 
-[caption id="" align="aligncenter" width="240" caption="Palestrantes RailsSummit"]![Palestrantes RailsSummit](http://farm4.static.flickr.com/3003/2949949673_d323a895d6_m.jpg)[/caption]
+![Palestrantes RailsSummit](http://farm4.static.flickr.com/3003/2949949673_d323a895d6_m.jpg)
 
 Todas as palestras foram muito interessantes, no segundo dia, o tema testes foi muito abordado e acabou ficando repetitivo, porém o pessoal aproveitou para [atualizar seus e blogs e tals](http://blog.shadowmaru.org/2008/10/17/rails-summit-latin-america-dia-2). Na minha humilde opinião, as apresentações de abertura e final do evento foram as melhores ! Na abertura, destaque para o [video que o pessoal do Rails Envy mandou](http://www.nomedojogo.com/2008/10/15/video-do-railsenvy-no-rails-summit/) !
 
@@ -34,7 +34,7 @@ No final, o BOF (Birds of a Feather) foi um show a parte! Várias figuras, falan
 
 O **segundo dia** de evento, começou muito interessante, com a apresentação muito boa - dei muita risada em várias partes - Ninh Bui e Hongli Lai os emos caras do Phusion ! Foi muita piada nerd, várias animações flash, citações de mega man à dragon ball, com direito a Star Wars no final ...
 
-[caption id="" align="aligncenter" width="240" caption="Phusion Darth Vader !"]![Phusion Darth Vader !](http://farm4.static.flickr.com/3188/2950767782_121584d6b3_m.jpg)[/caption]
+[Phusion Darth Vader !](http://farm4.static.flickr.com/3188/2950767782_121584d6b3_m.jpg)
 
 Depois assisti a palestra do Jay Fields. Foi muito legal, ele apresentou o lado bom e ruim de vários frameworks de testes como selenium, rspec e talz. Destaque para o momento flame, quando o David Chelimsky mantenedor do rspec, começa a questionar alguns pontos levantados por Jay. Não se preocupem, que tudo acabou em breja ...
 
@@ -44,7 +44,7 @@ Chegando ao final do dia, começou a bater o cansaço ... assisti a palestra do 
 
 Pra finalizar teve o fechamento com o Obie Fernandez, ele mostrou de maneira apaixonada e apaixonante, como está funcionando sua nova empresa, a HashRocket. Mostrou o manifesto agil, primeiro em papel e depois na vida real com os fatos da sua empresa. Mostrou que testes funcionam, programação em par também funciona! e etc. Foi muito show, acho muito legal a forma que ele conduz a apresentação.
 
-[caption id="" align="aligncenter" width="240" caption="1up4dev and ... Obie !"]![1up4dev and ... Obie !](http://farm4.static.flickr.com/3156/2950743840_f525af68d7_m.jpg)[/caption]
+[1up4dev and ... Obie !](http://farm4.static.flickr.com/3156/2950743840_f525af68d7_m.jpg)
 
 O evento fechou com chave de ouro, rolando várias brejas, e isso eu te garanto, é muito louco brindar com o Dr. Nic e Obie na mesma roda ! :D
 

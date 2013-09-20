@@ -28,7 +28,7 @@ Vamos ao que interessa !
 
 No projeto [gedit-rails](http://github.com/mig/gedit-rails/tree/master) faça o download [aqui](http://github.com/mig/gedit-rails/tarball/master) ou clique em download na página do projeto (estamos no linux, use o formato tar). Descompacte o arquivo, entre na pasta e execute o install.sh veja a imagem abaixo:
 
-[caption id="attachment_65" align="aligncenter" width="300" caption="install do gedit-rails"][![install-gedit-rails](/images/uploads/2008/08/install-gedit-rails-300x131.png)](/images/uploads/2008/08/install-gedit-rails.png)[/caption]
+[![install-gedit-rails](/images/uploads/2008/08/install-gedit-rails-300x131.png)](/images/uploads/2008/08/install-gedit-rails.png)
 
 No projeto [gedit-themes](http://github.com/mig/gedit-themes/tree/master) você encontrará temas para o visual do gedit, o meu preferido é o darkmate, acho muito confortável para os olhos, mas existem várias opções. O processo de instalação é mais simples que os plugins.
 
@@ -44,16 +44,16 @@ Infelizmente estou sem tempo para entrar nos detalhes de cada plugin, de qualque
 
 
 
-	
+
   * [HTML Tidy](http://www.eng.tau.ac.il/~atavory/gedit-plugins/html-tidy/)
 
-	
+
   * [Rails Hot Commands](http://code.google.com/p/rhc/)
 
-	
+
   * [Rails Hotkeys](http://simplesideias.com.br/rails-hotkeys/)
 
-	
+
   * [Snapopen](http://www.upperbound.net/snapopen/)
 
 

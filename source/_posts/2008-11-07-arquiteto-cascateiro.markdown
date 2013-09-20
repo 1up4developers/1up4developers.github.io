@@ -22,7 +22,7 @@ Recentemente tive o desprazer de conhecer um arquiteto, é isso mesmo, aquele co
 
 Voltando ao assunto, hoje no fretado, comecei a pensar nas semelhanças que um arquiteto de sistemas (certificado que decorou patterns inutéis da Sun) tem com um arquiteto de obras. Só para deixar claro, na tabela abaixo estou usando dois estados: _FAIL_ e Ok. Fail quer dizer que vai dá merda não vai dar certo e não tem jeito, caso queira uma definição mais formal, o [wikipédia](http://en.wikipedia.org/wiki/Failure) ajuda, agora se você prefere imagens, o [Fail Blog](http://www.failblog.net/) também serve.
 
-[caption id="attachment_235" align="aligncenter" width="300" caption="Exemplo de FAIL"][![Exemplo de FAIL](/images/uploads/2008/11/soccer_fail-300x201.jpg)](/images/uploads/2008/11/soccer_fail.jpg)[/caption]
+[![Exemplo de FAIL](/images/uploads/2008/11/soccer_fail-300x201.jpg)](/images/uploads/2008/11/soccer_fail.jpg)
 
 
 
@@ -91,7 +91,7 @@ Parei a tabela por aqui pois já dá pra saber que o FAIL tende a infinito né.
 Pergunta: o que ambos arquitetos estão fazendo!?!
 Resposta educada: Estão **fechando o escopo** do projeto.
 
-[caption id="attachment_220" align="alignleft" width="227" caption="Arquiteto Cascateiro trabalhando ..."][![Arquiteto Cascateiro trabalhando ...](/images/uploads/2008/11/construcao-crea-300x225.jpg)](/images/uploads/2008/11/construcao-crea.jpg)[/caption]
+[![Arquiteto Cascateiro trabalhando ...](/images/uploads/2008/11/construcao-crea-300x225.jpg)](/images/uploads/2008/11/construcao-crea.jpg)
 
 A resposta acima é uma frase chave pra você ter certeza que vive num projeto waterfall cascateiro. Fechar o escopo do projeto inteiro deve ser muito bom para o arquiteto de obras, já para um sistema, o efeito é contrário. Acredito muito na teoria que [desenvolver software não é construir prédios](http://gc.blog.br/2008/07/20/cuidando-para-que-o-software-nao-apodreca/). Livros de renome como [Pragmatic Programmer](http://1up4dev.org/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/) citam isso.
 
@@ -99,10 +99,10 @@ Sei que este tema de construção civil já está batido. Comecei a escrever est
 
 
 
-	
+
   * O [Diego Carrion](http://www.mouseoverstudio.com/blog/) (grande peruano! :D) cita este [_link_](http://agiletips.blogspot.com/2008/07/agile-bridge-analogy.html), que fala que a engenharia civil também consegue ser ágil em alguns casos.
 
-	
+
   * O [Witaro](http://witaro.wordpress.com/), fez um ótimo post "[Desenvolvendo software como uma Rock Band](http://witaro.wordpress.com/2008/08/11/desenvolvendo-software-como-uma-rock-band/)" que quebra a barreira da analogia com a engenharia civil. Cara, continue escrevendo, porque a sua visão é muito legal!
 
 

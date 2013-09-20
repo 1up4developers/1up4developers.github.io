@@ -18,25 +18,25 @@ A própria explicação do Caso de Uso demonstra o que costumam ser na prática,
 ## É uma cilada Bino!!!
 
 
-[caption id="attachment_525" align="aligncenter" width="360" caption="Caso de Uso!?! Pode ser uma cilada Bino!"][![](/images/uploads/2009/07/cilada_bino.jpg)](http://pt.wikipedia.org/wiki/Carga_Pesada)[/caption]
+[![](/images/uploads/2009/07/cilada_bino.jpg)](http://pt.wikipedia.org/wiki/Carga_Pesada)
 
 Pontos negativos que podem tornar numa cilada:
 
 
 
-	
+
   * Não tem público definido. Casos de Uso são feitos para os analistas, desenvolvedores, testadores e as vezes para o usuário.
 
-	
+
   * Casos de Uso não compilam. O usuário quer um sistema e não papéis para assinar.
 
-	
+
   * Não traz o famoso ROI, traduzindo, retorno de investimento. Já vi muitos projetos de "anos em análise", e no final, tinham uma bíblia inútil junto com um grande rombo nas contas.
 
-	
+
   * Difícil de manter atualizado. É natural que as coisas mudem, e a cada mudança ter que atualizar quilos de documentos, não é prático e muito caro.
 
-	
+
   * Pelo fato de terem um público abrangente, é consumido muito tempo com detalhes inúteis, como diagramas de "tudo", que não ajudam em nada no desenvolvimento. Mais um item que consome tempo, recurso e muito dinheiro.
 
 
@@ -65,19 +65,19 @@ Não reuna requisitos, cave-os!
 
 
 
-	
+
   * Este negócio de "cavar", é algo como: descobrir por que o usuário faz, e não somente como. Descobrindo o por que, você consegue sugerir maneiras diferentes de como fazer. Isso nos leva a próxima dica.
 
-	
+
   * Lembre-se que, requisitos não são arquitetura, nem design, muito menos interface do usuário. Requisitos são necessidades!
 
-	
+
   * Não seja escravo de nenhuma anotação. Use o melhor método que se comunica com o seu público. No meu caso, papel e caneta, com rascunhos da futura tela, já está funcionando e bem.
 
-	
+
   * Não ter medo de sugerir novas idéias. Acredito que se dependesse da maioria dos usuários, todos os sistemas teriam cara de Excel! :D Com o porque em mente, fica mais fácil sugerir funcionalidades como filtros, layout etc.
 
-	
+
   * _Some things are better done, than described._ -> Algumas coisas são melhores feitas do que descritas. Pra mim, esta dica tem funcionado com reformulação de telas, algum "filtro maluco" etc.
 
 

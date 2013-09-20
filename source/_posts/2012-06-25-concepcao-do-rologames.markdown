@@ -32,22 +32,22 @@ Como jogador, nunca achei um serviço legal pra trocar jogos usados. Haviam pouc
 ## Definindo um mantra
 
 
-[caption id="attachment_1199" align="alignleft" width="240" caption="Sorriso pimpão do Sr. Kawasaki"][![A Arte do Começo - The Art of Start](/images/uploads/2012/06/kawasaki-sm.jpg)](http://www.youtube.com/watch?v=VKhEg79xLio)[/caption]
+[![A Arte do Começo - The Art of Start](/images/uploads/2012/06/kawasaki-sm.jpg)](http://www.youtube.com/watch?v=VKhEg79xLio)
 
 Totalmente baseado nas dicas do Sr. Kawasaki em [A Arte do Começo](http://www.youtube.com/watch?v=VKhEg79xLio), definimos uma filosofia para o site. Lembrando que se mantivermos esta filosofia sempre em mente, o site não perderá seu foco:
 
 
 
-	
+
   * **Oportunidades confiáveis**. Queremos que o usuário encontre somente as oportunidades de troca que **façam sentido** a ele, e não receba spams que infortunam a vida ou propostas _sem noção_ (por exemplo, oferecerem um jogo antigo em troca de um lançamento).
 
-	
+
   * **Toda troca deve ser justa**. Infelizmente, é uma prática considerada normal a troca de 3 jogos por 1, onde pessoas ganham dinheiro em cima de jogadores. As propostas e trocas são sempre de um jogo por outro, de acordo com os desejos e ofertas dos usuários.
 
-	
+
   * **Fácil de usar**. O site não deve atrapalhar a vida do usuário com mensagens que ele não queira receber ou oportunidades que não façam sentido. É claro que a velocidade de navegação do site conta neste quesito.
 
-	
+
   * **Social**. Os usuários podem acompanhar a atividade de seus amigos, enviar mensagens diretas e ter a escolha de trocar os jogos somente com quem quiser.
 
 
