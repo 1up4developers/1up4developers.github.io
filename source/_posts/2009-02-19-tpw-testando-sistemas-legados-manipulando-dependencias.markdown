@@ -33,73 +33,76 @@ Partindo da premissa que o projeto não possuí nenhum framework de inversão de
 
 Vamos tomar como exemplo, uma classe simples com algumas dependências e responsável por encapsular algumas regras de negócio referentes à _Estoque_.
 
-    
-    <code>public class EstoqueLogic {
-        public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
-            EstoqueDAO dao = new EstoqueDAO();
-            Estoque estoque = dao.localizaProduto(produto.getCodigo());
-            return estoque.getQuantidade() >= quantidade;
-        }
+
+{% codeblock lang:java %}
+public class EstoqueLogic {
+    public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
+        EstoqueDAO dao = new EstoqueDAO();
+        Estoque estoque = dao.localizaProduto(produto.getCodigo());
+        return estoque.getQuantidade() >= quantidade;
     }
-    </code>
+}
+{% endcodeblock %}
 
 
 Da forma como esta classe foi escrita, é impossível testar a regra de _disponibilidade_ independentemente, pois depende do objeto _EstoqueDAO_ para localizar as informações necessárias para o método. Mas com um pequeno refactoring, a responsabilidade de resolver a dependência _EstoqueDAO_ passa a ser responsabilidade da própria classe _Estoque_:
 
-    
-    <code>public class EstoqueLogic {
-        public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
-            EstoqueDAO dao = getEstoqueDAO();
-            Estoque estoque = dao.localizaProduto(produto.getCodigo());
-            return estoque.getQuantidade() >= quantidade;
-        }
-        protected EstoqueDAO getEstoqueDAO() {
-            return new EstoqueDAO();
-        }
+
+{% codeblock lang:java %}
+public class EstoqueLogic {
+    public boolean verificaDisponibilidade(Produto produto, Integer quantidade) {
+        EstoqueDAO dao = getEstoqueDAO();
+        Estoque estoque = dao.localizaProduto(produto.getCodigo());
+        return estoque.getQuantidade() >= quantidade;
     }
-    </code>
+    protected EstoqueDAO getEstoqueDAO() {
+        return new EstoqueDAO();
+    }
+}
+{% endcodeblock %}
 
 
 Desta forma, é possível "injetar" um objeto que simule a dependência do _EstoqueDAO_ estendendo a classe e sobrescrevendo o método _getEstoqueDAO()_ para retornar a instância desejada. O teste ficaria mais ou menos assim:
 
-    
-    <code>public class EstoqueLogicTest {
-    
-        public void testVerificandoDisponibilidadeDeUmProduto() {
-    
-            //Criando o objeto EstoqueDAO mock, simulando o comportamento desejado
-            final EstoqueDAO estoqueDAOMock = new EstoqueDAO() {
-                @Override
-                public Estoque localizaProduto(String codigo) {
-                    Produto produto = new Produto();
-                    produto.setCodigo(codigo);
-                    Estoque estoque = new Estoque();
-                    estoque.setProduto(produto);
-                    estoque.setQuantidade(5);
-                    return estoque;
-                }
-            };
-    
-            //Sobrescrevendo o método getEstoqueDAO para retornar o Mock
-            EstoqueLogic logic = new EstoqueLogic() {
-                @Override
-                protected EstoqueDAO getEstoqueDAO() {
-                    return estoqueDAOMock;
-                }
-            };
-    
-            //Definindo o teste e executando
-            Produto produto = new Produto();
-            produto.setCodigo("123456");        
-    
-            boolean estaDisponivel = logic.verificaDisponibilidade(produto, 10);
-            assertTrue(estaDisponivel);
-    
-            boolean naoEstaDisponivel = logic.verificaDisponibilidade(produto, 2);
-            assertTrue(naoEstaDisponivel);
-        }
+
+{% codeblock lang:java %}
+public class EstoqueLogicTest {
+
+    public void testVerificandoDisponibilidadeDeUmProduto() {
+
+        //Criando o objeto EstoqueDAO mock, simulando o comportamento desejado
+        final EstoqueDAO estoqueDAOMock = new EstoqueDAO() {
+            @Override
+            public Estoque localizaProduto(String codigo) {
+                Produto produto = new Produto();
+                produto.setCodigo(codigo);
+                Estoque estoque = new Estoque();
+                estoque.setProduto(produto);
+                estoque.setQuantidade(5);
+                return estoque;
+            }
+        };
+
+        //Sobrescrevendo o método getEstoqueDAO para retornar o Mock
+        EstoqueLogic logic = new EstoqueLogic() {
+            @Override
+            protected EstoqueDAO getEstoqueDAO() {
+                return estoqueDAOMock;
+            }
+        };
+
+        //Definindo o teste e executando
+        Produto produto = new Produto();
+        produto.setCodigo("123456");
+
+        boolean estaDisponivel = logic.verificaDisponibilidade(produto, 10);
+        assertTrue(estaDisponivel);
+
+        boolean naoEstaDisponivel = logic.verificaDisponibilidade(produto, 2);
+        assertTrue(naoEstaDisponivel);
     }
-    </code>
+}
+{% endcodeblock %}
 
 
 O método_ getEstoqueDAO() _da classe _EstoqueLogic_ foi sobrescrito para retornar o objeto _estoqueDAOMock_ com as informações necessárias para o teste, ou seja, o comportamento das dependências foi simulado, possibilitando que o teste ficasse concentrado apenas da classe _Estoque_.

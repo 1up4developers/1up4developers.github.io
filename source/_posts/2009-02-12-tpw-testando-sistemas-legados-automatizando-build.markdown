@@ -27,16 +27,16 @@ A construção do projeto deve ser automática e desempenhada por uma ferramenta
 
 
 
-	
+
   1. Preparar o código e dependências
 
-	
+
   2. Compilar os arquivos fontes
 
-	
+
   3. Executar os testes
 
-	
+
   4. Empacotar a distribuição
 
 
@@ -44,40 +44,41 @@ No exemplo abaixo usarei o Ant, que é a ferramenta de build (para Java) mais po
 
 Tendo os objetivos do build definidos, basta escrever o script do Ant. Isso deve ser feito no arquivo build.xml, no root do projeto. As tarefas são definidas pelas tags <target> e podem ser dependentes para garantir a sequencia de execução. Em cada target são definidas as ações executadas, como rodar o compilador (javac), copiar um arquivo, rodar os testes, etc. Uma vez que as tarefas estão configuradas, basta executar o build pelo próprio IDE ou linha de comando.
 
-    
-    <code><project name="frank" default="package">
-        <path id="classpath">
-            <pathelement location="build/bin"/>
-            <fileset dir="src">
-                <include name="*.java"/>
-            </fileset>
-            <fileset dir="lib">
-                <include name="*.jar"/>
-            </fileset>
-        </path>
-        <target name="clean">
-             <delete dir="build"/>
-              <mkdir dir="build"/>
-        </target>
-        <target name="compile" depends="clean">
-            <javac srcdir="src" destdir="build">
-                <classpath refid="classpath"/>
-            </javac>
-        </target>
-        <target name="test" depends="compile">
-            <junit>
-                <classpath refid="classpath"/>
-                <batchtest>
-                    <fileset dir="build" includes="*Test"/>
-                </batchtest>
-            </junit>
-        </target>
-        <target name="package" depends="compile, test">
-            <war destfile="frank.war" webxml="web/WEB-INF/web.xml">
-            <classes dir="build"/>
-        </target>
-    </project>
-    </code>
+
+{% codeblock lang:xml %}
+<project name="frank" default="package">
+  <path id="classpath">
+      <pathelement location="build/bin"/>
+      <fileset dir="src">
+          <include name="*.java"/>
+      </fileset>
+      <fileset dir="lib">
+          <include name="*.jar"/>
+      </fileset>
+  </path>
+  <target name="clean">
+       <delete dir="build"/>
+        <mkdir dir="build"/>
+  </target>
+  <target name="compile" depends="clean">
+      <javac srcdir="src" destdir="build">
+          <classpath refid="classpath"/>
+      </javac>
+  </target>
+  <target name="test" depends="compile">
+      <junit>
+          <classpath refid="classpath"/>
+          <batchtest>
+              <fileset dir="build" includes="*Test"/>
+          </batchtest>
+      </junit>
+  </target>
+  <target name="package" depends="compile, test">
+      <war destfile="frank.war" webxml="web/WEB-INF/web.xml">
+      <classes dir="build"/>
+  </target>
+</project>
+{% endcodeblock %}
 
 
 Neste script estão definidas as tarefas necessárias para executar um build, conforme citei anteriormente. Por enquanto isto será o mínimo necessário para dar suporte as próximas etapas da sua missão. Mesmo que o projeto já tenha um build em Ant aproveite para [revisá-lo](http://www.onjava.com/pub/a/onjava/2003/12/17/ant_bestpractices.html). Tarefas bem simples e bem definidas são mais fáceis de entender e manter.

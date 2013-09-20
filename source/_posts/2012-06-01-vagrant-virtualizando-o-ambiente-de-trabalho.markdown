@@ -30,22 +30,22 @@ Vários pontos se destacam no uso do Vagrant:
 
 
 
-	
+
   * Centraliza as _dependências de ambiente_ do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num _box_ do Vagrant.
 
-	
+
   * Documenta as _dependências de ambiente_, caso use algum _Provisioner_.
 
-	
+
   * Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.
 
-	
+
   * Mantém a sua máquina local "limpa". Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.
 
 
 Agora vem o contra.
 
-	
+
   * Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.
 
 
@@ -64,25 +64,25 @@ O [Getting Started](http://vagrantup.com/v1/docs/getting-started/index.html) do 
 
 Supondo que o vagrant está instalado. Vamos adicionar uma máquina:
 
-    
+
     $ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
 
 
 Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:
 
-    
+
     $ vagrant init lucid32  #ja especificando o box lucid32 baixado
 
 
 Vamos subir a VM:
 
-    
+
     $ vagrant up
 
 
 Para acessar a VM:
 
-    
+
     $ vagrant ssh
 
 
@@ -90,13 +90,15 @@ Repare que dentro da VM, na pasta "/vagrant" estará montado o diretório do seu
 
 Vamos supor que você executou um "rails s" na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:
 
-    
-    <code>config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000</code>
+
+{% codeblock lang:ruby %}
+config.vm.forward_port 3000, 4000  # 3000 from VM, available at 4000
+{% endcodeblock %}
 
 
 Dá um restart na VM:
 
-    
+
     $ vagrant halt && vagrant up
 
 

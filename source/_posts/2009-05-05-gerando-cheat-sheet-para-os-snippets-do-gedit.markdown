@@ -19,32 +19,38 @@ Atualmente venho praticando Ruby, sendo o gedit - "tunado" com vários plugins -
 
 Tudo isso foi só pra contar o que me levou a criar a gem gedit-snippets-tool. Com ela é possível criar _cheat sheets_ dos seus snippets. Supondo que você tenha ruby e rubygem instalados, seu modo de uso é muito simples. Para instalar a gem execute:
 
-    
-    <code>sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com</code>
+
+{% codeblock lang:bash %}
+sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com
+{% endcodeblock %}
 
 
 Após a instalação, para gerar um _cheat sheet_ com todos os seus snippets, execute:
 
-    
-    <code>gedit-snippets-tool -cs > ~/mycheatsheet.xhtml</code>
+
+{% codeblock lang:bash %}
+gedit-snippets-tool -cs > ~/mycheatsheet.xhtml
+{% endcodeblock %}
 
 
 Caso tenha muitos snippets, e deseja criar um cheat sheet somente com Ruby e Ruby on Rails por exemplo, execute:
 
-    
-    <code>gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml</code>
+
+{% codeblock %}
+gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml
+{% endcodeblock %}
 
 
-[caption id="attachment_484" align="aligncenter" width="291" caption="Meu cheat sheet de exemplo"][![Meu cheat sheet de exemplo](/images/uploads/2009/04/cheatsheet-example-291x300.png)](/images/uploads/2009/04/cheatsheet-example.png)[/caption]
+[![Meu cheat sheet de exemplo](/images/uploads/2009/04/cheatsheet-example-291x300.png)](/images/uploads/2009/04/cheatsheet-example.png)
 
 Levando em conta que a gem foi feita em três dias e focamos somente o necessário para lançarmos uma versão 0.x "em produção", vamos as limitações:
 
 
 
-	
+
   * O gedit-snippets-tool lê os snippets (arquivos XML) que estão na pasta "home". Constatei que o gedit "limpo" logo após habilitar o plugin Snippets, guarda os snippets na pasta "/usr/share/gedit-2/plugins/snippets/". Bom, se for este o seu caso, peço a gentileza de copiá-los para a "home" em "{home-folder}/.gnome2/gedit/snippets/".
 
-	
+
   * O template usado para gerar a página xhtml está bem "rústico". O lado bom disso é que está bem fácil de alterá-lo. Vejam o código do template (via gist, leitores de RSS, sorry):
 
 
@@ -60,13 +66,13 @@ Assim que tive a idéia, análisei o que seria necessário, e resumindo:
 
 
 
-	
+
   * Ler os XMLs dos snippets;
 
-	
+
   * Uma engine para gerar páginas através de "templates";
 
-	
+
   * Fazer uma gem executável... pois assim é mais fácil e rápido para quem quiser usá-la;
 
 
