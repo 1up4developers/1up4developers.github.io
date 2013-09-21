@@ -4,7 +4,7 @@
   <title><![CDATA[Category: quick tips | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/quick-tips/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-20T23:00:32-03:00</updated>
+  <updated>2013-09-20T23:03:51-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -30,7 +30,7 @@
 
 <h2>Requisitos</h2>
 
-<p>Para utilizar o GitHub Pages, crie um repositório com o nome <strong>seunomedeusuarionogithub.github.io</strong>, incluindo o &ldquo;github.io&rdquo;. O GitHub gerencia este repositório e publica o conteúdo estático no endereço _<a href="http://seunomedeusuarionogithub.github.io_">http://seunomedeusuarionogithub.github.io_</a></p>
+<p>Para utilizar o GitHub Pages, crie um repositório com o nome <strong>usuariogithub.github.io</strong>, incluindo o &ldquo;github.io&rdquo;. O GitHub gerencia este repositório e publica o conteúdo estático no endereço <a href="http://usuariogithub.github.io">http://usuariogithub.github.io</a></p>
 
 <p>Agora, para gerar o conteúdo estático vamos usar o <a href="http://octopress.org">Octopress</a>.</p>
 
