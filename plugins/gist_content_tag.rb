@@ -32,7 +32,7 @@ module Jekyll
     end
 
     def html_output_for(script_url, code)
-      CGI.escapeHTML code
+      code
     end
 
     def script_url_for(user, gist_id, filename)
