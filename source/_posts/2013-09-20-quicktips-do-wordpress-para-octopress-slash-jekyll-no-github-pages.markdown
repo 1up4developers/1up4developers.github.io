@@ -24,7 +24,7 @@ Desafio! Estavamos "acostumados" ao Wordpress. Aprender Jekyll e a postar "commi
 
 ## Requisitos
 
-Para utilizar o GitHub Pages, crie um repositório com o nome **seunomedeusuarionogithub.github.io**, incluindo o "github.io". O GitHub gerencia este repositório e publica o conteúdo estático no endereço _http://seunomedeusuarionogithub.github.io_
+Para utilizar o GitHub Pages, crie um repositório com o nome **usuariogithub.github.io**, incluindo o "github.io". O GitHub gerencia este repositório e publica o conteúdo estático no endereço http://usuariogithub.github.io
 
 Agora, para gerar o conteúdo estático vamos usar o [Octopress](http://octopress.org).
 
