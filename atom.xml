@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-20T21:15:10-03:00</updated>
+  <updated>2013-09-20T23:00:32-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -12,6 +12,120 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
+    <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
+    <updated>2013-09-20T22:38:00-03:00</updated>
+    <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
+    <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
+
+<h2>Por que GitHub Pages?</h2>
+
+<p>Corte de custos! Manter o blog no Wordpress requer um hosting, um banco de dados e um domínio. Reduzimos as despesas apenas para o registro de domínio (por enquanto).</p>
+
+<p>Performance! GitHub Pages é estático, e conteúdo estático é servido naturalmente mais rápido.</p>
+
+<p>Desafio! Estavamos &ldquo;acostumados&rdquo; ao Wordpress. Aprender Jekyll e a postar &ldquo;commitando em um projeto&rdquo; permite que tenhamos novas idéias, ou no pior dos casos, aprendamos novas tecnologias.</p>
+
+<h2>Requisitos</h2>
+
+<p>Para utilizar o GitHub Pages, crie um repositório com o nome <strong>seunomedeusuarionogithub.github.io</strong>, incluindo o &ldquo;github.io&rdquo;. O GitHub gerencia este repositório e publica o conteúdo estático no endereço _<a href="http://seunomedeusuarionogithub.github.io_">http://seunomedeusuarionogithub.github.io_</a></p>
+
+<p>Agora, para gerar o conteúdo estático vamos usar o <a href="http://octopress.org">Octopress</a>.</p>
+
+<h2>Instalação</h2>
+
+<p>Basta clonar o repositório do Octopress localmente:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git@github.com:imathis/octopress.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>instalar as gems necessárias e em seguida rodar a rake para configuração:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>e informar o seu repositório do GitHub Pages:</p>
+
+<pre><code>git@github.com:username/username.github.io.git
+</code></pre>
+
+<p>Pronto! Os remoting points do projeto serão configurados para seu repositório do GitHub, como segue:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote -v
+</span><span class='line'>
+</span><span class='line'>octopress git@github.com:imathis/octopress.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>octopress git@github.com:imathis/octopress.git <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>origin     git@github.com:username/username.github.io.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin     git@github.com:username/username.github.io.git <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Postando</h2>
+
+<p>Para criar um novo post, basta rodar a rake:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s2">&quot;o titulo do seu post&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>o que vai criar o arquivo <em>source/_posts/2013-09-17-o-titulo-do-seu-post.markdown</em>. Escreva o conteúdo do seu post normalmente em Markdown (recomendo utilizar o <a href="http://markup.herokuapp.com/">Markup Editor</a>) e execute:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake generate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>para gerar o site estático no diretório <em>_deploy</em>. Caso queira dar um preview no que será publicado, basta rodar:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>e acessar no browser <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
+<h2>Publicando</h2>
+
+<p>Quando terminar seu post, basta rodar:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>para publicar o site no seu repositório do GitHub Pages.</p>
+
+<p>Pronto! Não se esqueça de subir os fontes do site (branch source), commitando suas alterações e executando o classico <em>git push</em>.</p>
+
+<h2>Migrando</h2>
+
+<p>Caso já tenha um site publicado no Wordpress, você pode seguir este guia para importar todo o conteúdo na estrutura do Jekyll:</p>
+
+<p><a href="http://johnnycode.com/2012/07/10/how-to-migrate-from-wordpress-to-jekyll-running-on-github/">How to Migrate from WordPress to Jekyll Running on Github</a></p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://pages.github.com/">GitHub Pages</a></li>
+<li><a href="http://octopress.org/">Octopress.org</a></li>
+<li><a href="http://jekyllrb.com/">Jekyll</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
@@ -1445,39 +1559,6 @@ server {
 <p><a href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> &ndash; Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.</p>
 
 <p><a href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> &ndash; No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[QuickTips] Habilitando auth_basic no Nginx e como gerar senhas do htpasswd]]></title>
-    <link href="http://1up4dev.org/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/"/>
-    <updated>2012-03-20T00:57:44-03:00</updated>
-    <id>http://1up4dev.org/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd</id>
-    <content type="html"><![CDATA[<p>Dica para quem usa o <a href="http://wiki.nginx.org/Main">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.</p>
-
-<p>Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:</p>
-
-<pre><code>location ~ / {
-        auth_basic            "Restricted";
-        auth_basic_user_file  htpasswd;
-        passenger_enabled on;
-}
-</code></pre>
-
-<p>Um detalhe importante: se estiver rodando sua app com <a href="http://www.modrails.com/">Passenger</a>, inclua a linha <em>passenger_enabled on;</em></p>
-
-<p>Ah, já estava esquecendo das senhas. Elas devem ficar no arquivo <em>htpasswd</em>, no mesmo diretório do arquivo<em> nginx.conf</em> e precisam seguir o formato user:senha em cada linha. Por exemplo:</p>
-
-<pre><code>user:sd5dsjo23PwdSh
-admin:mdePW2hgrPddSA
-</code></pre>
-
-<p>O detalhe é que a senha precisa ser <a href="http://wiki.nginx.org/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F">criptografada em MD5</a>. Uma maneira fácil (e que funciona) de fazer isso é executando:</p>
-
-<pre><code>ruby -e "puts 'usuario:' + 'senha'.crypt('md5')" &gt;&gt; htpasswd
-</code></pre>
-
-<p>Sucesso!</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: quick tips | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/quick-tips/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-20T21:15:10-03:00</updated>
+  <updated>2013-09-20T23:00:32-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
+    <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
+    <updated>2013-09-20T22:38:00-03:00</updated>
+    <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
+    <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
+
+<h2>Por que GitHub Pages?</h2>
+
+<p>Corte de custos! Manter o blog no Wordpress requer um hosting, um banco de dados e um domínio. Reduzimos as despesas apenas para o registro de domínio (por enquanto).</p>
+
+<p>Performance! GitHub Pages é estático, e conteúdo estático é servido naturalmente mais rápido.</p>
+
+<p>Desafio! Estavamos &ldquo;acostumados&rdquo; ao Wordpress. Aprender Jekyll e a postar &ldquo;commitando em um projeto&rdquo; permite que tenhamos novas idéias, ou no pior dos casos, aprendamos novas tecnologias.</p>
+
+<h2>Requisitos</h2>
+
+<p>Para utilizar o GitHub Pages, crie um repositório com o nome <strong>seunomedeusuarionogithub.github.io</strong>, incluindo o &ldquo;github.io&rdquo;. O GitHub gerencia este repositório e publica o conteúdo estático no endereço _<a href="http://seunomedeusuarionogithub.github.io_">http://seunomedeusuarionogithub.github.io_</a></p>
+
+<p>Agora, para gerar o conteúdo estático vamos usar o <a href="http://octopress.org">Octopress</a>.</p>
+
+<h2>Instalação</h2>
+
+<p>Basta clonar o repositório do Octopress localmente:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git@github.com:imathis/octopress.git
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>instalar as gems necessárias e em seguida rodar a rake para configuração:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>e informar o seu repositório do GitHub Pages:</p>
+
+<pre><code>git@github.com:username/username.github.io.git
+</code></pre>
+
+<p>Pronto! Os remoting points do projeto serão configurados para seu repositório do GitHub, como segue:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote -v&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;octopress   git@github.com:imathis/octopress.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>octopress   git@github.com:imathis/octopress.git <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>origin   git@github.com:username/username.github.io.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin   git@github.com:username/username.github.io.git <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Postando</h2>
+
+<p>Para criar um novo post, basta rodar a rake:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span>&amp;ldquo;o titulo <span class="k">do </span>seu post&amp;rdquo;<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>o que vai criar o arquivo <em>source/_posts/2013-09-17-o-titulo-do-seu-post.markdown</em>. Escreva o conteúdo do seu post normalmente em Markdown (recomendo utilizar o <a href="http://markup.herokuapp.com/">Markup Editor</a>) e execute:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake generate
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>para gerar o site estático no diretório <em>_deploy</em>. Caso queira dar um preview no que será publicado, basta rodar:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>e acessar no browser <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
+<h2>Publicando</h2>
+
+<p>Quando terminar seu post, basta rodar:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>para publicar o site no seu repositório do GitHub Pages.</p>
+
+<p>Pronto! Não se esqueça de subir os fontes do site (branch source), commitando suas alterações e executando o classico <em>git push</em>.</p>
+
+<h2>Migrando</h2>
+
+<p>Caso já tenha um site publicado no Wordpress, você pode seguir este guia para importar todo o conteúdo na estrutura do Jekyll:</p>
+
+<p><a href="http://johnnycode.com/2012/07/10/how-to-migrate-from-wordpress-to-jekyll-running-on-github/">How to Migrate from WordPress to Jekyll Running on Github</a></p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://pages.github.com/">GitHub Pages</a></li>
+<li><a href="http://octopress.org/">Octopress.org</a></li>
+<li><a href="http://jekyllrb.com/">Jekyll</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
@@ -423,68 +530,6 @@ Feche um split com Ctrl-a + X</p>
 <p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
 </a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
 </a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
-    <link href="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"/>
-    <updated>2012-11-28T13:49:06-02:00</updated>
-    <id>http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
-
-<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="o">&amp;</span><span class="n">lsquo</span><span class="p">;</span><span class="n">minion_server</span><span class="o">&amp;</span><span class="n">rsquo</span><span class="p">;</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;h1&gt;build your integration app&lt;/</span><span class="n">h1</span><span class="o">&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="o">&lt;</span><span class="nb">p</span><span class="o">&gt;</span><span class="no">IntegrationApp</span> <span class="o">=</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Builder</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">map</span> <span class="o">&amp;</span><span class="n">ldquo</span><span class="p">;</span><span class="o">/&amp;</span><span class="n">rdquo</span><span class="p">;</span> <span class="k">do</span><span class="o">&lt;</span><span class="sr">/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="sr">&lt;pre&gt;&lt;code&gt;run lambda { |env|</span>
-</span><span class='line'><span class="sr">  [200, {&quot;Content-Type&quot; =&amp;gt; &quot;text/</span><span class="n">plain</span><span class="s2">&quot;}, [&quot;</span><span class="no">Be</span> <span class="n">happy!</span><span class="s2">&quot;]]</span>
-</span><span class='line'><span class="s2">}</span>
-</span><span class='line'><span class="s2">&lt;/code&gt;&lt;/pre&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s2">&lt;p&gt;  end</span>
-</span><span class='line'><span class="s2">end&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s2">&lt;p&gt;server = MinionServer.new(IntegrationApp)</span>
-</span><span class='line'><span class="s2">server.start(&amp;ldquo;localhost&amp;rdquo;, 1620)  # default: localhost, 4000&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s2">&lt;h1&gt;do your calls&lt;/h1&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s2">&lt;p&gt;system &amp;ldquo;curl &lt;a href=&quot;</span><span class="ss">http</span><span class="p">:</span><span class="sr">//</span><span class="ss">localhost</span><span class="p">:</span><span class="mi">1620</span><span class="s2">&quot;&gt;http://localhost:1620&lt;/a&gt;&amp;rdquo; # =&gt; &amp;ldquo;Be happy!&amp;rdquo;&lt;/p&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s2">&lt;p&gt;server.shutdown</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div></p>
-
-<p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
-Hope that helps!</p>
-
-<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
 ]]></content>
   </entry>
   

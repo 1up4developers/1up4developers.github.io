@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Caros leitores, depois de um período, digamos boring, estamos de volta e com novidades! Durante o ano de 2010 estivemos trabalhando muito, por isso a &hellip;">
+  <meta name="description" content="Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,197 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/usando-bundler-com-rails-2-3/">Usando Bundler Com Rails 2.3</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-17T09:00:55-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
+
+        
+         | <a href="/2011/01/usando-bundler-com-rails-2-3/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma resposta.</p>
+
+<p>Caso você não conheça, Bundler é uma ferramenta criada para facilitar a instalação e atualização de aplicações e suas gems, resolvendo facilmente as dependências e criando ambientes homogêneos em máquinas diferentes. Em outras palavras, resolve de uma vez por todas aquele inferno que era ter que baixar gem por gem da sua aplicação e ainda assim correr o risco de encontrar alguma incompatibilidade.</p>
+
+<p>O Rails 3 utiliza o Bundler por padrão, mas aplicações em Rails 2.x ainda dependem das gems declaradas no arquivo <code>config/environment.rb</code>, e ao copiar os arquivos para uma determinada máquina, você é obrigado a usar <code>rake gems:install</code>, que vai levar algum tempo rodando e não vai instalar tudo o que você precisa.</p>
+
+<p>Ou pelo menos era assim que funcionava até você ler esse post.</p>
+
+<p>Primeiro, considerando que você esteja no diretório raiz da sua aplicação, execute a sequência abaixo:</p>
+
+<p>Antes de qualquer outra coisa, instale o Bundler na sua máquina executando o comando <code>gem install bundler</code></p>
+
+<p>No seu arquivo <code>config/boot.rb</code>, imediatamente antes da linha <code>Rails.boot!</code>, insira o bloco abaixo:</p>
+
+<pre><code>class Rails::Boot
+  def run
+    load_initializer
+
+    Rails::Initializer.class_eval do
+      def load_gems
+        @bundler_loaded ||= Bundler.require :default, Rails.env
+      end
+    end
+
+    Rails::Initializer.run(:set_load_path)
+  end
+end
+</code></pre>
+
+<p>Crie um arquivo <code>config/preinitializer.rb</code>. Esse arquivo não existe no Rails 2.x, então se você não criar, não vai funcionar. Adicione as linhas abaixo nesse arquivo:</p>
+
+<pre><code>begin
+  require "rubygems"
+  require "bundler"
+rescue LoadError
+  raise "Could not load the bundler gem. Install it with `gem install bundler`."
+end
+
+if Gem::Version.new(Bundler::VERSION) &lt;= Gem::Version.new("0.9.24")
+  raise RuntimeError, "Your bundler version is too old for Rails 2.3." +
+   "Run `gem install bundler` to upgrade."
+end
+
+begin
+  # Set up load paths for all bundled gems
+  ENV["BUNDLE_GEMFILE"] = File.expand_path("../../Gemfile", __FILE__)
+  Bundler.setup
+rescue Bundler::GemNotFound
+  raise RuntimeError, "Bundler couldn't find some gems." +
+    "Did you run `bundle install`?"
+end
+</code></pre>
+
+<p>Crie um arquivo chamado <code>Gemfile</code> no raiz da sua aplicação. Entre em <code>config/environment.rb</code>, remova todas as instruções config.gem e as adicione no arquivo <code>Gemfile</code> conforme abaixo, sem o prefixo <code>config.</code> (ponto incluído).</p>
+
+<p>Seu arquivo <code>config/environment.rb</code> era assim:</p>
+
+<pre><code># Be sure to restart your server when you modify this file
+
+# Specifies gem version of Rails to use when vendor/rails is not present
+RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
+
+# Bootstrap the Rails environment, frameworks, and default configuration
+require File.join(File.dirname(__FILE__), 'boot')
+
+Rails::Initializer.run do |config|
+  # Settings in config/environments/* take precedence over those specified here.
+  # Application configuration should go into files in config/initializers
+  # -- all .rb files in that directory are automatically loaded.
+
+  # Add additional load paths for your own custom dirs
+  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+
+  # Specify gems that this application depends on and have them installed with rake gems:install
+  config.gem "bj"
+  config.gem "hpricot", :version =&gt; '0.6', :source =&gt; "http://code.whytheluckystiff.net"
+  config.gem "sqlite3-ruby", :lib =&gt; "sqlite3"
+  config.gem "aws-s3", :lib =&gt; "aws/s3"
+  config.gem "authlogic", :version =&gt; "=2.1.6"
+  config.gem "slim_scrooge", "=1.0.10"
+
+  # Only load the plugins named here, in the order given (default is alphabetical).
+  # :all can be used as a placeholder for all plugins not explicitly named
+  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+
+  # Skip frameworks you're not going to use. To use Rails without a database,
+  # you must remove the Active Record framework.
+  # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
+end
+</code></pre>
+
+<p>E agora é assim:</p>
+
+<pre><code># Be sure to restart your server when you modify this file
+
+# Specifies gem version of Rails to use when vendor/rails is not present
+RAILS_GEM_VERSION = '2.3.10' unless defined? RAILS_GEM_VERSION
+
+# Bootstrap the Rails environment, frameworks, and default configuration
+require File.join(File.dirname(__FILE__), 'boot')
+
+Rails::Initializer.run do |config|
+  # Settings in config/environments/* take precedence over those specified here.
+  # Application configuration should go into files in config/initializers
+  # -- all .rb files in that directory are automatically loaded.
+
+  # Add additional load paths for your own custom dirs
+  # config.load_paths += %W( #{RAILS_ROOT}/extras )
+
+  # Only load the plugins named here, in the order given (default is alphabetical).
+  # :all can be used as a placeholder for all plugins not explicitly named
+  # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
+
+  # Skip frameworks you're not going to use. To use Rails without a database,
+  # you must remove the Active Record framework.
+  # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
+end
+</code></pre>
+
+<p>Bem mais limpo, não?</p>
+
+<p>Já o seu recém criado arquivo <code>Gemfile</code> vai ficar assim:</p>
+
+<pre><code>source 'http://gemcutter.org'
+gem "bj"
+gem "hpricot", "~&gt; 0.6"
+gem "sqlite3-ruby", "~&gt; 1.3.1", :require =&gt; "sqlite3"
+gem "aws-s3", :lib =&gt; "aws/s3"
+gem "rails", "= 2.3.10"
+gem "authlogic", "~&gt; 2.1.6"
+
+group :development, :test do
+  gem 'mongrel', :require =&gt; false
+end
+
+group :production do
+  gem "slim_scrooge", "~&gt; 1.0.10"
+end
+</code></pre>
+
+<p>Note que eu criei dois grupos: um com <code>:development, :test</code> e um com <code>:production</code>. Significa que as gems do primeiro grupo somente serão utilizadas em desenvolvimento e em testes, e as do segundo grupo somente serão usadas no ambiente de produção. O que está fora dos grupos será usado em qualquer ambiente.</p>
+
+<p>Agora, finalmente você digita <code>bundle install</code>, aguarda alguns instantes e pronto! A sua aplicação está com todas as gems instaladas e suas devidas dependências.</p>
+
+<p>Para listar as gems utilizadas, execute <code>bundle list</code>.</p>
+
+<p>Sugestões, correções e críticas são bem vindas nos comentários.</p>
+
+<p>Para mais informações, leia a documentação no site do Bundle: <a href="http://gembundler.com/">http://gembundler.com/</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -950,272 +1141,6 @@ Responding to change over following a plan</p></blockquote>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/">Ruby, Rubygems E $LOAD_PATH Ou Como Funciona O Require De Gems</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-17T08:30:15-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
-
-        
-         | <a href="/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Na madrugada passada, andei &ldquo;brincando&rdquo; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &ldquo;perda de tempo&rdquo;, resolvi postar alguns truques aprendidos.</p>
-
-<h2>Baixei o fonte do rubygems, como faço pra rodá-lo sem alterar o meu sistema?</h2>
-
-<p>Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.</p>
-
-<pre><code>$ irb
-
-
-
-
-irb(main):001:0&gt; $LOAD_PATH
-</code></pre>
-
-<p>No meu Ubuntu, obtive:</p>
-
-<pre><code>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]
-
-
-
-
-$ ls /usr/local/lib/site_ruby/1.8/
-</code></pre>
-
-<p>Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
-Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:</p>
-
-<pre><code>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v
-</code></pre>
-
-<p>O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.</p>
-
-<h2>Afinal, como funciona o &ldquo;require de gems&rdquo;?</h2>
-
-<p>Bom, já sabemos que o require &ldquo;rubygems&rdquo; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;.</p>
-
-<p>Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.</p>
-
-<ul>
-<li><p>Adiciona o metodo Kernel#gem.</p></li>
-<li><p>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</p></li>
-</ul>
-
-
-<h3>Kernel#gem</h3>
-
-<p>Permite &ldquo;acionar&rdquo; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:</p>
-
-<h1>#</h1>
-
-<h1>Use Kernel#gem to activate a specific version of +gem_name+.</h1>
-
-<p>#</p>
-
-<h1>+version_requirements+ is a list of version requirements that the</h1>
-
-<h1>specified gem must match, most commonly &ldquo;= example.version.number&rdquo;.  See</h1>
-
-<h1>Gem::Requirement for how to specify a version requirement.</h1>
-
-<p>#</p>
-
-<h1>If you will be activating the latest version of a gem, there is no need to</h1>
-
-<h1>call Kernel#gem, Kernel#require will do the right thing for you.</h1>
-
-<p>#</p>
-
-<h1>Kernel#gem returns true if the gem was activated, otherwise false.  If the</h1>
-
-<h1>gem could not be found, didn&rsquo;t match the version requirements, or a</h1>
-
-<h1>different version was already activated, an exception will be raised.</h1>
-
-<p>[&hellip;]</p>
-
-<h3>Kernel#require</h3>
-
-<p>No final do rubygems.rb encontramos:</p>
-
-<p>if RUBY_VERSION &lt; &lsquo;1.9&rsquo; then</p>
-
-<p>require &lsquo;rubygems/custom_require&rsquo;</p>
-
-<p>end</p>
-
-<p>Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:</p>
-
-<ul>
-<li><p>Chama o &ldquo;original&rdquo; require;</p></li>
-<li><p>Em caso de LoadError;</p>
-
-<ul>
-<li><p>Executa o &ldquo;Gem.searcher.find(path)&rdquo;;</p></li>
-<li><p>Se <em>true</em></p>
-
-<ul>
-<li><p>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</p></li>
-<li><p>Executa o &ldquo;original&rdquo; require novamente;</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-
-<h3>Exemplos com o IRB</h3>
-
-<p>Para finalizar legal e comprovar tudo isso, fiz alguns testes:</p>
-
-<pre><code>$ gem list json
-</code></pre>
-
-<p><strong><em> LOCAL GEMS </em></strong></p>
-
-<p>json (1.2.0, 1.1.9)</p>
-
-<p>json_pure (1.2.0)</p>
-
-<pre><code>$ irb
-
-
-
-
-irb(main):001:0&gt; $LOAD_PATH
-</code></pre>
-
-<p>=> [&ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
-
-<pre><code>irb(main):004:0&gt; require "json"
-</code></pre>
-
-<p>LoadError: no such file to load &mdash; json</p>
-
-<p>from (irb):4:in `require&#8217;</p>
-
-<p>from (irb):4</p>
-
-<p>from :0</p>
-
-<pre><code>irb(main):005:0&gt; gem "json", "= 1.2.0"
-</code></pre>
-
-<p>NoMethodError: undefined method `gem&#8217; for main:Object</p>
-
-<p>from (irb):5
-from :0</p>
-
-<p>O require &ldquo;json&rdquo; por si só, carrega a versão mais atual da gem.</p>
-
-<pre><code>irb(main):006:0&gt; require "rubygems"
-</code></pre>
-
-<p>=> true</p>
-
-<pre><code>irb(main):007:0&gt; require "json"
-</code></pre>
-
-<p>=> true</p>
-
-<pre><code>irb(main):008:0&gt; JSON::VERSION
-</code></pre>
-
-<p>=> &ldquo;1.2.0&rdquo;</p>
-
-<pre><code>irb(main):009:0&gt; $LOAD_PATH
-</code></pre>
-
-<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
-
-<pre><code>irb(main):010:0&gt; quit
-</code></pre>
-
-<p>Após o require &ldquo;json&rdquo;, as pastas foram adicionadas no $LOAD_PATH.</p>
-
-<pre><code>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"
-</code></pre>
-
-<p>Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:</p>
-
-<pre><code>$ irb
-
-irb(main):001:0&gt; require "rubygems"
-</code></pre>
-
-<p>=> true</p>
-
-<pre><code>irb(main):002:0&gt; $LOAD_PATH
-</code></pre>
-
-<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
-
-<pre><code>irb(main):003:0&gt; gem "json", "= 1.1.9"
-</code></pre>
-
-<p>=> true</p>
-
-<pre><code>irb(main):004:0&gt; $LOAD_PATH
-</code></pre>
-
-<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
-
-<pre><code>irb(main):005:0&gt; JSON
-</code></pre>
-
-<p>NameError: uninitialized constant JSON
-from (irb):5</p>
-
-<pre><code>irb(main):006:0&gt; require "json"
-</code></pre>
-
-<p>=> true</p>
-
-<pre><code>irb(main):007:0&gt; JSON::VERSION
-</code></pre>
-
-<p>=> &ldquo;1.1.9&rdquo;</p>
-
-<pre><code>irb(main):008:0&gt; quit
-</code></pre>
-
-<p>Note que após o gem &ldquo;json&rdquo;, &ldquo;= 1.1.9&rdquo; &hellip; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &ldquo;json&rdquo;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.</p>
-
-<p>Espero que com estas explicações, você use com mais segurança o rubygems.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -1233,6 +1158,10 @@ from (irb):5</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
@@ -1246,10 +1175,6 @@ from (irb):5</p>
     
       <li class="post">
         <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A melhor linguagem de programação</a>
       </li>
     
   </ul>

@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Estamos de volta depois de algumas semanas de correria e muito trabalho, o que nos impediu de postar sobre vários assuntos atuais e experiências &hellip;">
+  <meta name="description" content="Na madrugada passada, andei &ldquo;brincando&rdquo; com o fonte do Rubygems. Logo de cara posso te dizer que não consegui fazer o que queria, e pra &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,272 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/">Ruby, Rubygems E $LOAD_PATH Ou Como Funciona O Require De Gems</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-17T08:30:15-02:00" pubdate data-updated="true">Dec 17<span>th</span>, 2009</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+        
+         | <a href="/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Na madrugada passada, andei &ldquo;brincando&rdquo; com o fonte do <a href="http://rubyforge.org/projects/rubygems/">Rubygems</a>. Logo de cara posso te dizer que não consegui fazer o que queria, e pra amenizar o sentimento de &ldquo;perda de tempo&rdquo;, resolvi postar alguns truques aprendidos.</p>
+
+<h2>Baixei o fonte do rubygems, como faço pra rodá-lo sem alterar o meu sistema?</h2>
+
+<p>Foi a primeira pergunta que fiz. Percebi que com o google não iria encontrar a resposta, mas consegui uma dica importante: $LOAD_PATH.</p>
+
+<pre><code>$ irb
+
+
+
+
+irb(main):001:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>No meu Ubuntu, obtive:</p>
+
+<pre><code>["/usr/local/lib/site_ruby/1.8", "/usr/local/lib/site_ruby/1.8/i486-linux", "/usr/local/lib/site_ruby/1.8/i386-linux", "/usr/local/lib/site_ruby", "/usr/lib/ruby/vendor_ruby/1.8", "/usr/lib/ruby/vendor_ruby/1.8/i486-linux", "/usr/lib/ruby/vendor_ruby", "/usr/lib/ruby/1.8", "/usr/lib/ruby/1.8/i486-linux", "/usr/lib/ruby/1.8/i386-linux", "."]
+
+
+
+
+$ ls /usr/local/lib/site_ruby/1.8/
+</code></pre>
+
+<p>Exatamente nesta pasta que se encontra o rubygems.rb. Bingo!
+Para rodar o fonte do rubygems, só é necessário adicionar ao $LOAD_PATH a pasta lib do projeto. Dado que estou na raiz do projeto rubygems baixado, execute:</p>
+
+<pre><code>~/rubygems$ ruby -I $PWD/lib ./bin/gem -v
+</code></pre>
+
+<p>O paramêtro -I permite adicionar diretório ao $LOAD_PATH. Simples e prático. Primeiro problema resolvido, comecei a programar.</p>
+
+<h2>Afinal, como funciona o &ldquo;require de gems&rdquo;?</h2>
+
+<p>Bom, já sabemos que o require &ldquo;rubygems&rdquo; fuciona pois encontra-se no $LOAD_PATH do ruby, no caso do meu Ubuntu em &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;.</p>
+
+<p>Basicamente (e muito), o Rubygems faz duas coisas no Kernel do Ruby.</p>
+
+<ul>
+<li><p>Adiciona o metodo Kernel#gem.</p></li>
+<li><p>Faz um <a href="http://en.wikipedia.org/wiki/Monkey_patch">Monkey Patch</a> no Kernel#require</p></li>
+</ul>
+
+
+<h3>Kernel#gem</h3>
+
+<p>Permite &ldquo;acionar&rdquo; uma versão específica de gem. Note que este acionar, traduz-se para, adicionar a lib da gem no $LOAD_PATH. Segue um trecho do comentário do Kernel#gem:</p>
+
+<h1>#</h1>
+
+<h1>Use Kernel#gem to activate a specific version of +gem_name+.</h1>
+
+<p>#</p>
+
+<h1>+version_requirements+ is a list of version requirements that the</h1>
+
+<h1>specified gem must match, most commonly &ldquo;= example.version.number&rdquo;.  See</h1>
+
+<h1>Gem::Requirement for how to specify a version requirement.</h1>
+
+<p>#</p>
+
+<h1>If you will be activating the latest version of a gem, there is no need to</h1>
+
+<h1>call Kernel#gem, Kernel#require will do the right thing for you.</h1>
+
+<p>#</p>
+
+<h1>Kernel#gem returns true if the gem was activated, otherwise false.  If the</h1>
+
+<h1>gem could not be found, didn&rsquo;t match the version requirements, or a</h1>
+
+<h1>different version was already activated, an exception will be raised.</h1>
+
+<p>[&hellip;]</p>
+
+<h3>Kernel#require</h3>
+
+<p>No final do rubygems.rb encontramos:</p>
+
+<p>if RUBY_VERSION &lt; &lsquo;1.9&rsquo; then</p>
+
+<p>require &lsquo;rubygems/custom_require&rsquo;</p>
+
+<p>end</p>
+
+<p>Não consegui descobrir o que acontece com o ruby 1.9, mas no 1.8, o monkey patch executa os seguintes passos:</p>
+
+<ul>
+<li><p>Chama o &ldquo;original&rdquo; require;</p></li>
+<li><p>Em caso de LoadError;</p>
+
+<ul>
+<li><p>Executa o &ldquo;Gem.searcher.find(path)&rdquo;;</p></li>
+<li><p>Se <em>true</em></p>
+
+<ul>
+<li><p>Chama o activate (novamente traduz-se para adiciona a gem no $LOAD_PATH)</p></li>
+<li><p>Executa o &ldquo;original&rdquo; require novamente;</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<h3>Exemplos com o IRB</h3>
+
+<p>Para finalizar legal e comprovar tudo isso, fiz alguns testes:</p>
+
+<pre><code>$ gem list json
+</code></pre>
+
+<p><strong><em> LOCAL GEMS </em></strong></p>
+
+<p>json (1.2.0, 1.1.9)</p>
+
+<p>json_pure (1.2.0)</p>
+
+<pre><code>$ irb
+
+
+
+
+irb(main):001:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):004:0&gt; require "json"
+</code></pre>
+
+<p>LoadError: no such file to load &mdash; json</p>
+
+<p>from (irb):4:in `require&#8217;</p>
+
+<p>from (irb):4</p>
+
+<p>from :0</p>
+
+<pre><code>irb(main):005:0&gt; gem "json", "= 1.2.0"
+</code></pre>
+
+<p>NoMethodError: undefined method `gem&#8217; for main:Object</p>
+
+<p>from (irb):5
+from :0</p>
+
+<p>O require &ldquo;json&rdquo; por si só, carrega a versão mais atual da gem.</p>
+
+<pre><code>irb(main):006:0&gt; require "rubygems"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):007:0&gt; require "json"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):008:0&gt; JSON::VERSION
+</code></pre>
+
+<p>=> &ldquo;1.2.0&rdquo;</p>
+
+<pre><code>irb(main):009:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):010:0&gt; quit
+</code></pre>
+
+<p>Após o require &ldquo;json&rdquo;, as pastas foram adicionadas no $LOAD_PATH.</p>
+
+<pre><code>"/usr/lib/ruby/gems/1.8/gems/json-1.2.0/bin", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext/json/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/ext", "/usr/lib/ruby/gems/1.8/gems/json-1.2.0/lib"
+</code></pre>
+
+<p>Agora olhe que <strong>interessante</strong> este <strong>último teste</strong>:</p>
+
+<pre><code>$ irb
+
+irb(main):001:0&gt; require "rubygems"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):002:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):003:0&gt; gem "json", "= 1.1.9"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):004:0&gt; $LOAD_PATH
+</code></pre>
+
+<p>=> [&ldquo;/usr/lib/ruby/gems/1.8/gems/gemcutter-0.1.8/lib&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/bin&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext/json/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/ext&rdquo;, &ldquo;/usr/lib/ruby/gems/1.8/gems/json-1.1.9/lib&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby/1.8/i386-linux&rdquo;, &ldquo;/usr/local/lib/site_ruby&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/vendor_ruby&rdquo;, &ldquo;/usr/lib/ruby/1.8&rdquo;, &ldquo;/usr/lib/ruby/1.8/i486-linux&rdquo;, &ldquo;/usr/lib/ruby/1.8/i386-linux&rdquo;, &ldquo;.&rdquo;]</p>
+
+<pre><code>irb(main):005:0&gt; JSON
+</code></pre>
+
+<p>NameError: uninitialized constant JSON
+from (irb):5</p>
+
+<pre><code>irb(main):006:0&gt; require "json"
+</code></pre>
+
+<p>=> true</p>
+
+<pre><code>irb(main):007:0&gt; JSON::VERSION
+</code></pre>
+
+<p>=> &ldquo;1.1.9&rdquo;</p>
+
+<pre><code>irb(main):008:0&gt; quit
+</code></pre>
+
+<p>Note que após o gem &ldquo;json&rdquo;, &ldquo;= 1.1.9&rdquo; &hellip; a versao 1.1.9 foi adicionada no $LOAD_PATH mas não foi carregada. Ao executar o require &ldquo;json&rdquo;, como este já estava no $LOAD_PATH, a versão 1.1.9 é usada.</p>
+
+<p>Espero que com estas explicações, você use com mais segurança o rubygems.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -868,80 +1134,6 @@ script/autospec
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues/">Remarkable, jqGrid No Rails, Heroku E Github Issues</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-20T01:00:42-03:00" pubdate data-updated="true">Apr 20<span>th</span>, 2009</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">admin</span></span>
-
-        
-         | <a href="/2009/04/remarkable-jqgrid-no-rails-heroku-e-github-issues/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Este é o primeiro post que publicaremos semanalmente reunindo novidades sobre desenvolvimento, artigos, notícias e temas variados sobre Rails.</p>
-
-<h2><a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/">Remarkable 3.0</a></h2>
-
-<p>Foi lançada a nova versão do Remarkable, um framework para testes com RSpec. Dentre as novidades, estão:</p>
-
-<ul>
-<li><p>I18n, possibilitando gerar o output das specs no seu idioma favorito fluente</p></li>
-<li><p>Pending Macros, facilitando o agrupamento das specs pendentes</p></li>
-<li><p>Macro stubs e mais opções de Matchers, simplificando testes com mocks</p></li>
-</ul>
-
-
-<p>Para instalar basta um <code>sudo gem install remarkable_rails</code></p>
-
-<p>Saiba mais no site do <a href="http://www.nomedojogo.com/2009/04/14/remarkable-30-is-out-and-its-well-remarkable/">Carlos Brando</a>, lendo a <a href="http://remarkable.rubyforge.org/rails/">documentação</a> ou espiando o código no <a href="http://github.com/carlosbrando/remarkable/tree/master">Github</a>.</p>
-
-<h2><a href="http://www.2dconcept.com/jquery-grid-rails-plugin">jqGrid no Rails</a></h2>
-
-<p><a href="http://jquery.com/">jQuery</a> é um dos frameworks Javascript mais populares do mercado. O que <a href="http://www.2dconcept.com/articles/8-jquery-grid-rails-plugin">esse cara</a> fez foi juntar o <a href="http://www.trirand.com/jqgrid35/jqgrid.html">jqGrid</a>, que é um plugin muito bom para trabalhar com grids, num plugin para Rails, facilitando sua utilização.</p>
-
-<p>Veja <a href="http://www.2dconcept.com/jquery-grid-rails-plugin">aqui</a> um guia de utilização do plugin, a <a href="http://github.com/ahe/jqgrid_demo_app/tree/master">aplicação de exemplo</a> ou confira o código no <a href="http://github.com/ahe/2dc_jqgrid/tree/master">Github</a>.</p>
-
-<h2><a href="http://heroku.com/">Heroku</a></h2>
-
-<p>Apesar da simplicidade do <a href="http://1up4dev.org/2009/04/business-bingo-generator/">Business Bingo Generator</a>, houve muitas &ldquo;manhas&rdquo; aprendidas no seu desenvolvimento. O Heroku foi uma delas, onde pudemos publicar rapidamente a aplicação. Se você quer hospedar um projeto simples feito em Rails, nós o recomendamos. O seu uso é muito simples e a incrível idéia de usar o git como interface para deploy é realmente sensacional. Basta instalar o client do Heroku, dar um &ldquo;git push&rdquo; e pronto: a aplicação está no ar!</p>
-
-<h2><a href="http://github.com/blog/411-github-issue-tracker">Github Issue Tracker</a></h2>
-
-<p>Nova funcionalidade no GitHub para facilitar nossas vidas, permitindo informar os &ldquo;bugs&rdquo; nos projetos. No link acima, contém o vídeo &ldquo;I_ntroduction to GitHub Issues_&rdquo; para mais detalhes.</p>
-
-<p>Caso já use um Issue Tracker para o seu projeto no github, você pode desabilitá-lo na seção  do <em>Features </em>na aba<em> Admin</em>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -959,6 +1151,10 @@ script/autospec
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
@@ -972,10 +1168,6 @@ script/autospec
     
       <li class="post">
         <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A melhor linguagem de programação</a>
       </li>
     
   </ul>

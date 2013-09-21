@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Este post serve mais como &ldquo;cola&rdquo; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por &hellip;">
+  <meta name="description" content="Dica para quem usa o Nginx como web server de aplicações Rails e já apanhou para habilitar HTTP Basic Authentication ou para gerar as senhas &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,73 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/">[QuickTips] Habilitando Auth_basic No Nginx E Como Gerar Senhas Do Htpasswd</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-20T00:57:44-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2012</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+        
+         | <a href="/2012/03/quick-tips-habilitando-auth-basic-nginx-e-como-gerar-senhas-htpasswd/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Dica para quem usa o <a href="http://wiki.nginx.org/Main">Nginx</a> como web server de aplicações Rails e já apanhou para habilitar <a href="http://wiki.nginx.org/HttpAuthBasicModule">HTTP Basic Authentication</a> ou para gerar as senhas criptografadas em MD5.</p>
+
+<p>Para habilitar o <em>auth_basic</em>, basta adicionar dentro do bloco <em>server</em> do arquivo <em>nginx.conf</em>:</p>
+
+<pre><code>location ~ / {
+        auth_basic            "Restricted";
+        auth_basic_user_file  htpasswd;
+        passenger_enabled on;
+}
+</code></pre>
+
+<p>Um detalhe importante: se estiver rodando sua app com <a href="http://www.modrails.com/">Passenger</a>, inclua a linha <em>passenger_enabled on;</em></p>
+
+<p>Ah, já estava esquecendo das senhas. Elas devem ficar no arquivo <em>htpasswd</em>, no mesmo diretório do arquivo<em> nginx.conf</em> e precisam seguir o formato user:senha em cada linha. Por exemplo:</p>
+
+<pre><code>user:sd5dsjo23PwdSh
+admin:mdePW2hgrPddSA
+</code></pre>
+
+<p>O detalhe é que a senha precisa ser <a href="http://wiki.nginx.org/Faq#How_do_I_generate_an_htpasswd_file_without_having_Apache_tools_installed.3F">criptografada em MD5</a>. Uma maneira fácil (e que funciona) de fazer isso é executando:</p>
+
+<pre><code>ruby -e "puts 'usuario:' + 'senha'.crypt('md5')" &gt;&gt; htpasswd
+</code></pre>
+
+<p>Sucesso!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -922,65 +989,6 @@ fill = function(container, liquid) {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/o-desenvolvedor-preguicoso/">O Desenvolvedor Preguiçoso</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-08T13:24:49-03:00" pubdate data-updated="true">Apr 8<span>th</span>, 2011</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
-
-        
-         | <a href="/2011/04/o-desenvolvedor-preguicoso/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Durante o almoço eu estava conversando com um colega e citei que, se tivesse uma empresa, gostaria de contratar um programador/desenvolvedor/engenheiro que fosse preguiçoso. Por meio minuto ele deve ter imaginado que eu estava louco, ou que queria abrir transformar minha empresa imaginária numa repartição pública.</p>
-
-<p>Vou tentar ser breve na explicação.</p>
-
-<p>O primeiro ponto é que uma pessoa preguiçosa, dentro desse contexto, é completamente diferente de uma pessoa acomodada, encostada ou vagabunda. Uma pessoa preguiçosa, novamente nesse contexto, é aquela que se incomoda de fazer várias vezes ao dia a mesma tarefa, e encontra meios de automatizar isso.</p>
-
-<p>Um caso real: eu trabalhei numa projeto em que era necessário compilar os fontes, passar os binários resultantes (executáveis, DLLs ou JARs) por um software proprietário para que esses fossem convertidos num formato que a plataforma proprietária entenda, e então utilizar um outro software para jogar esse binário convertido para dentro do dispositivo.</p>
-
-<p>O segundo passo, a conversão dos binários, era freqüentemente esquecido, fazendo com que um binário desatualizado fosse instalado no dispositivo, desperdiçando tempo e estressando os envolvidos.</p>
-
-<p>Um colega, preguiçoso, criou um passo novo que foi adicionado ao <a href="http://maven.apache.org/">Maven</a> para que essa geração fosse automatizada, reduzindo todo processo à compilação e instalação. Não fosse o software de instalação tão fechado, a coisa toda seria realizada num único processo.</p>
-
-<p>O mesmo acontece com a utilização de testes automatizados. Poderíamos muito bem executar passo a passo todos os itens de uma planilha gigantesca cada vez que eu gerasse uma nova versão do sistema. Ao invés disso, escrevemos alguns testes automatizados (705 da última vez vi) que levam trinta segundos para executar toda vez que você altera o código. A cada nova funcionalidade, uma nova série de testes é escrita, fazendo com que a coisa seja menos trabalhosa para todos os envolvidos.</p>
-
-<p>Automatizar tarefas repetitivas aumenta a produtividade, reduz drasticamente a possibilidade de que erros idiotas aconteçam e ainda te dá tempo para investir no que realmente interessa.</p>
-
-<p>E você, está sendo preguiçoso ou acomodado?</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -998,6 +1006,10 @@ fill = function(container, liquid) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
@@ -1011,10 +1023,6 @@ fill = function(container, liquid) {
     
       <li class="post">
         <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/05/a-melhor-linguagem-de-programacao/">A melhor linguagem de programação</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: web | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/web/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-20T21:15:10-03:00</updated>
+  <updated>2013-09-20T23:00:32-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -12,6 +12,113 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
+    <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
+    <updated>2013-09-20T22:38:00-03:00</updated>
+    <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
+    <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
+
+<h2>Por que GitHub Pages?</h2>
+
+<p>Corte de custos! Manter o blog no Wordpress requer um hosting, um banco de dados e um domínio. Reduzimos as despesas apenas para o registro de domínio (por enquanto).</p>
+
+<p>Performance! GitHub Pages é estático, e conteúdo estático é servido naturalmente mais rápido.</p>
+
+<p>Desafio! Estavamos &ldquo;acostumados&rdquo; ao Wordpress. Aprender Jekyll e a postar &ldquo;commitando em um projeto&rdquo; permite que tenhamos novas idéias, ou no pior dos casos, aprendamos novas tecnologias.</p>
+
+<h2>Requisitos</h2>
+
+<p>Para utilizar o GitHub Pages, crie um repositório com o nome <strong>seunomedeusuarionogithub.github.io</strong>, incluindo o &ldquo;github.io&rdquo;. O GitHub gerencia este repositório e publica o conteúdo estático no endereço _<a href="http://seunomedeusuarionogithub.github.io_">http://seunomedeusuarionogithub.github.io_</a></p>
+
+<p>Agora, para gerar o conteúdo estático vamos usar o <a href="http://octopress.org">Octopress</a>.</p>
+
+<h2>Instalação</h2>
+
+<p>Basta clonar o repositório do Octopress localmente:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git@github.com:imathis/octopress.git
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>instalar as gems necessárias e em seguida rodar a rake para configuração:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>e informar o seu repositório do GitHub Pages:</p>
+
+<pre><code>git@github.com:username/username.github.io.git
+</code></pre>
+
+<p>Pronto! Os remoting points do projeto serão configurados para seu repositório do GitHub, como segue:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote -v&lt;/p&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;p&gt;octopress   git@github.com:imathis/octopress.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>octopress   git@github.com:imathis/octopress.git <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>origin   git@github.com:username/username.github.io.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin   git@github.com:username/username.github.io.git <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h2>Postando</h2>
+
+<p>Para criar um novo post, basta rodar a rake:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span>&amp;ldquo;o titulo <span class="k">do </span>seu post&amp;rdquo;<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>o que vai criar o arquivo <em>source/_posts/2013-09-17-o-titulo-do-seu-post.markdown</em>. Escreva o conteúdo do seu post normalmente em Markdown (recomendo utilizar o <a href="http://markup.herokuapp.com/">Markup Editor</a>) e execute:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake generate
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>para gerar o site estático no diretório <em>_deploy</em>. Caso queira dar um preview no que será publicado, basta rodar:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>e acessar no browser <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
+<h2>Publicando</h2>
+
+<p>Quando terminar seu post, basta rodar:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>para publicar o site no seu repositório do GitHub Pages.</p>
+
+<p>Pronto! Não se esqueça de subir os fontes do site (branch source), commitando suas alterações e executando o classico <em>git push</em>.</p>
+
+<h2>Migrando</h2>
+
+<p>Caso já tenha um site publicado no Wordpress, você pode seguir este guia para importar todo o conteúdo na estrutura do Jekyll:</p>
+
+<p><a href="http://johnnycode.com/2012/07/10/how-to-migrate-from-wordpress-to-jekyll-running-on-github/">How to Migrate from WordPress to Jekyll Running on Github</a></p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://pages.github.com/">GitHub Pages</a></li>
+<li><a href="http://octopress.org/">Octopress.org</a></li>
+<li><a href="http://jekyllrb.com/">Jekyll</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
@@ -484,46 +591,6 @@ Feche um split com Ctrl-a + X</p>
 <p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
 </a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
 </a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
-    <link href="http://1up4dev.org/2013/01/http-monkey/"/>
-    <updated>2013-01-23T13:29:16-02:00</updated>
-    <id>http://1up4dev.org/2013/01/http-monkey</id>
-    <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
-
-<p>Pontos positivos:</p>
-
-<ul>
-<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
-<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
-<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
-<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
-<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
-<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
-</ul>
-
-
-<p>Pontos negativos:</p>
-
-<ul>
-<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
-<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
-<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
-<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
-<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
-</ul>
-
-
-<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
-
-<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
-
-<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
-
-<p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
 ]]></content>
   </entry>
   
