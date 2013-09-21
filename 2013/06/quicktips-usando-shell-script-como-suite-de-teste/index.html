@@ -165,32 +165,32 @@
 </span><span class='line'>
 </span><span class='line'><span class="c">## Unit-Testable Shell Scripts (http://eradman.com/posts/ut-shell-scripts.html)</span>
 </span><span class='line'><span class="nb">typeset</span> -i <span class="nv">tests_run</span><span class="o">=</span>0
-</span><span class='line'><span class="k">function </span>try <span class="o">{</span> <span class="nv">this</span><span class="o">=</span>&amp;quot;<span class="nv">$1</span>&amp;quot;; <span class="o">}</span>
-</span><span class='line'><span class="nb">trap</span> &amp;#39;printf &amp;quot;<span class="nv">$0</span>: <span class="nb">exit </span>code <span class="nv">$?</span> on line <span class="nv">$LINENO</span><span class="se">\n</span>FAIL: <span class="nv">$this</span><span class="se">\n</span>&amp;quot;; <span class="nb">exit </span>1&amp;#39; ERR
+</span><span class='line'><span class="k">function </span>try <span class="o">{</span> <span class="nv">this</span><span class="o">=</span><span class="s2">&quot;$1&quot;</span>; <span class="o">}</span>
+</span><span class='line'><span class="nb">trap</span> <span class="s1">&#39;printf &quot;$0: exit code $? on line $LINENO\nFAIL: $this\n&quot;; exit 1&#39;</span> ERR
 </span><span class='line'><span class="k">function </span>assert <span class="o">{</span>
 </span><span class='line'>    <span class="nb">let </span>tests_run+<span class="o">=</span>1
-</span><span class='line'>    <span class="o">[</span> &amp;quot;<span class="nv">$1</span>&amp;quot; <span class="o">=</span> &amp;quot;<span class="nv">$2</span>&amp;quot; <span class="o">]</span> &amp;amp;&amp;amp; <span class="o">{</span> <span class="nb">echo</span> -n &amp;quot;.&amp;quot;; <span class="k">return</span>; <span class="o">}</span>
-</span><span class='line'>    <span class="nb">printf</span> &amp;quot;<span class="se">\n</span>FAIL: <span class="nv">$this</span><span class="se">\n</span>&amp;#39;<span class="nv">$1</span>&amp;#39; !<span class="o">=</span> &amp;#39;<span class="nv">$2</span>&amp;#39;<span class="se">\n</span>&amp;quot;; <span class="nb">exit </span>1
+</span><span class='line'>    <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">=</span> <span class="s2">&quot;$2&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">{</span> <span class="nb">echo</span> -n <span class="s2">&quot;.&quot;</span>; <span class="k">return</span>; <span class="o">}</span>
+</span><span class='line'>    <span class="nb">printf</span> <span class="s2">&quot;\nFAIL: $this\n&#39;$1&#39; != &#39;$2&#39;\n&quot;</span>; <span class="nb">exit </span>1
 </span><span class='line'><span class="o">}</span>
 </span><span class='line'><span class="c">## end</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">###############################################################</span>
 </span><span class='line'>
-</span><span class='line'>try &amp;quot;Example of GET and <span class="nb">test </span><span class="k">for </span>404 status&amp;quot;
+</span><span class='line'>try <span class="s2">&quot;Example of GET and test for 404 status&quot;</span>
 </span><span class='line'>
-</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>curl -s -w &amp;quot;%<span class="o">{</span>http_code<span class="o">}</span>&amp;quot; <span class="nv">$URL</span><span class="k">)</span>
-</span><span class='line'>assert &amp;quot;404&amp;quot; &amp;quot;<span class="nv">$out</span>&amp;quot;
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>curl -s -w <span class="s2">&quot;%{http_code}&quot;</span> <span class="nv">$URL</span><span class="k">)</span>
+</span><span class='line'>assert <span class="s2">&quot;404&quot;</span> <span class="s2">&quot;$out&quot;</span>
 </span><span class='line'>
-</span><span class='line'>try &amp;quot;Example of POST XML&amp;quot;
+</span><span class='line'>try <span class="s2">&quot;Example of POST XML&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c"># Post xml (from hello.xml file) on /hello</span>
-</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>cat <span class="nb">test</span>/hello.xml | curl -s -H &amp;quot;Content-Type: text/xml&amp;quot; -d @- <span class="se">\</span>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>cat <span class="nb">test</span>/hello.xml | curl -s -H <span class="s2">&quot;Content-Type: text/xml&quot;</span> -d @- <span class="se">\</span>
 </span><span class='line'>  -X POST <span class="nv">$URL</span>/hello<span class="k">)</span>
-</span><span class='line'>assert &amp;quot;Hello World&amp;quot; &amp;quot;<span class="nv">$out</span>&amp;quot;
+</span><span class='line'>assert <span class="s2">&quot;Hello World&quot;</span> <span class="s2">&quot;$out&quot;</span>
 </span><span class='line'>
 </span><span class='line'><span class="c">###############################################################</span>
 </span><span class='line'><span class="nb">echo</span>
-</span><span class='line'><span class="nb">echo</span> &amp;quot;PASS: <span class="nv">$tests_run</span> tests run&amp;quot;
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;PASS: $tests_run tests run&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
