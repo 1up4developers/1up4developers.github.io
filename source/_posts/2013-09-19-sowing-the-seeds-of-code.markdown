@@ -52,6 +52,8 @@ Para minha surpresa, a sala ficou lotada. Muita gente em pé, muita gente intere
 
 Não tenho dúvidas de que, profissionalmente falando, esse foi o ponto alto do ano para mim. Só tenho a agradecer aos presentes e à organização pelo interesse e pela oportunidade.
 
+O ponto negativo, e até certo ponto divertido, ficou por conta da novelinha criada por um dos palestrantes ao falar mal de SOA. Os representantes de um dos patrocinadores, que vendem consultoria no assunto, ao se sentirem ofendidos, iniciaram um festival de resmungos passivo-agressivos como se um bom diálogo fosse construído dessa forma. O evento em si e a organização nada tiveram a ver com isso, mas foi interessante acompanhar algumas reações e ver quem as pessoas realmente são quando o calo dói. 
+
 ## (clj-sp)
 
 Entre um evento e outro, percebendo o interesse crescente na linguagem Clojure, resolvi chamar os desenvolvedores das listas Clojure Brasil e Clojure BR para participar do (clj-sp), o Grupo de Usuários Clojure no Brasil. Somos o primeiro grupo do tipo no Brasil e, por mais estranho que pareça, nosso primeiro encontro foi no Rio de Janeiro.
