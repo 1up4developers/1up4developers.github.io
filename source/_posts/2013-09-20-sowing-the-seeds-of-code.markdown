@@ -66,7 +66,14 @@ Dia 26 de Setembro, última Quinta-feira do mês, teremos o segundo encontro. Ca
 
 ## O que vem por aí
 - 7masters JavaScript
-Já 25 de Setembro será dia de 7masters de JavaScript na iMasters.
+Já 25 de Setembro será dia de 7masters de JavaScript na iMasters. Eu e mais seis especialistas vamos apresentar lightining talks de sete minutos sobre algum assunto bacana relacionado à linguagem. Acesse [setemasters.imasters.com.br/edicoes/javascript/] e compareça.
 
 - DevDay
+Em outubro vou falar novamente sobre JavaScript no [DevDay](http://devday.devisland.com/), um evento muito bacana voltado para desenvolvedores de software que vai acontecer em Belo Horizonte.
+
+Vai ser uma chance bacana de conhecer vários desenvolvedores que eu admiro e aprender com quem realmente conhece do assunto.
+
 - Programação funcional
+E, finalizando, estou escrevendo meu segundo livro, mais focado em programação funcional e como isso pode salvar a sua pele no seu trabalho ou nos seus projetos pessoais. É um livro bem mais denso e especializado que o [primeiro](http://www.casadocodigo.com.br/products/livro-javascript-jquery), mas estou tentando manter o mesmo tom didático e fácil de assimilar.
+
+Esse ano está sendo _o ano da colheita_ de tudo o que eu plantei em 2012 e, enquanto isso, estou me preparando para colher mais frutos no ano que vem. Vamos ver no que dá.
