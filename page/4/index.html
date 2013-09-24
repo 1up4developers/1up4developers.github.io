@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Durante o almoço eu estava conversando com um colega e citei que, se tivesse uma empresa, gostaria de contratar um programador/desenvolvedor/ &hellip;">
+  <meta name="description" content="Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão. Aproveitando a barulheira, que é &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,197 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/coffescript-what/">CoffeeScript Quem?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-14T10:20:26-03:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
+
+        
+         | <a href="/2011/04/coffescript-what/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão.</p>
+
+<p>Aproveitando a barulheira, que é comum a cada vez que o criador da plataforma abre a boca, vamos nos ater ao que é importante e apresentar uma introdução ao resumo simplificado do CoffeeScript básico.</p>
+
+<p>Confesso que minha opinião sobre essa ferramenta mudou nos primeiros instantes em que comecei a usar. No site do CoffeeScript (ok se eu começar a chamar de CS daqui para frente?) existe um link onde você digita o código do lado esquerdo e, imediatamente, do lado direito aparece o equivalente em JavaScript.</p>
+
+<p>Fiz uma brincadeira lá usando um código que sempre me vem à cabeça ao tentar explicar o básico de programação funcional para alguem. Segue:</p>
+
+<pre><code>mimimi = (operation, value) -&gt;
+   operation(value);
+
+dobro = (value) -&gt;
+  value + value;
+
+quadrado = (value) -&gt;
+  value * value;
+
+zero = (value) -&gt;
+  value - value;
+
+um = (value) -&gt;
+  value / value;
+
+alert(mimimi(dobro, 3));
+alert(mimimi(quadrado, 3));
+alert(mimimi(zero, 3));
+alert(mimimi(um, 3));
+</code></pre>
+
+<p>Nada de outro mundo, certo? O equivalente JS é o código abaixo:</p>
+
+<pre><code>var dobro, mimimi, quadrado, um, zero;
+mimimi = function(operation, value) {
+  return operation(value);
+};
+dobro = function(value) {
+  return value + value;
+};
+quadrado = function(value) {
+  return value * value;
+};
+zero = function(value) {
+  return value - value;
+};
+um = function(value) {
+  return value / value;
+};
+alert(mimimi(dobro, 3));
+alert(mimimi(quadrado, 3));
+alert(mimimi(zero, 3));
+alert(mimimi(um, 3));
+</code></pre>
+
+<p>CS permite também a checagem automática de valores e parâmetros opcionais, conforme o exemplo retirado do site:</p>
+
+<pre><code>fill = (container, liquid = "coffee") -&gt;
+  "Filling the #{container} with #{liquid}..."
+</code></pre>
+
+<p>Ou o equivalente em JS:</p>
+
+<pre><code>var fill;
+fill = function(container, liquid) {
+  if (liquid == null) {
+    liquid = "coffee";
+  }
+  return "Filling the " + container + " with " + liquid + "...";
+};
+</code></pre>
+
+<p>Sem dúvida, muito mais legível e expressivo.</p>
+
+<p>É uma ferramenta que eu pretendo usar em algum projeto pequeno, para testar e ver o quanto acelera meu trabalho. Em projetos maiores talvez eu demore um pouco mais para usar mas, considerando que umas das minhas aplicações já conta com 79% de código total escrito em JavaScript, segundo o GitHub, imagino que isso vai melhorar consideravelmente a manutenção do código.</p>
+
+<p>E no mais, se o CS não te chamou a atenção e você não quer mesmo utilizar, basta remover o require do arquivo Gemfiles e a vida segue como se nada tivesse acontecido.</p>
+
+<p>Links recomendados:</p>
+
+<ul>
+<li><p>Site do CoffeScript: <a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></p></li>
+<li><p>Mais do mesmo: <a href="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html">http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html</a></p></li>
+<li><p>Exemplo bacana de como utilizar CS dentro da sua view: <a href="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html">http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html</a></p></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/comunicacao-e-tudo-e-mais-um-pouco/">Comunicação é Tudo E Mais Um Pouco</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-12T10:00:54-03:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
+
+        
+         | <a href="/2011/04/comunicacao-e-tudo-e-mais-um-pouco/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Imagine que você receba a seguinte especificação:</p>
+
+<blockquote><p>Pegue uma folha de papel A4. Sob a mesa, dobre-a ao meio. Coloque a folha dobrada sobre a mesa.</p></blockquote>
+
+<p>A especificação parece clara e simples, mas aposto que dobramos as folhas de forma diferente, obtendo resultados diferentes. Eu dobrei a minha folha verticalmente, enquanto provavelmente você dobrou horizontalmente, obtendo uma forma próxima de um quadrado.</p>
+
+<p>Qual foi o problema?</p>
+
+<p>Eu criei uma especificação tendo em mente exatamente o que eu queria. E eu acreditei que aquilo era mais do que suficiente.</p>
+
+<p>Você pegou uma especificação, aparentemente muito simples, e sem questionar seguiu os passos que julgou corretos.</p>
+
+<p>Não houve comunicação, cada parte presumiu coisas e o resultado final não foi o esperado.</p>
+
+<p>O grande diferencial das ditas metodologia ágeis é exatamente permitir a comunicação rápida, clara e sem ruídos entre todos os membros da equipe. Isso não tem nada a ver com post-its, gráficos ou ferramentas na Internet. É por isso que estamos vendo-as falhar, e é por isso que o seu projeto, e o meu, também estão falhando.</p>
+
+<p>É por isso que relacionamentos chegam a níveis insuportáveis de convivência, casamentos terminam, empregos viram um inferno. É por isso que ocorrem desencontros, é por isso que clientes recebem algo que não pediram e que não os atendem.</p>
+
+<p>É por isso também que não consegui comprar um mísero pão doce quando estive fora do país.</p>
+
+<p>Comunicação é, na minha opinião, o fator mais importante, e o menos valorizado. É tudo isso que eu falei, e mais um pouco.</p>
+
+<p>(Escrito pelo autor em 26/01/2009, e muito pouco ou quase nada mudou desde então)</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -827,133 +1018,6 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/">Enviando Emails No Rails Através Do Gmail</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-20T07:00:09-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
-
-        
-         | <a href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Enviar emails de uma aplicação Rails é <a href="http://guides.rubyonrails.org/action_mailer_basics.html">muito simples</a>. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não souber ou não tiver muita paciência para fazer isso (por exemplo instalar e configurar <a href="http://www.sendmail.org">sendmail</a>, <a href="http://www.mutt.org/">mutt</a>, etc), pode facilmente usar sua conta do <a href="http://lindsaar.net/2010/3/15/how_to_use_mail_and_actionmailer_3_with_gmail_smtp">Gmail</a> para enviar as mensagens da sua aplicação.</p>
-
-<p>Basta incluir as seguintes configurações no bloco <code>config</code> dos respectivos ambientes da aplicação (por exemplo, <code>config/environments/production.rb</code>):</p>
-
-<pre><code>  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :enable_starttls_auto =&gt; true,
-    :authentication =&gt; :plain,
-    :address =&gt; smtp.gmail.com,
-    :port =&gt; 587,
-    :user_name =&gt; "seuemail@gmail.com",
-    :password =&gt; "suasenha"
-  }
-</code></pre>
-
-<p>O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para habilitar <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. Sucesso!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">Criando Um WebCrawler De Modo Fácil E Rápido Com Ruby E Nokogiri</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-18T07:00:41-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
-
-        
-         | <a href="/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Quantas vezes você precisou buscar alguma informação externa para sua aplicação, como um número de telefone ou uma foto em algum site? A idéia é simples: criar um <a href="http://en.wikipedia.org/wiki/Web_crawler">crawler</a> script para fazer parse de algum conteúdo HTML. E basta apenas Ruby e <a href="http://nokogiri.org/">Nokogiri</a>.</p>
-
-<h3>Exemplo</h3>
-
-<p>Digamos que eu queira obter a última versão de uma dada gem consultando diretamente no site <a href="http://rubygems.org/">http://rubygems.org</a> para me ajudar quando precisar instalar novas gems no meu ambiente. Vamos ao código:</p>
-
-<pre><code>#!/usr/bin/env ruby
-
-require "rubygems"
-require "open-uri"
-require "nokogiri"
-
-gem = ARGV[0]
-site = open("http://rubygems.org/gems/#{gem}")
-document = Nokogiri::HTML(site)
-version = document.css(".title h3").text
-
-puts "#{gem} version #{version}"
-</code></pre>
-
-<p>Vou salvar esse script no arquivo <code>gem-version.sh</code>, torna-lo executável com <code>chmod +x gem-version.sh</code> em seguida executar no terminal:</p>
-
-<pre><code>$ ./gem-version rails
-  rails version 3.0.3
-</code></pre>
-
-<p>Pronto, agora você também pode brincar à vontade com <a href="http://github.com/tenderlove/nokogiri">Nokogiri</a> no seu shell!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -971,7 +1035,15 @@ puts "#{gem} version #{version}"
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
       <li class="post">
@@ -980,14 +1052,6 @@ puts "#{gem} version #{version}"
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
       </li>
     
   </ul>

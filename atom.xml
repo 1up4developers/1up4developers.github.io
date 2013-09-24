@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-20T23:03:51-03:00</updated>
+  <updated>2013-09-24T03:29:23-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers authors]]></name>
@@ -12,6 +12,386 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT]]></title>
+    <link href="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/"/>
+    <updated>2013-09-24T10:00:00-03:00</updated>
+    <id>http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt</id>
+    <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://openwrt.org">OpenWRT</a> é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. Em outras palavras, é um &ldquo;firmware on steroids&rdquo; para roteadores.</p>
+
+<h2>Mas por quê?</h2>
+
+<ul>
+<li>Economia. Apenas substituindo o firmware do roteador é possível adicionar funcionalidade e recursos, economizando uma grana preciosa com dispositivos semelhantes, como AppleTV, NAS dedicado, etc.</li>
+<li>Funcionalidade. Provavelmente o roteador fica ligado 100% do tempo na sua casa, sendo utilizado apenas para compartilhar a internet. Praticamente um servidor disponível 24 horas por dia sem utilizaçao! Não mais&hellip;</li>
+<li>Diversão. Substituir o firmware do seu roteador por uma distro baseada em Linux e configurar todos os serviços manualmente&hellip; é diversão pura!</li>
+<li>Por que eu quero (e posso)!</li>
+</ul>
+
+
+<h2>Instalação</h2>
+
+<p><strong>Atenção: existe a possibilidade (embora pequena) de algo sair muito errado e você ganhar um peso de papel. Prossiga por sua conta e risco&hellip; ou se tiver coragem!</strong></p>
+
+<p>O primeiro passo é descobrir o modelo do seu roteador e verificar a compatibilidade nesta página: <a href="http://wiki.openwrt.org/toh/start.">http://wiki.openwrt.org/toh/start.</a> Se não encontrar o modelo ou houver um aviso de não-compatibilidade, sinto muito mas não vai rolar para você.</p>
+
+<p>Se seu roteador for compatível, haverá o <strong>target</strong> da imagem e um link para uma wiki com um how-to específico do modelo, instruções de instalação, resolução de problemas, etc. Procure pelo nome da release que você deverá baixar daqui <a href="http://downloads.openwrt.org.">http://downloads.openwrt.org.</a> A imagem tem o formato <em>openwrt-TARGET-generic-MODELO-VERSAO-squashfs-factory.bin</em></p>
+
+<p>Por exemplo, meu roteador é um <strong>TP-Link WR1043ND</strong>. Procurando na página <a href="http://wiki.openwrt.org/toh/start,">http://wiki.openwrt.org/toh/start,</a> o target compatível com meu roteador é <em>ar71xx</em>:</p>
+
+<p><img src="http://1up4dev.org/images/posts/openwrt-1.png" alt="" /></p>
+
+<p>Acessei a página de downloads, naveguei pelos diretórios da release, depois target e encontrei o arquivo <em>openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin</em> para download.</p>
+
+<p><img src="http://1up4dev.org/images/posts/openwrt-2.png" alt="" /></p>
+
+<p>Quando baixar a imagem, é só fazer a atualização de firmware normalmente no seu roteador pelo admin:</p>
+
+<p><img src="http://1up4dev.org/images/posts/openwrt-3.png" alt="" /></p>
+
+<p>Confirme e reze muito! Aguarde o roteador atualizar e reiniciar.</p>
+
+<p>Deste ponto em diante, será necessário conectar no roteador com cabo, para setar uma senha de root e configurar o wifi. Este processo é relativamente trivial, basta utilizar a interface web do admin, sem segredo&hellip;</p>
+
+<p><img src="http://1up4dev.org/images/posts/openwrt-4.png" alt="" /></p>
+
+<p>Uma vez definida a senha e o wifi configurado, é possível acessar seu roteador via ssh:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh root@192.168.1.1
+</span><span class='line'>root@192.168.1.1's password:
+</span><span class='line'>
+</span><span class='line'>BusyBox v1.19.4 (2013-03-14 11:28:31 UTC) built-in shell (ash)
+</span><span class='line'>Enter 'help' for a list of built-in commands.
+</span><span class='line'>
+</span><span class='line'>  _______                     ________        __
+</span><span class='line'> |       |.-----.-----.-----.|  |  |  |.----.|  |_
+</span><span class='line'> |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+</span><span class='line'> |_______||   __|_____|__|__||________||__|  |____|
+</span><span class='line'>          |__| W I R E L E S S   F R E E D O M
+</span><span class='line'> -----------------------------------------------------
+</span><span class='line'> ATTITUDE ADJUSTMENT (12.09, r36088)
+</span><span class='line'> -----------------------------------------------------
+</span><span class='line'>  * 1/4 oz Vodka      Pour all ingredients into mixing
+</span><span class='line'>  * 1/4 oz Gin        tin with ice, strain into glass.
+</span><span class='line'>  * 1/4 oz Amaretto
+</span><span class='line'>  * 1/4 oz Triple sec
+</span><span class='line'>  * 1/4 oz Peach schnapps
+</span><span class='line'>  * 1/4 oz Sour mix
+</span><span class='line'>  * 1 splash Cranberry juice
+</span><span class='line'> -----------------------------------------------------
+</span><span class='line'>root@OpenWrt:~#</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Se você chegou até aqui, parabéns! Você teve coragem. E felizmente a parte difícil já passou&hellip;</p>
+
+<p>Nota: dependendo do seu roteador, a versão do OpenWRT pode variar. Leia a <a href="http://wiki.openwrt.org/">wiki</a> do modelo do seu roteador para instruções específicas e resolução de problemas.</p>
+
+<p><strong>Importante</strong>: caso o pior aconteça (como acabar a energia no meio do processo de flash da firmware) e você não queira utilizar seu roteador como peso de papel, tente seguir os procedimento de &ldquo;debriking&rdquo; em <a href="http://wiki.openwrt.org/doc/howto/generic.debrick">http://wiki.openwrt.org/doc/howto/generic.debrick</a></p>
+
+<h2>Configurando o NAS</h2>
+
+<p>Para o NAS, vamos montar as partições do HD externo e configurar uma partição de swap pois o roteador provavelmente não tem memória interna suficiente para dar conta do recado.</p>
+
+<p>Neste exemplo, vou usar meu HD de 1TB com uma partição formatada em ext4 e outra partição de 1GB formatada como linux+swap. Não vou usar FAT32 nem NTFS e nem recomendo! A idéia aqui é deixar o HD plugado eternamente no roteador e acessá-lo pela rede.</p>
+
+<h3>Instalando os pacotes necessários</h3>
+
+<p>Para nossa sorte, o OpenWRT conta com um gerenciador de pacotes que facilita (e muito) a instalação das libs e módulos necessários para montar o HD externo e compartilhá-lo na rede via Samba ou NFS.</p>
+
+<p>Logue no roteador via ssh e instale os seguintes pacotes:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install kmod-usb-storage block-mount kmod-fs-ext4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O ultimo pacote vai depender do sistema de arquivos do seu HD. Por exemplo, kmod-fs-ext2, etc. Veja os módulos disponíveis em <a href="http://wiki.openwrt.org/doc/howto/storage">http://wiki.openwrt.org/doc/howto/storage</a></p>
+
+<p>Verifique se as partições já foram detectadas rodando <em>blkid</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# blkid
+</span><span class='line'>/dev/mtdblock2: TYPE="squashfs"
+</span><span class='line'>/dev/sda1: LABEL="MEDIA" UUID="1ecad5f1-0000-0000-000f-e8b7f6ac651d" TYPE="ext4"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Montando as partições do HD</h3>
+
+<p>Agora vamos configurar o fstab para montar as partições automaticamente quando o roteador for ligado. Edite o arquivo <em>/etc/config/fstab</em> com o seguinte (use o vi):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config global automount
+</span><span class='line'>        option from_fstab 1
+</span><span class='line'>        option anon_mount 0
+</span><span class='line'>
+</span><span class='line'>config global autoswap
+</span><span class='line'>        option from_fstab 1
+</span><span class='line'>        option anon_swap 0
+</span><span class='line'>
+</span><span class='line'>config mount
+</span><span class='line'>        option target   /mnt/media
+</span><span class='line'>        option device   /dev/sda1
+</span><span class='line'>        option fstype   ext4
+</span><span class='line'>        option options  rw,sync
+</span><span class='line'>        option enabled  1
+</span><span class='line'>        option enabled_fsck 0
+</span><span class='line'>
+</span><span class='line'>config swap
+</span><span class='line'>        option device   /dev/sda2
+</span><span class='line'>        option enabled  1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No meu caso, vou montar a partição <em>/dev/sda1</em> em <em>/mnt/media</em>, então é necessário criar o diretório de destino, ativar e iniciar o serviço <em>fstab</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# mkdir /mnt/media
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/fstab enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/fstab start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pronto, seu HD externo pode ser acessado em <em>/mnt/media</em> e o swap foi montado na segunda partição.</p>
+
+<h3>Compartilhando na rede</h3>
+
+<p>Vou utilizar <a href="http://wiki.openwrt.org/doc/howto/nfs.server">NFS</a> para compartilhar a partição na rede, mas você também pode utilizar Samba seguindo <a href="http://wiki.openwrt.org/doc/howto/cifs.server">http://wiki.openwrt.org/doc/howto/cifs.server</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install nfs-kernel-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edite (ou crie) o arquivo <em>/etc/exports</em> com o conteúdo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/mnt/media 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ative e inicie os serviços necessários:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# /etc/init.d/portmap start
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/portmap enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/nfsd start
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/nfsd enable</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pronto! O server (roteador) está configurado. Para montar esta partição no client, por exemplo Ubuntu, siga:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install nfs-common
+</span><span class='line'>$ sudo mkdir /media/nas
+</span><span class='line'>$ sudo mount -t nfs 192.168.1.1:/mnt/media /media/nas</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Groovy! Seu NAS foi montado no seu desktop em <em>/media/nas</em>. Pode compartilhar seus arquivos a vontade!</p>
+
+<h2>Configurando o MediaServer (minidlna)</h2>
+
+<p>Logue no roteador e instale os pacotes necessários:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install minidlna</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para configurar, basta editar o arquivo <em>/etc/config/minidlna</em> como segue:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config minidlna config
+</span><span class='line'>  option 'enabled' '1'
+</span><span class='line'>  option port '8200'
+</span><span class='line'>  option interface 'br-lan'
+</span><span class='line'>  option friendly_name 'OpenWrt DLNA Server'
+</span><span class='line'>  option db_dir '/mnt/media/minidlna/db'
+</span><span class='line'>  option log_dir '/mnt/media/minidlna/log'
+</span><span class='line'>  option inotify '1'
+</span><span class='line'>  option enable_tivo '0'
+</span><span class='line'>  option strict_dlna '0'
+</span><span class='line'>  option presentation_url ''
+</span><span class='line'>  option notify_interval '900'
+</span><span class='line'>  option serial '12345678'
+</span><span class='line'>  option model_number '1'
+</span><span class='line'>  option root_container '.'
+</span><span class='line'>  list media_dir '/mnt/media'
+</span><span class='line'>  option album_art_names 'Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ative e inicie o serviço:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# /etc/init.d/minidlna enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/minidlna start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pronto! O MediaServer está configurado e compartilhando seus arquivos na rede. Aqui na minha SmartTV aparece assim:</p>
+
+<p><img src="http://1up4dev.org/images/posts/minidlna.jpg" alt="MiniDLNA na Samsung SmartTV" /></p>
+
+<h2>Configurando o BitTorrent client (transmission)</h2>
+
+<p>Vamos instalar os pacotes:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install transmission-daemon</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E configurar o serviço editando <em>/etc/config/transmission</em> e alterando as opções a seguir (mantenha todas as outras configs):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config transmission
+</span><span class='line'>  option enabled 1
+</span><span class='line'>  option config_dir '/mnt/media/transmission/config'
+</span><span class='line'>  option download_dir '/mnt/media/transmission/complete'
+</span><span class='line'>  option incomplete_dir '/mnt/media/transmission/incomplete'
+</span><span class='line'>  option incomplete_dir_enabled true
+</span><span class='line'>  option ratio_limit 2.0000
+</span><span class='line'>  option ratio_limit_enabled true
+</span><span class='line'>  option rpc_authentication_required false
+</span><span class='line'>  option rpc_password ''
+</span><span class='line'>  option rpc_username ''
+</span><span class='line'>  option speed_limit_up 5
+</span><span class='line'>  option speed_limit_up_enabled true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ative e inicie o serviço:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# /etc/init.d/transmission enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/transmission start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O Transmission roda como um daemon, sendo controlado remotamente. Para isso, será necessário adicionar a seguintes regra de farewall, adicionando no final do arquivi <em>/etc/config/firewall</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config rule
+</span><span class='line'>        option src *
+</span><span class='line'>        option proto tcp
+</span><span class='line'>        option dest_port 9091
+</span><span class='line'>        option target ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reinicie o firewall executando <em>/etc/init.d/firewall restart</em></p>
+
+<p>Para gerenciar seus torrents, instale a extensão <a href="https://chrome.google.com/webstore/detail/torrent-to-transmission/kfnbjgeekkbjcddceemhjajjiclnoekb">.torrent to Transmission</a> no Chrome, baixe o <a href="https://code.google.com/p/transmisson-remote-gui/">Transmission Remote GUI</a> para Windows, Mac e Linux ou ainda o <a href="https://play.google.com/store/apps/details?id=com.neogb.rtac">Remote Transmission</a> para Android.</p>
+
+<p><img src="http://1up4dev.org/images/posts/transmission-gui.jpg" alt="Transmission GUI" /></p>
+
+<p>Caso seu roteador tenha espaço disponível, você pode instalar o pacote <em>transmission-web</em> para gerenciar seus torrents diretamente do navegador.</p>
+
+<p>Ao adicionar um .torrent pelo GUI, o mesmo será baixado diretamente no seu roteador!</p>
+
+<h2>Conclusão</h2>
+
+<p>Embora relativamente complicado, todo procedimento para instalação e configuração não é nada diferente do que estamos acostumados a fazer diariamente no Linux, como devops, seja configurando uma VPS ou montando um NAS na rede.</p>
+
+<p>A liberdade que o OpenWRT oferece é imensa. O repositório é recheado com pacotes bem úteis e muito fáceis de configurar. Sem falar na economia comparando com um aparelho como AppleTV (que não ofecererá tantos recursos) ou outros media servers do mercado.</p>
+
+<p>E aí, tem coragem??? Poste sua experiência nos comentários! :)</p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://wiki.openwrt.org/doc/howto/usb.storage">http://wiki.openwrt.org/doc/howto/usb.storage</a></li>
+<li><a href="http://wiki.openwrt.org/doc/howto/nfs.server">http://wiki.openwrt.org/doc/howto/nfs.server</a></li>
+<li><a href="http://wiki.openwrt.org/doc/uci/minidlna">http://wiki.openwrt.org/doc/uci/minidlna</a></li>
+<li><a href="http://wiki.openwrt.org/doc/uci/transmission">http://wiki.openwrt.org/doc/uci/transmission</a></li>
+<li><a href="http://wiki.openwrt.org/toh/tp-link/tl-wr1043nd">http://wiki.openwrt.org/toh/tp-link/tl-wr1043nd</a></li>
+<li><a href="http://www.rodrigorodrigues.info/index.php/2012/01/openwrt-fazendo-magica-com-linux-no-roteador-parte-1/">http://www.rodrigorodrigues.info/index.php/2012/01/openwrt-fazendo-magica-com-linux-no-roteador-parte-1/</a></li>
+<li><a href="http://knowhow.bart.prokop.name/install/openwrt/wr1043nd">http://knowhow.bart.prokop.name/install/openwrt/wr1043nd</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
@@ -124,6 +504,99 @@
 <li><a href="http://jekyllrb.com/">Jekyll</a></li>
 </ul>
 
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sowing the seeds of code]]></title>
+    <link href="http://1up4dev.org/2013/09/sowing-the-seeds-of-code/"/>
+    <updated>2013-09-19T23:08:00-03:00</updated>
+    <id>http://1up4dev.org/2013/09/sowing-the-seeds-of-code</id>
+    <content type="html"><![CDATA[<p>Seguindo a filosofia de <a href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">tirar a bunda da cadeira</a>, tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.</p>
+
+<h2>Coding Dojo</h2>
+
+<p>Em Maio tive a honra de ter sido convidado a apresentar um coding dojo de Clojure na <a href="http://dasdad.com.br/">Das Dad</a>, que acabou tendo uma aceitação bem maior do que eu esperava.</p>
+
+<p>Tirando o fato do trânsito de São Paulo ter me derrubado e me feito chegar atrasado, conseguimos dar uma boa olhada na linguagem e atiçar a curiosidade. Quem quiser dar uma olhada no que foi feito, o código está <a href="https://github.com/dasdad/dojo-5">no GitHub</a>.</p>
+
+<h2>Anhanguera</h2>
+
+<p>Ainda em Maio, Alexandre Borba e eu fomos convidados a palestrar na unidade de Osasco da Anhanguera Educacional. Borba apresentou os conceitos de Coding Dojo, Katas e o formato Randori para os alunos, enquanto eu apresentei conceitos de orientação a objetos com JavaScript.</p>
+
+<p>Os organizadores do evento prepararam um espaço para os palestrantes atrás do palco que era muito melhor do que qualquer <em>camarim</em> que eu já tenha visto nas vezes em que toquei por aí.</p>
+
+<p>Alguns alunos perguntaram sobre o uso de JavaScript no mercado de trabalho, o que me deu a certeza de que uma palestra menos técnica e mais focada na realidade deles teria sido melhor aproveitada.</p>
+
+<h2>2º ENCATEC</h2>
+
+<p>O pessoal da Adapti, empresa júnior encubada no CEUNES-UFES, em São Mateus-ES, me convidou para o Segundo Encontro Norte-Capixaba de Tecnologia.</p>
+
+<p>Lá tive o prazer de assistir a palestra da Professora Mariella Berger, do projeto IARA, que apresentou o &ldquo;famoso carro que atropelou a Ana Maria Braga&rdquo; e o projeto da Universidade Federal do Espírito Santo que junta automatização, robótica, inteligência artificial, sistema de visão e mais um monte de coisas bacanas usando soluções de código aberto.</p>
+
+<p>Tive a oportunidade também de dividir espaço com meus ídolos Álvaro Justen, o Turicas, que falou sobre software livre; Ricardo Valeriano, que fez uma apresentação hardcore sobre Paralelismo e Concorrência com Ruby; e Luiz Rocha apresentando conceitos de sistemas distribuídos.</p>
+
+<p>Eu falei sobre as aplicações de programação funcional em ambientes corporativos, visto que os alunos da UFES &ldquo;aprendem&rdquo; programação funcional e Haskell logo no primeiro semestre de uma maneira bem deficiente.</p>
+
+<p>Assim como aconteceu na Anhanguera, saí com a impressão de que um tema menos técnico teria sido melhor aproveitado pelos alunos. O fato dos alunos serem pagos com horas de atividades extra-curriculares também fez com que muitos estivessem ali obrigados, estando pouco interessados nos temas apresentados.</p>
+
+<h2>TDC SP</h2>
+
+<p>Em Julho tivemos a etapa de São Paulo do The Developers Conference, evento itinerante organizado pela GlobalCode.</p>
+
+<p>Eu tive a oportunidade de apresentar a primeira palestra da trilha de JavaScript e HTML5, na Quarta-feira, e apresentei vários recursos menos conhecidos do JavaScript, além de ter sorteado uma cópia do meu livro.</p>
+
+<p>Como eu utilizei o manjadíssimo recurso de usar animais para explicar herança, um dos presentes comentou depois, no Twitter, que acha idiota a analogia com animais, visto que ele nunca utilizou animais nos sistemas que já ajudou a desenvolver. Eu achei que seria desnecessário dizer, mas o problema aí mora no fato do colega não perceber que eu estava explicando um conceito de uma forma que qualquer pessoa possa entender. Uma vez que você entenda o conceito, você pode extrapolá-lo para a sua realidade, seja utilizando herança para definir Pessoas Físicas e Jurídicas, seja para definir classes fiscais e naturezas de operação da forma que for mais conveniente.</p>
+
+<p>O ponto negativo ficou por conta da organização, que atrasou o início das palestras em pouco mais de uma hora, não apresentou justificativas nem um pedido de desculpas aos presentes.</p>
+
+<p>No Domingo, último dia do evento, fui mentor de Clojure no Coding Dojo que aconteceu na trilha de Ruby. Ao mesmo tempo e na mesma sala havia máquinas com Clojure, Scala e Ruby para resolver o mesmo problema. Os participantes saiam de uma máquina e iam para outra, onde podiam ver as diferenças e características de cada uma das linguagens.</p>
+
+<p>Fiquei feliz ao perceber que o Clojure causou uma boa impressão e, novamente, despertou o interesse.</p>
+
+<h2>QCon SP</h2>
+
+<p>O grande evento do ano para desenvolvedores, infelizmente, caiu nos mesmos dias do RubyConf, evento da Locaweb voltado para a comunidade Ruby e Rails. Ouvi coisas muito boas sobre o RubyConf desse ano, e foi uma pena que eu não estive por lá.</p>
+
+<p>Como acontece todos os anos, o nível das palestras foi muito bom e, pela primeira vez, tive a honra de ter sido convidado para falar sobre Clojure na trilha &ldquo;Fronteiras do Desenvolvimento&rdquo;.</p>
+
+<p>Para minha surpresa, a sala ficou lotada. Muita gente em pé, muita gente interessada e várias pessoas vieram falar comigo após a palestra para tirar dúvidas ou mesmo para contar suas experiências ao adotar Clojure em suas empresas.</p>
+
+<p>Não tenho dúvidas de que, profissionalmente falando, esse foi o ponto alto do ano para mim. Só tenho a agradecer aos presentes e à organização pelo interesse e pela oportunidade.</p>
+
+<p>O ponto negativo, e até certo ponto divertido, ficou por conta da novelinha criada por um dos palestrantes ao falar mal de SOA. Os representantes de um dos patrocinadores, que vendem consultoria no assunto, ao se sentirem ofendidos, iniciaram um festival de resmungos passivo-agressivos como se um bom diálogo fosse construído dessa forma. O evento em si e a organização nada tiveram a ver com isso, mas foi interessante acompanhar algumas reações e ver quem as pessoas realmente são quando o calo dói.</p>
+
+<h2>(clj-sp)</h2>
+
+<p>Entre um evento e outro, percebendo o interesse crescente na linguagem Clojure, resolvi chamar os desenvolvedores das listas Clojure Brasil e Clojure BR para participar do (clj-sp), o Grupo de Usuários Clojure no Brasil. Somos o primeiro grupo do tipo no Brasil e, por mais estranho que pareça, nosso primeiro encontro foi no Rio de Janeiro.</p>
+
+<p>Organizado pelo nosso amigo Giuliani, sete desenvolvedores se reuniram num bar da Lapa, o equivalente carioca da Vila Madalena e trocamos experiências sobre o uso de programação funcional em geral e Clojure em particular em nossos respectivos trabalhos.</p>
+
+<p>Dois dias depois tivemos o primeiro encontro em São Paulo, nas dependências da iMasters, contando com uma apresentação minha sobre a sintaxe do Clojure, Konrad Scorciapino falando sobre Datalog e Jonas Fagundes compartilhando sua experiência com Clojure em startups.</p>
+
+<p>O auditório da iMasters ficou pequeno para tanta gente interessada e eu fiquei impressionado como apareceu muito mais gente do que eu estava esperando.</p>
+
+<p>Dia 26 de Setembro, última Quinta-feira do mês, teremos o segundo encontro. Caso você tenha interesse, as informações estão em [<a href="http://www.meetup.com/clj-sp/">http://www.meetup.com/clj-sp/</a>].</p>
+
+<h2>O que vem por aí</h2>
+
+<ul>
+<li><p>7masters JavaScript
+Já 25 de Setembro será dia de 7masters de JavaScript na iMasters. Eu e mais seis especialistas vamos apresentar lightining talks de sete minutos sobre algum assunto bacana relacionado à linguagem. Acesse [setemasters.imasters.com.br/edicoes/javascript/] e compareça.</p></li>
+<li><p>DevDay
+Em outubro vou falar novamente sobre JavaScript no <a href="http://devday.devisland.com/">DevDay</a>, um evento muito bacana voltado para desenvolvedores de software que vai acontecer em Belo Horizonte.</p></li>
+</ul>
+
+
+<p>Vai ser uma chance bacana de conhecer vários desenvolvedores que eu admiro e aprender com quem realmente conhece do assunto.</p>
+
+<ul>
+<li>Programação funcional
+E, finalizando, estou escrevendo meu segundo livro, mais focado em programação funcional e como isso pode salvar a sua pele no seu trabalho ou nos seus projetos pessoais. É um livro bem mais denso e especializado que o <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">primeiro</a>, mas estou tentando manter o mesmo tom didático e fácil de assimilar.</li>
+</ul>
+
+
+<p>Esse ano está sendo <em>o ano da colheita</em> de tudo o que eu plantei em 2012 e, enquanto isso, estou me preparando para colher mais frutos no ano que vem. Vamos ver no que dá.</p>
 ]]></content>
   </entry>
   
@@ -1437,128 +1910,6 @@ server {
 <p>Já tinhamos uma prova de conceito, uns rascunhos das páginas e uma lista de funcionalidades. E todo processo levou cerca de uma semana.</p>
 
 <p>Sem perder mais tempo, partimos para o código! E foi então que começamos a tropeçar nos detalhes&hellip; mas este será um assunto para o próximo post. Até lá!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
-    <link href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/"/>
-    <updated>2012-06-20T08:37:53-03:00</updated>
-    <id>http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames</id>
-    <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
-
-<p><a href="http://rologames.com.br"><img src="http://1up4dev.org/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
-
-<p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
-
-<p>O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.</p>
-
-<p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
-
-<ol>
-<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
-<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
-<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
-<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
-</ol>
-
-
-<p>Mas como diz o ditado &ldquo;até mesmo um pé na bunda te empurra pra frente&rdquo; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D</p>
-
-<p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
-
-<ul>
-<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
-<li><p>Desenvolvimento</p></li>
-<li><p>Infraestrutura</p></li>
-</ul>
-
-
-<p>Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &ldquo;polêmico&rdquo; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vagrant, virtualizando o ambiente de trabalho]]></title>
-    <link href="http://1up4dev.org/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/"/>
-    <updated>2012-06-01T10:14:30-03:00</updated>
-    <id>http://1up4dev.org/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho</id>
-    <content type="html"><![CDATA[<p><a href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.</p>
-
-<h2>Prós e Contra<del>s</del></h2>
-
-<p>Vários pontos se destacam no uso do Vagrant:</p>
-
-<ul>
-<li><p>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</p></li>
-<li><p>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</p></li>
-<li><p>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</p></li>
-<li><p>Mantém a sua máquina local &ldquo;limpa&rdquo;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</p></li>
-</ul>
-
-
-<p>Agora vem o contra.</p>
-
-<ul>
-<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
-</ul>
-
-
-<h2>Instalação</h2>
-
-<p>Você precisa do <a href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &ldquo;gem install vagrant&rdquo; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.</p>
-
-<h2>Exemplo de Uso</h2>
-
-<p>O <a href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.</p>
-
-<p>Supondo que o vagrant está instalado. Vamos adicionar uma máquina:</p>
-
-<pre><code>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-</code></pre>
-
-<p>Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:</p>
-
-<pre><code>$ vagrant init lucid32  #ja especificando o box lucid32 baixado
-</code></pre>
-
-<p>Vamos subir a VM:</p>
-
-<pre><code>$ vagrant up
-</code></pre>
-
-<p>Para acessar a VM:</p>
-
-<pre><code>$ vagrant ssh
-</code></pre>
-
-<p>Repare que dentro da VM, na pasta &ldquo;/vagrant&rdquo; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.</p>
-
-<p>Vamos supor que você executou um &ldquo;rails s&rdquo; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span>  <span class="c1"># 3000 from VM, available at 4000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Dá um restart na VM:</p>
-
-<pre><code>$ vagrant halt &amp;&amp; vagrant up
-</code></pre>
-
-<p>Subir o projeto novamente. (vagrant ssh e o &ldquo;rails s&rdquo; dentro do /vagrant)</p>
-
-<p>Acesse <a href="http://localhost:4000.">http://localhost:4000.</a></p>
-
-<h2>Extras e Conclusão</h2>
-
-<p>A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:</p>
-
-<p><a href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> &ndash; Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.</p>
-
-<p><a href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> &ndash; Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.</p>
-
-<p><a href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> &ndash; No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.</p>
 ]]></content>
   </entry>
   

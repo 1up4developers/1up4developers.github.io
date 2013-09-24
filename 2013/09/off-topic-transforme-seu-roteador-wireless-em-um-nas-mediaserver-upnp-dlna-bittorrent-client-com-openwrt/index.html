@@ -1,0 +1,650 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT - 1up4developers</title>
+  <meta name="author" content="1up4developers authors">
+
+  
+  <meta name="description" content="TL;DR OpenWRT é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/1up4developers" rel="alternate" title="1up4developers" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-6134014-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <img src="/images/logo-1up-small.png" style="float: left; margin-top: 11px; margin-right: 30px;" alt="1up4developers logo">
+  <h1><a href="/">1up4developers</a></h1>
+  
+    <h2>Nadando contra o Waterfall. tail -f /mind/realworld >> /blog</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/1up4developers" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:1up4dev.org" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">[Off-Topic] Transforme Seu Roteador Wireless Em Um NAS, MediaServer UPnP/DLNA E BitTorrent Client Com OpenWRT</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-24T10:00:00-03:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><strong>TL;DR</strong> <a href="http://openwrt.org">OpenWRT</a> é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. Em outras palavras, é um &ldquo;firmware on steroids&rdquo; para roteadores.</p>
+
+<h2>Mas por quê?</h2>
+
+<ul>
+<li>Economia. Apenas substituindo o firmware do roteador é possível adicionar funcionalidade e recursos, economizando uma grana preciosa com dispositivos semelhantes, como AppleTV, NAS dedicado, etc.</li>
+<li>Funcionalidade. Provavelmente o roteador fica ligado 100% do tempo na sua casa, sendo utilizado apenas para compartilhar a internet. Praticamente um servidor disponível 24 horas por dia sem utilizaçao! Não mais&hellip;</li>
+<li>Diversão. Substituir o firmware do seu roteador por uma distro baseada em Linux e configurar todos os serviços manualmente&hellip; é diversão pura!</li>
+<li>Por que eu quero (e posso)!</li>
+</ul>
+
+
+<h2>Instalação</h2>
+
+<p><strong>Atenção: existe a possibilidade (embora pequena) de algo sair muito errado e você ganhar um peso de papel. Prossiga por sua conta e risco&hellip; ou se tiver coragem!</strong></p>
+
+<p>O primeiro passo é descobrir o modelo do seu roteador e verificar a compatibilidade nesta página: <a href="http://wiki.openwrt.org/toh/start.">http://wiki.openwrt.org/toh/start.</a> Se não encontrar o modelo ou houver um aviso de não-compatibilidade, sinto muito mas não vai rolar para você.</p>
+
+<p>Se seu roteador for compatível, haverá o <strong>target</strong> da imagem e um link para uma wiki com um how-to específico do modelo, instruções de instalação, resolução de problemas, etc. Procure pelo nome da release que você deverá baixar daqui <a href="http://downloads.openwrt.org.">http://downloads.openwrt.org.</a> A imagem tem o formato <em>openwrt-TARGET-generic-MODELO-VERSAO-squashfs-factory.bin</em></p>
+
+<p>Por exemplo, meu roteador é um <strong>TP-Link WR1043ND</strong>. Procurando na página <a href="http://wiki.openwrt.org/toh/start,">http://wiki.openwrt.org/toh/start,</a> o target compatível com meu roteador é <em>ar71xx</em>:</p>
+
+<p><img src="/images/posts/openwrt-1.png" alt="" /></p>
+
+<p>Acessei a página de downloads, naveguei pelos diretórios da release, depois target e encontrei o arquivo <em>openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin</em> para download.</p>
+
+<p><img src="/images/posts/openwrt-2.png" alt="" /></p>
+
+<p>Quando baixar a imagem, é só fazer a atualização de firmware normalmente no seu roteador pelo admin:</p>
+
+<p><img src="/images/posts/openwrt-3.png" alt="" /></p>
+
+<p>Confirme e reze muito! Aguarde o roteador atualizar e reiniciar.</p>
+
+<p>Deste ponto em diante, será necessário conectar no roteador com cabo, para setar uma senha de root e configurar o wifi. Este processo é relativamente trivial, basta utilizar a interface web do admin, sem segredo&hellip;</p>
+
+<p><img src="/images/posts/openwrt-4.png" alt="" /></p>
+
+<p>Uma vez definida a senha e o wifi configurado, é possível acessar seu roteador via ssh:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh root@192.168.1.1
+</span><span class='line'>root@192.168.1.1's password:
+</span><span class='line'>
+</span><span class='line'>BusyBox v1.19.4 (2013-03-14 11:28:31 UTC) built-in shell (ash)
+</span><span class='line'>Enter 'help' for a list of built-in commands.
+</span><span class='line'>
+</span><span class='line'>  _______                     ________        __
+</span><span class='line'> |       |.-----.-----.-----.|  |  |  |.----.|  |_
+</span><span class='line'> |   -   ||  _  |  -__|     ||  |  |  ||   _||   _|
+</span><span class='line'> |_______||   __|_____|__|__||________||__|  |____|
+</span><span class='line'>          |__| W I R E L E S S   F R E E D O M
+</span><span class='line'> -----------------------------------------------------
+</span><span class='line'> ATTITUDE ADJUSTMENT (12.09, r36088)
+</span><span class='line'> -----------------------------------------------------
+</span><span class='line'>  * 1/4 oz Vodka      Pour all ingredients into mixing
+</span><span class='line'>  * 1/4 oz Gin        tin with ice, strain into glass.
+</span><span class='line'>  * 1/4 oz Amaretto
+</span><span class='line'>  * 1/4 oz Triple sec
+</span><span class='line'>  * 1/4 oz Peach schnapps
+</span><span class='line'>  * 1/4 oz Sour mix
+</span><span class='line'>  * 1 splash Cranberry juice
+</span><span class='line'> -----------------------------------------------------
+</span><span class='line'>root@OpenWrt:~#</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Se você chegou até aqui, parabéns! Você teve coragem. E felizmente a parte difícil já passou&hellip;</p>
+
+<p>Nota: dependendo do seu roteador, a versão do OpenWRT pode variar. Leia a <a href="http://wiki.openwrt.org/">wiki</a> do modelo do seu roteador para instruções específicas e resolução de problemas.</p>
+
+<p><strong>Importante</strong>: caso o pior aconteça (como acabar a energia no meio do processo de flash da firmware) e você não queira utilizar seu roteador como peso de papel, tente seguir os procedimento de &ldquo;debriking&rdquo; em <a href="http://wiki.openwrt.org/doc/howto/generic.debrick">http://wiki.openwrt.org/doc/howto/generic.debrick</a></p>
+
+<h2>Configurando o NAS</h2>
+
+<p>Para o NAS, vamos montar as partições do HD externo e configurar uma partição de swap pois o roteador provavelmente não tem memória interna suficiente para dar conta do recado.</p>
+
+<p>Neste exemplo, vou usar meu HD de 1TB com uma partição formatada em ext4 e outra partição de 1GB formatada como linux+swap. Não vou usar FAT32 nem NTFS e nem recomendo! A idéia aqui é deixar o HD plugado eternamente no roteador e acessá-lo pela rede.</p>
+
+<h3>Instalando os pacotes necessários</h3>
+
+<p>Para nossa sorte, o OpenWRT conta com um gerenciador de pacotes que facilita (e muito) a instalação das libs e módulos necessários para montar o HD externo e compartilhá-lo na rede via Samba ou NFS.</p>
+
+<p>Logue no roteador via ssh e instale os seguintes pacotes:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install kmod-usb-storage block-mount kmod-fs-ext4</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O ultimo pacote vai depender do sistema de arquivos do seu HD. Por exemplo, kmod-fs-ext2, etc. Veja os módulos disponíveis em <a href="http://wiki.openwrt.org/doc/howto/storage">http://wiki.openwrt.org/doc/howto/storage</a></p>
+
+<p>Verifique se as partições já foram detectadas rodando <em>blkid</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# blkid
+</span><span class='line'>/dev/mtdblock2: TYPE="squashfs"
+</span><span class='line'>/dev/sda1: LABEL="MEDIA" UUID="1ecad5f1-0000-0000-000f-e8b7f6ac651d" TYPE="ext4"</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Montando as partições do HD</h3>
+
+<p>Agora vamos configurar o fstab para montar as partições automaticamente quando o roteador for ligado. Edite o arquivo <em>/etc/config/fstab</em> com o seguinte (use o vi):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config global automount
+</span><span class='line'>        option from_fstab 1
+</span><span class='line'>        option anon_mount 0
+</span><span class='line'>
+</span><span class='line'>config global autoswap
+</span><span class='line'>        option from_fstab 1
+</span><span class='line'>        option anon_swap 0
+</span><span class='line'>
+</span><span class='line'>config mount
+</span><span class='line'>        option target   /mnt/media
+</span><span class='line'>        option device   /dev/sda1
+</span><span class='line'>        option fstype   ext4
+</span><span class='line'>        option options  rw,sync
+</span><span class='line'>        option enabled  1
+</span><span class='line'>        option enabled_fsck 0
+</span><span class='line'>
+</span><span class='line'>config swap
+</span><span class='line'>        option device   /dev/sda2
+</span><span class='line'>        option enabled  1</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No meu caso, vou montar a partição <em>/dev/sda1</em> em <em>/mnt/media</em>, então é necessário criar o diretório de destino, ativar e iniciar o serviço <em>fstab</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# mkdir /mnt/media
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/fstab enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/fstab start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pronto, seu HD externo pode ser acessado em <em>/mnt/media</em> e o swap foi montado na segunda partição.</p>
+
+<h3>Compartilhando na rede</h3>
+
+<p>Vou utilizar <a href="http://wiki.openwrt.org/doc/howto/nfs.server">NFS</a> para compartilhar a partição na rede, mas você também pode utilizar Samba seguindo <a href="http://wiki.openwrt.org/doc/howto/cifs.server">http://wiki.openwrt.org/doc/howto/cifs.server</a></p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install nfs-kernel-server</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Edite (ou crie) o arquivo <em>/etc/exports</em> com o conteúdo:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/mnt/media 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ative e inicie os serviços necessários:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# /etc/init.d/portmap start
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/portmap enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/nfsd start
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/nfsd enable</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pronto! O server (roteador) está configurado. Para montar esta partição no client, por exemplo Ubuntu, siga:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo apt-get install nfs-common
+</span><span class='line'>$ sudo mkdir /media/nas
+</span><span class='line'>$ sudo mount -t nfs 192.168.1.1:/mnt/media /media/nas</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Groovy! Seu NAS foi montado no seu desktop em <em>/media/nas</em>. Pode compartilhar seus arquivos a vontade!</p>
+
+<h2>Configurando o MediaServer (minidlna)</h2>
+
+<p>Logue no roteador e instale os pacotes necessários:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install minidlna</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para configurar, basta editar o arquivo <em>/etc/config/minidlna</em> como segue:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config minidlna config
+</span><span class='line'>  option 'enabled' '1'
+</span><span class='line'>  option port '8200'
+</span><span class='line'>  option interface 'br-lan'
+</span><span class='line'>  option friendly_name 'OpenWrt DLNA Server'
+</span><span class='line'>  option db_dir '/mnt/media/minidlna/db'
+</span><span class='line'>  option log_dir '/mnt/media/minidlna/log'
+</span><span class='line'>  option inotify '1'
+</span><span class='line'>  option enable_tivo '0'
+</span><span class='line'>  option strict_dlna '0'
+</span><span class='line'>  option presentation_url ''
+</span><span class='line'>  option notify_interval '900'
+</span><span class='line'>  option serial '12345678'
+</span><span class='line'>  option model_number '1'
+</span><span class='line'>  option root_container '.'
+</span><span class='line'>  list media_dir '/mnt/media'
+</span><span class='line'>  option album_art_names 'Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ative e inicie o serviço:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# /etc/init.d/minidlna enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/minidlna start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Pronto! O MediaServer está configurado e compartilhando seus arquivos na rede. Aqui na minha SmartTV aparece assim:</p>
+
+<p><img src="/images/posts/minidlna.jpg" alt="MiniDLNA na Samsung SmartTV" /></p>
+
+<h2>Configurando o BitTorrent client (transmission)</h2>
+
+<p>Vamos instalar os pacotes:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install transmission-daemon</span></code></pre></td></tr></table></div></figure>
+
+
+<p>E configurar o serviço editando <em>/etc/config/transmission</em> e alterando as opções a seguir (mantenha todas as outras configs):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config transmission
+</span><span class='line'>  option enabled 1
+</span><span class='line'>  option config_dir '/mnt/media/transmission/config'
+</span><span class='line'>  option download_dir '/mnt/media/transmission/complete'
+</span><span class='line'>  option incomplete_dir '/mnt/media/transmission/incomplete'
+</span><span class='line'>  option incomplete_dir_enabled true
+</span><span class='line'>  option ratio_limit 2.0000
+</span><span class='line'>  option ratio_limit_enabled true
+</span><span class='line'>  option rpc_authentication_required false
+</span><span class='line'>  option rpc_password ''
+</span><span class='line'>  option rpc_username ''
+</span><span class='line'>  option speed_limit_up 5
+</span><span class='line'>  option speed_limit_up_enabled true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Ative e inicie o serviço:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>root@OpenWrt:~# /etc/init.d/transmission enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/transmission start</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O Transmission roda como um daemon, sendo controlado remotamente. Para isso, será necessário adicionar a seguintes regra de farewall, adicionando no final do arquivi <em>/etc/config/firewall</em>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config rule
+</span><span class='line'>        option src *
+</span><span class='line'>        option proto tcp
+</span><span class='line'>        option dest_port 9091
+</span><span class='line'>        option target ACCEPT</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reinicie o firewall executando <em>/etc/init.d/firewall restart</em></p>
+
+<p>Para gerenciar seus torrents, instale a extensão <a href="https://chrome.google.com/webstore/detail/torrent-to-transmission/kfnbjgeekkbjcddceemhjajjiclnoekb">.torrent to Transmission</a> no Chrome, baixe o <a href="https://code.google.com/p/transmisson-remote-gui/">Transmission Remote GUI</a> para Windows, Mac e Linux ou ainda o <a href="https://play.google.com/store/apps/details?id=com.neogb.rtac">Remote Transmission</a> para Android.</p>
+
+<p><img src="/images/posts/transmission-gui.jpg" alt="Transmission GUI" /></p>
+
+<p>Caso seu roteador tenha espaço disponível, você pode instalar o pacote <em>transmission-web</em> para gerenciar seus torrents diretamente do navegador.</p>
+
+<p>Ao adicionar um .torrent pelo GUI, o mesmo será baixado diretamente no seu roteador!</p>
+
+<h2>Conclusão</h2>
+
+<p>Embora relativamente complicado, todo procedimento para instalação e configuração não é nada diferente do que estamos acostumados a fazer diariamente no Linux, como devops, seja configurando uma VPS ou montando um NAS na rede.</p>
+
+<p>A liberdade que o OpenWRT oferece é imensa. O repositório é recheado com pacotes bem úteis e muito fáceis de configurar. Sem falar na economia comparando com um aparelho como AppleTV (que não ofecererá tantos recursos) ou outros media servers do mercado.</p>
+
+<p>E aí, tem coragem??? Poste sua experiência nos comentários! :)</p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://wiki.openwrt.org/doc/howto/usb.storage">http://wiki.openwrt.org/doc/howto/usb.storage</a></li>
+<li><a href="http://wiki.openwrt.org/doc/howto/nfs.server">http://wiki.openwrt.org/doc/howto/nfs.server</a></li>
+<li><a href="http://wiki.openwrt.org/doc/uci/minidlna">http://wiki.openwrt.org/doc/uci/minidlna</a></li>
+<li><a href="http://wiki.openwrt.org/doc/uci/transmission">http://wiki.openwrt.org/doc/uci/transmission</a></li>
+<li><a href="http://wiki.openwrt.org/toh/tp-link/tl-wr1043nd">http://wiki.openwrt.org/toh/tp-link/tl-wr1043nd</a></li>
+<li><a href="http://www.rodrigorodrigues.info/index.php/2012/01/openwrt-fazendo-magica-com-linux-no-roteador-parte-1/">http://www.rodrigorodrigues.info/index.php/2012/01/openwrt-fazendo-magica-com-linux-no-roteador-parte-1/</a></li>
+<li><a href="http://knowhow.bart.prokop.name/install/openwrt/wr1043nd">http://knowhow.bart.prokop.name/install/openwrt/wr1043nd</a></li>
+</ul>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-24T10:00:00-03:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/linux/'>linux</a>, <a class='category' href='/categories/off-topic/'>off-topic,</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/" title="Previous Post: [QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages">&laquo; [QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
+      </li>
+    
+  </ul>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - 1up4developers authors -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>.</span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = '1up4dev';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/';
+        var disqus_url = 'http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

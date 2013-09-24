@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma &hellip;">
+  <meta name="description" content="Enviar emails de uma aplicação Rails é muito simples. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,133 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/">Enviando Emails No Rails Através Do Gmail</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-20T07:00:09-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+        
+         | <a href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Enviar emails de uma aplicação Rails é <a href="http://guides.rubyonrails.org/action_mailer_basics.html">muito simples</a>. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não souber ou não tiver muita paciência para fazer isso (por exemplo instalar e configurar <a href="http://www.sendmail.org">sendmail</a>, <a href="http://www.mutt.org/">mutt</a>, etc), pode facilmente usar sua conta do <a href="http://lindsaar.net/2010/3/15/how_to_use_mail_and_actionmailer_3_with_gmail_smtp">Gmail</a> para enviar as mensagens da sua aplicação.</p>
+
+<p>Basta incluir as seguintes configurações no bloco <code>config</code> dos respectivos ambientes da aplicação (por exemplo, <code>config/environments/production.rb</code>):</p>
+
+<pre><code>  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :enable_starttls_auto =&gt; true,
+    :authentication =&gt; :plain,
+    :address =&gt; smtp.gmail.com,
+    :port =&gt; 587,
+    :user_name =&gt; "seuemail@gmail.com",
+    :password =&gt; "suasenha"
+  }
+</code></pre>
+
+<p>O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para habilitar <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. Sucesso!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/">Criando Um WebCrawler De Modo Fácil E Rápido Com Ruby E Nokogiri</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T07:00:41-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+        
+         | <a href="/2011/01/criando-um-webcrawler-de-modo-facil-e-rapido-com-ruby-e-nokogiri/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quantas vezes você precisou buscar alguma informação externa para sua aplicação, como um número de telefone ou uma foto em algum site? A idéia é simples: criar um <a href="http://en.wikipedia.org/wiki/Web_crawler">crawler</a> script para fazer parse de algum conteúdo HTML. E basta apenas Ruby e <a href="http://nokogiri.org/">Nokogiri</a>.</p>
+
+<h3>Exemplo</h3>
+
+<p>Digamos que eu queira obter a última versão de uma dada gem consultando diretamente no site <a href="http://rubygems.org/">http://rubygems.org</a> para me ajudar quando precisar instalar novas gems no meu ambiente. Vamos ao código:</p>
+
+<pre><code>#!/usr/bin/env ruby
+
+require "rubygems"
+require "open-uri"
+require "nokogiri"
+
+gem = ARGV[0]
+site = open("http://rubygems.org/gems/#{gem}")
+document = Nokogiri::HTML(site)
+version = document.css(".title h3").text
+
+puts "#{gem} version #{version}"
+</code></pre>
+
+<p>Vou salvar esse script no arquivo <code>gem-version.sh</code>, torna-lo executável com <code>chmod +x gem-version.sh</code> em seguida executar no terminal:</p>
+
+<pre><code>$ ./gem-version rails
+  rails version 3.0.3
+</code></pre>
+
+<p>Pronto, agora você também pode brincar à vontade com <a href="http://github.com/tenderlove/nokogiri">Nokogiri</a> no seu shell!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -942,205 +1069,6 @@ a.images.previous
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/">Importando E Exportando Suas Gems Com Rubygems Snapshot</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-22T14:24:09-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
-
-        
-         | <a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Final de ano está rendendo.
-O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do famoso &ldquo;gem hell&rdquo;.</p>
-
-<p>Veja como é difícil usar:</p>
-
-<p>Instalação:</p>
-
-<pre><code>sudo gem install rubygems_snapshot
-</code></pre>
-
-<p>Para <strong>exportar</strong> as gems instaladas:</p>
-
-<pre><code>gem snapshot export projeto-exemplo.yml
-</code></pre>
-
-<p>Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:</p>
-
-<pre><code>[sudo] gem snapshot import projeto-exemplo.yml
-</code></pre>
-
-<h2>Afinal, o que tem de legal nisso?</h2>
-
-<p>Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:</p>
-
-<p>Com o rvm, você pode criar um &ldquo;novo ambiente&rdquo;:</p>
-
-<pre><code>rvm use 1.8.7%projeto_exemplo
-
-
-
-
-gem list
-</code></pre>
-
-<p>Deve retornar vazio.</p>
-
-<pre><code>gem install rubygems_snapshot
-
-
-
-
-gem snapshot import projeto-exemplo.yml
-</code></pre>
-
-<p>Instalará as gems necessárias para o projeto e pronto!</p>
-
-<h2>ToDo:</h2>
-
-<p>Esta é uma versão bem básica, onde o &ldquo;import&rdquo; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &ldquo;build nativos&rdquo;, mas por enquanto estamos usando aqui na equipe com sucesso.</p>
-
-<h2>Como faço para criar um rubygems plugin também?</h2>
-
-<p>Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!</p>
-
-<p>Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
-Valeu e sucesso!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/12/agile-enterprise-edition/">Agile Enterprise Edition</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-12-21T07:00:08-02:00" pubdate data-updated="true">Dec 21<span>st</span>, 2009</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
-
-        
-         | <a href="/2009/12/agile-enterprise-edition/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Para começar o post, segue esta história sobre <em>gerenciamento</em> que vi no blog do <a href="http://gustavoribeiro.com/blog/gerenciamento">Gustavo Ribeiro</a>:</p>
-
-<blockquote><p>Todos os dias, uma formiga chegava cedinho ao escritório e pegava duro no trabalho. A formiga era produtiva e feliz. O gerente marimbondo estranhou a formiga trabalhar sem supervisão. Se ela era produtiva sem supervisão, seria ainda mais se fosse supervisionada.</p></blockquote>
-
-<p>E colocou uma barata, que preparava belíssimos relatórios e tinha muita experiência, como supervisora. A primeira preocupação da barata foi a de padronizar o horário de entrada e saída da formiga.</p>
-
-<p>Logo, a barata precisou de uma secretária para ajudar a preparar os relatórios e contratou também uma aranha para organizar os arquivos e controlar as ligações telefônicas.</p>
-
-<p>O marimbondo ficou encantado com os relatórios da barata e pediu também gráficos com indicadores e análise das tendências que eram mostradas em reuniões.</p>
-
-<p>A barata, então, contratou uma mosca, e comprou um computador com impressora colorida. Logo, a formiga produtiva e feliz, começou a se lamentar de toda aquela movimentação de papéis e reuniões!
-O marimbondo concluiu que era o momento de criar a função de gestor para a área onde a formiga produtiva e feliz, trabalhava. O cargo foi dado a uma cigarra, que mandou colocar carpete no seu escritório e comprar uma cadeira especial.</p>
-
-<p>A nova gestora cigarra logo precisou de um computador e de uma assistente (sua assistente na empresa anterior) para ajudá-la a preparar um plano estratégico de melhorias e um controle do orçamento para a área onde trabalhava a formiga, que já não cantarolava mais e cada dia se tornava mais chateada.</p>
-
-<p>A cigarra, então, convenceu o gerente marimbondo, que era preciso fazer um estudo de clima. Mas, o marimbondo, ao rever as cifras, se deu conta de que a unidade na qual a formiga trabalhava já não rendia como antes e contratou a coruja, uma prestigiada consultora, muito famosa, para que fizesse um diagnóstico da situação. A coruja permaneceu três meses nos escritórios e emitiu um volumoso relatório, com vários volumes que concluía: &ldquo;Há muita gente nesta empresa!&rdquo;</p>
-
-<p>Então o marimbondo mandou demitir a formiga porque ela andava muito desmotivada e aborrecida.</p>
-
-<p>Então lembrei de uma imagem que ilustra perfeitamente esta fábula e retrata fielmente a &ldquo;organização&rdquo; de alguma empresas:</p>
-
-<p><a href="/images/uploads/2009/07/trabalho_em_equipe.jpg"><img src="/images/uploads/2009/07/trabalho_em_equipe-222x300.jpg" alt="" /></a></p>
-
-<h2>Dividir para conquistar: você está fazendo isso errado!</h2>
-
-<p>Quando uma <em>startup</em> passa a vender mais e ter uma procura maior por seus produtos/serviços (o que é bom), uma reação comum da &ldquo;cúpula&rdquo; é aumentar o quadro de funcionários visando atender a demanda. Logo surgem os problemas com a organização do pessoal e/ou fluxo de trabalho. A solução mais simplista (e óbvia) é a especialização: fulano faz isso, ciclano faz aquilo, e beltrano gerencia. Logo controles são criados, fluxos validados, centros de custo, documentos, reuniões, atas, comitês, gestão de pessoas e relacionamento, terceirização, cargos, departamentos&hellip; e nasce o monstro da <a href="http://pt.wikipedia.org/wiki/Burocracia">burocracia</a>, aka &ldquo;enterprise&rdquo;.</p>
-
-<p>Com essa <a href="http://en.wikipedia.org/wiki/Enterprise_architecture">especialização</a>, cada &ldquo;módulo&rdquo; (também conhecido como departamento) começa a perder o foco no GRANDE objetivo da empresa e passa a defender apenas <a href="http://1up4dev.org/2008/11/os-guardioes-da-cascata">seus interesses</a> &ndash; a famosa MISSÃO da empresa passa a ser coadjuvante. O resultado? A empresa dobra ou triplica seu quadro de funcionários e na maioria dos casos, seu lucro bruto. Porém agora tem mais despesas com pessoal e gastos extras para manter  esse novo modelo &ldquo;enterprise&rdquo;. Trocando em miúdos, continua na mesma!</p>
-
-<p>Onde está o erro? Mais uma vez o FOCO está na <a href="http://1up4dev.org/2008/11/foco-no-problema/">solução</a> ao invés de PROBLEMA. Se você ler meus posts anteriores vai ver que este é um tema recorrente. Então por que as empresas continuam fazendo as coisas erradas e cometendo os mesmos erros?</p>
-
-<p>Idéias criativas surgem das pessoas <a href="http://blog.aspercom.com.br/2008/07/21/hierarquias-sao-inteligentes-nas-pontas/">diretamente</a> relacionadas com os problemas e não de diretores, contadores, gestores, etc. Esse modelo &ldquo;enterprise&rdquo; é um <em>overhead</em> organizacional que só gera ruído e desperdício!</p>
-
-<h2>A solução é adotar agile!</h2>
-
-<p>SOLUÇÃO!? Mas qual era o PROBLEMA mesmo!? Sim, mais uma vez o foco é a <a href="http://agilesoftwaredevelopment.com/blog/janusz-gorycki/agile-dead">solução</a> ao invés do problema.</p>
-
-<p>Como eu disse nos posts anteriores, acreditar que uma mudança drástica do processo pode mudar a cultura da empresa e pincipalmente as pessoas é o maior erro na adoção de metodologias ágeis. Mudam o processo mas não mudam as pessoas.</p>
-
-<p>De uma forma simples e direta, agile resume-se a quatro valores:</p>
-
-<blockquote><p>Individuals and interactions over processes and tools
-Working software over comprehensive documentation
-Customer collaboration over contract negotiation
-Responding to change over following a plan</p></blockquote>
-
-<p>Ou seja, pessoas, software, colaboração e feedback. Simples assim!</p>
-
-<p>O manifesto ágil não cita nada sobre &ldquo;enterprise&rdquo;, sobre a implementação. Este é o grande desafio em sua adoção. Como seguir estes valores sem burocratizar e engessar o processo? Como criar uma relação de colaboração com os clientes? Como responder rapidamente a mudanças? Como eliminar o esforço que não agrega valor ao produto e/ou empresa? Como evitar politicagem?</p>
-
-<h2>Mantenha-se pequeno!</h2>
-
-<p>Otimize! Busque soluções para os problemas que impedem de produzir mais e com mais qualidade. Faça MAIS com MENOS. Foque no O QUE ao invés do COMO. Escale as pessoas verticalmente!</p>
-
-<p>Inove! Não espere conseguir resultados diferentes fazendo sempre a mesma coisa. Busque novidades, opniões, experiências. Ouça seus funcionários, seus clientes. Estude, pesquise, arrisque, erre, acerte&hellip; continuamente.</p>
-
-<p>Mantenha o foco! Tenha um GRANDE e único objetivo e certifique-se que todos acreditem nesta filosofia. É importante que todos comprem a idéia e o <em>modus operandis</em>.</p>
-
-<p>Finalizando, este é apenas meu ponto de vista, baseado na minha experiência em diversas empresas grandes e pequenas, vivenciando problemas, errando muito e principalmente aprendendo com os erros dos outros. Agilidade pode funcionar bem em grandes corporações, desde que haja foco e que todos comprem a idéia. Você pode concordar ou não.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -1158,7 +1086,15 @@ Responding to change over following a plan</p></blockquote>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
       <li class="post">
@@ -1167,14 +1103,6 @@ Responding to change over following a plan</p></blockquote>
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
       </li>
     
   </ul>

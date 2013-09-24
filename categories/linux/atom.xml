@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: linux | 1up4developers]]></title>
+  <link href="http://1up4dev.org/categories/linux/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2013-09-24T03:29:23-03:00</updated>
+  <id>http://1up4dev.org/</id>
+  <author>
+    <name><![CDATA[1up4developers authors]]></name>
+    <email><![CDATA[1up4dev@googlegroups.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT]]></title>
+    <link href="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/"/>
+    <updated>2013-09-24T10:00:00-03:00</updated>
+    <id>http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt</id>
+    <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://openwrt.org">OpenWRT</a> é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. Em outras palavras, é um &ldquo;firmware on steroids&rdquo; para roteadores.</p>
+
+<h2>Mas por quê?</h2>
+
+<ul>
+<li>Economia. Apenas substituindo o firmware do roteador é possível adicionar funcionalidade e recursos, economizando uma grana preciosa com dispositivos semelhantes, como AppleTV, NAS dedicado, etc.</li>
+<li>Funcionalidade. Provavelmente o roteador fica ligado 100% do tempo na sua casa, sendo utilizado apenas para compartilhar a internet. Praticamente um servidor disponível 24 horas por dia sem utilizaçao! Não mais&hellip;</li>
+<li>Diversão. Substituir o firmware do seu roteador por uma distro baseada em Linux e configurar todos os serviços manualmente&hellip; é diversão pura!</li>
+<li>Por que eu quero (e posso)!</li>
+</ul>
+
+
+<h2>Instalação</h2>
+
+<p><strong>Atenção: existe a possibilidade (embora pequena) de algo sair muito errado e você ganhar um peso de papel. Prossiga por sua conta e risco&hellip; ou se tiver coragem!</strong></p>
+
+<p>O primeiro passo é descobrir o modelo do seu roteador e verificar a compatibilidade nesta página: <a href="http://wiki.openwrt.org/toh/start.">http://wiki.openwrt.org/toh/start.</a> Se não encontrar o modelo ou houver um aviso de não-compatibilidade, sinto muito mas não vai rolar para você.</p>
+
+<p>Se seu roteador for compatível, haverá o <strong>target</strong> da imagem e um link para uma wiki com um how-to específico do modelo, instruções de instalação, resolução de problemas, etc. Procure pelo nome da release que você deverá baixar daqui <a href="http://downloads.openwrt.org.">http://downloads.openwrt.org.</a> A imagem tem o formato <em>openwrt-TARGET-generic-MODELO-VERSAO-squashfs-factory.bin</em></p>
+
+<p>Por exemplo, meu roteador é um <strong>TP-Link WR1043ND</strong>. Procurando na página <a href="http://wiki.openwrt.org/toh/start,">http://wiki.openwrt.org/toh/start,</a> o target compatível com meu roteador é <em>ar71xx</em>:</p>
+
+<p><img src="/images/posts/openwrt-1.png" alt="" /></p>
+
+<p>Acessei a página de downloads, naveguei pelos diretórios da release, depois target e encontrei o arquivo <em>openwrt-ar71xx-generic-tl-wr1043nd-v1-squashfs-factory.bin</em> para download.</p>
+
+<p><img src="/images/posts/openwrt-2.png" alt="" /></p>
+
+<p>Quando baixar a imagem, é só fazer a atualização de firmware normalmente no seu roteador pelo admin:</p>
+
+<p><img src="/images/posts/openwrt-3.png" alt="" /></p>
+
+<p>Confirme e reze muito! Aguarde o roteador atualizar e reiniciar.</p>
+
+<p>Deste ponto em diante, será necessário conectar no roteador com cabo, para setar uma senha de root e configurar o wifi. Este processo é relativamente trivial, basta utilizar a interface web do admin, sem segredo&hellip;</p>
+
+<p><img src="/images/posts/openwrt-4.png" alt="" /></p>
+
+<p>Uma vez definida a senha e o wifi configurado, é possível acessar seu roteador via ssh:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>$ ssh &lt;a href="&#109;&#97;&#105;&#108;&#x74;&#111;&#58;&#114;&#111;&#111;&#116;&#64;&#x31;&#x39;&#50;&#x2e;&#49;&#x36;&#x38;&#46;&#49;&#46;&#x31;">&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#57;&#x32;&#x2e;&#49;&#x36;&#x38;&#x2e;&#49;&#46;&#x31;&lt;/a>
+</span><span class='line'>&lt;a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x72;&#x6f;&#x6f;&#116;&#x40;&#x31;&#x39;&#50;&#x2e;&#49;&#x36;&#x38;&#x2e;&#49;&#x2e;&#49;">&#x72;&#x6f;&#111;&#x74;&#x40;&#49;&#x39;&#50;&#46;&#x31;&#54;&#56;&#x2e;&#x31;&#46;&#49;&lt;/a>&rsquo;s password:&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>BusyBox v1.19.4 (2013-03-14 11:28:31 UTC) built-in shell (ash)
+</span><span class='line'>Enter &lsquo;help&rsquo; for a list of built-in commands.&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;hr />
+</span><span class='line'>
+</span><span class='line'>&lt;p> |       |.&mdash;&mdash;&ndash;.&mdash;&mdash;&ndash;.&mdash;&mdash;&ndash;.|  |  |  |.&mdash;&mdash;.|  |&lt;em>
+</span><span class='line'> |   &ndash;   ||  _  |  &ndash;__|     ||  |  |  ||   &lt;/em>||   &lt;em>|
+</span><span class='line'> |&lt;/em>&lt;em>&lt;em>&lt;em>&lt;em>&lt;strong>||   &lt;/strong>|&lt;/em>&lt;/em>&lt;/em>&lt;strong>|&lt;/strong>|&lt;strong>||&lt;/strong>&lt;/em>&lt;em>&lt;em>&lt;strong>_||&lt;/strong>|  |&lt;/em>&lt;/em>__|&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>      |__| W I R E L E S S   F R E E D O M
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;hr />
+</span><span class='line'>
+</span><span class='line'>&lt;p> ATTITUDE ADJUSTMENT (12.09, r36088)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;hr />
+</span><span class='line'>
+</span><span class='line'>&lt;ul>
+</span><span class='line'>&lt;li>&frac14; oz Vodka      Pour all ingredients into mixing&lt;/li>
+</span><span class='line'>&lt;li>&frac14; oz Gin        tin with ice, strain into glass.&lt;/li>
+</span><span class='line'>&lt;li>&frac14; oz Amaretto&lt;/li>
+</span><span class='line'>&lt;li>&frac14; oz Triple sec&lt;/li>
+</span><span class='line'>&lt;li>&frac14; oz Peach schnapps&lt;/li>
+</span><span class='line'>&lt;li>&frac14; oz Sour mix&lt;/li>
+</span><span class='line'>&lt;li>1 splash Cranberry juice&lt;/li>
+</span><span class='line'>&lt;/ul>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>&lt;hr />
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~#&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Se você chegou até aqui, parabéns! Você teve coragem. E felizmente a parte difícil já passou&hellip;</p>
+
+<p>Nota: dependendo do seu roteador, a versão do OpenWRT pode variar. Leia a <a href="http://wiki.openwrt.org/">wiki</a> do modelo do seu roteador para instruções específicas e resolução de problemas.</p>
+
+<p><strong>Importante</strong>: caso o pior aconteça (como acabar a energia no meio do processo de flash da firmware) e você não queira utilizar seu roteador como peso de papel, tente seguir os procedimento de &ldquo;debriking&rdquo; em <a href="http://wiki.openwrt.org/doc/howto/generic.debrick">http://wiki.openwrt.org/doc/howto/generic.debrick</a></p>
+
+<h2>Configurando o NAS</h2>
+
+<p>Para o NAS, vamos montar as partições do HD externo e configurar uma partição de swap pois o roteador provavelmente não tem memória interna suficiente para dar conta do recado.</p>
+
+<p>Neste exemplo, vou usar meu HD de 1TB com uma partição formatada em ext4 e outra partição de 1GB formatada como linux+swap. Não vou usar FAT32 nem NTFS e nem recomendo! A idéia aqui é deixar o HD plugado eternamente no roteador e acessá-lo pela rede.</p>
+
+<h3>Instalando os pacotes necessários</h3>
+
+<p>Para nossa sorte, o OpenWRT conta com um gerenciador de pacotes que facilita (e muito) a instalação das libs e módulos necessários para montar o HD externo e compartilhá-lo na rede via Samba ou NFS.</p>
+
+<p>Logue no roteador via ssh e instale os seguintes pacotes:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install kmod-usb-storage block-mount kmod-fs-ext4&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>O ultimo pacote vai depender do sistema de arquivos do seu HD. Por exemplo, kmod-fs-ext2, etc. Veja os módulos disponíveis em <a href="http://wiki.openwrt.org/doc/howto/storage">http://wiki.openwrt.org/doc/howto/storage</a></p>
+
+<p>Verifique se as partições já foram detectadas rodando <em>blkid</em>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# blkid
+</span><span class='line'>/dev/mtdblock2: TYPE=&ldquo;squashfs&rdquo;
+</span><span class='line'>/dev/sda1: LABEL=&ldquo;MEDIA&rdquo; UUID=&ldquo;1ecad5f1-0000-0000-000f-e8b7f6ac651d&rdquo; TYPE=&ldquo;ext4&rdquo;&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<h3>Montando as partições do HD</h3>
+
+<p>Agora vamos configurar o fstab para montar as partições automaticamente quando o roteador for ligado. Edite o arquivo <em>/etc/config/fstab</em> com o seguinte (use o vi):</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>config global automount&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>    option from_fstab 1
+</span><span class='line'>    option anon_mount 0
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>config global autoswap&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>    option from_fstab 1
+</span><span class='line'>    option anon_swap 0
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>config mount&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>    option target   /mnt/media
+</span><span class='line'>    option device   /dev/sda1
+</span><span class='line'>    option fstype   ext4
+</span><span class='line'>    option options  rw,sync
+</span><span class='line'>    option enabled  1
+</span><span class='line'>    option enabled_fsck 0
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p>config swap&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>    option device   /dev/sda2
+</span><span class='line'>    option enabled  1
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>No meu caso, vou montar a partição <em>/dev/sda1</em> em <em>/mnt/media</em>, então é necessário criar o diretório de destino, ativar e iniciar o serviço <em>fstab</em>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# mkdir /mnt/media
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/fstab enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/fstab start&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Pronto, seu HD externo pode ser acessado em <em>/mnt/media</em> e o swap foi montado na segunda partição.</p>
+
+<h3>Compartilhando na rede</h3>
+
+<p>Vou utilizar <a href="http://wiki.openwrt.org/doc/howto/nfs.server">NFS</a> para compartilhar a partição na rede, mas você também pode utilizar Samba seguindo <a href="http://wiki.openwrt.org/doc/howto/cifs.server">http://wiki.openwrt.org/doc/howto/cifs.server</a></p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install nfs-kernel-server&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Edite (ou crie) o arquivo <em>/etc/exports</em> com o conteúdo:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>/mnt/media 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check)&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ative e inicie os serviços necessários:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# /etc/init.d/portmap start
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/portmap enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/nfsd start
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/nfsd enable&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Pronto! O server (roteador) está configurado. Para montar esta partição no client, por exemplo Ubuntu, siga:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>$ sudo apt-get install nfs-common
+</span><span class='line'>$ sudo mkdir /media/nas
+</span><span class='line'>$ sudo mount -t nfs 192.168.1.1:/mnt/media /media/nas&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Groovy! Seu NAS foi montado no seu desktop em <em>/media/nas</em>. Pode compartilhar seus arquivos a vontade!</p>
+
+<h2>Configurando o MediaServer (minidlna)</h2>
+
+<p>Logue no roteador e instale os pacotes necessários:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install minidlna&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Para configurar, basta editar o arquivo <em>/etc/config/minidlna</em> como segue:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>config minidlna config&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>option 'enabled' '1'
+</span><span class='line'>option port '8200'
+</span><span class='line'>option interface 'br-lan'
+</span><span class='line'>option friendly_name 'OpenWrt DLNA Server'
+</span><span class='line'>option db_dir '/mnt/media/minidlna/db'
+</span><span class='line'>option log_dir '/mnt/media/minidlna/log'
+</span><span class='line'>option inotify '1'
+</span><span class='line'>option enable_tivo '0'
+</span><span class='line'>option strict_dlna '0'
+</span><span class='line'>option presentation_url ''
+</span><span class='line'>option notify_interval '900'
+</span><span class='line'>option serial '12345678'
+</span><span class='line'>option model_number '1'
+</span><span class='line'>option root_container '.'
+</span><span class='line'>list media_dir '/mnt/media'
+</span><span class='line'>option album_art_names 'Cover.jpg/cover.jpg/AlbumArtSmall.jpg/albumartsmall.jpg/AlbumArt.jpg/albumart.jpg/Album.jpg/album.jpg/Folder.jpg/folder.jpg/Thumb.jpg/thumb.jpg'
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ative e inicie o serviço:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# /etc/init.d/minidlna enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/minidlna start&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Pronto! O MediaServer está configurado e compartilhando seus arquivos na rede. Aqui na minha SmartTV aparece assim:</p>
+
+<p><img src="/images/posts/minidlna.jpg" alt="MiniDLNA na Samsung SmartTV" /></p>
+
+<h2>Configurando o BitTorrent client (transmission)</h2>
+
+<p>Vamos instalar os pacotes:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# opkg update
+</span><span class='line'>root@OpenWrt:~# opkg install transmission-daemon&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>E configurar o serviço editando <em>/etc/config/transmission</em> e alterando as opções a seguir (mantenha todas as outras configs):</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>config transmission&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>option enabled 1
+</span><span class='line'>option config_dir '/mnt/media/transmission/config'
+</span><span class='line'>option download_dir '/mnt/media/transmission/complete'
+</span><span class='line'>option incomplete_dir '/mnt/media/transmission/incomplete'
+</span><span class='line'>option incomplete_dir_enabled true
+</span><span class='line'>option ratio_limit 2.0000
+</span><span class='line'>option ratio_limit_enabled true
+</span><span class='line'>option rpc_authentication_required false
+</span><span class='line'>option rpc_password ''
+</span><span class='line'>option rpc_username ''
+</span><span class='line'>option speed_limit_up 5
+</span><span class='line'>option speed_limit_up_enabled true
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Ative e inicie o serviço:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>root@OpenWrt:~# /etc/init.d/transmission enable
+</span><span class='line'>root@OpenWrt:~# /etc/init.d/transmission start&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>O Transmission roda como um daemon, sendo controlado remotamente. Para isso, será necessário adicionar a seguintes regra de farewall, adicionando no final do arquivi <em>/etc/config/firewall</em>:</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;p>config rule&lt;/p>
+</span><span class='line'>
+</span><span class='line'>&lt;pre>&lt;code>    option src *
+</span><span class='line'>    option proto tcp
+</span><span class='line'>    option dest_port 9091
+</span><span class='line'>    option target ACCEPT
+</span><span class='line'>&lt;/code>&lt;/pre>
+</span><span class='line'>
+</span><span class='line'>&lt;p></span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Reinicie o firewall executando <em>/etc/init.d/firewall restart</em></p>
+
+<p>Para gerenciar seus torrents, instale a extensão <a href="https://chrome.google.com/webstore/detail/torrent-to-transmission/kfnbjgeekkbjcddceemhjajjiclnoekb">.torrent to Transmission</a> no Chrome, baixe o <a href="https://code.google.com/p/transmisson-remote-gui/">Transmission Remote GUI</a> para Windows, Mac e Linux ou ainda o <a href="https://play.google.com/store/apps/details?id=com.neogb.rtac">Remote Transmission</a> para Android.</p>
+
+<p><img src="/images/posts/transmission-gui.jpg" alt="Transmission GUI" /></p>
+
+<p>Caso seu roteador tenha espaço disponível, você pode instalar o pacote <em>transmission-web</em> para gerenciar seus torrents diretamente do navegador.</p>
+
+<p>Ao adicionar um .torrent pelo GUI, o mesmo será baixado diretamente no seu roteador!</p>
+
+<h2>Conclusão</h2>
+
+<p>Embora relativamente complicado, todo procedimento para instalação e configuração não é nada diferente do que estamos acostumados a fazer diariamente no Linux, como devops, seja configurando uma VPS ou montando um NAS na rede.</p>
+
+<p>A liberdade que o OpenWRT oferece é imensa. O repositório é recheado com pacotes bem úteis e muito fáceis de configurar. Sem falar na economia comparando com um aparelho como AppleTV (que não ofecererá tantos recursos) ou outros media servers do mercado.</p>
+
+<p>E aí, tem coragem??? Poste sua experiência nos comentários! :)</p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://wiki.openwrt.org/doc/howto/usb.storage">http://wiki.openwrt.org/doc/howto/usb.storage</a></li>
+<li><a href="http://wiki.openwrt.org/doc/howto/nfs.server">http://wiki.openwrt.org/doc/howto/nfs.server</a></li>
+<li><a href="http://wiki.openwrt.org/doc/uci/minidlna">http://wiki.openwrt.org/doc/uci/minidlna</a></li>
+<li><a href="http://wiki.openwrt.org/doc/uci/transmission">http://wiki.openwrt.org/doc/uci/transmission</a></li>
+<li><a href="http://wiki.openwrt.org/toh/tp-link/tl-wr1043nd">http://wiki.openwrt.org/toh/tp-link/tl-wr1043nd</a></li>
+<li><a href="http://www.rodrigorodrigues.info/index.php/2012/01/openwrt-fazendo-magica-com-linux-no-roteador-parte-1/">http://www.rodrigorodrigues.info/index.php/2012/01/openwrt-fazendo-magica-com-linux-no-roteador-parte-1/</a></li>
+<li><a href="http://knowhow.bart.prokop.name/install/openwrt/wr1043nd">http://knowhow.bart.prokop.name/install/openwrt/wr1043nd</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

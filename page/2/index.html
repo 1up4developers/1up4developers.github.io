@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford O que é programação funcional Programação funcional é, assim como a &hellip;">
+  <meta name="description" content="Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,221 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/pair-programming-remoto-com-screen-e-vim/">Pair Programming Remoto Com Screen E Vim</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+        
+         | <a href="/2013/03/pair-programming-remoto-com-screen-e-vim/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
+
+<p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
+
+<p>Usando as ferramentas e práticas certas é possível <a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">trabalhar remotamente</a> e até mesmo <a href="http://en.wikipedia.org/wiki/Pair_programming">parear com outro desenvolvedor</a> à distância.</p>
+
+<h2>Requisitos</h2>
+
+<ul>
+<li><p>ssh</p></li>
+<li><p>screen</p></li>
+<li><p>vim</p></li>
+<li><p>skype</p></li>
+</ul>
+
+
+<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a href="http://www.vim.org/">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
+
+<h2>Instalação</h2>
+
+<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
+
+<pre><code>$ sudo apt-get install screen
+</code></pre>
+
+<p>Em seguida, configure as permissões de execução:</p>
+
+<pre><code>$ chmod u+s /usr/bin/screen
+$ chmod 755 /var/run/screen
+</code></pre>
+
+<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
+
+<pre><code>$ screen -S nomedasessao
+</code></pre>
+
+<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
+
+<pre><code>$ screen -ls
+There is a screen on:
+        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
+1 Socket in /var/run/screen/S-user.
+</code></pre>
+
+<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
+
+<pre><code>$ screen -x nomedasessao
+</code></pre>
+
+<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
+
+<p>Para se desconectar da sessão atual, execute:</p>
+
+<pre><code># screen -d
+[remote detached from 8095.nomedasessao]
+</code></pre>
+
+<h2>Usando o Screen</h2>
+
+<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
+
+<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
+
+<p><strong>Copy mode (scroll)</strong>
+Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
+Navegue pela tela com as setas ou pageup/pagedown;
+Marque o início da seleção do texto com &lt;espaço> e termine com &lt;espaço> para copiar;
+Cole com Ctrl-a + ] (colchete para direita);</p>
+
+<p><strong>Windows</strong>
+Crie uma janela (ou aba) com Ctrl-a + c
+Liste as janelas com Ctrl-a + &ldquo; (aspas)
+Altere para a janela com Ctrl-a <numero de 0-9>
+Feche (ou mate) a janela atual com Ctrl+a k</p>
+
+<p><strong>Split</strong>
+Divida a tela horizontalmente com Ctrl-a + S
+Divida a tela verticalmente com Ctrl-a + V
+Mude de split com Ctrl-a + Tab
+Feche um split com Ctrl-a + X</p>
+
+<p>Para digitar um comando: Ctrl-a + :</p>
+
+<p>Consulte o <a href="http://linux.die.net/man/1/screen">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
+
+<h2>Dicas e considerações</h2>
+
+<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a href="http://linux.die.net/man/1/screen">manual oficial</a>.</p>
+
+<p>Existem outras alternativas como o <a href="http://tmux.sourceforge.net/">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
+
+<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
+
+<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a href="http://www.pomodorotechnique.com/">Pomodoro</a> pode ser uma boa opção.</p>
+
+<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
+
+<h2>Referências</h2>
+
+<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
+</a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
+</a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">O Ano Em Que Eu Tirei a Bunda Da Cadeira</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-18T13:45:25-03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
+
+        
+         | <a href="/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
+
+<p>De alguns anos para cá, passei a escrever uma pequena lista de metas para o ano seguinte e percebi que o simples fato de haver uma lista já era o suficiente para que eu não perdesse totalmente o foco.</p>
+
+<p>A criação de uma lista, pequena, concisa, realista, também traz motivação para cumprir novas metas a cada vez que você completa algum dos itens. É a estratégia de alimentar o cérebro com pequenas recompensas para continuar em frente, como acontece num jogo.</p>
+
+<p>Há pouco mais de dois anos, <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">escrevi aqui um post</a> em que eu dizia que deveríamos parar de chorar e reclamar e começar a correr atrás de nossos objetivos. Escrevi aquele texto especialmente para mim, como se uma parte do cérebro estivesse dando uma bronca na outra parte. Demorou, mas acho que a bronca fez efeito.</p>
+
+<p>Usando a lista de metas, mesmo sem muita disciplina, consegui ir além do que eu previa, sendo que passei a considerar 2012 como o ano em que parei de reclamar, tirei a bunda da cadeira e as coisas começaram a acontecer.</p>
+
+<p>Em 2011, resolvi que queria tentar participar de eventos como palestrante. Sempre tive dificuldade de falar em público e apresentar idéias, e achei que essa seria uma boa forma de corrigir essas limitações.</p>
+
+<p>Em 2012 eu continuei, tanto para apresentar algum tema que eu considero interessante, como também como ferramenta de marketing pessoal. Tanto quanto ser competente e fazer um bom trabalho, é importante ver e ser visto.</p>
+
+<p>Em Maio, apresentei um <a href="http://pbalduino.github.com/gurusp-talk-23/">talk de 30 minutos</a>, no 23º encontro do GURU-SP, demonstrando a simplicidade do LISP usando Clojure.</p>
+
+<p>Em Agosto, para minha total surpresa, fui convidado a apresentar um lightning talk no <a href="http://www.qconsp.com/">QCON-SP</a>, onde falei sobre todos os sabores conhecidos de Ruby e dialetos, incluindo o Elixir. Apresentar um tema em cinco minutos é como fazer um show de Punk Rock, e a adrenalina de ambos é sempre bem vinda.</p>
+
+<p>Em Outubro, foi ao ar o meu curso <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">Ruby on Rails do começo ao fim</a>, pelo portal de cursos do iMasters. O curso nasceu como um tutorial que fiz para ajudar algumas pessoas próximas e acabou se tornando algo que me ajudou a conhecer mais pessoas.</p>
+
+<p>Um dos frutos que colhi com esse curso foi o convite para <a href="http://pbalduino.github.com/senes2012/">palestrar</a> e ministrar um treinamento durante a IV Semana de Engenharia do Norte do Espírito Santo, no campus do CEUNES/UFES, em São Mateus &ndash; ES, que aconteceu em Novembro. Um efeito colateral muito bem vindo dessa minha ida ao Espírito Santo foi a criação do Grupo de Usuários Ruby-ES, um irmão caçula do GURU-SP.</p>
+
+<p>Ainda em Novembro, fui convidado a participar do evento 7masters Java, organizado pelo iMasters, no qual tive a honra de dividir o espaço com pessoas que eu admiro há anos, como Bruno &ldquo;JavaMan&rdquo;, Luca Bastos e a dupla dinâmica qmx/abstractj. Lá falei sobre os usos do <a href="http://pbalduino.github.com/7masters-java/">Clojure no mundo real</a> e <a href="http://videolog.tv/video.php?id=889921">compartilhei a experiência</a> que tive em um projeto, utilizando a ferramenta.</p>
+
+<p>Fechando o ano, tive meu livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">Dominando JavaScript com jQuery</a> publicado pela <a href="http://www.casadocodigo.com.br/">Editora Casa do Código</a>. Aliás, a versão impressa do livro foi disponibilizada hoje no site. Agora só me falta plantar uma árvore.</p>
+
+<p>Em breve, pretendo compartilhar minhas experiências ao escrever o curso e o livro.</p>
+
+<p>Que mais realizações venham em 2013, e que os frutos do que plantei continuem nascendo, mesmo que dessa vez eu não tenha feito nenhuma lista de metas a cumprir.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -889,196 +1104,6 @@ server {
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/a-experiencia-de-lancar-o-rologames/">A Experiência De Lançar O RoloGames</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-20T08:37:53-03:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
-
-        
-         | <a href="/2012/06/a-experiencia-de-lancar-o-rologames/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
-
-<p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
-
-<p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
-
-<p>O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.</p>
-
-<p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
-
-<ol>
-<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
-<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
-<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
-<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
-</ol>
-
-
-<p>Mas como diz o ditado &ldquo;até mesmo um pé na bunda te empurra pra frente&rdquo; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D</p>
-
-<p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
-
-<ul>
-<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
-<li><p>Desenvolvimento</p></li>
-<li><p>Infraestrutura</p></li>
-</ul>
-
-
-<p>Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &ldquo;polêmico&rdquo; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/">Vagrant, Virtualizando O Ambiente De Trabalho</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-01T10:14:30-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
-
-        
-         | <a href="/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.</p>
-
-<h2>Prós e Contra<del>s</del></h2>
-
-<p>Vários pontos se destacam no uso do Vagrant:</p>
-
-<ul>
-<li><p>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</p></li>
-<li><p>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</p></li>
-<li><p>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</p></li>
-<li><p>Mantém a sua máquina local &ldquo;limpa&rdquo;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</p></li>
-</ul>
-
-
-<p>Agora vem o contra.</p>
-
-<ul>
-<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
-</ul>
-
-
-<h2>Instalação</h2>
-
-<p>Você precisa do <a href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &ldquo;gem install vagrant&rdquo; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.</p>
-
-<h2>Exemplo de Uso</h2>
-
-<p>O <a href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.</p>
-
-<p>Supondo que o vagrant está instalado. Vamos adicionar uma máquina:</p>
-
-<pre><code>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
-</code></pre>
-
-<p>Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:</p>
-
-<pre><code>$ vagrant init lucid32  #ja especificando o box lucid32 baixado
-</code></pre>
-
-<p>Vamos subir a VM:</p>
-
-<pre><code>$ vagrant up
-</code></pre>
-
-<p>Para acessar a VM:</p>
-
-<pre><code>$ vagrant ssh
-</code></pre>
-
-<p>Repare que dentro da VM, na pasta &ldquo;/vagrant&rdquo; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.</p>
-
-<p>Vamos supor que você executou um &ldquo;rails s&rdquo; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span>  <span class="c1"># 3000 from VM, available at 4000</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Dá um restart na VM:</p>
-
-<pre><code>$ vagrant halt &amp;&amp; vagrant up
-</code></pre>
-
-<p>Subir o projeto novamente. (vagrant ssh e o &ldquo;rails s&rdquo; dentro do /vagrant)</p>
-
-<p>Acesse <a href="http://localhost:4000.">http://localhost:4000.</a></p>
-
-<h2>Extras e Conclusão</h2>
-
-<p>A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:</p>
-
-<p><a href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> &ndash; Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.</p>
-
-<p><a href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> &ndash; Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.</p>
-
-<p><a href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> &ndash; No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1096,7 +1121,15 @@ server {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
       <li class="post">
@@ -1105,14 +1138,6 @@ server {
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
       </li>
     
   </ul>

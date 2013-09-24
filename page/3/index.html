@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Dica para quem usa o Nginx como web server de aplicações Rails e já apanhou para habilitar HTTP Basic Authentication ou para gerar as senhas &hellip;">
+  <meta name="description" content="Nesta segunda-feira lançamos o RoloGames. Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3. O Panachi e eu ralamos &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,196 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/a-experiencia-de-lancar-o-rologames/">A Experiência De Lançar O RoloGames</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-20T08:37:53-03:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+        
+         | <a href="/2012/06/a-experiencia-de-lancar-o-rologames/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
+
+<p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
+
+<p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
+
+<p>O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.</p>
+
+<p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
+
+<ol>
+<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
+<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
+<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
+<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
+</ol>
+
+
+<p>Mas como diz o ditado &ldquo;até mesmo um pé na bunda te empurra pra frente&rdquo; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D</p>
+
+<p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
+
+<ul>
+<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
+<li><p>Desenvolvimento</p></li>
+<li><p>Infraestrutura</p></li>
+</ul>
+
+
+<p>Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &ldquo;polêmico&rdquo; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/">Vagrant, Virtualizando O Ambiente De Trabalho</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-01T10:14:30-03:00" pubdate data-updated="true">Jun 1<span>st</span>, 2012</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+        
+         | <a href="/2012/06/vagrant-virtualizando-o-ambiente-de-trabalho/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://vagrantup.com/">Vagrant</a>, se você não conhece ou não deu atenção para ele nestes últimos tempos, este post é pra ti mesmo. Trata-se de uma ferramenta que facilita (e muito!) a criação de Máquinas Virtuais usando o Virtual Box por baixo dos panos. E não é só isso! Com o Vagrant fazer <em>port forward</em>, compartilhar pastas é só questão de alterar um arquivo de configuração. Continue lendo que eu detalho melhor tudo isto.</p>
+
+<h2>Prós e Contra<del>s</del></h2>
+
+<p>Vários pontos se destacam no uso do Vagrant:</p>
+
+<ul>
+<li><p>Centraliza as <em>dependências de ambiente</em> do projeto. Sabe aquele projeto legado que só roda com rubygems 1.4.2 e mongo 1.1, com o Sol alinhado aos anéis de Saturno, então, você pode deixar tudo isso num <em>box</em> do Vagrant.</p></li>
+<li><p>Documenta as <em>dependências de ambiente</em>, caso use algum <em>Provisioner</em>.</p></li>
+<li><p>Facilita a integração de novos desenvolvedores na equipe, independente do SO que utiliza.</p></li>
+<li><p>Mantém a sua máquina local &ldquo;limpa&rdquo;. Você não precisa instalar o Mysql, Postgree, Redis, Memcache etc. para cada projeto que roda.</p></li>
+</ul>
+
+
+<p>Agora vem o contra.</p>
+
+<ul>
+<li>Se você trabalha com projetos simples ou até mesmo com poucos projetos, você pode sentir que está usando um canhão para matar mosca.</li>
+</ul>
+
+
+<h2>Instalação</h2>
+
+<p>Você precisa do <a href="https://www.virtualbox.org/">VirtualBox</a> (versões 4.0.x ou 4.1.x). Já o Vagrant, o jeito mais fácil é instalar via rubygems, ou seja, um &ldquo;gem install vagrant&rdquo; e pronto! Caso ache melhor instalar via .dmg, .deb etc., você pode baixar em <a href="http://downloads.vagrantup.com">http://downloads.vagrantup.com</a>.</p>
+
+<h2>Exemplo de Uso</h2>
+
+<p>O <a href="http://vagrantup.com/v1/docs/getting-started/index.html">Getting Started</a> do Vagrant é bem completo e tem também o <a href="http://railscasts.com/episodes/292-virtual-machines-with-vagrant">Rails Cast</a>, mas segue um resumão.</p>
+
+<p>Supondo que o vagrant está instalado. Vamos adicionar uma máquina:</p>
+
+<pre><code>$ vagrant box add lucid32 http://files.vagrantup.com/lucid32.box
+</code></pre>
+
+<p>Dentro da pasta do projeto, você tem criar o Vagrantfile e para isso execute:</p>
+
+<pre><code>$ vagrant init lucid32  #ja especificando o box lucid32 baixado
+</code></pre>
+
+<p>Vamos subir a VM:</p>
+
+<pre><code>$ vagrant up
+</code></pre>
+
+<p>Para acessar a VM:</p>
+
+<pre><code>$ vagrant ssh
+</code></pre>
+
+<p>Repare que dentro da VM, na pasta &ldquo;/vagrant&rdquo; estará montado o diretório do seu projeto, onde está o Vagrantfile. Supondo que seja um projeto Rails, daí em diante você segue todo o fluxo <em>default</em>, instalando o <em>bundler</em>, dando um <em>bundle install</em> e etc.</p>
+
+<p>Vamos supor que você executou um &ldquo;rails s&rdquo; na VM e o projeto subiu na porta 3000. Para acessá-lo, você tem que configurar o forward_port no VagrantFile:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">forward_port</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">4000</span>  <span class="c1"># 3000 from VM, available at 4000</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dá um restart na VM:</p>
+
+<pre><code>$ vagrant halt &amp;&amp; vagrant up
+</code></pre>
+
+<p>Subir o projeto novamente. (vagrant ssh e o &ldquo;rails s&rdquo; dentro do /vagrant)</p>
+
+<p>Acesse <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
+<h2>Extras e Conclusão</h2>
+
+<p>A idéia deste post é explicar rapidamente o que é e como usar o Vagrant, mas com certeza o Vagrant tem muito mais a oferecer. Segue alguns tópicos, que valem posts:</p>
+
+<p><a href="http://vagrantup.com/v1/docs/provisioners.html">Provisioning</a> &ndash; Existem várias ferramentas que podem te ajudar no <em>setup</em> da sua VM. O Vagrant tem suport a Chef, Puppet e até mesmo Shell script.</p>
+
+<p><a href="http://vagrantup.com/v1/docs/plugins.html">Plugins</a> &ndash; Você pode mudar ou adicionar funcionalidades ao Vagrant, criando plugins. É claro que sempre vale a pena googlar antes. Por exemplo o <a href="https://github.com/t9md/vagrant-snap">vagrant-snap</a>, que ajuda a tirar e gerenciar snapshots da VM.</p>
+
+<p><a href="http://vagrantup.com/v1/docs/boxes.html">Boxes</a> &ndash; No exemplo acima, usamos um box de Ubuntu, mas nada impede de você criar ou utilizar outros boxes. Existe o <a href="http://vagrantbox.es/">vagrantbox.es</a> que pode te ajudar a baixar uma existente, ou você vai ter que se aventurar pelos docs para criar uma zerada.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -798,197 +988,6 @@ Guy Kawasaki &ndash; A arte do começo (<a href="http://video.google.com/videopl
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/coffescript-what/">CoffeeScript Quem?</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-14T10:20:26-03:00" pubdate data-updated="true">Apr 14<span>th</span>, 2011</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
-
-        
-         | <a href="/2011/04/coffescript-what/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Muito buzz se formou depois que o DHH tornou público que a versão 3.1 do Rails virá com CofeeScript por padrão.</p>
-
-<p>Aproveitando a barulheira, que é comum a cada vez que o criador da plataforma abre a boca, vamos nos ater ao que é importante e apresentar uma introdução ao resumo simplificado do CoffeeScript básico.</p>
-
-<p>Confesso que minha opinião sobre essa ferramenta mudou nos primeiros instantes em que comecei a usar. No site do CoffeeScript (ok se eu começar a chamar de CS daqui para frente?) existe um link onde você digita o código do lado esquerdo e, imediatamente, do lado direito aparece o equivalente em JavaScript.</p>
-
-<p>Fiz uma brincadeira lá usando um código que sempre me vem à cabeça ao tentar explicar o básico de programação funcional para alguem. Segue:</p>
-
-<pre><code>mimimi = (operation, value) -&gt;
-   operation(value);
-
-dobro = (value) -&gt;
-  value + value;
-
-quadrado = (value) -&gt;
-  value * value;
-
-zero = (value) -&gt;
-  value - value;
-
-um = (value) -&gt;
-  value / value;
-
-alert(mimimi(dobro, 3));
-alert(mimimi(quadrado, 3));
-alert(mimimi(zero, 3));
-alert(mimimi(um, 3));
-</code></pre>
-
-<p>Nada de outro mundo, certo? O equivalente JS é o código abaixo:</p>
-
-<pre><code>var dobro, mimimi, quadrado, um, zero;
-mimimi = function(operation, value) {
-  return operation(value);
-};
-dobro = function(value) {
-  return value + value;
-};
-quadrado = function(value) {
-  return value * value;
-};
-zero = function(value) {
-  return value - value;
-};
-um = function(value) {
-  return value / value;
-};
-alert(mimimi(dobro, 3));
-alert(mimimi(quadrado, 3));
-alert(mimimi(zero, 3));
-alert(mimimi(um, 3));
-</code></pre>
-
-<p>CS permite também a checagem automática de valores e parâmetros opcionais, conforme o exemplo retirado do site:</p>
-
-<pre><code>fill = (container, liquid = "coffee") -&gt;
-  "Filling the #{container} with #{liquid}..."
-</code></pre>
-
-<p>Ou o equivalente em JS:</p>
-
-<pre><code>var fill;
-fill = function(container, liquid) {
-  if (liquid == null) {
-    liquid = "coffee";
-  }
-  return "Filling the " + container + " with " + liquid + "...";
-};
-</code></pre>
-
-<p>Sem dúvida, muito mais legível e expressivo.</p>
-
-<p>É uma ferramenta que eu pretendo usar em algum projeto pequeno, para testar e ver o quanto acelera meu trabalho. Em projetos maiores talvez eu demore um pouco mais para usar mas, considerando que umas das minhas aplicações já conta com 79% de código total escrito em JavaScript, segundo o GitHub, imagino que isso vai melhorar consideravelmente a manutenção do código.</p>
-
-<p>E no mais, se o CS não te chamou a atenção e você não quer mesmo utilizar, basta remover o require do arquivo Gemfiles e a vida segue como se nada tivesse acontecido.</p>
-
-<p>Links recomendados:</p>
-
-<ul>
-<li><p>Site do CoffeScript: <a href="http://jashkenas.github.com/coffee-script/">http://jashkenas.github.com/coffee-script/</a></p></li>
-<li><p>Mais do mesmo: <a href="http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html">http://www.rubyinside.com/rails-3-1-adopts-coffeescript-jquery-sass-and-controversy-4669.html</a></p></li>
-<li><p>Exemplo bacana de como utilizar CS dentro da sua view: <a href="http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html">http://geekiriki.blogspot.com/2010/08/jquery-meets-coffeescript.html</a></p></li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/comunicacao-e-tudo-e-mais-um-pouco/">Comunicação é Tudo E Mais Um Pouco</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-12T10:00:54-03:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">pbalduino</span></span>
-
-        
-         | <a href="/2011/04/comunicacao-e-tudo-e-mais-um-pouco/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Imagine que você receba a seguinte especificação:</p>
-
-<blockquote><p>Pegue uma folha de papel A4. Sob a mesa, dobre-a ao meio. Coloque a folha dobrada sobre a mesa.</p></blockquote>
-
-<p>A especificação parece clara e simples, mas aposto que dobramos as folhas de forma diferente, obtendo resultados diferentes. Eu dobrei a minha folha verticalmente, enquanto provavelmente você dobrou horizontalmente, obtendo uma forma próxima de um quadrado.</p>
-
-<p>Qual foi o problema?</p>
-
-<p>Eu criei uma especificação tendo em mente exatamente o que eu queria. E eu acreditei que aquilo era mais do que suficiente.</p>
-
-<p>Você pegou uma especificação, aparentemente muito simples, e sem questionar seguiu os passos que julgou corretos.</p>
-
-<p>Não houve comunicação, cada parte presumiu coisas e o resultado final não foi o esperado.</p>
-
-<p>O grande diferencial das ditas metodologia ágeis é exatamente permitir a comunicação rápida, clara e sem ruídos entre todos os membros da equipe. Isso não tem nada a ver com post-its, gráficos ou ferramentas na Internet. É por isso que estamos vendo-as falhar, e é por isso que o seu projeto, e o meu, também estão falhando.</p>
-
-<p>É por isso que relacionamentos chegam a níveis insuportáveis de convivência, casamentos terminam, empregos viram um inferno. É por isso que ocorrem desencontros, é por isso que clientes recebem algo que não pediram e que não os atendem.</p>
-
-<p>É por isso também que não consegui comprar um mísero pão doce quando estive fora do país.</p>
-
-<p>Comunicação é, na minha opinião, o fator mais importante, e o menos valorizado. É tudo isso que eu falei, e mais um pouco.</p>
-
-<p>(Escrito pelo autor em 26/01/2009, e muito pouco ou quase nada mudou desde então)</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1006,7 +1005,15 @@ fill = function(container, liquid) {
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
       <li class="post">
@@ -1015,14 +1022,6 @@ fill = function(container, liquid) {
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script como suite de teste</a>
       </li>
     
   </ul>
