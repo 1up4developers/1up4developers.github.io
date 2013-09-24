@@ -235,7 +235,7 @@ root@OpenWrt:~# /etc/init.d/minidlna start
 
 {% endcodeblock %}
 
-Pronto! O MediaServer está configurado e compartilhando seus arquivos na rede. Aqui na minha SmartTV aparece assim:
+Pronto! O MediaServer está configurado e compartilhando seus arquivos via DLNA na rede. Aqui na minha SmartTV aparece assim:
 
 ![MiniDLNA na Samsung SmartTV](/images/posts/minidlna.jpg)
 
@@ -279,7 +279,7 @@ root@OpenWrt:~# /etc/init.d/transmission start
 
 {% endcodeblock %}
 
-O Transmission roda como um daemon, sendo controlado remotamente. Para isso, será necessário adicionar a seguintes regra de farewall, adicionando no final do arquivi _/etc/config/firewall_:
+O Transmission roda como um daemon, sendo controlado remotamente. Para isso, será necessário adicionar a seguintes regra de farewall, adicionando no final do arquivo _/etc/config/firewall_:
 
 {% codeblock %}
 

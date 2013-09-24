@@ -4,6 +4,7 @@ title: "Sowing the seeds of code"
 date: 2013-09-19 23:08
 comments: true
 categories: eventos, comunidade, javascript, clojure
+author: pbalduino
 ---
 Seguindo a filosofia de [tirar a bunda da cadeira](http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/), tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.
 
@@ -20,7 +21,7 @@ Os organizadores do evento prepararam um espaço para os palestrantes atrás do 
 Alguns alunos perguntaram sobre o uso de JavaScript no mercado de trabalho, o que me deu a certeza de que uma palestra menos técnica e mais focada na realidade deles teria sido melhor aproveitada.
 
 ## 2º ENCATEC
-O pessoal da Adapti, empresa júnior encubada no CEUNES-UFES, em São Mateus-ES, me convidou para o Segundo Encontro Norte-Capixaba de Tecnologia. 
+O pessoal da Adapti, empresa júnior encubada no CEUNES-UFES, em São Mateus-ES, me convidou para o Segundo Encontro Norte-Capixaba de Tecnologia.
 
 Lá tive o prazer de assistir a palestra da Professora Mariella Berger, do projeto IARA, que apresentou o "famoso carro que atropelou a Ana Maria Braga" e o projeto da Universidade Federal do Espírito Santo que junta automatização, robótica, inteligência artificial, sistema de visão e mais um monte de coisas bacanas usando soluções de código aberto.
 
@@ -52,7 +53,7 @@ Para minha surpresa, a sala ficou lotada. Muita gente em pé, muita gente intere
 
 Não tenho dúvidas de que, profissionalmente falando, esse foi o ponto alto do ano para mim. Só tenho a agradecer aos presentes e à organização pelo interesse e pela oportunidade.
 
-O ponto negativo, e até certo ponto divertido, ficou por conta da novelinha criada por um dos palestrantes ao falar mal de SOA. Os representantes de um dos patrocinadores, que vendem consultoria no assunto, ao se sentirem ofendidos, iniciaram um festival de resmungos passivo-agressivos como se um bom diálogo fosse construído dessa forma. O evento em si e a organização nada tiveram a ver com isso, mas foi interessante acompanhar algumas reações e ver quem as pessoas realmente são quando o calo dói. 
+O ponto negativo, e até certo ponto divertido, ficou por conta da novelinha criada por um dos palestrantes ao falar mal de SOA. Os representantes de um dos patrocinadores, que vendem consultoria no assunto, ao se sentirem ofendidos, iniciaram um festival de resmungos passivo-agressivos como se um bom diálogo fosse construído dessa forma. O evento em si e a organização nada tiveram a ver com isso, mas foi interessante acompanhar algumas reações e ver quem as pessoas realmente são quando o calo dói.
 
 ## (clj-sp)
 
