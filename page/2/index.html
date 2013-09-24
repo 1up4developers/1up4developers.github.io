@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de &hellip;">
+  <meta name="description" content="TL;DR: 2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,150 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/03/pair-programming-remoto-com-screen-e-vim/">Pair Programming Remoto Com Screen E Vim</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
-
-        
-         | <a href="/2013/03/pair-programming-remoto-com-screen-e-vim/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
-
-<p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
-
-<p>Usando as ferramentas e práticas certas é possível <a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">trabalhar remotamente</a> e até mesmo <a href="http://en.wikipedia.org/wiki/Pair_programming">parear com outro desenvolvedor</a> à distância.</p>
-
-<h2>Requisitos</h2>
-
-<ul>
-<li><p>ssh</p></li>
-<li><p>screen</p></li>
-<li><p>vim</p></li>
-<li><p>skype</p></li>
-</ul>
-
-
-<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a href="http://www.vim.org/">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
-
-<h2>Instalação</h2>
-
-<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
-
-<pre><code>$ sudo apt-get install screen
-</code></pre>
-
-<p>Em seguida, configure as permissões de execução:</p>
-
-<pre><code>$ chmod u+s /usr/bin/screen
-$ chmod 755 /var/run/screen
-</code></pre>
-
-<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
-
-<pre><code>$ screen -S nomedasessao
-</code></pre>
-
-<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
-
-<pre><code>$ screen -ls
-There is a screen on:
-        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
-1 Socket in /var/run/screen/S-user.
-</code></pre>
-
-<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
-
-<pre><code>$ screen -x nomedasessao
-</code></pre>
-
-<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
-
-<p>Para se desconectar da sessão atual, execute:</p>
-
-<pre><code># screen -d
-[remote detached from 8095.nomedasessao]
-</code></pre>
-
-<h2>Usando o Screen</h2>
-
-<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
-
-<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
-
-<p><strong>Copy mode (scroll)</strong>
-Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
-Navegue pela tela com as setas ou pageup/pagedown;
-Marque o início da seleção do texto com &lt;espaço> e termine com &lt;espaço> para copiar;
-Cole com Ctrl-a + ] (colchete para direita);</p>
-
-<p><strong>Windows</strong>
-Crie uma janela (ou aba) com Ctrl-a + c
-Liste as janelas com Ctrl-a + &ldquo; (aspas)
-Altere para a janela com Ctrl-a <numero de 0-9>
-Feche (ou mate) a janela atual com Ctrl+a k</p>
-
-<p><strong>Split</strong>
-Divida a tela horizontalmente com Ctrl-a + S
-Divida a tela verticalmente com Ctrl-a + V
-Mude de split com Ctrl-a + Tab
-Feche um split com Ctrl-a + X</p>
-
-<p>Para digitar um comando: Ctrl-a + :</p>
-
-<p>Consulte o <a href="http://linux.die.net/man/1/screen">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
-
-<h2>Dicas e considerações</h2>
-
-<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a href="http://linux.die.net/man/1/screen">manual oficial</a>.</p>
-
-<p>Existem outras alternativas como o <a href="http://tmux.sourceforge.net/">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
-
-<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
-
-<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a href="http://www.pomodorotechnique.com/">Pomodoro</a> pode ser uma boa opção.</p>
-
-<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
-
-<h2>Referências</h2>
-
-<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
-</a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
-</a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1104,6 +960,78 @@ server {
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/06/a-experiencia-de-lancar-o-rologames/">A Experiência De Lançar O RoloGames</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-20T08:37:53-03:00" pubdate data-updated="true">Jun 20<span>th</span>, 2012</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+        
+         | <a href="/2012/06/a-experiencia-de-lancar-o-rologames/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
+
+<p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
+
+<p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
+
+<p>O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.</p>
+
+<p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
+
+<ol>
+<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
+<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
+<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
+<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
+</ol>
+
+
+<p>Mas como diz o ditado &ldquo;até mesmo um pé na bunda te empurra pra frente&rdquo; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D</p>
+
+<p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
+
+<ul>
+<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
+<li><p>Desenvolvimento</p></li>
+<li><p>Infraestrutura</p></li>
+</ul>
+
+
+<p>Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &ldquo;polêmico&rdquo; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1129,15 +1057,15 @@ server {
       </li>
     
       <li class="post">
-        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
-      </li>
-    
-      <li class="post">
         <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
       </li>
     
   </ul>

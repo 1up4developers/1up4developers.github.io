@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Enviar emails de uma aplicação Rails é muito simples. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não &hellip;">
+  <meta name="description" content="Quantas vezes você precisou buscar alguma informação externa para sua aplicação, como um número de telefone ou uma foto em algum site? A idéia é &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,64 +77,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/">Enviando Emails No Rails Através Do Gmail</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-20T07:00:09-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
-
-        
-         | <a href="/2011/01/enviando-emails-no-rails-atraves-do-gmail/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Enviar emails de uma aplicação Rails é <a href="http://guides.rubyonrails.org/action_mailer_basics.html">muito simples</a>. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não souber ou não tiver muita paciência para fazer isso (por exemplo instalar e configurar <a href="http://www.sendmail.org">sendmail</a>, <a href="http://www.mutt.org/">mutt</a>, etc), pode facilmente usar sua conta do <a href="http://lindsaar.net/2010/3/15/how_to_use_mail_and_actionmailer_3_with_gmail_smtp">Gmail</a> para enviar as mensagens da sua aplicação.</p>
-
-<p>Basta incluir as seguintes configurações no bloco <code>config</code> dos respectivos ambientes da aplicação (por exemplo, <code>config/environments/production.rb</code>):</p>
-
-<pre><code>  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :enable_starttls_auto =&gt; true,
-    :authentication =&gt; :plain,
-    :address =&gt; smtp.gmail.com,
-    :port =&gt; 587,
-    :user_name =&gt; "seuemail@gmail.com",
-    :password =&gt; "suasenha"
-  }
-</code></pre>
-
-<p>O toque mágico é a chave <code>:enable_startls_auto =&gt; true</code> para habilitar <a href="http://en.wikipedia.org/wiki/Transport_Layer_Security">TLS</a>. Sucesso!</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1069,6 +1011,104 @@ a.images.previous
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/">Importando E Exportando Suas Gems Com Rubygems Snapshot</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T14:24:09-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+        | 
+  
+
+<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+        
+         | <a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Final de ano está rendendo.
+O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do famoso &ldquo;gem hell&rdquo;.</p>
+
+<p>Veja como é difícil usar:</p>
+
+<p>Instalação:</p>
+
+<pre><code>sudo gem install rubygems_snapshot
+</code></pre>
+
+<p>Para <strong>exportar</strong> as gems instaladas:</p>
+
+<pre><code>gem snapshot export projeto-exemplo.yml
+</code></pre>
+
+<p>Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:</p>
+
+<pre><code>[sudo] gem snapshot import projeto-exemplo.yml
+</code></pre>
+
+<h2>Afinal, o que tem de legal nisso?</h2>
+
+<p>Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:</p>
+
+<p>Com o rvm, você pode criar um &ldquo;novo ambiente&rdquo;:</p>
+
+<pre><code>rvm use 1.8.7%projeto_exemplo
+
+
+
+
+gem list
+</code></pre>
+
+<p>Deve retornar vazio.</p>
+
+<pre><code>gem install rubygems_snapshot
+
+
+
+
+gem snapshot import projeto-exemplo.yml
+</code></pre>
+
+<p>Instalará as gems necessárias para o projeto e pronto!</p>
+
+<h2>ToDo:</h2>
+
+<p>Esta é uma versão bem básica, onde o &ldquo;import&rdquo; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &ldquo;build nativos&rdquo;, mas por enquanto estamos usando aqui na equipe com sucesso.</p>
+
+<h2>Como faço para criar um rubygems plugin também?</h2>
+
+<p>Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!</p>
+
+<p>Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
+Valeu e sucesso!</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -1094,15 +1134,15 @@ a.images.previous
       </li>
     
       <li class="post">
-        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
-      </li>
-    
-      <li class="post">
         <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
       </li>
     
   </ul>
