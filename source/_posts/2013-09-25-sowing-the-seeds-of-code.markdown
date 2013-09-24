@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Sowing the seeds of code"
-date: 2013-09-19 23:08
+date: 2013-09-25 23:08
 comments: true
 categories: eventos, comunidade, javascript, clojure
 author: pbalduino
