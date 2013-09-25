@@ -33,6 +33,7 @@ destination: public
 plugins: plugins
 code_dir: downloads/code
 category_dir: categories
+author_dir: authors
 markdown: rdiscount
 rdiscount:
   extensions:
@@ -61,6 +62,30 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
+
+authors:
+  admin:
+    name: Equipe 1up4developers
+  rodrigopanachi:
+    name: Rodrigo Panachi
+    twitter: rpanachi
+    email: rpanachi@gmail.com
+  rogerbarreto:
+    name: Roger Leite
+    twitter: rogerleite
+    email: roger.barreto@gmail.com
+  pbalduino:
+    name: Plínio Balduíno
+  miguelhorlle:
+    name: Miguel Horlle
+  hbulhoes:
+    name: Humberto Bulhões
+  andrefarina:
+    name: André Farina
+  tonyfabeen:
+    name: Tony Fabeen
+  rramos:
+    name: Rogério Ramos
 
 # Github repositories
 github_user:
