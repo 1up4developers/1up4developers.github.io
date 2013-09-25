@@ -9,7 +9,8 @@
   <meta name="author" content="1up4developers authors">
 
   
-  <meta name="description" content="Para começar o post, segue esta história sobre gerenciamento que vi no blog do Gustavo Ribeiro: Todos os dias, uma formiga chegava cedinho ao &hellip;">
+  <meta name="description" content="Final de ano está rendendo.
+O rubygems_snapshot nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +84,121 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/">Importando E Exportando Suas Gems Com Rubygems Snapshot</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-12-22T14:24:09-02:00" pubdate data-updated="true">Dec 22<span>nd</span>, 2009</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2009/12/importando-e-exportando-suas-gems-com-rubygems-snapshot/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Final de ano está rendendo.
+O <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a> nasceu da necessidade de &ldquo;migrar&rdquo; as gems instaladas de uma máquina para outra, aliado ao <a href="http://rvm.beginrescueend.com/">rvm</a> (veja este <a href="http://www.nuxlli.com.br/2009/11/24/para-tudo-instale-o-rvm-antes/">post-guia-rápido</a>), permite mudar e/ou criar diferentes ambientes em minutos. Assim você pode fugir do famoso &ldquo;gem hell&rdquo;.</p>
+
+<p>Veja como é difícil usar:</p>
+
+<p>Instalação:</p>
+
+<pre><code>sudo gem install rubygems_snapshot
+</code></pre>
+
+<p>Para <strong>exportar</strong> as gems instaladas:</p>
+
+<pre><code>gem snapshot export projeto-exemplo.yml
+</code></pre>
+
+<p>Supondo que esteja em outra máquina, para <strong>importar</strong> as gems, use:</p>
+
+<pre><code>[sudo] gem snapshot import projeto-exemplo.yml
+</code></pre>
+
+<h2>Afinal, o que tem de legal nisso?</h2>
+
+<p>Vamos supor que você acaba de entrar numa nova equipe e tem que montar o ambiente de desenvolvimento (por sinal, um ambiente complicado de configurar). O gem snapshot aliada ao rvm, foi feito para facilitar isto, vamos a um exemplo rápido:</p>
+
+<p>Com o rvm, você pode criar um &ldquo;novo ambiente&rdquo;:</p>
+
+<pre><code>rvm use 1.8.7%projeto_exemplo
+
+
+
+
+gem list
+</code></pre>
+
+<p>Deve retornar vazio.</p>
+
+<pre><code>gem install rubygems_snapshot
+
+
+
+
+gem snapshot import projeto-exemplo.yml
+</code></pre>
+
+<p>Instalará as gems necessárias para o projeto e pronto!</p>
+
+<h2>ToDo:</h2>
+
+<p>Esta é uma versão bem básica, onde o &ldquo;import&rdquo; somente lê as gem e version e manda instalar sem requerir dependências. Está previsto de colocar um aviso no final das gems que deram erro, geralmente devido a dependências de &ldquo;build nativos&rdquo;, mas por enquanto estamos usando aqui na equipe com sucesso.</p>
+
+<h2>Como faço para criar um rubygems plugin também?</h2>
+
+<p>Bom, logo de cara posso te garantir que não é difícil (apesar da pouca documentação na internet), mas deixarei os detalhes para um outro post. Por enquanto, a minha recomendação é: clone o projeto, analise os dois rb do projeto :D e crie o seu!</p>
+
+<p>Caso algum corajoso for usar, estou a disposição para ajudar, é só deixar um comentário aê!
+Valeu e sucesso!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/12/agile-enterprise-edition/">Agile Enterprise Edition</a></h1>
     
     
@@ -103,12 +219,29 @@
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
 
         
          | <a href="/2009/12/agile-enterprise-edition/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -204,12 +337,29 @@ Responding to change over following a plan</p></blockquote>
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rogerbarreto/'>Roger Leite</a></span></span>
+
 
         
          | <a href="/2009/12/ruby-rubygems-e-load_path-ou-como-funciona-o-require-de-gems/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -470,12 +620,29 @@ from (irb):5</p>
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
 
         
          | <a href="/2009/10/rails-summit-2009/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -568,12 +735,29 @@ from (irb):5</p>
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
 
         
          | <a href="/2009/08/ruby-quando-a-linguagem-de-programacao-faz-diferenca/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -651,12 +835,29 @@ from (irb):5</p>
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rogerbarreto/'>Roger Leite</a></span></span>
+
 
         
          | <a href="/2009/07/cuidado-com-casos-de-uso/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -742,12 +943,29 @@ from (irb):5</p>
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
 
         
          | <a href="/2009/07/paginacao-no-rails-com-will_paginate-e-ajax-de-modo-facil/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -849,12 +1067,29 @@ end
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rodrigopanachi</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
 
         
          | <a href="/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -915,12 +1150,29 @@ end
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">rogerbarreto</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/rogerbarreto/'>Roger Leite</a></span></span>
+
 
         
          | <a href="/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -1007,12 +1259,29 @@ end
         | 
   
 
-<span class="byline author vcard">Posted by <span class="fn">admin</span></span>
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/authors/admin/'>Equipe 1up4developers</a></span></span>
+
 
         
          | <a href="/2009/05/jquery-datatables-github-apilinks-semana/#disqus_thread">Comments</a>
         
       </p>
+    
+    
+      <br/>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/page/6/index.html" data-via="1up4dev" data-counturl="http://1up4dev.org/page/6/index.html" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
     
   </header>
 
@@ -1052,92 +1321,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/04/guia-de-ruby-do-why-autospec-autotest-notification/">Guia De Ruby Do Why E Autospec-notification</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-04-27T01:00:03-03:00" pubdate data-updated="true">Apr 27<span>th</span>, 2009</time>
-        | 
-  
-
-<span class="byline author vcard">Posted by <span class="fn">admin</span></span>
-
-        
-         | <a href="/2009/04/guia-de-ruby-do-why-autospec-autotest-notification/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>O comovente guia de Ruby do Why</h2>
-
-<p>Este <a href="http://poignantguide.net/ruby/">livro</a> é sensacional e demonstra exatamente o espírito do Ruby: papo de programador.</p>
-
-<p><a href="/images/uploads/2009/04/thefoxes-3.png"><img src="/images/uploads/2009/04/thefoxes-3.png" alt="" /></a></p>
-
-<p>O livro é bem divertido. As tirinhas das raposas são ótimas. Várias <a href="http://www.nomedojogo.com/2008/10/28/why%E2%80%99s-poignant-guide-to-ruby-em-portugues/">pessoas</a> <a href="http://akitaonrails.com/2008/5/14/vamos-traduzir-o-why-s-poignant-guide-to-ruby">contribuíram</a> com a tradução para pt-br que está disponível no <a href="http://github.com/carlosbrando/poignant-br/tree/master">Github</a>.</p>
-
-<p><a href="http://why.nomedojogo.com/">Leitura obrigatória</a>. Chunky bacon!</p>
-
-<h2>Autospec-notification</h2>
-
-<p>O <a href="http://www.nateclark.com/articles/2008/09/17/_autotest_-is-now-_autospec_-how-to-set-up-autospec-for-rspec-and-rails-with-zentest">Autospec</a> é um script gerado pelo <a href="http://rspec.info/">RSpec</a> que utiliza o Autotest para rodar os testes automaticamente a cada alteração no código.</p>
-
-<p>Unindo o útil ao agradável, foi criado o <a href="http://www.mouseoverstudio.com/blog/2008/10/10/autospec-autotest-notification-autospec-notification-e-novidades/">Autospec-notification</a>, que exibe as notificações do autospec no desktop.</p>
-
-<p><a href="/images/uploads/2009/04/sucesso.png"><img src="/images/uploads/2009/04/sucesso.png" alt="" /></a></p>
-
-<p>Para instalar, comece pela gem ZenTest:</p>
-
-<pre><code>sudo gem install ZenTest
-</code></pre>
-
-<p>No linux, instale o Libnotify:</p>
-
-<pre><code>sudo apt-get install libnotify-bin
-</code></pre>
-
-<p>Agora instale a gem do autotest-notification:</p>
-
-<pre><code>sudo gem install carlosbrando-autotest-notification --source=http://gems.github.com
-</code></pre>
-
-<p>Ative o autotest-notification e rode o autospec no seu projeto:</p>
-
-<pre><code>an-install
-
-
-
-
-script/autospec
-</code></pre>
-
-<p>O código está no <a href="http://github.com/carlosbrando/autotest-notification/tree/master">Github</a>. Escreva seus testes e divirta-se!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -1155,6 +1338,10 @@ script/autospec
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
       </li>
     
@@ -1168,10 +1355,6 @@ script/autospec
     
       <li class="post">
         <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, finalmente.</a>
       </li>
     
   </ul>
