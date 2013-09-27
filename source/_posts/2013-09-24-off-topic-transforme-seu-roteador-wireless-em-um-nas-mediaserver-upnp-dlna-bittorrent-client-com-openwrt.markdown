@@ -4,7 +4,7 @@ title: "[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP
 slug: "off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt"
 date: 2013-09-24 10:00
 comments: true
-categories: off-topic, linux
+categories: [off-topic, linux]
 author: rodrigopanachi
 ---
 

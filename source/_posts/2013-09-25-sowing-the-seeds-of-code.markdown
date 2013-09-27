@@ -3,7 +3,7 @@ layout: post
 title: "Sowing the seeds of code"
 date: 2013-09-25 23:08
 comments: true
-categories: eventos, comunidade, javascript, clojure
+categories: [eventos, comunidade, javascript, clojure]
 author: pbalduino
 ---
 Seguindo a filosofia de [tirar a bunda da cadeira](http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/), tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.
