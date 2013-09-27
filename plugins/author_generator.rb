@@ -42,15 +42,13 @@ module Jekyll
       # Set the title for this page.
       author_name              = site.config['authors'][author]['name']
       title_prefix             = site.config['author_title_prefix'] || 'author: '
-      self.data['title']       = "Autor: #{author_name}"
+      self.data['title']       = author_name
 
       # Set the meta-description for this page.
       meta_description_prefix  = site.config['author_meta_description_prefix'] || 'author: '
       self.data['description'] = "#{meta_description_prefix}#{author_name}"
     end
-
   end
-
 
   # The Site class is a built-in Jekyll class with access to global site config information.
   class Site
@@ -81,9 +79,7 @@ module Jekyll
         throw "No 'author_index' layout found."
       end
     end
-
   end
-
 
   # Jekyll hook - the generate method is called by jekyll, and generates all of the author pages.
   class GenerateAuthor < Generator
@@ -94,7 +90,6 @@ module Jekyll
       puts "Building page: authors"
       site.write_author_indexes
     end
-
   end
 
   # Adds some extra filters used during the author creation process.
@@ -109,11 +104,15 @@ module Jekyll
     #
     def author_links(author)
       dir = @context.registers[:site].config['author_dir']
-      return "<a class='author' href='/#{dir}/#{author.downcase}/'>#{author_name(author)}</a>"
+      "<a class='author' href='/#{dir}/#{author.downcase}/'>#{author_name(author)}</a>"
     end
 
     def author_name(author)
-      return @context.registers[:site].config['authors'][author.downcase]['name']
+      @context.registers[:site].config['authors'][author.downcase]['name']
+    end
+
+    def author_post_count(author)
+      @context.registers[:site].posts.select { |p| p.data["author"] == author }.size || 0
     end
 
     # Outputs the post.date as formatted html, with hooks for CSS styling.
@@ -127,7 +126,6 @@ module Jekyll
       result += date.strftime('<span class="year">%Y</span> ')
       result
     end
-
   end
 
 end
