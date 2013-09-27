@@ -1,0 +1,8 @@
+<section>
+  <h1>ls /categories</h1>
+  <p class="category-list">
+    {% for category in site.categories %}
+      <a href="/{{ site.category_dir }}/{{ category[0] }}">{{ category[0] }}</a>&nbsp;
+    {% endfor %}
+  </p>
+</section>
