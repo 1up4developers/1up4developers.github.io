@@ -20,7 +20,10 @@ Feito isso vai aparecer a mensage:
 
 Para atualizar tudo com os fontes do nosso repositório, execute:
 
-`$ git pull origin source`
+```
+$ git checkout .
+$ git fetch origin && git reset --hard origin/source
+```
 
 Pronto, está tudo configurado! O banch atual será "source".
 Os fontes, imagens e markdown ficam neste branch.
