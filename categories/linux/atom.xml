@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/linux/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-09-26T23:21:31-03:00</updated>
+  <updated>2013-10-08T00:10:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -99,8 +99,8 @@
 <span class='line-number'>39</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>&lt;/p>
 </span><span class='line'>
-</span><span class='line'>&lt;p>$ ssh &lt;a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x72;&#111;&#111;&#116;&#x40;&#49;&#57;&#50;&#x2e;&#49;&#54;&#56;&#x2e;&#x31;&#46;&#49;">&#114;&#111;&#111;&#x74;&#x40;&#49;&#x39;&#50;&#x2e;&#49;&#x36;&#56;&#46;&#x31;&#x2e;&#x31;&lt;/a>
-</span><span class='line'>&lt;a href="&#x6d;&#x61;&#105;&#108;&#116;&#111;&#58;&#x72;&#x6f;&#x6f;&#x74;&#64;&#49;&#x39;&#50;&#x2e;&#49;&#54;&#56;&#x2e;&#49;&#46;&#x31;">&#114;&#111;&#111;&#116;&#64;&#49;&#57;&#50;&#x2e;&#x31;&#54;&#56;&#x2e;&#49;&#46;&#49;&lt;/a>&rsquo;s password:&lt;/p>
+</span><span class='line'>&lt;p>$ ssh &lt;a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#58;&#114;&#111;&#111;&#x74;&#64;&#x31;&#57;&#50;&#x2e;&#49;&#x36;&#56;&#46;&#x31;&#46;&#49;">&#114;&#111;&#111;&#116;&#64;&#49;&#57;&#x32;&#46;&#49;&#x36;&#56;&#46;&#49;&#46;&#49;&lt;/a>
+</span><span class='line'>&lt;a href="&#109;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#114;&#x6f;&#x6f;&#116;&#x40;&#49;&#57;&#x32;&#46;&#49;&#x36;&#56;&#x2e;&#x31;&#46;&#49;">&#114;&#111;&#x6f;&#116;&#64;&#x31;&#x39;&#50;&#x2e;&#49;&#x36;&#56;&#46;&#49;&#46;&#49;&lt;/a>&rsquo;s password:&lt;/p>
 </span><span class='line'>
 </span><span class='line'>&lt;p>BusyBox v1.19.4 (2013-03-14 11:28:31 UTC) built-in shell (ash)
 </span><span class='line'>Enter &lsquo;help&rsquo; for a list of built-in commands.&lt;/p>
