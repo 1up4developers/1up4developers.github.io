@@ -103,7 +103,7 @@ Existem também símbolos especiais que guardam os resultados das últimas expre
 
 ### Consultando o código fonte
 
-Algumas vezes é bom ter acesso ao código fonte de determinada função ou macro para que possamos entender melhor como ela funciona. Enquanto eu escrevia este livro, fiz isso constantemente para descobrir como as coisas funcionam por baixo dos panos.
+Algumas vezes é bom ter acesso ao código fonte de determinada função ou macro para que possamos entender melhor como ela funciona. Enquanto eu escrevia este artigo, fiz isso constantemente para descobrir como as coisas funcionam por baixo dos panos.
 
 Infelizmente, nem sempre é simples ir até o site onde o código fonte do Clojure está disponível e procurar o arquivo em que aquela função está definida. 
 
