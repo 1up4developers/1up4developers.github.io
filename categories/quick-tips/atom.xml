@@ -4,7 +4,7 @@
   <title><![CDATA[Category: quick tips | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/quick-tips/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2013-10-08T00:10:13-03:00</updated>
+  <updated>2014-04-25T12:30:21-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -12,6 +12,141 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
+    <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
+    <updated>2014-04-25T11:21:00-03:00</updated>
+    <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
+    <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
+
+<p>Existem alguns atalhos e funções auxiliares que tornam o uso do REPL bem mais produtivo. Por mais que escrever diretamente no REPL não seja tão confortável quando no seu editor preferido, algumas vezes isso acaba sendo necessário.</p>
+
+<h3>Qual é mesmo o nome daquela função?</h3>
+
+<p>As funções da biblioteca padrão do Clojure vem com um texto explicativo, onde você pode se situar sobre como utilizá-las.</p>
+
+<p>Podemos pesquisar alguma palavra que estiver dentro desses textos para encontrar a função que queremos, mas não lembramos o nome. Para isso, usamos <tt>find-doc</tt>, seguido da palavra ou trecho de texto relacionado ao que queremos.</p>
+
+<p>Vamos supor que eu esteja procurando algo sobre ::sockets::. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
+
+<pre><code>(find-doc "socket")
+; -------------------------
+; clojure.tools.nrepl/connect
+; ([&amp; {:keys [port host transport-fn], :or {transport-fn
+;  transport/bencode, host "localhost"}}])
+;  Connects to a socket-based REPL at the given host (defaults to
+;  localhost) and port, returning the Transport (by default clojure.
+
+; e mais um monte de coisas
+</code></pre>
+
+<p>No nosso exemplo, encontramos a função <tt>connect</tt>, que está no namespace <tt>clojure.tools.nrepl</tt>.</p>
+
+<p>Se você lembra de alguma parte do nome da função, então pode usar a função <tt>apropos</tt>, passando como parâmetros o trecho do nome ou uma expressão regular. Não se preocupe com expressões regulares agora, pois veremos esse assunto em detalhes mais para frente.</p>
+
+<p>Vamos supor que eu esteja manipulando vetores e não lembre o nome da função, mas saiba que a estrutura chama-se <tt>vector</tt>:</p>
+
+<pre><code>(apropos "vector")
+; (vector-of vector vector? vector-zip)
+</code></pre>
+
+<p>E agora você pode usar a função <tt>doc</tt> para ver a documentação daquela que mais se parecer com o que você estiver procurando:</p>
+
+<pre><code>(doc vector?)
+; -------------------------
+; clojure.core/vector?
+; ([x])
+;   Return true if x implements IPersistentVector
+</code></pre>
+
+<p>Existe uma variação de <tt>apropos</tt> chamada <tt>apropos-better</tt>, que informa também o namespace da função quando ela não estiver dentro do namespace <tt>clojure.core</tt> ou dentro do namespace em que você estiver no momento:</p>
+
+<pre><code>(apropos-better "vector")
+; (vector vector-of vector? clojure.zip/vector-zip)
+</code></pre>
+
+<h3>Um pouco de Bash na sua vida</h3>
+
+<p>Quando você usa o REPL por dentro do Leiningen, alguns atalhos já conhecidos pelos usuários de Bash estão disponíveis, mesmo para quem está usando o Leiningen no Windows.</p>
+
+<p>O primeiro deles é a tecla ::TAB::, que exibe os nomes de funções que começam com o que você já digitou.</p>
+
+<p>Por exemplo, vou digitar <tt>map</tt> e pressionar ::TAB::</p>
+
+<pre><code>(map
+; map           map-indexed   map?          mapcat        mapv
+</code></pre>
+
+<p>Outra combinação que agiliza bastante o trabalho é a combinação ::Control L::, ou ::Command L:: se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
+
+<p>Existe também a combinação ::Control R::, ou ::Command R::, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
+
+<p>Usar as setas ::para cima:: ou ::para baixo:: permite que você navegue nos comandos utilizados recentemente.</p>
+
+<h3>Recuperando os últimos resultados</h3>
+
+<p>Existem também símbolos especiais que guardam os resultados das últimas expressões e exceções. Eles são <tt><em>1</tt>, <tt></em>2</tt> e <tt><em>3</tt> para os valores e <tt></em>e</tt> para a última exceção, ou erro, que ocorreu:</p>
+
+<pre><code>(+ 1 2)
+; 3
+
+(* 2 4)
+; 8
+
+(/ 8 2)
+; 4
+
+(println "Resultados anteriores:" *1 *2 *3)
+; Resultados anteriores: 4 8 3
+
+(/ 1 0)
+; ArithmeticException Divide by zero
+
+(println "Último erro:" *e)
+; Último erro: #&lt;ArithmeticException java.lang.ArithmeticException:
+;   Divide by zero&gt;
+</code></pre>
+
+<h3>Consultando o código fonte</h3>
+
+<p>Algumas vezes é bom ter acesso ao código fonte de determinada função ou macro para que possamos entender melhor como ela funciona. Enquanto eu escrevia este livro, fiz isso constantemente para descobrir como as coisas funcionam por baixo dos panos.</p>
+
+<p>Infelizmente, nem sempre é simples ir até o site onde o código fonte do Clojure está disponível e procurar o arquivo em que aquela função está definida.</p>
+
+<p>Pior ainda quando a versão que está lá é diferente da versão que você está usando no momento. E fica ainda pior quando você não tem acesso ao código fonte da biblioteca que estiver utilizando.</p>
+
+<p>Para nos ajudar, existe a macro <tt>source</tt>, que recebe como parâmetro o nome da função, sem aspas, e exibe o respectivo código fonte, quando possível.</p>
+
+<p>Existem casos em que isso não é possível, como quando você tentar ler o fonte de uma forma especial ou de um código que foi compilado utilizando AOT (veremos isso em detalhes mais para frente).</p>
+
+<p>Vamos exibir o código fonte da função <tt>+</tt>, responsável por somar dois ou mais números:</p>
+
+<pre><code>(source +)
+; (defn +
+;   "Returns the sum of nums. (+) returns 0. Does not auto-promote
+;   longs, will throw on overflow. See also: +'"
+;   {:inline (nary-inline 'add 'unchecked_add)
+;    :inline-arities &gt;1?
+;    :added "1.2"}
+;   ([] 0)
+;   ([x] (cast Number x))
+;   ([x y] (. clojure.lang.Numbers (add x y)))
+;   ([x y &amp; more]
+;      (reduce1 + (+ x y) more)))
+</code></pre>
+
+<p>Note que temos acesso a todos os detalhes internos da função <tt>+</tt>, incluindo sua documentação e mais algumas informações que são úteis para o compilador ou para alguma função que gere documentação automaticamente.</p>
+
+<p>Ao tentarmos ver o código fonte de uma forma especial ou de algum código escrito nativamente em Java, receberemos uma mensagem de que o código fonte não foi encontrado:</p>
+
+<pre><code>(source Thread/sleep)
+; Source not found
+</code></pre>
+
+<p>Há muito mais recursos no REPL do Clojure, inclusive no que diz respeito a integração com o seu editor preferido, mas vou deixar isso para outro artigo.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
@@ -420,116 +555,6 @@ y = (+ 1 (* 3 2))
 <p>Não se leve tão a sério. É apenas um texto, um post, um curso, um livro. A vida é bem mais do que isso.</p>
 
 <p>Abraço</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
-    <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
-    <updated>2013-03-20T11:27:02-03:00</updated>
-    <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
-    <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
-
-<p>Empresas de TI bem sucedidas como <a href="http://37signals.com/">37signals</a> e <a href="https://github.com/">Github</a> apostam em times e colaboradores distribuídos pelo mundo trabalhando remotamente em seus projetos.</p>
-
-<p>Usando as ferramentas e práticas certas é possível <a href="http://37signals.com/svn/posts/3435-remote-office-not-required-the-new-book-by-37signals-coming-fall-2013">trabalhar remotamente</a> e até mesmo <a href="http://en.wikipedia.org/wiki/Pair_programming">parear com outro desenvolvedor</a> à distância.</p>
-
-<h2>Requisitos</h2>
-
-<ul>
-<li><p>ssh</p></li>
-<li><p>screen</p></li>
-<li><p>vim</p></li>
-<li><p>skype</p></li>
-</ul>
-
-
-<p>Para compartilhar o mesmo &ldquo;contexto&rdquo; remotamente, ambos desenvolvedores deverão ter acesso ao mesmo ambiente de desenvolvimento, via <strong>ssh</strong>. Estando em modo texto, será necessário utilizar um editor compatível, neste caso o <strong><a href="http://www.vim.org/">VIM</a></strong>.  E para compartilhar o terminal em tempo real, utilizaremos o Screen. Para comunicação, basta utilizar o Skype. Simples não!?</p>
-
-<h2>Instalação</h2>
-
-<p>Uma vez escolhido o ambiente de desenvolvimento comum (um servidor de homologação, por exemplo), instale o Screen:</p>
-
-<pre><code>$ sudo apt-get install screen
-</code></pre>
-
-<p>Em seguida, configure as permissões de execução:</p>
-
-<pre><code>$ chmod u+s /usr/bin/screen
-$ chmod 755 /var/run/screen
-</code></pre>
-
-<p>O Screen roda como um <em>daemon</em>, mantendo um <em>buffer</em> da tela. Sendo assim, o primeiro passo é iniciar a sessão do Screen:</p>
-
-<pre><code>$ screen -S nomedasessao
-</code></pre>
-
-<p>Isso criará uma sessão com o nome &ldquo;nomedasessao&rdquo; e será exibido um shell &ldquo;limpo&rdquo;, o que quer dizer que você já está conectado a esta sessão. Para verificar, execute:</p>
-
-<pre><code>$ screen -ls
-There is a screen on:
-        8095.nomedasessao   (19-03-2013 23:32:54)   (Attached)
-1 Socket in /var/run/screen/S-user.
-</code></pre>
-
-<p>A partir de agora, o buffer desta sessão pode ser compartilhado com outro usuário conectado. Basta que seu par se logue no servidor via ssh e execute:</p>
-
-<pre><code>$ screen -x nomedasessao
-</code></pre>
-
-<p>Pronto! O que você digitar, seu par vai ver e vice-versa. Assim, basta abrir o VIM e começar a parear remotamente.</p>
-
-<p>Para se desconectar da sessão atual, execute:</p>
-
-<pre><code># screen -d
-[remote detached from 8095.nomedasessao]
-</code></pre>
-
-<h2>Usando o Screen</h2>
-
-<p>O Screen é simples e poderoso. É possível criar abas (window), dividir a tela (split), rolar a tela (copy mode), etc.</p>
-
-<p>Todos comandos começam com Ctrl + a, em seguida o comando ou atalho. Seguem alguns comandos e atalhos que serão muito úteis do seu dia-a-dia pareando:</p>
-
-<p><strong>Copy mode (scroll)</strong>
-Inicie o modo de cópia com Ctrl-a + [ (colchete para esquerda)
-Navegue pela tela com as setas ou pageup/pagedown;
-Marque o início da seleção do texto com &lt;espaço> e termine com &lt;espaço> para copiar;
-Cole com Ctrl-a + ] (colchete para direita);</p>
-
-<p><strong>Windows</strong>
-Crie uma janela (ou aba) com Ctrl-a + c
-Liste as janelas com Ctrl-a + &ldquo; (aspas)
-Altere para a janela com Ctrl-a <numero de 0-9>
-Feche (ou mate) a janela atual com Ctrl+a k</p>
-
-<p><strong>Split</strong>
-Divida a tela horizontalmente com Ctrl-a + S
-Divida a tela verticalmente com Ctrl-a + V
-Mude de split com Ctrl-a + Tab
-Feche um split com Ctrl-a + X</p>
-
-<p>Para digitar um comando: Ctrl-a + :</p>
-
-<p>Consulte o <a href="http://linux.die.net/man/1/screen">manual do Screen</a> para a lista completa de atalhos/comandos.</p>
-
-<h2>Dicas e considerações</h2>
-
-<p>Esta é uma abordagem simplista da utilização do Screen. Deixei vários detalhes de fora do post para tentar ser o mais didático possível. Para informações mais completas como configurações, gerenciamento de sessões e usuários, consulte o <a href="http://linux.die.net/man/1/screen">manual oficial</a>.</p>
-
-<p>Existem outras alternativas como o <a href="http://tmux.sourceforge.net/">tmux</a>, mas o conceito envolvido é o mesmo apresentado aqui.</p>
-
-<p>Se você estiver programando em Rails, provavelmente precisará de 3 contextos: console, server e editor (Vim). Recomendo utilizar cada contexto como &ldquo;window&rdquo; na mesma sessão do Screen.</p>
-
-<p>Utilize o Skype (ou outro voip de sua preferência) durante todo o tempo em que estiverem pareando e estabeleça intervalos. <a href="http://www.pomodorotechnique.com/">Pomodoro</a> pode ser uma boa opção.</p>
-
-<p>Dúvidas, críticas ou sugestões nos comentários. Sucesso!</p>
-
-<h2>Referências</h2>
-
-<p><a href="http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction">http://www.linux.com/learn/tutorials/442418-using-screen-for-remote-interaction
-</a><a href="http://linux.die.net/man/1/screen">http://linux.die.net/man/1/screen
-</a><a href="http://aperiodic.net/screen/quick_reference">http://aperiodic.net/screen/quick_reference</a></p>
 ]]></content>
   </entry>
   

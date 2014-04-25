@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>A importância de estudar constantemente - 1up4developers</title>
+  <title>Alguns truques com o REPL do Clojure - 1up4developers</title>
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Já faz tempo que venho ensaiando este post. Minha idéia é mostrar como é importante na nossa profissão de &ldquo;desenvolvedor&rdquo; estar &hellip;">
+  <meta name="description" content="O REPL é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/">
+  <link rel="canonical" href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">
   <link href="/favicon.ico" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -80,7 +80,7 @@
   
   <header>
     
-      <h1 class="entry-title">A Importância De Estudar Constantemente</h1>
+      <h1 class="entry-title">Alguns Truques Com O REPL Do Clojure</h1>
     
     
       <p class="meta">
@@ -96,12 +96,12 @@
   
 
 
-<time datetime="2008-06-18T19:04:22-03:00" pubdate data-updated="true">Jun 18<span>th</span>, 2008</time>
+<time datetime="2014-04-25T11:21:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
         | 
   
 
 
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
 
 
         
@@ -118,13 +118,13 @@
 
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/" data-text="A importância de estudar constantemente" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/" data-text="Alguns truques com o REPL do Clojure" data-via="1up4dev" data-counturl="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/" >Tweet</a>
   
   
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/"></div>
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"></div>
   
   
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/"></div>
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"></div>
   
 </div>
 
@@ -132,13 +132,133 @@
   </header>
 
 
-<div class="entry-content"><p>Já faz tempo que venho ensaiando este post. Minha idéia é mostrar como é importante na nossa profissão de &ldquo;desenvolvedor&rdquo; estar constantemente aprendendo novas técnicas, linguagens, frameworks, metodologia, etc. Com um mercado tão competitivo como o de Desenvolvimento de Software, não podemos nos dar o luxo de conhecer apenas uma linguagem. Evidente que é bom que você escolha uma para se especializar, mas de forma alguma deve ser a última linguagem que você aprenderá.</p>
+<div class="entry-content"><p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
-<p>Há algum tempo atrás, orientação a objetos era uma coisa de outro mundo para mim. É sério, não conseguia pensar na possibilidade de existir outro paradigma de programação. Bem, depois que estudei muito sobre OO e passei a utilizar profissionalmente, hoje não consigo me imaginar trabalhando sem OO. Tudo fica claro, organizado, abstraído&hellip; O que eu ganhei com isso? Com certeza consegui ser mais produtivo, mais organizado e mais eficiente e, como consequência, melhor remunerado. Se ainda desenvolvesse proceduralmente, certamente ainda desconheceria conceitos e técnicas, sendo apenas mais um na multidão. E não é assim que um verdadeiro desenvolvedor ágil quer ser visto, certo?</p>
+<p>Existem alguns atalhos e funções auxiliares que tornam o uso do REPL bem mais produtivo. Por mais que escrever diretamente no REPL não seja tão confortável quando no seu editor preferido, algumas vezes isso acaba sendo necessário.</p>
 
-<p>Outra coisa que estudei muito e hoje fico feliz em utilizar profissionalmente são Testes Unitários. Uma das premissas do desenvolvimento ágil está relacionada à qualidade do código. Com testes unitários é possível desenvolver incrementalmente e responder rápido às mudanças pois seu código está &ldquo;protegido&rdquo;. Além de servir como apoio à refactoring. O que eu ganho com isso? Consigo me preocupar apenas com o desenvolvimento de uma pequena funcionalidade por vez, meu código fica mais &ldquo;limpo&rdquo; e manutenível. Em consequencia disto me torno mais ágil e sou melhor remunerado. Além de poder dormir mais tranquilo&hellip;</p>
+<h3>Qual é mesmo o nome daquela função?</h3>
 
-<p>É importante reconhecer que há muito para aprender ainda. Nosso cenário de trabalho muda constantemente e os &ldquo;usuários&rdquo; são cada vez mais exigentes. Além disso, é importante lembrar que <a href="http://www.async.com.br/~kiko/papers/bullet/">não existe bala de prata</a>, não existe uma tecnologia que resolve todos os problemas. As linguagens e tecnologias são limitadas e precisam evoluir. Você precisa evoluir junto! Não se esqueça também que lá fora tem um mercado de trabalho começando a enxergar essas qualidades ágeis.</p>
+<p>As funções da biblioteca padrão do Clojure vem com um texto explicativo, onde você pode se situar sobre como utilizá-las.</p>
+
+<p>Podemos pesquisar alguma palavra que estiver dentro desses textos para encontrar a função que queremos, mas não lembramos o nome. Para isso, usamos <tt>find-doc</tt>, seguido da palavra ou trecho de texto relacionado ao que queremos.</p>
+
+<p>Vamos supor que eu esteja procurando algo sobre ::sockets::. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
+
+<pre><code>(find-doc "socket")
+; -------------------------
+; clojure.tools.nrepl/connect
+; ([&amp; {:keys [port host transport-fn], :or {transport-fn
+;  transport/bencode, host "localhost"}}])
+;  Connects to a socket-based REPL at the given host (defaults to
+;  localhost) and port, returning the Transport (by default clojure.
+
+; e mais um monte de coisas
+</code></pre>
+
+<p>No nosso exemplo, encontramos a função <tt>connect</tt>, que está no namespace <tt>clojure.tools.nrepl</tt>.</p>
+
+<p>Se você lembra de alguma parte do nome da função, então pode usar a função <tt>apropos</tt>, passando como parâmetros o trecho do nome ou uma expressão regular. Não se preocupe com expressões regulares agora, pois veremos esse assunto em detalhes mais para frente.</p>
+
+<p>Vamos supor que eu esteja manipulando vetores e não lembre o nome da função, mas saiba que a estrutura chama-se <tt>vector</tt>:</p>
+
+<pre><code>(apropos "vector")
+; (vector-of vector vector? vector-zip)
+</code></pre>
+
+<p>E agora você pode usar a função <tt>doc</tt> para ver a documentação daquela que mais se parecer com o que você estiver procurando:</p>
+
+<pre><code>(doc vector?)
+; -------------------------
+; clojure.core/vector?
+; ([x])
+;   Return true if x implements IPersistentVector
+</code></pre>
+
+<p>Existe uma variação de <tt>apropos</tt> chamada <tt>apropos-better</tt>, que informa também o namespace da função quando ela não estiver dentro do namespace <tt>clojure.core</tt> ou dentro do namespace em que você estiver no momento:</p>
+
+<pre><code>(apropos-better "vector")
+; (vector vector-of vector? clojure.zip/vector-zip)
+</code></pre>
+
+<h3>Um pouco de Bash na sua vida</h3>
+
+<p>Quando você usa o REPL por dentro do Leiningen, alguns atalhos já conhecidos pelos usuários de Bash estão disponíveis, mesmo para quem está usando o Leiningen no Windows.</p>
+
+<p>O primeiro deles é a tecla ::TAB::, que exibe os nomes de funções que começam com o que você já digitou.</p>
+
+<p>Por exemplo, vou digitar <tt>map</tt> e pressionar ::TAB::</p>
+
+<pre><code>(map
+; map           map-indexed   map?          mapcat        mapv
+</code></pre>
+
+<p>Outra combinação que agiliza bastante o trabalho é a combinação ::Control L::, ou ::Command L:: se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
+
+<p>Existe também a combinação ::Control R::, ou ::Command R::, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
+
+<p>Usar as setas ::para cima:: ou ::para baixo:: permite que você navegue nos comandos utilizados recentemente.</p>
+
+<h3>Recuperando os últimos resultados</h3>
+
+<p>Existem também símbolos especiais que guardam os resultados das últimas expressões e exceções. Eles são <tt><em>1</tt>, <tt></em>2</tt> e <tt><em>3</tt> para os valores e <tt></em>e</tt> para a última exceção, ou erro, que ocorreu:</p>
+
+<pre><code>(+ 1 2)
+; 3
+
+(* 2 4)
+; 8
+
+(/ 8 2)
+; 4
+
+(println "Resultados anteriores:" *1 *2 *3)
+; Resultados anteriores: 4 8 3
+
+(/ 1 0)
+; ArithmeticException Divide by zero
+
+(println "Último erro:" *e)
+; Último erro: #&lt;ArithmeticException java.lang.ArithmeticException:
+;   Divide by zero&gt;
+</code></pre>
+
+<h3>Consultando o código fonte</h3>
+
+<p>Algumas vezes é bom ter acesso ao código fonte de determinada função ou macro para que possamos entender melhor como ela funciona. Enquanto eu escrevia este livro, fiz isso constantemente para descobrir como as coisas funcionam por baixo dos panos.</p>
+
+<p>Infelizmente, nem sempre é simples ir até o site onde o código fonte do Clojure está disponível e procurar o arquivo em que aquela função está definida.</p>
+
+<p>Pior ainda quando a versão que está lá é diferente da versão que você está usando no momento. E fica ainda pior quando você não tem acesso ao código fonte da biblioteca que estiver utilizando.</p>
+
+<p>Para nos ajudar, existe a macro <tt>source</tt>, que recebe como parâmetro o nome da função, sem aspas, e exibe o respectivo código fonte, quando possível.</p>
+
+<p>Existem casos em que isso não é possível, como quando você tentar ler o fonte de uma forma especial ou de um código que foi compilado utilizando AOT (veremos isso em detalhes mais para frente).</p>
+
+<p>Vamos exibir o código fonte da função <tt>+</tt>, responsável por somar dois ou mais números:</p>
+
+<pre><code>(source +)
+; (defn +
+;   "Returns the sum of nums. (+) returns 0. Does not auto-promote
+;   longs, will throw on overflow. See also: +'"
+;   {:inline (nary-inline 'add 'unchecked_add)
+;    :inline-arities &gt;1?
+;    :added "1.2"}
+;   ([] 0)
+;   ([x] (cast Number x))
+;   ([x y] (. clojure.lang.Numbers (add x y)))
+;   ([x y &amp; more]
+;      (reduce1 + (+ x y) more)))
+</code></pre>
+
+<p>Note que temos acesso a todos os detalhes internos da função <tt>+</tt>, incluindo sua documentação e mais algumas informações que são úteis para o compilador ou para alguma função que gere documentação automaticamente.</p>
+
+<p>Ao tentarmos ver o código fonte de uma forma especial ou de algum código escrito nativamente em Java, receberemos uma mensagem de que o código fonte não foi encontrado:</p>
+
+<pre><code>(source Thread/sleep)
+; Source not found
+</code></pre>
+
+<p>Há muito mais recursos no REPL do Clojure, inclusive no que diz respeito a integração com o seu editor preferido, mas vou deixar isso para outro artigo.</p>
 </div>
 
 
@@ -148,7 +268,7 @@
   
 
 
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
 
 
       
@@ -163,12 +283,12 @@
   
 
 
-<time datetime="2008-06-18T19:04:22-03:00" pubdate data-updated="true">Jun 18<span>th</span>, 2008</time>
+<time datetime="2014-04-25T11:21:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
       
 
 <span class="categories">
   
-    <a class='category' href='/categories/real-world/'>real world</a>
+    <a class='category' href='/categories/clojure/'>clojure</a>, <a class='category' href='/categories/lisp/'>lisp</a>, <a class='category' href='/categories/quick-tips/'>quick tips</a>
   
 </span>
 
@@ -182,23 +302,21 @@
 
 <div class="sharing">
   
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/" data-text="A importância de estudar constantemente" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/" data-text="Alguns truques com o REPL do Clojure" data-via="1up4dev" data-counturl="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/" >Tweet</a>
   
   
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/"></div>
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"></div>
   
   
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/"></div>
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"></div>
   
 </div>
 
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/2008/06/guerrilha-agile-parte-1/" title="Previous Post: Guerrilha agile: a motivação">&laquo; Guerrilha agile: a motivação</a>
+        <a class="basic-alignment left" href="/2013/09/sowing-the-seeds-of-code/" title="Previous Post: Sowing the seeds of code">&laquo; Sowing the seeds of code</a>
       
-      
-        <a class="basic-alignment right" href="/2008/06/aderindo-a-campanha-br-linux/" title="Next Post: Aderindo a Campanha BR-Linux">Aderindo a Campanha BR-Linux &raquo;</a>
       
     </p>
   </footer>
@@ -379,8 +497,8 @@
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/';
-        var disqus_url = 'http://1up4dev.org/2008/06/a-importancia-de-estudar-constantemente/';
+        var disqus_identifier = 'http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/';
+        var disqus_url = 'http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/';
         var disqus_script = 'embed.js';
       
     (function () {

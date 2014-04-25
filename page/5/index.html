@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Enviar emails de uma aplicação Rails é muito simples. A parte complicada fica com a configuração do ambiente e do servidor de email. Se você não &hellip;">
+  <meta name="description" content="Se você está pensando em fazer o deploy da sua aplicação Rails em um server Nginx com Phusion Passenger, você está no caminho certo! Não apenas pela &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,153 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/01/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/">Deploy De Várias Aplicações No Nginx + Passenger Usando Subdomain Ou Suburi</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-26T08:00:59-02:00" pubdate data-updated="true">Jan 26<span>th</span>, 2011</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2011/01/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/01/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/" data-text="Deploy de várias aplicações no Nginx + Passenger usando subdomain ou suburi" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/01/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/01/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/01/deploy-de-varias-aplicacoes-no-nginx-passenger-usando-subdomain-ou-suburi/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você está pensando em fazer o deploy da sua aplicação Rails em um server <a href="http://nginx.org/">Nginx</a> com <a href="http://www.modrails.com/">Phusion Passenger</a>, você está no caminho certo! Não apenas pela segurança e performance do Nginx, mas também pela facilidade de instalação e configuração quando comparado à outros web servers populares.</p>
+
+<p>A <a href="http://wiki.nginx.org/Install">instalação do Nginx</a> bem como <a href="http://www.modrails.com/install.html">configuração do módulo do Passenger</a> são relativamente simples. A documentação de <a href="http://www.modrails.com/documentation/Users%20guide%20Nginx.html#_installing_phusion_passenger">ambos é bem completa</a>. Você provavelmente não terá muita dificuldade. Eu recomendo seguir o passo-a-passo da instalação do Passenger:</p>
+
+<pre><code>  passenger-install-nginx-module
+</code></pre>
+
+<p>Uma vez que tudo esteja instalado, é hora de configurar o Nginx editando o arquivo <code>nginx.conf</code> (provavelmente localizado em <code>/usr/local/nginx/conf/nginx.conf</code>)</p>
+
+<h3>Usando sub URI</h3>
+
+<p>O deploy como sub URI torna sua aplicação acessível com o endereço <code>http://dominio.com/app1</code>, sendo <code>app1</code> o nome da sua aplicação. Supondo que diretório público do Nginx esteja em <code>/var/www</code> e sua aplicação Rails em <code>/var/rails/app1</code>, configure-o assim:</p>
+
+<pre><code>http {
+    ...
+    server {
+        listen 80;
+        server_name dominio.com www.dominio.com;
+        root /var/www;
+        passenger_enabled on;
+        passenger_base_uri /app1;
+    }
+    ...
+}
+</code></pre>
+
+<p>Ainda é preciso criar um link simbólico para que o contexto da aplicação Rails seja visível pelo document root em <code>/var/www</code>:</p>
+
+<pre><code>ln -s /var/rails/app1/public /var/www/app1
+</code></pre>
+
+<p>Reiniciando o Nginx, sua aplicação já estará rodando. Para adicionar outras aplicações, basta adicionar:</p>
+
+<pre><code>        passenger_base_uri /app1;
+        passenger_base_uri /app2;
+        passenger_base_uri /app3;
+</code></pre>
+
+<p>E em seguida criar os links simbólicos como descrito acima. Nota importante: em alguns casos, será necessário informar a URL relativa correta nas configurações do Rails:</p>
+
+<pre><code>   config.action_controller.relative_url_root = "/app1"
+</code></pre>
+
+<h3>Usando subdomain</h3>
+
+<p>O deploy como subdomain torna sua aplicação acessível com o endereço <code>http://app1.dominio.com</code>. Basta configurar o Nginx como segue:</p>
+
+<pre><code>http {
+    ...
+    server {
+        listen 80;
+        server_name app1.dominio.com;
+        root /var/rails/app1/public;
+        passenger_enabled on;
+    }
+    ...
+}
+</code></pre>
+
+<p>Note que o <code>root</code> aponta diretamente para o diretório &ldquo;public&rdquo; da aplicação Rails. Para fazer o deploy de outras aplicações como subdomínio, basta configurar outro &ldquo;server&rdquo;, alterando <code>root</code> e o <code>server_name</code>:</p>
+
+<pre><code>http {
+    ...
+    server {
+        listen 80;
+        server_name app1.dominio.com;
+        root /var/rails/app1/public;
+        passenger_enabled on;
+    }
+    ...
+    server {
+        listen 80;
+        server_name app2.dominio.com;
+        root /var/rails/app2/public;
+        passenger_enabled on;
+    }
+    ...
+}
+</code></pre>
+
+<p>Uma vez que o DNS do host esteja corretamente configurado, suas aplicações estarão acessíveis em <code>http://app1.dominio.com</code>, <code>http://app2.dominio.com</code>, etc.</p>
+
+<p>Dúvidas ou sugestões, utilizem os comentários. Sucesso!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1206,89 +1353,6 @@ a.images.previous
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/">Rubygems Snapshot! Importando/Exportando Gems Com Velocidade!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-05-10T10:53:17-03:00" pubdate data-updated="true">May 10<span>th</span>, 2010</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/" data-text="Rubygems Snapshot! Importando/Exportando gems com velocidade!" data-via="1up4dev" data-counturl="http://1up4dev.org/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2010/05/rubygems-snapshot-importandoexportando-gems-com-velocidade/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Nova versão do <a href="http://github.com/rogerleite/rubygems_snapshot">Rubygems_Snapshot</a> no ar!</p>
-
-<p>Fico feliz em dizer que este é o meu primeiro projeto que passou dos dez &ldquo;watchers&rdquo; ! :D E que realmente ajudou alguns developers mundo afora.</p>
-
-<p>A primeira versão foi muito focada no uso pessoal, como &ldquo;quebra-galho&rdquo; mesmo. Resolvi investir algum tempo e praticamente refaze-lá, pois ao usar no dia-a-dia percebi algumas falhas e dificuldades de uso.</p>
-
-<p>Basicamente, nesta nova versão:</p>
-
-<ul>
-<li><p>É possível trabalhar com mais de um formato. Yml e Tar, que é o padrão.</p></li>
-<li><p>Ao exportar, os arquivos &ldquo;.gem&rdquo; serão exportados.</p></li>
-<li><p>Ao importar, ocorre praticamente uma instalação &ldquo;offlline&rdquo;, muito mais rápido e livre de problemas com &ldquo;sources&rdquo; do rubygem !</p></li>
-<li><p>Usar o Snapshot como API !</p></li>
-</ul>
-
-
-<p>Como tive um trabalhão para deixar o Readme legal, não pretendo escrever mais que isso! :D</p>
-
-<p><a href="http://github.com/nofxx">Marcos</a>, valeu pelo incentivo! Cara, forka lá e manda bala!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -1311,6 +1375,10 @@ a.images.previous
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
@@ -1324,10 +1392,6 @@ a.images.previous
     
       <li class="post">
         <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/extendendo-ruby-com-c-so-um-aperitivo/">Extendendo Ruby com C - Só um aperitivo</a>
       </li>
     
   </ul>
@@ -1356,7 +1420,7 @@ a.images.previous
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (14)
+          <a href="/author/pbalduino">Plínio Balduino</a> (15)
         </li>
       
     
@@ -1453,7 +1517,7 @@ a.images.previous
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - 1up4developers -
+  Copyright &copy; 2014 - 1up4developers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>.</span>
 </p>
 
