@@ -10,7 +10,7 @@ categories: [continuous integration, continuous delivery, agile]
 
 **TL;DR** [Wercker](http://wercker.com/) é uma plataforma de integração contínua, baseado em
 containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
-integrado com [Github](http://github.com), [BitBucket](BitBucket), [Heroku](Heroku),
+integrado com [Github](http://github.com), [BitBucket](https://bitbucket.org/), [Heroku](https://www.heroku.com/),
 [AWS](http://aws.amazon.com/) e [OpenShift](https://www.openshift.com/), em questão de minutos e com apenas alguns cliques
 é possível configurar o build e deploy da sua aplicação. O serviço está em beta, permitindo
 **repositórios privados grátis**!
@@ -95,7 +95,7 @@ Mais informações: [http://devcenter.wercker.com/articles/services/](http://dev
 ## Steps
 
 As steps são os "comandos" executados pelo Wercker no build ou deploy da aplicação, como
-`bundle-install`, `database-migration`, `script`, etc.
+`bundle-install`, `database-migrate`, `script`, etc.
 
 Você pode utilizar as steps disponibilizadas pelo Wercker ou criar suas próprias steps,
 executando os comandos que julgar necessário no seu build ou deploy.
