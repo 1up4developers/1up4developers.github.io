@@ -1,0 +1,14 @@
+box: wercker/rvm
+build:
+    steps:
+        - rvm-use:
+            version: 1.9.3
+        - bundle-install
+        - script:
+            name: generate
+            code: bundle exec rake generate
+deploy:
+    steps:
+        - script:
+            name: publish
+            code: bundle exec rake deploy
