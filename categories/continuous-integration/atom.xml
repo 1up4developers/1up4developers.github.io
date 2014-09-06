@@ -4,7 +4,7 @@
   <title><![CDATA[Category: continuous integration | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/continuous-integration/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-06T12:08:58-03:00</updated>
+  <updated>2014-09-06T13:23:23-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -20,7 +20,7 @@
     <id>http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
 containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
-integrado com <a href="http://github.com">Github</a>, <a href="BitBucket">BitBucket</a>, <a href="Heroku">Heroku</a>,
+integrado com <a href="http://github.com">Github</a>, <a href="https://bitbucket.org/">BitBucket</a>, <a href="https://www.heroku.com/">Heroku</a>,
 <a href="http://aws.amazon.com/">AWS</a> e <a href="https://www.openshift.com/">OpenShift</a>, em questão de minutos e com apenas alguns cliques
 é possível configurar o build e deploy da sua aplicação. O serviço está em beta, permitindo
 <strong>repositórios privados grátis</strong>!</p>
@@ -122,7 +122,7 @@ etc. Em outras palavras, é um container configurado com um serviço ready to us
 <h2>Steps</h2>
 
 <p>As steps são os &ldquo;comandos&rdquo; executados pelo Wercker no build ou deploy da aplicação, como
-<code>bundle-install</code>, <code>database-migration</code>, <code>script</code>, etc.</p>
+<code>bundle-install</code>, <code>database-migrate</code>, <code>script</code>, etc.</p>
 
 <p>Você pode utilizar as steps disponibilizadas pelo Wercker ou criar suas próprias steps,
 executando os comandos que julgar necessário no seu build ou deploy.</p>
