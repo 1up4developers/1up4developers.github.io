@@ -10,5 +10,12 @@ build:
 deploy:
     steps:
         - script:
+            name: setup deploy
+            code: |
+                mkdir _deploy
+                cd _deploy
+                git init
+                git remote add origin git@github.com:1up4developers/1up4developers.github.io.git
+        - script:
             name: publish
-            code: bundle exec rake generate deploy
+            code: bundle exec rake deploy
