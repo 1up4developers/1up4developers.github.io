@@ -12,7 +12,7 @@ tags:
 - cascata
 ---
 
-Durante minha carreira profissional fui obrigado tive a oportunidade de atuar brevemente no campo gerencial do desenvolvimento de software. Foi uma experiência que agregou muito conhecimento e me fez enxergar minha atividade principal, programação, com outros olhos. Também pude entender melhor as estratégias comerciais da empresa, gerenciamento de recursos, retorno sobre investimento, etc. Além de aprender mais sobre desenvolvimento de software, também pude conhecer os vilões dessa história, na maioria dos casos: a diretoria.
+Durante minha carreira profissional ~~fui obrigado~~ tive a oportunidade de atuar brevemente no campo gerencial do desenvolvimento de software. Foi uma experiência que agregou muito conhecimento e me fez enxergar minha atividade principal, programação, com outros olhos. Também pude entender melhor as estratégias comerciais da empresa, gerenciamento de recursos, retorno sobre investimento, etc. Além de aprender mais sobre desenvolvimento de software, também pude conhecer os vilões dessa história, na maioria dos casos: a diretoria.
 
 Na maioria dos problemas que presenciei, a diretoria (quem toma decisões e libera a grana do projeto) contribuiu para que as coisas ficassem cada vez piores, seja tomando decisões visando curto prazo ou aplicando conceitos ilusórios como adoção de uma tecnologia ou metodologia da moda. Seguem algumas pérolas da "diretoria":
 

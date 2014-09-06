@@ -18,7 +18,7 @@ tags:
 > Este post é uma homenagem aos Arquitetos defensores do _waterfall_/cascata.
 
 
-Recentemente tive o desprazer de conhecer um arquiteto, é isso mesmo, aquele com certificado e tudo, com direito a broche da Sun em seu terninho. Aliás, certificado é um tema polêmico que eu não tenho uma opinião muito certa e/ou formada... bom, vou deixar esta parte para um próximo post, quem sabe.
+Recentemente tive o ~~des~~prazer de conhecer um arquiteto, é isso mesmo, aquele com certificado e tudo, com direito a broche da Sun em seu terninho. Aliás, certificado é um tema polêmico que eu não tenho uma opinião muito certa e/ou formada... bom, vou deixar esta parte para um próximo post, quem sabe.
 
 Voltando ao assunto, hoje no fretado, comecei a pensar nas semelhanças que um arquiteto de sistemas (certificado que decorou patterns inutéis da Sun) tem com um arquiteto de obras. Só para deixar claro, na tabela abaixo estou usando dois estados: _FAIL_ e Ok. Fail quer dizer que vai dá merda não vai dar certo e não tem jeito, caso queira uma definição mais formal, o [wikipédia](http://en.wikipedia.org/wiki/Failure) ajuda, agora se você prefere imagens, o [Fail Blog](http://www.failblog.net/) também serve.
 
