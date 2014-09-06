@@ -87,8 +87,12 @@ module Jekyll
     priority :high
 
     def generate(site)
-      puts "Building page: authors"
-      site.write_author_indexes
+      if ENV["OCTOPRESS_ENV"] == "preview"
+        puts "Skiping /authors page in preview mode!"
+      else
+        puts "Building page: authors"
+        site.write_author_indexes
+      end
     end
   end
 
