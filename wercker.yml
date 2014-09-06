@@ -11,4 +11,4 @@ deploy:
     steps:
         - script:
             name: publish
-            code: bundle exec rake deploy
+            code: bundle exec rake generate deploy
