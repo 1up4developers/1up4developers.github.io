@@ -42,7 +42,7 @@ module Jekyll
     end
 
     def get_gist_url_for(user, gist, file)
-      "https://gist.github.com/#{user}/#{gist}/raw/#{file}"
+      "https://gist.githubusercontent.com/#{user}/#{gist}/raw/#{file}"
     end
 
     def cache(gist, file, data)
