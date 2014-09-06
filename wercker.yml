@@ -9,6 +9,8 @@ build:
             code: bundle exec rake generate
 deploy:
     steps:
+        - add-ssh-key:
+            keyname: GITHUB
         - script:
             name: setup deploy
             code: |
