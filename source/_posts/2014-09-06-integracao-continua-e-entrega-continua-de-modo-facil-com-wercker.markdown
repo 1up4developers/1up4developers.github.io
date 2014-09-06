@@ -2,7 +2,7 @@
 layout: post
 title: "Integração Contínua e Entrega Contínua de modo fácil com Wercker"
 slug: "integracao-continua-e-entrega-continua-de-modo-facil-com-wercker"
-date: 2014-09-05 20:54
+date: 2014-09-06 12:33
 author: rodrigopanachi
 comments: true
 categories: [continuous integration, continuous delivery, agile]
