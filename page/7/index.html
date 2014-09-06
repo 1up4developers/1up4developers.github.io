@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="jQuery DataTables Nós somos fãs de jQuery pela sua simplicidade e poder de extensão através de plugins. Falando nisso, este plugin torna qualquer &hellip;">
+  <meta name="description" content="Acredito que a maioria de vocês conhecem e/ou já usaram as famosas cheat sheets (tradução para &ldquo;cola&rdquo;?) para algo. Costumo usá-las quando &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,120 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/">Gerando Cheat Sheet Para Os Snippets Do Gedit</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-05T05:00:37-03:00" pubdate data-updated="true">May 5<span>th</span>, 2009</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/" data-text="Gerando cheat sheet para os snippets do gedit" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Acredito que a maioria de vocês conhecem e/ou já usaram as famosas <em>cheat sheets</em> (tradução para &ldquo;cola&rdquo;?) para algo. Costumo usá-las quando quero fixar algum conceito novo ou simplesmente para consultas rápidas. Com o pai Google, é possível encontrar os mais diversos tipos: <a href="http://www.google.com.br/search?q=cheat+sheet+HTML&amp;ie=utf-8&amp;oe=utf-8&amp;aq=t&amp;rls=com.ubuntu:en-US:unofficial&amp;client=firefox-a">HTML</a>, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;rls=com.ubuntu%3Aen-US%3Aunofficial&amp;hs=Ejh&amp;q=cheat+sheet+Ruby&amp;btnG=Pesquisar&amp;meta=">Ruby</a>, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;rls=com.ubuntu%3Aen-US%3Aunofficial&amp;hs=WQ2&amp;q=cheat+sheet+Ruby+on+Rails&amp;btnG=Pesquisar&amp;meta=">Ruby on Rails</a>, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;rls=com.ubuntu%3Aen-US%3Aunofficial&amp;hs=h7M&amp;q=cheat+sheet+Shell+Script&amp;btnG=Pesquisar&amp;meta=">Shell Script</a>&hellip; etc.</p>
+
+<p>Atualmente venho praticando Ruby, sendo o gedit &ndash; &ldquo;tunado&rdquo; com vários plugins &ndash; o meu maior aliado. Um dos plugins que mais me ajuda é o <a href="http://live.gnome.org/Gedit/Plugins/Snippets">Snippets</a> e neste <a href="http://cassiomarques.wordpress.com/2008/09/16/gedit-snippets/">post do Cássio Marques</a>, você encontra uma breve descrição do que é, e um link para snippets de exemplo.</p>
+
+<p>Tudo isso foi só pra contar o que me levou a criar a gem gedit-snippets-tool. Com ela é possível criar <em>cheat sheets</em> dos seus snippets. Supondo que você tenha ruby e rubygem instalados, seu modo de uso é muito simples. Para instalar a gem execute:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Após a instalação, para gerar um <em>cheat sheet</em> com todos os seus snippets, execute:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gedit-snippets-tool -cs &gt; ~/mycheatsheet.xhtml
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Caso tenha muitos snippets, e deseja criar um cheat sheet somente com Ruby e Ruby on Rails por exemplo, execute:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="/images/uploads/2009/04/cheatsheet-example.png"><img src="/images/uploads/2009/04/cheatsheet-example-291x300.png" alt="Meu cheat sheet de exemplo" /></a></p>
+
+<p>Levando em conta que a gem foi feita em três dias e focamos somente o necessário para lançarmos uma versão 0.x &ldquo;em produção&rdquo;, vamos as limitações:</p>
+
+<ul>
+<li><p>O gedit-snippets-tool lê os snippets (arquivos XML) que estão na pasta &ldquo;home&rdquo;. Constatei que o gedit &ldquo;limpo&rdquo; logo após habilitar o plugin Snippets, guarda os snippets na pasta &ldquo;/usr/share/gedit-2/plugins/snippets/&rdquo;. Bom, se for este o seu caso, peço a gentileza de copiá-los para a &ldquo;home&rdquo; em &ldquo;{home-folder}/.gnome2/gedit/snippets/&rdquo;.</p></li>
+<li><p>O template usado para gerar a página xhtml está bem &ldquo;rústico&rdquo;. O lado bom disso é que está bem fácil de alterá-lo. Vejam o código do template (via gist, leitores de RSS, sorry):</p></li>
+</ul>
+
+
+<p>Quem tiver sugestões (<strong>inclusive</strong> de template), podem forkar o projeto ou se quiser, deixe um comentário que eu entro em contato.</p>
+
+<h3>Sobre o Desenvolvimento</h3>
+
+<p>Assim que tive a idéia, análisei o que seria necessário, e resumindo:</p>
+
+<ul>
+<li><p>Ler os XMLs dos snippets;</p></li>
+<li><p>Uma engine para gerar páginas através de &ldquo;templates&rdquo;;</p></li>
+<li><p>Fazer uma gem executável&hellip; pois assim é mais fácil e rápido para quem quiser usá-la;</p></li>
+</ul>
+
+
+<p>A parte do XML é fácil, pois até já fiz coisa parecida <a href="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/">antes</a>. A parte da engine para templates, o pai Google me guiou a uma ótima, chamada <a href="http://www.kuwata-lab.com/erubis/">Erubis</a>, que é uma gem e torna as coisas muito mais fáceis.</p>
+
+<p>Para criar o esqueleto da gem, usei o <a href="http://github.com/dcrec1/gemhub">gemhub</a> do <a href="http://www.mouseoverstudio.com/blog/2008/10/27/criando-gems-com-gemhub-nunca-foi-tao-simples/">Diego Carrion</a>, que facilitou muito o meu trabalho, sem contar a ajuda que me deu na hora de publicar o gemspec no github&hellip; valeu truta! Bom, o resto foram três noites programando e aprendendo a fazer a minha primeira gem. Quem quiser participar estão todos convidados a &ldquo;forka-lo&rdquo; no <a href="http://github.com/rogerleite/gedit-snippets-tool">github</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -347,7 +461,7 @@ script/autospec
 
 <p>A maioria das empresas que têm problemas com desenvolvimento de software ainda estão vivendo na década de 90. Internet ainda é uma palavra assustadora. Programador é apenas um funcionário que sabe o que significam siglas de informática e sabem mexer no computador. Mudança ainda é encarada como algo arriscado, que deve ser planejado, estudado e aprovado pelo presidente, diretoria e gestores. A palavra da vez é <strong>processo</strong> e seu fiel companheiro é <strong>prazo</strong>. A burocracia é uma amiga que garante que as coisas não fujam de controle. Nesse cenário não há como fugir do waterfall.</p>
 
-<p>O maior problema do waterfall são os papéis: cada um com sua &ldquo;especialidade&rdquo;. Alguém determina que um infeliz funcionário vai ser responsável por &ldquo;levantar requisitos&rdquo;. Faz um cursinho de UML e começa a escrever uma quantidade sem fim de Casos de Uso sem ter noção alguma do que seu trabalho afeta no processo. Então a &ldquo;equipe&rdquo; começa a ter muito &ldquo;retrabalho&rdquo;, uma vez que os clientes não estão satisfeitos com o que está sendo entregue. Logo percebem que devem fazer o &ldquo;levantamento&rdquo; mais detalhado e passam a engessar ainda mais o processo com reuniões, assinaturas, etc. Conclusão: tempo e dinheiro desperdiçados e nenhum resultado satisfatório.</p>
+<p>O maior problema do waterfall são os papéis: cada um com sua &ldquo;especialidade&rdquo;. Alguém determina que um <del>infeliz</del> funcionário vai ser responsável por &ldquo;levantar requisitos&rdquo;. Faz um cursinho de UML e começa a escrever uma quantidade sem fim de Casos de Uso sem ter noção alguma do que seu trabalho afeta no processo. Então a &ldquo;equipe&rdquo; começa a ter muito &ldquo;retrabalho&rdquo;, uma vez que os clientes não estão satisfeitos com o que está sendo entregue. Logo percebem que devem fazer o &ldquo;levantamento&rdquo; mais detalhado e passam a engessar ainda mais o processo com reuniões, assinaturas, etc. Conclusão: tempo e dinheiro desperdiçados e nenhum resultado satisfatório.</p>
 
 <p><a href="/images/uploads/2009/04/lost_hatch_locke.jpg"><img src="/images/uploads/2009/04/lost_hatch_locke-300x199.jpg" alt="Seu trabalho é digitar xxx a cada 108 segundos" /></a></p>
 
@@ -1229,117 +1343,6 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/12/agilidade-cascateira/">Agilidade Cascateira</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-12-16T11:50:09-02:00" pubdate data-updated="true">Dec 16<span>th</span>, 2008</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
-
-
-        
-         | <a href="/2008/12/agilidade-cascateira/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/12/agilidade-cascateira/" data-text="Agilidade cascateira" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/12/agilidade-cascateira/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/12/agilidade-cascateira/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/12/agilidade-cascateira/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Atualmente as metodologias ágeis vêm aparecendo com cada vez mais freqüência nas empresas que desenvolvem software, introduzidas pelos próprios desenvolvedores (o que é mais comum) ou em alguns raros casos pela &ldquo;cúpula&rdquo; da empresa, na esperança de melhorar a produtividade e/ou o alto tempo de resposta do fracassado processo cascateiro. Porém, esta &ldquo;fama&rdquo; prematura dos métodos ágeis tem gerado mais resultados ruins do que bons. Sua aplicação na vida real, na maioria em muitos casos, ocorre de maneira equivocada, distorcida e desprezando-se os reais valores e princípios que apoiaram o surgimento desta filosofia.</p>
-
-<p>Um exemplo claro de como os valores ágeis estão sendo desprezados distorcidos é o aumento constante de &ldquo;cursos&rdquo; e treinamentos de metodologias ágeis. Não é raro eu receber semanalmente vários spams e-mails de escolas de treinamento que ministram cursos de Scrum, XP, preparação para certificação ScrumMaster, técnicas de TDD, DDD, BDD, etc. Infelizmente o que estes cursos não ensinam (como todos os outros) é o verdadeiro significado de &ldquo;ser ágil&rdquo;. Fazer um curso de 20 horas de Scrum não o torna um ScrumMaster (você pode até ter um certificado, mas se você realmente é &ldquo;ágil&rdquo;, sabe que um certificado é um mero pedaço de papel sem valor).</p>
-
-<p>E assim chegamos à &ldquo;agilidade cascateira&rdquo;, onde todos na empresa estufam o peito para falar que seguem práticas ágeis, <a href="http://pindureta.wordpress.com/2008/12/02/dialogo-imaginario-baseado-em-fatos-reais/">desenvolvimento orientados à testes</a>, utilizam <a href="http://fmeyer.org/archives/2008/11/20/o-scrume/">Scrume</a> para gerenciar os projetos, etc. Na verdade estão apenas praticando um <a href="http://1up4dev.org/2008/06/waterfalling/">waterfall incremental</a>, cometendo os mesmos <a href="http://1up4dev.org/2008/10/software-e-sobre-investimento/">erros clássicos da cascata</a>, valorizando os processos ao invés das pessoas, focando em soluções equivocadas ao invés de <a href="http://1up4dev.org/2008/11/foco-no-problema/">resolver os problemas dos clientes</a> e assim, <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">difamando e denegrindo</a> a reputação e o propósito do <a href="http://agilemanifesto.org/">AgileManifesto</a>.</p>
-
-<p>Esse é o cenário ideal para os <a href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/">guardiões cascateiros</a>. É por estes e outros motivos que vemos &ldquo;flames&rdquo; oportunistas como <a href="http://jamesshore.com/Blog/The-Decline-and-Fall-of-Agile.html">The Decline and Fall of Agile</a> começarem a fazer sentido na comunidade. Como disse o <a href="http://gc.blog.br/2008/11/22/agile-indo-para-o-buraco/">Guilherme Chapiewski</a>, as pessoas estão querendo ir direto para a sobremesa e esquecendo de comer seus vegetais. Utilizar uma metodologia ágil não é desenvolver software de forma anarquista, existe muito conceito e experiência adquirida para sustentar esta filosofia.</p>
-
-<p>Neste blog você já viu várias maneiras de como ser um verdadeiro cascateiro e de como não ser ágil. Já que estamos falando nisso, vamos tentar resumir alguns pontos e características que tornam um desenvolvedor realmente ÁGIL!</p>
-
-<h3>Estude, mantenha-se atualizado!</h3>
-
-<p>A principal característica de um agilista é sua sede por conhecimento, sua busca incansável por novas técnicas, linguagens, ferramentas, etc. O seguidor ágil lê artigos, revistas, livros e o faz como diversão. Se você não leu pelo menos um livro técnico nos últimos 6 meses, isto é um mal sinal. Faça laboratórios, testes de novos frameworks, bibliotecas, etc. Pet-projects também são uma maneira pragmática de aprender novas formas e técnicas de desenvolvimento. Finalmente, conheça e pratique os princípios e valores do <a href="http://agilemanifesto.org/principles.html">AgileManifesto</a>, tendo-os como seu mantra, seu guia filosófico e seu mentor profissional.</p>
-
-<h3>Entenda realmente o problema do seu cliente</h3>
-
-<p>Isto parece ser óbvio, mas na maioria das vezes não é. Existem vários perfis de clientes, e é claro que você deve lidar de maneiras diferentes com cada um deles.</p>
-
-<p>Alguns são visionários sonhadores e sempre têm necessidades mirabolantes, sem sentido. Outros são simplistas demais e muitas vezes &ldquo;ocultam&rdquo; detalhes importantes. Também existem os pseudo-técnicos, que acham que sabem fazer seu trabalho e já vêm sugerindo como você deve implementar aquela nova funcionalidade.</p>
-
-<p><a href="/images/uploads/2008/12/imagem_spam_problem.jpg"><img src="/images/uploads/2008/12/imagem_spam_problem-300x181.jpg" alt="Reação comum quando há um problema" /></a></p>
-
-<p>Como verdadeiro agilista, saber identificar o perfil de seu cliente é o início para um relacionamento de confiança e transparência. Só assim você será capaz de concentrar esforços para <a href="http://1up4dev.org/2008/11/foco-no-problema/">resolver seu problema</a> e <a href="http://1up4dev.org/2008/10/software-e-sobre-investimento/">agregar valor ao produto</a>.</p>
-
-<h3>Não tenha medo de mudanças</h3>
-
-<p>A única maneira de criar, corrigir ou melhorar algo é com coragem E com mudança. O essencial para mudar algo é saber identificar o que está errado. Por exemplo, você sofre diariamente para fazer o <em>deploy</em> da sua aplicação para homologação. Identificado o problema e uma possível solução, por exemplo, fazer o <em>deploy</em> em .war, você tem duas soluções: ou deixa como está e coloca a culpa na aplicação ou no processo de desenvolvimento (conformismo) ou com muita coragem investe algumas horas e resolve de vez o problema (agilismo).</p>
-
-<p>Quando bater a insegurança, repita: <strong>coragem! coragem! coragem!</strong></p>
-
-<p><a href="/images/uploads/2008/12/coragemcaocovarde.jpg"><img src="/images/uploads/2008/12/coragemcaocovarde.jpg" alt="" /></a></p>
-
-<h3>Reflita e aprenda com os próprios erros</h3>
-
-<p>Existem várias maneiras de você evoluir seu conhecimento, e a maioria dos programadores utilizam somente uma: tomando na cabeça.</p>
-
-<p><a href="/images/uploads/2008/12/fotopregocomcabeca.jpg"><img src="/images/uploads/2008/12/fotopregocomcabeca.jpg" alt="Prego só toma na cabeça!" /></a></p>
-
-<p>Como um bom seguidor de práticas ágeis, reflita e aprenda com seus erros. Compartilhar seus problemas é a melhor maneira de escolher um solução adequada e ainda espalhar sua experiência entre a equipe para que outras pessoas não cometam o mesmo erro.</p>
-
-<p>Errar é humano. Persistir no erro é burrice. Se você está com problemas, procure por pessoas que já tiveram um problema parecido e aprenda com ele. Não cometa os mesmo erros, e mais importante, não cometa os mesmo erros dos outros!</p>
-
-<h3>Resumo</h3>
-
-<p>Se tudo que você leu até agora não é novidade, parabéns! Caso contrário comece o quanto antes estudar e principalmente praticar estes conceitos no seu trabalho e na sua vida.</p>
-
-<p>Seja responsável e <a href="http://www.velhosabio.com.br/mensagem.exibir.php?codmsg=297">comprometido</a> com seu trabalho. Esforce-se para fazer o melhor. Faça valer o seu salário. E lembre-se: cuidado com os falsos agilistas!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -1362,6 +1365,10 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
       </li>
     
@@ -1375,10 +1382,6 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
     
       <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
   </ul>
@@ -1395,7 +1398,7 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (35)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
         </li>
       
     
@@ -1494,6 +1497,12 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
       <a class='category' href='/categories/comunidade/'>comunidade</a>&nbsp;
     
       <a class='category' href='/categories/javascript/'>javascript</a>&nbsp;
+    
+      <a class='category' href='/categories/agile/'>agile</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
   </p>
 </section>

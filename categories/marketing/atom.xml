@@ -4,7 +4,7 @@
   <title><![CDATA[Category: marketing | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/marketing/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-04-25T16:01:14-03:00</updated>
+  <updated>2014-09-06T12:08:58-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -164,7 +164,7 @@
     <link href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/"/>
     <updated>2008-11-04T01:49:11-02:00</updated>
     <id>http://1up4dev.org/2008/11/os-guardioes-da-cascata</id>
-    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
+    <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da <del>maldita</del> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
 
 <p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua necessidade execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, <sarcasmo> a &ldquo;equipe&rdquo; atinge seu objetivo: o software! </sarcasmo> Seguem alguns exemplos desses guardiões cascateiros:</p>
 

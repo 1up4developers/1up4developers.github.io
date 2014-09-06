@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Em um mega resumo, trabalhando muito no Sitefique.me. Acho que este post é uma maneira de mostrar porque está difícil de postar coisas novas, e ao &hellip;">
+  <meta name="description" content="This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,229 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/04/throw-legacy-part-i-continuous-testing-with-java/">Throw Legacy - Part I - Continuous Testing With Java</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-04-25T08:27:29-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/andrefarina/'>André Farina</a></span></span>
+
+
+        
+         | <a href="/2011/04/throw-legacy-part-i-continuous-testing-with-java/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/" data-text="Throw Legacy - Part I - Continuous testing with Java" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)</p>
+
+<p>JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
+In this series of blog posts I will show how I’m doing tests with Java legacy code. I will try cover topics including testing dao, service, controller and view layers.
+In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.</p>
+
+<p>The first thing we need is install <a href="https://rvm.beginrescueend.com/">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/">JRuby</a> and <a href="http://rubygems.org/">Ruby Gems</a>.</p>
+
+<pre><code>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
+</code></pre>
+
+<p><a href="http://rvm.beginrescueend.com/rvm/install/">http://rvm.beginrescueend.com/rvm/install/</a> for more info.</p>
+
+<p>Install JRuby:</p>
+
+<pre><code>rvm install jruby
+</code></pre>
+
+<p>Set rvm to use JRuby:</p>
+
+<pre><code>rvm use jruby
+</code></pre>
+
+<p>Install RSpec:</p>
+
+<pre><code>gem install rspec
+</code></pre>
+
+<p>Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.</p>
+
+<p>Create the initial project structure like this:</p>
+
+<pre><code>-boleto
+  -spec
+  -src
+    -com
+      -legacy
+  -build
+</code></pre>
+
+<p>Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:</p>
+
+<pre><code>require "date"
+require "java"
+java_import "com.legacy.Boleto"
+
+describe Boleto do
+  it "calculates due days" do
+    boleto = Boleto.new
+    boleto.due_date = java.util.Date.new(Date.parse("2011-01-15").ctime)
+    boleto.payment_date = java.util.Date.new(Date.parse("2011-01-25").ctime)
+    boleto.due_days.should == 10
+  end
+end
+</code></pre>
+
+<p>Let&rsquo;s run the example and watch it fail.</p>
+
+<pre><code>jruby -J-cp build -S rspec spec/boleto_spec.rb
+
+
+
+
+NameError: cannot load Java class com.legacy.Boleto
+</code></pre>
+
+<p>Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:</p>
+
+<pre><code>package com.legacy;
+import java.util.Date;
+public class Boleto {
+  private Date dueDate;
+  private Date paymentDate;
+
+  public Date getDueDate() { return this.dueDate; }
+  public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
+  public Date getPaymentDate() { return this.paymentDate; }
+  public void setPaymentDate(Date paymentDate) { this.paymentDate = paymentDate; }
+  public Integer getDueDays() { return 10; }
+}
+</code></pre>
+
+<p>Also we need to compile the java class.</p>
+
+<pre><code>javac -d build/ src/com/legacy/Boleto.java
+</code></pre>
+
+<p>Instead of run the example by manual command again, let’s install a continuous testing gem:</p>
+
+<pre><code>wget --no-check-certificate\
+ http://www.github.com/tomas-stefano/infinity_test/tarball/master\
+ -O infinity_test.tar.gz
+tar -zxvf infinity_test.tar.gz
+cd tomas-stefano-infinity_test-{version}
+gem build infinity_test.gemspec
+gem install infinity_test-1.0.2.gem
+</code></pre>
+
+<p>What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.</p>
+
+<p>Let&rsquo;s run the example with continuous testing gem:</p>
+
+<pre><code>infinity_test --rspec --rubies=jruby+"-J-cp build"
+</code></pre>
+
+<p>Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
+Also we can create a .infinity_test file, like this:</p>
+
+<pre><code>infinity_test do
+  use :rubies =&gt; %w(jruby),
+    :specific_options =&gt; {'jruby' =&gt; '-J-cp build'},
+    :test_framework =&gt; :rspec
+  notifications :lib_notify   # for linux / growl for mac
+end
+</code></pre>
+
+<p>And run:</p>
+
+<pre><code>infinity_test
+</code></pre>
+
+<p><img src="/images/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" />
+<a href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.</p>
+
+<p>However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a href="http://www.eclipse.org/">eclipse</a> or <a href="http://eclim.org/">eclim</a>. This kind of editor auto-recompile Java files whenever they change.</p>
+
+<p>Last notes</p>
+
+<ul>
+<li><p>I&rsquo;ve posted the code for boleto here <a href="https://github.com/andref5/rspec-java">https://github.com/andref5/rspec-java</a></p></li>
+<li><p>More info about JRuby</p>
+
+<ul>
+<li><p><a href="https://github.com/jruby/jruby/wiki">https://github.com/jruby/jruby/wiki</a></p></li>
+<li><p><a href="http://pragprog.com/titles/jruby/using-jruby">http://pragprog.com/titles/jruby/using-jruby</a></p></li>
+</ul>
+</li>
+<li><p>More info about RSpec</p>
+
+<ul>
+<li><p><a href="http://relishapp.com/rspec">http://relishapp.com/rspec</a></p></li>
+<li><p><a href="http://kerryb.github.com/iprug-rspec-presentation">http://kerryb.github.com/iprug-rspec-presentation</a></p></li>
+<li><p><a href="http://pragprog.com/titles/achbd/the-rspec-book">http://pragprog.com/titles/achbd/the-rspec-book</a></p></li>
+</ul>
+</li>
+<li><p>More info about Infinity_test</p>
+
+<ul>
+<li><a href="https://github.com/tomas-stefano/infinity_test">https://github.com/tomas-stefano/infinity_test</a></li>
+</ul>
+</li>
+<li><p>More info about Ruby</p>
+
+<ul>
+<li><a href="http://mislav.uniqpath.com/poignant-guide/book/">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1076,136 +1299,6 @@ Por enquanto, gostaríamos que <a href="http://sitefique.me/pesquisa">respondess
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/02/complexidade-nao-escala/">Complexidade Não Escala!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-01T07:00:00-02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
-
-
-        
-         | <a href="/2011/02/complexidade-nao-escala/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/02/complexidade-nao-escala/" data-text="Complexidade não escala!" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/02/complexidade-nao-escala/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/02/complexidade-nao-escala/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/02/complexidade-nao-escala/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Este é um assunto polêmico e que gera muita discussão nos escritórios de TI. Mesmo assim, tendo trabalhado em várias empresas, grandes e pequenas, presenciando vários projetos fracassarem por decisões arquiteturais (as gerenciais não contam nesse contexto), e os mesmos erros sendo cometidos repetidas vezes, sinto-me na obrigação de passar esta experiência e meu ponto de vista.</p>
-
-<h3>Escalabilidade, por definição</h3>
-
-<p>De acordo com a <a href="http://en.wikipedia.org/wiki/Scalability">Wikipedia</a>, <strong>escalabilidade</strong> <em>é uma característica desejável em todo o sistema que indica sua habilidade de manipular uma porção crescente de trabalho de forma uniforme, ou estar preparado para crescer.</em> Em outras palavras, um sistema deve estar preparado para suportar uma demanda crescente.</p>
-
-<p>Pode ser classificada como:</p>
-
-<ul>
-<li><p>Carga de escalabilidade: um sistema distribuído deve ser fácil para ser expandido e usar sua gama de recursos para acomodar tanto exigências do mesmo sendo elas pouca ou excessiva.</p></li>
-<li><p>Geograficamente escalável: um sistema é geograficamente escalável quando ele mantém sua utilidade e usabilidade, não obstante como são usados os seus recursos.</p></li>
-<li><p>Escalabilidade administrativa: não importa a variação de informação que diferentes organizações necessitam compartilhar em um único sistema distribuído, ele deve permanecer fácil de ser usado e gerenciado.</p></li>
-<li><p>Escalabilidade funcional: capacidade de melhorar o sistema, adicionando novas funcionalidades com mínimo esforço.</p></li>
-</ul>
-
-
-<p>Pode ser aplicada como:</p>
-
-<ul>
-<li><p><strong>Escalabilidade Vertical</strong> (scale up): significa adicionar recursos em um único nó do sistema (mais memória ou um disco rígido mais rápido).</p></li>
-<li><p><strong>Escalabilidade Horizontal</strong> (scale out): significa adicionar mais nós ao sistema, tais como adicionar um novo computador com uma aplicação para clusterizar o software. Você pode encontrar escalabilidade horizontal nos sabores <a href="http://pt.wikipedia.org/wiki/Computa%C3%A7%C3%A3o_distribu%C3%ADda">Sistemas Distribuídos</a>, <a href="http://en.wikipedia.org/wiki/Enterprise_JavaBean">Serviços de Componentes</a>, <a href="http://pt.wikipedia.org/wiki/Service-oriented_architecture">SOA</a>, <a href="http://en.wikipedia.org/wiki/System_of_systems">System of Systems</a>, etc.</p></li>
-</ul>
-
-
-<p><a href="http://escalabilidade.com"><img src="/images/uploads/2011/01/scale-up-300x150.png" alt="Escalabilidade" /></a>
-Do ponto de vista do custo de desenvolvimento, manutenção e suporte, eu defino escalabilidade como: caro (complexo) vs. barato (simples). Porém, o que é caro nem sempre é bom&hellip; e vice versa.</p>
-
-<h3>Analogias com o mundo real</h3>
-
-<p>Nós gostamos de fazer <a href="http://en.wikipedia.org/wiki/Extreme_programming_practices#System_metaphor">analogias com coisas reais</a>, são ótimas para expressar idéias e facilitar a comunicação.</p>
-
-<p>Call centers, ou centrais de atendimento. Se você mora no Brasil provavelmente já perdeu algumas horas de sua vida pendurado no telefone tentando resolver um problema com sua assinatura de celular, internet, TV, energia elétrica, etc. Mas por que isso acontece?
-Provavelmente, essas centrais de atendimento começaram com poucos funcionários, porém foram &ldquo;projetadas&rdquo; para crescer conforme a demanda. Basta contratar mais funcionários, dar treinamento e pronto: mais &ldquo;nós&rdquo; atendendo as requisições. Entretanto, o processo passa a ser mais complexo e mais burocrático, pois é muita informação para disseminar entre os funcionários. Resultado: alto custo para empresa e pouco resultado para os clientes. A espera ainda existe e quando finalmente somos atendidos, a sensação é de estar falando com um robô, que dificilmente entenderá seu problema e dará uma solução padrão ou insatisfatória para o mesmo.</p>
-
-<p><a href="/images/uploads/2011/01/call-center.jpg"><img src="/images/uploads/2011/01/call-center-300x225.jpg" alt="Call Center" /></a></p>
-
-<p>O processo é adequado para escalar a demanda horizontalmente, o que o torna complexo e não garante a qualidade. Vale lembrar que o <a href="http://pt.wikipedia.org/wiki/Sistemas_computacionais">software</a> apenas automatiza ou apóia a realização dos processos reais. Se o processo é complexo, o software será tão complexo quanto (e em alguns casos até mais complexo).</p>
-
-<p>Um exemplo diferente: o <a href="http://pt.wikipedia.org/wiki/Volkswagen_Fusca">Fusca</a>. É um dos carros mais simples que existem, não precisa nem de refrigeração a água. Costuma-se dizer que pode ser consertado com um alicate e um rolo de arame. Seu custo de fabricação seria mínimo se comparado com o custo de um carro popular moderno. Ok, não oferece a mesma segurança, velocidade e conforto de um carro moderno, mas ambos conseguem transportar 5 passageiros ao destino desejado.</p>
-
-<p><a href="/images/uploads/2011/01/fuka_herbie_oval.jpg"><img src="/images/uploads/2011/01/fuka_herbie_oval-300x210.jpg" alt="Fusca" /></a></p>
-
-<p>Mas o que um Fusca têm a ver com escalabilidade? Bem, imagine um congestionamento na véspera de um feriado, por exemplo. Tanto o Fusca quanto o carro moderno ficarão parados na mesma fila de farofeiros. Toda tecnologia, complexidade e custo da fabricação do carro moderno não o livra de um congestionamento. Não há projeto que consiga prever ou contornar esse problema.</p>
-
-<p><a href="/images/uploads/2011/01/baleia1.jpg"><img src="/images/uploads/2011/01/baleia1-300x225.jpg" alt="Twitter" /></a></p>
-
-<p>Voltando para nossa realidade, em certos casos o custo não paga o benefício. Mesmo um sistema bem planejado, distribuído, separado em camadas e serviços independentes, pode não suportar a demanda, seja de carga ou de funcionalidade. O mesmo aconteceria com um sistema mais simples arquiteturalmente, com certeza. Porém, o custo e velocidade de desenvolvimento e manutenção seria bem menor.</p>
-
-<h3>O que fazer então?</h3>
-
-<p>Sistemas precisam evoluir de acordo com a necessidade. <a href="http://merbist.com/2011/01/31/designing-for-scalability/">Projetar um sistema</a> prevendo todos os possíveis &ldquo;casos de uso&rdquo; bem como suas hipotéticas cargas (ou acessos) é uma forte característica do <em>waterfall</em>. Sistemas mais simples arquiteturalmente evoluem mais facilmente, em outras palavras, escalam mais facilmente:</p>
-
-<ul>
-<li><p><a href="http://pt.wikipedia.org/wiki/Keep_It_Simple"><strong>Keep it simple, stupid</strong></a>! Soluções simples geralmente custam menos e trazem retorno mais rápido. Qualquer funcionalidade ou recurso que não agregue valor deve ser descartada. Simples assim!</p></li>
-<li><p><strong>Simplifique requisitos</strong>. Clientes <em>sem</em> software costumam <em>viajar</em> nos requisitos. Converse, escute e entenda exatamente seus <a href="http://1up4dev.org/2008/11/foco-no-problema/">PROBLEMAS</a>, então <a href="http://pt.wikipedia.org/wiki/YAGNI">negocie</a> e sugira uma SOLUÇÃO simples e rápida. E a <a href="http://pragprog.com/titles/prj/ship-it">entregue</a> logo!</p></li>
-<li><p><strong>Busque soluções prontas</strong>. As necessidades dos clientes, em muitos casos, são parecidas. Provavelmente existe alguma solução pronta que você pode entregar para seu cliente ao invés de desenvolver um novo [software que todos conhecem] do zero.</p></li>
-<li><p><strong>Otimize sua infra-estrutura</strong>. Procure a melhor forma de deploy da aplicação. Qual hardware é mais adequado, qual sistema operacional e arquitetura. Faça tunning do webserver (workers, pool, memória), módulos e load balance. Utilize uma versão otimizada do interpretador, como o <a href="http://www.rubyenterpriseedition.com/">Ruby Enterprise Edition</a>, <a href="http://www.jruby.org/">JRuby</a> ou <a href="http://rubini.us/">Rubinius</a>.</p></li>
-<li><p><strong>Monitore sua aplicação</strong>. Uma vez que esteja em produção, monitore-a em busca de gargalos e possíveis pontos de otimização. Existem várias ferramentas para ajudá-lo nessa tarefa, como o <a href="http://hoptoadapp.com/">Hoptoad</a>, <a href="http://newrelic.com/">NewRelic</a>, ou até mesmo o <a href="http://rubini.us/doc/en/tools/profiler/">Rubinius Profiler</a>.</p></li>
-<li><p><strong>Otimize sua aplicação</strong>. O log é seu melhor amigo no desenvolvimento. Não ignore queries demoradas ou que geram <a href="http://rails-bestpractices.com/posts/29-fix-n-1-queries">N+1</a>, otimize-as! Faça <em>profiling</em>, analise e otimize o código. Utilize <em>caching</em> para serviços externos e para páginas. Caching pode ser a melhor alternativa para turbinar sua aplicação, mas use-o com sabedoria. Bancos de dados não devem ser um problema, por isso saiba escolher a melhor distribuição para seu caso. Mesmo que <a href="http://nosql-database.org/">NoSQL</a> esteja na moda, não quer dizer que é a melhor solução para sua aplicação (a menos que seja necessário para o negócio).</p></li>
-<li><p><strong>Simplifique o desenvolvimento</strong>. Fameworks ajudam bastante, mas use-os com sabedoria para não inflar o <em>stack</em> da aplicação. Em certas situações, vale mais a pena desenvolver algo simples do zero do que utilizar algo pronto, pesado e que precise ser adaptado para sua necessidade. Escreva menos: quanto menor seu código, mais rápido será sua execução. Camadas são perigosas: evite rodeios e escreva código que realmente interessa. E lembre-se: sempre existe uma ferramenta certa para cada problema.</p></li>
-</ul>
-
-
-<h3>SIMPLIFIQUE!</h3>
-
-<p>Tenha sempre a palavra <a href="http://zenhabits.net/simple-living-manifesto-72-ideas-to-simplify-your-life/"><strong>SIMPLES</strong></a> gravada na sua mente. Se uma coisa exigir muito esforço para ser feita, talvez nem valha a pena. Volte para o início, pense novamente e busque uma ALTERNATIVA mais rápida/fácil/barata. Quanto melhor for sua técnica, melhor serão suas escolhas. <a href="http://blip.tv/file/2733212">Pratique constantemente</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/5/">&larr; Older</a>
@@ -1228,6 +1321,10 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
       </li>
     
@@ -1241,10 +1338,6 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
     
       <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
   </ul>
@@ -1261,7 +1354,7 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (35)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
         </li>
       
     
@@ -1360,6 +1453,12 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
       <a class='category' href='/categories/comunidade/'>comunidade</a>&nbsp;
     
       <a class='category' href='/categories/javascript/'>javascript</a>&nbsp;
+    
+      <a class='category' href='/categories/agile/'>agile</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
   </p>
 </section>

@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Este post é um tópico da Experiência de lançar o RoloGames. Quando surgiu a idéia Como jogador, nunca achei um serviço legal pra trocar jogos usados &hellip;">
+  <meta name="description" content="Simples, basta usar o HttpRewriteModule. Para redirecionar de www.dominio.com para dominio.com faça: server { server_name www.dominio.com; rewrite &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,99 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/">[QuickTips] Nginx: Redirect De Domínio Com Www Para Domínio Sem Www E Vice-versa</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-05T10:00:45-03:00" pubdate data-updated="true">Jul 5<span>th</span>, 2012</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/" data-text="[QuickTips] Nginx: redirect de domínio com www para domínio sem www e vice-versa" data-via="1up4dev" data-counturl="http://1up4dev.org/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Simples, basta usar o <a href="http://wiki.nginx.org/HttpRewriteModule">HttpRewriteModule</a>.</p>
+
+<p>Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:</p>
+
+<pre><code>server {
+    server_name  www.dominio.com;
+    rewrite ^(.*) http://dominio.com$1 permanent;
+}
+
+server {
+    server_name  dominio.com;
+    #configurações do servidor aqui
+}
+</code></pre>
+
+<p>E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faça:</p>
+
+<pre><code>server {
+    server_name  dominio.com;
+    rewrite ^(.*) http://www.dominio.com$1 permanent;
+}
+
+server {
+    server_name  www.dominio.com;
+    #configurações do servidor aqui
+}
+</code></pre>
+
+<p><em>Voilà!</em></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -967,229 +1060,6 @@ user@ubuntu:~$ gem -v
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/throw-legacy-part-i-continuous-testing-with-java/">Throw Legacy - Part I - Continuous Testing With Java</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-25T08:27:29-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2011</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/andrefarina/'>André Farina</a></span></span>
-
-
-        
-         | <a href="/2011/04/throw-legacy-part-i-continuous-testing-with-java/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/" data-text="Throw Legacy - Part I - Continuous testing with Java" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/04/throw-legacy-part-i-continuous-testing-with-java/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>This is my first blog post and I decide to write in English because writing is a good way to learning and I’d like to improve my English, so post a comment if you see some grammar errors. 8)</p>
-
-<p>JRuby has helped me a lot bringing Ruby test “culture” into Java with RSpec.
-In this series of blog posts I will show how I’m doing tests with Java legacy code. I will try cover topics including testing dao, service, controller and view layers.
-In this part, we’re going to set up our development environment, write a RSpec example and implement with Java through JRuby. We’ll also get continuous testing running with infinity test gem.</p>
-
-<p>The first thing we need is install <a href="https://rvm.beginrescueend.com/">rvm (Ruby Version Manager)</a>, <a href="http://www.jruby.org/">JRuby</a> and <a href="http://rubygems.org/">Ruby Gems</a>.</p>
-
-<pre><code>bash &lt;&lt; ( curl http://rvm.beginrescueend.com/releases/rvm-install-head )
-</code></pre>
-
-<p><a href="http://rvm.beginrescueend.com/rvm/install/">http://rvm.beginrescueend.com/rvm/install/</a> for more info.</p>
-
-<p>Install JRuby:</p>
-
-<pre><code>rvm install jruby
-</code></pre>
-
-<p>Set rvm to use JRuby:</p>
-
-<pre><code>rvm use jruby
-</code></pre>
-
-<p>Install RSpec:</p>
-
-<pre><code>gem install rspec
-</code></pre>
-
-<p>Once you have finish installation let’s start code with a example that expresses a form of payment orders available in Brazil called Boleto.</p>
-
-<p>Create the initial project structure like this:</p>
-
-<pre><code>-boleto
-  -spec
-  -src
-    -com
-      -legacy
-  -build
-</code></pre>
-
-<p>Open up <strong>spec/boleto_spec.rb</strong> and make it look like this:</p>
-
-<pre><code>require "date"
-require "java"
-java_import "com.legacy.Boleto"
-
-describe Boleto do
-  it "calculates due days" do
-    boleto = Boleto.new
-    boleto.due_date = java.util.Date.new(Date.parse("2011-01-15").ctime)
-    boleto.payment_date = java.util.Date.new(Date.parse("2011-01-25").ctime)
-    boleto.due_days.should == 10
-  end
-end
-</code></pre>
-
-<p>Let&rsquo;s run the example and watch it fail.</p>
-
-<pre><code>jruby -J-cp build -S rspec spec/boleto_spec.rb
-
-
-
-
-NameError: cannot load Java class com.legacy.Boleto
-</code></pre>
-
-<p>Now write just enough code to make it pass on <strong>src/com/legacy/Boleto.java</strong> like this:</p>
-
-<pre><code>package com.legacy;
-import java.util.Date;
-public class Boleto {
-  private Date dueDate;
-  private Date paymentDate;
-
-  public Date getDueDate() { return this.dueDate; }
-  public void setDueDate(Date dueDate) { this.dueDate = dueDate; }
-  public Date getPaymentDate() { return this.paymentDate; }
-  public void setPaymentDate(Date paymentDate) { this.paymentDate = paymentDate; }
-  public Integer getDueDays() { return 10; }
-}
-</code></pre>
-
-<p>Also we need to compile the java class.</p>
-
-<pre><code>javac -d build/ src/com/legacy/Boleto.java
-</code></pre>
-
-<p>Instead of run the example by manual command again, let’s install a continuous testing gem:</p>
-
-<pre><code>wget --no-check-certificate\
- http://www.github.com/tomas-stefano/infinity_test/tarball/master\
- -O infinity_test.tar.gz
-tar -zxvf infinity_test.tar.gz
-cd tomas-stefano-infinity_test-{version}
-gem build infinity_test.gemspec
-gem install infinity_test-1.0.2.gem
-</code></pre>
-
-<p>What we have done here is install infinity_test gem that contains a path to pass arguments to specific versions of Ruby.</p>
-
-<p>Let&rsquo;s run the example with continuous testing gem:</p>
-
-<pre><code>infinity_test --rspec --rubies=jruby+"-J-cp build"
-</code></pre>
-
-<p>Now we can write a test for code on <strong>spec/boleto_spec.rb</strong> and Infinity Test automatic runs the test.
-Also we can create a .infinity_test file, like this:</p>
-
-<pre><code>infinity_test do
-  use :rubies =&gt; %w(jruby),
-    :specific_options =&gt; {'jruby' =&gt; '-J-cp build'},
-    :test_framework =&gt; :rspec
-  notifications :lib_notify   # for linux / growl for mac
-end
-</code></pre>
-
-<p>And run:</p>
-
-<pre><code>infinity_test
-</code></pre>
-
-<p><img src="/images/uploads/2011/04/infinity_test.png" alt="infinity_test jruby" />
-<a href="https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test">https://github.com/tomas-stefano/infinity_test/wiki/Customize-Infinity-Test</a> for more info.</p>
-
-<p>However, we have to compile the java classes when they change. The solution we came up with is to use editors like <a href="http://www.eclipse.org/">eclipse</a> or <a href="http://eclim.org/">eclim</a>. This kind of editor auto-recompile Java files whenever they change.</p>
-
-<p>Last notes</p>
-
-<ul>
-<li><p>I&rsquo;ve posted the code for boleto here <a href="https://github.com/andref5/rspec-java">https://github.com/andref5/rspec-java</a></p></li>
-<li><p>More info about JRuby</p>
-
-<ul>
-<li><p><a href="https://github.com/jruby/jruby/wiki">https://github.com/jruby/jruby/wiki</a></p></li>
-<li><p><a href="http://pragprog.com/titles/jruby/using-jruby">http://pragprog.com/titles/jruby/using-jruby</a></p></li>
-</ul>
-</li>
-<li><p>More info about RSpec</p>
-
-<ul>
-<li><p><a href="http://relishapp.com/rspec">http://relishapp.com/rspec</a></p></li>
-<li><p><a href="http://kerryb.github.com/iprug-rspec-presentation">http://kerryb.github.com/iprug-rspec-presentation</a></p></li>
-<li><p><a href="http://pragprog.com/titles/achbd/the-rspec-book">http://pragprog.com/titles/achbd/the-rspec-book</a></p></li>
-</ul>
-</li>
-<li><p>More info about Infinity_test</p>
-
-<ul>
-<li><a href="https://github.com/tomas-stefano/infinity_test">https://github.com/tomas-stefano/infinity_test</a></li>
-</ul>
-</li>
-<li><p>More info about Ruby</p>
-
-<ul>
-<li><a href="http://mislav.uniqpath.com/poignant-guide/book/">http://mislav.uniqpath.com/poignant-guide/book/</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1212,6 +1082,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
       </li>
     
@@ -1225,10 +1099,6 @@ end
     
       <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
   </ul>
@@ -1245,7 +1115,7 @@ end
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (35)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
         </li>
       
     
@@ -1344,6 +1214,12 @@ end
       <a class='category' href='/categories/comunidade/'>comunidade</a>&nbsp;
     
       <a class='category' href='/categories/javascript/'>javascript</a>&nbsp;
+    
+      <a class='category' href='/categories/agile/'>agile</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
   </p>
 </section>

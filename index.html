@@ -9,7 +9,8 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="O REPL é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o &hellip;">
+  <meta name="description" content="TL;DR Wercker é uma plataforma de integração contínua, baseado em
+containers e focado em facilitar o build e deploy de aplicações na nuvem. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +84,304 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua E Entrega Contínua De Modo Fácil Com Wercker</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-06T12:33:00-03:00" pubdate data-updated="true">Sep 6<span>th</span>, 2014</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/" data-text="Integração Contínua e Entrega Contínua de modo fácil com Wercker" data-via="1up4dev" data-counturl="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
+containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
+integrado com <a href="http://github.com">Github</a>, <a href="BitBucket">BitBucket</a>, <a href="Heroku">Heroku</a>,
+<a href="http://aws.amazon.com/">AWS</a> e <a href="https://www.openshift.com/">OpenShift</a>, em questão de minutos e com apenas alguns cliques
+é possível configurar o build e deploy da sua aplicação. O serviço está em beta, permitindo
+<strong>repositórios privados grátis</strong>!</p>
+
+<p><img src="/images/posts/wercker-1.png" alt="" /></p>
+
+<h2>Como funciona</h2>
+
+<p>Cada vez que você faz um <code>git push</code>, o Wercker recebe um sinal que houve atualização,
+baixa o código do repositório, monta o ambiente do build definindo variáveis de ambiente,
+rodando as migrations, etc, e executa os testes ou qualquer outro passo que você definir, como compilar os assets, etc.</p>
+
+<p>Uma vez que o build execute com sucesso, fica disponível para deploy na plataforma que escolher,
+como Heroku ou AWS. Da mesma forma do build, o deploy consiste em passos definidos, como rodar o
+Capistrano ou fazer push no repositório do Heroku.</p>
+
+<p>Durante as duas etapas deste processo de build e deploy, o Wercker ainda pode notificar seu
+<a href="https://www.hipchat.com/">HipChat</a> ou <a href="https://slack.com/">Slack</a> :)</p>
+
+<p><img src="/images/posts/wercker-2.png" alt="" /></p>
+
+<h2>Por que é diferente?</h2>
+
+<p>Existem vários serviços de CI com a mesma proposta, como o <a href="https://travis-ci.org/">Travis</a> ou o
+<a href="https://www.codeship.io/">Codeship</a>. Mas o Wercker permite total customização do ambiente do build
+e do deploy, uma vez que é baseado em containers.</p>
+
+<p>Você pode escolher um container oficial para seu build, como Ubuntu com Ruby instalado, por
+exemplo, ou pode procurar um container disponibilizado por outro usuário no <a href="https://app.wercker.com/#explore/boxes/search/">diretório do Wercker</a>.</p>
+
+<p>Mas se precisar de algo muito específico, você pode criar seu próprio container (ou box) com pacotes e serviços
+que desejar, versões, etc, e utilizá-lo no seu build. E você também pode disponibilizar este box
+no diretório do Wercker para outros usuários utilizarem!</p>
+
+<h2>Boxes</h2>
+
+<p>Um box é um ambiente virtual empacotado e versionado com pacotes e serviços necessários para executar o build.
+Em outras palavras, é o container &ldquo;base&rdquo; que rodará seu build.</p>
+
+<p>Para utilizar um box, basta declarar no início do <code>wercker.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>box: wercker/ubuntu12.04-ruby2.0.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Tem box para <a href="http://devcenter.wercker.com/articles/languages/ruby.html">Ruby</a>,
+<a href="http://devcenter.wercker.com/articles/languages/nodejs.html">Node.js</a>,
+<a href="http://devcenter.wercker.com/articles/languages/go.html">Go</a>,
+<a href="http://devcenter.wercker.com/articles/languages/android.html">Java/Android</a>
+e até para <a href="http://blog.wercker.com/2013/11/28/Announcing-docker-support.html">Docker</a>. Na prática,
+os boxes oficiais vão atender a maioria dos casos, mas você pode criar seu próprio box como desejar.</p>
+
+<p>Para definir um box, basta criar um repositório com o arquivo <code>wercker-box.yml</code> descrevendo a base
+(Ubuntu, por exemplo), o provisionamento (<a href="http://www.getchef.com/chef/">Chef</a>,
+<a href="http://puppetlabs.com/">Puppet</a>, etc, e adicioná-lo ao build pipeline do Wercker.</p>
+
+<p>Uma vez que o build passar, é possível fazer o deploy para disponibilizá-lo no diretório do
+Wercker. Assim, é possível utilizar este box no processo de build da sua aplicação.</p>
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/boxes/">http://devcenter.wercker.com/articles/boxes/</a></p>
+
+<h2>Services</h2>
+
+<p>Serviços são boxes prontos disponibilizados pelo Wercker, como MySql, PostgreSql, MongoDB, Redis,
+etc. Em outras palavras, é um container configurado com um serviço ready to use.</p>
+
+<p>Para utilizar um service, basta adicionar ao seu <code>wercker.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>box: wercker/ruby
+</span><span class='line'>services:
+</span><span class='line'>    - wercker/mongodb
+</span><span class='line'>    - wercker/redis</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/services/">http://devcenter.wercker.com/articles/services/</a></p>
+
+<h2>Steps</h2>
+
+<p>As steps são os &ldquo;comandos&rdquo; executados pelo Wercker no build ou deploy da aplicação, como
+<code>bundle-install</code>, <code>database-migration</code>, <code>script</code>, etc.</p>
+
+<p>Você pode utilizar as steps disponibilizadas pelo Wercker ou criar suas próprias steps,
+executando os comandos que julgar necessário no seu build ou deploy.</p>
+
+<p>Para definir as steps do seu build, basta adicionar o <code>wercker.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>build:
+</span><span class='line'>    steps:
+</span><span class='line'>        - rvm-use:
+</span><span class='line'>            version: 2.1.2
+</span><span class='line'>        - bundle-install
+</span><span class='line'>        - rails-database-yml
+</span><span class='line'>        - script:
+</span><span class='line'>            name: db migrate
+</span><span class='line'>            code: bundle exec rake db:migrate
+</span><span class='line'>        - script:
+</span><span class='line'>            name: rspec
+</span><span class='line'>            code: bundle exec rspec</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/steps/">http://devcenter.wercker.com/articles/steps/</a></p>
+
+<h2>Deploy pipeline</h2>
+
+<p>O Wercker permite fazer o deploy da sua aplicação em vários <a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a>
+como <a href="https://www.heroku.com/">Heroku</a> automaticamente ou definir o processo de deploy manualmente,
+utilizando o <a href="http://capistranorb.com/">Capistrano</a> ou executando um script de sua preferência.</p>
+
+<p>Durante a processo de deploy, é possível definir <a href="http://devcenter.wercker.com/articles/gettingstarted/repositoryaccess.html">chaves SSH</a> específicas, <a href="http://devcenter.wercker.com/articles/steps/variables.html">variáveis de ambiente</a>, etc.</p>
+
+<p>Para configurar seu deploy, adicione ao <code>wercker.yml</code> (por exemplo):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>deploy:
+</span><span class='line'>    steps:
+</span><span class='line'>        - heroku-deploy
+</span><span class='line'>        - s3sync:
+</span><span class='line'>            key_id: $AWS_ACCESS_KEY_ID
+</span><span class='line'>            key_secret: $AWS_SECRET_ACCESS_KEY
+</span><span class='line'>            bucket_url: $AWS_BUCKET_URL
+</span><span class='line'>            source_dir: build/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/deployment/">http://devcenter.wercker.com/articles/deployment/</a></p>
+
+<h2>#comofas?</h2>
+
+<p>O Wercker é legal, fácil, bla bla bla. Vamos à um exemplo prático, passo-a-passo, de como configurar
+seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
+
+<p>0 &ndash; <a href="https://app.wercker.com/users/new">Crie sua conta</a> :)</p>
+
+<p>1 &ndash; Escolha o repositório, adicione as chaves SSH, finalize;</p>
+
+<p><img src="/images/posts/wercker-gs.png" alt="" /></p>
+
+<p>2 &ndash; Adicione o arquivo <code>wercker.yml</code> ao seu projeto, parecido com este:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>box: wercker/rvm
+</span><span class='line'>services:
+</span><span class='line'>    - wercker/postgresql
+</span><span class='line'>build:
+</span><span class='line'>    steps:
+</span><span class='line'>        - rvm-use:
+</span><span class='line'>            version: 2.1.2
+</span><span class='line'>        - bundle-install
+</span><span class='line'>        - rails-database-yml
+</span><span class='line'>        - script:
+</span><span class='line'>            name: db migrate
+</span><span class='line'>            code: bundle exec rake db:migrate RAILS_ENV=test
+</span><span class='line'>        - script:
+</span><span class='line'>            name: rspec
+</span><span class='line'>            code: bundle exec rspec -f d
+</span><span class='line'>    after-steps:
+</span><span class='line'>        - hipchat-notify:
+</span><span class='line'>            token: $HIPCHAT_TOKEN
+</span><span class='line'>            room-id: 123456
+</span><span class='line'>            from-name: wercker</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/werckeryml">http://devcenter.wercker.com/articles/werckeryml</a></p>
+
+<p>3 &ndash; Dispare o build com <code>git push</code>;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git commit -m "Configurando Wercker"
+</span><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4 &ndash; Configure o deploy no Heroku:</p>
+
+<p><img src="/images/posts/wercker-deploy.png" alt="" /></p>
+
+<p>5 &ndash; Dispare o build/deploy com <code>git push</code> ou manualmente:</p>
+
+<p><img src="/images/posts/wercker-deploy-build.png" alt="" /></p>
+
+<p>6 &ndash; \o/</p>
+
+<h2>Espalhe a palavra!</h2>
+
+<p>Fácil né? Não há mais <del>choro</del> desculpas para não utilizar um CI em seu projeto.</p>
+
+<p>Configure seu projeto, tire um print screen do primeiro build com sucesso e Tuite para o
+<a href="https://twitter.com/Wercker">@wercker</a> para receber stickers <em>de grátis</em>!</p>
+
+<p>Compartilhe este post! Dúvidas e sugestões nos comentários abaixo. Sucesso!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns Truques Com O REPL Do Clojure</a></h1>
     
     
@@ -145,7 +444,7 @@
 
 <p>Podemos pesquisar alguma palavra que estiver dentro desses textos para encontrar a função que queremos, mas não lembramos o nome. Para isso, usamos <tt>find-doc</tt>, seguido da palavra ou trecho de texto relacionado ao que queremos.</p>
 
-<p>Vamos supor que eu esteja procurando algo sobre <em>sockets</em>. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
+<p>Vamos supor que eu esteja procurando algo sobre ::sockets::. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
 
 <pre><code>(find-doc "socket")
 ; -------------------------
@@ -187,19 +486,19 @@
 
 <p>Quando você usa o REPL por dentro do Leiningen, alguns atalhos já conhecidos pelos usuários de Bash estão disponíveis, mesmo para quem está usando o Leiningen no Windows.</p>
 
-<p>O primeiro deles é a tecla <em>TAB</em>, que exibe os nomes de funções que começam com o que você já digitou.</p>
+<p>O primeiro deles é a tecla ::TAB::, que exibe os nomes de funções que começam com o que você já digitou.</p>
 
-<p>Por exemplo, vou digitar <tt>map</tt> e pressionar <em>TAB</em></p>
+<p>Por exemplo, vou digitar <tt>map</tt> e pressionar ::TAB::</p>
 
 <pre><code>(map
 ; map           map-indexed   map?          mapcat        mapv
 </code></pre>
 
-<p>Outra combinação que agiliza bastante o trabalho é a combinação <em>Control L</em>, ou <em>Command L</em> se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
+<p>Outra combinação que agiliza bastante o trabalho é a combinação ::Control L::, ou ::Command L:: se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
 
-<p>Existe também a combinação <em>Control R</em>, ou <em>Command R</em>, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
+<p>Existe também a combinação ::Control R::, ou ::Command R::, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
 
-<p>Usar as setas <em>para cima</em> ou <em>para baixo</em> permite que você navegue nos comandos utilizados recentemente.</p>
+<p>Usar as setas ::para cima:: ou ::para baixo:: permite que você navegue nos comandos utilizados recentemente.</p>
 
 <h3>Recuperando os últimos resultados</h3>
 
@@ -1853,127 +2152,6 @@ y = (+ 1 (* 3 2))
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/04/o-que-eu-aprendi-escrevendo/">O Que Eu Aprendi Escrevendo</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-11T07:30:47-03:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
-
-
-        
-         | <a href="/2013/04/o-que-eu-aprendi-escrevendo/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/" data-text="O que eu aprendi escrevendo" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
-
-<p>Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.</p>
-
-<p>Seguindo os próprios passos que descrevo abaixo, resolvi separar alguns pontos que considero importantes.</p>
-
-<h3>Escrever é um processo iterativo e incremental</h3>
-
-<p>O texto não nasce pronto. As vezes uma coisa ou outra está pronta na sua cabeça, mas na hora de colocar no papel a coisa muda. Você esquece algumas partes, lembra de outras, muda a ordem.</p>
-
-<p>O importante é que você coloque suas ideias no papel (ou no site), e depois releia com calma. Mostre para outras pessoas, peça opinião. Eu pensei em um texto por mais de dois anos e <a href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/">publiquei aqui</a> antes de adicionar no livro. O feedback dos leitores foi importantíssimo para que a versão final tivesse o mínimo de erros e o máximo de clareza possível.</p>
-
-<h3>Defina bem o seu público</h3>
-
-<p>Ao escrever sobre programação funcional em JavaScript, eu tinha bem claro quem é o leitor do 1up. Caso você não tenha definido quem será seu público e quais os requisitos necessários para que possam absorver seu conteúdo, você vai correr o risco de escrever um texto em aramaico para crianças de quarta série ou um texto de quarta série para doutores em línguas mortas.</p>
-
-<p>Pior ainda é quando se tenta abraçar a todos. Seus braços são curtos para abraçar o mundo e, no final, alguma coisa vai acabar caindo no chão.</p>
-
-<h3>Trace uma linha</h3>
-
-<p>Como o Manifesto Ágil profere, <em>responder a mudanças é mais importante do que seguir um plano</em>, o que não quer dizer que você não precisa de um plano.</p>
-
-<p>Eu costumo traçar um plano, seja como uma lista de tópicos, seja como um mindmap, e vou me guiando por ele até pegar o ritmo. Normalmente essa lista não permanece inalterada por mais de dois capítulos, mas ainda assim é importante você ter algo para te manter no caminho, por mais que esse caminho mude constantemente.</p>
-
-<h3>Concentre-se</h3>
-
-<p>Eu tenho problemas sérios de concentração, mas em algumas ocasiões consigo despejar quilos de texto ou código de uma única vez. Claro que uma revisão posterior é sempre bem vinda e necessária.</p>
-
-<p>O problema são os culpados de sempre: família exigindo atenção (eles têm prioridade, não pense o contrário); Internet oferecendo todo o tipo de entretenimento; GTalk aberto e seus amigos ali, ao alcance dos dedos.</p>
-
-<p>Escrever é um ato solitário. Lide com isso e concentre-se no que está fazendo.</p>
-
-<h3>Arranje tempo</h3>
-
-<p>&ldquo;Eu não tenho tempo&rdquo; é a desculpa preferida do procrastinador e do cara que quer que os outros acreditem que ele é muito ocupado.</p>
-
-<p>Você tem tempo para conversar no GTalk, para acessar o 9gag, para ver os gols do Fantástico, mas nunca temos tempo para brincar com o filho, para conversar com a esposa (ou marido) ou para fazer aquela meia hora de esteira.</p>
-
-<p>Um terço do meu livro foi escrito dentro de viagens em ônibus, táxis e aviões. Acho que produzi muito mais em uma hora de vôo até o Rio do que em uma tarde inteira jogada fora na frente do computador.</p>
-
-<p>Quando você realmente quer fazer algo, o tempo aparece. Não ter tempo é uma outra forma de dizer &ldquo;isso não é importante o suficiente para mim&rdquo;.</p>
-
-<h3>&lsquo;Pronto&rsquo; é melhor do que &lsquo;perfeito&rsquo;</h3>
-
-<p>Depois do livro e do curso prontos e entregues, eu percebi coisas que poderia ter adicionado, frases que poderia ter mudado, assuntos que faltaram. Se existe a possibilidade de adicionar ou mudar, faça, mas não caia na armadilha de ficar polindo algo que já deveria estar em produção há tempos.</p>
-
-<p>Pronto é melhor do que perfeito e, não importa o quanto você tente, seu trabalho nunca vai ficar perfeito.</p>
-
-<h3>Divirta-se</h3>
-
-<p>Principalmente, divirta-se.</p>
-
-<p>Conheci muitas pessoas que sabem muito mais do assunto que estou escrevendo do que eu, pessoas que deram excelentes sugestões, ideias e me ensinaram a escrever melhor. E em tudo isso eu me diverti, aprendi, aproveitei o momento.</p>
-
-<p>Não se leve tão a sério. É apenas um texto, um post, um curso, um livro. A vida é bem mais do que isso.</p>
-
-<p>Abraço</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -1994,6 +2172,10 @@ y = (+ 1 (* 3 2))
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
       </li>
     
@@ -2007,10 +2189,6 @@ y = (+ 1 (* 3 2))
     
       <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
   </ul>
@@ -2027,7 +2205,7 @@ y = (+ 1 (* 3 2))
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (35)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
         </li>
       
     
@@ -2126,6 +2304,12 @@ y = (+ 1 (* 3 2))
       <a class='category' href='/categories/comunidade/'>comunidade</a>&nbsp;
     
       <a class='category' href='/categories/javascript/'>javascript</a>&nbsp;
+    
+      <a class='category' href='/categories/agile/'>agile</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
   </p>
 </section>

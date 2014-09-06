@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-04-25T16:01:14-03:00</updated>
+  <updated>2014-09-06T12:08:58-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -12,6 +12,248 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Integração Contínua e Entrega Contínua de modo fácil com Wercker]]></title>
+    <link href="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"/>
+    <updated>2014-09-06T12:33:00-03:00</updated>
+    <id>http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker</id>
+    <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
+containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
+integrado com <a href="http://github.com">Github</a>, <a href="BitBucket">BitBucket</a>, <a href="Heroku">Heroku</a>,
+<a href="http://aws.amazon.com/">AWS</a> e <a href="https://www.openshift.com/">OpenShift</a>, em questão de minutos e com apenas alguns cliques
+é possível configurar o build e deploy da sua aplicação. O serviço está em beta, permitindo
+<strong>repositórios privados grátis</strong>!</p>
+
+<p><img src="http://1up4dev.org/images/posts/wercker-1.png" alt="" /></p>
+
+<h2>Como funciona</h2>
+
+<p>Cada vez que você faz um <code>git push</code>, o Wercker recebe um sinal que houve atualização,
+baixa o código do repositório, monta o ambiente do build definindo variáveis de ambiente,
+rodando as migrations, etc, e executa os testes ou qualquer outro passo que você definir, como compilar os assets, etc.</p>
+
+<p>Uma vez que o build execute com sucesso, fica disponível para deploy na plataforma que escolher,
+como Heroku ou AWS. Da mesma forma do build, o deploy consiste em passos definidos, como rodar o
+Capistrano ou fazer push no repositório do Heroku.</p>
+
+<p>Durante as duas etapas deste processo de build e deploy, o Wercker ainda pode notificar seu
+<a href="https://www.hipchat.com/">HipChat</a> ou <a href="https://slack.com/">Slack</a> :)</p>
+
+<p><img src="http://1up4dev.org/images/posts/wercker-2.png" alt="" /></p>
+
+<h2>Por que é diferente?</h2>
+
+<p>Existem vários serviços de CI com a mesma proposta, como o <a href="https://travis-ci.org/">Travis</a> ou o
+<a href="https://www.codeship.io/">Codeship</a>. Mas o Wercker permite total customização do ambiente do build
+e do deploy, uma vez que é baseado em containers.</p>
+
+<p>Você pode escolher um container oficial para seu build, como Ubuntu com Ruby instalado, por
+exemplo, ou pode procurar um container disponibilizado por outro usuário no <a href="https://app.wercker.com/#explore/boxes/search/">diretório do Wercker</a>.</p>
+
+<p>Mas se precisar de algo muito específico, você pode criar seu próprio container (ou box) com pacotes e serviços
+que desejar, versões, etc, e utilizá-lo no seu build. E você também pode disponibilizar este box
+no diretório do Wercker para outros usuários utilizarem!</p>
+
+<h2>Boxes</h2>
+
+<p>Um box é um ambiente virtual empacotado e versionado com pacotes e serviços necessários para executar o build.
+Em outras palavras, é o container &ldquo;base&rdquo; que rodará seu build.</p>
+
+<p>Para utilizar um box, basta declarar no início do <code>wercker.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>box: wercker/ubuntu12.04-ruby2.0.0</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Tem box para <a href="http://devcenter.wercker.com/articles/languages/ruby.html">Ruby</a>,
+<a href="http://devcenter.wercker.com/articles/languages/nodejs.html">Node.js</a>,
+<a href="http://devcenter.wercker.com/articles/languages/go.html">Go</a>,
+<a href="http://devcenter.wercker.com/articles/languages/android.html">Java/Android</a>
+e até para <a href="http://blog.wercker.com/2013/11/28/Announcing-docker-support.html">Docker</a>. Na prática,
+os boxes oficiais vão atender a maioria dos casos, mas você pode criar seu próprio box como desejar.</p>
+
+<p>Para definir um box, basta criar um repositório com o arquivo <code>wercker-box.yml</code> descrevendo a base
+(Ubuntu, por exemplo), o provisionamento (<a href="http://www.getchef.com/chef/">Chef</a>,
+<a href="http://puppetlabs.com/">Puppet</a>, etc, e adicioná-lo ao build pipeline do Wercker.</p>
+
+<p>Uma vez que o build passar, é possível fazer o deploy para disponibilizá-lo no diretório do
+Wercker. Assim, é possível utilizar este box no processo de build da sua aplicação.</p>
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/boxes/">http://devcenter.wercker.com/articles/boxes/</a></p>
+
+<h2>Services</h2>
+
+<p>Serviços são boxes prontos disponibilizados pelo Wercker, como MySql, PostgreSql, MongoDB, Redis,
+etc. Em outras palavras, é um container configurado com um serviço ready to use.</p>
+
+<p>Para utilizar um service, basta adicionar ao seu <code>wercker.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>box: wercker/ruby
+</span><span class='line'>services:
+</span><span class='line'>    - wercker/mongodb
+</span><span class='line'>    - wercker/redis</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/services/">http://devcenter.wercker.com/articles/services/</a></p>
+
+<h2>Steps</h2>
+
+<p>As steps são os &ldquo;comandos&rdquo; executados pelo Wercker no build ou deploy da aplicação, como
+<code>bundle-install</code>, <code>database-migration</code>, <code>script</code>, etc.</p>
+
+<p>Você pode utilizar as steps disponibilizadas pelo Wercker ou criar suas próprias steps,
+executando os comandos que julgar necessário no seu build ou deploy.</p>
+
+<p>Para definir as steps do seu build, basta adicionar o <code>wercker.yml</code>:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>build:
+</span><span class='line'>    steps:
+</span><span class='line'>        - rvm-use:
+</span><span class='line'>            version: 2.1.2
+</span><span class='line'>        - bundle-install
+</span><span class='line'>        - rails-database-yml
+</span><span class='line'>        - script:
+</span><span class='line'>            name: db migrate
+</span><span class='line'>            code: bundle exec rake db:migrate
+</span><span class='line'>        - script:
+</span><span class='line'>            name: rspec
+</span><span class='line'>            code: bundle exec rspec</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/steps/">http://devcenter.wercker.com/articles/steps/</a></p>
+
+<h2>Deploy pipeline</h2>
+
+<p>O Wercker permite fazer o deploy da sua aplicação em vários <a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS</a>
+como <a href="https://www.heroku.com/">Heroku</a> automaticamente ou definir o processo de deploy manualmente,
+utilizando o <a href="http://capistranorb.com/">Capistrano</a> ou executando um script de sua preferência.</p>
+
+<p>Durante a processo de deploy, é possível definir <a href="http://devcenter.wercker.com/articles/gettingstarted/repositoryaccess.html">chaves SSH</a> específicas, <a href="http://devcenter.wercker.com/articles/steps/variables.html">variáveis de ambiente</a>, etc.</p>
+
+<p>Para configurar seu deploy, adicione ao <code>wercker.yml</code> (por exemplo):</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>deploy:
+</span><span class='line'>    steps:
+</span><span class='line'>        - heroku-deploy
+</span><span class='line'>        - s3sync:
+</span><span class='line'>            key_id: $AWS_ACCESS_KEY_ID
+</span><span class='line'>            key_secret: $AWS_SECRET_ACCESS_KEY
+</span><span class='line'>            bucket_url: $AWS_BUCKET_URL
+</span><span class='line'>            source_dir: build/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/deployment/">http://devcenter.wercker.com/articles/deployment/</a></p>
+
+<h2>#comofas?</h2>
+
+<p>O Wercker é legal, fácil, bla bla bla. Vamos à um exemplo prático, passo-a-passo, de como configurar
+seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
+
+<p>0 &ndash; <a href="https://app.wercker.com/users/new">Crie sua conta</a> :)</p>
+
+<p>1 &ndash; Escolha o repositório, adicione as chaves SSH, finalize;</p>
+
+<p><img src="http://1up4dev.org/images/posts/wercker-gs.png" alt="" /></p>
+
+<p>2 &ndash; Adicione o arquivo <code>wercker.yml</code> ao seu projeto, parecido com este:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>box: wercker/rvm
+</span><span class='line'>services:
+</span><span class='line'>    - wercker/postgresql
+</span><span class='line'>build:
+</span><span class='line'>    steps:
+</span><span class='line'>        - rvm-use:
+</span><span class='line'>            version: 2.1.2
+</span><span class='line'>        - bundle-install
+</span><span class='line'>        - rails-database-yml
+</span><span class='line'>        - script:
+</span><span class='line'>            name: db migrate
+</span><span class='line'>            code: bundle exec rake db:migrate RAILS_ENV=test
+</span><span class='line'>        - script:
+</span><span class='line'>            name: rspec
+</span><span class='line'>            code: bundle exec rspec -f d
+</span><span class='line'>    after-steps:
+</span><span class='line'>        - hipchat-notify:
+</span><span class='line'>            token: $HIPCHAT_TOKEN
+</span><span class='line'>            room-id: 123456
+</span><span class='line'>            from-name: wercker</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Mais informações: <a href="http://devcenter.wercker.com/articles/werckeryml">http://devcenter.wercker.com/articles/werckeryml</a></p>
+
+<p>3 &ndash; Dispare o build com <code>git push</code>;</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>git commit -m "Configurando Wercker"
+</span><span class='line'>git push origin master</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4 &ndash; Configure o deploy no Heroku:</p>
+
+<p><img src="http://1up4dev.org/images/posts/wercker-deploy.png" alt="" /></p>
+
+<p>5 &ndash; Dispare o build/deploy com <code>git push</code> ou manualmente:</p>
+
+<p><img src="http://1up4dev.org/images/posts/wercker-deploy-build.png" alt="" /></p>
+
+<p>6 &ndash; \o/</p>
+
+<h2>Espalhe a palavra!</h2>
+
+<p>Fácil né? Não há mais <del>choro</del> desculpas para não utilizar um CI em seu projeto.</p>
+
+<p>Configure seu projeto, tire um print screen do primeiro build com sucesso e Tuite para o
+<a href="https://twitter.com/Wercker">@wercker</a> para receber stickers <em>de grátis</em>!</p>
+
+<p>Compartilhe este post! Dúvidas e sugestões nos comentários abaixo. Sucesso!</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
@@ -28,7 +270,7 @@
 
 <p>Podemos pesquisar alguma palavra que estiver dentro desses textos para encontrar a função que queremos, mas não lembramos o nome. Para isso, usamos <tt>find-doc</tt>, seguido da palavra ou trecho de texto relacionado ao que queremos.</p>
 
-<p>Vamos supor que eu esteja procurando algo sobre <em>sockets</em>. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
+<p>Vamos supor que eu esteja procurando algo sobre ::sockets::. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
 
 <pre><code>(find-doc "socket")
 ; -------------------------
@@ -70,19 +312,19 @@
 
 <p>Quando você usa o REPL por dentro do Leiningen, alguns atalhos já conhecidos pelos usuários de Bash estão disponíveis, mesmo para quem está usando o Leiningen no Windows.</p>
 
-<p>O primeiro deles é a tecla <em>TAB</em>, que exibe os nomes de funções que começam com o que você já digitou.</p>
+<p>O primeiro deles é a tecla ::TAB::, que exibe os nomes de funções que começam com o que você já digitou.</p>
 
-<p>Por exemplo, vou digitar <tt>map</tt> e pressionar <em>TAB</em></p>
+<p>Por exemplo, vou digitar <tt>map</tt> e pressionar ::TAB::</p>
 
 <pre><code>(map
 ; map           map-indexed   map?          mapcat        mapv
 </code></pre>
 
-<p>Outra combinação que agiliza bastante o trabalho é a combinação <em>Control L</em>, ou <em>Command L</em> se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
+<p>Outra combinação que agiliza bastante o trabalho é a combinação ::Control L::, ou ::Command L:: se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
 
-<p>Existe também a combinação <em>Control R</em>, ou <em>Command R</em>, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
+<p>Existe também a combinação ::Control R::, ou ::Command R::, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
 
-<p>Usar as setas <em>para cima</em> ou <em>para baixo</em> permite que você navegue nos comandos utilizados recentemente.</p>
+<p>Usar as setas ::para cima:: ou ::para baixo:: permite que você navegue nos comandos utilizados recentemente.</p>
 
 <h3>Recuperando os últimos resultados</h3>
 
@@ -1967,43 +2209,6 @@ development:
 <p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres">mysql-to-postgres</a>, do mesmo autor.</p>
 
 <p>Caso tenha alguma dúvida ou sugestão, deixe seu comentário.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[QuickTips] Nginx: redirect de domínio com www para domínio sem www e vice-versa]]></title>
-    <link href="http://1up4dev.org/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa/"/>
-    <updated>2012-07-05T10:00:45-03:00</updated>
-    <id>http://1up4dev.org/2012/07/quick-tips-nginx-redirect-de-dominio-com-www-para-dominio-sem-www-e-vice-versa</id>
-    <content type="html"><![CDATA[<p>Simples, basta usar o <a href="http://wiki.nginx.org/HttpRewriteModule">HttpRewriteModule</a>.</p>
-
-<p>Para redirecionar de <em>www.dominio.com</em> para <em>dominio.com</em> faça:</p>
-
-<pre><code>server {
-    server_name  www.dominio.com;
-    rewrite ^(.*) http://dominio.com$1 permanent;
-}
-
-server {
-    server_name  dominio.com;
-    #configurações do servidor aqui
-}
-</code></pre>
-
-<p>E para redirecionar de <em>domínio.com</em> para <em>www.dominio.com</em>, faça:</p>
-
-<pre><code>server {
-    server_name  dominio.com;
-    rewrite ^(.*) http://www.dominio.com$1 permanent;
-}
-
-server {
-    server_name  www.dominio.com;
-    #configurações do servidor aqui
-}
-</code></pre>
-
-<p><em>Voilà!</em></p>
 ]]></content>
   </entry>
   

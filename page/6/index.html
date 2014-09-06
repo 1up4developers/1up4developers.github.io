@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Nova versão do Rubygems_Snapshot no ar! Fico feliz em dizer que este é o meu primeiro projeto que passou dos dez &ldquo;watchers&rdquo; ! :D E que &hellip;">
+  <meta name="description" content="É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com TDD, Vim e não poderia ser diferente com testes &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,135 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/">Teste Sua Aplicação De Linha De Comando Com Cucumber!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-14T07:00:21-03:00" pubdate data-updated="true">May 14<span>th</span>, 2010</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/" data-text="Teste sua aplicação de Linha de Comando com Cucumber!" data-via="1up4dev" data-counturl="http://1up4dev.org/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2010/05/teste-sua-aplicacao-de-linha-de-comando-com-cucumber/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, <a href="http://www.vim.org/">Vim</a> e não poderia ser diferente com testes funcionais, sendo mais especifico, <a href="http://cukes.info/">Cucumber</a>.</p>
+
+<p>Até o momento, só tinha usado cucumber em projetos web. E quando voltei a desenvolver o <a href="http://github.com/rogerleite/rubygems_snapshot">rubygems_snapshot</a>, senti falta de algo para testar funcionalmente. Baseado no <a href="http://github.com/vertiginous/pik">pik</a>, montei um esquema simples para validar qualquer aplicação de linha de comando.</p>
+
+<h2>Como instalar</h2>
+
+<p>Basicamente, será necessário (fontes via gist):</p>
+
+<ul>
+<li><p>rake para executar o cucumber</p></li>
+<li><p>env_terminal.rb</p></li>
+<li><p>terminal_steps.rb</p></li>
+</ul>
+
+
+<p>Dado que você tem cucumber instalado, com o esquema da pasta &ldquo;features&rdquo;.</p>
+
+<ul>
+<li><p>Copie o cucumber.rake para a raiz.</p></li>
+<li><p>Copie o env_terminal.rb para a pasta features.</p></li>
+<li><p>Copie o terminal_steps.rb para a pasta features/step_definitions/terminal_steps.rb.</p></li>
+<li><p>Edite o  env.rb incluindo (pode ser no começo):</p>
+
+<p>require &ldquo;env_terminal&rdquo;</p></li>
+<li><p>Dentro do Rakefile, pode ser no final mesmo, adicione:</p>
+
+<p>load &ldquo;cucumber.rake&rdquo;</p></li>
+</ul>
+
+
+<h2>Como usar</h2>
+
+<p>Todas features:</p>
+
+<pre><code>rake cucumber
+</code></pre>
+
+<p>Features com a tag @wip, também conhecida como Work in Progress.</p>
+
+<pre><code>rake cucumber:wip
+</code></pre>
+
+<h2>Informações Extras</h2>
+
+<p>Caso precise de mais informações, você tem a opção de ver a saída dos comandos, executando a rake assim:</p>
+
+<pre><code>rake cucumber show_output=true
+</code></pre>
+
+<p>ou</p>
+
+<pre><code>rake cucumber:wip show_output=true
+</code></pre>
+
+<p>No caso do snapshot, tive a necessidade de &ldquo;modificar&rdquo; o comando gem toda vez que era executado, ou melhor, passar um parâmetro para controlar o ambiente. Dentro do env_terminal.rb, existe o método <strong>gsub_command</strong>, nele você pode &ldquo;redefinir&rdquo; comandos, caso necessite.</p>
+
+<h2><strong>Gostei, quero mais!</strong></h2>
+
+<p>A solução acima, é bem &ldquo;caseira&rdquo;. Para projetos simples com funcionalidades simples, funciona bem.</p>
+
+<p>Caso queira algo mais robusto, você tem a opção da <a href="http://github.com/aslakhellesoy/aruba">gem Aruba</a>.</p>
+
+<p>Tem este post como introdução:</p>
+
+<p><a href="http://www.themodestrubyist.com/2010/04/22/aruba---cucumber-goodness-for-the-command-line/">Aruba &ndash; Cucumber Goodness for the Command-Line</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -885,7 +1014,7 @@ from (irb):5</p>
 
 <h2>Análise e documentação</h2>
 
-<p>Parabéns! Aqui você já pode ser considerado um desenvolvedor. Logo seu destaque na equipe será recompensado com mais trabalho de corno desafiador. Nesta fase sua empresa se parece com uma <a href="http://1up4dev.org/2009/04/agilidade-e-a-buzzword-do-momento/">padaria</a>: &ldquo;Me vê meio quilo do relatório X&rdquo;, &ldquo;Faz dois webservices pra viagem!&rdquo;, &ldquo;Aí, saindo uma fornada de casos de uso&hellip;&rdquo;, etc. Logo <a href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/">alguém</a> tem a brilhante <a href="http://1up4dev.org/2008/11/arquiteto-cascateiro/">idéia</a> de &ldquo;documentar&rdquo; tudo desde uma simples alteração no CSS do sistema até complexos e numerosos <a href="http://blog.fragmental.com.br/2008/07/25/uh-eme-ele/">diagramas</a> e notações daquele novo sistema para integração. No começo a novidade até parece ser uma boa idéia, mas logo você vai <a href="http://1up4dev.org/2009/07/cuidado-com-casos-de-uso/">descobrir</a> que o que realmente importa é <a href="http://1up4dev.org/2008/11/foco-no-problema/">ouvir os problemas dos clientes</a>.</p>
+<p>Parabéns! Aqui você já pode ser considerado um desenvolvedor. Logo seu destaque na equipe será recompensado com mais trabalho <del>de corno</del> desafiador. Nesta fase sua empresa se parece com uma <a href="http://1up4dev.org/2009/04/agilidade-e-a-buzzword-do-momento/">padaria</a>: &ldquo;Me vê meio quilo do relatório X&rdquo;, &ldquo;Faz dois webservices pra viagem!&rdquo;, &ldquo;Aí, saindo uma fornada de casos de uso&hellip;&rdquo;, etc. Logo <a href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/">alguém</a> tem a brilhante <a href="http://1up4dev.org/2008/11/arquiteto-cascateiro/">idéia</a> de &ldquo;documentar&rdquo; tudo desde uma simples alteração no CSS do sistema até complexos e numerosos <a href="http://blog.fragmental.com.br/2008/07/25/uh-eme-ele/">diagramas</a> e notações daquele novo sistema para integração. No começo a novidade até parece ser uma boa idéia, mas logo você vai <a href="http://1up4dev.org/2009/07/cuidado-com-casos-de-uso/">descobrir</a> que o que realmente importa é <a href="http://1up4dev.org/2008/11/foco-no-problema/">ouvir os problemas dos clientes</a>.</p>
 
 <h2>Testes</h2>
 
@@ -1247,120 +1376,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/">Gerando Cheat Sheet Para Os Snippets Do Gedit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-05T05:00:37-03:00" pubdate data-updated="true">May 5<span>th</span>, 2009</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/" data-text="Gerando cheat sheet para os snippets do gedit" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/05/gerando-cheat-sheet-para-os-snippets-do-gedit/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Acredito que a maioria de vocês conhecem e/ou já usaram as famosas <em>cheat sheets</em> (tradução para &ldquo;cola&rdquo;?) para algo. Costumo usá-las quando quero fixar algum conceito novo ou simplesmente para consultas rápidas. Com o pai Google, é possível encontrar os mais diversos tipos: <a href="http://www.google.com.br/search?q=cheat+sheet+HTML&amp;ie=utf-8&amp;oe=utf-8&amp;aq=t&amp;rls=com.ubuntu:en-US:unofficial&amp;client=firefox-a">HTML</a>, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;rls=com.ubuntu%3Aen-US%3Aunofficial&amp;hs=Ejh&amp;q=cheat+sheet+Ruby&amp;btnG=Pesquisar&amp;meta=">Ruby</a>, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;rls=com.ubuntu%3Aen-US%3Aunofficial&amp;hs=WQ2&amp;q=cheat+sheet+Ruby+on+Rails&amp;btnG=Pesquisar&amp;meta=">Ruby on Rails</a>, <a href="http://www.google.com.br/search?hl=pt-BR&amp;client=firefox-a&amp;rls=com.ubuntu%3Aen-US%3Aunofficial&amp;hs=h7M&amp;q=cheat+sheet+Shell+Script&amp;btnG=Pesquisar&amp;meta=">Shell Script</a>&hellip; etc.</p>
-
-<p>Atualmente venho praticando Ruby, sendo o gedit &ndash; &ldquo;tunado&rdquo; com vários plugins &ndash; o meu maior aliado. Um dos plugins que mais me ajuda é o <a href="http://live.gnome.org/Gedit/Plugins/Snippets">Snippets</a> e neste <a href="http://cassiomarques.wordpress.com/2008/09/16/gedit-snippets/">post do Cássio Marques</a>, você encontra uma breve descrição do que é, e um link para snippets de exemplo.</p>
-
-<p>Tudo isso foi só pra contar o que me levou a criar a gem gedit-snippets-tool. Com ela é possível criar <em>cheat sheets</em> dos seus snippets. Supondo que você tenha ruby e rubygem instalados, seu modo de uso é muito simples. Para instalar a gem execute:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo gem install rogerleite-gedit-snippets-tool -s http://gems.github.com
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Após a instalação, para gerar um <em>cheat sheet</em> com todos os seus snippets, execute:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gedit-snippets-tool -cs &gt; ~/mycheatsheet.xhtml
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Caso tenha muitos snippets, e deseja criar um cheat sheet somente com Ruby e Ruby on Rails por exemplo, execute:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>gedit-snippets-tool -cs ruby* > ~/mycheatsheet.xhtml</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="/images/uploads/2009/04/cheatsheet-example.png"><img src="/images/uploads/2009/04/cheatsheet-example-291x300.png" alt="Meu cheat sheet de exemplo" /></a></p>
-
-<p>Levando em conta que a gem foi feita em três dias e focamos somente o necessário para lançarmos uma versão 0.x &ldquo;em produção&rdquo;, vamos as limitações:</p>
-
-<ul>
-<li><p>O gedit-snippets-tool lê os snippets (arquivos XML) que estão na pasta &ldquo;home&rdquo;. Constatei que o gedit &ldquo;limpo&rdquo; logo após habilitar o plugin Snippets, guarda os snippets na pasta &ldquo;/usr/share/gedit-2/plugins/snippets/&rdquo;. Bom, se for este o seu caso, peço a gentileza de copiá-los para a &ldquo;home&rdquo; em &ldquo;{home-folder}/.gnome2/gedit/snippets/&rdquo;.</p></li>
-<li><p>O template usado para gerar a página xhtml está bem &ldquo;rústico&rdquo;. O lado bom disso é que está bem fácil de alterá-lo. Vejam o código do template (via gist, leitores de RSS, sorry):</p></li>
-</ul>
-
-
-<p>Quem tiver sugestões (<strong>inclusive</strong> de template), podem forkar o projeto ou se quiser, deixe um comentário que eu entro em contato.</p>
-
-<h3>Sobre o Desenvolvimento</h3>
-
-<p>Assim que tive a idéia, análisei o que seria necessário, e resumindo:</p>
-
-<ul>
-<li><p>Ler os XMLs dos snippets;</p></li>
-<li><p>Uma engine para gerar páginas através de &ldquo;templates&rdquo;;</p></li>
-<li><p>Fazer uma gem executável&hellip; pois assim é mais fácil e rápido para quem quiser usá-la;</p></li>
-</ul>
-
-
-<p>A parte do XML é fácil, pois até já fiz coisa parecida <a href="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/">antes</a>. A parte da engine para templates, o pai Google me guiou a uma ótima, chamada <a href="http://www.kuwata-lab.com/erubis/">Erubis</a>, que é uma gem e torna as coisas muito mais fáceis.</p>
-
-<p>Para criar o esqueleto da gem, usei o <a href="http://github.com/dcrec1/gemhub">gemhub</a> do <a href="http://www.mouseoverstudio.com/blog/2008/10/27/criando-gems-com-gemhub-nunca-foi-tao-simples/">Diego Carrion</a>, que facilitou muito o meu trabalho, sem contar a ajuda que me deu na hora de publicar o gemspec no github&hellip; valeu truta! Bom, o resto foram três noites programando e aprendendo a fazer a minha primeira gem. Quem quiser participar estão todos convidados a &ldquo;forka-lo&rdquo; no <a href="http://github.com/rogerleite/gedit-snippets-tool">github</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -1383,6 +1398,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
       </li>
     
@@ -1396,10 +1415,6 @@ end
     
       <li class="post">
         <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a>
       </li>
     
   </ul>
@@ -1416,7 +1431,7 @@ end
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (35)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
         </li>
       
     
@@ -1515,6 +1530,12 @@ end
       <a class='category' href='/categories/comunidade/'>comunidade</a>&nbsp;
     
       <a class='category' href='/categories/javascript/'>javascript</a>&nbsp;
+    
+      <a class='category' href='/categories/agile/'>agile</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
+    
+      <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
   </p>
 </section>
