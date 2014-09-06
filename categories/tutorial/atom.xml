@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tutorial | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/tutorial/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-06T13:23:23-03:00</updated>
+  <updated>2014-09-06T18:50:58+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
     <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
-    <updated>2013-03-20T11:27:02-03:00</updated>
+    <updated>2013-03-20T14:27:02+00:00</updated>
     <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
@@ -126,7 +126,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[Programação funcional com JavaScript]]></title>
     <link href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"/>
-    <updated>2013-02-21T12:58:02-03:00</updated>
+    <updated>2013-02-21T15:58:02+00:00</updated>
     <id>http://1up4dev.org/2013/02/programacao-funcional-com-javascript</id>
     <content type="html"><![CDATA[<blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
 
@@ -310,7 +310,7 @@ bomDia("Nicolau");
   <entry>
     <title type="html"><![CDATA[[Tutorial] Configurando o ambiente de desenvolvimento Ruby: RVM]]></title>
     <link href="http://1up4dev.org/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm/"/>
-    <updated>2011-08-22T06:00:19-03:00</updated>
+    <updated>2011-08-22T09:00:19+00:00</updated>
     <id>http://1up4dev.org/2011/08/tutorial-configurando-o-ambiente-de-desenvolvimento-ruby-rvm</id>
     <content type="html"><![CDATA[<p>Se você ainda não trabalha com <a href="http://www.ruby-lang.org/pt/">Ruby</a> pois acha complicado demais instalá-lo, chega de desculpas! Esse tutorial <del>for dummies</del> ajudará a instalar o Ruby através do <a href="http://beginrescueend.com/">RVM</a> de forma direta, sem enrolação.</p>
 
@@ -377,7 +377,7 @@ user@ubuntu:~$ gem -v
   <entry>
     <title type="html"><![CDATA[Usando Bundler com Rails 2.3]]></title>
     <link href="http://1up4dev.org/2011/01/usando-bundler-com-rails-2-3/"/>
-    <updated>2011-01-17T09:00:55-02:00</updated>
+    <updated>2011-01-17T11:00:55+00:00</updated>
     <id>http://1up4dev.org/2011/01/usando-bundler-com-rails-2-3</id>
     <content type="html"><![CDATA[<p>Iniciando minha participação neste blog, vou apresentar uma solução rápida para um problema que eu tive e levei um certo tempo para encontrar uma resposta.</p>
 
@@ -534,7 +534,7 @@ end
   <entry>
     <title type="html"><![CDATA[Guia de Ruby do Why e Autospec-notification]]></title>
     <link href="http://1up4dev.org/2009/04/guia-de-ruby-do-why-autospec-autotest-notification/"/>
-    <updated>2009-04-27T01:00:03-03:00</updated>
+    <updated>2009-04-27T04:00:03+00:00</updated>
     <id>http://1up4dev.org/2009/04/guia-de-ruby-do-why-autospec-autotest-notification</id>
     <content type="html"><![CDATA[<h2>O comovente guia de Ruby do Why</h2>
 

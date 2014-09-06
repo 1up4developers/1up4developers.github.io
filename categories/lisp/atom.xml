@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lisp | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/lisp/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-06T13:23:23-03:00</updated>
+  <updated>2014-09-06T18:50:58+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00-03:00</updated>
+    <updated>2014-04-25T11:21:00+00:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -151,7 +151,7 @@
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
     <link href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"/>
-    <updated>2013-07-14T11:35:31-03:00</updated>
+    <updated>2013-07-14T14:35:31+00:00</updated>
     <id>http://1up4dev.org/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 

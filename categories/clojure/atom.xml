@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/clojure/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-06T13:23:23-03:00</updated>
+  <updated>2014-09-06T18:50:58+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00-03:00</updated>
+    <updated>2014-04-25T11:21:00+00:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -151,7 +151,7 @@
   <entry>
     <title type="html"><![CDATA[Sowing the seeds of code]]></title>
     <link href="http://1up4dev.org/2013/09/sowing-the-seeds-of-code/"/>
-    <updated>2013-09-25T23:08:00-03:00</updated>
+    <updated>2013-09-25T23:08:00+00:00</updated>
     <id>http://1up4dev.org/2013/09/sowing-the-seeds-of-code</id>
     <content type="html"><![CDATA[<p>Seguindo a filosofia de <a href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">tirar a bunda da cadeira</a>, tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.</p>
 
