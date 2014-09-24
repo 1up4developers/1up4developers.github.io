@@ -260,7 +260,7 @@ multitask :push do
     system "git add -A"
     puts "\n## Commiting: Site updated at #{Time.now.utc}"
     message = "Site updated at #{Time.now.utc}"
-    system "git commit -m \"#{message}\" --author=\"Deploy <1up4dev@googlegroups.com>\" [skip ci]"
+    system "git commit -m \"#{message} [skip ci]\" --author=\"Deploy <1up4dev@googlegroups.com>\""
     puts "\n## Pushing generated #{deploy_dir} website"
     system "git push origin #{deploy_branch}"
     puts "\n## Github Pages deploy complete"
