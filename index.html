@@ -9,8 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="TL;DR Wercker é uma plataforma de integração contínua, baseado em
-containers e focado em facilitar o build e deploy de aplicações na nuvem. &hellip;">
+  <meta name="description" content="Fazendo mágica com o REPL do Clojure Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do texto anterior para aprender o básico &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,248 @@ containers e focado em facilitar o build e deploy de aplicações na nuvem. &hel
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo Mágica Com O REPL Do Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-09-23T18:24:00+00:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
+
+
+        
+         | <a href="/2014/09/magica-com-o-repl-do-clojure/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/" data-text="Fazendo mágica com o REPL do Clojure" data-via="1up4dev" data-counturl="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><h1>Fazendo mágica com o REPL do Clojure</h1>
+
+<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
+
+<p>É recomendado também que você leia as mensagens emitidas pela aplicação com a voz do <a href="http://pt.wikipedia.org/wiki/Cid_Moreira">Cid Moreira</a>. Para uma versão em inglês do artigo estou considerando sugerir as vozes do Morgan Freeman ou do Stephen Fry.</p>
+
+<p>As pessoas me perguntam se um REPL é equivalente ao IRB do Ruby ou o modo interativo do Python. No artigo anterior eu comentei que o REPL é bem mais do que isso, mas ainda não fui convincente o bastante.</p>
+
+<p>Nesse artigo eu pretendo demonstrar como podemos modificar a aplicação enquanto ela é executada, sem necessidade de reiniciá-la ou de esperar para que a compilação termine.</p>
+
+<p>Primeiro, vamos instalar uma ferramenta chamada <strong>Leiningen</strong>, que pode ser facilmente instalada a partir de <a href="http://leiningen.org/#install.">http://leiningen.org/#install.</a></p>
+
+<p>O <strong>Leiningen</strong> é uma ferramenta que automatiza uma série de processos cotidianos do desenvolvimento de uma aplicação, além de também cuidar das dependências da aplicação. Pense nele como um primo bonito do <strong>Maven</strong> ou do <strong>Gradle</strong>.</p>
+
+<p>Primeiro, vamos criar uma aplicação usando o <strong>Leiningen</strong>.</p>
+
+<p>No terminal, digite:</p>
+
+<pre><code>lein new misterm
+</code></pre>
+
+<p>Se for a primeira vez que você utiliza o <strong>Leiningen</strong>, algumas dependências serão baixadas para a sua máquina.</p>
+
+<pre><code>$ lein new misterm
+Generating a project called misterm based on the 'default' template.
+The default template is intended for library projects, not applications.
+To see other templates (app, plugin, etc), try `lein help new`.
+</code></pre>
+
+<p>Será criado um diretório chamado <code>misterm</code>, onde teremos nossa aplicação, e dentro desse diretório, edite um arquivo <code>project.clj</code>.</p>
+
+<pre><code>; O seu arquivo project.clj vai ter essa cara
+(defproject misterm "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.6.0"]])
+</code></pre>
+
+<p>O conteúdo do arquivo <code>project.clj</code> nada mais é do que um código Clojure válido, sendo <code>defproject</code> uma <strong>macro</strong> que armazena as configurações do projeto em algum estado global. Vou deixar para explicar macros em outro artigo.</p>
+
+<p>Para que a mágica funcione, vamos adicionar o <code>nREPL</code> na nossa aplicação. <code>nREPL</code> é uma biblioteca que permite que o REPL do Clojure seja acessado remotamente, normalmente através de uma porta TCP. O próprio REPL do Clojure disponibilizado pelo Leiningen já vem com o nREPL, como vamos ver mais para frente.</p>
+
+<p>Para criarmos um projeto executável, precisamos informar no projeto em qual <strong>namespace</strong> estará o <strong>entrypoint</strong> da aplicação. Pense num <strong>namespace</strong> como um <strong>package</strong> do Java, apesar de existirem grandes diferenças entre ambos. Para a nossa explicação, considerar um como o outro basta.</p>
+
+<p>Vamos editar o arquivo, adicionando a nova dependência dentro do vetor <code>:dependencies</code> e também a opção <code>:main misterm.core</code> antes do parêntese final.</p>
+
+<p>O final do arquivo vai ficar assim:</p>
+
+<pre><code>; final do arquivo project.clj
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/tools.nrepl "0.2.5"]]
+  :main misterm.core)
+</code></pre>
+
+<p>Agora vamos editar o arquivo <code>core.clj</code>, que está dentro de <code>src/misterm</code>. Perceba que o nome da aplicação é usado por padrão como parte do nome do <strong>namespace</strong>.</p>
+
+<p>Encontraremos um arquivo assim:</p>
+
+<pre><code>(ns misterm.core)
+
+(defn foo
+  "I don't do a whole lot."
+  [x]
+  (println x "Hello, World!"))
+</code></pre>
+
+<p>Aqui está sendo declarado o <strong>namespace</strong> <code>misterm.core</code>, e em seguida uma função <code>foo</code> que simplesmente imprime o texto <strong>Hello, World!</strong>.</p>
+
+<p>Vamos modificar a declaração do <strong>namespace</strong> para que possamos usar o <code>nREPL</code> em nossa aplicação.</p>
+
+<pre><code>(ns misterm.core
+    (:require [clojure.tools.nrepl.server :as nrepl]))
+</code></pre>
+
+<p>Em seguida vamos iniciar o servidor do <code>nREPL</code> na porta 12345.</p>
+
+<pre><code>(defonce server (nrepl/start-server :port 12345))
+</code></pre>
+
+<p>Estamos usando <code>defonce</code> aqui para garantir que, ao acessarmos a aplicação via <code>nREPL</code>, o servidor não seja iniciado mais de uma vez. Caso isso aconteça teremos um erro porque a porta 12345 já estará em uso.</p>
+
+<p>Vamos apagar a função <code>foo</code> e vamos criar uma chamada <code>magic</code>:</p>
+
+<pre><code>(defn magica []
+  (Thread/sleep 2000)
+  (println "Mostre-nos o seu segredo, Mister M"))
+</code></pre>
+
+<p>Nossa função simplesmente espera dois segundos e, sem seguida, imprime na tela um texto.</p>
+
+<p>Agora vamos criar a função <code>-main</code>, que serve como <strong>entrypoint</strong> da aplicação, assim como o método <code>main</code> de uma aplicação Java.</p>
+
+<pre><code>(defn -main [&amp; args]
+  (loop []
+    (magica)
+    (recur)))
+</code></pre>
+
+<p>O argumento <code>&amp; args</code> indica que a função <code>-main</code> aceita uma quantidade indefinida de parâmetros, ou mesmo nenhum, exatamente como acontece com o método <code>main(String ... args)</code> do Java.</p>
+
+<p>Os operadores <code>loop</code> e <code>recur</code> são usados para simularmos <strong>tail call recursion</strong> no Clojure, o que é assunto para outro texto. Para o que precisamos, basta saber que criamos um loop infinito com eles. Dentro desse loop infinito estamos invocando a função <code>magica</code>.</p>
+
+<p>Tudo pronto, vamos salvar o arquivo e voltar para o terminal. Execute o comando <code>lein run</code> para executar a aplicação e a cada dois segundos será exibida a mensagem. Lembre-se de usar a voz do Cid Moreira ao ler.</p>
+
+<pre><code>$ lein run
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+</code></pre>
+
+<p>Vamos abrir um novo terminal e executar o comando <code>lein repl :connect 127.0.0.1:12345</code>.</p>
+
+<pre><code>$ lein repl :connect 127.0.0.1:12345
+Connecting to nREPL at 127.0.0.1:12345
+REPL-y 0.3.5, nREPL 0.2.6
+Clojure 1.6.0
+Java HotSpot(TM) 64-Bit Server VM 1.8.0-b132
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
+
+user=&gt;
+</code></pre>
+
+<p>O prompt indica que estamos no namespace padrão do Clojure, chamado <code>user</code>. Vamos para o namespace onde estão as nossas funções para verificar se estamos mesmo conectados na aplicação.</p>
+
+<pre><code>(ns misterm.core)
+</code></pre>
+
+<p>Agora vamos executar a função <code>magica</code>. Se tudo foi feito corretamente até agora, vamos esperar dois minutos e então ler a mensagem <strong>Mostre-nos o seu segredo, Mister M</strong>.</p>
+
+<pre><code>(magica)
+; Mostre-nos o seu segredo, Mister M
+</code></pre>
+
+<p>Tudo certo. Agora vamos modificar a aplicação enquanto ela está sendo executada.</p>
+
+<p>Dê uma olhada no primeiro terminal. A essa altura a nossa mensagem já encheu a tela.</p>
+
+<p>De volta ao segundo terminal, o que está com o REPL aberto, reescreva o conteúdo da função <code>magica</code>:</p>
+
+<pre><code>(defn magica []
+  (Thread/sleep 1000)
+  (println "Aaaaaahhhhh, Mister M!"))
+</code></pre>
+
+<p>A função <code>magica</code> já existia, mas estamos redefinindo em tempo de execução. Se você tentar fazer isso no IRB, por exemplo, receberá uma mensagem de erro.</p>
+
+<p>Agora olhe novamente no primeiro terminal, aquele que estava com a tela cheia de mensagens.</p>
+
+<pre><code>Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Aaaaaahhhhh, Mister M!
+Aaaaaahhhhh, Mister M!
+Aaaaaahhhhh, Mister M!
+</code></pre>
+
+<p>A mensagem mudou! Não só isso. Agora ela leva um segundo para ser exibida na tela, ao invés dos dois originais. Nós mudamos a aplicação enquanto ela estava sendo executada.</p>
+
+<p>Claro que toda mágica tem lá seus pontos a serem considerados. Se você reiniciar a aplicação a mensagem original será novamente exibida, já que alteramos a aplicação enquanto ela estava sendo executada, e não seu código fonte.</p>
+
+<p>Esse recurso é muito útil para corrigir erros sem derrubar a aplicação, para desenvolver aplicações de maneira verdadeiramente incremental e iterativa, e também para aumentarmos a velocidade do ciclo de desenvolvimento ao máximo. Pense que dessa forma não precisamos mais derrubar a aplicação, recompilar, executar novamente, aguardar o tempo de carga da JVM, que não é pouco. Numa visão otimista, caso você ganhe dez segundos em cada iteração do seu ciclo de desenvolvimento, ao final do dia você terá economizado muito tempo, além de ter mantido o foco naquilo que realmente importa. É sabido que essas mudanças de contexto, por mais rápidas que sejam, atrapalham a concentração e a produtividade.</p>
+
+<p>Editores como <strong>Emacs</strong> e <strong>ViM</strong> têm plugins que se conectam ao <code>nREPL</code>, fazendo com que você nem ao menos precise fechar a janela de edição de código para alterar a aplicação. Já o <strong>Lighttable</strong> oferece um modo chamado <strong>InstantREPL</strong>, onde seu código é avaliado na própria edição, exibindo os valores enquanto você programa.</p>
+
+<p>O REPL é uma ferramenta poderosa não só no Clojure, mas em praticamente todos os dialetos LISP. Experimente fazer isso com a sua linguagem preferida e veja se consegue ter tanto ganho de produtividade.</p>
+
+<p>P.S.: Jon Garret conseguiu inclusive corrigir um bug em um satélite em órbita graças ao uso do REPL. Leia mais <a href="http://www.flownet.com/gat/jpl-lisp.html">aqui</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -2067,91 +2308,6 @@ y = (+ 1 (* 3 2))
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/05/a-melhor-linguagem-de-programacao/">A Melhor Linguagem De Programação</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-05-06T10:00:44+00:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
-
-
-        
-         | <a href="/2013/05/a-melhor-linguagem-de-programacao/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/" data-text="A melhor linguagem de programação" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
-
-<p>Atualmente ele está trabalhando em um projeto para Web e comentou que está dando preferência a uma ferramenta proprietária que eu particularmente não gosto.</p>
-
-<p>Numa conversa que achei muito produtiva, nós concordamos que, independente de gostar ou não, &ldquo;software é bola na rede&rdquo;, onde o importante é entregar o produto, atendendo as necessidades do cliente no menor tempo possível.</p>
-
-<p>Eu trabalhei com PHP por dez anos, com Delphi por seis e estou indo para oito com Java, usando diariamente cada uma dessas linguagens. Já tive experiências com C e trabalho há anos com Ruby e JavaScript, atualmente tenho me concentrado em Clojure e, gostando mais de umas e menos de outras, conheço as forças e fraquezas de cada uma delas.</p>
-
-<p>No final das contas, eu gosto da analogia de que o nosso trabalho se assemelha ao de um carpinteiro/marceneiro (desculpe, mas eu não sei muito bem a diferença entre ambos). Esses profissionais usam várias ferramentas para chegar ao produto final e, ao invés de perderem tempo em fóruns e discussões, eles buscam as ferramentas adequadas a cada tipo de tarefa, buscando entregar o melhor produto no menor tempo e menor custo (entenda &lsquo;melhor produto&rsquo; como algo totalmente subjetivo).</p>
-
-<p>Linguagens de programação são meras ferramentas, assim como serrotes, limas, martelos e sei lá que outras ferramentas os profissionais da madeira usam.</p>
-
-<p>Assim sendo, o que é melhor? SASS, SCSS, LESS ou CSS puro? HAML ou ERB? A melhor é aquela que trouxer menos dor de cabeça, custo e tempo de desenvolvimento. Avalie com cautela aquilo que &ldquo;está na moda&rdquo; ou &ldquo;que é o padrão de mercado&rdquo; e escolha o que for melhor para o que você precisa, usando argumentos técnicos e financeiros, e deixando a paixão de lado.</p>
-
-<p>Aprenda a sua linguagem de trabalho a fundo, e procure conhecer alternativas. Ao me tornar um bom desenvolvedor  Ruby, eu aprendi a escrever um código Java melhor. Ao entender LISP, eu me tornei mais produtivo em JavaScript.</p>
-
-<p>Quando for escrever ou comentar algo do tipo &ldquo;Porque PHP fede&rdquo;, ou perguntar num fórum &ldquo;O que é melhor: PL/I ou FORTRAN 66?&rdquo;, procure estudar mais, entender que nem todo mundo vive a mesma realidade que você e mesmo, algumas vezes, nem todo mundo tem o interesse em aprender tanto quanto você.</p>
-
-<p>Às vezes, o que o outro desenvolvedor quer é apenas entregar o trabalho, receber o pagamento e ir para casa.</p>
-
-<p>P.S.: de qualquer maneira, se você quiser e puder, aprenda o máximo de linguagens que conseguir. Eu acho divertido, e profissionalmente é algo que tem me dado bons resultados.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -2172,6 +2328,10 @@ y = (+ 1 (* 3 2))
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
@@ -2185,10 +2345,6 @@ y = (+ 1 (* 3 2))
     
       <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
       </li>
     
   </ul>
@@ -2217,7 +2373,7 @@ y = (+ 1 (* 3 2))
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (15)
+          <a href="/author/pbalduino">Plínio Balduino</a> (16)
         </li>
       
     

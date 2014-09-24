@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="É engraçado como tudo é questão de treino e disciplina. Levei um tempo para me acostumar com TDD, Vim e não poderia ser diferente com testes &hellip;">
+  <meta name="description" content="Qualquer um que comece a desenvolver com Active Record (AR), minha primeira recomendação é, para tudo e leia:  A Guide to Active Record Associations &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,199 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/">Active Record Em: Como Adicionar Comportamento as Suas Associações</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-05-19T13:14:18+00:00" pubdate data-updated="true">May 19<span>th</span>, 2010</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/" data-text="Active Record em: Como adicionar comportamento as suas associações" data-via="1up4dev" data-counturl="http://1up4dev.org/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2010/05/active-record-em-como-adicionar-comportamento-as-suas-associacoes/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Qualquer um que comece a desenvolver com <a href="http://api.rubyonrails.org/files/vendor/rails/activerecord/README.html">Active Record</a> (AR), minha primeira recomendação é, para tudo e leia:  <a href="http://guides.rubyonrails.org/association_basics.html">A Guide to Active Record Associations</a> ou <a href="http://guias.rubyonrails.pro.br/association_basics.html">O Guia de Associações do Active Record</a>. O guia é bem completo, e descreve muito bem os tipos de associações que estão disponíveis no AR.</p>
+
+<h2>Association Proxy, #wtf !</h2>
+
+<p>As associações:</p>
+
+<ul>
+<li><p>belongs_to</p></li>
+<li><p>has_one</p></li>
+<li><p>has_many</p></li>
+<li><p>has_and_belongs_to_many</p></li>
+</ul>
+
+
+<p>Quando usadas, adicionam alguns métodos (veja <a href="http://guides.rubyonrails.org/association_basics.html#detailed-association-reference">Detailed Association Reference</a>). Por exemplo, ao declarar uma associação <em>belongs_to</em>, o model &ldquo;ganhará&rdquo; os seguintes métodos:</p>
+
+<ul>
+<li><p>association(force_reload = false)</p></li>
+<li><p>association=(associate)</p></li>
+<li><p>build_association(attributes = {})</p></li>
+<li><p>create_association(attributes = {})</p></li>
+</ul>
+
+
+<p>Onde association, será substituído pelo nome da associação. Exemplo retirado do guides:</p>
+
+<pre><code>class Order &lt; ActiveRecord::Base
+   belongs_to :customer
+end
+</code></pre>
+
+<p>Cada instância de Order, conterá os métodos:</p>
+
+<ul>
+<li><p>customer</p></li>
+<li><p>customer=</p></li>
+<li><p>build_customer</p></li>
+<li><p>create_customer</p></li>
+</ul>
+
+
+<p>O <em>association proxy</em>, é o objeto que faz a ligação do objeto que contém a associação, conhecido como <em>owner</em>, e o objeto associado, conhecido como <em>target</em>.</p>
+
+<h2>Legal e daí !?!</h2>
+
+<p>Graças ao <em>association proxy</em>, ao declarar uma associação, podemos extendê-la e adicionar comportamentos &ldquo;customizados&rdquo;. No guia, é citado como <a href="http://guides.rubyonrails.org/association_basics.html#association-extensions">Association Extensions</a>. O código de exemplo abaixo, está no github em <a href="http://github.com/rogerleite/random-samples">random-samples</a>.</p>
+
+<p>Para exemplificar, vamos criar um modulo que adiciona o comportamento de uma galeria a qualquer coleção.</p>
+
+<pre><code>module GalleryColletion
+
+  def current=(curr = nil)
+    @current, @index = nil
+
+    if curr.nil?
+      @current = collection.first
+      @index = 0
+    else
+      collection.each_with_index do |item, index|
+        if item.id.to_i == curr.to_i
+          @current = item
+          @index = index
+        end
+      end
+    end
+    @current
+  end
+
+  def current
+    @current
+  end
+
+  def position
+    @index + 1
+  end
+
+  def previous?
+    return false if @index.nil?
+    !!(@index - 1 &gt;= 0)
+  end
+  def previous
+    collection[@index - 1] if previous?
+  end
+
+  def next?
+    return false if @index.nil?
+    !!(@index + 1 &lt; collection.size)
+  end
+  def next
+    collection[@index + 1] if next?
+  end
+
+  private
+
+  def collection
+    proxy_owner.send(proxy_reflection.name)
+  end
+
+end
+</code></pre>
+
+<p><a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/lib/extensions/gallery_collection.rb">Gallery Collection</a></p>
+
+<p>Note que o modulo está na pasta lib, logo, a pasta tem que ser adicionada no path via config/environment.rb.</p>
+
+<p>Para extender a associação, declare:</p>
+
+<pre><code>class Article &lt; ActiveRecord::Base
+  has_and_belongs_to_many :images, :extend =&gt; GalleryColletion
+end
+</code></pre>
+
+<p><a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/article.rb">Article model</a>, <a href="http://github.com/rogerleite/random-samples/blob/master/association_extend/app/models/image.rb">Image model aqui</a>.</p>
+
+<p>Agora para navegar entre as imagens, você pode usar:</p>
+
+<pre><code>a = Article.first
+a.images.current = 1 #1 e o Image.id que deseja selecionar
+a.images.current
+a.images.position
+a.images.next?
+a.images.next
+a.images.previous?
+a.images.previous
+</code></pre>
+
+<p>Caso esteja com coragem, baixe o projeto e veja rodando.</p>
+
+<p>Dúvidas, sugestões, algum &ldquo;case&rdquo; de sucesso, comente!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1288,94 +1481,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/">Agendando Tarefas Em Aplicações Rails Com Rufus-scheduler</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-05-31T18:33:06+00:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
-
-
-        
-         | <a href="/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/" data-text="Agendando tarefas em aplicações Rails com rufus-scheduler" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://rufus.rubyforge.org/">Rufus</a> é um conjunto de gems utilizado para <a href="http://pt.wikipedia.org/wiki/Fluxo_de_Trabalho">Workflow</a> e <a href="http://pt.wikipedia.org/wiki/Business_Process_Management">BPM</a>. O <a href="http://rufus.rubyforge.org/rufus-scheduler/">rufus-scheduler</a> é a gem responsável pelo agendamento e execução de tarefas (jobs). Se você programa em Java e conhece o <a href="http://www.opensymphony.com/quartz/wikidocs/QuickStart.html">Quartz</a> não vai ter dificuldade em utilizá-la.</p>
-
-<p>Instalação:</p>
-
-<pre><code>sudo gem install rufus-scheduler
-</code></pre>
-
-<p>Utilização:</p>
-
-<pre><code>require 'rubygems'
-require 'rufus/scheduler'
-
-scheduler = Rufus::Scheduler.start_new
-
-scheduler.every '5m' do
-  puts 'Executando a cada 5 minutos'
-end
-
-scheduler.schedule '0 18 * * *' do
-  puts 'Executando todos os dias as 18h'
-end
-</code></pre>
-
-<p>Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/">documentação</a> oficial ou <a href="http://github.com/jmettraux/rufus-scheduler/tree/master">contribua com o código</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/7/">&larr; Older</a>
@@ -1398,6 +1503,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
@@ -1411,10 +1520,6 @@ end
     
       <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
       </li>
     
   </ul>
@@ -1443,7 +1548,7 @@ end
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (15)
+          <a href="/author/pbalduino">Plínio Balduino</a> (16)
         </li>
       
     

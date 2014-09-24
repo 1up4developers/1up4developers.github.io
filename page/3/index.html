@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Simples, basta usar o HttpRewriteModule. Para redirecionar de www.dominio.com para dominio.com faça: server { server_name www.dominio.com; rewrite &hellip;">
+  <meta name="description" content="Motivação Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,202 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/">[QuickTips] Migrando Sua App Rails Do MySQL Para PostgreSQL Sem Dor</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-29T11:00:07+00:00" pubdate data-updated="true">Aug 29<span>th</span>, 2012</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/" data-text="[QuickTips] Migrando sua app Rails do MySQL para PostgreSQL sem dor" data-via="1up4dev" data-counturl="http://1up4dev.org/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Motivação</h2>
+
+<p>Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.</p>
+
+<p>Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/">toque de Midas da escrotização</a>.</p>
+
+<p>Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software">Open Source</a>.</p>
+
+<h2>Instalando o Postgres</h2>
+
+<p>Se você estiver no Ubuntu, basta rodar:</p>
+
+<pre><code>$ sudo apt-get install postgresql-9.1 libpq-dev
+</code></pre>
+
+<p>Finalizada a instalação, inicie o serviço e abra o client do Postgres:</p>
+
+<pre><code>$ sudo service postgresql start
+$ sudo -u postgres psql
+</code></pre>
+
+<p>Aproveite o terminal e mude a senha do usuário <em>postgres</em>:</p>
+
+<pre><code># \password
+</code></pre>
+
+<p>Para sair, digite:</p>
+
+<pre><code># \q
+</code></pre>
+
+<h2>Migrando o banco</h2>
+
+<p>Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.</p>
+
+<p>O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:</p>
+
+<pre><code>$ sudo gem install mysql2psql
+</code></pre>
+
+<p>Em seguida, execute:</p>
+
+<pre><code>$ mysql2psql
+</code></pre>
+
+<p>Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:</p>
+
+<pre><code>mysql:
+ hostname: localhost
+ port: 3306
+ socket: /var/run/mysqld/mysqld.sock
+ username: root
+ password: root
+ database: app_development
+destination:
+ postgres:
+  hostname: localhost
+  port: 5432
+  username: postgres
+  password: postgres
+  database: app_development
+</code></pre>
+
+<p>Agora crie o banco de destino no Postgres:</p>
+
+<pre><code>$ sudo psql -h localhost -U postgres -W
+# CREATE DATABASE app_development;
+</code></pre>
+
+<p>Saia do client com <em>\q</em> e então rode novamente:</p>
+
+<pre><code>$ mysql2psql
+</code></pre>
+
+<p>Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:</p>
+
+<pre><code>Creating table comments...
+Created table comments
+Creating table schema_migrations...
+Created table schema_migrations
+Creating table users...
+Created table users
+
+Counting rows of comments... 
+Rows counted
+Loading comments...
+5 rows loaded in 0min 0s
+
+Counting rows of schema_migrations... 
+Rows counted
+Loading schema_migrations...
+20 rows loaded in 0min 0s
+
+Counting rows of users... 
+Rows counted
+Loading users...
+418 rows loaded in 0min 0s
+
+Indexing table comments...
+Indexed table comments
+Indexing table schema_migrations...
+Indexed table schema_migrations
+Indexing table users...
+Indexed table users
+
+Table creation 0 min, loading 1 min, indexing 0 min, total 1 min
+</code></pre>
+
+<h2>Configurando a app</h2>
+
+<p>Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:</p>
+
+<pre><code># Gemfile
+gem 'pg'
+
+
+
+
+# database.yml
+development:
+  adapter: postgresql
+  host: localhost
+  database: app_development
+  username: postgres
+  password: postgres
+</code></pre>
+
+<p>Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!</p>
+
+<p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres">mysql-to-postgres</a>, do mesmo autor.</p>
+
+<p>Caso tenha alguma dúvida ou sugestão, deixe seu comentário.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -982,84 +1178,6 @@ user@ubuntu:~$ gem -v
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/04/dont-be-a-hero/">Don&#8217;t Be a Hero</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-04-27T21:59:21+00:00" pubdate data-updated="true">Apr 27<span>th</span>, 2011</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
-
-
-        
-         | <a href="/2011/04/dont-be-a-hero/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/04/dont-be-a-hero/" data-text="Don't be a hero" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/04/dont-be-a-hero/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/04/dont-be-a-hero/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/04/dont-be-a-hero/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Um amigo escreveu isso há algum tempo e tive a oportunidade de reler hoje.</p>
-
-<blockquote><p>Sometimes things go wrong: hardware is not acting as expected, the API you rely on is not reliable, some vital information is missing. But you don’t care, as you are a hero, a tough Charles Bronson-like guy that will accomplish the mission no matter what.</p></blockquote>
-
-<p>Another project is saved? Maybe. But someone made a very stupid choice and will pay for it. And I’m talking about you, Bruce Lee.</p>
-
-<p>In six months nobody will remember the adversities you’ve been through. The sleepless nights. The weird bugs. The managers on you back, asking for status reports every five minutes. But something will linger: your name in the source code. It will be there in the SCM, ready to prove that you are a lousy coder and committed buggy/ugly code.</p>
-
-<p>So, next time you find yourself in this kind of situation, take a deep breath and raise the red flag. Share the problem. It’s not fair to chain yourself to something bad just to show that you are tough.</p>
-
-<p>Eu deveria ter levado esse texto impresso para a Venezuela.</p>
-
-<p><strong>Update em 02/05</strong>:
-<a href="http://igormusardo.com.br/">Igor Musardo</a> <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/">repostou esse post</a>, e adicionou um excelente vídeo da palestra do DHH na Rails Conf 2009. Recomendo que <a href="http://igormusardo.com.br/2011/05/01/no-seja-um-heroi/">assistam</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1082,6 +1200,10 @@ user@ubuntu:~$ gem -v
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
@@ -1095,10 +1217,6 @@ user@ubuntu:~$ gem -v
     
       <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
       </li>
     
   </ul>
@@ -1127,7 +1245,7 @@ user@ubuntu:~$ gem -v
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (15)
+          <a href="/author/pbalduino">Plínio Balduino</a> (16)
         </li>
       
     

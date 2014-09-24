@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-06T18:50:58+00:00</updated>
+  <updated>2014-09-24T01:07:34+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -12,6 +12,192 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
+    <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
+    <updated>2014-09-23T18:24:00+00:00</updated>
+    <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
+    <content type="html"><![CDATA[<h1>Fazendo mágica com o REPL do Clojure</h1>
+
+<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
+
+<p>É recomendado também que você leia as mensagens emitidas pela aplicação com a voz do <a href="http://pt.wikipedia.org/wiki/Cid_Moreira">Cid Moreira</a>. Para uma versão em inglês do artigo estou considerando sugerir as vozes do Morgan Freeman ou do Stephen Fry.</p>
+
+<p>As pessoas me perguntam se um REPL é equivalente ao IRB do Ruby ou o modo interativo do Python. No artigo anterior eu comentei que o REPL é bem mais do que isso, mas ainda não fui convincente o bastante.</p>
+
+<p>Nesse artigo eu pretendo demonstrar como podemos modificar a aplicação enquanto ela é executada, sem necessidade de reiniciá-la ou de esperar para que a compilação termine.</p>
+
+<p>Primeiro, vamos instalar uma ferramenta chamada <strong>Leiningen</strong>, que pode ser facilmente instalada a partir de <a href="http://leiningen.org/#install.">http://leiningen.org/#install.</a></p>
+
+<p>O <strong>Leiningen</strong> é uma ferramenta que automatiza uma série de processos cotidianos do desenvolvimento de uma aplicação, além de também cuidar das dependências da aplicação. Pense nele como um primo bonito do <strong>Maven</strong> ou do <strong>Gradle</strong>.</p>
+
+<p>Primeiro, vamos criar uma aplicação usando o <strong>Leiningen</strong>.</p>
+
+<p>No terminal, digite:</p>
+
+<pre><code>lein new misterm
+</code></pre>
+
+<p>Se for a primeira vez que você utiliza o <strong>Leiningen</strong>, algumas dependências serão baixadas para a sua máquina.</p>
+
+<pre><code>$ lein new misterm
+Generating a project called misterm based on the 'default' template.
+The default template is intended for library projects, not applications.
+To see other templates (app, plugin, etc), try `lein help new`.
+</code></pre>
+
+<p>Será criado um diretório chamado <code>misterm</code>, onde teremos nossa aplicação, e dentro desse diretório, edite um arquivo <code>project.clj</code>.</p>
+
+<pre><code>; O seu arquivo project.clj vai ter essa cara
+(defproject misterm "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.6.0"]])
+</code></pre>
+
+<p>O conteúdo do arquivo <code>project.clj</code> nada mais é do que um código Clojure válido, sendo <code>defproject</code> uma <strong>macro</strong> que armazena as configurações do projeto em algum estado global. Vou deixar para explicar macros em outro artigo.</p>
+
+<p>Para que a mágica funcione, vamos adicionar o <code>nREPL</code> na nossa aplicação. <code>nREPL</code> é uma biblioteca que permite que o REPL do Clojure seja acessado remotamente, normalmente através de uma porta TCP. O próprio REPL do Clojure disponibilizado pelo Leiningen já vem com o nREPL, como vamos ver mais para frente.</p>
+
+<p>Para criarmos um projeto executável, precisamos informar no projeto em qual <strong>namespace</strong> estará o <strong>entrypoint</strong> da aplicação. Pense num <strong>namespace</strong> como um <strong>package</strong> do Java, apesar de existirem grandes diferenças entre ambos. Para a nossa explicação, considerar um como o outro basta.</p>
+
+<p>Vamos editar o arquivo, adicionando a nova dependência dentro do vetor <code>:dependencies</code> e também a opção <code>:main misterm.core</code> antes do parêntese final.</p>
+
+<p>O final do arquivo vai ficar assim:</p>
+
+<pre><code>; final do arquivo project.clj
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/tools.nrepl "0.2.5"]]
+  :main misterm.core)
+</code></pre>
+
+<p>Agora vamos editar o arquivo <code>core.clj</code>, que está dentro de <code>src/misterm</code>. Perceba que o nome da aplicação é usado por padrão como parte do nome do <strong>namespace</strong>.</p>
+
+<p>Encontraremos um arquivo assim:</p>
+
+<pre><code>(ns misterm.core)
+
+(defn foo
+  "I don't do a whole lot."
+  [x]
+  (println x "Hello, World!"))
+</code></pre>
+
+<p>Aqui está sendo declarado o <strong>namespace</strong> <code>misterm.core</code>, e em seguida uma função <code>foo</code> que simplesmente imprime o texto <strong>Hello, World!</strong>.</p>
+
+<p>Vamos modificar a declaração do <strong>namespace</strong> para que possamos usar o <code>nREPL</code> em nossa aplicação.</p>
+
+<pre><code>(ns misterm.core
+    (:require [clojure.tools.nrepl.server :as nrepl]))
+</code></pre>
+
+<p>Em seguida vamos iniciar o servidor do <code>nREPL</code> na porta 12345.</p>
+
+<pre><code>(defonce server (nrepl/start-server :port 12345))
+</code></pre>
+
+<p>Estamos usando <code>defonce</code> aqui para garantir que, ao acessarmos a aplicação via <code>nREPL</code>, o servidor não seja iniciado mais de uma vez. Caso isso aconteça teremos um erro porque a porta 12345 já estará em uso.</p>
+
+<p>Vamos apagar a função <code>foo</code> e vamos criar uma chamada <code>magic</code>:</p>
+
+<pre><code>(defn magica []
+  (Thread/sleep 2000)
+  (println "Mostre-nos o seu segredo, Mister M"))
+</code></pre>
+
+<p>Nossa função simplesmente espera dois segundos e, sem seguida, imprime na tela um texto.</p>
+
+<p>Agora vamos criar a função <code>-main</code>, que serve como <strong>entrypoint</strong> da aplicação, assim como o método <code>main</code> de uma aplicação Java.</p>
+
+<pre><code>(defn -main [&amp; args]
+  (loop []
+    (magica)
+    (recur)))
+</code></pre>
+
+<p>O argumento <code>&amp; args</code> indica que a função <code>-main</code> aceita uma quantidade indefinida de parâmetros, ou mesmo nenhum, exatamente como acontece com o método <code>main(String ... args)</code> do Java.</p>
+
+<p>Os operadores <code>loop</code> e <code>recur</code> são usados para simularmos <strong>tail call recursion</strong> no Clojure, o que é assunto para outro texto. Para o que precisamos, basta saber que criamos um loop infinito com eles. Dentro desse loop infinito estamos invocando a função <code>magica</code>.</p>
+
+<p>Tudo pronto, vamos salvar o arquivo e voltar para o terminal. Execute o comando <code>lein run</code> para executar a aplicação e a cada dois segundos será exibida a mensagem. Lembre-se de usar a voz do Cid Moreira ao ler.</p>
+
+<pre><code>$ lein run
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+</code></pre>
+
+<p>Vamos abrir um novo terminal e executar o comando <code>lein repl :connect 127.0.0.1:12345</code>.</p>
+
+<pre><code>$ lein repl :connect 127.0.0.1:12345
+Connecting to nREPL at 127.0.0.1:12345
+REPL-y 0.3.5, nREPL 0.2.6
+Clojure 1.6.0
+Java HotSpot(TM) 64-Bit Server VM 1.8.0-b132
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
+
+user=&gt;
+</code></pre>
+
+<p>O prompt indica que estamos no namespace padrão do Clojure, chamado <code>user</code>. Vamos para o namespace onde estão as nossas funções para verificar se estamos mesmo conectados na aplicação.</p>
+
+<pre><code>(ns misterm.core)
+</code></pre>
+
+<p>Agora vamos executar a função <code>magica</code>. Se tudo foi feito corretamente até agora, vamos esperar dois minutos e então ler a mensagem <strong>Mostre-nos o seu segredo, Mister M</strong>.</p>
+
+<pre><code>(magica)
+; Mostre-nos o seu segredo, Mister M
+</code></pre>
+
+<p>Tudo certo. Agora vamos modificar a aplicação enquanto ela está sendo executada.</p>
+
+<p>Dê uma olhada no primeiro terminal. A essa altura a nossa mensagem já encheu a tela.</p>
+
+<p>De volta ao segundo terminal, o que está com o REPL aberto, reescreva o conteúdo da função <code>magica</code>:</p>
+
+<pre><code>(defn magica []
+  (Thread/sleep 1000)
+  (println "Aaaaaahhhhh, Mister M!"))
+</code></pre>
+
+<p>A função <code>magica</code> já existia, mas estamos redefinindo em tempo de execução. Se você tentar fazer isso no IRB, por exemplo, receberá uma mensagem de erro.</p>
+
+<p>Agora olhe novamente no primeiro terminal, aquele que estava com a tela cheia de mensagens.</p>
+
+<pre><code>Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Aaaaaahhhhh, Mister M!
+Aaaaaahhhhh, Mister M!
+Aaaaaahhhhh, Mister M!
+</code></pre>
+
+<p>A mensagem mudou! Não só isso. Agora ela leva um segundo para ser exibida na tela, ao invés dos dois originais. Nós mudamos a aplicação enquanto ela estava sendo executada.</p>
+
+<p>Claro que toda mágica tem lá seus pontos a serem considerados. Se você reiniciar a aplicação a mensagem original será novamente exibida, já que alteramos a aplicação enquanto ela estava sendo executada, e não seu código fonte.</p>
+
+<p>Esse recurso é muito útil para corrigir erros sem derrubar a aplicação, para desenvolver aplicações de maneira verdadeiramente incremental e iterativa, e também para aumentarmos a velocidade do ciclo de desenvolvimento ao máximo. Pense que dessa forma não precisamos mais derrubar a aplicação, recompilar, executar novamente, aguardar o tempo de carga da JVM, que não é pouco. Numa visão otimista, caso você ganhe dez segundos em cada iteração do seu ciclo de desenvolvimento, ao final do dia você terá economizado muito tempo, além de ter mantido o foco naquilo que realmente importa. É sabido que essas mudanças de contexto, por mais rápidas que sejam, atrapalham a concentração e a produtividade.</p>
+
+<p>Editores como <strong>Emacs</strong> e <strong>ViM</strong> têm plugins que se conectam ao <code>nREPL</code>, fazendo com que você nem ao menos precise fechar a janela de edição de código para alterar a aplicação. Já o <strong>Lighttable</strong> oferece um modo chamado <strong>InstantREPL</strong>, onde seu código é avaliado na própria edição, exibindo os valores enquanto você programa.</p>
+
+<p>O REPL é uma ferramenta poderosa não só no Clojure, mas em praticamente todos os dialetos LISP. Experimente fazer isso com a sua linguagem preferida e veja se consegue ter tanto ganho de produtividade.</p>
+
+<p>P.S.: Jon Garret conseguiu inclusive corrigir um bug em um satélite em órbita graças ao uso do REPL. Leia mais <a href="http://www.flownet.com/gat/jpl-lisp.html">aqui</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Integração Contínua e Entrega Contínua de modo fácil com Wercker]]></title>
@@ -2069,146 +2255,6 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
 Hope that helps!</p>
 
 <p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[QuickTips] Migrando sua app Rails do MySQL para PostgreSQL sem dor]]></title>
-    <link href="http://1up4dev.org/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor/"/>
-    <updated>2012-08-29T11:00:07+00:00</updated>
-    <id>http://1up4dev.org/2012/08/quicktips-migrando-sua-app-rails-do-mysql-para-postgresql-sem-dor</id>
-    <content type="html"><![CDATA[<h2>Motivação</h2>
-
-<p>Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época, difícil de instalar, administrar, etc. Quando comecei a programar profissionalmente, por volta de 2004, conheci o <a href="http://www.mysql.com/">MySQL</a> e gostei muito da sua simplicidade de configuração e ótima performance. Passou a ser o banco de dados padrão para a maioria dos projetos pessoais ou onde havia possibilidade de escolha.</p>
-
-<p>Tudo andava bem, até que a <a href="http://info.abril.com.br/noticias/negocios/oracle-compra-sun-por-us-7-4-bilhoes-20042009-5.shl">Oracle comprou a Sun Microsystems em 2009</a>. Não é segredo que nunca fui fã da Oracle, e considerando os acontecimentos recentes com o <a href="http://br-linux.org/2011/oracle-descontinua-licenca-que-permitia-incluir-sua-java-vm-em-distribuicoes-linux/">Java</a> e o <a href="http://idgnow.uol.com.br/ti-corporativa/2011/04/19/oracle-desiste-do-openoffice/">OpenOffice</a>, não demoraria muito para o MySQL também receber seu <a href="http://blog.mariadb.org/disappearing-test-cases/">toque de Midas da escrotização</a>.</p>
-
-<p>Dentre várias alternativas, optei pelo <a href="http://www.postgresql.org/">PostgreSQL</a> pela sua performance, muitas vezes comparável com o Oracle DB, suporte da comunidade, e por ser <a href="http://en.wikipedia.org/wiki/Open-source_software">Open Source</a>.</p>
-
-<h2>Instalando o Postgres</h2>
-
-<p>Se você estiver no Ubuntu, basta rodar:</p>
-
-<pre><code>$ sudo apt-get install postgresql-9.1 libpq-dev
-</code></pre>
-
-<p>Finalizada a instalação, inicie o serviço e abra o client do Postgres:</p>
-
-<pre><code>$ sudo service postgresql start
-$ sudo -u postgres psql
-</code></pre>
-
-<p>Aproveite o terminal e mude a senha do usuário <em>postgres</em>:</p>
-
-<pre><code># \password
-</code></pre>
-
-<p>Para sair, digite:</p>
-
-<pre><code># \q
-</code></pre>
-
-<h2>Migrando o banco</h2>
-
-<p>Estou usando a gem <a href="http://rubygems.org/gems/mysql2psql">mysql2psql</a>, que embora esteja deprecated, funciona muito bem e não tem dependência do stack do Rails, como o <em>activerecord</em>. Assim é possível rodar a migração fora do contexto da aplicação e descartar o MySQL quando terminar.</p>
-
-<p>O funcionamento é simples: conecta no banco MySQL de origem e copia a estrutura e os dados para um banco Postgres destino configurado. Para instalar:</p>
-
-<pre><code>$ sudo gem install mysql2psql
-</code></pre>
-
-<p>Em seguida, execute:</p>
-
-<pre><code>$ mysql2psql
-</code></pre>
-
-<p>Isto criará o arquivo <em>mysql2psql.yml</em> com a estrutura de configuração necessária. Edite este arquivo para ficar assim:</p>
-
-<pre><code>mysql:
- hostname: localhost
- port: 3306
- socket: /var/run/mysqld/mysqld.sock
- username: root
- password: root
- database: app_development
-destination:
- postgres:
-  hostname: localhost
-  port: 5432
-  username: postgres
-  password: postgres
-  database: app_development
-</code></pre>
-
-<p>Agora crie o banco de destino no Postgres:</p>
-
-<pre><code>$ sudo psql -h localhost -U postgres -W
-# CREATE DATABASE app_development;
-</code></pre>
-
-<p>Saia do client com <em>\q</em> e então rode novamente:</p>
-
-<pre><code>$ mysql2psql
-</code></pre>
-
-<p>Se as configurações estiverem corretas, a estrutura do banco e os dados serão migrados. O output será parecido com:</p>
-
-<pre><code>Creating table comments...
-Created table comments
-Creating table schema_migrations...
-Created table schema_migrations
-Creating table users...
-Created table users
-
-Counting rows of comments... 
-Rows counted
-Loading comments...
-5 rows loaded in 0min 0s
-
-Counting rows of schema_migrations... 
-Rows counted
-Loading schema_migrations...
-20 rows loaded in 0min 0s
-
-Counting rows of users... 
-Rows counted
-Loading users...
-418 rows loaded in 0min 0s
-
-Indexing table comments...
-Indexed table comments
-Indexing table schema_migrations...
-Indexed table schema_migrations
-Indexing table users...
-Indexed table users
-
-Table creation 0 min, loading 1 min, indexing 0 min, total 1 min
-</code></pre>
-
-<h2>Configurando a app</h2>
-
-<p>Para finalizar, remova a gem do <em>mysql</em>, adicione a do Postgres no <em>Gemfile</em> e configure o <em>database.yml</em> com as informações do Postgres:</p>
-
-<pre><code># Gemfile
-gem 'pg'
-
-
-
-
-# database.yml
-development:
-  adapter: postgresql
-  host: localhost
-  database: app_development
-  username: postgres
-  password: postgres
-</code></pre>
-
-<p>Basta rodar <em>bundle install</em> e iniciar sua aplicação usando PostgreSQL!</p>
-
-<p>Se precisar ou preferir rodar uma migração no contexto da sua app, dê uma olhada na gem <a href="https://github.com/maxlapshin/mysql2postgres">mysql-to-postgres</a>, do mesmo autor.</p>
-
-<p>Caso tenha alguma dúvida ou sugestão, deixe seu comentário.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: quick tips | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/quick-tips/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-06T18:50:58+00:00</updated>
+  <updated>2014-09-24T01:07:34+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -12,6 +12,192 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
+    <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
+    <updated>2014-09-23T18:24:00+00:00</updated>
+    <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
+    <content type="html"><![CDATA[<h1>Fazendo mágica com o REPL do Clojure</h1>
+
+<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
+
+<p>É recomendado também que você leia as mensagens emitidas pela aplicação com a voz do <a href="http://pt.wikipedia.org/wiki/Cid_Moreira">Cid Moreira</a>. Para uma versão em inglês do artigo estou considerando sugerir as vozes do Morgan Freeman ou do Stephen Fry.</p>
+
+<p>As pessoas me perguntam se um REPL é equivalente ao IRB do Ruby ou o modo interativo do Python. No artigo anterior eu comentei que o REPL é bem mais do que isso, mas ainda não fui convincente o bastante.</p>
+
+<p>Nesse artigo eu pretendo demonstrar como podemos modificar a aplicação enquanto ela é executada, sem necessidade de reiniciá-la ou de esperar para que a compilação termine.</p>
+
+<p>Primeiro, vamos instalar uma ferramenta chamada <strong>Leiningen</strong>, que pode ser facilmente instalada a partir de <a href="http://leiningen.org/#install.">http://leiningen.org/#install.</a></p>
+
+<p>O <strong>Leiningen</strong> é uma ferramenta que automatiza uma série de processos cotidianos do desenvolvimento de uma aplicação, além de também cuidar das dependências da aplicação. Pense nele como um primo bonito do <strong>Maven</strong> ou do <strong>Gradle</strong>.</p>
+
+<p>Primeiro, vamos criar uma aplicação usando o <strong>Leiningen</strong>.</p>
+
+<p>No terminal, digite:</p>
+
+<pre><code>lein new misterm
+</code></pre>
+
+<p>Se for a primeira vez que você utiliza o <strong>Leiningen</strong>, algumas dependências serão baixadas para a sua máquina.</p>
+
+<pre><code>$ lein new misterm
+Generating a project called misterm based on the 'default' template.
+The default template is intended for library projects, not applications.
+To see other templates (app, plugin, etc), try `lein help new`.
+</code></pre>
+
+<p>Será criado um diretório chamado <code>misterm</code>, onde teremos nossa aplicação, e dentro desse diretório, edite um arquivo <code>project.clj</code>.</p>
+
+<pre><code>; O seu arquivo project.clj vai ter essa cara
+(defproject misterm "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+  :dependencies [[org.clojure/clojure "1.6.0"]])
+</code></pre>
+
+<p>O conteúdo do arquivo <code>project.clj</code> nada mais é do que um código Clojure válido, sendo <code>defproject</code> uma <strong>macro</strong> que armazena as configurações do projeto em algum estado global. Vou deixar para explicar macros em outro artigo.</p>
+
+<p>Para que a mágica funcione, vamos adicionar o <code>nREPL</code> na nossa aplicação. <code>nREPL</code> é uma biblioteca que permite que o REPL do Clojure seja acessado remotamente, normalmente através de uma porta TCP. O próprio REPL do Clojure disponibilizado pelo Leiningen já vem com o nREPL, como vamos ver mais para frente.</p>
+
+<p>Para criarmos um projeto executável, precisamos informar no projeto em qual <strong>namespace</strong> estará o <strong>entrypoint</strong> da aplicação. Pense num <strong>namespace</strong> como um <strong>package</strong> do Java, apesar de existirem grandes diferenças entre ambos. Para a nossa explicação, considerar um como o outro basta.</p>
+
+<p>Vamos editar o arquivo, adicionando a nova dependência dentro do vetor <code>:dependencies</code> e também a opção <code>:main misterm.core</code> antes do parêntese final.</p>
+
+<p>O final do arquivo vai ficar assim:</p>
+
+<pre><code>; final do arquivo project.clj
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [org.clojure/tools.nrepl "0.2.5"]]
+  :main misterm.core)
+</code></pre>
+
+<p>Agora vamos editar o arquivo <code>core.clj</code>, que está dentro de <code>src/misterm</code>. Perceba que o nome da aplicação é usado por padrão como parte do nome do <strong>namespace</strong>.</p>
+
+<p>Encontraremos um arquivo assim:</p>
+
+<pre><code>(ns misterm.core)
+
+(defn foo
+  "I don't do a whole lot."
+  [x]
+  (println x "Hello, World!"))
+</code></pre>
+
+<p>Aqui está sendo declarado o <strong>namespace</strong> <code>misterm.core</code>, e em seguida uma função <code>foo</code> que simplesmente imprime o texto <strong>Hello, World!</strong>.</p>
+
+<p>Vamos modificar a declaração do <strong>namespace</strong> para que possamos usar o <code>nREPL</code> em nossa aplicação.</p>
+
+<pre><code>(ns misterm.core
+    (:require [clojure.tools.nrepl.server :as nrepl]))
+</code></pre>
+
+<p>Em seguida vamos iniciar o servidor do <code>nREPL</code> na porta 12345.</p>
+
+<pre><code>(defonce server (nrepl/start-server :port 12345))
+</code></pre>
+
+<p>Estamos usando <code>defonce</code> aqui para garantir que, ao acessarmos a aplicação via <code>nREPL</code>, o servidor não seja iniciado mais de uma vez. Caso isso aconteça teremos um erro porque a porta 12345 já estará em uso.</p>
+
+<p>Vamos apagar a função <code>foo</code> e vamos criar uma chamada <code>magic</code>:</p>
+
+<pre><code>(defn magica []
+  (Thread/sleep 2000)
+  (println "Mostre-nos o seu segredo, Mister M"))
+</code></pre>
+
+<p>Nossa função simplesmente espera dois segundos e, sem seguida, imprime na tela um texto.</p>
+
+<p>Agora vamos criar a função <code>-main</code>, que serve como <strong>entrypoint</strong> da aplicação, assim como o método <code>main</code> de uma aplicação Java.</p>
+
+<pre><code>(defn -main [&amp; args]
+  (loop []
+    (magica)
+    (recur)))
+</code></pre>
+
+<p>O argumento <code>&amp; args</code> indica que a função <code>-main</code> aceita uma quantidade indefinida de parâmetros, ou mesmo nenhum, exatamente como acontece com o método <code>main(String ... args)</code> do Java.</p>
+
+<p>Os operadores <code>loop</code> e <code>recur</code> são usados para simularmos <strong>tail call recursion</strong> no Clojure, o que é assunto para outro texto. Para o que precisamos, basta saber que criamos um loop infinito com eles. Dentro desse loop infinito estamos invocando a função <code>magica</code>.</p>
+
+<p>Tudo pronto, vamos salvar o arquivo e voltar para o terminal. Execute o comando <code>lein run</code> para executar a aplicação e a cada dois segundos será exibida a mensagem. Lembre-se de usar a voz do Cid Moreira ao ler.</p>
+
+<pre><code>$ lein run
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+</code></pre>
+
+<p>Vamos abrir um novo terminal e executar o comando <code>lein repl :connect 127.0.0.1:12345</code>.</p>
+
+<pre><code>$ lein repl :connect 127.0.0.1:12345
+Connecting to nREPL at 127.0.0.1:12345
+REPL-y 0.3.5, nREPL 0.2.6
+Clojure 1.6.0
+Java HotSpot(TM) 64-Bit Server VM 1.8.0-b132
+    Docs: (doc function-name-here)
+          (find-doc "part-of-name-here")
+  Source: (source function-name-here)
+ Javadoc: (javadoc java-object-or-class-here)
+    Exit: Control+D or (exit) or (quit)
+ Results: Stored in vars *1, *2, *3, an exception in *e
+
+user=&gt;
+</code></pre>
+
+<p>O prompt indica que estamos no namespace padrão do Clojure, chamado <code>user</code>. Vamos para o namespace onde estão as nossas funções para verificar se estamos mesmo conectados na aplicação.</p>
+
+<pre><code>(ns misterm.core)
+</code></pre>
+
+<p>Agora vamos executar a função <code>magica</code>. Se tudo foi feito corretamente até agora, vamos esperar dois minutos e então ler a mensagem <strong>Mostre-nos o seu segredo, Mister M</strong>.</p>
+
+<pre><code>(magica)
+; Mostre-nos o seu segredo, Mister M
+</code></pre>
+
+<p>Tudo certo. Agora vamos modificar a aplicação enquanto ela está sendo executada.</p>
+
+<p>Dê uma olhada no primeiro terminal. A essa altura a nossa mensagem já encheu a tela.</p>
+
+<p>De volta ao segundo terminal, o que está com o REPL aberto, reescreva o conteúdo da função <code>magica</code>:</p>
+
+<pre><code>(defn magica []
+  (Thread/sleep 1000)
+  (println "Aaaaaahhhhh, Mister M!"))
+</code></pre>
+
+<p>A função <code>magica</code> já existia, mas estamos redefinindo em tempo de execução. Se você tentar fazer isso no IRB, por exemplo, receberá uma mensagem de erro.</p>
+
+<p>Agora olhe novamente no primeiro terminal, aquele que estava com a tela cheia de mensagens.</p>
+
+<pre><code>Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Mostre-nos o seu segredo, Mister M
+Aaaaaahhhhh, Mister M!
+Aaaaaahhhhh, Mister M!
+Aaaaaahhhhh, Mister M!
+</code></pre>
+
+<p>A mensagem mudou! Não só isso. Agora ela leva um segundo para ser exibida na tela, ao invés dos dois originais. Nós mudamos a aplicação enquanto ela estava sendo executada.</p>
+
+<p>Claro que toda mágica tem lá seus pontos a serem considerados. Se você reiniciar a aplicação a mensagem original será novamente exibida, já que alteramos a aplicação enquanto ela estava sendo executada, e não seu código fonte.</p>
+
+<p>Esse recurso é muito útil para corrigir erros sem derrubar a aplicação, para desenvolver aplicações de maneira verdadeiramente incremental e iterativa, e também para aumentarmos a velocidade do ciclo de desenvolvimento ao máximo. Pense que dessa forma não precisamos mais derrubar a aplicação, recompilar, executar novamente, aguardar o tempo de carga da JVM, que não é pouco. Numa visão otimista, caso você ganhe dez segundos em cada iteração do seu ciclo de desenvolvimento, ao final do dia você terá economizado muito tempo, além de ter mantido o foco naquilo que realmente importa. É sabido que essas mudanças de contexto, por mais rápidas que sejam, atrapalham a concentração e a produtividade.</p>
+
+<p>Editores como <strong>Emacs</strong> e <strong>ViM</strong> têm plugins que se conectam ao <code>nREPL</code>, fazendo com que você nem ao menos precise fechar a janela de edição de código para alterar a aplicação. Já o <strong>Lighttable</strong> oferece um modo chamado <strong>InstantREPL</strong>, onde seu código é avaliado na própria edição, exibindo os valores enquanto você programa.</p>
+
+<p>O REPL é uma ferramenta poderosa não só no Clojure, mas em praticamente todos os dialetos LISP. Experimente fazer isso com a sua linguagem preferida e veja se consegue ter tanto ganho de produtividade.</p>
+
+<p>P.S.: Jon Garret conseguiu inclusive corrigir um bug em um satélite em órbita graças ao uso do REPL. Leia mais <a href="http://www.flownet.com/gat/jpl-lisp.html">aqui</a>.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
@@ -490,71 +676,6 @@ y = (+ 1 (* 3 2))
 <p><a href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a></p>
 
 <p>Aguardo dicas, sugestões, experiências etc.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
-    <link href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"/>
-    <updated>2013-04-11T10:30:47+00:00</updated>
-    <id>http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo</id>
-    <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
-
-<p>Pretendo escrever outro livro ainda esse ano, mas ainda não tenho nada definido. Escrever um curso ou um livro é algo cansativo, mas muito gratificante. Como não dei espaço entre um e outro, acho que seria bom eu tomar um ar antes de me lançar novamente nessa empreitada.</p>
-
-<p>Seguindo os próprios passos que descrevo abaixo, resolvi separar alguns pontos que considero importantes.</p>
-
-<h3>Escrever é um processo iterativo e incremental</h3>
-
-<p>O texto não nasce pronto. As vezes uma coisa ou outra está pronta na sua cabeça, mas na hora de colocar no papel a coisa muda. Você esquece algumas partes, lembra de outras, muda a ordem.</p>
-
-<p>O importante é que você coloque suas ideias no papel (ou no site), e depois releia com calma. Mostre para outras pessoas, peça opinião. Eu pensei em um texto por mais de dois anos e <a href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/">publiquei aqui</a> antes de adicionar no livro. O feedback dos leitores foi importantíssimo para que a versão final tivesse o mínimo de erros e o máximo de clareza possível.</p>
-
-<h3>Defina bem o seu público</h3>
-
-<p>Ao escrever sobre programação funcional em JavaScript, eu tinha bem claro quem é o leitor do 1up. Caso você não tenha definido quem será seu público e quais os requisitos necessários para que possam absorver seu conteúdo, você vai correr o risco de escrever um texto em aramaico para crianças de quarta série ou um texto de quarta série para doutores em línguas mortas.</p>
-
-<p>Pior ainda é quando se tenta abraçar a todos. Seus braços são curtos para abraçar o mundo e, no final, alguma coisa vai acabar caindo no chão.</p>
-
-<h3>Trace uma linha</h3>
-
-<p>Como o Manifesto Ágil profere, <em>responder a mudanças é mais importante do que seguir um plano</em>, o que não quer dizer que você não precisa de um plano.</p>
-
-<p>Eu costumo traçar um plano, seja como uma lista de tópicos, seja como um mindmap, e vou me guiando por ele até pegar o ritmo. Normalmente essa lista não permanece inalterada por mais de dois capítulos, mas ainda assim é importante você ter algo para te manter no caminho, por mais que esse caminho mude constantemente.</p>
-
-<h3>Concentre-se</h3>
-
-<p>Eu tenho problemas sérios de concentração, mas em algumas ocasiões consigo despejar quilos de texto ou código de uma única vez. Claro que uma revisão posterior é sempre bem vinda e necessária.</p>
-
-<p>O problema são os culpados de sempre: família exigindo atenção (eles têm prioridade, não pense o contrário); Internet oferecendo todo o tipo de entretenimento; GTalk aberto e seus amigos ali, ao alcance dos dedos.</p>
-
-<p>Escrever é um ato solitário. Lide com isso e concentre-se no que está fazendo.</p>
-
-<h3>Arranje tempo</h3>
-
-<p>&ldquo;Eu não tenho tempo&rdquo; é a desculpa preferida do procrastinador e do cara que quer que os outros acreditem que ele é muito ocupado.</p>
-
-<p>Você tem tempo para conversar no GTalk, para acessar o 9gag, para ver os gols do Fantástico, mas nunca temos tempo para brincar com o filho, para conversar com a esposa (ou marido) ou para fazer aquela meia hora de esteira.</p>
-
-<p>Um terço do meu livro foi escrito dentro de viagens em ônibus, táxis e aviões. Acho que produzi muito mais em uma hora de vôo até o Rio do que em uma tarde inteira jogada fora na frente do computador.</p>
-
-<p>Quando você realmente quer fazer algo, o tempo aparece. Não ter tempo é uma outra forma de dizer &ldquo;isso não é importante o suficiente para mim&rdquo;.</p>
-
-<h3>&lsquo;Pronto&rsquo; é melhor do que &lsquo;perfeito&rsquo;</h3>
-
-<p>Depois do livro e do curso prontos e entregues, eu percebi coisas que poderia ter adicionado, frases que poderia ter mudado, assuntos que faltaram. Se existe a possibilidade de adicionar ou mudar, faça, mas não caia na armadilha de ficar polindo algo que já deveria estar em produção há tempos.</p>
-
-<p>Pronto é melhor do que perfeito e, não importa o quanto você tente, seu trabalho nunca vai ficar perfeito.</p>
-
-<h3>Divirta-se</h3>
-
-<p>Principalmente, divirta-se.</p>
-
-<p>Conheci muitas pessoas que sabem muito mais do assunto que estou escrevendo do que eu, pessoas que deram excelentes sugestões, ideias e me ensinaram a escrever melhor. E em tudo isso eu me diverti, aprendi, aproveitei o momento.</p>
-
-<p>Não se leve tão a sério. É apenas um texto, um post, um curso, um livro. A vida é bem mais do que isso.</p>
-
-<p>Abraço</p>
 ]]></content>
   </entry>
   

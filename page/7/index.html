@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Acredito que a maioria de vocês conhecem e/ou já usaram as famosas cheat sheets (tradução para &ldquo;cola&rdquo;?) para algo. Costumo usá-las quando &hellip;">
+  <meta name="description" content="Rufus é um conjunto de gems utilizado para Workflow e BPM. O rufus-scheduler é a gem responsável pelo agendamento e execução de tarefas (jobs). Se &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/">Agendando Tarefas Em Aplicações Rails Com Rufus-scheduler</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-05-31T18:33:06+00:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/" data-text="Agendando tarefas em aplicações Rails com rufus-scheduler" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/05/agendando-tarefas-em-aplicacoes-rails-com-rufus-scheduler/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://rufus.rubyforge.org/">Rufus</a> é um conjunto de gems utilizado para <a href="http://pt.wikipedia.org/wiki/Fluxo_de_Trabalho">Workflow</a> e <a href="http://pt.wikipedia.org/wiki/Business_Process_Management">BPM</a>. O <a href="http://rufus.rubyforge.org/rufus-scheduler/">rufus-scheduler</a> é a gem responsável pelo agendamento e execução de tarefas (jobs). Se você programa em Java e conhece o <a href="http://www.opensymphony.com/quartz/wikidocs/QuickStart.html">Quartz</a> não vai ter dificuldade em utilizá-la.</p>
+
+<p>Instalação:</p>
+
+<pre><code>sudo gem install rufus-scheduler
+</code></pre>
+
+<p>Utilização:</p>
+
+<pre><code>require 'rubygems'
+require 'rufus/scheduler'
+
+scheduler = Rufus::Scheduler.start_new
+
+scheduler.every '5m' do
+  puts 'Executando a cada 5 minutos'
+end
+
+scheduler.schedule '0 18 * * *' do
+  puts 'Executando todos os dias as 18h'
+end
+</code></pre>
+
+<p>Simples assim! Consulte a <a href="http://rufus.rubyforge.org/rufus-scheduler/">documentação</a> oficial ou <a href="http://github.com/jmettraux/rufus-scheduler/tree/master">contribua com o código</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1208,141 +1296,6 @@ script/autospec
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/01/tpw-dicas-para-a-qualidade-do-software/">TPW - Dicas Para a Qualidade Do Software</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-01-15T10:32:52+00:00" pubdate data-updated="true">Jan 15<span>th</span>, 2009</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2009/01/tpw-dicas-para-a-qualidade-do-software/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/" data-text="TPW - Dicas para a qualidade do Software" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Desenvolvedores em geral sabem como é chato quando uma tela que fez ou alterou dá erro durante uma homologação ou até produção. No caso de um sistema Web, a raiva aumenta ainda mais se a causa for incompatibilidade de navegadores.</p>
-
-<p>Antes de começar a apresentar o &ldquo;the best of my rotina&rdquo;, é bom deixar bem claro o meu cenário:</p>
-
-<ul>
-<li><p>Trabalho sozinho no projeto, sou humano e faço pair programming com a cpu, que eu tenho certeza que é <a href="http://desciclo.pedia.ws/wiki/POG">pogger</a>!</p></li>
-<li><p>O meu cliente, o que requisita correções e/ou novas funcionalidades, é um cliente interno e eu tenho acesso direto a ele.</p></li>
-<li><p>O sistema não tem testes unitários, testes de integração e etc.</p></li>
-<li><p>Muito código foi copiado, não somente na camada de negócio, mas também nas views. As páginas por aqui, também são conhecidas como <em>business-view</em>.</p></li>
-<li><p>Tem mais complicações, mais acho que já tem o suficiente para entenderem o meu cenário.</p></li>
-</ul>
-
-
-<p>O que já fizemos para começar a arrumar a casa:</p>
-
-<ul>
-<li><p>Implantamos um bug tracker, conhecido como <a href="http://www.redmine.org/">Redmine</a>. Sabe aquele velho problema de planilha pra lá e pra cá e ninguém nunca sabia quem, e o que estava fazendo? Pois bem, este problema está quase resolvido aqui (quase porque ainda tem projeto faltando para migrar).</p></li>
-<li><p>Implantamos um servidor de integração continua, com o <a href="https://hudson.dev.java.net/">Hudson</a>. Apesar de eu não ter testes, havia um sério problema aqui para implantar novas versões em homologação e produção, e agora com o Hudson centralizando o build, ele mesmo já disponibiliza o war.</p></li>
-<li><p>Por sinal, montar e começar a usar o war foi outro trampo também.</p></li>
-</ul>
-
-
-<p>Sabendo que o meu contexto é diferente do seu, sinta-se livre para adaptar qualquer coisa. Tentei deixar as dicas o mais genérico possível.</p>
-
-<h3>1. Trabalhe com tarefas Curtas</h3>
-
-<p>Tarefas curtas são muito mais fáceis para desenvolver, testar e se livrar! Por exemplo, se tem que desenvolver aquele formulário com vinte telas, não tenha dúvida, quebre isto em pequenas funcionalidades. Para identificar as partes &ldquo;quebráveis&rdquo;, leve em conta o que a torna funcional, ainda no exemplo anterior, se das vinte telas, você fizer a primeira e a última são suficientes para um cadastro básico, está ai a sua primeira tarefa. Muitas pessoas não dão importância para isso, mas saber &ldquo;extrair&rdquo; as tarefas certas de um novo desenvolvimento ou manutenção, traz um leque de vantagens:</p>
-
-<ul>
-<li><p>Testar uma funcionalidade curta é muito mais rápido e fácil do que testar uma gigantesca;</p></li>
-<li><p>Fica mais dificil perder o foco.</p></li>
-<li><p>Os prazos ficam mais &ldquo;coerentes&rdquo;.</p></li>
-<li><p>Você pode retirar ou incluir novas funcionalidades, a &ldquo;negociação&rdquo; com o cliente fica mais simples.</p></li>
-</ul>
-
-
-<h3>2. Monte e use um roteiro de teste</h3>
-
-<p>Pra quem usa <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, este passo pode pular. Pra quem trabalha com legados e ainda não tem testes (meu caso), eu costumo fazer um roteiro de testes antes de implementar a funcionalidade curta. Este roteiro costuma ser enxuto e abrangente, isto permite que eu descanse meu cerebro enquanto testo, pois com ele, acaba se tornando um processo mecânico. Vou colocar um exemplo recente de roteiro que usei:</p>
-
-<p><strong>Teste de Primeiro Acesso</strong></p>
-
-<ul>
-<li><p>Limpar a base, apagar os registros da tabela xpto e suas dependências.</p></li>
-<li><p>Limpar os cookies.</p></li>
-<li><p>Acessar o index.jsp da Aplicação (esta página simula um login via cookie).</p></li>
-<li><p>A tela inicial só permite cadastrar os dados do perfil, os links &ldquo;xxx&rdquo; e &ldquo;zzz&rdquo; não ficam disponíveis.</p></li>
-<li><p>Após o Teste de Restrições ao Editar o Perfil, verificar que os links &ldquo;xxx&rdquo; e &ldquo;zzz&rdquo; estão disponíveis.</p></li>
-<li><p>Clicar em salvar novamente para verificar se o problema de &ldquo;unique id&rdquo; não ocorre.</p></li>
-</ul>
-
-
-<p>Estes roteiros se tornaram um costume, eu perco pouquissimo tempo pra fazer e apesar de parecer besta, ele me ajuda muito na hora de executar um teste de sanidade por exemplo. O ideal seria transformar este roteiro num teste unitário ou até mesmo num script via Selenium, mas devido a estrutura (ou a falta dela?!) eu ainda não consegui esta automação tão sonhada.
-Apesar deste roteiro ser descartável e somente para ajudá-lo, uma idéia legal que venho fazendo é colocá-lo como comentário caso use um bug tracker.</p>
-
-<h3>3. Teste seu sistema num ambiente isolado</h3>
-
-<p>Estes últimos dois anos tenho usado <a href="http://www.ubuntu.com/">linux</a> no desktop para desenvolvimento. Infelizmente, todos nós sabemos que todo sistema web tem que ser testado nos IE*s e cia. É claro que durante o inicio do desenvolvimento, uso meu firefox local mesmo, mas assim que termino a funcionalidade, uso uma máquina virtual para averiguar a compatibilidade com os navegadores mais utilizados.
-Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://tredosoft.com/Multiple_IE">Multiple IEs</a> mais o opcional roteiro de testes, consigo validar o sistema numa boa gama de navegadores. Para usar o Multiple IEs não tem segredo, é só atualizar para o IE7 e depois rodar o executável do mesmo.</p>
-
-<p><a href="/images/uploads/2009/01/virtualbox_multiple_ies.png"><img src="/images/uploads/2009/01/virtualbox_multiple_ies-300x187.png" alt="" /></a></p>
-
-<h3>4. Automatize o que for possível</h3>
-
-<p>Já ocorreu de você precisar preencher <em>n</em> campos, navegar em <em>n</em> telas e descobrir que você errou o nome de uma variável javascript e ter que fazer tudo de novo? Pois bem, comigo já aconteceu muito, e uma das soluções que venho usando é o <a href="http://seleniumhq.org/projects/ide/">Selenium Ide</a>. Com o plugin do firefox, eu gravo scripts temporários (durante o desenvolvimento da tarefa) que preenche os <em>n</em> campos e navegam nas <em>n</em> telas, assim pelo menos este tempo de navegação eu só perco uma vez.</p>
-
-<h3>Finalizando &hellip;</h3>
-
-<p>Todas estas &ldquo;técnicas&rdquo; nada mais são do que uma retrospectiva minha, de uma tentativa (frustada por sinal) de Scrum Solo. Aqui estou colocando o que vem dando resultado, e se você achou besteira ou legal, gostaria muito do seu comentário. Sabe aquela <a href="http://www.jlcarneiro.com/macas-ideias-e-conhecimento/">frase da maça e conhecimento</a>, então, minha única expectativa com este post é esta: Novas Idéias!</p>
-
-<p>Valeu e feliz ano novo a todos!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -1365,6 +1318,10 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
@@ -1378,10 +1335,6 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
     
       <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
       </li>
     
   </ul>
@@ -1410,7 +1363,7 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (15)
+          <a href="/author/pbalduino">Plínio Balduino</a> (16)
         </li>
       
     

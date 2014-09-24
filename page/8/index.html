@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Atualmente as metodologias ágeis vêm aparecendo com cada vez mais freqüência nas empresas que desenvolvem software, introduzidas pelos próprios &hellip;">
+  <meta name="description" content="Desenvolvedores em geral sabem como é chato quando uma tela que fez ou alterou dá erro durante uma homologação ou até produção. No caso de um sistema &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,141 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2009/01/tpw-dicas-para-a-qualidade-do-software/">TPW - Dicas Para a Qualidade Do Software</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-01-15T10:32:52+00:00" pubdate data-updated="true">Jan 15<span>th</span>, 2009</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2009/01/tpw-dicas-para-a-qualidade-do-software/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/" data-text="TPW - Dicas para a qualidade do Software" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/01/tpw-dicas-para-a-qualidade-do-software/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Desenvolvedores em geral sabem como é chato quando uma tela que fez ou alterou dá erro durante uma homologação ou até produção. No caso de um sistema Web, a raiva aumenta ainda mais se a causa for incompatibilidade de navegadores.</p>
+
+<p>Antes de começar a apresentar o &ldquo;the best of my rotina&rdquo;, é bom deixar bem claro o meu cenário:</p>
+
+<ul>
+<li><p>Trabalho sozinho no projeto, sou humano e faço pair programming com a cpu, que eu tenho certeza que é <a href="http://desciclo.pedia.ws/wiki/POG">pogger</a>!</p></li>
+<li><p>O meu cliente, o que requisita correções e/ou novas funcionalidades, é um cliente interno e eu tenho acesso direto a ele.</p></li>
+<li><p>O sistema não tem testes unitários, testes de integração e etc.</p></li>
+<li><p>Muito código foi copiado, não somente na camada de negócio, mas também nas views. As páginas por aqui, também são conhecidas como <em>business-view</em>.</p></li>
+<li><p>Tem mais complicações, mais acho que já tem o suficiente para entenderem o meu cenário.</p></li>
+</ul>
+
+
+<p>O que já fizemos para começar a arrumar a casa:</p>
+
+<ul>
+<li><p>Implantamos um bug tracker, conhecido como <a href="http://www.redmine.org/">Redmine</a>. Sabe aquele velho problema de planilha pra lá e pra cá e ninguém nunca sabia quem, e o que estava fazendo? Pois bem, este problema está quase resolvido aqui (quase porque ainda tem projeto faltando para migrar).</p></li>
+<li><p>Implantamos um servidor de integração continua, com o <a href="https://hudson.dev.java.net/">Hudson</a>. Apesar de eu não ter testes, havia um sério problema aqui para implantar novas versões em homologação e produção, e agora com o Hudson centralizando o build, ele mesmo já disponibiliza o war.</p></li>
+<li><p>Por sinal, montar e começar a usar o war foi outro trampo também.</p></li>
+</ul>
+
+
+<p>Sabendo que o meu contexto é diferente do seu, sinta-se livre para adaptar qualquer coisa. Tentei deixar as dicas o mais genérico possível.</p>
+
+<h3>1. Trabalhe com tarefas Curtas</h3>
+
+<p>Tarefas curtas são muito mais fáceis para desenvolver, testar e se livrar! Por exemplo, se tem que desenvolver aquele formulário com vinte telas, não tenha dúvida, quebre isto em pequenas funcionalidades. Para identificar as partes &ldquo;quebráveis&rdquo;, leve em conta o que a torna funcional, ainda no exemplo anterior, se das vinte telas, você fizer a primeira e a última são suficientes para um cadastro básico, está ai a sua primeira tarefa. Muitas pessoas não dão importância para isso, mas saber &ldquo;extrair&rdquo; as tarefas certas de um novo desenvolvimento ou manutenção, traz um leque de vantagens:</p>
+
+<ul>
+<li><p>Testar uma funcionalidade curta é muito mais rápido e fácil do que testar uma gigantesca;</p></li>
+<li><p>Fica mais dificil perder o foco.</p></li>
+<li><p>Os prazos ficam mais &ldquo;coerentes&rdquo;.</p></li>
+<li><p>Você pode retirar ou incluir novas funcionalidades, a &ldquo;negociação&rdquo; com o cliente fica mais simples.</p></li>
+</ul>
+
+
+<h3>2. Monte e use um roteiro de teste</h3>
+
+<p>Pra quem usa <a href="http://en.wikipedia.org/wiki/Test-driven_development">TDD</a>, este passo pode pular. Pra quem trabalha com legados e ainda não tem testes (meu caso), eu costumo fazer um roteiro de testes antes de implementar a funcionalidade curta. Este roteiro costuma ser enxuto e abrangente, isto permite que eu descanse meu cerebro enquanto testo, pois com ele, acaba se tornando um processo mecânico. Vou colocar um exemplo recente de roteiro que usei:</p>
+
+<p><strong>Teste de Primeiro Acesso</strong></p>
+
+<ul>
+<li><p>Limpar a base, apagar os registros da tabela xpto e suas dependências.</p></li>
+<li><p>Limpar os cookies.</p></li>
+<li><p>Acessar o index.jsp da Aplicação (esta página simula um login via cookie).</p></li>
+<li><p>A tela inicial só permite cadastrar os dados do perfil, os links &ldquo;xxx&rdquo; e &ldquo;zzz&rdquo; não ficam disponíveis.</p></li>
+<li><p>Após o Teste de Restrições ao Editar o Perfil, verificar que os links &ldquo;xxx&rdquo; e &ldquo;zzz&rdquo; estão disponíveis.</p></li>
+<li><p>Clicar em salvar novamente para verificar se o problema de &ldquo;unique id&rdquo; não ocorre.</p></li>
+</ul>
+
+
+<p>Estes roteiros se tornaram um costume, eu perco pouquissimo tempo pra fazer e apesar de parecer besta, ele me ajuda muito na hora de executar um teste de sanidade por exemplo. O ideal seria transformar este roteiro num teste unitário ou até mesmo num script via Selenium, mas devido a estrutura (ou a falta dela?!) eu ainda não consegui esta automação tão sonhada.
+Apesar deste roteiro ser descartável e somente para ajudá-lo, uma idéia legal que venho fazendo é colocá-lo como comentário caso use um bug tracker.</p>
+
+<h3>3. Teste seu sistema num ambiente isolado</h3>
+
+<p>Estes últimos dois anos tenho usado <a href="http://www.ubuntu.com/">linux</a> no desktop para desenvolvimento. Infelizmente, todos nós sabemos que todo sistema web tem que ser testado nos IE*s e cia. É claro que durante o inicio do desenvolvimento, uso meu firefox local mesmo, mas assim que termino a funcionalidade, uso uma máquina virtual para averiguar a compatibilidade com os navegadores mais utilizados.
+Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://tredosoft.com/Multiple_IE">Multiple IEs</a> mais o opcional roteiro de testes, consigo validar o sistema numa boa gama de navegadores. Para usar o Multiple IEs não tem segredo, é só atualizar para o IE7 e depois rodar o executável do mesmo.</p>
+
+<p><a href="/images/uploads/2009/01/virtualbox_multiple_ies.png"><img src="/images/uploads/2009/01/virtualbox_multiple_ies-300x187.png" alt="" /></a></p>
+
+<h3>4. Automatize o que for possível</h3>
+
+<p>Já ocorreu de você precisar preencher <em>n</em> campos, navegar em <em>n</em> telas e descobrir que você errou o nome de uma variável javascript e ter que fazer tudo de novo? Pois bem, comigo já aconteceu muito, e uma das soluções que venho usando é o <a href="http://seleniumhq.org/projects/ide/">Selenium Ide</a>. Com o plugin do firefox, eu gravo scripts temporários (durante o desenvolvimento da tarefa) que preenche os <em>n</em> campos e navegam nas <em>n</em> telas, assim pelo menos este tempo de navegação eu só perco uma vez.</p>
+
+<h3>Finalizando &hellip;</h3>
+
+<p>Todas estas &ldquo;técnicas&rdquo; nada mais são do que uma retrospectiva minha, de uma tentativa (frustada por sinal) de Scrum Solo. Aqui estou colocando o que vem dando resultado, e se você achou besteira ou legal, gostaria muito do seu comentário. Sabe aquela <a href="http://www.jlcarneiro.com/macas-ideias-e-conhecimento/">frase da maça e conhecimento</a>, então, minha única expectativa com este post é esta: Novas Idéias!</p>
+
+<p>Valeu e feliz ano novo a todos!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -920,99 +1055,6 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/08/tpw-colocando-dicas-em-pratica/">TPW - Colocando Dicas Em Prática</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-08-18T17:02:43+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2008/08/tpw-colocando-dicas-em-pratica/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/" data-text="TPW - Colocando dicas em prática" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Depois de ler <a href="http://1up4dev.org/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/">The Pragmatic Programmer</a> é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &ldquo;digerido&rdquo; o livro, lancei as <a href="http://1up4dev.org/2008/06/tpw-dicas-para-o-desenvolvedor/">dicas para o desenvolvedor</a>, acabei inventando um termo legal <em>The Pragmatic Waterfall</em>, que resolvi transformá-lo numa série.</p>
-
-<p>A primeira dica do &ldquo;dicas para o desenvolvedor&rdquo;, foi:
-&ndash; Gerador de código descartável.</p>
-
-<p>Pois bem, hoje, vou mostrar um exemplo de &ldquo;código descartável&rdquo; que utilizei e deu certo ! :D</p>
-
-<p>Problema: No projeto que estou existem algumas queries em arquivos XML do hibernate, preciso convertê-las para Spring. Pra cada query do hibernate, precisei gerar dois arquivos de XML do Spring e mais uma classe Java que herda de SqlUpdate &hellip; blá blá blá. Bom, os detalhes não importam muito, <strong>o que importa é que vamos ler o XML do hibernate e gerar o que for necessário</strong>, tudo isso com <strong>Ruby</strong>!</p>
-
-<p>Antes de qualquer coisa, já aviso que ainda não domino totalmente Ruby, e o script que fiz é do tipo código &ldquo;descartável&rdquo;, então não tive o menor cuidado em deixá-lo bonito, apenas funcional. Acho que a melhor maneira de aprender uma nova linguagem é escrevendo código com ela, não somente lendo sobre.</p>
-
-<p>Exemplo super simplificado do XML do Hibernate:
-script generator-bean em Ruby:</p>
-
-<p>É isto ! O script é simples e direto, deixei a saida pro console mesmo e para jogar em arquivo é muito simples:</p>
-
-<p>$ ruby generator-bean.rb > spring-exemplo.xml</p>
-
-<p>O script que coloquei é uma versão bem reduzida, já que a idéia do post é mostrar que é possível transformar tarefas chatas e trabalhosas em scripts semi-automáticos ! Ah, lembrando que com ele consegui terminar a minha tarefa em 2 dias, sendo que a previsão era quase uma semana de trabalho !</p>
-
-<p>Precisa de mais informações de como ler XML com Ruby !?</p>
-
-<p>Segue as referências.
-Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-ruby/">post</a>, muito legal por sinal.
-* API do REXML: <a href="http://www.ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html">http://www.ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html</a>
-* Sobre o Electric XML: <a href="http://www.xml.com/pub/r/1098">http://www.xml.com/pub/r/1098</a>
-* Tutorial um pouco mais complexo sobre XML com Ruby: <a href="http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html">http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html</a></p>
-
-<p><strong>OBS:</strong> Estou usando o <a href="http://gist.github.com/">gist.github.com</a> para colocar o xml e script de exemplo, provavelmente não vai aparecer no leitor de feed.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -1035,6 +1077,10 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
@@ -1048,10 +1094,6 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     
       <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
       </li>
     
   </ul>
@@ -1080,7 +1122,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (15)
+          <a href="/author/pbalduino">Plínio Balduino</a> (16)
         </li>
       
     

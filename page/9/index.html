@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Divulgação: Pessoal, o Akita deu a Largada para o Maior Evento de Rails da América Latina! Eu não vou perder ! O mais difícil foi convencer a patroa &hellip;">
+  <meta name="description" content="Depois de ler The Pragmatic Programmer é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &ldquo; &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,99 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2008/08/tpw-colocando-dicas-em-pratica/">TPW - Colocando Dicas Em Prática</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-08-18T17:02:43+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2008/08/tpw-colocando-dicas-em-pratica/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/" data-text="TPW - Colocando dicas em prática" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/08/tpw-colocando-dicas-em-pratica/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Depois de ler <a href="http://1up4dev.org/2008/05/the-pragmatic-programmer-no-ambiente-waterfall-e-claro/">The Pragmatic Programmer</a> é natural ficar empolgado, bom, uma prova disso foi meu próprio post sobre o assunto. Depois de ter &ldquo;digerido&rdquo; o livro, lancei as <a href="http://1up4dev.org/2008/06/tpw-dicas-para-o-desenvolvedor/">dicas para o desenvolvedor</a>, acabei inventando um termo legal <em>The Pragmatic Waterfall</em>, que resolvi transformá-lo numa série.</p>
+
+<p>A primeira dica do &ldquo;dicas para o desenvolvedor&rdquo;, foi:
+&ndash; Gerador de código descartável.</p>
+
+<p>Pois bem, hoje, vou mostrar um exemplo de &ldquo;código descartável&rdquo; que utilizei e deu certo ! :D</p>
+
+<p>Problema: No projeto que estou existem algumas queries em arquivos XML do hibernate, preciso convertê-las para Spring. Pra cada query do hibernate, precisei gerar dois arquivos de XML do Spring e mais uma classe Java que herda de SqlUpdate &hellip; blá blá blá. Bom, os detalhes não importam muito, <strong>o que importa é que vamos ler o XML do hibernate e gerar o que for necessário</strong>, tudo isso com <strong>Ruby</strong>!</p>
+
+<p>Antes de qualquer coisa, já aviso que ainda não domino totalmente Ruby, e o script que fiz é do tipo código &ldquo;descartável&rdquo;, então não tive o menor cuidado em deixá-lo bonito, apenas funcional. Acho que a melhor maneira de aprender uma nova linguagem é escrevendo código com ela, não somente lendo sobre.</p>
+
+<p>Exemplo super simplificado do XML do Hibernate:
+script generator-bean em Ruby:</p>
+
+<p>É isto ! O script é simples e direto, deixei a saida pro console mesmo e para jogar em arquivo é muito simples:</p>
+
+<p>$ ruby generator-bean.rb > spring-exemplo.xml</p>
+
+<p>O script que coloquei é uma versão bem reduzida, já que a idéia do post é mostrar que é possível transformar tarefas chatas e trabalhosas em scripts semi-automáticos ! Ah, lembrando que com ele consegui terminar a minha tarefa em 2 dias, sendo que a previsão era quase uma semana de trabalho !</p>
+
+<p>Precisa de mais informações de como ler XML com Ruby !?</p>
+
+<p>Segue as referências.
+Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-ruby/">post</a>, muito legal por sinal.
+* API do REXML: <a href="http://www.ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html">http://www.ruby-doc.org/stdlib/libdoc/rexml/rdoc/index.html</a>
+* Sobre o Electric XML: <a href="http://www.xml.com/pub/r/1098">http://www.xml.com/pub/r/1098</a>
+* Tutorial um pouco mais complexo sobre XML com Ruby: <a href="http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html">http://www.xml.com/pub/a/2005/11/09/rexml-processing-xml-in-ruby.html</a></p>
+
+<p><strong>OBS:</strong> Estou usando o <a href="http://gist.github.com/">gist.github.com</a> para colocar o xml e script de exemplo, provavelmente não vai aparecer no leitor de feed.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -879,75 +972,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/1up4developers-20/">1up4developers 2.0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-03T20:20:33+00:00" pubdate data-updated="true">Jun 3<span>rd</span>, 2008</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/hbulhoes/'>Humberto Bulhões</a></span></span>
-
-
-        
-         | <a href="/2008/06/1up4developers-20/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/06/1up4developers-20/" data-text="1up4developers 2.0" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/06/1up4developers-20/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/06/1up4developers-20/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/06/1up4developers-20/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Então, nobres colegas e respeitável público, o nosso blog estava meio estranho no Blogger e decidimos mudar para uma plataforma mais funcional, mais gerenciável, mais colaborativa, enfim, uma coisa totalmente mais 2.0 mesmo.</p>
-
-<p>O conteúdo continua composto de puro veneno partindo de mentes furiosas por não terem uma vida agilemente ativa. Aposto que você, leitor, também se encontra nessa situação aviltante, então <a href="http://feeds.feedburner.com/1up4dev?format=xml">assine o novo feed</a> e participe comentando as nossas observações, frustrações e viagens.</p>
-
-<p>Muito sucesso a todos! Prossigamos&hellip;</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/10/">&larr; Older</a>
@@ -970,6 +994,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
@@ -983,10 +1011,6 @@
     
       <li class="post">
         <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages</a>
       </li>
     
   </ul>
@@ -1015,7 +1039,7 @@
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (15)
+          <a href="/author/pbalduino">Plínio Balduino</a> (16)
         </li>
       
     
