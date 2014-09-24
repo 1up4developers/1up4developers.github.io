@@ -15,7 +15,6 @@ tags:
 - leiningen
 - repl
 ---
-# Fazendo mágica com o REPL do Clojure
 
 Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do [texto anterior](http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/) para aprender o básico.
 
