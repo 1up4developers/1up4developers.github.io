@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lisp | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/lisp/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-24T01:07:34+00:00</updated>
+  <updated>2014-09-24T01:11:14+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -18,9 +18,7 @@
     <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
     <updated>2014-09-23T18:24:00+00:00</updated>
     <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
-    <content type="html"><![CDATA[<h1>Fazendo mágica com o REPL do Clojure</h1>
-
-<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
+    <content type="html"><![CDATA[<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
 
 <p>É recomendado também que você leia as mensagens emitidas pela aplicação com a voz do <a href="http://pt.wikipedia.org/wiki/Cid_Moreira">Cid Moreira</a>. Para uma versão em inglês do artigo estou considerando sugerir as vozes do Morgan Freeman ou do Stephen Fry.</p>
 
