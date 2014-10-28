@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cookbook | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/cookbook/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:17:50+00:00</updated>
+  <updated>2014-10-28T16:27:16+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -33,6 +33,9 @@
 <p>Para isso, vamos abrir a página inicial da editora em <a href="http://www.casadocodigo.com.br/,">http://www.casadocodigo.com.br/,</a> que contém links para todos os livros publicados até o momento. Com esses links em mãos, vamos entrar em cada um deles e extrair os nomes dos autores para em seguida agrupá-los e apresentarmos o resultado.</p>
 
 <h3>Como fazer</h3>
+
+<pre><code>É necessário ter algum conhecimento de Clojure e Leiningen para poder acompanhar este post. Dê uma lida no texto [Fazendo mágica com o REPL do Clojure](http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/) para aprender como criar um projeto.
+</code></pre>
 
 <p>Vamos criar um projeto chamado <code>autores</code>, definir o namespace inicial e adicionar a biblioteca <em>Enlive</em>, que vai nos permitir extrair os dados que queremos de dentro do código HTML. O nosso arquivo project.clj vai ficar parecido com o exemplo abaixo:</p>
 
