@@ -14,8 +14,6 @@ tags:
 - lisp
 - enlive
 ---
-# Extraindo dados da Internet com Clojure
-
 ## O problema
 
 A Internet é um repositórios de dados gigantesco e frequentemente precisamos extrair algo que nos interessa de maneira automatizada. O grande problema é que esses dados normalmente são apresentados de forma não estruturada, e precisamos utilizar uma técnica chamada _scrapping_, que consiste em abrir uma página, carregar o HTML e navegar dentro desse código para extrair o que precisamos.
