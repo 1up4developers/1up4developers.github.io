@@ -30,7 +30,7 @@ Para isso, vamos abrir a página inicial da editora em http://www.casadocodigo.c
 
 ### Como fazer
 
-    É necessário ter algum conhecimento de Clojure e Leiningen para poder acompanhar este post. Dê uma lida no texto [Fazendo mágica com o REPL do Clojure](http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/) para aprender como criar um projeto.
+> É necessário ter algum conhecimento de Clojure e Leiningen para poder acompanhar este post. Dê uma lida no texto [Fazendo mágica com o REPL do Clojure](http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/) para aprender como criar um projeto.
 
 Vamos criar um projeto chamado `autores`, definir o namespace inicial e adicionar a biblioteca _Enlive_, que vai nos permitir extrair os dados que queremos de dentro do código HTML. O nosso arquivo project.clj vai ficar parecido com o exemplo abaixo:
 
