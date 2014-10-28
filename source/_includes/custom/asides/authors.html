@@ -1,0 +1,12 @@
+<section>
+  <h1>ls /authors</h1>
+  <ul id="authors">
+    {% for author in site.authors %}
+      {% if author[0] != 'admin' %}
+        <li class="author">
+          <a href="/{{ site.author_dir }}/{{ author[0] }}">{{ author[1].name }}</a> ({{ author[0] | author_post_count }})
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>

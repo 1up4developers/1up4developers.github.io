@@ -1,0 +1,23 @@
+box: wercker/rvm
+build:
+    steps:
+        - rvm-use:
+            version: 1.9.3
+        - bundle-install
+        - script:
+            name: generate
+            code: bundle exec rake generate
+deploy:
+    steps:
+        - add-ssh-key:
+            keyname: GITHUB
+        - script:
+            name: setup deploy
+            code: |
+                mkdir _deploy
+                cd _deploy
+                git init
+                git remote add origin git@github.com:1up4developers/1up4developers.github.io.git
+        - script:
+            name: publish
+            code: bundle exec rake deploy

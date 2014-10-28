@@ -1,0 +1,87 @@
+---
+author: rodrigopanachi
+comments: true
+date: 2009-10-23 13:21:22+00:00
+layout: post
+slug: rails-summit-2009
+title: Rails Summit 2009
+wordpress_id: 558
+categories:
+- eventos
+- rails
+tags:
+- railssummit
+- ruby
+- ruby on rails
+---
+
+Estamos de volta depois de algumas semanas de correria e muito trabalho, o que nos impediu de postar sobre vários assuntos atuais e experiências recentes. Também migramos de empresa. Agora o [Roger](http://1up4dev.org/author/rogerbarreto/) e eu estamos trabalhando em uma empresa maior, focada em conteúdo digital, desenvolvendo aplicações de grande porte com Ruby e Rails :)
+
+
+# O evento
+
+
+Se você não soube do [Rails Summit 2009](http://www.railssummit.com.br/) ou não sabe nem o que é Rails recomendo que acesse [este site](http://pbskids.org/teletubbies/). Deixando o sarcasmo de lado, a edição 2009 do Rails Summit foi muito boa. As palestras foram excelentes (com algumas poucas exceções). Os coffe-breaks e as [locagirls](http://github.com/railssummit/morena_opensource/tree/master/RailsSummit2009/) também!
+
+![Rails Summit 2009 Locaweb](/images/uploads/2009/10/4013425175_68b7b78b6f_original.jpg)
+
+Quem não conseguiu ir este ano pode conferir o que aconteceu e assistir a algumas palestras nos seguintes links:
+
+[http://akitaonrails.com/2009/10/17/rails-summit-2009-retrospectiva](http://github.com/leonardoborges/railssummit09)
+
+[http://andrefaria.com/2009/10/15/rails-summit-2009-chad-fowler/](http://andrefaria.com/2009/10/15/rails-summit-2009-chad-fowler/)
+
+[http://andrefaria.com/2009/10/19/rails-summit-gregg-pollack/](http://andrefaria.com/2009/10/19/rails-summit-gregg-pollack/)
+
+[http://marciotrindade.com/2009/10/13/rails-summit-2009-parte-1](http://marciotrindade.com/2009/10/13/rails-summit-2009-parte-1)
+
+[http://marciotrindade.com/2009/10/14/rails-summit-2009-parte-2](http://marciotrindade.com/2009/10/14/rails-summit-2009-parte-2)
+
+[http://marciotrindade.com/2009/10/16/rails-summit-2009-parte-3](http://marciotrindade.com/2009/10/16/rails-summit-2009-parte-3)
+
+
+# Rails não escala
+
+
+Das palestras técnicas, focadas em Ruby e Rails, destaco a do [Gregg Pollac](http://blog.envylabs.com): On The Edge of Rails Performance, que falou sobre algumas [ferramentas e plugins](http://andrefaria.com/2009/10/19/rails-summit-gregg-pollack/) para ajudar a melhorar a performance de aplicações Rails.
+
+O estreiante [Pratik Naik](http://m.onkey.org/2009/10/18/railssummit-slides) também deu algumas dicas muito boas para melhoar a performance e falou um bouco sobre suas experiências com Rails.
+
+Para finalizar, o [Bruno Miranda](http://brunomiranda.com/) fechou falando sobre sua experiência com o desenvolvimento do [Cyloop](http://br.msn.cyloop.com/), uma rede social de música, mostrando os problemas enfrentados com escalabilidade e as estratégias utilizadas para resolvê-los.
+
+E claro que não podia deixar de falar da excelente palestra do [Fábio Kung](http://www.slideshare.net/fabiokung/dsls-internas-e-ruby) sobre metaprogramação com Ruby, apresentando um hands-on, ou seja, <faustao>quem sabe faz ao vivo</faustao>, para criar uma DSL em Ruby e outras técnicas de magia negra como [Callbacks](http://coderrr.wordpress.com/2008/11/22/super-simple-callbacks-in-ruby/), que pretendo abordar com mais detalhes aqui no blog.
+
+Resumindo, projetar aplicações Rails escaláveis não é uma tarefa trivial e deve ser pensada com muito cuidado. Pretendo explorar mais este assunto nos próximos posts do blog.
+
+
+# Agilidade a seu favor
+
+
+Apesar de ser um evento sobre Rails, um tema predominante foi agile. A [largada](http://andrefaria.com/2009/10/15/rails-summit-2009-chad-fowler/) foi dada pelo [Chad Fowler](http://chadfowler.com/) que falou sobre a insurgência Ruby on Rails, incentivando o movimento ágil a "quebrar as regras", [parar de fazer as coisas que sabemos que estão erradas](http://chadfowler.com/2006/12/27/the-big-rewrite)! Também ressaltou que é preciso ter coragem e atitude para rejeitar os moldes corporativos e lutar contra os [trolls](http://akitaonrails.com/2009/03/30/off-topic-net-negative-producing-programmer), os [guardiões da cascata](http://1up4dev.org/2008/11/os-guardioes-da-cascata/).
+
+O [Akita](http://akitaonrails.com/) realmente surpreendeu com sua [palestra](http://vimeo.com/7099091) "Agile, beyond chaos". Explicou os princípios do [manifesto ágil](http://agilemanifesto.org/) e comprovou cientificamente o "porque" agile funciona!
+
+A palestra sobre empreendedorismo do [Vinícius Teles](http://improveit.com.br/empresa/vinicius) foi uma verdadeira aula, contando um pouco da sua história, as dificuldades e obstáculos superados até conseguir transformar o [Be on the Net](http://beonthe.net/) em realidade. Resumindo: ganhe dinheiro fazendo o que você gosta e ajudando as outras pessoas a ganhar dinheiro!
+
+Finalizando com chave de ouro, o [Obie Fernandez](http://obiefernandez.com/) falou sobre a "arte" do desenvolvimento de aplicações. Assim como um artista que precisa praticar muito para atingir a excelência, um programador precisa praticar e codificar muito... "O que você está esperando? Fuck the enterprise!"
+
+Resumindo, falou-se muito sobre agilidade usando ruby e rails como uma ferramenta pragmática. As empresas de software sérias já estão usando Ruby. É a [linguagem ideal para o modelo ágil](http://1up4dev.org/2009/08/ruby-quando-a-linguagem-de-programacao-faz-diferenca/).
+
+
+## Comentários do Roger
+
+
+Tomei a liberdade de adicionar uma nota neste post do [Panachi](http://1up4dev.org/author/rodrigopanachi/), pois como participante do [Rails Summit 2008](http://1up4dev.org/2008/10/rails-summit-eu-fui/), resumidamente notei três coisas do evento:
+
+
+
+	
+  * A infra estrutura do evento estava muito melhor, mais espaço, mais organização e sem o calor infernal do ano passado. Parabéns para o Akita e o pessoal da Locaweb pelo ótimo trabalho e evento mais uma vez!
+
+	
+  * Tivemos ótimas palestras técnicas sobre como melhorar a performance de aplicações Ruby!
+
+	
+  * Em 2008 a grande mensagem foi "Participe!". Ficou bem claro a importância de participar de projetos e contribuir. Este ano, a grande mensagem foi "_Fuck the Enterprise!_". :D
+
+
