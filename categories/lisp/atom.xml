@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lisp | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/lisp/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:30:35+00:00</updated>
+  <updated>2014-10-28T16:34:17+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -80,7 +80,7 @@
 
 <p>Visualmente, a página tem a aparência da imagem abaixo:</p>
 
-<p><img src="/images/uploads/10/cdc-full.png" alt="/images/uploads/10/cdc-full.png" /></p>
+<p><img src="/images/uploads/2014/10/cdc-parts.png" alt="/images/uploads/2014/10/cdc-parts.png" /></p>
 
 <p>Felizmente a página está bem estruturada e todos os links que nos interessam estão dentro da área <code>section</code>, o que vai nos poupar trabalho.</p>
 
