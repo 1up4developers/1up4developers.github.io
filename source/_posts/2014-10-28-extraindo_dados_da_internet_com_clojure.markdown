@@ -72,7 +72,7 @@ O primeiro passo é varrer a página inicial da editora e extrair os links dos l
 
 Visualmente, a página tem a aparência da imagem abaixo:
 
-![/images/uploads/10/cdc-full.png](/images/uploads/10/cdc-full.png)
+![/images/uploads/2014/10/cdc-parts.png](/images/uploads/2014/10/cdc-parts.png)
 
 Felizmente a página está bem estruturada e todos os links que nos interessam estão dentro da área `section`, o que vai nos poupar trabalho.
 
