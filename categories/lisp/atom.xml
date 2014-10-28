@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lisp | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/lisp/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:09:52+00:00</updated>
+  <updated>2014-10-28T16:15:51+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Extraindo dados da Internet com Clojure]]></title>
     <link href="http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure/"/>
-    <updated>2014-10-28T17:00:00+00:00</updated>
+    <updated>2014-10-28T12:10:00+00:00</updated>
     <id>http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure</id>
     <content type="html"><![CDATA[<h1>Extraindo dados da Internet com Clojure</h1>
 
@@ -79,7 +79,7 @@
 
 <p>Visualmente, a página tem a aparência da imagem abaixo:</p>
 
-<p><img src="/images/cdc-parts.png" alt="/images/cdc-full.png" /></p>
+<p><img src="/images/cdc-parts.png" alt="/images/uploads/10/cdc-full.png" /></p>
 
 <p>Felizmente a página está bem estruturada e todos os links que nos interessam estão dentro da área <code>section</code>, o que vai nos poupar trabalho.</p>
 
