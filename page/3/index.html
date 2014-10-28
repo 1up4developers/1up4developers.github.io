@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Motivação Meu primeiro contato com banco de dados relacionais foi o PostgreSQL, ou Postgres, nos tempos da faculdade. Achei muito complicado na época &hellip;">
+  <meta name="description" content="MinionServer is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,115 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/11/minionserver-a-real-server-to-mock-servers/">MinionServer - a Real Server to Mock Servers!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-11-28T15:49:06+00:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2012/11/minionserver-a-real-server-to-mock-servers/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/" data-text="MinionServer - a real server to mock servers!" data-via="1up4dev" data-counturl="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;minion_server&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># build your integration app</span>
+</span><span class='line'><span class="no">IntegrationApp</span> <span class="o">=</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Builder</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">map</span> <span class="s2">&quot;/&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">run</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
+</span><span class='line'>      <span class="o">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">},</span> <span class="o">[</span><span class="s2">&quot;Be happy!&quot;</span><span class="o">]]</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">server</span> <span class="o">=</span> <span class="no">MinionServer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">IntegrationApp</span><span class="p">)</span>
+</span><span class='line'><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">1620</span><span class="p">)</span>  <span class="c1"># default: localhost, 4000</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># do your calls</span>
+</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;curl http://localhost:1620&quot;</span> <span class="c1"># =&gt; &quot;Be happy!&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">server</span><span class="o">.</span><span class="n">shutdown</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
+Hope that helps!</p>
+
+<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1075,109 +1184,6 @@ user@ubuntu:~$ gem -v
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/06/tpw-e-mails-vs-reunioes/">TPW: E-mails vs Reuniões</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-13T09:00:59+00:00" pubdate data-updated="true">Jun 13<span>th</span>, 2011</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
-
-
-        
-         | <a href="/2011/06/tpw-e-mails-vs-reunioes/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes/" data-text="TPW: e-mails vs reuniões" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/06/tpw-e-mails-vs-reunioes/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>A cilada típica em ambientes corporativos:</p>
-
-<p><img src="http://lh5.ggpht.com/_JtWk7d3YRZo/S6k6MYuywBI/AAAAAAAALCE/eTVUncdC1s8/ciclocorporativo.jpg" alt="Ciclo corporativo" /></p>
-
-<h2>E agora, quem poderá nos ajudar?</h2>
-
-<p>Infelizmente, <strong>e-mails</strong> e <strong>reuniões</strong>, mesmo em ambientes ágeis, são inevitáveis, e na maioria das situações, tóxicos. Reuniões de 2 horas de duração ou 50 emails diários são sinais claros de que as coisas não andam muito bem.</p>
-
-<p>Atitudes ágeis tendem a evitar &ldquo;enrolações&rdquo; que desviem o foco da equipe ou desacelerem a produtividade. A seguir, algumas estratégias e dicas que podemos aplicar para quebrar um pouco essas práticas corporativas cascateiras, ajudar a manter o foco da equipe e produzir mais.</p>
-
-<h2>Reuniões</h2>
-
-<p>Simplesmente <strong>evite reuniões</strong>, com temor! Tente resolver os problemas com <strong>conversas cara-a-cara</strong>, na sua mesa mesmo. Se precisar discutir um assunto por mais de 5 minutos, convide as pessoas envolvidas para um cafézinho, de preferência em pé.</p>
-
-<p>Se não puder evitar a reunião, <strong>defina com antecipação</strong>: 1) o(s) <strong>objetivo</strong>(s) e 2) a <strong>duração máxima</strong>. Limite qualquer reunião a no máximo 5 participantes e duração de 15 minutos. Acredite: é  suficiente.</p>
-
-<p>Se um problema for muito complexo para ser resolvido em uma reunião de 15 minutos, <strong>quebre o problema em problemas menores</strong>, e discuta um de cada vez. Os próximos problemas devem ser discutidos somente quando o problema anterior for resolvido.</p>
-
-<p>Antes de começar qualquer discussão, faça com que todos presentes tomem ciência dos <strong>objetivos e da duração máxima</strong>. Assim que alcançarem os objetivos ou o tempo se esgotar, termine a discussão imediatamente! Não dê oportunidade para que alguém inicie uma nova discussão desnecessária.</p>
-
-<p><strong>Diga não</strong>! Em certas ocasiões, é a melhor resposta. Se você não é o responsável por determinado problema, desconhece ou não pode ajudar plenamente, simplesmente diga &ldquo;não, obrigado&rdquo;.</p>
-
-<h2>E-mails</h2>
-
-<p>Alguns problemas podem ser resolvidos com um simples e-mail, é verdade. A única regra que devemos seguir é a do &ldquo;passa, repassa ou paga&rdquo;. <strong>Não deixe os e-mails passarem das tréplicas</strong>. Se depois de 3 e-mails o problema ainda não foi resolvido, convide os envolvidos para tomar um cafezinho.</p>
-
-<p><strong>E-mail não é chat</strong>. O time deve conversar cara-a-cara, incluindo os clientes. Trocar mais do que 5 e-mails diários entre a equipe é um mau sinal. Se não puder falar pessoalmente, <strong>use o telefone ou skype</strong> ao invés de mandar um e-mail que pode ser facilmente ignorado pelo destinatário.</p>
-
-<p><strong>E-mail não é documentação</strong>. Não é preciso enviar um e-mail a cada decisão tomada pelo cliente ou pelo time. Se algo importante foi decidido, converse pessoalmente com os envolvidos.</p>
-
-<p>Finalmente, use o e-mail com sabedoria, para trocar informações importantes e relevantes entre a equipe. <strong>E-mail não deve ser regra</strong>, e sim um suporte para comunicação entre a equipe. Lembre-se: <strong>quanto mais e-mails você enviar, maior a chance de ser ignorado.</strong></p>
-
-<h2>Resumo</h2>
-
-<p>Reuniões e e-mails são tóxicos. Evite-os! Se não puder evitar, use-os com sabedoria.</p>
-
-<p>Se identificou com alguma situação? Acha que essas dicas &ldquo;choveram no molhado&rdquo;? Concorda, discorda, quer complementar algo? Use os comentários.</p>
-
-<p><strong>Reflexão: quais dessas práticas você aplica no seu cotidiano profissional?</strong></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1200,6 +1206,10 @@ user@ubuntu:~$ gem -v
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
       </li>
     
@@ -1213,10 +1223,6 @@ user@ubuntu:~$ gem -v
     
       <li class="post">
         <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
       </li>
     
   </ul>
@@ -1245,7 +1251,7 @@ user@ubuntu:~$ gem -v
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (16)
+          <a href="/author/pbalduino">Plínio Balduino</a> (17)
         </li>
       
     
@@ -1338,6 +1344,8 @@ user@ubuntu:~$ gem -v
       <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
     
       <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
+    
+      <a class='category' href='/categories/cookbook/'>cookbook</a>&nbsp;
     
   </p>
 </section>

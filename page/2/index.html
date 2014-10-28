@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter &hellip;">
+  <meta name="description" content="Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,159 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-27T12:42:18+00:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/" data-text="[QuickTips] Usando Shell Script como suite de teste" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
+
+<p>Dependências:</p>
+
+<ul>
+<li><p>bash</p></li>
+<li><p>curl</p></li>
+</ul>
+
+
+<p>Foi testado no Ubuntu 13.04.</p>
+
+<p>Obs: Vou embedar <a href="https://gist.github.com/rogerleite/5869576">este gist</a>, e pode ser que não apareça no seu reader ;D.</p>
+
+<p>Obs2: Este post é uma versão pt-br deste post no coderwall <a href="https://coderwall.com/p/nsso8w">Using Shell Script to test your server</a>.</p>
+
+<figure class='code'><figcaption><span>test.sh </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>  <span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">URL</span><span class="o">=</span>http://localhost:8080
+</span><span class='line'>
+</span><span class='line'><span class="c">## Unit-Testable Shell Scripts (http://eradman.com/posts/ut-shell-scripts.html)</span>
+</span><span class='line'><span class="nb">typeset</span> -i <span class="nv">tests_run</span><span class="o">=</span>0
+</span><span class='line'><span class="k">function </span>try <span class="o">{</span> <span class="nv">this</span><span class="o">=</span><span class="s2">&quot;$1&quot;</span>; <span class="o">}</span>
+</span><span class='line'><span class="nb">trap</span> <span class="s1">&#39;printf &quot;$0: exit code $? on line $LINENO\nFAIL: $this\n&quot;; exit 1&#39;</span> ERR
+</span><span class='line'><span class="k">function </span>assert <span class="o">{</span>
+</span><span class='line'>    <span class="nb">let </span>tests_run+<span class="o">=</span>1
+</span><span class='line'>    <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">=</span> <span class="s2">&quot;$2&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="o">{</span> <span class="nb">echo</span> -n <span class="s2">&quot;.&quot;</span>; <span class="k">return</span>; <span class="o">}</span>
+</span><span class='line'>    <span class="nb">printf</span> <span class="s2">&quot;\nFAIL: $this\n&#39;$1&#39; != &#39;$2&#39;\n&quot;</span>; <span class="nb">exit </span>1
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'><span class="c">## end</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">###############################################################</span>
+</span><span class='line'>
+</span><span class='line'>try <span class="s2">&quot;Example of GET and test for 404 status&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>curl -s -w <span class="s2">&quot;%{http_code}&quot;</span> <span class="nv">$URL</span><span class="k">)</span>
+</span><span class='line'>assert <span class="s2">&quot;404&quot;</span> <span class="s2">&quot;$out&quot;</span>
+</span><span class='line'>
+</span><span class='line'>try <span class="s2">&quot;Example of POST XML&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Post xml (from hello.xml file) on /hello</span>
+</span><span class='line'><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>cat <span class="nb">test</span>/hello.xml | curl -s -H <span class="s2">&quot;Content-Type: text/xml&quot;</span> -d @- <span class="se">\</span>
+</span><span class='line'>  -X POST <span class="nv">$URL</span>/hello<span class="k">)</span>
+</span><span class='line'>assert <span class="s2">&quot;Hello World&quot;</span> <span class="s2">&quot;$out&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">###############################################################</span>
+</span><span class='line'><span class="nb">echo</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;PASS: $tests_run tests run&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Referências:</p>
+
+<p><a href="http://eradman.com/posts/ut-shell-scripts.html">Unit-Testable Shell Scripts</a></p>
+
+<p>Aguardo dicas, sugestões, experiências etc.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1104,115 +1257,6 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/minionserver-a-real-server-to-mock-servers/">MinionServer - a Real Server to Mock Servers!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-28T15:49:06+00:00" pubdate data-updated="true">Nov 28<span>th</span>, 2012</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2012/11/minionserver-a-real-server-to-mock-servers/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/" data-text="MinionServer - a real server to mock servers!" data-via="1up4dev" data-counturl="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;minion_server&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># build your integration app</span>
-</span><span class='line'><span class="no">IntegrationApp</span> <span class="o">=</span> <span class="ss">Rack</span><span class="p">:</span><span class="ss">:Builder</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span>
-</span><span class='line'>  <span class="n">map</span> <span class="s2">&quot;/&quot;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="n">run</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">env</span><span class="o">|</span>
-</span><span class='line'>      <span class="o">[</span><span class="mi">200</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;Content-Type&quot;</span> <span class="o">=&gt;</span> <span class="s2">&quot;text/plain&quot;</span><span class="p">},</span> <span class="o">[</span><span class="s2">&quot;Be happy!&quot;</span><span class="o">]]</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="k">end</span>
-</span><span class='line'><span class="k">end</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">server</span> <span class="o">=</span> <span class="no">MinionServer</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="no">IntegrationApp</span><span class="p">)</span>
-</span><span class='line'><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">1620</span><span class="p">)</span>  <span class="c1"># default: localhost, 4000</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1"># do your calls</span>
-</span><span class='line'><span class="nb">system</span> <span class="s2">&quot;curl http://localhost:1620&quot;</span> <span class="c1"># =&gt; &quot;Be happy!&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">server</span><span class="o">.</span><span class="n">shutdown</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can see more examples at <a href="https://github.com/rogerleite/http_monkey">http_monkey</a>&rsquo;s integration tests.
-Hope that helps!</p>
-
-<p><strong>pt-br moment</strong>: Está em inglês porque eu publiquei no <a href="https://coderwall.com/p/ibr4ig">coderwall</a> e depois tive a idéia brilhante de postar aqui, com a preguiça mais brilhante ainda de traduzir em pt-br.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1235,6 +1279,10 @@ Hope that helps!</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
       </li>
     
@@ -1248,10 +1296,6 @@ Hope that helps!</p>
     
       <li class="post">
         <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/">[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT</a>
       </li>
     
   </ul>
@@ -1280,7 +1324,7 @@ Hope that helps!</p>
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (16)
+          <a href="/author/pbalduino">Plínio Balduino</a> (17)
         </li>
       
     
@@ -1373,6 +1417,8 @@ Hope that helps!</p>
       <a class='category' href='/categories/continuous-delivery/'>continuous delivery</a>&nbsp;
     
       <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
+    
+      <a class='category' href='/categories/cookbook/'>cookbook</a>&nbsp;
     
   </p>
 </section>

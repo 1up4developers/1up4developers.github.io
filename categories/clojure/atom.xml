@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/clojure/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-09-24T01:11:14+00:00</updated>
+  <updated>2014-10-28T16:09:52+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -12,6 +12,326 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Extraindo dados da Internet com Clojure]]></title>
+    <link href="http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure/"/>
+    <updated>2014-10-28T17:00:00+00:00</updated>
+    <id>http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure</id>
+    <content type="html"><![CDATA[<h1>Extraindo dados da Internet com Clojure</h1>
+
+<h2>O problema</h2>
+
+<p>A Internet é um repositórios de dados gigantesco e frequentemente precisamos extrair algo que nos interessa de maneira automatizada. O grande problema é que esses dados normalmente são apresentados de forma não estruturada, e precisamos utilizar uma técnica chamada <em>scrapping</em>, que consiste em abrir uma página, carregar o HTML e navegar dentro desse código para extrair o que precisamos.</p>
+
+<p>Com o uso das ferramentas certas isso não é complicado, mas pode ser trabalhoso e, uma vez que a página que você estiver lendo altere alguma coisa em sua estrutura, você terá que adaptar seu código às mudanças.</p>
+
+<p>Vamos apresentar um exemplo simples, mas que vai te dar uma boa base de como extrair dados de uma página utilizando Clojure.</p>
+
+<h2>Quem escreveu mais livros na Casa do Código?</h2>
+
+<p>A Casa do Código é uma editora brasileira especializada em livros para desenvolvedores de software, empreendedores e webdesigners. Seus autores são profissionais conhecidos em suas respectivas áreas e precisamos saber quais deles escreveram mais livros.</p>
+
+<p>Para isso, vamos abrir a página inicial da editora em <a href="http://www.casadocodigo.com.br/,">http://www.casadocodigo.com.br/,</a> que contém links para todos os livros publicados até o momento. Com esses links em mãos, vamos entrar em cada um deles e extrair os nomes dos autores para em seguida agrupá-los e apresentarmos o resultado.</p>
+
+<h3>Como fazer</h3>
+
+<p>Vamos criar um projeto chamado <code>autores</code>, definir o namespace inicial e adicionar a biblioteca <em>Enlive</em>, que vai nos permitir extrair os dados que queremos de dentro do código HTML. O nosso arquivo project.clj vai ficar parecido com o exemplo abaixo:</p>
+
+<pre><code>(defproject autores "0.1.0-SNAPSHOT"
+  ; informações de licença e descrição do projeto
+
+  :dependencies [[org.clojure/clojure "1.6.0"]
+                 [enlive "1.1.5"]]
+  :main autores.core)
+</code></pre>
+
+<p>Enlive é uma biblioteca criada por Christophe Grand, coautor de Clojure Programming, que permite que você gere código HTML escrevendo em Clojure, e permite também que você extraia textos de um arquivo HTML já existente.</p>
+
+<p>Para utilizarmos o Enlive em nosso código, vamos referenciar as funções na nossa declaração de namespace. Vamos também adicionar o <em>Pretty Print</em> para exibir o resultado formatado e as bibliotecas do <em>clojure.string</em> para manipularmos o texto. Também vamos precisar importar a classe <code>java.net.URL</code> para tratarmos o endereço do site. Nosso código então começa assim:</p>
+
+<pre><code>(ns autores.core
+  (:require [clojure.pprint :as pp]
+            [net.cgrand.enlive-html :as en]
+            [clojure.string :as str])
+  (:import  [java.net URL]))
+</code></pre>
+
+<p>O primeiro passo é varrer a página inicial da editora e extrair os links dos livros. Abrindo o código fonte da página, percebemos que ela tem a seguinte estrutura, que aqui está devidamente resumida para fins de apresentação:</p>
+
+<pre><code>&lt;html&gt;
+&lt;head&gt;
+  &lt;!-- titulo, meta, etc --&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;nav&gt;
+    &lt;!-- menu do topo --&gt;
+  &lt;/nav&gt;
+  &lt;section&gt;
+    &lt;!-- links e imagens com os livros --&gt;
+  &lt;/section&gt;
+  &lt;footer&gt;
+    &lt;!-- menu do rodapé --&gt;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<p>Visualmente, a página tem a aparência da imagem abaixo:</p>
+
+<p><img src="/images/cdc-parts.png" alt="/images/cdc-full.png" /></p>
+
+<p>Felizmente a página está bem estruturada e todos os links que nos interessam estão dentro da área <code>section</code>, o que vai nos poupar trabalho.</p>
+
+<p>Vamos criar uma função chamada <code>get-links</code>, que vai receber a URL do site em formato texto e vamos extrair todo o código HTML usando a função <code>html-resource</code> do Enlive.</p>
+
+<pre><code>(defn- get-links [url]
+  (en/html-resource (URL. url)))
+</code></pre>
+
+<p>Perceba que a função <code>html-resource</code> exige que você converta a URL de texto para um objeto <code>java.net.URL</code>, para só então o passarmos como parâmetro para o Enlive.</p>
+
+<p>Para evitar que o encadeamento de muitas funções torne o código difícil de ler, vamos alterá-lo para utilizar o operador <code>-&gt;</code> e vamos guardar o resultado em um <em>binding</em> chamado <code>links</code>. Perceba que essa abordagem permite que possamos adicionar funções no final da lista de argumentos de <code>-&gt;</code> sem diminuir a legibilidade do código.</p>
+
+<pre><code>(defn- get-links [url]
+  (let [links (-&gt; url
+                  URL.
+                  en/html-resource)]
+    (pp/pprint links)))
+</code></pre>
+
+<p>Vamos então usar a função <code>select</code>, também do Enlive, que recebe como argumento um <em>vector</em> com as tags que você deseja extrair. Nós queremos somente os links, formados pela tag <code>&lt;a&gt;&lt;/a&gt;</code>, que estão contidas entre <code>&lt;section&gt;</code> e <code>&lt;/section&gt;</code>.</p>
+
+<pre><code>(defn- get-links [url]
+  (let [links (-&gt; url
+                  URL. 
+                  en/html-resource
+                  (en/select [:body :section :a]))]))
+</code></pre>
+
+<p>A função <code>select</code> vai nos retornar uma lista contendo um <em>map</em> para cada elemento HTML que obedecer aos nossos requisitos. Cada <em>map</em> tem um item <code>:attrs</code> que contém os atributos da tag HTML, incluindo a página para a qual o link está apontando. Ainda dentro da função <code>get-links</code>, vamos converter essa lista de mapas em uma lista que contenha apenas os endereços e para isso vamos usar a função <code>map</code>, que recebe como parâmetros a função que vai transformar cada item da lista e a lista a ser transformada. Para fins de didática, vamos suprimir o código que está dentro de <code>let</code>, para só no final da explicação mostrarmos a função completa.</p>
+
+<pre><code>  (map #((% :attrs) :href) 
+       links)
+</code></pre>
+
+<p>Agora nossa função está retornando uma lista de links como na listagem abaixo, devidamente resumida:</p>
+
+<pre><code>("/products/livro-programador-apaixonado"
+ "/products/livro-aspnet-mvc"
+ "/products/livro-jpa-eficaz"
+ "/products/livro-photoshop"
+ "/products/colecao-frameworks-java"
+ ...
+ "/products/livro-ciencia-da-computacao-com-jogos"
+ "/products/vale-presente")
+</code></pre>
+
+<p>Os links são relativos à URL da página inicial, então vamos adicionar o endereço que que foi passado para a função <code>get-links</code> para torná-los absolutos. Note que nessa lista existem links que não são de livros, mas de coleções e do vale presente. Podemos eliminá-los usando a função <code>filter</code>, que recebe como parâmetros uma função que retorna <code>true</code> ou <code>false</code> de acordo com cada item da lista, e a lista a ser filtrada que é passada como terceiro parâmetro. Os itens que fizerem a função retornar <code>true</code> ficam, e os demais não são incluidos.</p>
+
+<pre><code>(filter
+  #(. % contains "livro")
+  (map #(str url ((% :attrs) :href)) 
+       links))
+</code></pre>
+
+<p>E agora nossa função retorna os endereços absolutos de todos os livros da editora, conforme a listagem abaixo:</p>
+
+<pre><code>("http://www.casadocodigo.com.br/products/livro-programador-apaixonado"
+ "http://www.casadocodigo.com.br/products/livro-aspnet-mvc"
+ "http://www.casadocodigo.com.br/products/livro-jpa-eficaz"
+ "http://www.casadocodigo.com.br/products/livro-photoshop"
+ ...
+ "http://www.casadocodigo.com.br/products/livro-ciencia-da-computacao-com-jogos")
+</code></pre>
+
+<p>Agora que concluímos o primeiro passo da nossa pesquisa, vamos editar o código da nossa função <code>main</code> para que a função <code>get-links</code> seja chamada:</p>
+
+<pre><code>(defn -main [&amp; args]
+  (pp/pprint
+    (get-links "http://www.casadocodigo.com.br")))
+</code></pre>
+
+<p>Vamos criar agora uma função chamada <code>get-author</code>, que vai receber cada um dos links e, usando as funções do Enlive que já conhecemos, vai extrair o nome do autor, ou dos autores, de cada um dos livros.</p>
+
+<p>Os nomes dos autores ficam dentro de uma tag <code>span</code> marcada com a classe <code>product-author-link</code>. Mais uma vez o site bem construído nos ajuda na tarefa. Para pesquisarmos uma tag que esteja utilizando determinada classe, vamos separar tag e classe com um ponto final, como se fosse um arquivo CSS. Assim, o nosso <code>span</code> com a classe <code>product-author-link</code> vai virar <code>:span.product-author-link</code>. O código inicial não vai ficar muito diferente do que fizemos em <code>get-links</code>:</p>
+
+<pre><code>(defn- get-author [url]
+  (let [authors (-&gt; url
+                    URL.
+                    en/html-resource
+                    (en/select [:span.product-author-link]))]
+      (pp/pprint authors)))
+</code></pre>
+
+<p>Vamos usar o link do primeiro livro para testar. O resultado traz toda a informação da tag <code>span</code> dentro de um map que está dentro de uma lista, e não só o nome do autor.</p>
+
+<pre><code>(get-author "http://www.casadocodigo.com.br/products/livro-programador-apaixonado")
+
+({:tag :span,
+  :attrs {:class "product-author-link"},
+  :content
+  ("\n          \n            Chad Fowler\n          \n        ")})
+</code></pre>
+
+<p>Novamente vamos suprimir o código que está dentro do <code>let</code> para não poluir o texto. Vamos selecionar o <em>map</em> que está dentro da lista usando a função <code>first</code> e, em seguida, utilizar somente o valor que está na chave <code>:content</code>:</p>
+
+<pre><code>((first authors) :content)
+</code></pre>
+
+<p>O valor que estava em <code>:content</code> também é uma lista contendo o nome do autor. Além do nome do autor, o texto está poluído com quebras de linhas, simbolizado por <code>\n</code> e espaços em branco. Vamos utilizar a função <code>replace</code> do namespace <code>clojure.string</code> para remover esses caracteres indesejados. Essa função recebe como parâmetros o texto original, uma expressão regular indicando o que deve ser alterado e, por último, o texto a ser utilizado na alteração.</p>
+
+<p>Vamos utilizar o operador <code>-&gt;</code> para facilitar a leitura:</p>
+
+<pre><code>(-&gt; ((first authors) :content)
+    first
+    (str/replace #"(\n|  )" ""))
+</code></pre>
+
+<p>Ao executar a função, temos o nome do autor limpo e sem caracteres indesejados:</p>
+
+<pre><code>(get-author "http://www.casadocodigo.com.br/products/livro-programador-apaixonado")
+=&gt; "Chad Fowler"
+</code></pre>
+
+<p>Tudo certo quando estamos lidando com um livro escrito por apenas um autor, mas quando temos coautorias a nossa função já não faz o que é esperado. Por exemplo, no livro de ASP.NET MVC, nossa função retorna o autor como <code>Fabrício Sanchez e Márcio Fábio Althmann</code>, e no livro de Lógica de Programação temos <code>Paulo Silveira, Adriano Almeida</code>. Tanto <code>,</code> como <code>e</code> são usados para separar os nomes dos autores.
+Vamos fazer a nossa função retornar um <em>vector</em> com os nomes dos autores separados utilizando a função <code>split</code>, do namespace <code>clojure.string</code>. Essa função recebe como argumentos o texto a ser dividido e uma expressão regular indicando onde o texto deve ser dividido:</p>
+
+<pre><code>(-&gt; ((first authors) :content)
+    first
+    (str/replace #"(\n|  )" "")
+    (str/split #"(, | e )"))
+</code></pre>
+
+<p>Agora temos os nomes dos autores separados corretamente dentro um <em>vector</em>, como no exemplo abaixo:</p>
+
+<pre><code>(get-author "http://www.casadocodigo.com.br/products/livro-programacao")
+=&gt; ["Paulo Silveira" "Adriano Almeida"]
+</code></pre>
+
+<p>Voltando à nossa função <code>-main</code>, vamos fazer com que a função <code>get-author</code> pega os autores de cada um dos links retornados pela função <code>get-links</code>. Vamos usar o operador <code>-&gt;&gt;</code> para deixar mais fácil de entender as transformações que estamos fazendo nos dados. A diferença para o <code>-&gt;</code> é que o operador <code>-&gt;&gt;</code> passa o resultado da expressão como último parâmetro da expressão seguinte, enquanto o operador <code>-&gt;</code> passa como primeiro. Isso é necessário para podermos passar a lista retornada por <code>get-links</code> para a função <code>map</code> da expressão seguinte:</p>
+
+<pre><code>(defn -main [&amp; args]
+  (pp/pprint
+    (-&gt;&gt; "http://www.casadocodigo.com.br"
+         get-links
+         (map get-author))))
+</code></pre>
+
+<p>A nossa função <code>-main</code> retornou uma lista contendo vários <em>vector</em> com os nomes dos autores. Um livro com mais de um autor vai retornar um <em>vector</em> com mais de um nome.</p>
+
+<pre><code>(["Chad Fowler"]
+ ["Fabrício Sanchez" "Márcio Fábio Althmann"]
+ ...
+ ["Mauricio Tollin" "Rodrigo Gomes" "Anderson Leite"]
+ ...
+ ["André Backes"]
+ ["Bruno Feijó" "Esteban Clua" "Flávio S. Correa da Silva"])
+</code></pre>
+
+<p>Vamos utilizar a função <code>flatten</code> para converter essa lista de <em>vectors</em> de diversos tamanhos em uma lista de uma dimensão. Isso vai nos permitir calcular quantas vezes cada nome aparece na lista por meio da função <code>frequencies</code>. Como cada vez que o nome aparece é um livro escrito por aquele autor, podemos entender que <code>frequencies</code> vai atribuir o número de livros que aquele autor tem publicado pela Casa do Código:</p>
+
+<pre><code>(defn -main [&amp; args]
+  (pp/pprint
+    (-&gt;&gt; "http://www.casadocodigo.com.br"
+         get-links
+         (map get-author)
+         flatten
+         frequencies)))
+</code></pre>
+
+<p>Agora temos uma lista não ordenada com o nome do autor e a quantidade de livros publicados:</p>
+
+<pre><code>{"Caio Ribeiro Pereira" 1,
+ "Fabrício Sanchez" 1,
+ "Alexandre Saudate" 2,
+ "Chad Fowler" 1,
+ ...
+ "Gabriel Schade Cardoso" 1,
+ "Guilherme Moreira" 1}
+</code></pre>
+
+<p>Nosso próximo passo é ordenar essa lista, deixando os autores com maior número de livros no topo. Para isso vamos usar a função <code>sort</code>, que permite que você informe uma função para selecionar o critério de ordenação, que no nosso caso vai ser a função <code>last</code>, que retorna o último item de uma lista, e também a função que vai ser usada para comparar um item com outro e definir quem vem primeiro, que nosso caso vai ser <code>&gt;</code>. No caso do <code>last</code>, convém deixar claro que vamos pegar o último item do que vai ser comparado. No caso de <code>"Caio Ribeiro Pereira" 1</code>, o último item é o número 1. Se quisessemos ordenar por nome, usariámos a função <code>first</code>.</p>
+
+<p>Em seguida vamos dividir essa lista em <em>n</em> grupos, de acordo com a quantidade de livros publicados usando a função <code>partition-by</code>. No nosso exemplo teremos um grupo com autores que tenham dois livros publicados e outro com autores com apenas um livro. Como nos interessa apenas os autores que mais publicaram livros, vamos usar a função <code>first</code> para selecionarmos apenas o primeiro grupo. Com isso nosso código ficará assim:</p>
+
+<pre><code>(defn -main [&amp; args]
+  (pp/pprint
+    (-&gt;&gt; "http://www.casadocodigo.com.br"
+         get-links
+         (map get-author)
+         flatten
+         frequencies
+         (sort-by last &gt;)
+         (partition-by last)
+         first)))
+</code></pre>
+
+<p>Agora temos o resultado abaixo:</p>
+
+<pre><code>(["Alexandre Saudate" 2]
+ ["Sérgio Lopes" 2]
+ ["Paulo Silveira" 2]
+ ["Tárcio Zemel" 2]
+ ["Anderson Leite" 2]
+ ["Mauricio Aniche" 2]
+ ["Gilliard Cordeiro" 2]
+ ["Hébert Coelho" 2]
+ ["Eduardo Guerra" 2]
+ ["Rafael Steil" 2])
+</code></pre>
+
+<p>Agora que temos a lista dos maiores autores, vamos otimizar um o nosso código adicionando uma dose de processamento paralelo. Note que a função <code>get-links</code> retorna uma lista de endereços que é passada como parâmetro para a função <code>map</code>, que passa endereço por endereço para a função <code>get-author</code>, sequencialmente. Se trocarmos <code>map</code> por <code>pmap</code>, serão criadas threads que executarão <code>get-author</code> em paralelo, melhorando o tempo total do nosso código. A quantidade de thread criadas por <code>pmap</code> está diretamente ligada ao número de núcleos ou processadores que sua máquina tiver.</p>
+
+<p>Porém, o uso de <code>pmap</code> pode trazer um problema: é comum que a aplicação fique congelada por até um minuto após a execução do <code>pmap</code> por conta de questões internas de timeout de threads e configurações do pool utilizado pelo Clojure. Para resolver isso, devemos solicitar ao Clojure que finalize todas as thread que não estiverem sendo usadas, liberando-as para que o programa possa ser encerrado. Para isso usamos a função <code>shutdown-agents</code> na última linha da função <code>-main</code>.</p>
+
+<p>Agora temos o nosso código funcionando alguns segundos mais rápido e trazendo os autores que mais publicaram livros pela Casa do Código.</p>
+
+<h3>Código completo</h3>
+
+<pre><code>(ns autores.core
+  (:require [clojure.pprint :as pp]
+            [net.cgrand.enlive-html :as en]
+            [clojure.string :as str])
+  (:import  [java.net URL]))
+
+(defn- get-links [url]
+  (let [links (-&gt; url
+                  URL. 
+                  en/html-resource
+                  (en/select [:body :section :a]))]
+      (filter
+        #(. % contains "livro")
+        (map #(str url ((% :attrs) :href)) 
+             links))))
+
+(defn- get-author [url]
+  (let [authors (-&gt; url
+                    URL.
+                    en/html-resource
+                    (en/select [:span.product-author-link]))]
+    (str/split
+      (str/replace
+        (first
+          ((first authors) :content))
+        #"(\n|  )" "")
+      #"(, | e )")))
+
+(defn -main [&amp; args]
+  (println "Os autores com mais publicações na Casa do Código:")
+  (pp/pprint
+    (-&gt;&gt; "http://www.casadocodigo.com.br"
+         get-links
+         (pmap get-author)
+         flatten
+         frequencies
+         (sort-by last &gt;)
+         (partition-by last)
+         first))
+  (shutdown-agents))
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
