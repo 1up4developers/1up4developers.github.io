@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Extraindo dados da Internet com Clojure"
-date: 2014-10-28 17:00
+date: 2014-10-28 12:10
 author: 'pbalduino'
 comments: true
 categories:
@@ -72,7 +72,7 @@ O primeiro passo é varrer a página inicial da editora e extrair os links dos l
 
 Visualmente, a página tem a aparência da imagem abaixo:
 
-![/images/cdc-full.png](/images/cdc-parts.png)
+![/images/uploads/10/cdc-full.png](/images/cdc-parts.png)
 
 Felizmente a página está bem estruturada e todos os links que nos interessam estão dentro da área `section`, o que vai nos poupar trabalho.
 
