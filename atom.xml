@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:34:17+00:00</updated>
+  <updated>2014-10-28T16:36:16+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -34,8 +34,7 @@
 
 <h3>Como fazer</h3>
 
-<pre><code>É necessário ter algum conhecimento de Clojure e Leiningen para poder acompanhar este post. Dê uma lida no texto [Fazendo mágica com o REPL do Clojure](http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/) para aprender como criar um projeto.
-</code></pre>
+<blockquote><p>É necessário ter algum conhecimento de Clojure e Leiningen para poder acompanhar este post. Dê uma lida no texto <a href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a> para aprender como criar um projeto.</p></blockquote>
 
 <p>Vamos criar um projeto chamado <code>autores</code>, definir o namespace inicial e adicionar a biblioteca <em>Enlive</em>, que vai nos permitir extrair os dados que queremos de dentro do código HTML. O nosso arquivo project.clj vai ficar parecido com o exemplo abaixo:</p>
 
