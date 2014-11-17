@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Paginação é um recurso simples e indispensável em qualquer aplicação séria. Em se tratando de Rails, a solução mais popular é a gem WillPaginate que &hellip;">
+  <meta name="description" content="Na Engenharia de Software, um caso de uso (ou use case) é um tipo de classificador representando uma unidade funcional coerente provida pelo sistema &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,119 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/07/cuidado-com-casos-de-uso/">Cuidado Com Casos De Uso</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-07-21T06:45:58-03:00" pubdate data-updated="true">Jul 21<span>st</span>, 2009</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2009/07/cuidado-com-casos-de-uso/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/07/cuidado-com-casos-de-uso/" data-text="Cuidado com Casos de Uso" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/07/cuidado-com-casos-de-uso/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/07/cuidado-com-casos-de-uso/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/07/cuidado-com-casos-de-uso/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Na Engenharia de Software, um caso de uso (ou <em>use case</em>) é um tipo de classificador representando uma unidade funcional coerente provida pelo sistema, subsistema, ou classe manifestada por seqüências de mensagens intercambiáveis entre os sistemas e um ou mais atores. Pode ser representado por uma elipse contendo, internamente, o nome do caso de uso. (fonte: <a href="http://pt.wikipedia.org/wiki/Caso_de_uso">Wikipédia</a>)</p>
+
+<p>A própria explicação do Caso de Uso demonstra o que costumam ser na prática, ou seja, um monte de <em>buzzwords</em> para enganar o usuário e levar a sua assinatura. Este por sinal, só é citado no segundo parágrafo&hellip;</p>
+
+<h2>É uma cilada Bino!!!</h2>
+
+<p><a href="http://pt.wikipedia.org/wiki/Carga_Pesada"><img src="/images/uploads/2009/07/cilada_bino.jpg" alt="" /></a></p>
+
+<p>Pontos negativos que podem tornar numa cilada:</p>
+
+<ul>
+<li><p>Não tem público definido. Casos de Uso são feitos para os analistas, desenvolvedores, testadores e as vezes para o usuário.</p></li>
+<li><p>Casos de Uso não compilam. O usuário quer um sistema e não papéis para assinar.</p></li>
+<li><p>Não traz o famoso ROI, traduzindo, retorno de investimento. Já vi muitos projetos de &ldquo;anos em análise&rdquo;, e no final, tinham uma bíblia inútil junto com um grande rombo nas contas.</p></li>
+<li><p>Difícil de manter atualizado. É natural que as coisas mudem, e a cada mudança ter que atualizar quilos de documentos, não é prático e muito caro.</p></li>
+<li><p>Pelo fato de terem um público abrangente, é consumido muito tempo com detalhes inúteis, como diagramas de &ldquo;tudo&rdquo;, que não ajudam em nada no desenvolvimento. Mais um item que consome tempo, recurso e muito dinheiro.</p></li>
+</ul>
+
+
+<p>A lista pode continuar fácil, mas devemos ir para a parte que interessa:</p>
+
+<h2>Como corresponder a expectativa do usuário?</h2>
+
+<p>Vou colocar o que está dando certo para mim. Caso encontrem alguma semelhança com o capítulo 7 do <a href="http://www.pragprog.com/titles/tpp/the-pragmatic-programmer">Pragmatic Programmer</a>, não estranhem, foi de lá mesmo que eu me &ldquo;inspirei&rdquo;.</p>
+
+<p>Nada melhor do que a dica 51 (uma boa idéia!) para começar:</p>
+
+<p><em>Don&rsquo;t gather requirements &mdash; Dig for them</em></p>
+
+<p>Numa tradução livre e tosca, colocaria assim:</p>
+
+<p>Não reuna requisitos, cave-os!</p>
+
+<ul>
+<li><p>Este negócio de &ldquo;cavar&rdquo;, é algo como: descobrir por que o usuário faz, e não somente como. Descobrindo o por que, você consegue sugerir maneiras diferentes de como fazer. Isso nos leva a próxima dica.</p></li>
+<li><p>Lembre-se que, requisitos não são arquitetura, nem design, muito menos interface do usuário. Requisitos são necessidades!</p></li>
+<li><p>Não seja escravo de nenhuma anotação. Use o melhor método que se comunica com o seu público. No meu caso, papel e caneta, com rascunhos da futura tela, já está funcionando e bem.</p></li>
+<li><p>Não ter medo de sugerir novas idéias. Acredito que se dependesse da maioria dos usuários, todos os sistemas teriam cara de Excel! :D Com o porque em mente, fica mais fácil sugerir funcionalidades como filtros, layout etc.</p></li>
+<li><p><em>Some things are better done, than described.</em> &ndash;> Algumas coisas são melhores feitas do que descritas. Pra mim, esta dica tem funcionado com reformulação de telas, algum &ldquo;filtro maluco&rdquo; etc.</p></li>
+</ul>
+
+
+<p>Sei que este post é muito &ldquo;abstrato&rdquo;, rápido e sem referência nenhuma, mas a idéia em si é causar uma reflexão em ti, sobre o modo que tu trabalha. Hoje, ele é prático? o cliente está satisfeito com resultado? o cliente está satisfeito com a velocidade, desde a análise a concepção? está havendo desperdício de verba?</p>
+
+<p>Estas perguntas são interessantes, e sempre devem ser feitas. Por mais que o software seja problemático, se conseguirmos corresponder a expectativa do usuário, teremos mais um cliente satisfeito na carteira.</p>
+
+<p>O tema Caso de Uso, é polêmico, e não quero causar <em>flame</em>. Pra cada ambiente, equipe, produto/projeto existe uma maneira diferente de trabalhar. O que espero evitar, são aqueles papéis inúteis, com: &ldquo;se a ação teve sucesso, deve mostrar ok&rdquo; &hellip; bah!</p>
+
+<p>Por sinal, um dos <a href="http://rafael.adm.br/p/os-top-cinco-erros-nao-tecnicos-cometidos-por-desenvolvedores/">cinco grandes erros não técnicos, cometidos por programadores</a> (<a href="http://www.makinggoodsoftware.com/2009/07/07/5-top-non-technical-mistakes-made-by-programmers/">original aqui</a>) é: Esquecer do usuário. Lembre disto! ;)</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/07/paginacao-no-rails-com-will_paginate-e-ajax-de-modo-facil/">Paginação No Rails Com Will_paginate E Ajax De Modo Fácil</a></h1>
     
     
@@ -99,7 +212,7 @@
   
 
 
-<time datetime="2009-07-13T03:30:48+00:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
+<time datetime="2009-07-13T00:30:48-03:00" pubdate data-updated="true">Jul 13<span>th</span>, 2009</time>
         | 
   
 
@@ -228,7 +341,7 @@ end
   
 
 
-<time datetime="2009-05-31T18:33:06+00:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
+<time datetime="2009-05-31T15:33:06-03:00" pubdate data-updated="true">May 31<span>st</span>, 2009</time>
         | 
   
 
@@ -316,7 +429,7 @@ end
   
 
 
-<time datetime="2009-05-05T08:00:37+00:00" pubdate data-updated="true">May 5<span>th</span>, 2009</time>
+<time datetime="2009-05-05T05:00:37-03:00" pubdate data-updated="true">May 5<span>th</span>, 2009</time>
         | 
   
 
@@ -430,7 +543,7 @@ end
   
 
 
-<time datetime="2009-05-04T04:00:27+00:00" pubdate data-updated="true">May 4<span>th</span>, 2009</time>
+<time datetime="2009-05-04T01:00:27-03:00" pubdate data-updated="true">May 4<span>th</span>, 2009</time>
         | 
   
 
@@ -522,7 +635,7 @@ end
   
 
 
-<time datetime="2009-04-27T04:00:03+00:00" pubdate data-updated="true">Apr 27<span>th</span>, 2009</time>
+<time datetime="2009-04-27T01:00:03-03:00" pubdate data-updated="true">Apr 27<span>th</span>, 2009</time>
         | 
   
 
@@ -630,7 +743,7 @@ script/autospec
   
 
 
-<time datetime="2009-04-22T14:46:42+00:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2009</time>
+<time datetime="2009-04-22T11:46:42-03:00" pubdate data-updated="true">Apr 22<span>nd</span>, 2009</time>
         | 
   
 
@@ -749,7 +862,7 @@ script/autospec
   
 
 
-<time datetime="2009-04-20T04:00:42+00:00" pubdate data-updated="true">Apr 20<span>th</span>, 2009</time>
+<time datetime="2009-04-20T01:00:42-03:00" pubdate data-updated="true">Apr 20<span>th</span>, 2009</time>
         | 
   
 
@@ -845,7 +958,7 @@ script/autospec
   
 
 
-<time datetime="2009-04-13T12:03:13+00:00" pubdate data-updated="true">Apr 13<span>th</span>, 2009</time>
+<time datetime="2009-04-13T09:03:13-03:00" pubdate data-updated="true">Apr 13<span>th</span>, 2009</time>
         | 
   
 
@@ -928,7 +1041,7 @@ script/autospec
   
 
 
-<time datetime="2009-03-03T14:11:00+00:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
+<time datetime="2009-03-03T11:11:00-03:00" pubdate data-updated="true">Mar 3<span>rd</span>, 2009</time>
         | 
   
 
@@ -1063,210 +1176,6 @@ script/autospec
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/">TPW - Testando Sistemas Legados: Manipulando Dependências</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2009-02-19T15:48:35+00:00" pubdate data-updated="true">Feb 19<span>th</span>, 2009</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
-
-
-        
-         | <a href="/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/" data-text="TPW - Testando sistemas legados: manipulando dependências" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Pela definição de <a href="http://www.amazon.com/Working-Effectively-Legacy-Robert-Martin/dp/0131177052">Michael Feather</a>, <strong>código legado é código sem testes</strong>! Não importa se o código foi escrito semana passada ou alguns anos atrás. Qualquer manutenção será de difícil entendimento por outra pessoa e não haverá garantias de seu funcionamento. Uma vez que não há &ldquo;controle&rdquo;, é mais difícil rastrear as alterações; pior do que uma nova funcionalidade que não funciona, é uma funcionalidade antiga que começa a falhar. Este é um risco que um desenvolvedor não pode correr!</p>
-
-<h3>Não altere código legado até que seja possível testá-lo</h3>
-
-<p>Um dos problemas mais comuns em sistemas legados é a interdependência de classes, ou seja, o <a href="http://en.wikipedia.org/wiki/Coupling_(computer_science">alto acoplamento</a>), que sempre está ligado com a <a href="http://en.wikipedia.org/wiki/Cohesion_(computer_science">baixa coesão</a>). Se estes termos são difíceis de entender, pense em acoplamento como sendo o grau com que as classes referenciam umas as outras e coesão o quanto uma classe está focada em realizar suas responsabilidades.</p>
-
-<p>Para que seja possível testar o comportamento de uma classe &ldquo;acoplada&rdquo;, o comportamento de suas dependências precisa ser <a href="http://en.wikipedia.org/wiki/Method_stub">simulado</a>. Isto normalmente é feito através de objetos falsos, ou <a href="http://en.wikipedia.org/wiki/Mock_object">mocks</a>, que são injetados na instância da classe em questão. Este padrão é conhecido como <a href="http://pt.wikipedia.org/wiki/Invers%C3%A3o_de_controle">Inversão de Controle </a>e <a href="http://pt.wikipedia.org/wiki/Inje%C3%A7%C3%A3o_de_depend%C3%AAncia">Injeção de dependência</a>, onde o controle sobre as dependências da classe são delegados à outro objeto, ou normalmente um <a href="http://pt.wikipedia.org/wiki/Spring_Framework">container de objetos</a>, responsável por <a href="http://misko.hevery.com/2009/01/14/when-to-use-dependency-injection/">injetar</a> as dependências nas instâncias das classes. Simples, não?! Mas isso será detalhado em outro post&hellip;</p>
-
-<p>Voltando para os testes, no <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-automatizando-build/">post anterior</a> começamos a organizar o projeto automatizando o build e centralizando a execução dos testes para evitar que fiquem &ldquo;soltos&rdquo; pelo código. Agora vamos nos concentrar em escrever os casos de teste, <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorando</a> o necessário para lidar com as dependências das classes.</p>
-
-<p>Partindo da premissa que o projeto não possuí nenhum framework de inversão de controle, utilizaremos um certo &ldquo;padrão&rdquo; que permite manipular as dependências de uma classe por meio de herança, sem alterar seu comportamento original. <strong>A idéia é resolver as dependências da classe através de getters protegidos, que podem ser sobrescritos em uma classe filha no momento do teste</strong>. Isso permite que, na classe estendida, o método sobrescrito retorne um objeto mock, por exemplo, com o comportamento esperado para o teste.</p>
-
-<p>Vamos tomar como exemplo, uma classe simples com algumas dependências e responsável por encapsular algumas regras de negócio referentes à <em>Estoque</em>.</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogic</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verificaDisponibilidade</span><span class="o">(</span><span class="n">Produto</span> <span class="n">produto</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">quantidade</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">EstoqueDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueDAO</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">localizaProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">.</span><span class="na">getCodigo</span><span class="o">());</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">estoque</span><span class="o">.</span><span class="na">getQuantidade</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">quantidade</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Da forma como esta classe foi escrita, é impossível testar a regra de <em>disponibilidade</em> independentemente, pois depende do objeto <em>EstoqueDAO</em> para localizar as informações necessárias para o método. Mas com um pequeno refactoring, a responsabilidade de resolver a dependência <em>EstoqueDAO</em> passa a ser responsabilidade da própria classe <em>Estoque</em>:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogic</span> <span class="o">{</span>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verificaDisponibilidade</span><span class="o">(</span><span class="n">Produto</span> <span class="n">produto</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">quantidade</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>        <span class="n">EstoqueDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="n">getEstoqueDAO</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">localizaProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">.</span><span class="na">getCodigo</span><span class="o">());</span>
-</span><span class='line'>        <span class="k">return</span> <span class="n">estoque</span><span class="o">.</span><span class="na">getQuantidade</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">quantidade</span><span class="o">;</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'>    <span class="kd">protected</span> <span class="n">EstoqueDAO</span> <span class="nf">getEstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="nf">EstoqueDAO</span><span class="o">();</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Desta forma, é possível &ldquo;injetar&rdquo; um objeto que simule a dependência do <em>EstoqueDAO</em> estendendo a classe e sobrescrevendo o método <em>getEstoqueDAO()</em> para retornar a instância desejada. O teste ficaria mais ou menos assim:</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogicTest</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testVerificandoDisponibilidadeDeUmProduto</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//Criando o objeto EstoqueDAO mock, simulando o comportamento desejado</span>
-</span><span class='line'>        <span class="kd">final</span> <span class="n">EstoqueDAO</span> <span class="n">estoqueDAOMock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>            <span class="nd">@Override</span>
-</span><span class='line'>            <span class="kd">public</span> <span class="n">Estoque</span> <span class="nf">localizaProduto</span><span class="o">(</span><span class="n">String</span> <span class="n">codigo</span><span class="o">)</span> <span class="o">{</span>
-</span><span class='line'>                <span class="n">Produto</span> <span class="n">produto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Produto</span><span class="o">();</span>
-</span><span class='line'>                <span class="n">produto</span><span class="o">.</span><span class="na">setCodigo</span><span class="o">(</span><span class="n">codigo</span><span class="o">);</span>
-</span><span class='line'>                <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Estoque</span><span class="o">();</span>
-</span><span class='line'>                <span class="n">estoque</span><span class="o">.</span><span class="na">setProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">);</span>
-</span><span class='line'>                <span class="n">estoque</span><span class="o">.</span><span class="na">setQuantidade</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
-</span><span class='line'>                <span class="k">return</span> <span class="n">estoque</span><span class="o">;</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//Sobrescrevendo o método getEstoqueDAO para retornar o Mock</span>
-</span><span class='line'>        <span class="n">EstoqueLogic</span> <span class="n">logic</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueLogic</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>            <span class="nd">@Override</span>
-</span><span class='line'>            <span class="kd">protected</span> <span class="n">EstoqueDAO</span> <span class="nf">getEstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>                <span class="k">return</span> <span class="n">estoqueDAOMock</span><span class="o">;</span>
-</span><span class='line'>            <span class="o">}</span>
-</span><span class='line'>        <span class="o">};</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">//Definindo o teste e executando</span>
-</span><span class='line'>        <span class="n">Produto</span> <span class="n">produto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Produto</span><span class="o">();</span>
-</span><span class='line'>        <span class="n">produto</span><span class="o">.</span><span class="na">setCodigo</span><span class="o">(</span><span class="s">&quot;123456&quot;</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="kt">boolean</span> <span class="n">estaDisponivel</span> <span class="o">=</span> <span class="n">logic</span><span class="o">.</span><span class="na">verificaDisponibilidade</span><span class="o">(</span><span class="n">produto</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">assertTrue</span><span class="o">(</span><span class="n">estaDisponivel</span><span class="o">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="kt">boolean</span> <span class="n">naoEstaDisponivel</span> <span class="o">=</span> <span class="n">logic</span><span class="o">.</span><span class="na">verificaDisponibilidade</span><span class="o">(</span><span class="n">produto</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
-</span><span class='line'>        <span class="n">assertTrue</span><span class="o">(</span><span class="n">naoEstaDisponivel</span><span class="o">);</span>
-</span><span class='line'>    <span class="o">}</span>
-</span><span class='line'><span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>O método<em> getEstoqueDAO() </em>da classe <em>EstoqueLogic</em> foi sobrescrito para retornar o objeto <em>estoqueDAOMock</em> com as informações necessárias para o teste, ou seja, o comportamento das dependências foi simulado, possibilitando que o teste ficasse concentrado apenas da classe <em>Estoque</em>.</p>
-
-<h3>Elimine as dependências e teste onde os bugs estão!</h3>
-
-<p>Este padrão fornece apenas uma maneira de lidar com as dependências das classes para escrever testes. A dica aqui é manter o <a href="http://1up4dev.org/2008/11/foco-no-problema/">foco</a>: defina apenas testes para as funcionalidades que estiver alterando e que exercitem pontos críticos e/ou regras de negócio. Então, refatore apenas as classes necessárias para simular e validar o fluxo destes testes, nem que seja apenas seus &ldquo;<a href="http://www.fragmental.com.br/wiki/index.php/Contratos_Nulos">contratos</a>&rdquo;. Não há necessidade de escrever testes muito granulares nem alterar todas as classes de um sistema legado.</p>
-
-<p>No caso de classes com muitas dependências, o melhor é refatorá-la, separar as responsabilidades e testá-las individualmente. Para classes com dependências de Utils e/ou muitas chamadas à métodos estáticos, uma estratégia parecida pode ser utilizada. Mas estes são assuntos para os próximos posts. Acompanhem!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/8/">&larr; Older</a>
@@ -1289,6 +1198,10 @@ script/autospec
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/">Lendo arquivo CSV com parcimônia no Ruby</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
       </li>
     
@@ -1302,10 +1215,6 @@ script/autospec
     
       <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
   </ul>
@@ -1328,7 +1237,7 @@ script/autospec
     
       
         <li class="author">
-          <a href="/author/rogerbarreto">Roger Leite</a> (33)
+          <a href="/author/rogerbarreto">Roger Leite</a> (34)
         </li>
       
     
@@ -1429,6 +1338,8 @@ script/autospec
       <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
       <a class='category' href='/categories/cookbook/'>cookbook</a>&nbsp;
+    
+      <a class='category' href='/categories/csv/'>csv</a>&nbsp;
     
   </p>
 </section>

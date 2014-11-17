@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. &hellip;">
+  <meta name="description" content="A sintaxe invertida Ao olhar um código LISP pela primeira vez, você se assusta. Eu me assustei e não havia ninguém para me ajudar a entender. Que bom &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,204 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-14T11:35:31-03:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
+
+
+        
+         | <a href="/2013/07/entendendo-lisp-finalmente/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/" data-text="Entendendo LISP, finalmente." data-via="1up4dev" data-counturl="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><h2>A sintaxe invertida</h2>
+
+<p>Ao olhar um código LISP pela primeira vez, você se assusta.</p>
+
+<p>Eu me assustei e não havia ninguém para me ajudar a entender.</p>
+
+<p>Que bom que você está lendo isto para entender bem depressa e perder o medo.</p>
+
+<p>Acredite ou não, o LISP não é invertido: as outras linguagens é que são inconsistentes.</p>
+
+<p>Matematicamente falando, funções são expressas dessa forma:</p>
+
+<pre><code>y = f(x)
+</code></pre>
+
+<p>Para calcularmos o dobro de um número, teríamos:</p>
+
+<pre><code>y = dobro(21)
+</code></pre>
+
+<p>Note que estamos usando uma notação diferente: primeiro vem o operador dobro e, em seguida, vem o operando, ou parâmetro, 21. Chamamos isso de notação prefixa.</p>
+
+<p>Já para executar um cálculo matemático, usamos a forma abaixo:</p>
+
+<pre><code>y = 21 * 2
+</code></pre>
+
+<p>Primeiro temos um operador 21, depois temos um operando responsável pela multiplicação e, finalmente, o segundo operando 2. Chamamos essa forma de notação infixa.</p>
+
+<p>Nota: se você é um desenvolvedor Ruby, ignore essa última expressão. Em Ruby o cálculo acima utiliza internamente a notação prefixa onde 21 é um objeto, * é um método (ou uma mensagem, se preferir) e 2 é um parâmetro.</p>
+
+<p>A coisa fica bagunçada quando misturamos as duas formas:</p>
+
+<pre><code>y = dobro(7 * 3)
+</code></pre>
+
+<p>Na expressão acima misturamos notação prefixa com infixa. Não há problema algum com isso, mas não é um bom exemplo de consistência.</p>
+
+<p>Quando falamos em LISP, o primeiro item de uma lista é um operador e todos os demais são operandos.</p>
+
+<p>Todo operador é uma função, macro ou forma especial, inclusive os operadores matemáticos. Não se preocupe em entender agora o que são macros ou formas especiais. Todo o resto da lista é considerado um valor, parâmetro ou operando.</p>
+
+<p>Imagine agora que o símbolo <code>+</code> é uma função. Para calcularmos uma soma usaríamos o seguinte código:</p>
+
+<pre><code>+(1, 2)
+</code></pre>
+
+<p>Movendo os parênteses e removendo as vírgulas, a nossa soma inicial ficaria:</p>
+
+<pre><code>(+ 1 2)
+</code></pre>
+
+<p>Sabemos que dobro também é uma função. Para calcular dobro, usaríamos:</p>
+
+<pre><code>(dobro 12)
+</code></pre>
+
+<p>Percebam que agora temos uma regra que se aplica a todos os casos. Repetindo a expressão acima que mistura as notações infixa e prefixa usando as regras do LISP, teríamos:</p>
+
+<pre><code>(dobro (+ 7 3))
+</code></pre>
+
+<p>Talvez pela sua origem acadêmica e fortemente influenciada pela matemática, as implementações de LISP levam muito a sério a questão da consistência.</p>
+
+<h2>Os parênteses</h2>
+
+<p>Quando eu estava na quarta série, aprendi uma coisa chamada <em>expressão numérica</em>, que consistia em resolver um cálculo extenso atacando um pedaço por vez, organizadamente.</p>
+
+<p>Cada pedaço desse cálculo ficava dentro de parênteses, colchetes ou chaves, dependendo do quão aninhado estivesse a expressão. Eu nunca mais vi esse tipo de hierarquia,  mas era um jeito bacana de manter a organização.</p>
+
+<p>Uma expressão numérica tem essa cara:</p>
+
+<pre><code>x = {1 + [3 * (5 + 7)]}
+</code></pre>
+
+<p>Resolvemos a expressão de dentro para fora:</p>
+
+<pre><code>x = {1 + [3 * (12)]}
+
+x = {1 + [36]}
+
+x = {37}
+
+x = 37
+</code></pre>
+
+<p>Simples, não?</p>
+
+<p>Agora vamos extrapolar o que aprendemos na quarta série para uma linguagem de programação, trocando chaves e colchetes por parênteses:</p>
+
+<pre><code>x = (1 + (3 * (5 + 7)))
+</code></pre>
+
+<p>Vamos substituir a nossa conhecida notação infixa pela prefixa.</p>
+
+<pre><code>x = (+ 1 (* 3 (+ 5 7)))
+</code></pre>
+
+<p>Pronto. Você tem uma expressão numérica com a cara do LISP, resolvendo da forma como a professora ensinou lá na quarta série: primeiro você resolve os parênteses de dentro, depois os próximos, até terminar.</p>
+
+<p>Qualquer LISP que você encontrar pela frente, incluindo o Clojure, funciona exatamente dessa maneira.</p>
+
+<p>Uma vantagem que isso traz é que você não precisa ficar se preocupando com precedência de operadores.</p>
+
+<p>Imagine que você tem o código abaixo:</p>
+
+<pre><code>x = 3 * 2 + 1
+
+y = 1 + 2 * 3
+</code></pre>
+
+<p>Os valores de x e y serão iguais? Sim, ambas as variáveis contém o número 7, mas para saber disso você precisou ler em algum outro lugar que o operador de multiplicação tem precedência sobre o operador de adição. É algo que você espera que seja assim e age como se realmente fosse.</p>
+
+<p>E o que aconteceria se você estiver usando uma linguagem em que a adição tem precedência sobre a multiplicação? Ou pior ainda: os operadores são executados da esquerda para a direita conforme forem aparecendo.</p>
+
+<p>No primeiro caso, x e y continuariam sendo igual, mas ambos teriam o valor 9. No segundo caso, x seria igual a 7 e y seria igual a 9.</p>
+
+<p>Seria mais fácil se as expressões fossem escritas assim:</p>
+
+<pre><code>x = (3 * 2) + 1
+
+y = 1 + (2 * 3)
+</code></pre>
+
+<p>Agora está claro para qualquer pessoa o que vai ser executado primeiro, independente do modo como a expressão seja interpretada pela linguagem. Pois saiba que é exatamente assim que um LISP trabalha. Usando a notação prefixa, as expressões acima ficariam:</p>
+
+<pre><code>x = (+ (* 3 2) 1)
+
+y = (+ 1 (* 3 2))
+</code></pre>
+
+<p>Primeiro será executada a multiplicação, que está nos parênteses mais internos e, em seguida, será executada a adição. Tudo isso sem se preocupar com regras ocultas ou peculiaridades do compilador.</p>
+
+<p>Qualquer código em qualquer dialeto LISP, mesmo com suas características particulares, fica fácil de entender se você lembrar dessas regrinha.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2013/06/quicktips-usando-shell-script-como-suite-de-teste/">[QuickTips] Usando Shell Script Como Suite De Teste</a></h1>
     
     
@@ -99,7 +297,7 @@
   
 
 
-<time datetime="2013-06-27T12:42:18+00:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+<time datetime="2013-06-27T09:42:18-03:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
         | 
   
 
@@ -252,7 +450,7 @@
   
 
 
-<time datetime="2013-05-06T10:00:44+00:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+<time datetime="2013-05-06T07:00:44-03:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
         | 
   
 
@@ -337,7 +535,7 @@
   
 
 
-<time datetime="2013-04-11T10:30:47+00:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
+<time datetime="2013-04-11T07:30:47-03:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
         | 
   
 
@@ -458,7 +656,7 @@
   
 
 
-<time datetime="2013-04-01T15:00:51+00:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+<time datetime="2013-04-01T12:00:51-03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
         | 
   
 
@@ -527,7 +725,7 @@
   
 
 
-<time datetime="2013-03-20T14:27:02+00:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
+<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
         | 
   
 
@@ -693,7 +891,7 @@ Feche um split com Ctrl-a + X</p>
   
 
 
-<time datetime="2013-03-18T16:45:25+00:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+<time datetime="2013-03-18T13:45:25-03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
         | 
   
 
@@ -786,7 +984,7 @@ Feche um split com Ctrl-a + X</p>
   
 
 
-<time datetime="2013-02-21T15:58:02+00:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
+<time datetime="2013-02-21T12:58:02-03:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
         | 
   
 
@@ -1026,7 +1224,7 @@ bomDia("Nicolau");
   
 
 
-<time datetime="2013-01-23T15:29:16+00:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+<time datetime="2013-01-23T13:29:16-02:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
         | 
   
 
@@ -1122,7 +1320,7 @@ bomDia("Nicolau");
   
 
 
-<time datetime="2013-01-04T15:51:14+00:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
+<time datetime="2013-01-04T13:51:14-02:00" pubdate data-updated="true">Jan 4<span>th</span>, 2013</time>
         | 
   
 
@@ -1174,89 +1372,6 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/11/rails-4-novidades/">Rails 4 - Novidades</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-11-29T13:38:49+00:00" pubdate data-updated="true">Nov 29<span>th</span>, 2012</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2012/11/rails-4-novidades/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2012/11/rails-4-novidades/" data-text="Rails 4 - Novidades" data-via="1up4dev" data-counturl="http://1up4dev.org/2012/11/rails-4-novidades/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2012/11/rails-4-novidades/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2012/11/rails-4-novidades/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
-
-<p>Segue um resumão:</p>
-
-<ul>
-<li><p>Suporte somente a ruby 1.9.3 ou superior</p></li>
-<li><p>Vendor/Plugins já era</p></li>
-<li><p>Muita &ldquo;magia&rdquo; movida pra gems \o/ (Dynamic finders, Mass assignments, AR Session Store, ActiveResource … e muito mais)</p></li>
-<li><p>Interface de Queue</p></li>
-<li><p>Asynchronous Mailer</p></li>
-<li><p>ActionController::Live</p></li>
-<li><p>HTML5 tag helpers</p></li>
-<li><p>Threadsafe on by default</p></li>
-</ul>
-
-
-<p>O <a href="https://twitter.com/spastorino">Santiago Pastorino</a>, um dos commiters do Rails está mantendo um <a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">ótimo post</a> sobre o desenvolvimento do Rails 4, que vale a pena acompanhar.</p>
-
-<p>Sucesso!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1279,6 +1394,10 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/">Lendo arquivo CSV com parcimônia no Ruby</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
       </li>
     
@@ -1292,10 +1411,6 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
     
       <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
   </ul>
@@ -1318,7 +1433,7 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
     
       
         <li class="author">
-          <a href="/author/rogerbarreto">Roger Leite</a> (33)
+          <a href="/author/rogerbarreto">Roger Leite</a> (34)
         </li>
       
     
@@ -1419,6 +1534,8 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
       <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
       <a class='category' href='/categories/cookbook/'>cookbook</a>&nbsp;
+    
+      <a class='category' href='/categories/csv/'>csv</a>&nbsp;
     
   </p>
 </section>

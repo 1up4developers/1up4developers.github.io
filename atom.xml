@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:36:16+00:00</updated>
+  <updated>2014-11-17T09:49:34-02:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -14,9 +14,357 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Lendo arquivo CSV com parcimônia no Ruby]]></title>
+    <link href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"/>
+    <updated>2014-11-17T09:34:00-02:00</updated>
+    <id>http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby</id>
+    <content type="html"><![CDATA[<p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
+
+<p>Na versão 1.9.3 e superior, o Ruby incluiu a classe <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html">CSV</a> na sua <em>standard lib</em>, que facilita o trabalho de ler e/ou escrever arquivos csv. Exemplos em código abaixo.</p>
+
+<h2>Conhecendo o CSV</h2>
+
+<p>O modo mais simples e direto para ler um arquivo csv, é usar o <code>CSV.read</code> que retorna um Array de Arrays:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>array_students = CSV.read('/tmp/mock_data.csv') # return an Array of Arrays
+</span><span class='line'>array_students.each { |row| puts row.inspect }  # =&gt; output:
+</span><span class='line'># "[\"id\", \"name\", \"country\", \"birthday\"]"
+</span><span class='line'># "[\"1\", \"Virginia Harvey\", \"GB\", \"01/06/1993\"]"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dentro da classe CSV, existem mais duas classes que facilitam ainda mais o manuseio dos dados.</p>
+
+<p>Caso necessite de mais requinte e sofisticação, o método <code>CSV.table</code> retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Table.html">CSV::Table</a>. Com o table, você tem acesso ao cabeçalho através do <code>headers</code> e acesso a cada linha do arquivo com o <code>each</code>, que retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Row.html">CSV::Row</a>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>table_students = CSV.table('/tmp/mock_data.csv') # =&gt; instance of CSV::Table
+</span><span class='line'>puts table_students.headers.inspect # =&gt; [:id, :name, :country, :birthday]
+</span><span class='line'>table_students.each { |row| puts row.inspect } # =&gt; output:
+</span><span class='line'># &lt;CSV::Row id:1 name:"Virginia Harvey" country:"GB" birthday:"01/06/1993"&gt;
+</span><span class='line'>table_students.each { |row| puts row.fetch(:name) } # =&gt; output:
+</span><span class='line'># Virginia Harvey</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Tanto o <code>read</code> quanto o <code>table</code>, aceitam um hash de options como segundo argumento. Tem uma descrição detalhada na documentação do <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#method-c-new">método new</a>. Exemplo usando options:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>table_students = CSV.table('/tmp/mock_data2.csv', col_sep: ";", skip_blanks: true, converters: [])
+</span><span class='line'>table_students.each { |row| puts row.inspect }</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CSV converters</h2>
+
+<p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#HeaderConverters">CSV::HeaderConverters</a> contém um hash de symbol e block que são usados para converter os valores do cabeçalho. Para usá-los, você deve informar qual <em>converter</em> deseja aplicar na opção <code>header_converters</code>. Acredito que o código abaixo explica melhor.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>puts CSV::HeaderConverters.keys.inspect # =&gt; [:downcase, :symbol]
+</span><span class='line'>
+</span><span class='line'># Add new header converter
+</span><span class='line'>CSV::HeaderConverters[:remap] = lambda do |raw_value|
+</span><span class='line'>  raw_value = raw_value.to_sym
+</span><span class='line'>  case raw_value
+</span><span class='line'>  when :country
+</span><span class='line'>    :pais
+</span><span class='line'>  when :birthday
+</span><span class='line'>    :dt_nascimento
+</span><span class='line'>  else
+</span><span class='line'>    raw_value
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>table_students = CSV.table('mock_data.csv', col_sep: ",", header_converters: :remap)
+</span><span class='line'>table_students.each do |row|
+</span><span class='line'>  puts [row.fetch(:pais), row.fetch(:dt_nascimento)].inspect # =&gt; ["GB", "01/06/1993"]
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No exemplo acima, criei o HeaderConverter &ldquo;remap&rdquo; que traduz o cabeçalho country para pais e birthday para dt_nascimento. Por padrão, o <code>CSV</code> disponibiliza os converters downcase e symbol, que por sinal são usados quando usamos o método <code>table</code> para ler csv.</p>
+
+<p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#Converters">CSV::Converters</a> segue o mesmo padrão de symbol e block, a única diferença que este é usado para converter os valores da linha. Vamos ao código.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>require 'date'
+</span><span class='line'>
+</span><span class='line'>puts CSV::Converters.keys.inspect       # =&gt; [:integer, :float, :numeric, :date, :date_time, :all]
+</span><span class='line'>
+</span><span class='line'># Add new converter
+</span><span class='line'>CSV::Converters[:nil_to_empty] = lambda do |raw_value|
+</span><span class='line'>  raw_value.nil? ? "" : raw_value
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># Add new converter
+</span><span class='line'>CSV::Converters[:brazilian_date] = lambda do |raw_value|
+</span><span class='line'>  if raw_value =~ /\d{2}\/\d{2}\/\d{4}/
+</span><span class='line'>    Date.strptime(raw_value, "%d/%m/%Y")
+</span><span class='line'>  else
+</span><span class='line'>    raw_value
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># Group converters
+</span><span class='line'>CSV::Converters[:my_custom_converters] = [:nil_to_empty, :brazilian_date]
+</span><span class='line'>
+</span><span class='line'>table_students = CSV.table('mock_data.csv', col_sep: ",", converters: :my_custom_converters)
+</span><span class='line'>table_students.each do |row|
+</span><span class='line'>  puts [row.fetch(:country), row.fetch(:birthday)].inspect # =&gt; ["GB", #&lt;Date: 1993-06-01 ((2449140j,0s,0n),+0s,2299161j)&gt;]
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No exemplo acima criei dois converters. Um para trocar nil por &ldquo;&rdquo; e o outro que converte para Date caso o valor esteja no formato 99/99/9999.</p>
+
+<h2>Encoding hell com Excel</h2>
+
+<p>Normalmente o csv é usado como meio de integração Excel &lt;=> Sistema. Acontece que o Excel não se dá muito bem com acentos especiais como ãõáé etc. Isto porque estamos em 2014. Acontece que quando há caracteres especiais, a única abordagem que funcionou foi exportar para Unicode text. Neste formato, o encoding do arquivo é UTF-16LE e separado por tab (\t). Este <a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">post de 2009 da Plataformatec</a> explica com mais detalhes este jeitinho do Excel de ser com os dados. A única diferença de 2009 pra hoje, é que podemos passar o encoding como parâmetro ao ler o arquivo, e por sorte evitar o uso do iconv. Vamos ao código:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>
+</span><span class='line'>table = CSV.table('mock_unicode.txt',
+</span><span class='line'>                  col_sep: "\t", # tab as delimiter
+</span><span class='line'>                  encoding: "UTF-16LE:UTF-8") # read UTF-16LE and convert to UTF-8
+</span><span class='line'>table.each do |row|
+</span><span class='line'>  puts row.inspect
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Evitando o abuso de memória</h2>
+
+<p>Ao ler arquivos com <code>read</code> ou <code>table</code>, o arquivo é colocado em memória, ou seja, ao processar uma planilha de 100mb, o seu processo ruby vai pra um 100mb e pouco. Agora imagina 20 workers e cada um processando uma planilha de 100mb ou mais, facilmente o seu servidor terá um pico de consumo de memória, o no pior cenário vai dar crash no processo. Para evitar este consumo devemos usar o <code>foreach</code> do <code>CSV</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>
+</span><span class='line'>CSV.foreach("mock_data.csv", col_sep: ",") do |row|
+</span><span class='line'>  puts row.inspect
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># =&gt;
+</span><span class='line'># ["id", "name", "country", "birthday"]
+</span><span class='line'># ["1", "Virginia Harvey", "GB", "01/06/1993"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Desta maneira a leitura é mais otimizada, pois apenas uma linha por vez é lida. O único problema é que perdemos algumas facilidades do <code>table</code>, como os <code>headers</code> e a instância do <code>CSV::Row</code> por linha. Tentando chegar no modelo ideal, montei uma classe que usa o foreach e mesmo assim tem os <code>headers</code> e os <code>rows</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>
+</span><span class='line'>class SheetReader
+</span><span class='line'>
+</span><span class='line'>  attr_reader :headers
+</span><span class='line'>
+</span><span class='line'>  def initialize(filepath)
+</span><span class='line'>    # options to read unicode text file
+</span><span class='line'>    # options = {
+</span><span class='line'>    #   col_sep: "\t",
+</span><span class='line'>    #   skip_blanks: true,
+</span><span class='line'>    #   encoding: "UTF-16LE:UTF-8",
+</span><span class='line'>    #   converters: []
+</span><span class='line'>    # }
+</span><span class='line'>    options = {col_sep: ",", converters: []}
+</span><span class='line'>    @csv_reader = CSV.foreach(filepath, options) # gets a iterator
+</span><span class='line'>    @headers    = convert_headers(@csv_reader.next) # read first line
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  # yield an instance of http://ruby-doc.org/stdlib-2.1.0/libdoc/csv/rdoc/CSV/Row.html
+</span><span class='line'>  def each_row(&block)
+</span><span class='line'>    begin
+</span><span class='line'>      while true
+</span><span class='line'>        raw_row = @csv_reader.next  # raise StopIteration in EOF
+</span><span class='line'>        yield CSV::Row.new(headers, raw_row)
+</span><span class='line'>      end
+</span><span class='line'>    rescue StopIteration
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  protected
+</span><span class='line'>
+</span><span class='line'>  # Internal: Convert headers to Array of symbols.
+</span><span class='line'>  #
+</span><span class='line'>  # raw_headers - Array of Strings.
+</span><span class='line'>  #
+</span><span class='line'>  # Examples
+</span><span class='line'>  #
+</span><span class='line'>  #   convert_headers(["ATIVO", "NOME COMERCIAL"])
+</span><span class='line'>  #   # =&gt; [:ativo, :nome_comercial]
+</span><span class='line'>  #
+</span><span class='line'>  # Returns Array of symbols.
+</span><span class='line'>  def convert_headers(raw_headers)
+</span><span class='line'>    raw_headers.compact! # removes nil values
+</span><span class='line'>    converter = lambda do |header|
+</span><span class='line'>      header_converters = CSV::HeaderConverters.values
+</span><span class='line'>      header_converters.inject(header) do |header, converter_proc|
+</span><span class='line'>        converter_proc.call(header)
+</span><span class='line'>      end
+</span><span class='line'>    end
+</span><span class='line'>
+</span><span class='line'>    raw_headers.map { |header| converter.call(header) }
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>reader = SheetReader.new('mock_data.csv')
+</span><span class='line'>reader.headers # =&gt; [:id, :name, :country, :birthday]
+</span><span class='line'>reader.each_row do |row|
+</span><span class='line'>  puts row.inspect # =&gt; #&lt;CSV::Row id:"1" name:"Virginia Harvey" country:"GB" birthday:"01/06/1993"&gt;
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Por último, uma observação importante: todo este código acima foi rodado no ruby 2.1.0. Espero que este mini guia de como ler arquivo csv com Ruby te ajude.
+Segue alguns links com mais informações:</p>
+
+<ul>
+<li><a href="http://www.sitepoint.com/guide-ruby-csv-library-part/">http://www.sitepoint.com/guide-ruby-csv-library-part/</a></li>
+<li><a href="http://www.sitepoint.com/guide-ruby-csv-library-part-2/">http://www.sitepoint.com/guide-ruby-csv-library-part-2/</a></li>
+<li><a href="http://technicalpickles.com/posts/parsing-csv-with-ruby/">http://technicalpickles.com/posts/parsing-csv-with-ruby/</a></li>
+<li><a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/</a></li>
+</ul>
+
+
+<p>Dúvidas, sugestões ou qualquer outra coisa. Deixe um comentário ou se preferir, mande um <a href="https://twitter.com/rogerleite">tweety!</a> :D</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Extraindo dados da Internet com Clojure]]></title>
     <link href="http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure/"/>
-    <updated>2014-10-28T12:10:00+00:00</updated>
+    <updated>2014-10-28T12:10:00-02:00</updated>
     <id>http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure</id>
     <content type="html"><![CDATA[<h2>O problema</h2>
 
@@ -336,7 +684,7 @@ Vamos fazer a nossa função retornar um <em>vector</em> com os nomes dos autore
   <entry>
     <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
-    <updated>2014-09-23T18:24:00+00:00</updated>
+    <updated>2014-09-23T18:24:00-03:00</updated>
     <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
 
@@ -520,7 +868,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Integração Contínua e Entrega Contínua de modo fácil com Wercker]]></title>
     <link href="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"/>
-    <updated>2014-09-06T12:33:00+00:00</updated>
+    <updated>2014-09-06T12:33:00-03:00</updated>
     <id>http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
 containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
@@ -762,7 +1110,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00+00:00</updated>
+    <updated>2014-04-25T11:21:00-03:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -897,7 +1245,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   <entry>
     <title type="html"><![CDATA[Sowing the seeds of code]]></title>
     <link href="http://1up4dev.org/2013/09/sowing-the-seeds-of-code/"/>
-    <updated>2013-09-25T23:08:00+00:00</updated>
+    <updated>2013-09-25T23:08:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/sowing-the-seeds-of-code</id>
     <content type="html"><![CDATA[<p>Seguindo a filosofia de <a href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">tirar a bunda da cadeira</a>, tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.</p>
 
@@ -990,7 +1338,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT]]></title>
     <link href="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/"/>
-    <updated>2013-09-24T10:00:00+00:00</updated>
+    <updated>2013-09-24T10:00:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://openwrt.org">OpenWRT</a> é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. Em outras palavras, é um &ldquo;firmware on steroids&rdquo; para roteadores.</p>
 
@@ -1370,7 +1718,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
     <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
-    <updated>2013-09-20T22:38:00+00:00</updated>
+    <updated>2013-09-20T22:38:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
     <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
 
@@ -1484,7 +1832,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
     <link href="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/"/>
-    <updated>2013-08-22T17:32:23+00:00</updated>
+    <updated>2013-08-22T14:32:23-03:00</updated>
     <id>http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups</id>
     <content type="html"><![CDATA[<p>Em tempos de <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
@@ -1632,7 +1980,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Extendendo Ruby com C - Só um aperitivo]]></title>
     <link href="http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
-    <updated>2013-08-19T17:29:56+00:00</updated>
+    <updated>2013-08-19T14:29:56-03:00</updated>
     <id>http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
     <content type="html"><![CDATA[<p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
 
@@ -1765,7 +2113,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
     <link href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"/>
-    <updated>2013-07-14T14:35:31+00:00</updated>
+    <updated>2013-07-14T11:35:31-03:00</updated>
     <id>http://1up4dev.org/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 
@@ -1907,7 +2255,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
     <link href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
-    <updated>2013-06-27T12:42:18+00:00</updated>
+    <updated>2013-06-27T09:42:18-03:00</updated>
     <id>http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
@@ -2004,7 +2352,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
     <link href="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/"/>
-    <updated>2013-05-06T10:00:44+00:00</updated>
+    <updated>2013-05-06T07:00:44-03:00</updated>
     <id>http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao</id>
     <content type="html"><![CDATA[<p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
 
@@ -2033,7 +2381,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
     <link href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"/>
-    <updated>2013-04-11T10:30:47+00:00</updated>
+    <updated>2013-04-11T07:30:47-03:00</updated>
     <id>http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
@@ -2098,7 +2446,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
     <link href="http://1up4dev.org/2013/04/novos-rumos/"/>
-    <updated>2013-04-01T15:00:51+00:00</updated>
+    <updated>2013-04-01T12:00:51-03:00</updated>
     <id>http://1up4dev.org/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
@@ -2111,7 +2459,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
     <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
-    <updated>2013-03-20T14:27:02+00:00</updated>
+    <updated>2013-03-20T11:27:02-03:00</updated>
     <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
@@ -2221,7 +2569,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[O ano em que eu tirei a bunda da cadeira]]></title>
     <link href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
-    <updated>2013-03-18T16:45:25+00:00</updated>
+    <updated>2013-03-18T13:45:25-03:00</updated>
     <id>http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
     <content type="html"><![CDATA[<p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
 
@@ -2258,7 +2606,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[Programação funcional com JavaScript]]></title>
     <link href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"/>
-    <updated>2013-02-21T15:58:02+00:00</updated>
+    <updated>2013-02-21T12:58:02-03:00</updated>
     <id>http://1up4dev.org/2013/02/programacao-funcional-com-javascript</id>
     <content type="html"><![CDATA[<blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
 
@@ -2442,7 +2790,7 @@ bomDia("Nicolau");
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
     <link href="http://1up4dev.org/2013/01/http-monkey/"/>
-    <updated>2013-01-23T15:29:16+00:00</updated>
+    <updated>2013-01-23T13:29:16-02:00</updated>
     <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
@@ -2482,7 +2830,7 @@ bomDia("Nicolau");
   <entry>
     <title type="html"><![CDATA[Nos idos de 2012, UML, Design e Waterfall]]></title>
     <link href="http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
-    <updated>2013-01-04T15:51:14+00:00</updated>
+    <updated>2013-01-04T13:51:14-02:00</updated>
     <id>http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
     <content type="html"><![CDATA[<p>Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
 Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&hellip; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.</p>
@@ -2493,33 +2841,6 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
 <p>A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento ágil distoa fortemente do <a href="http://en.wikipedia.org/wiki/Waterfall_model">modelo cascata</a>, que delinea claramente o papel do analista de negócios/requisitos, o arquiteto/designer da solução e os <del>pobres</del> desenvolvedores que terão de seguir à risca todas definições impostas pelos modelos produzidos. E se durante o ciclo ágil os problemas identificados são priorizados para serem endereçados no próximo ciclo, como o processo formal gerencia isso? Hum&hellip; daí vem minha maior crítica quanto ao uso de modelos no desenvolvimento de software. Já que se decidiu por engessar o processo, seguí-lo fielmente deveria ser o preço a ser pago para manter tanta parafernalha de artefatos sem valor. Identificado o problema, o fluxo deveria voltar lá no início e corrigir requisitos, modelos, código e testes; mas o mercado não permite tanta demora, as linhas de negócio precisam colocar seu produto na prateleira e o fluxo controladamente perfeito que outrora se desenhou, na vida real não funciona mais.</p>
 
 <p>É inviável manter a &ldquo;documentação&rdquo; do sistema em face a uma concorrência e volatilidade de negócios tão vorazes, então eu me pergunto: O que aquelas pessoas estavam fazendo trancadas numa sala, consumindo o tempo a um alto <a href="http://www.stanford.edu/group/fms/fingate/staff/capitalequip/capital_software.html">custo</a> da sua empresa? Aprendendo a como não fazer? Pode ser. Constatando uma vez mais que embora no papel, no processo, tudo aquilo que a teoria diz é muito bonito e controlado mas não funciona no mundo real? Sim, pode ser também, mas o pior é que passados anos de experiências ruins, projetos fracassados e montanhas de dinheiro jogados no ralo, ainda terão coragem de propor um processo baseado em requisitos → modelagem → desenvolvimento → testes, faseados e interdependentes, ignorando o histórico de dores e prejuízos experimentado.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Rails 4 - Novidades]]></title>
-    <link href="http://1up4dev.org/2012/11/rails-4-novidades/"/>
-    <updated>2012-11-29T13:38:49+00:00</updated>
-    <id>http://1up4dev.org/2012/11/rails-4-novidades</id>
-    <content type="html"><![CDATA[<p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
-
-<p>Segue um resumão:</p>
-
-<ul>
-<li><p>Suporte somente a ruby 1.9.3 ou superior</p></li>
-<li><p>Vendor/Plugins já era</p></li>
-<li><p>Muita &ldquo;magia&rdquo; movida pra gems \o/ (Dynamic finders, Mass assignments, AR Session Store, ActiveResource … e muito mais)</p></li>
-<li><p>Interface de Queue</p></li>
-<li><p>Asynchronous Mailer</p></li>
-<li><p>ActionController::Live</p></li>
-<li><p>HTML5 tag helpers</p></li>
-<li><p>Threadsafe on by default</p></li>
-</ul>
-
-
-<p>O <a href="https://twitter.com/spastorino">Santiago Pastorino</a>, um dos commiters do Rails está mantendo um <a href="http://blog.wyeworks.com/2012/11/13/rails-4-compilation-links/">ótimo post</a> sobre o desenvolvimento do Rails 4, que vale a pena acompanhar.</p>
-
-<p>Sucesso!</p>
 ]]></content>
   </entry>
   

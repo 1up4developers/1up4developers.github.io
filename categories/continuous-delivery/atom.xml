@@ -4,7 +4,7 @@
   <title><![CDATA[Category: continuous delivery | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/continuous-delivery/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:36:16+00:00</updated>
+  <updated>2014-11-17T09:49:34-02:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Integração Contínua e Entrega Contínua de modo fácil com Wercker]]></title>
     <link href="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"/>
-    <updated>2014-09-06T12:33:00+00:00</updated>
+    <updated>2014-09-06T12:33:00-03:00</updated>
     <id>http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
 containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente

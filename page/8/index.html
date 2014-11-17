@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Imagine o cenário: você caiu de para-quedas naquele projeto que todo mundo na empresa fez gambiarra deu manutenção e agora precisa implementar uma &hellip;">
+  <meta name="description" content="Pela definição de Michael Feather, código legado é código sem testes! Não importa se o código foi escrito semana passada ou alguns anos atrás. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,210 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/">TPW - Testando Sistemas Legados: Manipulando Dependências</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2009-02-19T12:48:35-03:00" pubdate data-updated="true">Feb 19<span>th</span>, 2009</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/" data-text="TPW - Testando sistemas legados: manipulando dependências" data-via="1up4dev" data-counturl="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-manipulando-dependencias/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Pela definição de <a href="http://www.amazon.com/Working-Effectively-Legacy-Robert-Martin/dp/0131177052">Michael Feather</a>, <strong>código legado é código sem testes</strong>! Não importa se o código foi escrito semana passada ou alguns anos atrás. Qualquer manutenção será de difícil entendimento por outra pessoa e não haverá garantias de seu funcionamento. Uma vez que não há &ldquo;controle&rdquo;, é mais difícil rastrear as alterações; pior do que uma nova funcionalidade que não funciona, é uma funcionalidade antiga que começa a falhar. Este é um risco que um desenvolvedor não pode correr!</p>
+
+<h3>Não altere código legado até que seja possível testá-lo</h3>
+
+<p>Um dos problemas mais comuns em sistemas legados é a interdependência de classes, ou seja, o <a href="http://en.wikipedia.org/wiki/Coupling_(computer_science">alto acoplamento</a>), que sempre está ligado com a <a href="http://en.wikipedia.org/wiki/Cohesion_(computer_science">baixa coesão</a>). Se estes termos são difíceis de entender, pense em acoplamento como sendo o grau com que as classes referenciam umas as outras e coesão o quanto uma classe está focada em realizar suas responsabilidades.</p>
+
+<p>Para que seja possível testar o comportamento de uma classe &ldquo;acoplada&rdquo;, o comportamento de suas dependências precisa ser <a href="http://en.wikipedia.org/wiki/Method_stub">simulado</a>. Isto normalmente é feito através de objetos falsos, ou <a href="http://en.wikipedia.org/wiki/Mock_object">mocks</a>, que são injetados na instância da classe em questão. Este padrão é conhecido como <a href="http://pt.wikipedia.org/wiki/Invers%C3%A3o_de_controle">Inversão de Controle </a>e <a href="http://pt.wikipedia.org/wiki/Inje%C3%A7%C3%A3o_de_depend%C3%AAncia">Injeção de dependência</a>, onde o controle sobre as dependências da classe são delegados à outro objeto, ou normalmente um <a href="http://pt.wikipedia.org/wiki/Spring_Framework">container de objetos</a>, responsável por <a href="http://misko.hevery.com/2009/01/14/when-to-use-dependency-injection/">injetar</a> as dependências nas instâncias das classes. Simples, não?! Mas isso será detalhado em outro post&hellip;</p>
+
+<p>Voltando para os testes, no <a href="http://1up4dev.org/2009/02/tpw-testando-sistemas-legados-automatizando-build/">post anterior</a> começamos a organizar o projeto automatizando o build e centralizando a execução dos testes para evitar que fiquem &ldquo;soltos&rdquo; pelo código. Agora vamos nos concentrar em escrever os casos de teste, <a href="http://pt.wikipedia.org/wiki/Refatora%C3%A7%C3%A3o">refatorando</a> o necessário para lidar com as dependências das classes.</p>
+
+<p>Partindo da premissa que o projeto não possuí nenhum framework de inversão de controle, utilizaremos um certo &ldquo;padrão&rdquo; que permite manipular as dependências de uma classe por meio de herança, sem alterar seu comportamento original. <strong>A idéia é resolver as dependências da classe através de getters protegidos, que podem ser sobrescritos em uma classe filha no momento do teste</strong>. Isso permite que, na classe estendida, o método sobrescrito retorne um objeto mock, por exemplo, com o comportamento esperado para o teste.</p>
+
+<p>Vamos tomar como exemplo, uma classe simples com algumas dependências e responsável por encapsular algumas regras de negócio referentes à <em>Estoque</em>.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogic</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verificaDisponibilidade</span><span class="o">(</span><span class="n">Produto</span> <span class="n">produto</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">quantidade</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">EstoqueDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueDAO</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">localizaProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">.</span><span class="na">getCodigo</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">estoque</span><span class="o">.</span><span class="na">getQuantidade</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">quantidade</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Da forma como esta classe foi escrita, é impossível testar a regra de <em>disponibilidade</em> independentemente, pois depende do objeto <em>EstoqueDAO</em> para localizar as informações necessárias para o método. Mas com um pequeno refactoring, a responsabilidade de resolver a dependência <em>EstoqueDAO</em> passa a ser responsabilidade da própria classe <em>Estoque</em>:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogic</span> <span class="o">{</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">verificaDisponibilidade</span><span class="o">(</span><span class="n">Produto</span> <span class="n">produto</span><span class="o">,</span> <span class="n">Integer</span> <span class="n">quantidade</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">EstoqueDAO</span> <span class="n">dao</span> <span class="o">=</span> <span class="n">getEstoqueDAO</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="n">dao</span><span class="o">.</span><span class="na">localizaProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">.</span><span class="na">getCodigo</span><span class="o">());</span>
+</span><span class='line'>        <span class="k">return</span> <span class="n">estoque</span><span class="o">.</span><span class="na">getQuantidade</span><span class="o">()</span> <span class="o">&gt;=</span> <span class="n">quantidade</span><span class="o">;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>    <span class="kd">protected</span> <span class="n">EstoqueDAO</span> <span class="nf">getEstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="k">new</span> <span class="nf">EstoqueDAO</span><span class="o">();</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Desta forma, é possível &ldquo;injetar&rdquo; um objeto que simule a dependência do <em>EstoqueDAO</em> estendendo a classe e sobrescrevendo o método <em>getEstoqueDAO()</em> para retornar a instância desejada. O teste ficaria mais ou menos assim:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="kd">class</span> <span class="nc">EstoqueLogicTest</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testVerificandoDisponibilidadeDeUmProduto</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Criando o objeto EstoqueDAO mock, simulando o comportamento desejado</span>
+</span><span class='line'>        <span class="kd">final</span> <span class="n">EstoqueDAO</span> <span class="n">estoqueDAOMock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="nd">@Override</span>
+</span><span class='line'>            <span class="kd">public</span> <span class="n">Estoque</span> <span class="nf">localizaProduto</span><span class="o">(</span><span class="n">String</span> <span class="n">codigo</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">Produto</span> <span class="n">produto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Produto</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">produto</span><span class="o">.</span><span class="na">setCodigo</span><span class="o">(</span><span class="n">codigo</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">Estoque</span> <span class="n">estoque</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Estoque</span><span class="o">();</span>
+</span><span class='line'>                <span class="n">estoque</span><span class="o">.</span><span class="na">setProduto</span><span class="o">(</span><span class="n">produto</span><span class="o">);</span>
+</span><span class='line'>                <span class="n">estoque</span><span class="o">.</span><span class="na">setQuantidade</span><span class="o">(</span><span class="mi">5</span><span class="o">);</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">estoque</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Sobrescrevendo o método getEstoqueDAO para retornar o Mock</span>
+</span><span class='line'>        <span class="n">EstoqueLogic</span> <span class="n">logic</span> <span class="o">=</span> <span class="k">new</span> <span class="n">EstoqueLogic</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="nd">@Override</span>
+</span><span class='line'>            <span class="kd">protected</span> <span class="n">EstoqueDAO</span> <span class="nf">getEstoqueDAO</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">return</span> <span class="n">estoqueDAOMock</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">};</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//Definindo o teste e executando</span>
+</span><span class='line'>        <span class="n">Produto</span> <span class="n">produto</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Produto</span><span class="o">();</span>
+</span><span class='line'>        <span class="n">produto</span><span class="o">.</span><span class="na">setCodigo</span><span class="o">(</span><span class="s">&quot;123456&quot;</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">boolean</span> <span class="n">estaDisponivel</span> <span class="o">=</span> <span class="n">logic</span><span class="o">.</span><span class="na">verificaDisponibilidade</span><span class="o">(</span><span class="n">produto</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">assertTrue</span><span class="o">(</span><span class="n">estaDisponivel</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kt">boolean</span> <span class="n">naoEstaDisponivel</span> <span class="o">=</span> <span class="n">logic</span><span class="o">.</span><span class="na">verificaDisponibilidade</span><span class="o">(</span><span class="n">produto</span><span class="o">,</span> <span class="mi">2</span><span class="o">);</span>
+</span><span class='line'>        <span class="n">assertTrue</span><span class="o">(</span><span class="n">naoEstaDisponivel</span><span class="o">);</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O método<em> getEstoqueDAO() </em>da classe <em>EstoqueLogic</em> foi sobrescrito para retornar o objeto <em>estoqueDAOMock</em> com as informações necessárias para o teste, ou seja, o comportamento das dependências foi simulado, possibilitando que o teste ficasse concentrado apenas da classe <em>Estoque</em>.</p>
+
+<h3>Elimine as dependências e teste onde os bugs estão!</h3>
+
+<p>Este padrão fornece apenas uma maneira de lidar com as dependências das classes para escrever testes. A dica aqui é manter o <a href="http://1up4dev.org/2008/11/foco-no-problema/">foco</a>: defina apenas testes para as funcionalidades que estiver alterando e que exercitem pontos críticos e/ou regras de negócio. Então, refatore apenas as classes necessárias para simular e validar o fluxo destes testes, nem que seja apenas seus &ldquo;<a href="http://www.fragmental.com.br/wiki/index.php/Contratos_Nulos">contratos</a>&rdquo;. Não há necessidade de escrever testes muito granulares nem alterar todas as classes de um sistema legado.</p>
+
+<p>No caso de classes com muitas dependências, o melhor é refatorá-la, separar as responsabilidades e testá-las individualmente. Para classes com dependências de Utils e/ou muitas chamadas à métodos estáticos, uma estratégia parecida pode ser utilizada. Mas estes são assuntos para os próximos posts. Acompanhem!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2009/02/tpw-testando-sistemas-legados-automatizando-build/">TPW - Testando Sistemas Legados: Automatizando O Build</a></h1>
     
     
@@ -99,7 +303,7 @@
   
 
 
-<time datetime="2009-02-12T02:01:31+00:00" pubdate data-updated="true">Feb 12<span>th</span>, 2009</time>
+<time datetime="2009-02-12T00:01:31-02:00" pubdate data-updated="true">Feb 12<span>th</span>, 2009</time>
         | 
   
 
@@ -257,7 +461,7 @@
   
 
 
-<time datetime="2009-01-15T10:32:52+00:00" pubdate data-updated="true">Jan 15<span>th</span>, 2009</time>
+<time datetime="2009-01-15T08:32:52-02:00" pubdate data-updated="true">Jan 15<span>th</span>, 2009</time>
         | 
   
 
@@ -392,7 +596,7 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
   
 
 
-<time datetime="2008-12-16T13:50:09+00:00" pubdate data-updated="true">Dec 16<span>th</span>, 2008</time>
+<time datetime="2008-12-16T11:50:09-02:00" pubdate data-updated="true">Dec 16<span>th</span>, 2008</time>
         | 
   
 
@@ -503,7 +707,7 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
   
 
 
-<time datetime="2008-11-17T15:07:28+00:00" pubdate data-updated="true">Nov 17<span>th</span>, 2008</time>
+<time datetime="2008-11-17T13:07:28-02:00" pubdate data-updated="true">Nov 17<span>th</span>, 2008</time>
         | 
   
 
@@ -584,7 +788,7 @@ Usando o <a href="http://www.virtualbox.org/">Virtual Box</a> e <a href="http://
   
 
 
-<time datetime="2008-11-10T21:33:43+00:00" pubdate data-updated="true">Nov 10<span>th</span>, 2008</time>
+<time datetime="2008-11-10T19:33:43-02:00" pubdate data-updated="true">Nov 10<span>th</span>, 2008</time>
         | 
   
 
@@ -671,7 +875,7 @@ Os russos, que tiveram o mesmo problema, optaram por uma solução mais simples:
   
 
 
-<time datetime="2008-11-07T09:44:44+00:00" pubdate data-updated="true">Nov 7<span>th</span>, 2008</time>
+<time datetime="2008-11-07T07:44:44-02:00" pubdate data-updated="true">Nov 7<span>th</span>, 2008</time>
         | 
   
 
@@ -798,7 +1002,7 @@ Resposta educada: Estão <strong>fechando o escopo</strong> do projeto.</p>
   
 
 
-<time datetime="2008-11-04T03:49:11+00:00" pubdate data-updated="true">Nov 4<span>th</span>, 2008</time>
+<time datetime="2008-11-04T01:49:11-02:00" pubdate data-updated="true">Nov 4<span>th</span>, 2008</time>
         | 
   
 
@@ -885,7 +1089,7 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
   
 
 
-<time datetime="2008-10-30T03:00:33+00:00" pubdate data-updated="true">Oct 30<span>th</span>, 2008</time>
+<time datetime="2008-10-30T01:00:33-02:00" pubdate data-updated="true">Oct 30<span>th</span>, 2008</time>
         | 
   
 
@@ -968,7 +1172,7 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
   
 
 
-<time datetime="2008-10-20T02:48:18+00:00" pubdate data-updated="true">Oct 20<span>th</span>, 2008</time>
+<time datetime="2008-10-20T00:48:18-02:00" pubdate data-updated="true">Oct 20<span>th</span>, 2008</time>
         | 
   
 
@@ -1032,107 +1236,6 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/10/rails-summit-eu-fui/">Rails Summit ! Eu Fui !</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-10-18T04:43:14+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2008</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2008/10/rails-summit-eu-fui/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/10/rails-summit-eu-fui/" data-text="Rails Summit ! Eu fui !" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/10/rails-summit-eu-fui/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/10/rails-summit-eu-fui/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/10/rails-summit-eu-fui/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Não sei nem como começar a descrever o evento, foi muito bom !!! Logo no primeiro dia, na fila para pegar o pequeno cracha de identificação, já trombei logo com quem !?! Dr. Nic ! E ao seu lado, estava um cara muito simpático também, que de primeira não reconheci, o Chad Fowler e sem barba ! E pra quem não acredita, bom, tirei foto com o figura como prova ! (está <a href="http://www.flickr.com/photos/rogerleite/">aqui</a> no album do flickr)</p>
-
-<p><img src="http://farm4.static.flickr.com/3003/2949949673_d323a895d6_m.jpg" alt="Palestrantes RailsSummit" /></p>
-
-<p>Todas as palestras foram muito interessantes, no segundo dia, o tema testes foi muito abordado e acabou ficando repetitivo, porém o pessoal aproveitou para <a href="http://blog.shadowmaru.org/2008/10/17/rails-summit-latin-america-dia-2">atualizar seus e blogs e tals</a>. Na minha humilde opinião, as apresentações de abertura e final do evento foram as melhores ! Na abertura, destaque para o <a href="http://www.nomedojogo.com/2008/10/15/video-do-railsenvy-no-rails-summit/">video que o pessoal do Rails Envy mandou</a> !</p>
-
-<p>Sem se preocupar em parecer repetitivo, mas a principal mensagem das palestras foram, &ldquo;faça!&rdquo;. Tudo se resume a ação!, ajude projetos open, crie novos projetos, participe com diferentes papéis, leia, escreva blogs, livros, screencasts, wikis &hellip; etc. Teve muita mensagem motivacional, e eu confesso que gostei ! :D</p>
-
-<p>É complicado tentar repassar a enxurrada de informação que veio do evento, e por serem parecidas, eu acabo misturando as informações. Resumão: Metodologias Agéis, teve bastante coisa sobre e com perspectivas diferentes, cool!</p>
-
-<p>Parte do Chad Fowler, foi muito legal, com sacadas interessantes do &ldquo;meio corporativo&rdquo;, e apresentou questões filosoficas sobre a evolução de frameworks. Logo em seguida, teve uma conferência com o DHH (David Heinemeir Hansson), falou sobre o futuro de Rails, falou sobre thread-safe do Rails 2.2.</p>
-
-<p>Palestra do <a href="http://www.nomedojogo.com/2008/10/09/rails-summit-meu-emprego-foi-para-os-eua/">Brando</a> foi muito legal, e deu uns toques importantes de como conseguir aquele seu emprego rails tão desejado, sem contar o chefe dele, Carl, grande figura.</p>
-
-<p>Depois teve o Chris Wanstrath (criador do github.com), é impressionante o tanto que ele batalhou pra chegar aonde o github é hoje, foi meio chato porque ele ficou lendo, mesmo assim, teve informações legais.</p>
-
-<p>No final, o BOF (Birds of a Feather) foi um show a parte! Várias figuras, falando desde projetos em desenvolvimento até a técnicas de impor novas idéias &hellip; várias figuras, várias risadas.</p>
-
-<p>O <strong>segundo dia</strong> de evento, começou muito interessante, com a apresentação muito boa &ndash; dei muita risada em várias partes &ndash; Ninh Bui e Hongli Lai os emos caras do Phusion ! Foi muita piada nerd, várias animações flash, citações de mega man à dragon ball, com direito a Star Wars no final &hellip;</p>
-
-<p><a href="http://farm4.static.flickr.com/3188/2950767782_121584d6b3_m.jpg">Phusion Darth Vader !</a></p>
-
-<p>Depois assisti a palestra do Jay Fields. Foi muito legal, ele apresentou o lado bom e ruim de vários frameworks de testes como selenium, rspec e talz. Destaque para o momento flame, quando o David Chelimsky mantenedor do rspec, começa a questionar alguns pontos levantados por Jay. Não se preocupem, que tudo acabou em breja &hellip;</p>
-
-<p>Assisti a palestra do Vinicius Teles, cara, sensacional ! A palestra foi sobre empreendedorismo, com participação especial do Carl (da SurgeWorks), ficou muito legal a &ldquo;<em>union</em>&rdquo; das apresentações, e esta com certeza merece um post separado-extra.</p>
-
-<p>Chegando ao final do dia, começou a bater o cansaço &hellip; assisti a palestra do Fabio Kung sobre JRuby. Ele entrou em detalhes na plataforma Java e como é executado o código ruby nela. Foi muito legal, porque eu finalmente entendi a diferença entre &ldquo;servers&rdquo; e talz. Eu não lembro muito ao certo, se eu tiver acesso a apresentação, coloco o link aqui.</p>
-
-<p>Pra finalizar teve o fechamento com o Obie Fernandez, ele mostrou de maneira apaixonada e apaixonante, como está funcionando sua nova empresa, a HashRocket. Mostrou o manifesto agil, primeiro em papel e depois na vida real com os fatos da sua empresa. Mostrou que testes funcionam, programação em par também funciona! e etc. Foi muito show, acho muito legal a forma que ele conduz a apresentação.</p>
-
-<p><a href="http://farm4.static.flickr.com/3156/2950743840_f525af68d7_m.jpg">1up4dev and &hellip; Obie !</a></p>
-
-<p>O evento fechou com chave de ouro, rolando várias brejas, e isso eu te garanto, é muito louco brindar com o Dr. Nic e Obie na mesma roda ! :D</p>
-
-<p>Além de tudo isso, é muito interessante como o espirito de &ldquo;integração&rdquo; é muito alto, por exemplo, o <a href="http://www.mouseoverstudio.com/blog/">Diego Carrion do MouseOver Studio</a> ficou com nosso grupo, os dois dias, trocamos experiências, foi show também. Até agora, a única apresentação que peguei foi a do Dr. Nic, que ele disponibilizou o <a href="http://www.slideshare.net/drnic/everyone-can-participate-dr-nic-williams-railssummit-brazil-2008-presentation/">link</a> via <a href="http://twitter.com/drnic">twitter</a>.</p>
-
-<p>Me desculpem pelo tamanho do post &hellip; e como ele está muito grande, nem vou ler em busca de erros, vou arrumando conforme necessário, ou seja, fica pro próximo sprint !</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/9/">&larr; Older</a>
@@ -1155,6 +1258,10 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/">Lendo arquivo CSV com parcimônia no Ruby</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
       </li>
     
@@ -1168,10 +1275,6 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
     
       <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
   </ul>
@@ -1194,7 +1297,7 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
     
       
         <li class="author">
-          <a href="/author/rogerbarreto">Roger Leite</a> (33)
+          <a href="/author/rogerbarreto">Roger Leite</a> (34)
         </li>
       
     
@@ -1295,6 +1398,8 @@ Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. 
       <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
       <a class='category' href='/categories/cookbook/'>cookbook</a>&nbsp;
+    
+      <a class='category' href='/categories/csv/'>csv</a>&nbsp;
     
   </p>
 </section>

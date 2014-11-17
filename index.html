@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="O problema A Internet é um repositórios de dados gigantesco e frequentemente precisamos extrair algo que nos interessa de maneira automatizada. O &hellip;">
+  <meta name="description" content="Ler e escrever arquivo csv é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,410 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/">Lendo Arquivo CSV Com Parcimônia No Ruby</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-11-17T09:34:00-02:00" pubdate data-updated="true">Nov 17<span>th</span>, 2014</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/" data-text="Lendo arquivo CSV com parcimônia no Ruby" data-via="1up4dev" data-counturl="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
+
+<p>Na versão 1.9.3 e superior, o Ruby incluiu a classe <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html">CSV</a> na sua <em>standard lib</em>, que facilita o trabalho de ler e/ou escrever arquivos csv. Exemplos em código abaixo.</p>
+
+<h2>Conhecendo o CSV</h2>
+
+<p>O modo mais simples e direto para ler um arquivo csv, é usar o <code>CSV.read</code> que retorna um Array de Arrays:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>array_students = CSV.read('/tmp/mock_data.csv') # return an Array of Arrays
+</span><span class='line'>array_students.each { |row| puts row.inspect }  # =&gt; output:
+</span><span class='line'># "[\"id\", \"name\", \"country\", \"birthday\"]"
+</span><span class='line'># "[\"1\", \"Virginia Harvey\", \"GB\", \"01/06/1993\"]"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Dentro da classe CSV, existem mais duas classes que facilitam ainda mais o manuseio dos dados.</p>
+
+<p>Caso necessite de mais requinte e sofisticação, o método <code>CSV.table</code> retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Table.html">CSV::Table</a>. Com o table, você tem acesso ao cabeçalho através do <code>headers</code> e acesso a cada linha do arquivo com o <code>each</code>, que retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Row.html">CSV::Row</a>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>table_students = CSV.table('/tmp/mock_data.csv') # =&gt; instance of CSV::Table
+</span><span class='line'>puts table_students.headers.inspect # =&gt; [:id, :name, :country, :birthday]
+</span><span class='line'>table_students.each { |row| puts row.inspect } # =&gt; output:
+</span><span class='line'># &lt;CSV::Row id:1 name:"Virginia Harvey" country:"GB" birthday:"01/06/1993"&gt;
+</span><span class='line'>table_students.each { |row| puts row.fetch(:name) } # =&gt; output:
+</span><span class='line'># Virginia Harvey</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Tanto o <code>read</code> quanto o <code>table</code>, aceitam um hash de options como segundo argumento. Tem uma descrição detalhada na documentação do <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#method-c-new">método new</a>. Exemplo usando options:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>table_students = CSV.table('/tmp/mock_data2.csv', col_sep: ";", skip_blanks: true, converters: [])
+</span><span class='line'>table_students.each { |row| puts row.inspect }</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CSV converters</h2>
+
+<p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#HeaderConverters">CSV::HeaderConverters</a> contém um hash de symbol e block que são usados para converter os valores do cabeçalho. Para usá-los, você deve informar qual <em>converter</em> deseja aplicar na opção <code>header_converters</code>. Acredito que o código abaixo explica melhor.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>puts CSV::HeaderConverters.keys.inspect # =&gt; [:downcase, :symbol]
+</span><span class='line'>
+</span><span class='line'># Add new header converter
+</span><span class='line'>CSV::HeaderConverters[:remap] = lambda do |raw_value|
+</span><span class='line'>  raw_value = raw_value.to_sym
+</span><span class='line'>  case raw_value
+</span><span class='line'>  when :country
+</span><span class='line'>    :pais
+</span><span class='line'>  when :birthday
+</span><span class='line'>    :dt_nascimento
+</span><span class='line'>  else
+</span><span class='line'>    raw_value
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>table_students = CSV.table('mock_data.csv', col_sep: ",", header_converters: :remap)
+</span><span class='line'>table_students.each do |row|
+</span><span class='line'>  puts [row.fetch(:pais), row.fetch(:dt_nascimento)].inspect # =&gt; ["GB", "01/06/1993"]
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No exemplo acima, criei o HeaderConverter &ldquo;remap&rdquo; que traduz o cabeçalho country para pais e birthday para dt_nascimento. Por padrão, o <code>CSV</code> disponibiliza os converters downcase e symbol, que por sinal são usados quando usamos o método <code>table</code> para ler csv.</p>
+
+<p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#Converters">CSV::Converters</a> segue o mesmo padrão de symbol e block, a única diferença que este é usado para converter os valores da linha. Vamos ao código.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>require 'date'
+</span><span class='line'>
+</span><span class='line'>puts CSV::Converters.keys.inspect       # =&gt; [:integer, :float, :numeric, :date, :date_time, :all]
+</span><span class='line'>
+</span><span class='line'># Add new converter
+</span><span class='line'>CSV::Converters[:nil_to_empty] = lambda do |raw_value|
+</span><span class='line'>  raw_value.nil? ? "" : raw_value
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># Add new converter
+</span><span class='line'>CSV::Converters[:brazilian_date] = lambda do |raw_value|
+</span><span class='line'>  if raw_value =~ /\d{2}\/\d{2}\/\d{4}/
+</span><span class='line'>    Date.strptime(raw_value, "%d/%m/%Y")
+</span><span class='line'>  else
+</span><span class='line'>    raw_value
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># Group converters
+</span><span class='line'>CSV::Converters[:my_custom_converters] = [:nil_to_empty, :brazilian_date]
+</span><span class='line'>
+</span><span class='line'>table_students = CSV.table('mock_data.csv', col_sep: ",", converters: :my_custom_converters)
+</span><span class='line'>table_students.each do |row|
+</span><span class='line'>  puts [row.fetch(:country), row.fetch(:birthday)].inspect # =&gt; ["GB", #&lt;Date: 1993-06-01 ((2449140j,0s,0n),+0s,2299161j)&gt;]
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No exemplo acima criei dois converters. Um para trocar nil por &ldquo;&rdquo; e o outro que converte para Date caso o valor esteja no formato 99/99/9999.</p>
+
+<h2>Encoding hell com Excel</h2>
+
+<p>Normalmente o csv é usado como meio de integração Excel &lt;=> Sistema. Acontece que o Excel não se dá muito bem com acentos especiais como ãõáé etc. Isto porque estamos em 2014. Acontece que quando há caracteres especiais, a única abordagem que funcionou foi exportar para Unicode text. Neste formato, o encoding do arquivo é UTF-16LE e separado por tab (\t). Este <a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">post de 2009 da Plataformatec</a> explica com mais detalhes este jeitinho do Excel de ser com os dados. A única diferença de 2009 pra hoje, é que podemos passar o encoding como parâmetro ao ler o arquivo, e por sorte evitar o uso do iconv. Vamos ao código:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>
+</span><span class='line'>table = CSV.table('mock_unicode.txt',
+</span><span class='line'>                  col_sep: "\t", # tab as delimiter
+</span><span class='line'>                  encoding: "UTF-16LE:UTF-8") # read UTF-16LE and convert to UTF-8
+</span><span class='line'>table.each do |row|
+</span><span class='line'>  puts row.inspect
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Evitando o abuso de memória</h2>
+
+<p>Ao ler arquivos com <code>read</code> ou <code>table</code>, o arquivo é colocado em memória, ou seja, ao processar uma planilha de 100mb, o seu processo ruby vai pra um 100mb e pouco. Agora imagina 20 workers e cada um processando uma planilha de 100mb ou mais, facilmente o seu servidor terá um pico de consumo de memória, o no pior cenário vai dar crash no processo. Para evitar este consumo devemos usar o <code>foreach</code> do <code>CSV</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>
+</span><span class='line'>CSV.foreach("mock_data.csv", col_sep: ",") do |row|
+</span><span class='line'>  puts row.inspect
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'># =&gt;
+</span><span class='line'># ["id", "name", "country", "birthday"]
+</span><span class='line'># ["1", "Virginia Harvey", "GB", "01/06/1993"]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Desta maneira a leitura é mais otimizada, pois apenas uma linha por vez é lida. O único problema é que perdemos algumas facilidades do <code>table</code>, como os <code>headers</code> e a instância do <code>CSV::Row</code> por linha. Tentando chegar no modelo ideal, montei uma classe que usa o foreach e mesmo assim tem os <code>headers</code> e os <code>rows</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</span><span class='line'>
+</span><span class='line'>class SheetReader
+</span><span class='line'>
+</span><span class='line'>  attr_reader :headers
+</span><span class='line'>
+</span><span class='line'>  def initialize(filepath)
+</span><span class='line'>    # options to read unicode text file
+</span><span class='line'>    # options = {
+</span><span class='line'>    #   col_sep: "\t",
+</span><span class='line'>    #   skip_blanks: true,
+</span><span class='line'>    #   encoding: "UTF-16LE:UTF-8",
+</span><span class='line'>    #   converters: []
+</span><span class='line'>    # }
+</span><span class='line'>    options = {col_sep: ",", converters: []}
+</span><span class='line'>    @csv_reader = CSV.foreach(filepath, options) # gets a iterator
+</span><span class='line'>    @headers    = convert_headers(@csv_reader.next) # read first line
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  # yield an instance of http://ruby-doc.org/stdlib-2.1.0/libdoc/csv/rdoc/CSV/Row.html
+</span><span class='line'>  def each_row(&block)
+</span><span class='line'>    begin
+</span><span class='line'>      while true
+</span><span class='line'>        raw_row = @csv_reader.next  # raise StopIteration in EOF
+</span><span class='line'>        yield CSV::Row.new(headers, raw_row)
+</span><span class='line'>      end
+</span><span class='line'>    rescue StopIteration
+</span><span class='line'>    end
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  protected
+</span><span class='line'>
+</span><span class='line'>  # Internal: Convert headers to Array of symbols.
+</span><span class='line'>  #
+</span><span class='line'>  # raw_headers - Array of Strings.
+</span><span class='line'>  #
+</span><span class='line'>  # Examples
+</span><span class='line'>  #
+</span><span class='line'>  #   convert_headers(["ATIVO", "NOME COMERCIAL"])
+</span><span class='line'>  #   # =&gt; [:ativo, :nome_comercial]
+</span><span class='line'>  #
+</span><span class='line'>  # Returns Array of symbols.
+</span><span class='line'>  def convert_headers(raw_headers)
+</span><span class='line'>    raw_headers.compact! # removes nil values
+</span><span class='line'>    converter = lambda do |header|
+</span><span class='line'>      header_converters = CSV::HeaderConverters.values
+</span><span class='line'>      header_converters.inject(header) do |header, converter_proc|
+</span><span class='line'>        converter_proc.call(header)
+</span><span class='line'>      end
+</span><span class='line'>    end
+</span><span class='line'>
+</span><span class='line'>    raw_headers.map { |header| converter.call(header) }
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>reader = SheetReader.new('mock_data.csv')
+</span><span class='line'>reader.headers # =&gt; [:id, :name, :country, :birthday]
+</span><span class='line'>reader.each_row do |row|
+</span><span class='line'>  puts row.inspect # =&gt; #&lt;CSV::Row id:"1" name:"Virginia Harvey" country:"GB" birthday:"01/06/1993"&gt;
+</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Por último, uma observação importante: todo este código acima foi rodado no ruby 2.1.0. Espero que este mini guia de como ler arquivo csv com Ruby te ajude.
+Segue alguns links com mais informações:</p>
+
+<ul>
+<li><a href="http://www.sitepoint.com/guide-ruby-csv-library-part/">http://www.sitepoint.com/guide-ruby-csv-library-part/</a></li>
+<li><a href="http://www.sitepoint.com/guide-ruby-csv-library-part-2/">http://www.sitepoint.com/guide-ruby-csv-library-part-2/</a></li>
+<li><a href="http://technicalpickles.com/posts/parsing-csv-with-ruby/">http://technicalpickles.com/posts/parsing-csv-with-ruby/</a></li>
+<li><a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/</a></li>
+</ul>
+
+
+<p>Dúvidas, sugestões ou qualquer outra coisa. Deixe um comentário ou se preferir, mande um <a href="https://twitter.com/rogerleite">tweety!</a> :D</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo Dados Da Internet Com Clojure</a></h1>
     
     
@@ -99,7 +503,7 @@
   
 
 
-<time datetime="2014-10-28T12:10:00+00:00" pubdate data-updated="true">Oct 28<span>th</span>, 2014</time>
+<time datetime="2014-10-28T12:10:00-02:00" pubdate data-updated="true">Oct 28<span>th</span>, 2014</time>
         | 
   
 
@@ -475,7 +879,7 @@ Vamos fazer a nossa função retornar um <em>vector</em> com os nomes dos autore
   
 
 
-<time datetime="2014-09-23T18:24:00+00:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
+<time datetime="2014-09-23T18:24:00-03:00" pubdate data-updated="true">Sep 23<span>rd</span>, 2014</time>
         | 
   
 
@@ -715,7 +1119,7 @@ Aaaaaahhhhh, Mister M!
   
 
 
-<time datetime="2014-09-06T12:33:00+00:00" pubdate data-updated="true">Sep 6<span>th</span>, 2014</time>
+<time datetime="2014-09-06T12:33:00-03:00" pubdate data-updated="true">Sep 6<span>th</span>, 2014</time>
         | 
   
 
@@ -1013,7 +1417,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   
 
 
-<time datetime="2014-04-25T11:21:00+00:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
+<time datetime="2014-04-25T11:21:00-03:00" pubdate data-updated="true">Apr 25<span>th</span>, 2014</time>
         | 
   
 
@@ -1204,7 +1608,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   
 
 
-<time datetime="2013-09-25T23:08:00+00:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time>
+<time datetime="2013-09-25T23:08:00-03:00" pubdate data-updated="true">Sep 25<span>th</span>, 2013</time>
         | 
   
 
@@ -1353,7 +1757,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   
 
 
-<time datetime="2013-09-24T10:00:00+00:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
+<time datetime="2013-09-24T10:00:00-03:00" pubdate data-updated="true">Sep 24<span>th</span>, 2013</time>
         | 
   
 
@@ -1789,7 +2193,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   
 
 
-<time datetime="2013-09-20T22:38:00+00:00" pubdate data-updated="true">Sep 20<span>th</span>, 2013</time>
+<time datetime="2013-09-20T22:38:00-03:00" pubdate data-updated="true">Sep 20<span>th</span>, 2013</time>
         | 
   
 
@@ -1959,7 +2363,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   
 
 
-<time datetime="2013-08-22T17:32:23+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+<time datetime="2013-08-22T14:32:23-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
         | 
   
 
@@ -2163,7 +2567,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   
 
 
-<time datetime="2013-08-19T17:29:56+00:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
+<time datetime="2013-08-19T14:29:56-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
         | 
   
 
@@ -2331,204 +2735,6 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/07/entendendo-lisp-finalmente/">Entendendo LISP, Finalmente.</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-07-14T14:35:31+00:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
-
-
-        
-         | <a href="/2013/07/entendendo-lisp-finalmente/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/" data-text="Entendendo LISP, finalmente." data-via="1up4dev" data-counturl="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><h2>A sintaxe invertida</h2>
-
-<p>Ao olhar um código LISP pela primeira vez, você se assusta.</p>
-
-<p>Eu me assustei e não havia ninguém para me ajudar a entender.</p>
-
-<p>Que bom que você está lendo isto para entender bem depressa e perder o medo.</p>
-
-<p>Acredite ou não, o LISP não é invertido: as outras linguagens é que são inconsistentes.</p>
-
-<p>Matematicamente falando, funções são expressas dessa forma:</p>
-
-<pre><code>y = f(x)
-</code></pre>
-
-<p>Para calcularmos o dobro de um número, teríamos:</p>
-
-<pre><code>y = dobro(21)
-</code></pre>
-
-<p>Note que estamos usando uma notação diferente: primeiro vem o operador dobro e, em seguida, vem o operando, ou parâmetro, 21. Chamamos isso de notação prefixa.</p>
-
-<p>Já para executar um cálculo matemático, usamos a forma abaixo:</p>
-
-<pre><code>y = 21 * 2
-</code></pre>
-
-<p>Primeiro temos um operador 21, depois temos um operando responsável pela multiplicação e, finalmente, o segundo operando 2. Chamamos essa forma de notação infixa.</p>
-
-<p>Nota: se você é um desenvolvedor Ruby, ignore essa última expressão. Em Ruby o cálculo acima utiliza internamente a notação prefixa onde 21 é um objeto, * é um método (ou uma mensagem, se preferir) e 2 é um parâmetro.</p>
-
-<p>A coisa fica bagunçada quando misturamos as duas formas:</p>
-
-<pre><code>y = dobro(7 * 3)
-</code></pre>
-
-<p>Na expressão acima misturamos notação prefixa com infixa. Não há problema algum com isso, mas não é um bom exemplo de consistência.</p>
-
-<p>Quando falamos em LISP, o primeiro item de uma lista é um operador e todos os demais são operandos.</p>
-
-<p>Todo operador é uma função, macro ou forma especial, inclusive os operadores matemáticos. Não se preocupe em entender agora o que são macros ou formas especiais. Todo o resto da lista é considerado um valor, parâmetro ou operando.</p>
-
-<p>Imagine agora que o símbolo <code>+</code> é uma função. Para calcularmos uma soma usaríamos o seguinte código:</p>
-
-<pre><code>+(1, 2)
-</code></pre>
-
-<p>Movendo os parênteses e removendo as vírgulas, a nossa soma inicial ficaria:</p>
-
-<pre><code>(+ 1 2)
-</code></pre>
-
-<p>Sabemos que dobro também é uma função. Para calcular dobro, usaríamos:</p>
-
-<pre><code>(dobro 12)
-</code></pre>
-
-<p>Percebam que agora temos uma regra que se aplica a todos os casos. Repetindo a expressão acima que mistura as notações infixa e prefixa usando as regras do LISP, teríamos:</p>
-
-<pre><code>(dobro (+ 7 3))
-</code></pre>
-
-<p>Talvez pela sua origem acadêmica e fortemente influenciada pela matemática, as implementações de LISP levam muito a sério a questão da consistência.</p>
-
-<h2>Os parênteses</h2>
-
-<p>Quando eu estava na quarta série, aprendi uma coisa chamada <em>expressão numérica</em>, que consistia em resolver um cálculo extenso atacando um pedaço por vez, organizadamente.</p>
-
-<p>Cada pedaço desse cálculo ficava dentro de parênteses, colchetes ou chaves, dependendo do quão aninhado estivesse a expressão. Eu nunca mais vi esse tipo de hierarquia,  mas era um jeito bacana de manter a organização.</p>
-
-<p>Uma expressão numérica tem essa cara:</p>
-
-<pre><code>x = {1 + [3 * (5 + 7)]}
-</code></pre>
-
-<p>Resolvemos a expressão de dentro para fora:</p>
-
-<pre><code>x = {1 + [3 * (12)]}
-
-x = {1 + [36]}
-
-x = {37}
-
-x = 37
-</code></pre>
-
-<p>Simples, não?</p>
-
-<p>Agora vamos extrapolar o que aprendemos na quarta série para uma linguagem de programação, trocando chaves e colchetes por parênteses:</p>
-
-<pre><code>x = (1 + (3 * (5 + 7)))
-</code></pre>
-
-<p>Vamos substituir a nossa conhecida notação infixa pela prefixa.</p>
-
-<pre><code>x = (+ 1 (* 3 (+ 5 7)))
-</code></pre>
-
-<p>Pronto. Você tem uma expressão numérica com a cara do LISP, resolvendo da forma como a professora ensinou lá na quarta série: primeiro você resolve os parênteses de dentro, depois os próximos, até terminar.</p>
-
-<p>Qualquer LISP que você encontrar pela frente, incluindo o Clojure, funciona exatamente dessa maneira.</p>
-
-<p>Uma vantagem que isso traz é que você não precisa ficar se preocupando com precedência de operadores.</p>
-
-<p>Imagine que você tem o código abaixo:</p>
-
-<pre><code>x = 3 * 2 + 1
-
-y = 1 + 2 * 3
-</code></pre>
-
-<p>Os valores de x e y serão iguais? Sim, ambas as variáveis contém o número 7, mas para saber disso você precisou ler em algum outro lugar que o operador de multiplicação tem precedência sobre o operador de adição. É algo que você espera que seja assim e age como se realmente fosse.</p>
-
-<p>E o que aconteceria se você estiver usando uma linguagem em que a adição tem precedência sobre a multiplicação? Ou pior ainda: os operadores são executados da esquerda para a direita conforme forem aparecendo.</p>
-
-<p>No primeiro caso, x e y continuariam sendo igual, mas ambos teriam o valor 9. No segundo caso, x seria igual a 7 e y seria igual a 9.</p>
-
-<p>Seria mais fácil se as expressões fossem escritas assim:</p>
-
-<pre><code>x = (3 * 2) + 1
-
-y = 1 + (2 * 3)
-</code></pre>
-
-<p>Agora está claro para qualquer pessoa o que vai ser executado primeiro, independente do modo como a expressão seja interpretada pela linguagem. Pois saiba que é exatamente assim que um LISP trabalha. Usando a notação prefixa, as expressões acima ficariam:</p>
-
-<pre><code>x = (+ (* 3 2) 1)
-
-y = (+ 1 (* 3 2))
-</code></pre>
-
-<p>Primeiro será executada a multiplicação, que está nos parênteses mais internos e, em seguida, será executada a adição. Tudo isso sem se preocupar com regras ocultas ou peculiaridades do compilador.</p>
-
-<p>Qualquer código em qualquer dialeto LISP, mesmo com suas características particulares, fica fácil de entender se você lembrar dessas regrinha.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/2/">&larr; Older</a>
@@ -2549,6 +2755,10 @@ y = (+ 1 (* 3 2))
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/">Lendo arquivo CSV com parcimônia no Ruby</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
       </li>
     
@@ -2562,10 +2772,6 @@ y = (+ 1 (* 3 2))
     
       <li class="post">
         <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2013/09/sowing-the-seeds-of-code/">Sowing the seeds of code</a>
       </li>
     
   </ul>
@@ -2588,7 +2794,7 @@ y = (+ 1 (* 3 2))
     
       
         <li class="author">
-          <a href="/author/rogerbarreto">Roger Leite</a> (33)
+          <a href="/author/rogerbarreto">Roger Leite</a> (34)
         </li>
       
     
@@ -2689,6 +2895,8 @@ y = (+ 1 (* 3 2))
       <a class='category' href='/categories/continuous-integration/'>continuous integration</a>&nbsp;
     
       <a class='category' href='/categories/cookbook/'>cookbook</a>&nbsp;
+    
+      <a class='category' href='/categories/csv/'>csv</a>&nbsp;
     
   </p>
 </section>

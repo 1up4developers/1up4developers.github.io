@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/ruby/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-10-28T16:36:16+00:00</updated>
+  <updated>2014-11-17T09:49:34-02:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -14,9 +14,267 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Lendo arquivo CSV com parcimônia no Ruby]]></title>
+    <link href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"/>
+    <updated>2014-11-17T09:34:00-02:00</updated>
+    <id>http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby</id>
+    <content type="html"><![CDATA[<p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
+
+<p>Na versão 1.9.3 e superior, o Ruby incluiu a classe <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html">CSV</a> na sua <em>standard lib</em>, que facilita o trabalho de ler e/ou escrever arquivos csv. Exemplos em código abaixo.</p>
+
+<h2>Conhecendo o CSV</h2>
+
+<p>O modo mais simples e direto para ler um arquivo csv, é usar o <code>CSV.read</code> que retorna um Array de Arrays:</p>
+
+<p>```
+require &lsquo;csv&rsquo;
+array_students = CSV.read(&lsquo;/tmp/mock_data.csv&rsquo;) # return an Array of Arrays
+array_students.each { |row| puts row.inspect }  # => output:</p>
+
+<h1>&ldquo;[\"id\&rdquo;, \&ldquo;name\&rdquo;, \&ldquo;country\&rdquo;, \&ldquo;birthday\&rdquo;]"</h1>
+
+<h1>&ldquo;[\"1\&rdquo;, \&ldquo;Virginia Harvey\&rdquo;, \&ldquo;GB\&rdquo;, \&ldquo;01/06/1993\&rdquo;]"</h1>
+
+<p>```</p>
+
+<p>Dentro da classe CSV, existem mais duas classes que facilitam ainda mais o manuseio dos dados.</p>
+
+<p>Caso necessite de mais requinte e sofisticação, o método <code>CSV.table</code> retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Table.html">CSV::Table</a>. Com o table, você tem acesso ao cabeçalho através do <code>headers</code> e acesso a cada linha do arquivo com o <code>each</code>, que retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Row.html">CSV::Row</a>.</p>
+
+<p>```
+require &lsquo;csv&rsquo;
+table_students = CSV.table(&lsquo;/tmp/mock_data.csv&rsquo;) # => instance of CSV::Table
+puts table_students.headers.inspect # => [:id, :name, :country, :birthday]
+table_students.each { |row| puts row.inspect } # => output:</p>
+
+<h1>&lt;CSV::Row id:1 name:&ldquo;Virginia Harvey&rdquo; country:&ldquo;GB&rdquo; birthday:&ldquo;01/06/1993&rdquo;></h1>
+
+<p>table_students.each { |row| puts row.fetch(:name) } # => output:</p>
+
+<h1>Virginia Harvey</h1>
+
+<p>```</p>
+
+<p>Tanto o <code>read</code> quanto o <code>table</code>, aceitam um hash de options como segundo argumento. Tem uma descrição detalhada na documentação do <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#method-c-new">método new</a>. Exemplo usando options:</p>
+
+<p><code>
+require 'csv'
+table_students = CSV.table('/tmp/mock_data2.csv', col_sep: ";", skip_blanks: true, converters: [])
+table_students.each { |row| puts row.inspect }
+</code></p>
+
+<h2>CSV converters</h2>
+
+<p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#HeaderConverters">CSV::HeaderConverters</a> contém um hash de symbol e block que são usados para converter os valores do cabeçalho. Para usá-los, você deve informar qual <em>converter</em> deseja aplicar na opção <code>header_converters</code>. Acredito que o código abaixo explica melhor.</p>
+
+<p>```
+require &lsquo;csv&rsquo;
+puts CSV::HeaderConverters.keys.inspect # => [:downcase, :symbol]</p>
+
+<h1>Add new header converter</h1>
+
+<p>CSV::HeaderConverters[:remap] = lambda do |raw_value|
+  raw_value = raw_value.to_sym
+  case raw_value
+  when :country</p>
+
+<pre><code>:pais
+</code></pre>
+
+<p>  when :birthday</p>
+
+<pre><code>:dt_nascimento
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>raw_value
+</code></pre>
+
+<p>  end
+end</p>
+
+<p>table_students = CSV.table(&lsquo;mock_data.csv&rsquo;, col_sep: &ldquo;,&rdquo;, header_converters: :remap)
+table_students.each do |row|
+  puts [row.fetch(:pais), row.fetch(:dt_nascimento)].inspect # => [&ldquo;GB&rdquo;, &ldquo;01/06/1993&rdquo;]
+end
+```</p>
+
+<p>No exemplo acima, criei o HeaderConverter &ldquo;remap&rdquo; que traduz o cabeçalho country para pais e birthday para dt_nascimento. Por padrão, o <code>CSV</code> disponibiliza os converters downcase e symbol, que por sinal são usados quando usamos o método <code>table</code> para ler csv.</p>
+
+<p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#Converters">CSV::Converters</a> segue o mesmo padrão de symbol e block, a única diferença que este é usado para converter os valores da linha. Vamos ao código.</p>
+
+<p>```
+require &lsquo;csv&rsquo;
+require &lsquo;date&rsquo;</p>
+
+<p>puts CSV::Converters.keys.inspect       # => [:integer, :float, :numeric, :date, :date_time, :all]</p>
+
+<h1>Add new converter</h1>
+
+<p>CSV::Converters[:nil_to_empty] = lambda do |raw_value|
+  raw_value.nil? ? &ldquo;&rdquo; : raw_value
+end</p>
+
+<h1>Add new converter</h1>
+
+<p>CSV::Converters[:brazilian_date] = lambda do |raw_value|
+  if raw_value =~ /\d{2}\/\d{2}\/\d{4}/</p>
+
+<pre><code>Date.strptime(raw_value, "%d/%m/%Y")
+</code></pre>
+
+<p>  else</p>
+
+<pre><code>raw_value
+</code></pre>
+
+<p>  end
+end</p>
+
+<h1>Group converters</h1>
+
+<p>CSV::Converters[:my_custom_converters] = [:nil_to_empty, :brazilian_date]</p>
+
+<p>table_students = CSV.table(&lsquo;mock_data.csv&rsquo;, col_sep: &ldquo;,&rdquo;, converters: :my_custom_converters)
+table_students.each do |row|
+  puts [row.fetch(:country), row.fetch(:birthday)].inspect # => [&ldquo;GB&rdquo;, #&lt;Date: 1993-06-01 ((2449140j,0s,0n),+0s,2299161j)>]
+end
+```</p>
+
+<p>No exemplo acima criei dois converters. Um para trocar nil por &ldquo;&rdquo; e o outro que converte para Date caso o valor esteja no formato 99/99/9999.</p>
+
+<h2>Encoding hell com Excel</h2>
+
+<p>Normalmente o csv é usado como meio de integração Excel &lt;=> Sistema. Acontece que o Excel não se dá muito bem com acentos especiais como ãõáé etc. Isto porque estamos em 2014. Acontece que quando há caracteres especiais, a única abordagem que funcionou foi exportar para Unicode text. Neste formato, o encoding do arquivo é UTF-16LE e separado por tab (\t). Este <a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">post de 2009 da Plataformatec</a> explica com mais detalhes este jeitinho do Excel de ser com os dados. A única diferença de 2009 pra hoje, é que podemos passar o encoding como parâmetro ao ler o arquivo, e por sorte evitar o uso do iconv. Vamos ao código:</p>
+
+<p>```
+require &lsquo;csv&rsquo;</p>
+
+<p>table = CSV.table(&lsquo;mock_unicode.txt&rsquo;,</p>
+
+<pre><code>              col_sep: "\t", # tab as delimiter
+              encoding: "UTF-16LE:UTF-8") # read UTF-16LE and convert to UTF-8
+</code></pre>
+
+<p>table.each do |row|
+  puts row.inspect
+end
+```</p>
+
+<h2>Evitando o abuso de memória</h2>
+
+<p>Ao ler arquivos com <code>read</code> ou <code>table</code>, o arquivo é colocado em memória, ou seja, ao processar uma planilha de 100mb, o seu processo ruby vai pra um 100mb e pouco. Agora imagina 20 workers e cada um processando uma planilha de 100mb ou mais, facilmente o seu servidor terá um pico de consumo de memória, o no pior cenário vai dar crash no processo. Para evitar este consumo devemos usar o <code>foreach</code> do <code>CSV</code>.</p>
+
+<p>```
+require &lsquo;csv&rsquo;</p>
+
+<p>CSV.foreach(&ldquo;mock_data.csv&rdquo;, col_sep: &ldquo;,&rdquo;) do |row|
+  puts row.inspect
+end</p>
+
+<h1>=></h1>
+
+<h1>[&ldquo;id&rdquo;, &ldquo;name&rdquo;, &ldquo;country&rdquo;, &ldquo;birthday&rdquo;]</h1>
+
+<h1>[&ldquo;1&rdquo;, &ldquo;Virginia Harvey&rdquo;, &ldquo;GB&rdquo;, &ldquo;01/06/1993&rdquo;]</h1>
+
+<p>```</p>
+
+<p>Desta maneira a leitura é mais otimizada, pois apenas uma linha por vez é lida. O único problema é que perdemos algumas facilidades do <code>table</code>, como os <code>headers</code> e a instância do <code>CSV::Row</code> por linha. Tentando chegar no modelo ideal, montei uma classe que usa o foreach e mesmo assim tem os <code>headers</code> e os <code>rows</code>.</p>
+
+<p>```
+require &lsquo;csv&rsquo;</p>
+
+<p>class SheetReader</p>
+
+<p>  attr_reader :headers</p>
+
+<p>  def initialize(filepath)</p>
+
+<pre><code># options to read unicode text file
+# options = {
+#   col_sep: "\t",
+#   skip_blanks: true,
+#   encoding: "UTF-16LE:UTF-8",
+#   converters: []
+# }
+options = {col_sep: ",", converters: []}
+@csv_reader = CSV.foreach(filepath, options) # gets a iterator
+@headers    = convert_headers(@csv_reader.next) # read first line
+</code></pre>
+
+<p>  end</p>
+
+<p>  # yield an instance of <a href="http://ruby-doc.org/stdlib-2.1.0/libdoc/csv/rdoc/CSV/Row.html">http://ruby-doc.org/stdlib-2.1.0/libdoc/csv/rdoc/CSV/Row.html</a>
+  def each_row(&amp;block)</p>
+
+<pre><code>begin
+  while true
+    raw_row = @csv_reader.next  # raise StopIteration in EOF
+    yield CSV::Row.new(headers, raw_row)
+  end
+rescue StopIteration
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  protected</p>
+
+<p>  # Internal: Convert headers to Array of symbols.
+  #
+  # raw_headers &ndash; Array of Strings.
+  #
+  # Examples
+  #
+  #   convert_headers([&ldquo;ATIVO&rdquo;, &ldquo;NOME COMERCIAL&rdquo;])
+  #   # => [:ativo, :nome_comercial]
+  #
+  # Returns Array of symbols.
+  def convert_headers(raw_headers)</p>
+
+<pre><code>raw_headers.compact! # removes nil values
+converter = lambda do |header|
+  header_converters = CSV::HeaderConverters.values
+  header_converters.inject(header) do |header, converter_proc|
+    converter_proc.call(header)
+  end
+end
+
+raw_headers.map { |header| converter.call(header) }
+</code></pre>
+
+<p>  end</p>
+
+<p>end</p>
+
+<p>reader = SheetReader.new(&lsquo;mock_data.csv&rsquo;)
+reader.headers # => [:id, :name, :country, :birthday]
+reader.each_row do |row|
+  puts row.inspect # => #&lt;CSV::Row id:&ldquo;1&rdquo; name:&ldquo;Virginia Harvey&rdquo; country:&ldquo;GB&rdquo; birthday:&ldquo;01/06/1993&rdquo;>
+end
+```</p>
+
+<p>Por último, uma observação importante: todo este código acima foi rodado no ruby 2.1.0. Espero que este mini guia de como ler arquivo csv com Ruby te ajude.
+Segue alguns links com mais informações:</p>
+
+<ul>
+<li><a href="http://www.sitepoint.com/guide-ruby-csv-library-part/">http://www.sitepoint.com/guide-ruby-csv-library-part/</a></li>
+<li><a href="http://www.sitepoint.com/guide-ruby-csv-library-part-2/">http://www.sitepoint.com/guide-ruby-csv-library-part-2/</a></li>
+<li><a href="http://technicalpickles.com/posts/parsing-csv-with-ruby/">http://technicalpickles.com/posts/parsing-csv-with-ruby/</a></li>
+<li><a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/</a></li>
+</ul>
+
+
+<p>Dúvidas, sugestões ou qualquer outra coisa. Deixe um comentário ou se preferir, mande um <a href="https://twitter.com/rogerleite">tweety!</a> :D</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
     <link href="http://1up4dev.org/2013/01/http-monkey/"/>
-    <updated>2013-01-23T15:29:16+00:00</updated>
+    <updated>2013-01-23T13:29:16-02:00</updated>
     <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
@@ -56,7 +314,7 @@
   <entry>
     <title type="html"><![CDATA[Rails 4 - Novidades]]></title>
     <link href="http://1up4dev.org/2012/11/rails-4-novidades/"/>
-    <updated>2012-11-29T13:38:49+00:00</updated>
+    <updated>2012-11-29T11:38:49-02:00</updated>
     <id>http://1up4dev.org/2012/11/rails-4-novidades</id>
     <content type="html"><![CDATA[<p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
 
@@ -83,7 +341,7 @@
   <entry>
     <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
     <link href="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"/>
-    <updated>2012-11-28T15:49:06+00:00</updated>
+    <updated>2012-11-28T13:49:06-02:00</updated>
     <id>http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
@@ -145,7 +403,7 @@ Hope that helps!</p>
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
     <link href="http://1up4dev.org/2012/06/concepcao-do-rologames/"/>
-    <updated>2012-06-25T10:05:09+00:00</updated>
+    <updated>2012-06-25T07:05:09-03:00</updated>
     <id>http://1up4dev.org/2012/06/concepcao-do-rologames</id>
     <content type="html"><![CDATA[<p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
 
@@ -180,44 +438,6 @@ Hope that helps!</p>
 <p>Já tinhamos uma prova de conceito, uns rascunhos das páginas e uma lista de funcionalidades. E todo processo levou cerca de uma semana.</p>
 
 <p>Sem perder mais tempo, partimos para o código! E foi então que começamos a tropeçar nos detalhes&hellip; mas este será um assunto para o próximo post. Até lá!</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
-    <link href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/"/>
-    <updated>2012-06-20T11:37:53+00:00</updated>
-    <id>http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames</id>
-    <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
-
-<p><a href="http://rologames.com.br"><img src="/images/uploads/2012/06/logo1.jpg" alt="Rolo Games - Rede Social de Troca de Jogos" /></a></p>
-
-<p>Trata-se de um site social para trocar jogos de videogames, no caso, PlayStation 3.</p>
-
-<p>O Panachi e eu ralamos muito durante 2 meses, projetando e programando todas as funcionalidades. Não foi fácil, mas é gratificante ver o site no ar.</p>
-
-<p>Antes de contar esta experiência, queria falar um pouco do passado e dos projetos onde já falhamos (e aprendemos!), por ordem de lançamento:</p>
-
-<ol>
-<li><p> <a href="http://business-bingo.heroku.com/">Business Bingo Generator</a>. Primeiro site que lançamos, foi feito em dois dias e só de zueira. O legal é que na época tinha uns dez termos cadastrados &hellip; :D</p></li>
-<li><p> MeAciona (fora do ar). Foi há mais de 3 anos atrás. Na época, foi o nosso primeiro projeto feito em Rails. Foi muito legal criar o site e ao mesmo tempo aprender Ruby/Rails. O site tinha integração com a Bovespa, cadastro de usuários e possibilitava definir &ldquo;regras&rdquo; para receber avisos sobre determinado momento de um papel. Era voltado à pequenos investidores, como uma ferramenta para auxiliar a monitorar as ações. Porém logo percebemos que este nicho/mercado era muito restrito e que existiam várias outras ferramentas gratuitas para esta finalidade. Desistimos da idéia, porém o que aprendemos durante seu desenvolvimento não foi perdido!</p></li>
-<li><p> <a href="https://mooney.1up4dev.com/">Mooney</a>. Controle financeiro pessoal simples, rápido e seguro. Este foi o Panachi que fez, ficou bem legal e ele usa até hoje.</p></li>
-<li><p> Sitefique.me (fora de funcionamento, porém mantemos no ar, como portifólio, em <a href="http://sitefiqueme.1up4dev.com">http://sitefiqueme.1up4dev.com</a>). Foi no ano passado (2011). Já tinhamos mais experiência técnica e conseguimos em 3 meses, lançar um serviço mega legal que permitia que qualquer pessoa pudesse criar um site com layout customizado e o publicasse na internet com domínio próprio ou utilizando o subdomínio xxx.sitefique.me. Esperávamos atingir um mercado de pequenas empresas que precisassem manter um site completo e atualizado com um pequeno investimento mensal. É claro que não foi pra frente, pois não planejamos a parte não técnica e vendável (marketing, divulgação, etc) do serviço. A concorrência, principalmente serviços gratuitos, também ajudou a engavetarmos a idéia.</p></li>
-</ol>
-
-
-<p>Mas como diz o ditado &ldquo;até mesmo um pé na bunda te empurra pra frente&rdquo; , continuamos perseverando! É um trabalho cansativo, mas o segredo é não desistir jamais! Isto até me lembra do <a href="http://1up4dev.org/2008/10/rails-summit-eu-fui">Rails Summit</a> (em 2008!), quando o Chris Wanstrath contou que antes de criar o Github, ele já tinha lançado mais de 17 sites! Segundo o meu cálculo, contando com o Rolo Games, ainda temos mais 12 chances! :D</p>
-
-<p>E pensando nisso, resolvi compartilhar a experiência de como foi planejar, desenvolver e colocar no ar o RoloGames. Eu não consigo escrever posts gigantes (tipo do Akita), então resolvi dividir a experiência em três partes (vou atualizando os links conforme forem publicados):</p>
-
-<ul>
-<li><p><a href="http://1up4dev.org/2012/06/concepcao-do-rologames/">Concepção</a></p></li>
-<li><p>Desenvolvimento</p></li>
-<li><p>Infraestrutura</p></li>
-</ul>
-
-
-<p>Espero que o post te ajude de alguma maneira e te motive também, afinal até hoje o &ldquo;polêmico&rdquo; <a href="http://1up4dev.org/2011/02/pare-de-chorar-e-mexa-se/">Pare de chorar e mexa-se</a> é um dos posts mais lidos do blog!</p>
 ]]></content>
   </entry>
   
