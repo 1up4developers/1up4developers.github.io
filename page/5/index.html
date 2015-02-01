@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Aproveitando a grande repercussão do post do Plínio sobre atitude empreendedora e um gancho do meu último post sobre simplicidade e prática constante &hellip;">
+  <meta name="description" content="Documentação é aquilo que você reclama para fazer e reclama quando não encontra. Por Plínio &ldquo;Chico Xavier&#8221; via Twitter. Isto me fez &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,142 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/">Documentação Não Pode Ser Chato. Como Fazer Igual Ao Rails Guides !</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-02-24T03:52:40+00:00" pubdate data-updated="true">Feb 24<span>th</span>, 2011</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/" data-text="Documentação não pode ser chato. Como fazer igual ao Rails Guides !" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/02/documentacao-nao-pode-ser-chato-como-fazer-igual-ao-rails-guides/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>Documentação é aquilo que você reclama para fazer e reclama quando não encontra.</p></blockquote>
+
+<p>Por <a href="http://1up4dev.org/author/pbalduino/">Plínio</a> &ldquo;Chico Xavier&#8221; via <a href="http://twitter.com/#!/p_balduino/status/35689585455407105">Twitter</a>.</p>
+
+<p>Isto me fez refletir (bem rápido) sobre as possíveis causas da não-documentação:</p>
+
+<ul>
+<li><p>É muito chato ! Editar wiki, doc &hellip; é incrível como toda documentação geralmente é feita em algo não produtivo.</p></li>
+<li><p>Espaço e Tempo (ou seja, prazo!). Sempre é deixado por último e nunca sobra tempo pra ser feito.</p></li>
+<li><p>Não é levado a sério. Levanta a mão que já viu a secretária documentando &ldquo;tela&rdquo; de sistema &hellip; :D</p></li>
+<li><p>Normalmente o &ldquo;investidor&rdquo; do software não vê valor nisto, ou melhor, espera alguém pedir e repassa a tarefa com prioridade &ldquo;faz rapidinho&rdquo;.</p></li>
+</ul>
+
+
+<p>Ok. Após reflexão feita, hora de atacar o problema.</p>
+
+<h2>Usando &ldquo;guides&rdquo; para criar um Guide !</h2>
+
+<p>Este é um resultado da experiência abaixo:</p>
+
+<p><a href="http://rogerleite.github.com/rubygems_snapshot/"><img src="/images/uploads/2011/02/snapshot_guide-300x241.png" alt="Snapshot Guide (inspirado no Rails Guides)" /></a></p>
+
+<p>Com a gem <a href="https://github.com/wycats/guides">guides</a>, em segundos você tem um <em>scaffold</em>, pronto para ser preenchido.</p>
+
+<pre><code>&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ gem install guides&lt;/span&gt;&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt; &lt;/span&gt;&lt;/span&gt;&lt;span style="color: #444444; font-family: Georgia, 'Bitstream Charter', serif; line-height: 22px;"&gt;$ guides #mostra os comandos disponíveis&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ guides new sample&lt;/span&gt;&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ cd sample&lt;/span&gt;&lt;/span&gt;
+
+
+
+
+&lt;span style="font-family: Georgia, 'Bitstream Charter', serif; color: #444444;"&gt;&lt;span style="line-height: 22px;"&gt;$ guides build &amp;&amp; guides preview&lt;/span&gt;&lt;/span&gt;
+</code></pre>
+
+<p>Pronto. Em <a href="http://localhost:9292">http://localhost:9292</a> você terá acesso ao novo guia gerado.</p>
+
+<h3>Preenchendo o seu Guia</h3>
+
+<p>Em <em>guides.yml</em> (exemplo <a href="https://github.com/rogerleite/rubygems_snapshot/blob/master/guides/guides.yml">aqui</a>), está o básico do seu Guia. Nele está o índice de &ldquo;capítulos&rdquo;, com resumo e nome do arquivo que o link deve seguir. Os arquivos textile  gerados/criados ficarão na pasta <em>source</em>, o resultado do &ldquo;guides build&rdquo; ficará na pasta <em>output</em>.</p>
+
+<p>As páginas são em <a href="http://www.textism.com/tools/textile/">textile</a>, o que facilita bastante. Mas o grande diferencial, está em alguns <em>helpers</em> disponibilizados pela gem, que torna muito simples criar áreas de destaque como INFO, WARNING &hellip; etc e adicionar comandos e códigos.</p>
+
+<p>Para ter idéia de uma página em textile, segue o link <a href="https://github.com/rogerleite/rubygems_snapshot/raw/master/guides/source/getting_started.textile">source/getting_started.textile</a> (raw).</p>
+
+<h3>Repensando a documentação</h3>
+
+<p>Com certeza, usando a <em>gem guides</em>, vocẽ consegue um boost na hora de documentar. Já evitando aquela chatice de editar wiki, .doc, controlando versão &hellip; etc. Usando textile, seu editor preferido e git, não tem mais desculpas.</p>
+
+<h4>Desenvolvendo Frameworks e APIs</h4>
+
+<p>Já faz um tempo que eu topo com a <em>vibe</em> <a href="http://www.google.com.br/search?sourceid=chrome&amp;ie=UTF-8&amp;q=Documentation+Driven+Development">Documentation Driven Development</a>. Como tudo na vida, é questão de bom senso. Documentar uma API, nada mais é do que definir a interface dela, e dependendo do caso, isto ajuda bastante antes de começar o desenvolvimento.</p>
+
+<h4>Você é um Usuário !</h4>
+
+<p>Uma documentação com um monte de imagem e seta, descrevendo o óbvio não serve para nada (além de passar raiva). Uma documentação <strong>sucinta</strong>, com o básico, por exemplo Instalação, Modo de Usar, Configurações Disponíveis é bem melhor que muito dossiê por aí ! Tente ao máximo se colocar no lugar do usuário ao escrever alguma documentação ou ajuda.</p>
+
+<hr />
+
+<p>Não deixe de contribuir com o post. Mande sugestões, comentários, reclamações etc.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2011/02/torne-se-excelente/">Torne-se Excelente</a></h1>
     
     
@@ -99,7 +235,7 @@
   
 
 
-<time datetime="2011-02-22T06:00:05-03:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2011</time>
+<time datetime="2011-02-22T09:00:05+00:00" pubdate data-updated="true">Feb 22<span>nd</span>, 2011</time>
         | 
   
 
@@ -246,7 +382,7 @@
   
 
 
-<time datetime="2011-02-12T10:00:30-02:00" pubdate data-updated="true">Feb 12<span>th</span>, 2011</time>
+<time datetime="2011-02-12T12:00:30+00:00" pubdate data-updated="true">Feb 12<span>th</span>, 2011</time>
         | 
   
 
@@ -349,7 +485,7 @@
   
 
 
-<time datetime="2011-02-02T10:05:53-02:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2011</time>
+<time datetime="2011-02-02T12:05:53+00:00" pubdate data-updated="true">Feb 2<span>nd</span>, 2011</time>
         | 
   
 
@@ -436,7 +572,7 @@
   
 
 
-<time datetime="2011-02-01T07:00:00-02:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
+<time datetime="2011-02-01T09:00:00+00:00" pubdate data-updated="true">Feb 1<span>st</span>, 2011</time>
         | 
   
 
@@ -566,7 +702,7 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
   
 
 
-<time datetime="2011-01-26T08:00:59-02:00" pubdate data-updated="true">Jan 26<span>th</span>, 2011</time>
+<time datetime="2011-01-26T10:00:59+00:00" pubdate data-updated="true">Jan 26<span>th</span>, 2011</time>
         | 
   
 
@@ -713,7 +849,7 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
   
 
 
-<time datetime="2011-01-20T07:00:09-02:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
+<time datetime="2011-01-20T09:00:09+00:00" pubdate data-updated="true">Jan 20<span>th</span>, 2011</time>
         | 
   
 
@@ -793,7 +929,7 @@ Provavelmente, essas centrais de atendimento começaram com poucos funcionários
   
 
 
-<time datetime="2011-01-18T07:00:41-02:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+<time datetime="2011-01-18T09:00:41+00:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
         | 
   
 
@@ -884,7 +1020,7 @@ puts "#{gem} version #{version}"
   
 
 
-<time datetime="2011-01-17T09:00:55-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
+<time datetime="2011-01-17T11:00:55+00:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
         | 
   
 
@@ -1097,7 +1233,7 @@ end
   
 
 
-<time datetime="2011-01-17T08:00:23-02:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
+<time datetime="2011-01-17T10:00:23+00:00" pubdate data-updated="true">Jan 17<span>th</span>, 2011</time>
         | 
   
 
@@ -1161,133 +1297,6 @@ end
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/">Teste De Integração Com Rspec 1.x E Capybara Na Sua App Rails</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-08-09T07:00:35-03:00" pubdate data-updated="true">Aug 9<span>th</span>, 2010</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/" data-text="Teste de integração com Rspec 1.x e Capybara na sua app Rails" data-via="1up4dev" data-counturl="http://1up4dev.org/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2010/08/teste-de-integracao-com-rspec-1-x-e-capybara-na-sua-app-rails/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Este não é daqueles posts que explicam o que é rspec, testes, diferenças entre teste funcional, integração e etc. Este post é só uma rapidinha, pra quem já conhece <a href="http://rspec.info/">rspec</a> e <a href="http://github.com/jnicklas/capybara">capybara</a>.</p>
-
-<p>A documentação do Capybara é boa, mas deixa a desejar nas instruções de como integrá-lo somente com rspec. Com a ajuda do <a href="http://blog.georgeguimaraes.com/">George Guimarães</a> da <a href="http://blog.plataformatec.com.br/">Plataforma</a>, cheguei num passo a passo mega simples.</p>
-
-<p>No <em>config/environments/test.rb</em> declare:</p>
-
-<pre><code>config.gem "rspec",            :version =&gt; "= 1.3.0", :lib =&gt; false
-config.gem "rspec-rails",      :version =&gt; "= 1.3.2", :lib =&gt; false
-config.gem "capybara",         :version =&gt; "= 0.3.9", :lib =&gt; false
-</code></pre>
-
-<p>No <em>spec/spec_helper.rb</em> coloque:</p>
-
-<pre><code>require 'capybara/rails'
-[...]
-Spec::Runner.configure do |config|
-
-  [...]
-  config.include(Capybara, :type =&gt; :integration)
-
-end
-</code></pre>
-
-<p>Pronto! Isto é o suficiente para utilizar o Capybara nos testes de integração.
-Para finalizar, você pode montar um teste simples de validação. Por exemplo:</p>
-
-<p>Crie <em>spec/integration/site_spec.rb</em> e coloque:</p>
-
-<pre><code>require 'spec_helper'
-
-describe "Site sample" do
-
-  context "root" do
-
-    before do
-      visit root_url
-      save_and_open_page
-    end
-
-    it "should have Hello" do
-      page.should have_content("Hello")
-    end
-
-  end
-
-end
-</code></pre>
-
-<p>Para executar somente os testes de integração:</p>
-
-<pre><code>rake spec:integration
-</code></pre>
-
-<h2>have_content e um hot tip que pode te salvar muitas horas !</h2>
-
-<p>Caso aconteça o erro:</p>
-
-<pre><code>undefined method `have_content' for #&lt;ActionController::Integration::Session:0xb618ad10&gt;
-</code></pre>
-
-<p>Graças a esta mensagem <a href="http://groups.google.com/group/ruby-capybara/browse_thread/thread/28467e031beb7ba1/19a368c21a278eb8?lnk=gst&amp;q=have_content#19a368c21a278eb8">Can&rsquo;t make matchers work with cucumber and rails 2.3.2</a>, descobri que o <em>have_content</em> não funciona com o rails 2.3.2, eu resolvi o problema fazendo um upgrade para a última versão do rails. #ficaadica</p>
-
-<p>Dúvidas, melhorias, sugestões e elogios são sempre bem vindos !</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/6/">&larr; Older</a>
@@ -1310,6 +1319,10 @@ end
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/01/type-hints-no-clojure-parte-1/">Type hints no Clojure - Parte 1</a>
+      </li>
+    
+      <li class="post">
         <a href="/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/">Lendo arquivo CSV com parcimônia no Ruby</a>
       </li>
     
@@ -1323,10 +1336,6 @@ end
     
       <li class="post">
         <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/04/alguns-truques-com-o-repl-do-clojure/">Alguns truques com o REPL do Clojure</a>
       </li>
     
   </ul>
@@ -1355,7 +1364,7 @@ end
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (17)
+          <a href="/author/pbalduino">Plínio Balduino</a> (18)
         </li>
       
     
@@ -1462,7 +1471,7 @@ end
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - 1up4developers -
+  Copyright &copy; 2015 - 1up4developers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>.</span>
 </p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-11-17T09:49:34-02:00</updated>
+  <updated>2015-01-31T23:28:33+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -14,9 +14,107 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Type hints no Clojure - Parte 1]]></title>
+    <link href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/"/>
+    <updated>2015-01-31T21:14:00+00:00</updated>
+    <id>http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1</id>
+    <content type="html"><![CDATA[<h2>Otimizando com type hints</h2>
+
+<p>Por padrão você não informa os tipos dos dados ao Clojure. Internamente o dado vai ser tratado como <code>Object</code>, que é a classe base de qualquer objeto Java.</p>
+
+<p>Qualquer método ou propriedade que você invocar desse objeto será localizado e chamado através de <em>reflection</em>. No Java, <em>reflection</em> é a capacidade de acessar métodos e membros de um objeto ou classe através de metaprogramação.</p>
+
+<p>Exemplificando, esse código Clojure:</p>
+
+<pre><code>(defn upper-case [text]
+  (.toUpperCase text))
+
+(upper-case "umba umba umba ê")
+; "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Vai ser transformado em algo equivalente a isso:</p>
+
+<pre><code>public Object invoke(Object par01) {
+  return (Object)(par01
+                    .getClass()
+                    .getDeclaredMethod("toUpperCase", null)
+                    .invoke(par01));
+}
+
+(new user$upper_case()).invoke("umba umba umba ê");
+// "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Eu disse <em>equivalente</em> porque o seu código Clojure vai ser compilado diretamente para <em>bytecode</em> ao invés de ser convertido primeiro para código Java.</p>
+
+<p>Como podemos notar, além de termos que invocar três métodos para fazer a chamada de um e termos que fazer <em>typecasting</em> &ndash; ou <em>coerção de tipos</em>, se preferir &ndash; para que tudo seja tratado como <code>Object</code>, o próprio processo de <em>reflection</em> é lento por si só.</p>
+
+<p>Note como informamos o nome do método <code>toUpperCase</code> como um texto. Com isso o método <code>getDeclaredMethod</code> vai pesquisar uma tabela interna daquela objeto comparando cada nome de método até encontrar o que procuramos.</p>
+
+<p>Para ajudar, como o Clojure não tem a mais remota ideia do que queremos transformar em letras maiúsculas, a função aceita qualquer coisa.</p>
+
+<pre><code>(upper-case 3.14159)
+; IllegalArgumentException No matching field found: toUpperCase for 
+; class java.lang.Double
+</code></pre>
+
+<p><em>Ah, então o compilador do Clojure é mal feito?</em></p>
+
+<p>Não. Acontece algo muito parecido quando escrevemos código JavaScript, Ruby, Python ou qualquer outra linguagem dinâmica para a JVM. Como você não informou o tipo, o compilador tem que adivinhar ou confiar cegamente no que você está dizendo.</p>
+
+<p>Porém, existe uma forma de diminuir essa trabalheira toda dando dicas ao compilador sobre o tipo de dado que ele deve utilizar. Essas dicas chamam-se <em>type hints</em>, ou dicas de tipos.</p>
+
+<p>Mas atenção: que fique claro que estamos dando dicas ao compilador ao invés de declararmos estaticamente o tipo de dados que estamos utilizando.</p>
+
+<p>Podemos reescrever nosso código dessa forma para que o compilador receba nossas dicas:</p>
+
+<pre><code>(defn upper-case [^String text]
+  (.toUpperCase text))
+
+(upper-case "umba umba umba ê")
+; "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Se tentarmos passar qualquer coisa diferente de <code>String</code>, a JVM vai reclamar na mesma hora.</p>
+
+<pre><code>(upper-case 3.14159)
+; ClassCastException java.lang.Double cannot be cast to 
+; java.lang.String  user/upper-case (NO_SOURCE_FILE:2)
+</code></pre>
+
+<p>Aí você pensa <em>ah, tá. era para ter passado <code>String</code> e passei <code>Double</code></em>. Bonito, não?</p>
+
+<p>Mas não é só isso. Ao usar <em>type hints</em> você ainda leva uma otimização de código totalmente de graça.</p>
+
+<p>O <em>bytecode</em> gerado fica equivalente a esse código Java:</p>
+
+<pre><code>public Object invoke(Object par01) {
+  return ((String)par01).toUpperCase();
+}
+
+(new user$upper_case()).invoke("umba umba umba ê");
+// "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Se você imaginou que o código, além de menor, também ficou mais rápido, acertou.</p>
+
+<p><em>Então vou usar isso no meu código inteiro!</em></p>
+
+<p>Calma lá. Clojure não deixa de ser uma linguagem dinâmica apenas por ter <em>type hints</em>. A contrapartida dessas dicas é que elas poluem o código e, muitas vezes, e dificilmente você vai precisar que todo seu código seja otimizado.</p>
+
+<p>Na próxima parte vamos aprender quando e como otimizar para praticamente todas as situações.</p>
+
+<p>Até lá.</p>
+
+<p><em>(Trecho do meu livro &ldquo;Clojure: Programação Funcional Descomplicada para a JVM&rdquo;, a ser publicado em breve)</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Lendo arquivo CSV com parcimônia no Ruby]]></title>
     <link href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"/>
-    <updated>2014-11-17T09:34:00-02:00</updated>
+    <updated>2014-11-17T09:34:00+00:00</updated>
     <id>http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby</id>
     <content type="html"><![CDATA[<p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
 
@@ -364,7 +462,7 @@ Segue alguns links com mais informações:</p>
   <entry>
     <title type="html"><![CDATA[Extraindo dados da Internet com Clojure]]></title>
     <link href="http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure/"/>
-    <updated>2014-10-28T12:10:00-02:00</updated>
+    <updated>2014-10-28T12:10:00+00:00</updated>
     <id>http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure</id>
     <content type="html"><![CDATA[<h2>O problema</h2>
 
@@ -684,7 +782,7 @@ Vamos fazer a nossa função retornar um <em>vector</em> com os nomes dos autore
   <entry>
     <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
-    <updated>2014-09-23T18:24:00-03:00</updated>
+    <updated>2014-09-23T18:24:00+00:00</updated>
     <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
 
@@ -868,7 +966,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Integração Contínua e Entrega Contínua de modo fácil com Wercker]]></title>
     <link href="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"/>
-    <updated>2014-09-06T12:33:00-03:00</updated>
+    <updated>2014-09-06T12:33:00+00:00</updated>
     <id>http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
 containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
@@ -1110,7 +1208,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00-03:00</updated>
+    <updated>2014-04-25T11:21:00+00:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -1245,7 +1343,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   <entry>
     <title type="html"><![CDATA[Sowing the seeds of code]]></title>
     <link href="http://1up4dev.org/2013/09/sowing-the-seeds-of-code/"/>
-    <updated>2013-09-25T23:08:00-03:00</updated>
+    <updated>2013-09-25T23:08:00+00:00</updated>
     <id>http://1up4dev.org/2013/09/sowing-the-seeds-of-code</id>
     <content type="html"><![CDATA[<p>Seguindo a filosofia de <a href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">tirar a bunda da cadeira</a>, tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.</p>
 
@@ -1338,7 +1436,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT]]></title>
     <link href="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/"/>
-    <updated>2013-09-24T10:00:00-03:00</updated>
+    <updated>2013-09-24T10:00:00+00:00</updated>
     <id>http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://openwrt.org">OpenWRT</a> é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. Em outras palavras, é um &ldquo;firmware on steroids&rdquo; para roteadores.</p>
 
@@ -1718,7 +1816,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
     <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
-    <updated>2013-09-20T22:38:00-03:00</updated>
+    <updated>2013-09-20T22:38:00+00:00</updated>
     <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
     <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
 
@@ -1832,7 +1930,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
     <link href="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/"/>
-    <updated>2013-08-22T14:32:23-03:00</updated>
+    <updated>2013-08-22T17:32:23+00:00</updated>
     <id>http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups</id>
     <content type="html"><![CDATA[<p>Em tempos de <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
@@ -1980,7 +2078,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Extendendo Ruby com C - Só um aperitivo]]></title>
     <link href="http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
-    <updated>2013-08-19T14:29:56-03:00</updated>
+    <updated>2013-08-19T17:29:56+00:00</updated>
     <id>http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
     <content type="html"><![CDATA[<p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
 
@@ -2113,7 +2211,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
     <link href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"/>
-    <updated>2013-07-14T11:35:31-03:00</updated>
+    <updated>2013-07-14T14:35:31+00:00</updated>
     <id>http://1up4dev.org/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 
@@ -2255,7 +2353,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
     <link href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
-    <updated>2013-06-27T09:42:18-03:00</updated>
+    <updated>2013-06-27T12:42:18+00:00</updated>
     <id>http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
@@ -2352,7 +2450,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
     <link href="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/"/>
-    <updated>2013-05-06T07:00:44-03:00</updated>
+    <updated>2013-05-06T10:00:44+00:00</updated>
     <id>http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao</id>
     <content type="html"><![CDATA[<p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
 
@@ -2381,7 +2479,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
     <link href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"/>
-    <updated>2013-04-11T07:30:47-03:00</updated>
+    <updated>2013-04-11T10:30:47+00:00</updated>
     <id>http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
@@ -2446,7 +2544,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
     <link href="http://1up4dev.org/2013/04/novos-rumos/"/>
-    <updated>2013-04-01T12:00:51-03:00</updated>
+    <updated>2013-04-01T15:00:51+00:00</updated>
     <id>http://1up4dev.org/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
@@ -2459,7 +2557,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
     <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
-    <updated>2013-03-20T11:27:02-03:00</updated>
+    <updated>2013-03-20T14:27:02+00:00</updated>
     <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
@@ -2569,7 +2667,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[O ano em que eu tirei a bunda da cadeira]]></title>
     <link href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
-    <updated>2013-03-18T13:45:25-03:00</updated>
+    <updated>2013-03-18T16:45:25+00:00</updated>
     <id>http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
     <content type="html"><![CDATA[<p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
 
@@ -2606,7 +2704,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[Programação funcional com JavaScript]]></title>
     <link href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"/>
-    <updated>2013-02-21T12:58:02-03:00</updated>
+    <updated>2013-02-21T15:58:02+00:00</updated>
     <id>http://1up4dev.org/2013/02/programacao-funcional-com-javascript</id>
     <content type="html"><![CDATA[<blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
 
@@ -2790,7 +2888,7 @@ bomDia("Nicolau");
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
     <link href="http://1up4dev.org/2013/01/http-monkey/"/>
-    <updated>2013-01-23T13:29:16-02:00</updated>
+    <updated>2013-01-23T15:29:16+00:00</updated>
     <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
@@ -2824,23 +2922,6 @@ bomDia("Nicolau");
 <p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
 
 <p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Nos idos de 2012, UML, Design e Waterfall]]></title>
-    <link href="http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
-    <updated>2013-01-04T13:51:14-02:00</updated>
-    <id>http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
-    <content type="html"><![CDATA[<p>Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
-Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&hellip; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.</p>
-
-<p>Em meio a corrida do novo ouro, me encontro em uma sala de treinamento, às vesperas de um novo ano, estudando, discutindo e demonstrando como analisar e modelar sistemas utilizando a mais famosa linguagem de modelagem: a <a href="http://pt.wikipedia.org/wiki/UML">UML</a>.
-Nunca consegui traçar uma ligação saudável entre os modelos criados com UML e código funcionando em produção. A idéia principal da UML é a de comunicar aos envolvidos em um projeto o que se planeja implementar; quais os detalhes que norteiam o desenvolvimento de uma solução e que <a href="http://www.batebyte.pr.gov.br/modules/conteudo/conteudo.php?conteudo=1718">requisitos funcionais e não funcionais</a> devem ser implementados. O problema é que qualquer coisa diferente de código no desenvolvimento de sistemas, está fadada a diferentes interpretações, ao conhecimento e experiência de quem <a href="http://1up4dev.org/2008/11/arquiteto-cascateiro">produz</a> e consome tais artefatos.</p>
-
-<p>A idéia de times multidisciplinares e autogerenciáveis trazida pelo movimento ágil distoa fortemente do <a href="http://en.wikipedia.org/wiki/Waterfall_model">modelo cascata</a>, que delinea claramente o papel do analista de negócios/requisitos, o arquiteto/designer da solução e os <del>pobres</del> desenvolvedores que terão de seguir à risca todas definições impostas pelos modelos produzidos. E se durante o ciclo ágil os problemas identificados são priorizados para serem endereçados no próximo ciclo, como o processo formal gerencia isso? Hum&hellip; daí vem minha maior crítica quanto ao uso de modelos no desenvolvimento de software. Já que se decidiu por engessar o processo, seguí-lo fielmente deveria ser o preço a ser pago para manter tanta parafernalha de artefatos sem valor. Identificado o problema, o fluxo deveria voltar lá no início e corrigir requisitos, modelos, código e testes; mas o mercado não permite tanta demora, as linhas de negócio precisam colocar seu produto na prateleira e o fluxo controladamente perfeito que outrora se desenhou, na vida real não funciona mais.</p>
-
-<p>É inviável manter a &ldquo;documentação&rdquo; do sistema em face a uma concorrência e volatilidade de negócios tão vorazes, então eu me pergunto: O que aquelas pessoas estavam fazendo trancadas numa sala, consumindo o tempo a um alto <a href="http://www.stanford.edu/group/fms/fingate/staff/capitalequip/capital_software.html">custo</a> da sua empresa? Aprendendo a como não fazer? Pode ser. Constatando uma vez mais que embora no papel, no processo, tudo aquilo que a teoria diz é muito bonito e controlado mas não funciona no mundo real? Sim, pode ser também, mas o pior é que passados anos de experiências ruins, projetos fracassados e montanhas de dinheiro jogados no ralo, ainda terão coragem de propor um processo baseado em requisitos → modelagem → desenvolvimento → testes, faseados e interdependentes, ignorando o histórico de dores e prejuízos experimentado.</p>
 ]]></content>
   </entry>
   

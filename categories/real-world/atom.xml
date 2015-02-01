@@ -4,7 +4,7 @@
   <title><![CDATA[Category: real world | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/real-world/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-11-17T09:49:34-02:00</updated>
+  <updated>2015-01-31T23:28:33+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
     <link href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
-    <updated>2013-06-27T09:42:18-03:00</updated>
+    <updated>2013-06-27T12:42:18+00:00</updated>
     <id>http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
@@ -112,7 +112,7 @@
   <entry>
     <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
     <link href="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/"/>
-    <updated>2013-05-06T07:00:44-03:00</updated>
+    <updated>2013-05-06T10:00:44+00:00</updated>
     <id>http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao</id>
     <content type="html"><![CDATA[<p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
 
@@ -141,7 +141,7 @@
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
     <link href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"/>
-    <updated>2013-04-11T07:30:47-03:00</updated>
+    <updated>2013-04-11T10:30:47+00:00</updated>
     <id>http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
@@ -206,7 +206,7 @@
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
     <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
-    <updated>2013-03-20T11:27:02-03:00</updated>
+    <updated>2013-03-20T14:27:02+00:00</updated>
     <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
@@ -316,7 +316,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[O ano em que eu tirei a bunda da cadeira]]></title>
     <link href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
-    <updated>2013-03-18T13:45:25-03:00</updated>
+    <updated>2013-03-18T16:45:25+00:00</updated>
     <id>http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
     <content type="html"><![CDATA[<p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
 

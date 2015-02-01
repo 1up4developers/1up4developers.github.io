@@ -4,7 +4,7 @@
   <title><![CDATA[Category: clojure | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/clojure/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2014-11-17T09:49:34-02:00</updated>
+  <updated>2015-01-31T23:28:33+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -14,9 +14,107 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Type hints no Clojure - Parte 1]]></title>
+    <link href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/"/>
+    <updated>2015-01-31T21:14:00+00:00</updated>
+    <id>http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1</id>
+    <content type="html"><![CDATA[<h2>Otimizando com type hints</h2>
+
+<p>Por padrão você não informa os tipos dos dados ao Clojure. Internamente o dado vai ser tratado como <code>Object</code>, que é a classe base de qualquer objeto Java.</p>
+
+<p>Qualquer método ou propriedade que você invocar desse objeto será localizado e chamado através de <em>reflection</em>. No Java, <em>reflection</em> é a capacidade de acessar métodos e membros de um objeto ou classe através de metaprogramação.</p>
+
+<p>Exemplificando, esse código Clojure:</p>
+
+<pre><code>(defn upper-case [text]
+  (.toUpperCase text))
+
+(upper-case "umba umba umba ê")
+; "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Vai ser transformado em algo equivalente a isso:</p>
+
+<pre><code>public Object invoke(Object par01) {
+  return (Object)(par01
+                    .getClass()
+                    .getDeclaredMethod("toUpperCase", null)
+                    .invoke(par01));
+}
+
+(new user$upper_case()).invoke("umba umba umba ê");
+// "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Eu disse <em>equivalente</em> porque o seu código Clojure vai ser compilado diretamente para <em>bytecode</em> ao invés de ser convertido primeiro para código Java.</p>
+
+<p>Como podemos notar, além de termos que invocar três métodos para fazer a chamada de um e termos que fazer <em>typecasting</em> &ndash; ou <em>coerção de tipos</em>, se preferir &ndash; para que tudo seja tratado como <code>Object</code>, o próprio processo de <em>reflection</em> é lento por si só.</p>
+
+<p>Note como informamos o nome do método <code>toUpperCase</code> como um texto. Com isso o método <code>getDeclaredMethod</code> vai pesquisar uma tabela interna daquela objeto comparando cada nome de método até encontrar o que procuramos.</p>
+
+<p>Para ajudar, como o Clojure não tem a mais remota ideia do que queremos transformar em letras maiúsculas, a função aceita qualquer coisa.</p>
+
+<pre><code>(upper-case 3.14159)
+; IllegalArgumentException No matching field found: toUpperCase for 
+; class java.lang.Double
+</code></pre>
+
+<p><em>Ah, então o compilador do Clojure é mal feito?</em></p>
+
+<p>Não. Acontece algo muito parecido quando escrevemos código JavaScript, Ruby, Python ou qualquer outra linguagem dinâmica para a JVM. Como você não informou o tipo, o compilador tem que adivinhar ou confiar cegamente no que você está dizendo.</p>
+
+<p>Porém, existe uma forma de diminuir essa trabalheira toda dando dicas ao compilador sobre o tipo de dado que ele deve utilizar. Essas dicas chamam-se <em>type hints</em>, ou dicas de tipos.</p>
+
+<p>Mas atenção: que fique claro que estamos dando dicas ao compilador ao invés de declararmos estaticamente o tipo de dados que estamos utilizando.</p>
+
+<p>Podemos reescrever nosso código dessa forma para que o compilador receba nossas dicas:</p>
+
+<pre><code>(defn upper-case [^String text]
+  (.toUpperCase text))
+
+(upper-case "umba umba umba ê")
+; "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Se tentarmos passar qualquer coisa diferente de <code>String</code>, a JVM vai reclamar na mesma hora.</p>
+
+<pre><code>(upper-case 3.14159)
+; ClassCastException java.lang.Double cannot be cast to 
+; java.lang.String  user/upper-case (NO_SOURCE_FILE:2)
+</code></pre>
+
+<p>Aí você pensa <em>ah, tá. era para ter passado <code>String</code> e passei <code>Double</code></em>. Bonito, não?</p>
+
+<p>Mas não é só isso. Ao usar <em>type hints</em> você ainda leva uma otimização de código totalmente de graça.</p>
+
+<p>O <em>bytecode</em> gerado fica equivalente a esse código Java:</p>
+
+<pre><code>public Object invoke(Object par01) {
+  return ((String)par01).toUpperCase();
+}
+
+(new user$upper_case()).invoke("umba umba umba ê");
+// "UMBA UMBA UMBA Ê"
+</code></pre>
+
+<p>Se você imaginou que o código, além de menor, também ficou mais rápido, acertou.</p>
+
+<p><em>Então vou usar isso no meu código inteiro!</em></p>
+
+<p>Calma lá. Clojure não deixa de ser uma linguagem dinâmica apenas por ter <em>type hints</em>. A contrapartida dessas dicas é que elas poluem o código e, muitas vezes, e dificilmente você vai precisar que todo seu código seja otimizado.</p>
+
+<p>Na próxima parte vamos aprender quando e como otimizar para praticamente todas as situações.</p>
+
+<p>Até lá.</p>
+
+<p><em>(Trecho do meu livro &ldquo;Clojure: Programação Funcional Descomplicada para a JVM&rdquo;, a ser publicado em breve)</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Extraindo dados da Internet com Clojure]]></title>
     <link href="http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure/"/>
-    <updated>2014-10-28T12:10:00-02:00</updated>
+    <updated>2014-10-28T12:10:00+00:00</updated>
     <id>http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure</id>
     <content type="html"><![CDATA[<h2>O problema</h2>
 
@@ -336,7 +434,7 @@ Vamos fazer a nossa função retornar um <em>vector</em> com os nomes dos autore
   <entry>
     <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
-    <updated>2014-09-23T18:24:00-03:00</updated>
+    <updated>2014-09-23T18:24:00+00:00</updated>
     <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
 
@@ -520,7 +618,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00-03:00</updated>
+    <updated>2014-04-25T11:21:00+00:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -655,7 +753,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Sowing the seeds of code]]></title>
     <link href="http://1up4dev.org/2013/09/sowing-the-seeds-of-code/"/>
-    <updated>2013-09-25T23:08:00-03:00</updated>
+    <updated>2013-09-25T23:08:00+00:00</updated>
     <id>http://1up4dev.org/2013/09/sowing-the-seeds-of-code</id>
     <content type="html"><![CDATA[<p>Seguindo a filosofia de <a href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">tirar a bunda da cadeira</a>, tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.</p>
 
