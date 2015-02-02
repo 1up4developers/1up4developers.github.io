@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora &hellip;">
+  <meta name="description" content="O HTTP Monkey é um cliente http simples, com interface fluente, suporte a múltiplos adapters (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e  &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,102 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/01/http-monkey/">HTTP Monkey - Lançado!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-01-23T15:29:16+00:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
+
+
+        
+         | <a href="/2013/01/http-monkey/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/01/http-monkey/" data-text="HTTP Monkey - lançado!" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/01/http-monkey/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/01/http-monkey/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/01/http-monkey/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
+
+<p>Pontos positivos:</p>
+
+<ul>
+<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
+<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
+<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
+<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
+</ul>
+
+
+<p>Pontos negativos:</p>
+
+<ul>
+<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
+<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
+<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
+<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
+<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
+</ul>
+
+
+<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
+
+<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
+
+<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
+
+<p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1052,96 +1148,6 @@ admin:mdePW2hgrPddSA
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/">Dica Rápida: Removendo O Test Unit De Um Projeto Rails 3</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-11-08T11:00:28+00:00" pubdate data-updated="true">Nov 8<span>th</span>, 2011</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/" data-text="Dica Rápida: Removendo o test unit de um projeto Rails 3" data-via="1up4dev" data-counturl="http://1up4dev.org/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2011/11/dica-rapida-removendo-o-test-unit-de-um-projeto-rails-3/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Este post serve mais como &ldquo;cola&rdquo; de referência, pois toda vez que vou fazer isso eu não encontro fácil no google e nunca lembro. Por sinal é mega simples, é só editar o <em>config/application.rb</em> e remover a linha:</p>
-
-<pre><code>require 'rails/all'
-</code></pre>
-
-<p>E substituir por:</p>
-
-<pre><code>require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
-require "sprockets/railtie"
-</code></pre>
-
-<p>Após isso, já não aparece mais as tasks de testes, e você pode remover a pasta test.</p>
-
-<pre><code>$ git rm -r test/
-</code></pre>
-
-<p>Pra finalizar, já segue a dica de alterar a task <em>default</em>, no final do <em>Rakefile</em> é só colocar:</p>
-
-<pre><code>Rake::Task[:default].prerequisites.clear
-task :default =&gt; :spec  #no caso do rspec
-</code></pre>
-
-<p>Sucesso!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/4/">&larr; Older</a>
@@ -1164,6 +1170,10 @@ task :default =&gt; :spec  #no caso do rspec
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/02/type-hints-no-clojure-parte-2/">Type hints no Clojure - Parte 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/type-hints-no-clojure-parte-1/">Type hints no Clojure - Parte 1</a>
       </li>
     
@@ -1177,10 +1187,6 @@ task :default =&gt; :spec  #no caso do rspec
     
       <li class="post">
         <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
   </ul>
@@ -1209,7 +1215,7 @@ task :default =&gt; :spec  #no caso do rspec
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (18)
+          <a href="/author/pbalduino">Plínio Balduino</a> (19)
         </li>
       
     

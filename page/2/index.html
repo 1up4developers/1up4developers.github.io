@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C. Vamos criar uma extensão que retorna uma &hellip;">
+  <meta name="description" content="Em tempos de Metodologias Àgeis, iniciativas como DevOps, adoção de Cloud Computing e derivados (SaaS, IaaS e PaaS), aplicações que demorariam meses &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +77,210 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-22T17:32:23+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/tonyfabeen/'>Tony Fabeen</a></span></span>
+
+
+        
+         | <a href="/2013/08/introducao-a-linux-control-groups-cgroups/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/" data-text="Introdução a Linux Control Groups (CGroups)" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Em tempos de <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
+
+<p>Com a necessidade de ter os aplicativos de forma mais rápida em produção, a adoção e criação de <strong><a href="http://en.wikipedia.org/wiki/Platform_as_a_service">PaaS (Platform as A Service)</a></strong> tem sido a nova &ldquo;<em>onda do verão</em>&rdquo; e tecnologias como <strong><a href="http://lxc.sourceforge.net/">LXC</a></strong>, <strong><a href="http://www.docker.io/">Docker</a> </strong>e <strong><a href="http://en.wikipedia.org/wiki/Cgroups">CGroups</a></strong> atuam como o cerne dessa &ldquo;wave&rdquo;.</p>
+
+<h3>O que são CGroups?</h3>
+
+<p><strong>CGroups</strong> é uma feature do Kernel que provê mecanismos para organização de Processos em forma de grupos e limita recursos de máquina como Consumo de CPU, memória e I/O para estes.</p>
+
+<p>Curioso pra ver como funciona?</p>
+
+<h3>Situação de Exemplo</h3>
+
+<p>Para este exemplo teremos duas aplicações <em><a href="https://gist.github.com/tonyfabeen/6310137">Sinatra</a></em> e nosso objetivo será dedicar um grupo para cada aplicação limitando o consumo de memória para cada uma elas.</p>
+
+<p>Para rodar o exemplo estarei utilizando um <em>Ubuntu 12.04 64 bits.</em></p>
+
+<h4>Pré-Requisitos</h4>
+
+<p>Antes de mais nada precisamos instalar algumas dependências:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install cgroup-bin libcgroup1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Com a instalação dos pacotes acima veremos que um novo filesystem foi montado em <strong>/sys/fs/cgroup </strong></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ls -al /sys/fs/cgroup
+</span><span class='line'>
+</span><span class='line'>drwxr-xr-x 7 root root 140 Aug  6 09:38 .
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:37 ..
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 cpu
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 cpuacct
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 devices
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 freezer
+</span><span class='line'>drwxr-xr-x 6 root root   0 Aug  6 09:38 memory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>CGroups estão organizados por subsistemas conhecidos também como &ldquo;resource controllers&rdquo; responsáveis por gerenciar memória, cpu, dispositivos, entre outras coisas. Na organização acima cada diretório representa um <strong>Resource Controller</strong>.</p>
+
+<h4>CGConfig Service</h4>
+
+<p>Para gerenciar CGroups iremos utilizar a utilitário <em>cgconfig</em> instalado como o pacote <em>libcgroup1</em>. É interessante checar se o serviço está rodando antes de continuar :</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo service cgconfig status
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Caso não esteja inicie o serviço</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo service cgconfig start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Existem duas formas de configurar CGroups com cgconfig, diretamente no arquivo de configuração <strong>/etc/cgconfig.conf&#8217;</strong> ou via linha de comando, que será o meio que iremos utilizar.</p>
+
+<h4>Criando Grupos</h4>
+
+<p>Para criar um grupo, utilizamos o comando <strong>cgcreate</strong> passando como argumento quais controllers estarão associados a ele.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra1
+</span><span class='line'>sudo cgcreate -g cpu,cpuacct,devices,memory,freezer:/sinatra2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O argumento <strong>/sinatra</strong>* indica o caminho relativo do grupo dentro de cada Resource Controller. Ex : <strong>/sys/fs/cgroup/&lt;resource_controller>/<path></strong></p>
+
+<h3>Executando programas em um Grupo</h3>
+
+<p>Para executar determinado processo em um grupo utilizamos o comando <strong>cgexec</strong> passando como argumentos quais controllers estarão associados ao processo e o caminho do grupo que ele estará associado.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo cgexec -g *:/sinatra1 sh -c <span class="s1">&#39;cd &lt;path_to_sinatra1&gt; &amp;&amp; exec rackup -p 4567 -D&#39;</span>
+</span><span class='line'>sudo cgexec -g *:/sinatra2 sh -c <span class="s1">&#39;cd &lt;path_to_sinatra2&gt; &amp;&amp; exec rackup -p 4568 -D&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>O asterisco <strong>(*)</strong> acima significa que o processo estará associado a todos os controllers.</p>
+
+<p>Para checar a hierarquia criada:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>ps xawf -eo pid,cgroup,args | grep ruby
+</span><span class='line'> 1476              <span class="se">\_</span>  5:freezer:              <span class="se">\_</span> grep --color<span class="o">=</span>auto ruby
+</span><span class='line'> 1418  5:freezer:/sinatra1?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4567 -D
+</span><span class='line'> 1454  5:freezer:/sinatra2?4:memo /usr/bin/ruby1.9.1 /usr/local/bin/rackup -p 4568 -D
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para setar os valores em determinado controller utilizamos o comando <strong>cgset</strong>. No caso abaixo estamos limitando o consumo de memória para o grupo <strong>sinatra1</strong> em <strong>256MB</strong> e para o grupo <strong>sinatra2</strong> em <strong>128MB</strong>.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo cgset -r memory.limit_in_bytes<span class="o">=</span><span class="s1">&#39;256M&#39;</span> sinatra1
+</span><span class='line'>sudo cgset -r memory.limit_in_bytes<span class="o">=</span><span class="s1">&#39;128M&#39;</span> sinatra2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Para checar a alteração:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>cat /sys/fs/cgroup/memory/sinatra1/memory.limit_in_bytes
+</span><span class='line'>cat /sys/fs/cgroup/memory/sinatra2/memory.limit_in_bytes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Conclusão</h3>
+
+<p>O intuito deste artigo foi demonstrar um dos possíveis usos de CGroups. Caso a aplicação <strong>sinatra1</strong> cair por estouro de memória ou alguma outra falha que não seja a destruição da máquina, a aplicação <strong>sinatra2 </strong>continuará funcionando.</p>
+
+<p>Há mais a se explorar, poderíamos inserir limitação de I/O, consumo de banda, entre outras coisas. Poderíamos até criar nossa própria implementação de LXC, mas isso é assunto para um próximo encontro.</p>
+
+<p>Os links abaixo exploram mais detalhes sobre o assunto :</p>
+
+<ul>
+<li><p><a href="https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt">https://www.kernel.org/doc/Documentation/cgroups/cgroups.txt</a></p></li>
+<li><p><a href="http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf">http://linux.oracle.com/documentation/EL6/Red_Hat_Enterprise_Linux-6-Resource_Management_Guide-en-US.pdf</a></p></li>
+</ul>
+
+
+<p>Divirtam-se!</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1392,102 +1596,6 @@ bomDia("Nicolau");
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/01/http-monkey/">HTTP Monkey - Lançado!</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-01-23T15:29:16+00:00" pubdate data-updated="true">Jan 23<span>rd</span>, 2013</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2013/01/http-monkey/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/01/http-monkey/" data-text="HTTP Monkey - lançado!" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/01/http-monkey/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/01/http-monkey/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/01/http-monkey/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
-
-<p>Pontos positivos:</p>
-
-<ul>
-<li><p><a href="http://rogerleite.github.com/http_monkey">Documentação</a>. Está um pouco desorganizado, mas tem. :D</p></li>
-<li><p><a href="http://rogerleite.github.com/http_monkey/#light_and_powerful">Autenticações</a>. Suporta basic, digest e SSL.</p></li>
-<li><p><a href="http://rogerleite.github.com/http_monkey/#more_power_to_the_people_for_god_sake">Middlewares</a> são simples classes Ruby. Por exemplo temos o <a href="https://github.com/rogerleite/http_monkey-cookie">middleware que dá suporte a cookies</a>.</p></li>
-<li><p><a href="http://rogerleite.github.com/http_monkey/#flexibility">Callback</a> por Response code.</p></li>
-<li><p>Helpers no headers response. Ex: resp.headers.content_type?; resp.headers.cache_control.max_age</p></li>
-<li><p>Pouco código, fácil manutenção (mais fácil do povo contribuir também).</p></li>
-</ul>
-
-
-<p>Pontos negativos:</p>
-
-<ul>
-<li><p>Gem nova. Ainda não tem um case em produção.</p></li>
-<li><p>Falta de middlewares para funcionalidades como Cache, OAuth … etc.</p></li>
-<li><p>Não suporta adapter que permite requisições em paralelo.</p></li>
-<li><p>Tem o <a href="https://github.com/lostisland/faraday">Faraday</a> como concorrente, que tem base em produção e bastantes <em>middlewares</em>.</p></li>
-<li><p>A comunidade nacional e internacional ainda não conhece o Monkey (comecei agora a trabalhar nisso).</p></li>
-</ul>
-
-
-<p>Na página <a href="http://rogerleite.github.com/http_monkey/http_monkey_an_alternative_to_faraday.html">HTTP Monkey an alternative to Faraday</a>, comecei um trabalho de &ldquo;localizar&rdquo; o desenvolvedor que está acostumado com o Faraday em como trabalhar com o Monkey. Lembrando que a DSL do HTTP Monkey, foi feita pensando em substituir o uso do <a href="https://github.com/caelum/restfulie">Restfulie</a>, muita usada nos projetos da Abril Mídia.</p>
-
-<p>Tem também <a href="http://www.slideshare.net/rogerleite14/http-monkey">uns slides</a> que apresentei na Abril em alguns tech talks.</p>
-
-<p><strong> <a href="http://www.slideshare.net/rogerleite14/http-monkey">HTTP Monkey</a> </strong> from <strong><a href="http://www.slideshare.net/rogerleite14">Roger Leite</a></strong></p>
-
-<p>Valeu e aceito numa boa sugestões e críticas referentes ao projeto, por favor comentem! :D</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1510,6 +1618,10 @@ bomDia("Nicolau");
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2015/02/type-hints-no-clojure-parte-2/">Type hints no Clojure - Parte 2</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/01/type-hints-no-clojure-parte-1/">Type hints no Clojure - Parte 1</a>
       </li>
     
@@ -1523,10 +1635,6 @@ bomDia("Nicolau");
     
       <li class="post">
         <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/">Integração Contínua e Entrega Contínua de modo fácil com Wercker</a>
       </li>
     
   </ul>
@@ -1555,7 +1663,7 @@ bomDia("Nicolau");
     
       
         <li class="author">
-          <a href="/author/pbalduino">Plínio Balduino</a> (18)
+          <a href="/author/pbalduino">Plínio Balduino</a> (19)
         </li>
       
     
