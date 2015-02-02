@@ -10,6 +10,8 @@ tags:
 - clojure
 - programacao
 ---
+Parte 2: http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/
+
 ## Otimizando com type hints
 
 Por padrão você não informa os tipos dos dados ao Clojure. Internamente o dado vai ser tratado como `Object`, que é a classe base de qualquer objeto Java.
