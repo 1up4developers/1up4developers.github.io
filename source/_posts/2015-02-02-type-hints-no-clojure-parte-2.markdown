@@ -10,7 +10,7 @@ tags:
 - clojure
 - programacao
 ---
-Parte 1: http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/
+Parte 1: http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1
 
 ## Quando otimizar
 
