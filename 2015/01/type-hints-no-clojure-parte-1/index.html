@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Otimizando com type hints Por padrão você não informa os tipos dos dados ao Clojure. Internamente o dado vai ser tratado como Object, que é a classe &hellip;">
+  <meta name="description" content="Parte 2: http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/ Otimizando com type hints Por padrão você não informa os tipos dos dados ao &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -132,7 +132,9 @@
   </header>
 
 
-<div class="entry-content"><h2>Otimizando com type hints</h2>
+<div class="entry-content"><p>Parte 2: <a href="http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/">http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/</a></p>
+
+<h2>Otimizando com type hints</h2>
 
 <p>Por padrão você não informa os tipos dos dados ao Clojure. Internamente o dado vai ser tratado como <code>Object</code>, que é a classe base de qualquer objeto Java.</p>
 
@@ -140,25 +142,41 @@
 
 <p>Exemplificando, esse código Clojure:</p>
 
-<pre><code>(defn upper-case [text]
-  (.toUpperCase text))
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">upper-case</span> <span class="p">[</span><span class="nv">text</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">.toUpperCase</span> <span class="nv">text</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">upper-case</span> <span class="s">&quot;umba umba umba ê&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; &quot;UMBA UMBA UMBA Ê&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-(upper-case "umba umba umba ê")
-; "UMBA UMBA UMBA Ê"
-</code></pre>
 
 <p>Vai ser transformado em algo equivalente a isso:</p>
 
-<pre><code>public Object invoke(Object par01) {
-  return (Object)(par01
-                    .getClass()
-                    .getDeclaredMethod("toUpperCase", null)
-                    .invoke(par01));
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">par01</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">(</span><span class="n">Object</span><span class="o">)(</span><span class="n">par01</span>
+</span><span class='line'>                    <span class="o">.</span><span class="na">getClass</span><span class="o">()</span>
+</span><span class='line'>                    <span class="o">.</span><span class="na">getDeclaredMethod</span><span class="o">(</span><span class="s">&quot;toUpperCase&quot;</span><span class="o">,</span> <span class="kc">null</span><span class="o">)</span>
+</span><span class='line'>                    <span class="o">.</span><span class="na">invoke</span><span class="o">(</span><span class="n">par01</span><span class="o">));</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">(</span><span class="k">new</span> <span class="n">user$upper_case</span><span class="o">()).</span><span class="na">invoke</span><span class="o">(</span><span class="s">&quot;umba umba umba ê&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="c1">// &quot;UMBA UMBA UMBA Ê&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-(new user$upper_case()).invoke("umba umba umba ê");
-// "UMBA UMBA UMBA Ê"
-</code></pre>
 
 <p>Eu disse <em>equivalente</em> porque o seu código Clojure vai ser compilado diretamente para <em>bytecode</em> ao invés de ser convertido primeiro para código Java.</p>
 
@@ -168,10 +186,14 @@
 
 <p>Para ajudar, como o Clojure não tem a mais remota ideia do que queremos transformar em letras maiúsculas, a função aceita qualquer coisa.</p>
 
-<pre><code>(upper-case 3.14159)
-; IllegalArgumentException No matching field found: toUpperCase for 
-; class java.lang.Double
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">upper-case</span> <span class="mf">3.14159</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; IllegalArgumentException No matching field found: toUpperCase for </span>
+</span><span class='line'><span class="c1">; class java.lang.Double</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p><em>Ah, então o compilador do Clojure é mal feito?</em></p>
 
@@ -183,19 +205,29 @@
 
 <p>Podemos reescrever nosso código dessa forma para que o compilador receba nossas dicas:</p>
 
-<pre><code>(defn upper-case [^String text]
-  (.toUpperCase text))
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">upper-case</span> <span class="p">[</span><span class="o">^</span><span class="nv">String</span> <span class="nv">text</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">.toUpperCase</span> <span class="nv">text</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">upper-case</span> <span class="s">&quot;umba umba umba ê&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; &quot;UMBA UMBA UMBA Ê&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-(upper-case "umba umba umba ê")
-; "UMBA UMBA UMBA Ê"
-</code></pre>
 
 <p>Se tentarmos passar qualquer coisa diferente de <code>String</code>, a JVM vai reclamar na mesma hora.</p>
 
-<pre><code>(upper-case 3.14159)
-; ClassCastException java.lang.Double cannot be cast to 
-; java.lang.String  user/upper-case (NO_SOURCE_FILE:2)
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">upper-case</span> <span class="mf">3.14159</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; ClassCastException java.lang.Double cannot be cast to </span>
+</span><span class='line'><span class="c1">; java.lang.String  user/upper-case (NO_SOURCE_FILE:2)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Aí você pensa <em>ah, tá. era para ter passado <code>String</code> e passei <code>Double</code></em>. Bonito, não?</p>
 
@@ -203,13 +235,20 @@
 
 <p>O <em>bytecode</em> gerado fica equivalente a esse código Java:</p>
 
-<pre><code>public Object invoke(Object par01) {
-  return ((String)par01).toUpperCase();
-}
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='java'><span class='line'><span class="kd">public</span> <span class="n">Object</span> <span class="nf">invoke</span><span class="o">(</span><span class="n">Object</span> <span class="n">par01</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="o">((</span><span class="n">String</span><span class="o">)</span><span class="n">par01</span><span class="o">).</span><span class="na">toUpperCase</span><span class="o">();</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">(</span><span class="k">new</span> <span class="n">user$upper_case</span><span class="o">()).</span><span class="na">invoke</span><span class="o">(</span><span class="s">&quot;umba umba umba ê&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="c1">// &quot;UMBA UMBA UMBA Ê&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-(new user$upper_case()).invoke("umba umba umba ê");
-// "UMBA UMBA UMBA Ê"
-</code></pre>
 
 <p>Se você imaginou que o código, além de menor, também ficou mais rápido, acertou.</p>
 
