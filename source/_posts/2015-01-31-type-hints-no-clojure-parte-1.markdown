@@ -20,23 +20,31 @@ Qualquer método ou propriedade que você invocar desse objeto será localizado 
 
 Exemplificando, esse código Clojure:
 
-    (defn upper-case [text]
-      (.toUpperCase text))
-    
-    (upper-case "umba umba umba ê")
-    ; "UMBA UMBA UMBA Ê"
+{% codeblock lang:clojure %}
+
+(defn upper-case [text]
+  (.toUpperCase text))
+
+(upper-case "umba umba umba ê")
+; "UMBA UMBA UMBA Ê"
+
+{% endcodeblock %}
 
 Vai ser transformado em algo equivalente a isso:
 
-    public Object invoke(Object par01) {
-      return (Object)(par01
-                        .getClass()
-                        .getDeclaredMethod("toUpperCase", null)
-                        .invoke(par01));
-    }
-    
-    (new user$upper_case()).invoke("umba umba umba ê");
-    // "UMBA UMBA UMBA Ê"
+{% codeblock lang:java %}
+
+public Object invoke(Object par01) {
+  return (Object)(par01
+                    .getClass()
+                    .getDeclaredMethod("toUpperCase", null)
+                    .invoke(par01));
+}
+
+(new user$upper_case()).invoke("umba umba umba ê");
+// "UMBA UMBA UMBA Ê"
+
+{% endcodeblock %}
 
 Eu disse _equivalente_ porque o seu código Clojure vai ser compilado diretamente para _bytecode_ ao invés de ser convertido primeiro para código Java.
 
@@ -46,9 +54,13 @@ Note como informamos o nome do método `toUpperCase` como um texto. Com isso o m
 
 Para ajudar, como o Clojure não tem a mais remota ideia do que queremos transformar em letras maiúsculas, a função aceita qualquer coisa.
 
-    (upper-case 3.14159)
-    ; IllegalArgumentException No matching field found: toUpperCase for 
-    ; class java.lang.Double
+{% codeblock lang:clojure %}
+
+(upper-case 3.14159)
+; IllegalArgumentException No matching field found: toUpperCase for 
+; class java.lang.Double
+
+{% endcodeblock %}
 
 _Ah, então o compilador do Clojure é mal feito?_
 
@@ -60,17 +72,25 @@ Mas atenção: que fique claro que estamos dando dicas ao compilador ao invés d
 
 Podemos reescrever nosso código dessa forma para que o compilador receba nossas dicas:
 
-    (defn upper-case [^String text]
-      (.toUpperCase text))
-    
-    (upper-case "umba umba umba ê")
-    ; "UMBA UMBA UMBA Ê"
+{% codeblock lang:clojure %}
+
+(defn upper-case [^String text]
+  (.toUpperCase text))
+
+(upper-case "umba umba umba ê")
+; "UMBA UMBA UMBA Ê"
+
+{% endcodeblock %}
 
 Se tentarmos passar qualquer coisa diferente de `String`, a JVM vai reclamar na mesma hora.
 
-    (upper-case 3.14159)
-    ; ClassCastException java.lang.Double cannot be cast to 
-    ; java.lang.String  user/upper-case (NO_SOURCE_FILE:2)
+{% codeblock lang:clojure %}
+
+(upper-case 3.14159)
+; ClassCastException java.lang.Double cannot be cast to 
+; java.lang.String  user/upper-case (NO_SOURCE_FILE:2)
+
+{% endcodeblock %}
 
 Aí você pensa _ah, tá. era para ter passado `String` e passei `Double`_. Bonito, não?
 
@@ -78,12 +98,16 @@ Mas não é só isso. Ao usar _type hints_ você ainda leva uma otimização de 
 
 O _bytecode_ gerado fica equivalente a esse código Java:
 
-    public Object invoke(Object par01) {
-      return ((String)par01).toUpperCase();
-    }
-    
-    (new user$upper_case()).invoke("umba umba umba ê");
-    // "UMBA UMBA UMBA Ê"
+{% codeblock lang:java %}
+
+public Object invoke(Object par01) {
+  return ((String)par01).toUpperCase();
+}
+
+(new user$upper_case()).invoke("umba umba umba ê");
+// "UMBA UMBA UMBA Ê"
+
+{% endcodeblock %}
 
 Se você imaginou que o código, além de menor, também ficou mais rápido, acertou.
 
