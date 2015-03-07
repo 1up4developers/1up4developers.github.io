@@ -2,7 +2,7 @@ box: wercker/rvm
 build:
     steps:
         - rvm-use:
-            version: 1.9.3
+            version: 2.2.0
         - bundle-install
         - script:
             name: generate
