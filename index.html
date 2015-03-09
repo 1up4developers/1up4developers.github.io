@@ -495,53 +495,56 @@
 
 <p>O modo mais simples e direto para ler um arquivo csv, é usar o <code>CSV.read</code> que retorna um Array de Arrays:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
-</span><span class='line'>array_students = CSV.read('/tmp/mock_data.csv') # return an Array of Arrays
-</span><span class='line'>array_students.each { |row| puts row.inspect }  # =&gt; output:
-</span><span class='line'># "[\"id\", \"name\", \"country\", \"birthday\"]"
-</span><span class='line'># "[\"1\", \"Virginia Harvey\", \"GB\", \"01/06/1993\"]"</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
+</span><span class='line'><span class="n">array_students</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;/tmp/mock_data.csv&#39;</span><span class="p">)</span> <span class="c1"># return an Array of Arrays</span>
+</span><span class='line'><span class="n">array_students</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span> <span class="p">}</span>  <span class="c1"># =&gt; output:</span>
+</span><span class='line'><span class="c1"># &quot;[\&quot;id\&quot;, \&quot;name\&quot;, \&quot;country\&quot;, \&quot;birthday\&quot;]&quot;</span>
+</span><span class='line'><span class="c1"># &quot;[\&quot;1\&quot;, \&quot;Virginia Harvey\&quot;, \&quot;GB\&quot;, \&quot;01/06/1993\&quot;]&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Dentro da classe CSV, existem mais duas classes que facilitam ainda mais o manuseio dos dados.</p>
 
 <p>Caso necessite de mais requinte e sofisticação, o método <code>CSV.table</code> retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Table.html">CSV::Table</a>. Com o table, você tem acesso ao cabeçalho através do <code>headers</code> e acesso a cada linha do arquivo com o <code>each</code>, que retorna uma instância de <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Row.html">CSV::Row</a>.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
-</span><span class='line'>table_students = CSV.table('/tmp/mock_data.csv') # =&gt; instance of CSV::Table
-</span><span class='line'>puts table_students.headers.inspect # =&gt; [:id, :name, :country, :birthday]
-</span><span class='line'>table_students.each { |row| puts row.inspect } # =&gt; output:
-</span><span class='line'># &lt;CSV::Row id:1 name:"Virginia Harvey" country:"GB" birthday:"01/06/1993"&gt;
-</span><span class='line'>table_students.each { |row| puts row.fetch(:name) } # =&gt; output:
-</span><span class='line'># Virginia Harvey</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
+</span><span class='line'><span class="n">table_students</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;/tmp/mock_data.csv&#39;</span><span class="p">)</span> <span class="c1"># =&gt; instance of CSV::Table</span>
+</span><span class='line'><span class="nb">puts</span> <span class="n">table_students</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">inspect</span> <span class="c1"># =&gt; [:id, :name, :country, :birthday]</span>
+</span><span class='line'><span class="n">table_students</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span> <span class="p">}</span> <span class="c1"># =&gt; output:</span>
+</span><span class='line'><span class="c1"># &lt;CSV::Row id:1 name:&quot;Virginia Harvey&quot; country:&quot;GB&quot; birthday:&quot;01/06/1993&quot;&gt;</span>
+</span><span class='line'><span class="n">table_students</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span> <span class="p">}</span> <span class="c1"># =&gt; output:</span>
+</span><span class='line'><span class="c1"># Virginia Harvey</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Tanto o <code>read</code> quanto o <code>table</code>, aceitam um hash de options como segundo argumento. Tem uma descrição detalhada na documentação do <a href="http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#method-c-new">método new</a>. Exemplo usando options:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
-</span><span class='line'>table_students = CSV.table('/tmp/mock_data2.csv', col_sep: ";", skip_blanks: true, converters: [])
-</span><span class='line'>table_students.each { |row| puts row.inspect }</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
+</span><span class='line'><span class="n">table_students</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;/tmp/mock_data2.csv&#39;</span><span class="p">,</span> <span class="n">col_sep</span><span class="p">:</span> <span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">skip_blanks</span><span class="p">:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">converters</span><span class="p">:</span> <span class="o">[]</span><span class="p">)</span>
+</span><span class='line'><span class="n">table_students</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span> <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span> <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>CSV converters</h2>
 
 <p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#HeaderConverters">CSV::HeaderConverters</a> contém um hash de symbol e block que são usados para converter os valores do cabeçalho. Para usá-los, você deve informar qual <em>converter</em> deseja aplicar na opção <code>header_converters</code>. Acredito que o código abaixo explica melhor.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -561,33 +564,34 @@
 <span class='line-number'>18</span>
 <span class='line-number'>19</span>
 <span class='line-number'>20</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
-</span><span class='line'>puts CSV::HeaderConverters.keys.inspect # =&gt; [:downcase, :symbol]
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
+</span><span class='line'><span class="nb">puts</span> <span class="ss">CSV</span><span class="p">:</span><span class="ss">:HeaderConverters</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">inspect</span> <span class="c1"># =&gt; [:downcase, :symbol]</span>
 </span><span class='line'>
-</span><span class='line'># Add new header converter
-</span><span class='line'>CSV::HeaderConverters[:remap] = lambda do |raw_value|
-</span><span class='line'>  raw_value = raw_value.to_sym
-</span><span class='line'>  case raw_value
-</span><span class='line'>  when :country
-</span><span class='line'>    :pais
-</span><span class='line'>  when :birthday
-</span><span class='line'>    :dt_nascimento
-</span><span class='line'>  else
-</span><span class='line'>    raw_value
-</span><span class='line'>  end
-</span><span class='line'>end
+</span><span class='line'><span class="c1"># Add new header converter</span>
+</span><span class='line'><span class="ss">CSV</span><span class="p">:</span><span class="ss">:HeaderConverters</span><span class="o">[</span><span class="ss">:remap</span><span class="o">]</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">raw_value</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">raw_value</span> <span class="o">=</span> <span class="n">raw_value</span><span class="o">.</span><span class="n">to_sym</span>
+</span><span class='line'>  <span class="k">case</span> <span class="n">raw_value</span>
+</span><span class='line'>  <span class="k">when</span> <span class="ss">:country</span>
+</span><span class='line'>    <span class="ss">:pais</span>
+</span><span class='line'>  <span class="k">when</span> <span class="ss">:birthday</span>
+</span><span class='line'>    <span class="ss">:dt_nascimento</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">raw_value</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>table_students = CSV.table('mock_data.csv', col_sep: ",", header_converters: :remap)
-</span><span class='line'>table_students.each do |row|
-</span><span class='line'>  puts [row.fetch(:pais), row.fetch(:dt_nascimento)].inspect # =&gt; ["GB", "01/06/1993"]
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">table_students</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;mock_data.csv&#39;</span><span class="p">,</span> <span class="n">col_sep</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">header_converters</span><span class="p">:</span> <span class="ss">:remap</span><span class="p">)</span>
+</span><span class='line'><span class="n">table_students</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:pais</span><span class="p">),</span> <span class="n">row</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:dt_nascimento</span><span class="p">)</span><span class="o">].</span><span class="n">inspect</span> <span class="c1"># =&gt; [&quot;GB&quot;, &quot;01/06/1993&quot;]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>No exemplo acima, criei o HeaderConverter &ldquo;remap&rdquo; que traduz o cabeçalho country para pais e birthday para dt_nascimento. Por padrão, o <code>CSV</code> disponibiliza os converters downcase e symbol, que por sinal são usados quando usamos o método <code>table</code> para ler csv.</p>
 
 <p><a href="http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#Converters">CSV::Converters</a> segue o mesmo padrão de symbol e block, a única diferença que este é usado para converter os valores da linha. Vamos ao código.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -613,32 +617,33 @@
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
 <span class='line-number'>26</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
-</span><span class='line'>require 'date'
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;date&#39;</span>
 </span><span class='line'>
-</span><span class='line'>puts CSV::Converters.keys.inspect       # =&gt; [:integer, :float, :numeric, :date, :date_time, :all]
+</span><span class='line'><span class="nb">puts</span> <span class="ss">CSV</span><span class="p">:</span><span class="ss">:Converters</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">inspect</span>       <span class="c1"># =&gt; [:integer, :float, :numeric, :date, :date_time, :all]</span>
 </span><span class='line'>
-</span><span class='line'># Add new converter
-</span><span class='line'>CSV::Converters[:nil_to_empty] = lambda do |raw_value|
-</span><span class='line'>  raw_value.nil? ? "" : raw_value
-</span><span class='line'>end
+</span><span class='line'><span class="c1"># Add new converter</span>
+</span><span class='line'><span class="ss">CSV</span><span class="p">:</span><span class="ss">:Converters</span><span class="o">[</span><span class="ss">:nil_to_empty</span><span class="o">]</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">raw_value</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">raw_value</span><span class="o">.</span><span class="n">nil?</span> <span class="p">?</span> <span class="s2">&quot;&quot;</span> <span class="p">:</span> <span class="n">raw_value</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'># Add new converter
-</span><span class='line'>CSV::Converters[:brazilian_date] = lambda do |raw_value|
-</span><span class='line'>  if raw_value =~ /\d{2}\/\d{2}\/\d{4}/
-</span><span class='line'>    Date.strptime(raw_value, "%d/%m/%Y")
-</span><span class='line'>  else
-</span><span class='line'>    raw_value
-</span><span class='line'>  end
-</span><span class='line'>end
+</span><span class='line'><span class="c1"># Add new converter</span>
+</span><span class='line'><span class="ss">CSV</span><span class="p">:</span><span class="ss">:Converters</span><span class="o">[</span><span class="ss">:brazilian_date</span><span class="o">]</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">raw_value</span><span class="o">|</span>
+</span><span class='line'>  <span class="k">if</span> <span class="n">raw_value</span> <span class="o">=~</span> <span class="sr">/\d{2}\/\d{2}\/\d{4}/</span>
+</span><span class='line'>    <span class="no">Date</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">raw_value</span><span class="p">,</span> <span class="s2">&quot;%d/%m/%Y&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="n">raw_value</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'># Group converters
-</span><span class='line'>CSV::Converters[:my_custom_converters] = [:nil_to_empty, :brazilian_date]
+</span><span class='line'><span class="c1"># Group converters</span>
+</span><span class='line'><span class="ss">CSV</span><span class="p">:</span><span class="ss">:Converters</span><span class="o">[</span><span class="ss">:my_custom_converters</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="ss">:nil_to_empty</span><span class="p">,</span> <span class="ss">:brazilian_date</span><span class="o">]</span>
 </span><span class='line'>
-</span><span class='line'>table_students = CSV.table('mock_data.csv', col_sep: ",", converters: :my_custom_converters)
-</span><span class='line'>table_students.each do |row|
-</span><span class='line'>  puts [row.fetch(:country), row.fetch(:birthday)].inspect # =&gt; ["GB", #&lt;Date: 1993-06-01 ((2449140j,0s,0n),+0s,2299161j)&gt;]
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">table_students</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;mock_data.csv&#39;</span><span class="p">,</span> <span class="n">col_sep</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="ss">converters</span><span class="p">:</span> <span class="ss">:my_custom_converters</span><span class="p">)</span>
+</span><span class='line'><span class="n">table_students</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="o">[</span><span class="n">row</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:country</span><span class="p">),</span> <span class="n">row</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:birthday</span><span class="p">)</span><span class="o">].</span><span class="n">inspect</span> <span class="c1"># =&gt; [&quot;GB&quot;, #&lt;Date: 1993-06-01 ((2449140j,0s,0n),+0s,2299161j)&gt;]</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>No exemplo acima criei dois converters. Um para trocar nil por &ldquo;&rdquo; e o outro que converte para Date caso o valor esteja no formato 99/99/9999.</p>
@@ -647,7 +652,7 @@
 
 <p>Normalmente o csv é usado como meio de integração Excel &lt;=> Sistema. Acontece que o Excel não se dá muito bem com acentos especiais como ãõáé etc. Isto porque estamos em 2014. Acontece que quando há caracteres especiais, a única abordagem que funcionou foi exportar para Unicode text. Neste formato, o encoding do arquivo é UTF-16LE e separado por tab (\t). Este <a href="http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/">post de 2009 da Plataformatec</a> explica com mais detalhes este jeitinho do Excel de ser com os dados. A única diferença de 2009 pra hoje, é que podemos passar o encoding como parâmetro ao ler o arquivo, e por sorte evitar o uso do iconv. Vamos ao código:</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -655,21 +660,22 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
 </span><span class='line'>
-</span><span class='line'>table = CSV.table('mock_unicode.txt',
-</span><span class='line'>                  col_sep: "\t", # tab as delimiter
-</span><span class='line'>                  encoding: "UTF-16LE:UTF-8") # read UTF-16LE and convert to UTF-8
-</span><span class='line'>table.each do |row|
-</span><span class='line'>  puts row.inspect
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">table</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s1">&#39;mock_unicode.txt&#39;</span><span class="p">,</span>
+</span><span class='line'>                  <span class="n">col_sep</span><span class="p">:</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="c1"># tab as delimiter</span>
+</span><span class='line'>                  <span class="ss">encoding</span><span class="p">:</span> <span class="s2">&quot;UTF-16LE:UTF-8&quot;</span><span class="p">)</span> <span class="c1"># read UTF-16LE and convert to UTF-8</span>
+</span><span class='line'><span class="n">table</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <h2>Evitando o abuso de memória</h2>
 
 <p>Ao ler arquivos com <code>read</code> ou <code>table</code>, o arquivo é colocado em memória, ou seja, ao processar uma planilha de 100mb, o seu processo ruby vai pra um 100mb e pouco. Agora imagina 20 workers e cada um processando uma planilha de 100mb ou mais, facilmente o seu servidor terá um pico de consumo de memória, o no pior cenário vai dar crash no processo. Para evitar este consumo devemos usar o <code>foreach</code> do <code>CSV</code>.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -678,20 +684,21 @@
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
 </span><span class='line'>
-</span><span class='line'>CSV.foreach("mock_data.csv", col_sep: ",") do |row|
-</span><span class='line'>  puts row.inspect
-</span><span class='line'>end
+</span><span class='line'><span class="no">CSV</span><span class="o">.</span><span class="n">foreach</span><span class="p">(</span><span class="s2">&quot;mock_data.csv&quot;</span><span class="p">,</span> <span class="n">col_sep</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'># =&gt;
-</span><span class='line'># ["id", "name", "country", "birthday"]
-</span><span class='line'># ["1", "Virginia Harvey", "GB", "01/06/1993"]</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="c1"># =&gt;</span>
+</span><span class='line'><span class="c1"># [&quot;id&quot;, &quot;name&quot;, &quot;country&quot;, &quot;birthday&quot;]</span>
+</span><span class='line'><span class="c1"># [&quot;1&quot;, &quot;Virginia Harvey&quot;, &quot;GB&quot;, &quot;01/06/1993&quot;]</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Desta maneira a leitura é mais otimizada, pois apenas uma linha por vez é lida. O único problema é que perdemos algumas facilidades do <code>table</code>, como os <code>headers</code> e a instância do <code>CSV::Row</code> por linha. Tentando chegar no modelo ideal, montei uma classe que usa o foreach e mesmo assim tem os <code>headers</code> e os <code>rows</code>.</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -751,68 +758,67 @@
 <span class='line-number'>58</span>
 <span class='line-number'>59</span>
 <span class='line-number'>60</span>
-<span class='line-number'>61</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>require 'csv'
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;csv&#39;</span>
 </span><span class='line'>
-</span><span class='line'>class SheetReader
+</span><span class='line'><span class="k">class</span> <span class="nc">SheetReader</span>
 </span><span class='line'>
-</span><span class='line'>  attr_reader :headers
+</span><span class='line'>  <span class="kp">attr_reader</span> <span class="ss">:headers</span>
 </span><span class='line'>
-</span><span class='line'>  def initialize(filepath)
-</span><span class='line'>    # options to read unicode text file
-</span><span class='line'>    # options = {
-</span><span class='line'>    #   col_sep: "\t",
-</span><span class='line'>    #   skip_blanks: true,
-</span><span class='line'>    #   encoding: "UTF-16LE:UTF-8",
-</span><span class='line'>    #   converters: []
-</span><span class='line'>    # }
-</span><span class='line'>    options = {col_sep: ",", converters: []}
-</span><span class='line'>    @csv_reader = CSV.foreach(filepath, options) # gets a iterator
-</span><span class='line'>    @headers    = convert_headers(@csv_reader.next) # read first line
-</span><span class='line'>  end
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
+</span><span class='line'>    <span class="c1"># options to read unicode text file</span>
+</span><span class='line'>    <span class="c1"># options = {</span>
+</span><span class='line'>    <span class="c1">#   col_sep: &quot;\t&quot;,</span>
+</span><span class='line'>    <span class="c1">#   skip_blanks: true,</span>
+</span><span class='line'>    <span class="c1">#   encoding: &quot;UTF-16LE:UTF-8&quot;,</span>
+</span><span class='line'>    <span class="c1">#   converters: []</span>
+</span><span class='line'>    <span class="c1"># }</span>
+</span><span class='line'>    <span class="n">options</span> <span class="o">=</span> <span class="p">{</span><span class="n">col_sep</span><span class="p">:</span> <span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="ss">converters</span><span class="p">:</span> <span class="o">[]</span><span class="p">}</span>
+</span><span class='line'>    <span class="vi">@csv_reader</span> <span class="o">=</span> <span class="no">CSV</span><span class="o">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">filepath</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span> <span class="c1"># gets a iterator</span>
+</span><span class='line'>    <span class="vi">@headers</span>    <span class="o">=</span> <span class="n">convert_headers</span><span class="p">(</span><span class="vi">@csv_reader</span><span class="o">.</span><span class="n">next</span><span class="p">)</span> <span class="c1"># read first line</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>  # yield an instance of http://ruby-doc.org/stdlib-2.1.0/libdoc/csv/rdoc/CSV/Row.html
-</span><span class='line'>  def each_row(&block)
-</span><span class='line'>    begin
-</span><span class='line'>      while true
-</span><span class='line'>        raw_row = @csv_reader.next  # raise StopIteration in EOF
-</span><span class='line'>        yield CSV::Row.new(headers, raw_row)
-</span><span class='line'>      end
-</span><span class='line'>    rescue StopIteration
-</span><span class='line'>    end
-</span><span class='line'>  end
+</span><span class='line'>  <span class="c1"># yield an instance of http://ruby-doc.org/stdlib-2.1.0/libdoc/csv/rdoc/CSV/Row.html</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">each_row</span><span class="p">(</span><span class="o">&amp;</span><span class="n">block</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">begin</span>
+</span><span class='line'>      <span class="k">while</span> <span class="kp">true</span>
+</span><span class='line'>        <span class="n">raw_row</span> <span class="o">=</span> <span class="vi">@csv_reader</span><span class="o">.</span><span class="n">next</span>  <span class="c1"># raise StopIteration in EOF</span>
+</span><span class='line'>        <span class="k">yield</span> <span class="ss">CSV</span><span class="p">:</span><span class="ss">:Row</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="n">raw_row</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">rescue</span> <span class="no">StopIteration</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>  protected
+</span><span class='line'>  <span class="kp">protected</span>
 </span><span class='line'>
-</span><span class='line'>  # Internal: Convert headers to Array of symbols.
-</span><span class='line'>  #
-</span><span class='line'>  # raw_headers - Array of Strings.
-</span><span class='line'>  #
-</span><span class='line'>  # Examples
-</span><span class='line'>  #
-</span><span class='line'>  #   convert_headers(["ATIVO", "NOME COMERCIAL"])
-</span><span class='line'>  #   # =&gt; [:ativo, :nome_comercial]
-</span><span class='line'>  #
-</span><span class='line'>  # Returns Array of symbols.
-</span><span class='line'>  def convert_headers(raw_headers)
-</span><span class='line'>    raw_headers.compact! # removes nil values
-</span><span class='line'>    converter = lambda do |header|
-</span><span class='line'>      header_converters = CSV::HeaderConverters.values
-</span><span class='line'>      header_converters.inject(header) do |header, converter_proc|
-</span><span class='line'>        converter_proc.call(header)
-</span><span class='line'>      end
-</span><span class='line'>    end
+</span><span class='line'>  <span class="c1"># Internal: Convert headers to Array of symbols.</span>
+</span><span class='line'>  <span class="c1">#</span>
+</span><span class='line'>  <span class="c1"># raw_headers - Array of Strings.</span>
+</span><span class='line'>  <span class="c1">#</span>
+</span><span class='line'>  <span class="c1"># Examples</span>
+</span><span class='line'>  <span class="c1">#</span>
+</span><span class='line'>  <span class="c1">#   convert_headers([&quot;ATIVO&quot;, &quot;NOME COMERCIAL&quot;])</span>
+</span><span class='line'>  <span class="c1">#   # =&gt; [:ativo, :nome_comercial]</span>
+</span><span class='line'>  <span class="c1">#</span>
+</span><span class='line'>  <span class="c1"># Returns Array of symbols.</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">convert_headers</span><span class="p">(</span><span class="n">raw_headers</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">raw_headers</span><span class="o">.</span><span class="n">compact!</span> <span class="c1"># removes nil values</span>
+</span><span class='line'>    <span class="n">converter</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="k">do</span> <span class="o">|</span><span class="n">header</span><span class="o">|</span>
+</span><span class='line'>      <span class="n">header_converters</span> <span class="o">=</span> <span class="ss">CSV</span><span class="p">:</span><span class="ss">:HeaderConverters</span><span class="o">.</span><span class="n">values</span>
+</span><span class='line'>      <span class="n">header_converters</span><span class="o">.</span><span class="n">inject</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">header</span><span class="p">,</span> <span class="n">converter_proc</span><span class="o">|</span>
+</span><span class='line'>        <span class="n">converter_proc</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>    raw_headers.map { |header| converter.call(header) }
-</span><span class='line'>  end
+</span><span class='line'>    <span class="n">raw_headers</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span> <span class="o">|</span><span class="n">header</span><span class="o">|</span> <span class="n">converter</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="p">}</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
 </span><span class='line'>
-</span><span class='line'>end
-</span><span class='line'>
-</span><span class='line'>reader = SheetReader.new('mock_data.csv')
-</span><span class='line'>reader.headers # =&gt; [:id, :name, :country, :birthday]
-</span><span class='line'>reader.each_row do |row|
-</span><span class='line'>  puts row.inspect # =&gt; #&lt;CSV::Row id:"1" name:"Virginia Harvey" country:"GB" birthday:"01/06/1993"&gt;
-</span><span class='line'>end</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'><span class="n">reader</span> <span class="o">=</span> <span class="no">SheetReader</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s1">&#39;mock_data.csv&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="n">reader</span><span class="o">.</span><span class="n">headers</span> <span class="c1"># =&gt; [:id, :name, :country, :birthday]</span>
+</span><span class='line'><span class="n">reader</span><span class="o">.</span><span class="n">each_row</span> <span class="k">do</span> <span class="o">|</span><span class="n">row</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">puts</span> <span class="n">row</span><span class="o">.</span><span class="n">inspect</span> <span class="c1"># =&gt; #&lt;CSV::Row id:&quot;1&quot; name:&quot;Virginia Harvey&quot; country:&quot;GB&quot; birthday:&quot;01/06/1993&quot;&gt;</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
 <p>Por último, uma observação importante: todo este código acima foi rodado no ruby 2.1.0. Espero que este mini guia de como ler arquivo csv com Ruby te ajude.
