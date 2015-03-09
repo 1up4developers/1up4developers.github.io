@@ -20,19 +20,19 @@ Na versão 1.9.3 e superior, o Ruby incluiu a classe [CSV](http://ruby-doc.org/s
 
 O modo mais simples e direto para ler um arquivo csv, é usar o `CSV.read` que retorna um Array de Arrays:
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 array_students = CSV.read('/tmp/mock_data.csv') # return an Array of Arrays
 array_students.each { |row| puts row.inspect }  # => output:
 # "[\"id\", \"name\", \"country\", \"birthday\"]"
 # "[\"1\", \"Virginia Harvey\", \"GB\", \"01/06/1993\"]"
-```
+{% endcodeblock %}
 
 Dentro da classe CSV, existem mais duas classes que facilitam ainda mais o manuseio dos dados.
 
 Caso necessite de mais requinte e sofisticação, o método `CSV.table` retorna uma instância de [CSV::Table](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Table.html). Com o table, você tem acesso ao cabeçalho através do `headers` e acesso a cada linha do arquivo com o `each`, que retorna uma instância de [CSV::Row](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV/Row.html).
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 table_students = CSV.table('/tmp/mock_data.csv') # => instance of CSV::Table
 puts table_students.headers.inspect # => [:id, :name, :country, :birthday]
@@ -40,21 +40,21 @@ table_students.each { |row| puts row.inspect } # => output:
 # <CSV::Row id:1 name:"Virginia Harvey" country:"GB" birthday:"01/06/1993">
 table_students.each { |row| puts row.fetch(:name) } # => output:
 # Virginia Harvey
-```
+{% endcodeblock %}
 
 Tanto o `read` quanto o `table`, aceitam um hash de options como segundo argumento. Tem uma descrição detalhada na documentação do [método new](http://ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#method-c-new). Exemplo usando options:
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 table_students = CSV.table('/tmp/mock_data2.csv', col_sep: ";", skip_blanks: true, converters: [])
 table_students.each { |row| puts row.inspect }
-```
+{% endcodeblock %}
 
 ## CSV converters
 
 [CSV::HeaderConverters](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#HeaderConverters) contém um hash de symbol e block que são usados para converter os valores do cabeçalho. Para usá-los, você deve informar qual *converter* deseja aplicar na opção `header_converters`. Acredito que o código abaixo explica melhor.
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 puts CSV::HeaderConverters.keys.inspect # => [:downcase, :symbol]
 
@@ -75,13 +75,13 @@ table_students = CSV.table('mock_data.csv', col_sep: ",", header_converters: :re
 table_students.each do |row|
   puts [row.fetch(:pais), row.fetch(:dt_nascimento)].inspect # => ["GB", "01/06/1993"]
 end
-```
+{% endcodeblock %}
 
 No exemplo acima, criei o HeaderConverter "remap" que traduz o cabeçalho country para pais e birthday para dt_nascimento. Por padrão, o `CSV` disponibiliza os converters downcase e symbol, que por sinal são usados quando usamos o método `table` para ler csv.
 
 [CSV::Converters](http://www.ruby-doc.org/stdlib-1.9.3/libdoc/csv/rdoc/CSV.html#Converters) segue o mesmo padrão de symbol e block, a única diferença que este é usado para converter os valores da linha. Vamos ao código.
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 require 'date'
 
@@ -108,7 +108,7 @@ table_students = CSV.table('mock_data.csv', col_sep: ",", converters: :my_custom
 table_students.each do |row|
   puts [row.fetch(:country), row.fetch(:birthday)].inspect # => ["GB", #<Date: 1993-06-01 ((2449140j,0s,0n),+0s,2299161j)>]
 end
-```
+{% endcodeblock %}
 
 No exemplo acima criei dois converters. Um para trocar nil por "" e o outro que converte para Date caso o valor esteja no formato 99/99/9999.
 
@@ -117,7 +117,7 @@ No exemplo acima criei dois converters. Um para trocar nil por "" e o outro que 
 Normalmente o csv é usado como meio de integração Excel <=> Sistema. Acontece que o Excel não se dá muito bem com acentos especiais como ãõáé etc. Isto porque estamos em 2014. Acontece que quando há caracteres especiais, a única abordagem que funcionou foi exportar para Unicode text. Neste formato, o encoding do arquivo é UTF-16LE e separado por tab (\t). Este [post de 2009 da Plataformatec](http://blog.plataformatec.com.br/2009/09/exportando-dados-para-excel-usando-csv-em-um-aplicativo-rails/) explica com mais detalhes este jeitinho do Excel de ser com os dados. A única diferença de 2009 pra hoje, é que podemos passar o encoding como parâmetro ao ler o arquivo, e por sorte evitar o uso do iconv. Vamos ao código:
 
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 
 table = CSV.table('mock_unicode.txt',
@@ -126,14 +126,13 @@ table = CSV.table('mock_unicode.txt',
 table.each do |row|
   puts row.inspect
 end
-```
+{% endcodeblock %}
 
 ## Evitando o abuso de memória
 
 Ao ler arquivos com `read` ou `table`, o arquivo é colocado em memória, ou seja, ao processar uma planilha de 100mb, o seu processo ruby vai pra um 100mb e pouco. Agora imagina 20 workers e cada um processando uma planilha de 100mb ou mais, facilmente o seu servidor terá um pico de consumo de memória, o no pior cenário vai dar crash no processo. Para evitar este consumo devemos usar o `foreach` do `CSV`.
 
-
-```
+{% codeblock lang:ruby %}
 require 'csv'
 
 CSV.foreach("mock_data.csv", col_sep: ",") do |row|
@@ -143,11 +142,11 @@ end
 # =>
 # ["id", "name", "country", "birthday"]
 # ["1", "Virginia Harvey", "GB", "01/06/1993"]
-```
+{% endcodeblock %}
 
 Desta maneira a leitura é mais otimizada, pois apenas uma linha por vez é lida. O único problema é que perdemos algumas facilidades do `table`, como os `headers` e a instância do `CSV::Row` por linha. Tentando chegar no modelo ideal, montei uma classe que usa o foreach e mesmo assim tem os `headers` e os `rows`.
 
-```
+{% codeblock lang:ruby %}
 require 'csv'
 
 class SheetReader
@@ -201,7 +200,6 @@ class SheetReader
 
     raw_headers.map { |header| converter.call(header) }
   end
-
 end
 
 reader = SheetReader.new('mock_data.csv')
@@ -209,7 +207,7 @@ reader.headers # => [:id, :name, :country, :birthday]
 reader.each_row do |row|
   puts row.inspect # => #<CSV::Row id:"1" name:"Virginia Harvey" country:"GB" birthday:"01/06/1993">
 end
-```
+{% endcodeblock %}
 
 Por último, uma observação importante: todo este código acima foi rodado no ruby 2.1.0. Espero que este mini guia de como ler arquivo csv com Ruby te ajude.
 Segue alguns links com mais informações:
