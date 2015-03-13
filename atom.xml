@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-09T11:35:58+00:00</updated>
+  <updated>2015-03-13T14:10:16+00:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -18,7 +18,7 @@
     <link href="http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/"/>
     <updated>2015-02-02T17:14:00+00:00</updated>
     <id>http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2</id>
-    <content type="html"><![CDATA[<p>Parte 1: <a href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/">http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/</a></p>
+    <content type="html"><![CDATA[<p>Parte 1: <a href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1">http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1</a></p>
 
 <h2>Quando otimizar</h2>
 
@@ -121,7 +121,7 @@
     <link href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/"/>
     <updated>2015-01-31T21:14:00+00:00</updated>
     <id>http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1</id>
-    <content type="html"><![CDATA[<p>Parte 2: <a href="http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/">http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/</a></p>
+    <content type="html"><![CDATA[<p>Parte 2: <a href="http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2">http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2</a></p>
 
 <h2>Otimizando com type hints</h2>
 
@@ -1368,28 +1368,41 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
 
 <p>Podemos pesquisar alguma palavra que estiver dentro desses textos para encontrar a função que queremos, mas não lembramos o nome. Para isso, usamos <tt>find-doc</tt>, seguido da palavra ou trecho de texto relacionado ao que queremos.</p>
 
-<p>Vamos supor que eu esteja procurando algo sobre ::sockets::. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
+<p>Vamos supor que eu esteja procurando algo sobre <em>sockets</em>. Basta digitar <tt>(find-doc &ldquo;socket&rdquo;)</tt> no REPL.</p>
 
-<pre><code>(find-doc "socket")
-; -------------------------
-; clojure.tools.nrepl/connect
-; ([&amp; {:keys [port host transport-fn], :or {transport-fn
-;  transport/bencode, host "localhost"}}])
-;  Connects to a socket-based REPL at the given host (defaults to
-;  localhost) and port, returning the Transport (by default clojure.
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">find-doc </span><span class="s">&quot;socket&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; -------------------------</span>
+</span><span class='line'><span class="c1">; clojure.tools.nrepl/connect</span>
+</span><span class='line'><span class="c1">; ([&amp; {:keys [port host transport-fn], :or {transport-fn</span>
+</span><span class='line'><span class="c1">;  transport/bencode, host &quot;localhost&quot;}}])</span>
+</span><span class='line'><span class="c1">;  Connects to a socket-based REPL at the given host (defaults to</span>
+</span><span class='line'><span class="c1">;  localhost) and port, returning the Transport (by default clojure.</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">; e mais um monte de coisas</span>
+</span></code></pre></td></tr></table></div></figure>
 
-; e mais um monte de coisas
-</code></pre>
 
-<p>No nosso exemplo, encontramos a função <tt>connect</tt>, que está no namespace <tt>clojure.tools.nrepl</tt>.</p>
+<p>No nosso exemplo, encontramos a função <code>connect</code>, que está no namespace <code>clojure.tools.nrepl</code>.</p>
 
 <p>Se você lembra de alguma parte do nome da função, então pode usar a função <tt>apropos</tt>, passando como parâmetros o trecho do nome ou uma expressão regular. Não se preocupe com expressões regulares agora, pois veremos esse assunto em detalhes mais para frente.</p>
 
 <p>Vamos supor que eu esteja manipulando vetores e não lembre o nome da função, mas saiba que a estrutura chama-se <tt>vector</tt>:</p>
 
-<pre><code>(apropos "vector")
-; (vector-of vector vector? vector-zip)
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">apropos</span> <span class="s">&quot;vector&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; (vector-of vector vector? vector-zip)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>E agora você pode usar a função <tt>doc</tt> para ver a documentação daquela que mais se parecer com o que você estiver procurando:</p>
 
@@ -1410,19 +1423,19 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
 
 <p>Quando você usa o REPL por dentro do Leiningen, alguns atalhos já conhecidos pelos usuários de Bash estão disponíveis, mesmo para quem está usando o Leiningen no Windows.</p>
 
-<p>O primeiro deles é a tecla ::TAB::, que exibe os nomes de funções que começam com o que você já digitou.</p>
+<p>O primeiro deles é a tecla <em>TAB</em>, que exibe os nomes de funções que começam com o que você já digitou.</p>
 
-<p>Por exemplo, vou digitar <tt>map</tt> e pressionar ::TAB::</p>
+<p>Por exemplo, vou digitar <tt>map</tt> e pressionar <em>TAB</em></p>
 
 <pre><code>(map
 ; map           map-indexed   map?          mapcat        mapv
 </code></pre>
 
-<p>Outra combinação que agiliza bastante o trabalho é a combinação ::Control L::, ou ::Command L:: se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
+<p>Outra combinação que agiliza bastante o trabalho é a combinação <em>Control L</em>, ou <em>Command L</em> se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
 
-<p>Existe também a combinação ::Control R::, ou ::Command R::, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
+<p>Existe também a combinação <em>Control R</em>, ou <em>Command R</em>, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.</p>
 
-<p>Usar as setas ::para cima:: ou ::para baixo:: permite que você navegue nos comandos utilizados recentemente.</p>
+<p>Usar as setas <em>para cima</em> ou <em>para baixo</em> permite que você navegue nos comandos utilizados recentemente.</p>
 
 <h3>Recuperando os últimos resultados</h3>
 
