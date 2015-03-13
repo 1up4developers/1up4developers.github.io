@@ -27,26 +27,34 @@ As funções da biblioteca padrão do Clojure vem com um texto explicativo, onde
 
 Podemos pesquisar alguma palavra que estiver dentro desses textos para encontrar a função que queremos, mas não lembramos o nome. Para isso, usamos <tt>find-doc</tt>, seguido da palavra ou trecho de texto relacionado ao que queremos.
 
-Vamos supor que eu esteja procurando algo sobre ::sockets::. Basta digitar <tt>(find-doc "socket")</tt> no REPL.
+Vamos supor que eu esteja procurando algo sobre _sockets_. Basta digitar <tt>(find-doc "socket")</tt> no REPL.
 
-    (find-doc "socket")
-    ; -------------------------
-    ; clojure.tools.nrepl/connect
-    ; ([& {:keys [port host transport-fn], :or {transport-fn
-    ;  transport/bencode, host "localhost"}}])
-    ;  Connects to a socket-based REPL at the given host (defaults to
-    ;  localhost) and port, returning the Transport (by default clojure.
+{% codeblock lang:clojure %}
 
-    ; e mais um monte de coisas
+(find-doc "socket")
+; -------------------------
+; clojure.tools.nrepl/connect
+; ([& {:keys [port host transport-fn], :or {transport-fn
+;  transport/bencode, host "localhost"}}])
+;  Connects to a socket-based REPL at the given host (defaults to
+;  localhost) and port, returning the Transport (by default clojure.
 
-No nosso exemplo, encontramos a função <tt>connect</tt>, que está no namespace <tt>clojure.tools.nrepl</tt>.
+; e mais um monte de coisas
+
+{% endcodeblock %}
+
+No nosso exemplo, encontramos a função `connect`, que está no namespace `clojure.tools.nrepl`.
 
 Se você lembra de alguma parte do nome da função, então pode usar a função <tt>apropos</tt>, passando como parâmetros o trecho do nome ou uma expressão regular. Não se preocupe com expressões regulares agora, pois veremos esse assunto em detalhes mais para frente.
 
 Vamos supor que eu esteja manipulando vetores e não lembre o nome da função, mas saiba que a estrutura chama-se <tt>vector</tt>:
 
-    (apropos "vector")
-    ; (vector-of vector vector? vector-zip)
+{% codeblock lang:clojure %}
+
+(apropos "vector")
+; (vector-of vector vector? vector-zip)
+
+{% endcodeblock %}
 
 E agora você pode usar a função <tt>doc</tt> para ver a documentação daquela que mais se parecer com o que você estiver procurando:
 
@@ -65,18 +73,18 @@ Existe uma variação de <tt>apropos</tt> chamada <tt>apropos-better</tt>, que i
 
 Quando você usa o REPL por dentro do Leiningen, alguns atalhos já conhecidos pelos usuários de Bash estão disponíveis, mesmo para quem está usando o Leiningen no Windows.
 
-O primeiro deles é a tecla ::TAB::, que exibe os nomes de funções que começam com o que você já digitou.
+O primeiro deles é a tecla _TAB_, que exibe os nomes de funções que começam com o que você já digitou.
 
-Por exemplo, vou digitar <tt>map</tt> e pressionar ::TAB::
+Por exemplo, vou digitar <tt>map</tt> e pressionar _TAB_
 
     (map
     ; map           map-indexed   map?          mapcat        mapv
 
-Outra combinação que agiliza bastante o trabalho é a combinação ::Control L::, ou ::Command L:: se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.
+Outra combinação que agiliza bastante o trabalho é a combinação _Control L_, ou _Command L_ se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.
 
-Existe também a combinação ::Control R::, ou ::Command R::, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.
+Existe também a combinação _Control R_, ou _Command R_, que completa o que você estiver digitando usando o histórico de comandos do REPL. Pressionando essa combinação mais de uma vez vai alternar entre todas as combinações já utilizadas que contenham o texto que você já digitou.
 
-Usar as setas ::para cima:: ou ::para baixo:: permite que você navegue nos comandos utilizados recentemente.
+Usar as setas _para cima_ ou _para baixo_ permite que você navegue nos comandos utilizados recentemente.
 
 ### Recuperando os últimos resultados
 
