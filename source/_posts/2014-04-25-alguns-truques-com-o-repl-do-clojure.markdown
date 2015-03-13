@@ -58,16 +58,24 @@ Vamos supor que eu esteja manipulando vetores e não lembre o nome da função, 
 
 E agora você pode usar a função <tt>doc</tt> para ver a documentação daquela que mais se parecer com o que você estiver procurando:
 
-    (doc vector?)
-    ; -------------------------
-    ; clojure.core/vector?
-    ; ([x])
-    ;   Return true if x implements IPersistentVector
+{% codeblock lang:clojure %}
+
+(doc vector?)
+; -------------------------
+; clojure.core/vector?
+; ([x])
+;   Return true if x implements IPersistentVector
+
+{% endcodeblock %}
 
 Existe uma variação de <tt>apropos</tt> chamada <tt>apropos-better</tt>, que informa também o namespace da função quando ela não estiver dentro do namespace <tt>clojure.core</tt> ou dentro do namespace em que você estiver no momento:
 
-    (apropos-better "vector")
-    ; (vector vector-of vector? clojure.zip/vector-zip)
+{% codeblock lang:clojure %}
+
+(apropos-better "vector")
+; (vector vector-of vector? clojure.zip/vector-zip)
+
+{% endcodeblock %}
 
 ### Um pouco de Bash na sua vida
 
@@ -77,8 +85,12 @@ O primeiro deles é a tecla _TAB_, que exibe os nomes de funções que começam 
 
 Por exemplo, vou digitar <tt>map</tt> e pressionar _TAB_
 
-    (map
-    ; map           map-indexed   map?          mapcat        mapv
+{% codeblock lang:clojure %}
+
+(map
+; map           map-indexed   map?          mapcat        mapv
+
+{% endcodeblock %}
 
 Outra combinação que agiliza bastante o trabalho é a combinação _Control L_, ou _Command L_ se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.
 
@@ -90,24 +102,28 @@ Usar as setas _para cima_ ou _para baixo_ permite que você navegue nos comandos
 
 Existem também símbolos especiais que guardam os resultados das últimas expressões e exceções. Eles são <tt>*1</tt>, <tt>*2</tt> e <tt>*3</tt> para os valores e <tt>*e</tt> para a última exceção, ou erro, que ocorreu:
 
-    (+ 1 2)
-    ; 3
+{% codeblock lang:clojure %}
 
-    (* 2 4)
-    ; 8
+(+ 1 2)
+; 3
 
-    (/ 8 2)
-    ; 4
+(* 2 4)
+; 8
 
-    (println "Resultados anteriores:" *1 *2 *3)
-    ; Resultados anteriores: 4 8 3
+(/ 8 2)
+; 4
 
-    (/ 1 0)
-    ; ArithmeticException Divide by zero
+(println "Resultados anteriores:" *1 *2 *3)
+; Resultados anteriores: 4 8 3
 
-    (println "Último erro:" *e)
-    ; Último erro: #<ArithmeticException java.lang.ArithmeticException:
-    ;   Divide by zero>
+(/ 1 0)
+; ArithmeticException Divide by zero
+
+(println "Último erro:" *e)
+; Último erro: #<ArithmeticException java.lang.ArithmeticException:
+;   Divide by zero>
+
+{% endcodeblock %}
 
 ### Consultando o código fonte
 
@@ -123,24 +139,32 @@ Existem casos em que isso não é possível, como quando você tentar ler o font
 
 Vamos exibir o código fonte da função <tt>+</tt>, responsável por somar dois ou mais números:
 
-    (source +)
-    ; (defn +
-    ;   "Returns the sum of nums. (+) returns 0. Does not auto-promote
-    ;   longs, will throw on overflow. See also: +'"
-    ;   {:inline (nary-inline 'add 'unchecked_add)
-    ;    :inline-arities >1?
-    ;    :added "1.2"}
-    ;   ([] 0)
-    ;   ([x] (cast Number x))
-    ;   ([x y] (. clojure.lang.Numbers (add x y)))
-    ;   ([x y & more]
-    ;      (reduce1 + (+ x y) more)))
+{% codeblock lang:clojure %}
+
+(source +)
+; (defn +
+;   "Returns the sum of nums. (+) returns 0. Does not auto-promote
+;   longs, will throw on overflow. See also: +'"
+;   {:inline (nary-inline 'add 'unchecked_add)
+;    :inline-arities >1?
+;    :added "1.2"}
+;   ([] 0)
+;   ([x] (cast Number x))
+;   ([x y] (. clojure.lang.Numbers (add x y)))
+;   ([x y & more]
+;      (reduce1 + (+ x y) more)))
+
+{% endcodeblock %}
 
 Note que temos acesso a todos os detalhes internos da função <tt>+</tt>, incluindo sua documentação e mais algumas informações que são úteis para o compilador ou para alguma função que gere documentação automaticamente.
 
 Ao tentarmos ver o código fonte de uma forma especial ou de algum código escrito nativamente em Java, receberemos uma mensagem de que o código fonte não foi encontrado:
 
-    (source Thread/sleep)
-    ; Source not found
+{% codeblock lang:clojure %}
+
+(source Thread/sleep)
+; Source not found
+
+{% endcodeblock %}
 
 Há muito mais recursos no REPL do Clojure, inclusive no que diz respeito a integração com o seu editor preferido, mas vou deixar isso para outro artigo.
