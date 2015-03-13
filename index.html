@@ -1859,18 +1859,27 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
 
 <p>E agora você pode usar a função <tt>doc</tt> para ver a documentação daquela que mais se parecer com o que você estiver procurando:</p>
 
-<pre><code>(doc vector?)
-; -------------------------
-; clojure.core/vector?
-; ([x])
-;   Return true if x implements IPersistentVector
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">doc </span><span class="nv">vector?</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; -------------------------</span>
+</span><span class='line'><span class="c1">; clojure.core/vector?</span>
+</span><span class='line'><span class="c1">; ([x])</span>
+</span><span class='line'><span class="c1">;   Return true if x implements IPersistentVector</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Existe uma variação de <tt>apropos</tt> chamada <tt>apropos-better</tt>, que informa também o namespace da função quando ela não estiver dentro do namespace <tt>clojure.core</tt> ou dentro do namespace em que você estiver no momento:</p>
 
-<pre><code>(apropos-better "vector")
-; (vector vector-of vector? clojure.zip/vector-zip)
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">apropos-better</span> <span class="s">&quot;vector&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; (vector vector-of vector? clojure.zip/vector-zip)</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <h3>Um pouco de Bash na sua vida</h3>
 
@@ -1880,9 +1889,12 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
 
 <p>Por exemplo, vou digitar <tt>map</tt> e pressionar <em>TAB</em></p>
 
-<pre><code>(map
-; map           map-indexed   map?          mapcat        mapv
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">map</span>
+</span><span class='line'><span class="c1">; map           map-indexed   map?          mapcat        mapv</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Outra combinação que agiliza bastante o trabalho é a combinação <em>Control L</em>, ou <em>Command L</em> se você estiver usando MacOS, que limpa os resultados das expressões anteriores e mantém apenas a expressão que você estiver digitando no momento.</p>
 
@@ -1894,25 +1906,44 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
 
 <p>Existem também símbolos especiais que guardam os resultados das últimas expressões e exceções. Eles são <tt><em>1</tt>, <tt></em>2</tt> e <tt><em>3</tt> para os valores e <tt></em>e</tt> para a última exceção, ou erro, que ocorreu:</p>
 
-<pre><code>(+ 1 2)
-; 3
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; 3</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">* </span><span class="mi">2</span> <span class="mi">4</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; 8</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">/ </span><span class="mi">8</span> <span class="mi">2</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; 4</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Resultados anteriores:&quot;</span> <span class="nv">*1</span> <span class="nv">*2</span> <span class="nv">*3</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; Resultados anteriores: 4 8 3</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">/ </span><span class="mi">1</span> <span class="mi">0</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; ArithmeticException Divide by zero</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">println </span><span class="s">&quot;Último erro:&quot;</span> <span class="nv">*e</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; Último erro: #&lt;ArithmeticException java.lang.ArithmeticException:</span>
+</span><span class='line'><span class="c1">;   Divide by zero&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-(* 2 4)
-; 8
-
-(/ 8 2)
-; 4
-
-(println "Resultados anteriores:" *1 *2 *3)
-; Resultados anteriores: 4 8 3
-
-(/ 1 0)
-; ArithmeticException Divide by zero
-
-(println "Último erro:" *e)
-; Último erro: #&lt;ArithmeticException java.lang.ArithmeticException:
-;   Divide by zero&gt;
-</code></pre>
 
 <h3>Consultando o código fonte</h3>
 
@@ -1928,27 +1959,43 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
 
 <p>Vamos exibir o código fonte da função <tt>+</tt>, responsável por somar dois ou mais números:</p>
 
-<pre><code>(source +)
-; (defn +
-;   "Returns the sum of nums. (+) returns 0. Does not auto-promote
-;   longs, will throw on overflow. See also: +'"
-;   {:inline (nary-inline 'add 'unchecked_add)
-;    :inline-arities &gt;1?
-;    :added "1.2"}
-;   ([] 0)
-;   ([x] (cast Number x))
-;   ([x y] (. clojure.lang.Numbers (add x y)))
-;   ([x y &amp; more]
-;      (reduce1 + (+ x y) more)))
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">source</span> <span class="nv">+</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; (defn +</span>
+</span><span class='line'><span class="c1">;   &quot;Returns the sum of nums. (+) returns 0. Does not auto-promote</span>
+</span><span class='line'><span class="c1">;   longs, will throw on overflow. See also: +&#39;&quot;</span>
+</span><span class='line'><span class="c1">;   {:inline (nary-inline &#39;add &#39;unchecked_add)</span>
+</span><span class='line'><span class="c1">;    :inline-arities &gt;1?</span>
+</span><span class='line'><span class="c1">;    :added &quot;1.2&quot;}</span>
+</span><span class='line'><span class="c1">;   ([] 0)</span>
+</span><span class='line'><span class="c1">;   ([x] (cast Number x))</span>
+</span><span class='line'><span class="c1">;   ([x y] (. clojure.lang.Numbers (add x y)))</span>
+</span><span class='line'><span class="c1">;   ([x y &amp; more]</span>
+</span><span class='line'><span class="c1">;      (reduce1 + (+ x y) more)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Note que temos acesso a todos os detalhes internos da função <tt>+</tt>, incluindo sua documentação e mais algumas informações que são úteis para o compilador ou para alguma função que gere documentação automaticamente.</p>
 
 <p>Ao tentarmos ver o código fonte de uma forma especial ou de algum código escrito nativamente em Java, receberemos uma mensagem de que o código fonte não foi encontrado:</p>
 
-<pre><code>(source Thread/sleep)
-; Source not found
-</code></pre>
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">source</span> <span class="nv">Thread/sleep</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; Source not found</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Há muito mais recursos no REPL do Clojure, inclusive no que diz respeito a integração com o seu editor preferido, mas vou deixar isso para outro artigo.</p>
 </div>
