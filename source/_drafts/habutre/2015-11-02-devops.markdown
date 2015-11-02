@@ -1,0 +1,74 @@
+---
+layout: post
+title: "DevOps, e agora?"
+date: 2015-11-02 20:10
+author: 'habutre'
+comments: true
+categories: 
+ - devops
+tags:
+ - devops
+ - agile
+ - culture
+---
+
+
+    , e agora?
+
+Nenhum sistema ou aplicação novos merecem nascer com influências tradicionais baseadas em processos cascata ou pseudo-iterativo. Nenhum negócio atualmente pode se dar o luxo de aguardar meses para verificar as primeiras funcionalidades, o que chamados de [MVP](http://www.google.com).
+Até mesmo os legados devem ser tratados com mais atenção e gradativamente receber os beneficios das práticas e processos que o movimento [Agile](http://www.google.com) e [DevOps](http://www.google.com) trouxeram.
+Não é difícil encontrar pessoas e grupos que não vêem valor nas “novidades” trazidas por esses conceitos, e que afirmam ser apenas buzzwords que não agregam nada aos seus processos atuais.
+Nos próximos tópicos vou tentar demonstrar de forma objetiva que benefícios podem ser extraídos das práticas Ágeis e do processo DevOps que se aplicados vão mudar a visão cética daqueles que ainda não experimentaram sair da zona de conforto.
+
+> AVISO: os tópcios a seguir são fortes e exigem coragem e determinação para aplicá-los, se a mudança causa desconforto e críticas sem embasamento, recomendo que pare de ler esse post agora.
+
+DevOps & Agile
+---------------
+
+Quanto se tenta descrever o que é DevOps é difícil não relacionar seus meios e  fins com os princípios trazidos pelo [Manifesto Agile].
+Os princípios ágeis foram descritos para o desenvolvimento de software e portanto aplicados fortemente nessa disciplina. Os processos de desenvolvimento anteriores ao Agile sempre falharam ao tentar definir e validar o desenho da solução sem nenhum código funcionando; desenhos, fluxos, diagrama e protótipos não funcionais não garantiam o resultado esperado.
+Pois bem, a popularização do DevOps se deu principalmente porque uma vez que se tinha software funcionando, testado, aceito pelo usuário de forma colaborativa e mais eficaz, sua implantação não seguia os mesmos princípios e valores. Os impasses para se ter uma nova versão em produção passava desde  o entendimento dos itens de configuração que seriam afetados até a execução dos passos – em sua grande maioria manuais – necessários para concluir a implantação.
+Ou seja, o desenvolvimento de software ia muito bem obrigado, mas a operação não possuía a mesma sinergia o que muitas vezes dava a enterder  que os processos ágeis eram mesmo buzzwords.
+Ao olharmos com atenção para os [12 princípios ágeis], fica difícil não pensar como Desenvolvimento e Operações poderiam trabalhar juntos sem que houvesse mudança para ambos.
+
+DevOps & Automation
+--------------------
+
+Devops definitivamente é sinônimo de automação. Quando voltamos algumas linhas acima e lembramos que o desenvovimento de software é colaborativo, multidisciplinar e orientados a pequenas e constantes mudanças, não há como evitar o enfileiramento de versões, versões e versões quando se trabalha de forma manual.
+Um procedimento para implantação de uma aplicação web simples e sem mudança em banco de dados seria:
+
+[Enviar o pacote da versào para o servidor] → [Verificar que o pacote chegou integro] → [Colocar pagina de manutenção no ar] → [Substituir pacote] → [Remover página manutenção] (imagem)
+
+Garantindo que todas as ações foram realizadas com sucesso, até que se teria uma mudança estável e não muito demorada, mas quando adicionamos ingredientes de complexidade nesse ambiente o processo tende a se tornar mais propenso a erros, mais lento e difícil de validar.
+A tecnologia empregada também pode incluir pontos adicionais nesse processo simples apresentado, como parada de servidores, remoção de arquivos temporários e em cache, etc. inserindo mais pontos de  falhas no processo. 
+DevOps compreende mais subprocessos que apenas a implantação. A implantação tangibiliza a nova versão, mas antes e depois desse processo temos outros que são interdependentes e que chamamos [DevOps Pipeline], que demonstro abaixo o que considero o conjunto macro de pontos a serem cobertos:
+
+[SCM] → [Build] → [Test] → [Deploy] → [Monitoring] (imagem)
+
+ Automação é o coração de DevOps, porque:
+
+* Reduz erros causados por procedimentos manuais
+* Garante estabilidade de ambientes, ou no mínimo permite gerenciar possíveis diferenças
+* Mantém transparência em todos os procedimentos ao evitar intervenção manual
+* Promove a repetição contínua, possibilitando a identificação de erros e sua correção
+* Disseminação do conhecimento
+
+Automatizar integralmente os processos de Desenvolvimento e Implantação de software é realmente possível, mas isso não quer dizer que seja rápido ou fácil. É preciso coragem e disciplina, isso implica que todas as pessoas e áreas envolvidas compreendam a mudança em curso .
+
+DevOps & Cloud
+--------------
+
+Aplicar os conceitos de DevOps não requer obrigatoriamente que uma aplicação deva ser implantada em um ambiente Cloud. Até o momento, foram mencionadas práticas ágeis e automação como pontos chave de DevOps. É possível executar o DevOps Pipeline de ponta a ponta sem no entanto possuir qualquer recurso disponível em Cloud.
+É possível “ser” DevOps utilizando os recursos computacionais existentes, aquele [hypervisor](http://www.google.com) que tem suportado a infraestrutura há tempos, virtualizando recursos e facilitando a vida dos sysadmins. Mas é imperioso mencionar os benefícios que um ambiente em Cloud pode trazer. As vantagens e facilidades que  os recursos em nuvem trouxeram, fazem qualquer sysadmin conectado às novas tendências começar o seu dia pensando qual seria a tarefa chata e complicada que ele automatizaria se estive com seus recursos em nuvem.
+Um exemplo seria aquele bom e velho load balancer, daquela marca renomada e que não recebe um upgrade decente há anos meses. Como automatizar um deploy que agora possui um novo servidor Web, mas que exige a criação de um nova regra, um restart e que talvez não ofereça aquela regra específica que evitaria uma serie the rewrites no seu servidor Web?
+Atualmente se fala em Infraestrutura como Código, onde as APIs estão em toda parte permitindo automações quase sem limites. Então pensar em criar um novo datacenter ou comprar aquele servidor que vai ajudar na tarefa ou funcionalidade x, y ou z não é mais uma opção ou pelo menos não deveria ser.
+O que dizer daquele teste de carga ou de resiliência que vai acontecer a cada grande mudança, e isso poderia ser a cada 2 ou 3 meses, onde foi necessário espelhar o ambiente de produção. O que fazer com  todo esse potencial quando os testes terminarem? Alias foi essa inatividade que deu [origem à Amazon Web Services] (veja aqui https://dzone.com/articles/5-key-events-history-cloud)
+DevOps e Cloud não são sinônimos, e individualmente é possível fazer DevOps sem Cloud, e utilizar recursos em nuvem ser seguir nenhuma das práticas de DevOps ou Agile.
+
+DevOps No Pain No Gain
+----------------------
+
+Quantas vezes se ouviu naquele treinamento Agile que o processo era simples mas que causaria muita dor para ser implantado? DevOps segue a mesma linha, pois quantas vezes já se ouviu “Ah! É só automatizar esses testes aqui e usar aquela ferramentas de CI alí e pronto!”, mas essa tarefa aparentemente simples não sai do papel?
+É difícil gerenciar a ansiedade de se ter um produto no mercado o mais rápido possível, e na maioria das vezes, o senso de urgência negligencia as coisas certas que devem ser feitas. A grande sabotagem de qualquer ação a ser tomada é deixá-la para depois.
+DevOps não é para ser feito do dia para noite, mas é preciso ter em mente os objetivos a se alcançar. É trabalho de formiga, que a cada pequena tarefa completada contribui para o todo.equire 'json'
+
