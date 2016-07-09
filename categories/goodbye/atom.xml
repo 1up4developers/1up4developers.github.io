@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: goodbye | 1up4developers]]></title>
+  <link href="http://1up4dev.org/categories/goodbye/atom.xml" rel="self"/>
+  <link href="http://1up4dev.org/"/>
+  <updated>2016-07-09T13:57:13-03:00</updated>
+  <id>http://1up4dev.org/</id>
+  <author>
+    <name><![CDATA[1up4developers]]></name>
+    <email><![CDATA[1up4dev@googlegroups.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Encerramento do blog]]></title>
+    <link href="http://1up4dev.org/2016/07/encerramento-do-blog/"/>
+    <updated>2016-07-08T12:00:00-03:00</updated>
+    <id>http://1up4dev.org/2016/07/encerramento-do-blog</id>
+    <content type="html"><![CDATA[<p>Amigos, este blog será encerrado no final deste mês :(</p>
+
+<p>Desde 2008 vínhamos compartilhando nossas aventuras e experiências no maravilhoso mundo da programação. Aprendemos muito com esta trajetória, com os comentários que vocês leitores fizeram e com as oportunidades que surgiram através do blog.</p>
+
+<p>Foi uma etapa muito importante e proveitosa em nossas carreiras, mas este ciclo chegou ao fim. E este é o momento de iniciar um novo ciclo em nossas carreiras.</p>
+
+<p>O blog será encerrado, mas continuaremos compartilhando nossas experiências no Twitter, Medium e nos blogs pessoais de cada autor.</p>
+
+<p>Aqui estão nossos feeds de conteúdo agile a partir do próximo mês:</p>
+
+<h3>Rodrigo Panachi</h3>
+
+<ul>
+<li><a href="http://rpanachi.com">http://rpanachi.com</a></li>
+<li><a href="https://medium.com/@rpanachi">https://medium.com/@rpanachi</a></li>
+<li><a href="https://twitter.com/rpanachi">https://twitter.com/rpanachi</a></li>
+</ul>
+
+
+<h3>Roger Leite</h3>
+
+<ul>
+<li><a href="https://medium.com/@rogerleite">https://medium.com/@rogerleite</a></li>
+<li><a href="https://tiwttier.com/rogerleite">https://tiwttier.com/rogerleite</a></li>
+</ul>
+
+
+<h3>Plinio Balduino</h3>
+
+<ul>
+<li><a href="https://medium.com/@p_balduino">https://medium.com/@p_balduino</a></li>
+<li><a href="http://twitter.com/p_balduino">http://twitter.com/p_balduino</a></li>
+</ul>
+
+
+<h3>Tony Fabeen</h3>
+
+<ul>
+<li><a href="https://twitter.com/tonyfabeen">https://twitter.com/tonyfabeen</a></li>
+<li><a href="https://medium.com/@tonyfabeen">https://medium.com/@tonyfabeen</a></li>
+</ul>
+
+
+<h3>Miguel Horlle</h3>
+
+<ul>
+<li><a href="https://twitter.com/miguelbaldi">https://twitter.com/miguelbaldi</a></li>
+</ul>
+
+
+<h3>Humberto Bulhões</h3>
+
+<ul>
+<li><a href="https://twitter.com/01berto">https://twitter.com/01berto</a></li>
+</ul>
+
+
+<h3>Rogério Ramos</h3>
+
+<ul>
+<li><a href="https://medium.com/@habutre">https://medium.com/@habutre</a></li>
+<li><a href="https://twitter.com/habutre">https://twitter.com/habutre</a></li>
+</ul>
+
+
+<p>Continue nadando contra o waterfall e até a proxima. Sucesso!</p>
+]]></content>
+  </entry>
+  
+</feed>

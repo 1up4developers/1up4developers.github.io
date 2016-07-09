@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Atualmente, desenvolver software não é uma atividade barata. O custo com os profissionais envolvidos, equipamentos, licenças de software (não é o &hellip;">
+  <meta name="description" content="Se você freqüenta este blog já deve ter percebido que nós não gostamos da maldita cascata. Fases bem definidas, detalhamento de requisitos, &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,93 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2008/11/os-guardioes-da-cascata/">Os Guardiões Da Cascata</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-11-04T01:49:11-02:00" pubdate data-updated="true">Nov 4<span>th</span>, 2008</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2008/11/os-guardioes-da-cascata/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/11/os-guardioes-da-cascata/" data-text="Os guardiões da cascata" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/11/os-guardioes-da-cascata/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/11/os-guardioes-da-cascata/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da <del>maldita</del> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
+
+<p>O principal apelo de um processo cascateiro são suas fases e papéis bem definidos, onde cada membro da &ldquo;equipe&rdquo; é responsável por uma determinada tarefa que é executada em uma seqüência previamente definida. Dentre os <a href="http://www.wthreex.com/rup/process/workers/ovu_works.htm">papéis</a>, pode-se facilmente identificar os especialistas daquela tarefa, que defendem sua necessidade execução com unhas e dentes. Para ilustrar, resolvi chamá-los de <a href="http://pt.wikipedia.org/wiki/Guardi%C3%B5es_do_Universo">guardiões</a>, seja da tecnologia ou da atividade em questão. Um guardião protege sua fase, tarefa e interesses, defendendo-os para que o &ldquo;processo&rdquo; não seja quebrado. Desta forma, <sarcasmo> a &ldquo;equipe&rdquo; atinge seu objetivo: o software! </sarcasmo> Seguem alguns exemplos desses guardiões cascateiros:</p>
+
+<p><strong>O guardião do banco de dados: &ldquo;<em>Não rodarás nenhum script na base alheia</em>&rdquo;</strong>
+Começo por este por ser o mais comum dos guardiões. Ele trata o banco de dados como um filho, mesmo que seja um adolescente que não obedeça inteiramente à 3ª regra normal. São vistos como semi-deuses, capazes de transcrever o modelo de negócio da empresa em uma linguagem de alto nível, impossível de ser compreendida por simples programadores. Protejem as tabelas com a própria vida e qualquer alteração na base de dados é motivo para um duelo até a morte! Utilizam um padrão para nomenclatura de campos que somente é conhecido pelo clã dos DBAs. Geralmente são seguidores do Oráculo, o senhor de todos os bancos de dados.</p>
+
+<p><strong>O guardião do projeto: <em>&ldquo;Guia-te pelo teu Gantt e serás recompensado&rdquo;</em></strong>
+Este guardião está presente em todos os projetos, garantindo que a palavra do <a href="http://pt.wikipedia.org/wiki/Diagrama_de_Gantt">Gantt</a> seja cumprida, protegendo o escopo do projeto com a própria vida (ou a vida de algum programador). Adicionalmente atua como roteador de atividades: recebe os requisitos pelo email, encaminha para um recurso disponível (programador) que estima o esforço e define uma data de entrega, devolvendo para o guardião que atualiza seu <a href="http://blog.aspercom.com.br/2007/11/15/ganttchartnaofunciona/">Project</a>.</p>
+
+<p><strong>O guardião do framework: <em>&ldquo;Venerarás o Struts e nada te faltarás&rdquo;</em></strong>
+O framework é o objeto de adoração deste guardião, nenhum outro framework é tão bom quanto o que ele venera. Ele provê solução para todos seus problemas simplesmente escrevendo um bloco de XML aqui, outro ali, mudando aquela linha acolá e estendendo uma classe X implementando aquela interface Z. Qualquer evolução do framework em questão não passa de uma tentativa frustrada de &ldquo;reinventar a roda&rdquo;.</p>
+
+<p><strong>O guardião da arquitetura: <em>&ldquo;Não usarás a instância do teu objeto em vão&rdquo;</em></strong>
+Uma variação interessante de guardião, que neutraliza seu oponente através de técnicas de tortura e perturbação mental, inundando as sessões de brainstorm com uma enxurrada de DTO&rsquo;s, VO&rsquo;s, Facades, EJB&rsquo;s entre outros patterns que fazem a cabeça dos programadores entrar em conflito, até que seus órgãos faleçam (ou simplesmente se demitam). Geralmente são cúmplices dos guardiões do projeto, conspirando para a dominação do Gannt.</p>
+
+<p><strong>O guardião do root: <em>&ldquo;Teu processo não executarás no meu bash&rdquo;</em></strong>
+A jóia mais preciosa da empresa: a senha do root. Seu guardião é o mais honrado dos seres, sendo uma espécie de <a href="http://pt.wikipedia.org/wiki/O_Senhor_dos_An%C3%A9is">Frodo</a>, protegendo-a com a própria vida pois uma vez em mãos erradas pode ser usada para a destruição da humanidade (ou apenas para reiniciar aquela instância do Tomcat travado em produção). Aquele que desafia este guardião perde o direito de executar seus processos como administrador local e fica vagando pelo filesystem eternamente.</p>
+
+<p><strong>O guardião dos guardiões: <em>&ldquo;Tua TI é um mal necessário&rdquo;</em></strong>
+Também conhecido como diretor, presidente, CEO, dono, investidor, sócio, etc. É o guardião das decisões, aquele que protege sua riqueza acima de tudo, economizando nos salários, contratando funcionários despreparados e investindo rios de dinheiro em consultorias e licenças de software para garantir seus investimentos.</p>
+
+<p>Enfim, são guardiões dos próprios interesses. A &ldquo;equipe&rdquo; é apenas uma palavra que usam em discursos mas nunca aplicaram o conceito na prática!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2008/10/software-e-sobre-investimento/">Software é Sobre Investimento</a></h1>
     
     
@@ -99,7 +186,7 @@
   
 
 
-<time datetime="2008-10-30T03:00:33+00:00" pubdate data-updated="true">Oct 30<span>th</span>, 2008</time>
+<time datetime="2008-10-30T01:00:33-02:00" pubdate data-updated="true">Oct 30<span>th</span>, 2008</time>
         | 
   
 
@@ -182,7 +269,7 @@
   
 
 
-<time datetime="2008-10-20T02:48:18+00:00" pubdate data-updated="true">Oct 20<span>th</span>, 2008</time>
+<time datetime="2008-10-20T00:48:18-02:00" pubdate data-updated="true">Oct 20<span>th</span>, 2008</time>
         | 
   
 
@@ -267,7 +354,7 @@
   
 
 
-<time datetime="2008-10-18T04:43:14+00:00" pubdate data-updated="true">Oct 18<span>th</span>, 2008</time>
+<time datetime="2008-10-18T01:43:14-03:00" pubdate data-updated="true">Oct 18<span>th</span>, 2008</time>
         | 
   
 
@@ -368,7 +455,7 @@
   
 
 
-<time datetime="2008-09-03T03:30:24+00:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2008</time>
+<time datetime="2008-09-03T00:30:24-03:00" pubdate data-updated="true">Sep 3<span>rd</span>, 2008</time>
         | 
   
 
@@ -448,7 +535,7 @@
   
 
 
-<time datetime="2008-08-18T17:02:43+00:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
+<time datetime="2008-08-18T14:02:43-03:00" pubdate data-updated="true">Aug 18<span>th</span>, 2008</time>
         | 
   
 
@@ -541,7 +628,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   
 
 
-<time datetime="2008-08-05T11:45:18+00:00" pubdate data-updated="true">Aug 5<span>th</span>, 2008</time>
+<time datetime="2008-08-05T08:45:18-03:00" pubdate data-updated="true">Aug 5<span>th</span>, 2008</time>
         | 
   
 
@@ -619,7 +706,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   
 
 
-<time datetime="2008-08-03T17:04:26+00:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2008</time>
+<time datetime="2008-08-03T14:04:26-03:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2008</time>
         | 
   
 
@@ -755,7 +842,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   
 
 
-<time datetime="2008-07-06T20:01:06+00:00" pubdate data-updated="true">Jul 6<span>th</span>, 2008</time>
+<time datetime="2008-07-06T17:01:06-03:00" pubdate data-updated="true">Jul 6<span>th</span>, 2008</time>
         | 
   
 
@@ -834,7 +921,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   
 
 
-<time datetime="2008-06-26T19:54:19+00:00" pubdate data-updated="true">Jun 26<span>th</span>, 2008</time>
+<time datetime="2008-06-26T16:54:19-03:00" pubdate data-updated="true">Jun 26<span>th</span>, 2008</time>
         | 
   
 
@@ -894,76 +981,6 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2008/06/aderindo-a-campanha-br-linux/">Aderindo a Campanha BR-Linux</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2008-06-25T18:36:17+00:00" pubdate data-updated="true">Jun 25<span>th</span>, 2008</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rogerbarreto/'>Roger Leite</a></span></span>
-
-
-        
-         | <a href="/2008/06/aderindo-a-campanha-br-linux/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2008/06/aderindo-a-campanha-br-linux/" data-text="Aderindo a Campanha BR-Linux" data-via="1up4dev" data-counturl="http://1up4dev.org/2008/06/aderindo-a-campanha-br-linux/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2008/06/aderindo-a-campanha-br-linux/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2008/06/aderindo-a-campanha-br-linux/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><p>Não é só de Waterfall que este blog vive. Ele também nasceu pra ajudar o software livre ! Eu sei, não temos nenhum post sobre isso, mas isso é questão de tempo eu prometo.</p>
-
-<p>Como grande fã que sou do <a href="http://br-linux.org/">BR-Linux</a>, estou aderindo a campanha ! E com certeza todos os autores deste blog concordam comigo, que noticia do mundo livre é no BR-Linux.</p>
-
-<p><strong>Ajude a sustentar a Wikipédia e outros projetos, sem colocar a mão no bolso, e concorra a um Eee PC!</strong>
-…e também a pen drives, card drives, camisetas geeks, livros e mais! O <a href="http://br-linux.org/">BR-Linux</a> e o <a href="http://efetividade.net/">Efetividade</a> lançaram uma <a href="http://br-linux.org/2008/campanha-wikipedia/">campanha</a> para ajudar a Wikimedia Foundation e outros mantenedores de projetos que usamos no dia-a-dia on-line. Se você puder doar diretamente, ou contribuir de outra forma, são sempre melhores opções. Mas se não puder, veja as regras da promoção e <a href="http://br-linux.org/2008/campanha-wikipedia/">participe</a> &ndash; quanto mais divulgação, maior será a doação do BR-Linux e do Efetividade, e você ainda concorre a diversos brindes!</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/10/">&larr; Older</a>
@@ -986,6 +1003,10 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2016/07/encerramento-do-blog/">Encerramento do blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/type-hints-no-clojure-parte-2/">Type hints no Clojure - Parte 2</a>
       </li>
     
@@ -999,10 +1020,6 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     
       <li class="post">
         <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
       </li>
     
   </ul>
@@ -1019,7 +1036,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (37)
         </li>
       
     
@@ -1129,6 +1146,8 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     
       <a class='category' href='/categories/csv/'>csv</a>&nbsp;
     
+      <a class='category' href='/categories/goodbye/'>goodbye</a>&nbsp;
+    
   </p>
 </section>
 
@@ -1138,7 +1157,7 @@ Tirei deste <a href="http://www.meupost.com/2008/07/10/lendo-xml-com-o-rexml-rub
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - 1up4developers -
+  Copyright &copy; 2016 - 1up4developers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>.</span>
 </p>
 

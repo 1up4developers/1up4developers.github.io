@@ -9,7 +9,7 @@
   <meta name="author" content="1up4developers">
 
   
-  <meta name="description" content="Em tempos de Metodologias Àgeis, iniciativas como DevOps, adoção de Cloud Computing e derivados (SaaS, IaaS e PaaS), aplicações que demorariam meses &hellip;">
+  <meta name="description" content="Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -83,6 +83,176 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/">[QuickTips] Do Wordpress Para Octopress/Jekyll No GitHub Pages</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-20T22:38:00-03:00" pubdate data-updated="true">Sep 20<span>th</span>, 2013</time>
+        | 
+  
+
+
+  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/rodrigopanachi/'>Rodrigo Panachi</a></span></span>
+
+
+        
+         | <a href="/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/#disqus_thread">Comments</a>
+        
+      </p>
+    
+    
+      <br/>
+      
+  
+  
+
+
+<div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/" data-text="[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"></div>
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"></div>
+  
+</div>
+
+    
+  </header>
+
+
+  <div class="entry-content"><p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
+
+<h2>Por que GitHub Pages?</h2>
+
+<p>Corte de custos! Manter o blog no Wordpress requer um hosting, um banco de dados e um domínio. Reduzimos as despesas apenas para o registro de domínio (por enquanto).</p>
+
+<p>Performance! GitHub Pages é estático, e conteúdo estático é servido naturalmente mais rápido.</p>
+
+<p>Desafio! Estavamos &ldquo;acostumados&rdquo; ao Wordpress. Aprender Jekyll e a postar &ldquo;commitando em um projeto&rdquo; permite que tenhamos novas idéias, ou no pior dos casos, aprendamos novas tecnologias.</p>
+
+<h2>Requisitos</h2>
+
+<p>Para utilizar o GitHub Pages, crie um repositório com o nome <strong>usuariogithub.github.io</strong>, incluindo o &ldquo;github.io&rdquo;. O GitHub gerencia este repositório e publica o conteúdo estático no endereço <a href="http://usuariogithub.github.io">http://usuariogithub.github.io</a></p>
+
+<p>Agora, para gerar o conteúdo estático vamos usar o <a href="http://octopress.org">Octopress</a>.</p>
+
+<h2>Instalação</h2>
+
+<p>Basta clonar o repositório do Octopress localmente:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git clone git@github.com:imathis/octopress.git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>instalar as gems necessárias e em seguida rodar a rake para configuração:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake setup_github_pages
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>e informar o seu repositório do GitHub Pages:</p>
+
+<pre><code>git@github.com:username/username.github.io.git
+</code></pre>
+
+<p>Pronto! Os remoting points do projeto serão configurados para seu repositório do GitHub, como segue:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>git remote -v
+</span><span class='line'>
+</span><span class='line'>octopress git@github.com:imathis/octopress.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>octopress git@github.com:imathis/octopress.git <span class="o">(</span>push<span class="o">)</span>
+</span><span class='line'>origin     git@github.com:username/username.github.io.git <span class="o">(</span>fetch<span class="o">)</span>
+</span><span class='line'>origin     git@github.com:username/username.github.io.git <span class="o">(</span>push<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Postando</h2>
+
+<p>Para criar um novo post, basta rodar a rake:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake new_post<span class="o">[</span><span class="s2">&quot;o titulo do seu post&quot;</span><span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>o que vai criar o arquivo <em>source/_posts/2013-09-17-o-titulo-do-seu-post.markdown</em>. Escreva o conteúdo do seu post normalmente em Markdown (recomendo utilizar o <a href="http://markup.herokuapp.com/">Markup Editor</a>) e execute:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake generate
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>para gerar o site estático no diretório <em>_deploy</em>. Caso queira dar um preview no que será publicado, basta rodar:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake preview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>e acessar no browser <a href="http://localhost:4000.">http://localhost:4000.</a></p>
+
+<h2>Publicando</h2>
+
+<p>Quando terminar seu post, basta rodar:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>rake deploy
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>para publicar o site no seu repositório do GitHub Pages.</p>
+
+<p>Pronto! Não se esqueça de subir os fontes do site (branch source), commitando suas alterações e executando o classico <em>git push</em>.</p>
+
+<h2>Migrando</h2>
+
+<p>Caso já tenha um site publicado no Wordpress, você pode seguir este guia para importar todo o conteúdo na estrutura do Jekyll:</p>
+
+<p><a href="http://johnnycode.com/2012/07/10/how-to-migrate-from-wordpress-to-jekyll-running-on-github/">How to Migrate from WordPress to Jekyll Running on Github</a></p>
+
+<h2>Referências</h2>
+
+<ul>
+<li><a href="http://pages.github.com/">GitHub Pages</a></li>
+<li><a href="http://octopress.org/">Octopress.org</a></li>
+<li><a href="http://jekyllrb.com/">Jekyll</a></li>
+</ul>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/2013/08/introducao-a-linux-control-groups-cgroups/">Introdução a Linux Control Groups (CGroups)</a></h1>
     
     
@@ -99,7 +269,7 @@
   
 
 
-<time datetime="2013-08-22T17:32:23+00:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
+<time datetime="2013-08-22T14:32:23-03:00" pubdate data-updated="true">Aug 22<span>nd</span>, 2013</time>
         | 
   
 
@@ -303,7 +473,7 @@
   
 
 
-<time datetime="2013-08-19T17:29:56+00:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
+<time datetime="2013-08-19T14:29:56-03:00" pubdate data-updated="true">Aug 19<span>th</span>, 2013</time>
         | 
   
 
@@ -492,7 +662,7 @@
   
 
 
-<time datetime="2013-07-14T14:35:31+00:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
+<time datetime="2013-07-14T11:35:31-03:00" pubdate data-updated="true">Jul 14<span>th</span>, 2013</time>
         | 
   
 
@@ -690,7 +860,7 @@ y = (+ 1 (* 3 2))
   
 
 
-<time datetime="2013-06-27T12:42:18+00:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
+<time datetime="2013-06-27T09:42:18-03:00" pubdate data-updated="true">Jun 27<span>th</span>, 2013</time>
         | 
   
 
@@ -843,7 +1013,7 @@ y = (+ 1 (* 3 2))
   
 
 
-<time datetime="2013-05-06T10:00:44+00:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
+<time datetime="2013-05-06T07:00:44-03:00" pubdate data-updated="true">May 6<span>th</span>, 2013</time>
         | 
   
 
@@ -928,7 +1098,7 @@ y = (+ 1 (* 3 2))
   
 
 
-<time datetime="2013-04-11T10:30:47+00:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
+<time datetime="2013-04-11T07:30:47-03:00" pubdate data-updated="true">Apr 11<span>th</span>, 2013</time>
         | 
   
 
@@ -1049,7 +1219,7 @@ y = (+ 1 (* 3 2))
   
 
 
-<time datetime="2013-04-01T15:00:51+00:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
+<time datetime="2013-04-01T12:00:51-03:00" pubdate data-updated="true">Apr 1<span>st</span>, 2013</time>
         | 
   
 
@@ -1118,7 +1288,7 @@ y = (+ 1 (* 3 2))
   
 
 
-<time datetime="2013-03-20T14:27:02+00:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
+<time datetime="2013-03-20T11:27:02-03:00" pubdate data-updated="true">Mar 20<span>th</span>, 2013</time>
         | 
   
 
@@ -1284,7 +1454,7 @@ Feche um split com Ctrl-a + X</p>
   
 
 
-<time datetime="2013-03-18T16:45:25+00:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
+<time datetime="2013-03-18T13:45:25-03:00" pubdate data-updated="true">Mar 18<span>th</span>, 2013</time>
         | 
   
 
@@ -1356,246 +1526,6 @@ Feche um split com Ctrl-a + X</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2013/02/programacao-funcional-com-javascript/">Programação Funcional Com JavaScript</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-02-21T15:58:02+00:00" pubdate data-updated="true">Feb 21<span>st</span>, 2013</time>
-        | 
-  
-
-
-  <span class="byline author vcard">Posted by <span class="fn"><a class='author' href='/author/pbalduino/'>Plínio Balduino</a></span></span>
-
-
-        
-         | <a href="/2013/02/programacao-funcional-com-javascript/#disqus_thread">Comments</a>
-        
-      </p>
-    
-    
-      <br/>
-      
-  
-  
-
-
-<div class="sharing">
-  
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/" data-text="Programação funcional com JavaScript" data-via="1up4dev" data-counturl="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/" >Tweet</a>
-  
-  
-  <div class="g-plusone" data-size="medium" data-href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"></div>
-  
-  
-    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false" data-url="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"></div>
-  
-</div>
-
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
-
-<h2>O que é programação funcional</h2>
-
-<p>Programação funcional é, assim como a orientação a objetos, uma forma de se pensar em como resolver problemas.</p>
-
-<p>A base do que hoje é a programação funcional foi criada paralelamente por Alan Turing e Alonzo Church na década de 1930, antes mesmo da existência dos computadores como o conhecemos.</p>
-
-<p>Infelizmente, a programação funcional passou muito tempo restrita aos meios acadêmicos, o que faz com que o iniciante no assunto fique assustado com toda aquela notação matemática e com os termos incompreensíveis.</p>
-
-<pre><code>ω := λx.x x
-Ω := ω ω 
-Y := λg.(λx.g (x x)) (λx.g (x x))
-</code></pre>
-
-<p>Felizmente, o conceito de programação funcional é muito simples. Assim como na orientação a objetos a menor parte de um sistema é um objeto, você pode atribuir objetos a variáveis, pode passá-los por parâmetro e ter métodos retornando objetos, na programação funcional a menor parte do seu sistema é uma função.</p>
-
-<p>Isso implica que você pode atribuir funções a variáveis, pode passá-las por parâmetro e mesmo fazer com que uma função retorne outra função. Alguma linguagens implementam também imutabilidade, que é quando todo valor é tratado como se fosse uma constante, e outros conceitos periféricos, o que não é o caso do JavaScript. Todos os demais conceitos de programação funcional derivam do fato de você lidar com funções como se fossem um valor como qualquer outro.</p>
-
-<h2>High order functions</h2>
-
-<p>Uma high order function (não achei uma tradução decente para o Português), apesar do nome intimidador, é simplesmente uma função que recebe outra função como parâmetro ou devolve uma função como resultado. Quando você usa callbacks no JavaScript e no jQuery, você está fazendo uso de high order functions.</p>
-
-<pre><code>$("button.mallandro")
-  .click(function() {
-    alert("Ié ié!");
-  });
-</code></pre>
-
-<p>O método click é uma high order function, e a função anônima que faz <em>Ié ié!</em> é um callback.</p>
-
-<p>Mais para frente vou mostrar mais formas de usar high order functions.</p>
-
-<h2>Escopo</h2>
-
-<p>Apesar do conceito de escopo não ser exclusivo da programação funcional, é importantíssimo que você entenda como funciona o escopo no JavaScript para que não fique confuso ao ver <em>closures</em> e <em>currying</em>.</p>
-
-<p>Como na maioria das linguagens comerciais, uma variável declarada em um escopo maior é visível em um escopo menor, enquanto o contrário não é verdadeiro.</p>
-
-<p>Na prática significa que uma variável global é visível por todo mundo:</p>
-
-<pre><code>var x = 1;
-
-function foo() {
-  console.log(x);
-}
-
-foo();
-
-// Saída:   1
-</code></pre>
-
-<p>Significa também que uma variável local só é vista dentro do escopo em que foi criada, mesmo que tenha o mesmo nome de uma variável global:</p>
-
-<pre><code>var x = 1;
-
-function bar() {
-  var x = 99;
-  var y = 42
-
-  console.log(x, y);
-}
-
-bar();
-// 99 42
-
-console.log(x);
-// 1
-
-console.log(y);
-// ReferenceError: y is not defined
-</code></pre>
-
-<p>Quando uma função altera o valor de uma variável global, isso afeta toda a aplicação. Por isso o uso de variáveis globais não é considerado uma boa prática. Porém, uma variável global passada por parâmetro para uma função não tem o seu valor alterado:</p>
-
-<pre><code>var x = 1;
-var y = 11;
-
-function meh(x) {
-  console.log("Dentro: ", x, y);
-  x++;
-  y++;
-  console.log("Dentro: ", x, y);
-}
-
-meh(x);
-// Dentro:  1 11
-// Dentro:  2 12
-
-console.log("Fora: ", x, y);
-// Fora:  1 12
-</code></pre>
-
-<h2>Closures</h2>
-
-<p>Outra característica do escopo é que uma função guarda as variáveis do contexto em que foi criada. Isso significa que uma função pode continuar acessando variáveis que só existiam no momento em que ela foi criada.</p>
-
-<pre><code>function counter() {
-  var x = 0;
-
-  return function() {
-    return ++x;
-  }
-}
-
-var count = counter();
-
-console.log(count());
-// 1
-console.log(count());
-// 2
-console.log(count());
-// 3
-console.log(count());
-// 4
-console.log(x);
-// ReferenceError: x is not defined
-</code></pre>
-
-<p>O que acontece aqui é que count recebe uma função que incrementa o valor da variável x, só que essa variável existe apenas dentro da função counter. O que aconteceu aqui é que a função armazenada em count <em>se lembra</em> da variável que foi criada em outra função, mas que não está mais sendo executada.</p>
-
-<p>Ao tentarmos exibir o valor da variável x, recebemos um erro, pois ela não existe no escopo global.</p>
-
-<h2>Currying</h2>
-
-<p>Juntando tudo o que vimos até aqui sobre high order functions, escopo e closures, chegamos ao <em>currying</em>. Currying é uma operação em que você transforma uma função que receberia mais de um parâmetro em uma série de chamadas de funções com apenas um parâmetro cada.</p>
-
-<p>Um dos usos dessa técnica é evitar, de forma elegante, que o mesmo parâmetro seja passado para a mesma função.</p>
-
-<p>Vamos pegar um exemplo escrito de forma imperativa. Temos uma função hey, que recebe os parâmetros texto e nome e, a partir disso, imprime uma saudação.</p>
-
-<pre><code>function hey(texto, nome) {
-  console.log(texto + ", " + nome);
-}
-
-hey("Bom dia", "João");
-// Bom dia, João
-
-hey("Bom dia", "José");
-// Bom dia, José
-
-hey("Bom dia", "Nicolau");
-// Bom dia, Nicolau
-</code></pre>
-
-<p>Você pode dizer que poderíamos guardar &ldquo;Bom dia&rdquo; em uma variável. Concordo, mas isso não mudaria nada dentro do que estamos apresentando.</p>
-
-<p>Reescrevendo a mesma função usando currying, teremos o código abaixo:</p>
-
-<pre><code>function hey(texto) {
-  return function(nome) {
-    console.log(texto + ", " + nome);
-  }
-}
-
-var bomDia = hey("Bom dia");
-
-bomDia("João");
-// Bom dia, João
-
-bomDia("José");
-// Bom dia, José
-
-bomDia("Nicolau");
-// Bom dia, Nicolau
-</code></pre>
-
-<p>Programação funcional é muito mais do que os conceitos que apresentei aqui, mas como um primeiro contato já dá para fazer muita coisa bacana.</p>
-
-<p>Recomendo que você estude e pesquise a respeito. Mesmo que você não use uma linguagem funcional no seu dia-a-dia, o fato de conhecer um novo modo de pensar acaba alterando a forma como você resolve problemas, fazendo com que você tenha idéias melhores e mais elegantes.</p>
-
-<p><strong>Update em 26/02:</strong></p>
-
-<p>Este artigo foi publicado também no iMasters, no endereço <a href="http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/">http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/</a>.</p>
-
-<p><em>Esse texto é parte do livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">Dominando JavaScript com jQuery</a>, publicado pela <a href="http://www.casadocodigo.com.br">Editora Casa do Código</a></em>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/page/3/">&larr; Older</a>
@@ -1618,6 +1548,10 @@ bomDia("Nicolau");
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/2016/07/encerramento-do-blog/">Encerramento do blog</a>
+      </li>
+    
+      <li class="post">
         <a href="/2015/02/type-hints-no-clojure-parte-2/">Type hints no Clojure - Parte 2</a>
       </li>
     
@@ -1631,10 +1565,6 @@ bomDia("Nicolau");
     
       <li class="post">
         <a href="/2014/10/extraindo_dados_da_internet_com_clojure/">Extraindo dados da Internet com Clojure</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2014/09/magica-com-o-repl-do-clojure/">Fazendo mágica com o REPL do Clojure</a>
       </li>
     
   </ul>
@@ -1651,7 +1581,7 @@ bomDia("Nicolau");
     
       
         <li class="author">
-          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (36)
+          <a href="/author/rodrigopanachi">Rodrigo Panachi</a> (37)
         </li>
       
     
@@ -1761,6 +1691,8 @@ bomDia("Nicolau");
     
       <a class='category' href='/categories/csv/'>csv</a>&nbsp;
     
+      <a class='category' href='/categories/goodbye/'>goodbye</a>&nbsp;
+    
   </p>
 </section>
 
@@ -1770,7 +1702,7 @@ bomDia("Nicolau");
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - 1up4developers -
+  Copyright &copy; 2016 - 1up4developers -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a>. Design by <a href="http://octopressthemes.com">Octopress Themes</a>.</span>
 </p>
 

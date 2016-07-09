@@ -4,7 +4,7 @@
   <title><![CDATA[Category: waterfall | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/waterfall/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-13T14:26:15+00:00</updated>
+  <updated>2016-07-09T13:57:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
     <link href="http://1up4dev.org/2013/04/novos-rumos/"/>
-    <updated>2013-04-01T15:00:51+00:00</updated>
+    <updated>2013-04-01T12:00:51-03:00</updated>
     <id>http://1up4dev.org/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
@@ -29,7 +29,7 @@
   <entry>
     <title type="html"><![CDATA[Nos idos de 2012, UML, Design e Waterfall]]></title>
     <link href="http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall/"/>
-    <updated>2013-01-04T15:51:14+00:00</updated>
+    <updated>2013-01-04T13:51:14-02:00</updated>
     <id>http://1up4dev.org/2013/01/nos-idos-de-2012-uml-design-e-waterfall</id>
     <content type="html"><![CDATA[<p>Há alguns anos atrás não havia uma referencia forte e consistente sobre os processos de desenvolvimento de software que não fosse Waterfall. Embora movimentos ágeis, processos mais simples e eficazes venham sendo utilizados a muito mais tempo, eles não eram tão evidentes como agora.
 Independente do processo ágil discutido <a href="http://scrum.org">Scrum</a>, <a href="http://www.lean.org">Lean</a>, <a href="http://xprogramming.com">XP</a> e etc, etc, etc&hellip; o movimento para remover as velhas e engessadas práticas de desenvolvimento de software cresce vertiginosamente e começa a movimentar grandes empresas, que ainda amarradas e processos internos pesadíssimos, entendem que algo precisa mudar para se conseguir maior flexibilidade e agilidade ao entregar novos serviços e funcionalidade a seus clientes, e obviamente, estar à frente da concorrência.</p>
@@ -46,7 +46,7 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   <entry>
     <title type="html"><![CDATA[Agilidade é a buzzword do momento]]></title>
     <link href="http://1up4dev.org/2009/04/agilidade-e-a-buzzword-do-momento/"/>
-    <updated>2009-04-22T14:46:42+00:00</updated>
+    <updated>2009-04-22T11:46:42-03:00</updated>
     <id>http://1up4dev.org/2009/04/agilidade-e-a-buzzword-do-momento</id>
     <content type="html"><![CDATA[<p>Nos últimos anos o mercado de TI cresceu exponencialmente. Surgiram desde pequenas empresas especializadas em construir websites até monstruosas fábricas de software com seus contratos milionários. Algumas com orçamento limitado outras com dinheiro jorrando pelos canos. Umas com problemas por falta de organização outras com problemas burocráticos. Bons profissionais vs. equipes de sobrinhos, habilidade técnica contra enxurradas de documentos&hellip; muito fracasso, pouco sucesso.</p>
 
@@ -109,7 +109,7 @@ Nunca consegui traçar uma ligação saudável entre os modelos criados com UML 
   <entry>
     <title type="html"><![CDATA[Foco no problema]]></title>
     <link href="http://1up4dev.org/2008/11/foco-no-problema/"/>
-    <updated>2008-11-10T21:33:43+00:00</updated>
+    <updated>2008-11-10T19:33:43-02:00</updated>
     <id>http://1up4dev.org/2008/11/foco-no-problema</id>
     <content type="html"><![CDATA[<p>Desenvolver software é uma atividade muito gratificante pois sempre podemos (ou deveríamos) exercitar nossa criatividade para solucionar os problemas dos clientes. Isto, apesar de divertido pode ser perigoso e/ou catastrófico se estivermos com o foco errado. Num ambiente cascateiro, onde cada envolvido está comprometido apenas com o processo e não se preocupa verdadeiramente com os problemas dos clientes, não é difícil que isto ocorra. Quase sempre o foco acaba sendo direcionado para a solução ao invés do problema.</p>
 
@@ -140,7 +140,7 @@ Os russos, que tiveram o mesmo problema, optaram por uma solução mais simples:
   <entry>
     <title type="html"><![CDATA[Arquiteto Cascateiro]]></title>
     <link href="http://1up4dev.org/2008/11/arquiteto-cascateiro/"/>
-    <updated>2008-11-07T09:44:44+00:00</updated>
+    <updated>2008-11-07T07:44:44-02:00</updated>
     <id>http://1up4dev.org/2008/11/arquiteto-cascateiro</id>
     <content type="html"><![CDATA[<blockquote><p>Este post é uma homenagem aos Arquitetos defensores do <em>waterfall</em>/cascata.</p></blockquote>
 

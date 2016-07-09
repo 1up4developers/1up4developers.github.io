@@ -4,7 +4,7 @@
   <title><![CDATA[Category: quick tips | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/quick-tips/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-13T14:26:15+00:00</updated>
+  <updated>2016-07-09T13:57:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
-    <updated>2014-09-23T18:24:00+00:00</updated>
+    <updated>2014-09-23T18:24:00-03:00</updated>
     <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
 
@@ -200,7 +200,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00+00:00</updated>
+    <updated>2014-04-25T11:21:00-03:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -451,7 +451,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
     <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
-    <updated>2013-09-20T22:38:00+00:00</updated>
+    <updated>2013-09-20T22:38:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
     <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
 
@@ -558,7 +558,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
     <link href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"/>
-    <updated>2013-07-14T14:35:31+00:00</updated>
+    <updated>2013-07-14T11:35:31-03:00</updated>
     <id>http://1up4dev.org/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 
@@ -700,7 +700,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
     <link href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
-    <updated>2013-06-27T12:42:18+00:00</updated>
+    <updated>2013-06-27T09:42:18-03:00</updated>
     <id>http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 

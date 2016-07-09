@@ -4,7 +4,7 @@
   <title><![CDATA[Category: marketing | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/marketing/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-13T14:26:15+00:00</updated>
+  <updated>2016-07-09T13:57:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
     <link href="http://1up4dev.org/2013/01/http-monkey/"/>
-    <updated>2013-01-23T15:29:16+00:00</updated>
+    <updated>2013-01-23T13:29:16-02:00</updated>
     <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
@@ -56,7 +56,7 @@
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
     <link href="http://1up4dev.org/2012/06/concepcao-do-rologames/"/>
-    <updated>2012-06-25T10:05:09+00:00</updated>
+    <updated>2012-06-25T07:05:09-03:00</updated>
     <id>http://1up4dev.org/2012/06/concepcao-do-rologames</id>
     <content type="html"><![CDATA[<p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
 
@@ -97,7 +97,7 @@
   <entry>
     <title type="html"><![CDATA[A experiência de lançar o RoloGames]]></title>
     <link href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/"/>
-    <updated>2012-06-20T11:37:53+00:00</updated>
+    <updated>2012-06-20T08:37:53-03:00</updated>
     <id>http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames</id>
     <content type="html"><![CDATA[<p>Nesta segunda-feira lançamos o <a href="http://rologames.com.br/">RoloGames</a>.</p>
 
@@ -135,7 +135,7 @@
   <entry>
     <title type="html"><![CDATA[Business Bingo Generator]]></title>
     <link href="http://1up4dev.org/2009/04/business-bingo-generator/"/>
-    <updated>2009-04-13T12:03:13+00:00</updated>
+    <updated>2009-04-13T09:03:13-03:00</updated>
     <id>http://1up4dev.org/2009/04/business-bingo-generator</id>
     <content type="html"><![CDATA[<p>Para quem tem algum tempo de internet, é fácil notar como as piadas se repetem, ou melhor, assim como olimpíadas ou copa do mundo, re-aparecem a cada quatro anos por exemplo. Não foi diferente com a piada que recebi (novamente) a pouco tempo, o Business Bingo. O que torna a piada muito divertida é o seu alto teor sarcástico e real, foi quando pensei, porque não imprimir esta cartela e realmente testar! Foi assim que surgiu a idéia de fazer um gerador de cartelas para o Business Bingo! :D</p>
 
@@ -162,7 +162,7 @@
   <entry>
     <title type="html"><![CDATA[Os guardiões da cascata]]></title>
     <link href="http://1up4dev.org/2008/11/os-guardioes-da-cascata/"/>
-    <updated>2008-11-04T03:49:11+00:00</updated>
+    <updated>2008-11-04T01:49:11-02:00</updated>
     <id>http://1up4dev.org/2008/11/os-guardioes-da-cascata</id>
     <content type="html"><![CDATA[<p>Se você freqüenta este blog já deve ter percebido que nós não gostamos da <del>maldita</del> <a href="http://pt.wikipedia.org/wiki/Modelo_em_cascata">cascata</a>. Fases bem definidas, detalhamento de requisitos, documentos inúteis, diagramas UML, papéis&hellip; tudo muito lindo na teoria. Eu fico até emocionado quando leio a <a href="http://www.wthreex.com/rup/">documentação</a> do <a href="http://pt.wikipedia.org/wiki/Rational_Unified_Process">RUP</a>. Mas infelizmente a maioria dos profissionais de TI precisam são obrigados a trabalhar nestes ambientes cascateiros, enfrentando chefes sem noção, colegas com <a href="http://www.novacorja.org/">síndrome do funcionário público</a>, <a href="http://desciclopedia.org/wiki/POG#Prazos_de_um_projeto_POG">prazos sem sentido</a>, entre outras <a href="http://1up4dev.org/2008/09/contos-do-programador-pragmatico/">pérolas</a> da <a href="http://1up4dev.org/2008/10/a-perpetuacao-da-especie/">área</a>.</p>
 

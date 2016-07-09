@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/ruby/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-13T14:26:15+00:00</updated>
+  <updated>2016-07-09T13:57:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Lendo arquivo CSV com parcimônia no Ruby]]></title>
     <link href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"/>
-    <updated>2014-11-17T09:34:00+00:00</updated>
+    <updated>2014-11-17T09:34:00-02:00</updated>
     <id>http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby</id>
     <content type="html"><![CDATA[<p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
 
@@ -450,7 +450,7 @@ Segue alguns links com mais informações:</p>
   <entry>
     <title type="html"><![CDATA[HTTP Monkey - lançado!]]></title>
     <link href="http://1up4dev.org/2013/01/http-monkey/"/>
-    <updated>2013-01-23T15:29:16+00:00</updated>
+    <updated>2013-01-23T13:29:16-02:00</updated>
     <id>http://1up4dev.org/2013/01/http-monkey</id>
     <content type="html"><![CDATA[<p>O <a href="https://github.com/rogerleite/http_monkey">HTTP Monkey</a> é um cliente http simples, com <strong>interface fluente</strong>, suporte a <strong>múltiplos <em>adapters</em></strong> (Net::HTTP, Curb, HTTPClient, EM-HTTP-Request) e <strong><em>middlewares </em></strong>no<em> estilo rack.</em></p>
 
@@ -490,7 +490,7 @@ Segue alguns links com mais informações:</p>
   <entry>
     <title type="html"><![CDATA[Rails 4 - Novidades]]></title>
     <link href="http://1up4dev.org/2012/11/rails-4-novidades/"/>
-    <updated>2012-11-29T13:38:49+00:00</updated>
+    <updated>2012-11-29T11:38:49-02:00</updated>
     <id>http://1up4dev.org/2012/11/rails-4-novidades</id>
     <content type="html"><![CDATA[<p>O Rails 4 já está em desenvolvimento <del>faz um tempo</del>, na verdade um bom tempo, desde 20/Dez/2011, olha <a href="https://github.com/rails/rails/commit/632fa15">o commit do DHH aqui</a>. No <a href="http://edgeguides.rubyonrails.org/4_0_release_notes.html">Ruby on Rails guides do <em>edge</em></a>, já tem muita coisa documentada do que vem por aí.</p>
 
@@ -517,7 +517,7 @@ Segue alguns links com mais informações:</p>
   <entry>
     <title type="html"><![CDATA[MinionServer - a real server to mock servers!]]></title>
     <link href="http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers/"/>
-    <updated>2012-11-28T15:49:06+00:00</updated>
+    <updated>2012-11-28T13:49:06-02:00</updated>
     <id>http://1up4dev.org/2012/11/minionserver-a-real-server-to-mock-servers</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/rogerleite/minion_server">MinionServer</a> is a ruby gem to help you with integration tests. You can create an app using Rack Builder and start a tiny server very easy. Let me show you some code:</p>
 
@@ -579,7 +579,7 @@ Hope that helps!</p>
   <entry>
     <title type="html"><![CDATA[Concepção do RoloGames]]></title>
     <link href="http://1up4dev.org/2012/06/concepcao-do-rologames/"/>
-    <updated>2012-06-25T10:05:09+00:00</updated>
+    <updated>2012-06-25T07:05:09-03:00</updated>
     <id>http://1up4dev.org/2012/06/concepcao-do-rologames</id>
     <content type="html"><![CDATA[<p>Este post é um tópico da <a href="http://1up4dev.org/2012/06/a-experiencia-de-lancar-o-rologames/">Experiência de lançar o RoloGames</a>.</p>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: csv | 1up4developers]]></title>
   <link href="http://1up4dev.org/categories/csv/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-13T14:26:15+00:00</updated>
+  <updated>2016-07-09T13:57:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Lendo arquivo CSV com parcimônia no Ruby]]></title>
     <link href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"/>
-    <updated>2014-11-17T09:34:00+00:00</updated>
+    <updated>2014-11-17T09:34:00-02:00</updated>
     <id>http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby</id>
     <content type="html"><![CDATA[<p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
 

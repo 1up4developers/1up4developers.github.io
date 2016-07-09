@@ -4,7 +4,7 @@
   <title><![CDATA[1up4developers]]></title>
   <link href="http://1up4dev.org/atom.xml" rel="self"/>
   <link href="http://1up4dev.org/"/>
-  <updated>2015-03-13T14:26:15+00:00</updated>
+  <updated>2016-07-09T13:57:13-03:00</updated>
   <id>http://1up4dev.org/</id>
   <author>
     <name><![CDATA[1up4developers]]></name>
@@ -14,9 +14,83 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Encerramento do blog]]></title>
+    <link href="http://1up4dev.org/2016/07/encerramento-do-blog/"/>
+    <updated>2016-07-08T12:00:00-03:00</updated>
+    <id>http://1up4dev.org/2016/07/encerramento-do-blog</id>
+    <content type="html"><![CDATA[<p>Amigos, este blog será encerrado no final deste mês :(</p>
+
+<p>Desde 2008 vínhamos compartilhando nossas aventuras e experiências no maravilhoso mundo da programação. Aprendemos muito com esta trajetória, com os comentários que vocês leitores fizeram e com as oportunidades que surgiram através do blog.</p>
+
+<p>Foi uma etapa muito importante e proveitosa em nossas carreiras, mas este ciclo chegou ao fim. E este é o momento de iniciar um novo ciclo em nossas carreiras.</p>
+
+<p>O blog será encerrado, mas continuaremos compartilhando nossas experiências no Twitter, Medium e nos blogs pessoais de cada autor.</p>
+
+<p>Aqui estão nossos feeds de conteúdo agile a partir do próximo mês:</p>
+
+<h3>Rodrigo Panachi</h3>
+
+<ul>
+<li><a href="http://rpanachi.com">http://rpanachi.com</a></li>
+<li><a href="https://medium.com/@rpanachi">https://medium.com/@rpanachi</a></li>
+<li><a href="https://twitter.com/rpanachi">https://twitter.com/rpanachi</a></li>
+</ul>
+
+
+<h3>Roger Leite</h3>
+
+<ul>
+<li><a href="https://medium.com/@rogerleite">https://medium.com/@rogerleite</a></li>
+<li><a href="https://tiwttier.com/rogerleite">https://tiwttier.com/rogerleite</a></li>
+</ul>
+
+
+<h3>Plinio Balduino</h3>
+
+<ul>
+<li><a href="https://medium.com/@p_balduino">https://medium.com/@p_balduino</a></li>
+<li><a href="http://twitter.com/p_balduino">http://twitter.com/p_balduino</a></li>
+</ul>
+
+
+<h3>Tony Fabeen</h3>
+
+<ul>
+<li><a href="https://twitter.com/tonyfabeen">https://twitter.com/tonyfabeen</a></li>
+<li><a href="https://medium.com/@tonyfabeen">https://medium.com/@tonyfabeen</a></li>
+</ul>
+
+
+<h3>Miguel Horlle</h3>
+
+<ul>
+<li><a href="https://twitter.com/miguelbaldi">https://twitter.com/miguelbaldi</a></li>
+</ul>
+
+
+<h3>Humberto Bulhões</h3>
+
+<ul>
+<li><a href="https://twitter.com/01berto">https://twitter.com/01berto</a></li>
+</ul>
+
+
+<h3>Rogério Ramos</h3>
+
+<ul>
+<li><a href="https://medium.com/@habutre">https://medium.com/@habutre</a></li>
+<li><a href="https://twitter.com/habutre">https://twitter.com/habutre</a></li>
+</ul>
+
+
+<p>Continue nadando contra o waterfall e até a proxima. Sucesso!</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Type hints no Clojure - Parte 2]]></title>
     <link href="http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2/"/>
-    <updated>2015-02-02T17:14:00+00:00</updated>
+    <updated>2015-02-02T17:14:00-02:00</updated>
     <id>http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2</id>
     <content type="html"><![CDATA[<p>Parte 1: <a href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1">http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1</a></p>
 
@@ -119,7 +193,7 @@
   <entry>
     <title type="html"><![CDATA[Type hints no Clojure - Parte 1]]></title>
     <link href="http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1/"/>
-    <updated>2015-01-31T21:14:00+00:00</updated>
+    <updated>2015-01-31T21:14:00-02:00</updated>
     <id>http://1up4dev.org/2015/01/type-hints-no-clojure-parte-1</id>
     <content type="html"><![CDATA[<p>Parte 2: <a href="http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2">http://1up4dev.org/2015/02/type-hints-no-clojure-parte-2</a></p>
 
@@ -256,7 +330,7 @@
   <entry>
     <title type="html"><![CDATA[Lendo arquivo CSV com parcimônia no Ruby]]></title>
     <link href="http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby/"/>
-    <updated>2014-11-17T09:34:00+00:00</updated>
+    <updated>2014-11-17T09:34:00-02:00</updated>
     <id>http://1up4dev.org/2014/11/lendo-arquivo-csv-com-parcimonia-no-ruby</id>
     <content type="html"><![CDATA[<p>Ler e escrever <a href="http://en.wikipedia.org/wiki/Comma-separated_values">arquivo csv</a> é um mal necessário de muitos sistemas, ainda mais levando em conta que esta integração será feita via Excel, em algum Windows, com quilos de texto com acentos e dados a formatar. Dado este cenário, e que ele provavelmente se repetirá no futuro, deixo aqui um post auto-ajuda para mim mesmo e provavelmente para você que está lendo. :D</p>
 
@@ -610,7 +684,7 @@ Segue alguns links com mais informações:</p>
   <entry>
     <title type="html"><![CDATA[Extraindo dados da Internet com Clojure]]></title>
     <link href="http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure/"/>
-    <updated>2014-10-28T12:10:00+00:00</updated>
+    <updated>2014-10-28T12:10:00-02:00</updated>
     <id>http://1up4dev.org/2014/10/extraindo_dados_da_internet_com_clojure</id>
     <content type="html"><![CDATA[<h2>O problema</h2>
 
@@ -930,7 +1004,7 @@ Vamos fazer a nossa função retornar um <em>vector</em> com os nomes dos autore
   <entry>
     <title type="html"><![CDATA[Fazendo mágica com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure/"/>
-    <updated>2014-09-23T18:24:00+00:00</updated>
+    <updated>2014-09-23T18:24:00-03:00</updated>
     <id>http://1up4dev.org/2014/09/magica-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>Caso você não esteja íntimo com o REPL do Clojure, recomendo a leitura do <a href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/">texto anterior</a> para aprender o básico.</p>
 
@@ -1114,7 +1188,7 @@ Aaaaaahhhhh, Mister M!
   <entry>
     <title type="html"><![CDATA[Integração Contínua e Entrega Contínua de modo fácil com Wercker]]></title>
     <link href="http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker/"/>
-    <updated>2014-09-06T12:33:00+00:00</updated>
+    <updated>2014-09-06T12:33:00-03:00</updated>
     <id>http://1up4dev.org/2014/09/integracao-continua-e-entrega-continua-de-modo-facil-com-wercker</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://wercker.com/">Wercker</a> é uma plataforma de integração contínua, baseado em
 containers e focado em facilitar o build e deploy de aplicações na nuvem. Totalmente
@@ -1356,7 +1430,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   <entry>
     <title type="html"><![CDATA[Alguns truques com o REPL do Clojure]]></title>
     <link href="http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure/"/>
-    <updated>2014-04-25T11:21:00+00:00</updated>
+    <updated>2014-04-25T11:21:00-03:00</updated>
     <id>http://1up4dev.org/2014/04/alguns-truques-com-o-repl-do-clojure</id>
     <content type="html"><![CDATA[<p>O <tt>REPL</tt> é uma das ferramentas mais úteis para se programar em Clojure. Se você está chegando do Ruby ou do Python está mais do que acostumado a usar o <tt>IRB</tt> ou o modo interativo do Python. Veremos no decorrer do capítulo que o REPL é bem mais do que um prompt da linguagem, que serve apenas para que instruções sejam testadas.</p>
 
@@ -1551,7 +1625,7 @@ seu projeto no Wercker, fazer o build e o deploy automaticamente no Heroku.</p>
   <entry>
     <title type="html"><![CDATA[Sowing the seeds of code]]></title>
     <link href="http://1up4dev.org/2013/09/sowing-the-seeds-of-code/"/>
-    <updated>2013-09-25T23:08:00+00:00</updated>
+    <updated>2013-09-25T23:08:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/sowing-the-seeds-of-code</id>
     <content type="html"><![CDATA[<p>Seguindo a filosofia de <a href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/">tirar a bunda da cadeira</a>, tive a oportunidade de falar em excelentes eventos esse ano, conhecer muita gente interessante e dar os primeiros passos no sentido de disseminar a linguagem Clojure no Brasil e organizar comunidades em São Paulo e no Rio de Janeiro.</p>
 
@@ -1644,7 +1718,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[[Off-Topic] Transforme seu roteador wireless em um NAS, MediaServer UPnP/DLNA e BitTorrent client com OpenWRT]]></title>
     <link href="http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt/"/>
-    <updated>2013-09-24T10:00:00+00:00</updated>
+    <updated>2013-09-24T10:00:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/off-topic-transforme-seu-roteador-wireless-em-um-nas-mediaserver-upnp-dlna-bittorrent-client-com-openwrt</id>
     <content type="html"><![CDATA[<p><strong>TL;DR</strong> <a href="http://openwrt.org">OpenWRT</a> é uma distro Linux embarcável em roteadores que permite customizar e instalar serviços sem a necessidade de compilar um novo firmware. Em outras palavras, é um &ldquo;firmware on steroids&rdquo; para roteadores.</p>
 
@@ -2024,7 +2098,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[[QuickTips] Do Wordpress para Octopress/Jekyll no GitHub Pages]]></title>
     <link href="http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages/"/>
-    <updated>2013-09-20T22:38:00+00:00</updated>
+    <updated>2013-09-20T22:38:00-03:00</updated>
     <id>http://1up4dev.org/2013/09/quicktips-do-wordpress-para-octopress-slash-jekyll-no-github-pages</id>
     <content type="html"><![CDATA[<p>Quando migramos nosso blog do Wordpress para o GitHub Pages, escrevi um email para nossos autores com instruções resumidas para configurar e postar com Octopress/Jekyll. Percebi que dando um tapa nesse email, poderia publicá-lo aqui no blog como um guia rápido e talvez incentivar outros blogueiros a fazer o mesmo.</p>
 
@@ -2138,7 +2212,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Introdução a Linux Control Groups (CGroups)]]></title>
     <link href="http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups/"/>
-    <updated>2013-08-22T17:32:23+00:00</updated>
+    <updated>2013-08-22T14:32:23-03:00</updated>
     <id>http://1up4dev.org/2013/08/introducao-a-linux-control-groups-cgroups</id>
     <content type="html"><![CDATA[<p>Em tempos de <strong>Metodologias Àgeis</strong>, iniciativas como <strong><a href="http://en.wikipedia.org/wiki/DevOps">DevOps</a></strong>, adoção de <strong>Cloud Computing</strong> e derivados <strong>(SaaS, IaaS e PaaS)</strong>, aplicações que demorariam meses, senão anos para estar na <strong>www</strong>, hoje em questão de dias, e por que não horas, é possível estar disponíveis ao usuário final.</p>
 
@@ -2286,7 +2360,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Extendendo Ruby com C - Só um aperitivo]]></title>
     <link href="http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo/"/>
-    <updated>2013-08-19T17:29:56+00:00</updated>
+    <updated>2013-08-19T14:29:56-03:00</updated>
     <id>http://1up4dev.org/2013/08/extendendo-ruby-com-c-so-um-aperitivo</id>
     <content type="html"><![CDATA[<p>Extender Ruby em C não é complicado. É claro, você deve ao menos ter o conhecimento básico da linguagem C.</p>
 
@@ -2419,7 +2493,7 @@ E, finalizando, estou escrevendo meu segundo livro, mais focado em programação
   <entry>
     <title type="html"><![CDATA[Entendendo LISP, finalmente.]]></title>
     <link href="http://1up4dev.org/2013/07/entendendo-lisp-finalmente/"/>
-    <updated>2013-07-14T14:35:31+00:00</updated>
+    <updated>2013-07-14T11:35:31-03:00</updated>
     <id>http://1up4dev.org/2013/07/entendendo-lisp-finalmente</id>
     <content type="html"><![CDATA[<h2>A sintaxe invertida</h2>
 
@@ -2561,7 +2635,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[[QuickTips] Usando Shell Script como suite de teste]]></title>
     <link href="http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste/"/>
-    <updated>2013-06-27T12:42:18+00:00</updated>
+    <updated>2013-06-27T09:42:18-03:00</updated>
     <id>http://1up4dev.org/2013/06/quicktips-usando-shell-script-como-suite-de-teste</id>
     <content type="html"><![CDATA[<p>Indo na linha do programador pragmático, às vezes, dependendo do time ou linguagem do projeto, é muito mais prático usar shell script para testar. Recentemente resolvi usar esta abordagem, e cheguei no seguinte &ldquo;template&rdquo; em shell script para testar uma API Server.</p>
 
@@ -2658,7 +2732,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[A melhor linguagem de programação]]></title>
     <link href="http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao/"/>
-    <updated>2013-05-06T10:00:44+00:00</updated>
+    <updated>2013-05-06T07:00:44-03:00</updated>
     <id>http://1up4dev.org/2013/05/a-melhor-linguagem-de-programacao</id>
     <content type="html"><![CDATA[<p>Eu tenho a felicidade de ter um sogro que trabalha com desenvolvimento de softwares. Ele tem a experiência de já ter sido empresário e de já ter visto de quase tudo nessa área.</p>
 
@@ -2687,7 +2761,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[O que eu aprendi escrevendo]]></title>
     <link href="http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo/"/>
-    <updated>2013-04-11T10:30:47+00:00</updated>
+    <updated>2013-04-11T07:30:47-03:00</updated>
     <id>http://1up4dev.org/2013/04/o-que-eu-aprendi-escrevendo</id>
     <content type="html"><![CDATA[<p>Apesar de ter <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">um livro</a> e <a href="http://pro.imasters.com.br/online/cursos/ruby-on-rails-do-comeco-ao-fim">um curso</a> publicados, eu ainda estou longe de ser considerado um escritor. Honestamente, nem ao menos sei o que é necessário para que eu, ou outra pessoa, me considere como tal.</p>
 
@@ -2752,7 +2826,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[Novos rumos]]></title>
     <link href="http://1up4dev.org/2013/04/novos-rumos/"/>
-    <updated>2013-04-01T15:00:51+00:00</updated>
+    <updated>2013-04-01T12:00:51-03:00</updated>
     <id>http://1up4dev.org/2013/04/novos-rumos</id>
     <content type="html"><![CDATA[<p>Depois de um 2012 movimentado, resolvi tirar minha certificação PMI e, a partir de hoje, trabalho como gerente da fábrica de software de uma conhecida consultoria, líder de mercado.</p>
 
@@ -2765,7 +2839,7 @@ y = (+ 1 (* 3 2))
   <entry>
     <title type="html"><![CDATA[Pair Programming remoto com Screen e Vim]]></title>
     <link href="http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim/"/>
-    <updated>2013-03-20T14:27:02+00:00</updated>
+    <updated>2013-03-20T11:27:02-03:00</updated>
     <id>http://1up4dev.org/2013/03/pair-programming-remoto-com-screen-e-vim</id>
     <content type="html"><![CDATA[<p>Limitar a produtividade e colaboração interpessoal ao espaço físico de um escritório parece uma idéia cada vez menos viável no ramo de desenvolvimento de software.</p>
 
@@ -2875,7 +2949,7 @@ Feche um split com Ctrl-a + X</p>
   <entry>
     <title type="html"><![CDATA[O ano em que eu tirei a bunda da cadeira]]></title>
     <link href="http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira/"/>
-    <updated>2013-03-18T16:45:25+00:00</updated>
+    <updated>2013-03-18T13:45:25-03:00</updated>
     <id>http://1up4dev.org/2013/03/o-ano-em-que-eu-tirei-a-bunda-da-cadeira</id>
     <content type="html"><![CDATA[<p><strong>TL;DR: </strong><em>2012 foi o ano em que eu publiquei um curso num grande portal de tecnologia, palestrei em eventos relevantes e ministrei um curso em um lugar que eu mal conhecia no mapa.</em></p>
 
@@ -2906,190 +2980,6 @@ Feche um split com Ctrl-a + X</p>
 <p>Em breve, pretendo compartilhar minhas experiências ao escrever o curso e o livro.</p>
 
 <p>Que mais realizações venham em 2013, e que os frutos do que plantei continuem nascendo, mesmo que dessa vez eu não tenha feito nenhuma lista de metas a cumprir.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Programação funcional com JavaScript]]></title>
-    <link href="http://1up4dev.org/2013/02/programacao-funcional-com-javascript/"/>
-    <updated>2013-02-21T15:58:02+00:00</updated>
-    <id>http://1up4dev.org/2013/02/programacao-funcional-com-javascript</id>
-    <content type="html"><![CDATA[<blockquote><p>&ldquo;JavaScript is LISP in C&rsquo;s clothing&rdquo; &ndash; Douglas Crockford</p></blockquote>
-
-<h2>O que é programação funcional</h2>
-
-<p>Programação funcional é, assim como a orientação a objetos, uma forma de se pensar em como resolver problemas.</p>
-
-<p>A base do que hoje é a programação funcional foi criada paralelamente por Alan Turing e Alonzo Church na década de 1930, antes mesmo da existência dos computadores como o conhecemos.</p>
-
-<p>Infelizmente, a programação funcional passou muito tempo restrita aos meios acadêmicos, o que faz com que o iniciante no assunto fique assustado com toda aquela notação matemática e com os termos incompreensíveis.</p>
-
-<pre><code>ω := λx.x x
-Ω := ω ω 
-Y := λg.(λx.g (x x)) (λx.g (x x))
-</code></pre>
-
-<p>Felizmente, o conceito de programação funcional é muito simples. Assim como na orientação a objetos a menor parte de um sistema é um objeto, você pode atribuir objetos a variáveis, pode passá-los por parâmetro e ter métodos retornando objetos, na programação funcional a menor parte do seu sistema é uma função.</p>
-
-<p>Isso implica que você pode atribuir funções a variáveis, pode passá-las por parâmetro e mesmo fazer com que uma função retorne outra função. Alguma linguagens implementam também imutabilidade, que é quando todo valor é tratado como se fosse uma constante, e outros conceitos periféricos, o que não é o caso do JavaScript. Todos os demais conceitos de programação funcional derivam do fato de você lidar com funções como se fossem um valor como qualquer outro.</p>
-
-<h2>High order functions</h2>
-
-<p>Uma high order function (não achei uma tradução decente para o Português), apesar do nome intimidador, é simplesmente uma função que recebe outra função como parâmetro ou devolve uma função como resultado. Quando você usa callbacks no JavaScript e no jQuery, você está fazendo uso de high order functions.</p>
-
-<pre><code>$("button.mallandro")
-  .click(function() {
-    alert("Ié ié!");
-  });
-</code></pre>
-
-<p>O método click é uma high order function, e a função anônima que faz <em>Ié ié!</em> é um callback.</p>
-
-<p>Mais para frente vou mostrar mais formas de usar high order functions.</p>
-
-<h2>Escopo</h2>
-
-<p>Apesar do conceito de escopo não ser exclusivo da programação funcional, é importantíssimo que você entenda como funciona o escopo no JavaScript para que não fique confuso ao ver <em>closures</em> e <em>currying</em>.</p>
-
-<p>Como na maioria das linguagens comerciais, uma variável declarada em um escopo maior é visível em um escopo menor, enquanto o contrário não é verdadeiro.</p>
-
-<p>Na prática significa que uma variável global é visível por todo mundo:</p>
-
-<pre><code>var x = 1;
-
-function foo() {
-  console.log(x);
-}
-
-foo();
-
-// Saída:   1
-</code></pre>
-
-<p>Significa também que uma variável local só é vista dentro do escopo em que foi criada, mesmo que tenha o mesmo nome de uma variável global:</p>
-
-<pre><code>var x = 1;
-
-function bar() {
-  var x = 99;
-  var y = 42
-
-  console.log(x, y);
-}
-
-bar();
-// 99 42
-
-console.log(x);
-// 1
-
-console.log(y);
-// ReferenceError: y is not defined
-</code></pre>
-
-<p>Quando uma função altera o valor de uma variável global, isso afeta toda a aplicação. Por isso o uso de variáveis globais não é considerado uma boa prática. Porém, uma variável global passada por parâmetro para uma função não tem o seu valor alterado:</p>
-
-<pre><code>var x = 1;
-var y = 11;
-
-function meh(x) {
-  console.log("Dentro: ", x, y);
-  x++;
-  y++;
-  console.log("Dentro: ", x, y);
-}
-
-meh(x);
-// Dentro:  1 11
-// Dentro:  2 12
-
-console.log("Fora: ", x, y);
-// Fora:  1 12
-</code></pre>
-
-<h2>Closures</h2>
-
-<p>Outra característica do escopo é que uma função guarda as variáveis do contexto em que foi criada. Isso significa que uma função pode continuar acessando variáveis que só existiam no momento em que ela foi criada.</p>
-
-<pre><code>function counter() {
-  var x = 0;
-
-  return function() {
-    return ++x;
-  }
-}
-
-var count = counter();
-
-console.log(count());
-// 1
-console.log(count());
-// 2
-console.log(count());
-// 3
-console.log(count());
-// 4
-console.log(x);
-// ReferenceError: x is not defined
-</code></pre>
-
-<p>O que acontece aqui é que count recebe uma função que incrementa o valor da variável x, só que essa variável existe apenas dentro da função counter. O que aconteceu aqui é que a função armazenada em count <em>se lembra</em> da variável que foi criada em outra função, mas que não está mais sendo executada.</p>
-
-<p>Ao tentarmos exibir o valor da variável x, recebemos um erro, pois ela não existe no escopo global.</p>
-
-<h2>Currying</h2>
-
-<p>Juntando tudo o que vimos até aqui sobre high order functions, escopo e closures, chegamos ao <em>currying</em>. Currying é uma operação em que você transforma uma função que receberia mais de um parâmetro em uma série de chamadas de funções com apenas um parâmetro cada.</p>
-
-<p>Um dos usos dessa técnica é evitar, de forma elegante, que o mesmo parâmetro seja passado para a mesma função.</p>
-
-<p>Vamos pegar um exemplo escrito de forma imperativa. Temos uma função hey, que recebe os parâmetros texto e nome e, a partir disso, imprime uma saudação.</p>
-
-<pre><code>function hey(texto, nome) {
-  console.log(texto + ", " + nome);
-}
-
-hey("Bom dia", "João");
-// Bom dia, João
-
-hey("Bom dia", "José");
-// Bom dia, José
-
-hey("Bom dia", "Nicolau");
-// Bom dia, Nicolau
-</code></pre>
-
-<p>Você pode dizer que poderíamos guardar &ldquo;Bom dia&rdquo; em uma variável. Concordo, mas isso não mudaria nada dentro do que estamos apresentando.</p>
-
-<p>Reescrevendo a mesma função usando currying, teremos o código abaixo:</p>
-
-<pre><code>function hey(texto) {
-  return function(nome) {
-    console.log(texto + ", " + nome);
-  }
-}
-
-var bomDia = hey("Bom dia");
-
-bomDia("João");
-// Bom dia, João
-
-bomDia("José");
-// Bom dia, José
-
-bomDia("Nicolau");
-// Bom dia, Nicolau
-</code></pre>
-
-<p>Programação funcional é muito mais do que os conceitos que apresentei aqui, mas como um primeiro contato já dá para fazer muita coisa bacana.</p>
-
-<p>Recomendo que você estude e pesquise a respeito. Mesmo que você não use uma linguagem funcional no seu dia-a-dia, o fato de conhecer um novo modo de pensar acaba alterando a forma como você resolve problemas, fazendo com que você tenha idéias melhores e mais elegantes.</p>
-
-<p><strong>Update em 26/02:</strong></p>
-
-<p>Este artigo foi publicado também no iMasters, no endereço <a href="http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/">http://imasters.com.br/front-end/javascript/programacao-funcional-com-javascript/</a>.</p>
-
-<p><em>Esse texto é parte do livro <a href="http://www.casadocodigo.com.br/products/livro-javascript-jquery">Dominando JavaScript com jQuery</a>, publicado pela <a href="http://www.casadocodigo.com.br">Editora Casa do Código</a></em>.</p>
 ]]></content>
   </entry>
   
