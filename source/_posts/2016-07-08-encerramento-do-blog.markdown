@@ -27,15 +27,15 @@ Aqui estão nossos feeds de conteúdo agile a partir do próximo mês:
 
 ### Roger Leite
 - https://medium.com/@rogerleite
-- https://tiwttier.com/rogerleite
+- https://twitter.com/rogerleite
 
 ### Plinio Balduino
-- https://medium.com/@p_balduino
+- https://medium.com/@pbalduino
 - http://twitter.com/p_balduino
 
 ### Tony Fabeen
-- https://twitter.com/tonyfabeen
 - https://medium.com/@tonyfabeen
+- https://twitter.com/tonyfabeen
 
 ### Miguel Horlle
 - https://twitter.com/miguelbaldi
